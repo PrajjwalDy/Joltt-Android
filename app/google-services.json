@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "264576983495",
+    "project_id": "cunow-2fcfa",
+    "storage_bucket": "cunow-2fcfa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:264576983495:android:277f907eecca1dd96679e2",
+        "android_client_info": {
+          "package_name": "com.hindu.cunow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "264576983495-oc7m1rscrrftaet6aeoa4b29akc46jho.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDaU9ySTzqIM6UQT6UiHQQTB0CiuCCrSM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "264576983495-oc7m1rscrrftaet6aeoa4b29akc46jho.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

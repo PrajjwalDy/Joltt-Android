@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/red"
+    tools:context=".Activity.SignUpActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/allan"
+        android:text="CUNow"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="80dp"
+        android:orientation="vertical">
+
+
+
+        <EditText
+            android:id="@+id/fullName_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/usernamr_password_bg"
+            android:layout_margin="20dp"
+            android:hint="Full Name"
+            android:textAlignment="center"
+            android:textColor="@color/red"/>
+
+        <EditText
+            android:id="@+id/uid_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/usernamr_password_bg"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:hint="UID"
+            android:textAlignment="center"
+            android:textColor="@color/red"/>
+
+        <EditText
+            android:id="@+id/phone_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/usernamr_password_bg"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:inputType="phone"
+            android:layout_marginBottom="20dp"
+            android:hint="Phone No."
+            android:textAlignment="center"
+            android:textColor="@color/red"/>
+
+        <EditText
+            android:id="@+id/password_Create_AC"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/usernamr_password_bg"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:hint="Password"
+            android:textAlignment="center"
+            android:textColor="@color/red"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/signUp_button"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/usernamr_password_bg"
+            android:textColor="@color/red"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="DiveUp"/>
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/logInAccount_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Already have account? DiveIn"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="H.I.N.D.U Production"
+        android:textSize="15dp"
+        android:layout_marginTop="100dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>
