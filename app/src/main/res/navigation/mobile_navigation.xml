@@ -12,21 +12,21 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.hindu.cunow.ui.dashboard.DashboardFragment"
+        android:name="com.hindu.cunow.Fragments.ExploreFragment"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_profile"
-        android:name="com.hindu.cunow.ui.notifications.NotificationsFragment"
-        tools:layout="@layout/profile_fragment" />
-
-    <fragment
         android:id="@+id/navigation_addPost"
-        android:name="com.hindu.cunow.ui.notifications.NotificationsFragment"
+        android:name="com.hindu.cunow.Fragments.CreatePostFragment"
         tools:layout="@layout/create_post_fragment" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.hindu.cunow.ui.notifications.NotificationsFragment"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.hindu.cunow.Fragments.ProfileFragment"
+        tools:layout="@layout/profile_fragment" />
 </navigation>

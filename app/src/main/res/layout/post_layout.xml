@@ -8,11 +8,50 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/profileuser"
+                android:layout_margin="10dp"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/publisher_profile_image"/>
+            
+            <TextView
+                android:id="@+id/publisher_Name"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Someone Example"/>
+            
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/verification_image"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/profileuser"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                />
+            
+            <TextView
+                android:layout_width=""
+                android:layout_height=""
+            
+            
+            
+        </LinearLayout>
+
 
         <ImageView
             android:id="@+id/postImage"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:src="@drawable/test_img"
@@ -20,67 +59,35 @@
             />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_gravity="bottom"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_gravity="center_vertical"
                 android:layout_margin="5dp">
 
                 <ImageView
-                    android:id="@+id/save"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:id="@+id/like"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/bookmark"
+                    android:src="@drawable/heart"
                     />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="save"
-                    android:layout_gravity="center_horizontal"
-                    android:textColor="@color/red"/>
 
 
             </LinearLayout>
 
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_margin="5dp">
-
-                <ImageView
-                    android:id="@+id/share"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center_horizontal"
-                    android:src="@drawable/send"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="share"
-                    android:textSize="12sp"
-                    android:layout_gravity="center_horizontal"
-                    android:textColor="@color/red"/>
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_gravity="center_vertical"
                 android:layout_margin="5dp">
 
                 <ImageView
@@ -88,15 +95,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/comment"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="com"
-                    android:layout_gravity="center_horizontal"
-                    android:textColor="@color/red"/>
+                    android:src="@drawable/comment" />
 
 
             </LinearLayout>
@@ -105,22 +104,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_gravity="center_vertical"
                 android:layout_margin="5dp">
 
                 <ImageView
-                    android:id="@+id/like"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:id="@+id/share"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/heart"
+                    android:src="@drawable/send"
                     />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Like"
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="200dp">
+
+                <ImageView
+                    android:id="@+id/save"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="center_horizontal"
-                    android:textColor="@color/red"/>
+                    android:src="@drawable/bookmark"
+                    />
 
 
             </LinearLayout>
@@ -128,6 +141,14 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
 
 
     </LinearLayout>

@@ -3,14 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Fragments.CreatePostFragment">
 
-    <TextView
-        android:id="@+id/textExplore"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:text="This is Create post fragment" />
+
 
 </LinearLayout>

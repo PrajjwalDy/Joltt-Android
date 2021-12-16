@@ -10,9 +10,6 @@ import com.hindu.cunow.R
 
 class CreatePostFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = CreatePostFragment()
-    }
 
     private lateinit var viewModel: CreatePostViewModel
 
@@ -20,13 +17,13 @@ class CreatePostFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.create_post_fragment, container, false)
+        val root:View = inflater.inflate(R.layout.create_post_fragment, container, false)
+
+
+
+
+        return root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CreatePostViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
 }
