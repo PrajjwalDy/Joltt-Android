@@ -9,9 +9,16 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.hindu.cunow.Adapter.PostAdapter
+import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.FragmentHomeBinding
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -19,11 +26,11 @@ import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
 
+    private var postAdapter:PostAdapter?= null
+    private var postList:MutableList<PostModel>? = null
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private var recyclerVeiw: RecyclerView? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -37,20 +44,24 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
+        homeViewModel.postModel!!.observe(viewLifecycleOwner, Observer{
 
-            root.post_img.setOnClickListener { view->
-                postText(root)
-
-            }
-
-            root.post_txt.setOnClickListener { view->
-                postText(root)
-            }
+            intitView(root)
+            postAdapter = context?.let { it1 -> PostAdapter(it1,it) }
+            recyclerVeiw!!.adapter = postAdapter
+            postAdapter!!.notifyDataSetChanged()
 
         })
+
         return root
     }
+
+    private  fun intitView(root: View){
+        recyclerVeiw = root.findViewById(R.id.postRecyclerView) as RecyclerView
+        recyclerVeiw!!.setHasFixedSize(true)
+        recyclerVeiw!!.layoutManager = LinearLayoutManager(context)
+    }
+
 
     private fun postText(view: View){
         Snackbar.make(view,"adding post....",Snackbar.LENGTH_SHORT).show()
@@ -68,6 +79,10 @@ class HomeFragment : Fragment() {
         Snackbar.make(view,"post added successfully",Snackbar.LENGTH_SHORT).show()
 
         caption_only.text.clear()
+    }
+
+    private fun postImage(){
+
     }
 
     override fun onDestroyView() {

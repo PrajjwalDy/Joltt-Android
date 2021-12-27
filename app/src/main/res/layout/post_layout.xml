@@ -39,12 +39,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="5dp"
                 />
-            
-            <TextView
-                android:layout_width=""
-                android:layout_height=""
-            
-            
+
             
         </LinearLayout>
 
@@ -54,6 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
+            android:visibility="gone"
             android:src="@drawable/test_img"
             android:scaleType="fitCenter"
             />

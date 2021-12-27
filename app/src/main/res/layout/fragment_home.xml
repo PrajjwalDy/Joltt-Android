@@ -32,6 +32,7 @@
     </com.google.android.material.appbar.AppBarLayout>
     
     <androidx.cardview.widget.CardView
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardElevation="5dp">
@@ -141,7 +142,6 @@
         android:id="@+id/postRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
         />
 
 
