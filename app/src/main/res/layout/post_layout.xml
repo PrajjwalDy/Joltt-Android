@@ -49,6 +49,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:adjustViewBounds="true"
+            android:visibility="gone"
             android:src="@drawable/test_img"
             android:scaleType="fitCenter"
             />
