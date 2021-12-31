@@ -39,20 +39,15 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="5dp"
                 />
-            
-            <TextView
-                android:layout_width=""
-                android:layout_height=""
-            
-            
+
             
         </LinearLayout>
 
 
         <ImageView
             android:id="@+id/postImage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:adjustViewBounds="true"
             android:src="@drawable/test_img"
             android:scaleType="fitCenter"
@@ -145,7 +140,6 @@
             android:id="@+id/caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="16sp"/>
