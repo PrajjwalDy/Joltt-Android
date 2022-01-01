@@ -45,11 +45,11 @@
 
 
         <ImageView
-            android:id="@+id/postImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:adjustViewBounds="true"
             android:visibility="gone"
+            android:id="@+id/postImage"
+            android:layout_width="410dp"
+            android:layout_height="410dp"
+            android:adjustViewBounds="true"
             android:src="@drawable/test_img"
             android:scaleType="fitCenter"
             />

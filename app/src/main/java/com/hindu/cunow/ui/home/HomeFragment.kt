@@ -1,6 +1,7 @@
 package com.hindu.cunow.ui.home
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.hindu.cunow.Activity.AddPostActivity
 import com.hindu.cunow.Adapter.PostAdapter
 import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.Model.UserModel
@@ -60,6 +62,11 @@ class HomeFragment : Fragment() {
             postAdapter!!.notifyDataSetChanged()
 
         })
+
+        root.select_media_img.setOnClickListener {
+            startActivity(Intent(context,AddPostActivity::class.java))
+        }
+
         return root
     }
 
@@ -73,6 +80,7 @@ class HomeFragment : Fragment() {
         postMap["postId"] = postId!!
         postMap["publisher"] = FirebaseAuth.getInstance().currentUser!!.uid
         postMap["caption"] = caption_only.text.toString()
+        postMap["image"] = ""
 
         ref.child(postId).updateChildren(postMap)
 
@@ -85,6 +93,8 @@ class HomeFragment : Fragment() {
         recyclerView!!.setHasFixedSize(true)
         recyclerView!!.isNestedScrollingEnabled = false
         val linearLayoutManager = LinearLayoutManager(context)
+        linearLayoutManager.reverseLayout = true
+        linearLayoutManager.stackFromEnd = true
         recyclerView!!.layoutManager = linearLayoutManager
         loadUserImage(root)
 

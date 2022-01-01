@@ -35,7 +35,7 @@ class PostAdapter(private val mContext: Context,
 
         val post = mPost[position]
 
-        holder.bind(mPost[position],mContext)
+        holder.bind(mPost[position],mContext,holder.image)
         publisher(holder.publisherImage,holder.publisherName,post.publisher!!,false,holder.verification)
 
 
@@ -53,12 +53,13 @@ class PostAdapter(private val mContext: Context,
         val publisherName: TextView = itemView.findViewById(R.id.publisher_Name)
         val verification:CircleImageView = itemView.findViewById(R.id.verification_image)
 
-        fun bind(list:PostModel,context: Context){
+        fun bind(list:PostModel,context: Context,imageView: ImageView){
             caption.text = list.caption
-            if (list!!.image == ""){
-                image.visibility = View.GONE
+            if (list.image != ""){
+                imageView.visibility = View.VISIBLE
+                Glide.with(context).load(list.image).into(imageView)
             }else{
-                Glide.with(context).load(list.image).into(image)
+                imageView.visibility = View.GONE
             }
         }
     }
