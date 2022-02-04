@@ -4,6 +4,7 @@ class UserModel {
 
     val profileImage:String? = null
     val fullName:String? =null
-    val verification:Boolean = false
+    var verification:Boolean = false
     val verifImage:String? = null
+    val bio:String? = null
 }
