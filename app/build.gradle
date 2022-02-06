@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'com.google.gms.google-services'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -63,5 +64,8 @@ dependencies {
 
     implementation 'com.google.android.exoplayer:exoplayer:2.16.1'
     implementation 'com.google.android.exoplayer:exoplayer-ui:2.16.1'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+    kapt "android.arch.lifecycle:compiler:1.1.1"
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
 
 }

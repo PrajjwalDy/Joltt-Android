@@ -94,6 +94,8 @@ class AddPostActivity : AppCompatActivity() {
                 postMap["publisher"] = FirebaseAuth.getInstance().currentUser!!.uid
                 postMap["caption"] = caption_image.text.toString()
                 postMap["image"] = myUrl
+                postMap["iImage"] = true
+                postMap["video"] = false
 
                 ref.child(postId).updateChildren(postMap)
 

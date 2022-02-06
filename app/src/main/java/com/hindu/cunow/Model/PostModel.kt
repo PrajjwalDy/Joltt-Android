@@ -6,4 +6,7 @@ class PostModel {
     val image:String? = null
     val publisher:String? = null
     val postId:String? = null
+    val videoId:String? = null
+    val video: Boolean = false
+    val iImage: Boolean = false
 }
