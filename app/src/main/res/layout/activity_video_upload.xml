@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activity.AddPostActivity">
+    tools:context=".Activity.VideoUploadActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -22,75 +22,75 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="10dp"
                 android:fontFamily="@font/amiko"
-                android:text="Image Preview"
+                android:text="Video Preview"
                 android:textColor="@color/red"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/next_step"
+                android:id="@+id/next_step_video"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_alignParentEnd="true"
-                android:layout_margin="5dp"
-                android:src="@drawable/right_arrow"
-                android:padding="5dp"/>
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:padding="5dp"
+                android:src="@drawable/right_arrow" />
 
 
         </RelativeLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
-    <ImageView
-        android:id="@+id/postImage_preview"
+    <VideoView
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:scaleType="center"
-        android:src="@drawable/gallery"/>
-
+        android:layout_gravity="center"
+        android:id="@+id/videoPreview"
+        />
+    
     <EditText
-        android:id="@+id/caption_image"
+        android:id="@+id/captionVideo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="5dp"
-        android:fontFamily="@font/amiko"
+        android:layout_height="40dp"
         android:textSize="12sp"
         android:backgroundTint="@color/red"
-        android:hint="Describe something about this image"
-        android:textColor="@color/red"/>
-
+        android:hint="Say somethig aboot your post"
+        android:padding="10dp"
+        android:layout_margin="10dp"/>
+    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/changeImage_btn"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
             android:layout_margin="5dp"
-            android:fontFamily="@font/amiko"
-            android:textAllCaps="false"
             android:background="@color/white"
-            android:text="Change Image"
-            android:textColor="@color/red"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/shareImage_btn"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
+            android:fontFamily="@font/amiko"
+            android:elevation="5dp"
+            android:textColor="@color/red"
             android:text="Add Location"
             android:textAllCaps="false"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="0dp"
+            android:layout_height="40dp"
             android:fontFamily="@font/amiko"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
             android:background="@color/white"
-            android:textColor="@color/red"/>
+            android:elevation="5dp"
+            android:textColor="@color/red"
+            android:text="Change Video"
+            android:textAllCaps="false"
+            />
 
     </LinearLayout>
 

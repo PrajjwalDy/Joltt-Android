@@ -62,7 +62,8 @@
                     android:layout_gravity="center_vertical"
                     android:fontFamily="@font/amiko"
                     android:background="@color/white"
-                    android:focusedByDefault="false"
+                    android:textSize="12sp"
+                    android:focusableInTouchMode="true"
                     android:hint="What's happening in CU?"/>
 
             </LinearLayout>

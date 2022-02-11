@@ -1,5 +1,6 @@
 package com.hindu.cunow.ui.home
 
+import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -25,6 +27,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Activity.AddPostActivity
+import com.hindu.cunow.Activity.VideoUploadActivity
 import com.hindu.cunow.Adapter.PostAdapter
 import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.Model.UserModel
@@ -32,18 +35,18 @@ import com.hindu.cunow.R
 import com.hindu.cunow.databinding.FragmentHomeBinding
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.image_or_video_dialogbox.view.*
+import kotlinx.android.synthetic.main.more_option_dialogbox.view.*
 
 class HomeFragment : Fragment() {
 
     var recyclerView: RecyclerView? = null
     private var postAdapter: PostAdapter? = null
-    private var postList: MutableList<PostModel>? = null
+   // private var postList: MutableList<PostModel>? = null
 
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -66,7 +69,22 @@ class HomeFragment : Fragment() {
         })
 
         root.select_media_img.setOnClickListener {
-            startActivity(Intent(context,AddPostActivity::class.java))
+            val dialogView = LayoutInflater.from(context).inflate(R.layout.image_or_video_dialogbox, null)
+
+            val dialogBuilder = AlertDialog.Builder(context)
+                .setView(dialogView)
+
+            val alertDialog = dialogBuilder.show()
+            dialogView.selectImage.setOnClickListener {
+                startActivity(Intent(context,AddPostActivity::class.java))
+                alertDialog.dismiss()
+            }
+            dialogView.selectVideo.setOnClickListener {
+                startActivity(Intent(context,VideoUploadActivity::class.java))
+                alertDialog.dismiss()
+            }
+
+
         }
 
         return root
