@@ -37,12 +37,12 @@ class AddPostActivity : AppCompatActivity() {
 
     private  var myUrl = ""
     private var imageUri : Uri? = null
-    private var checker = ""
     private var storagePostImageRef: StorageReference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_post)
+
 
         storagePostImageRef = FirebaseStorage.getInstance().reference.child("Posted Images")
 
@@ -53,6 +53,7 @@ class AddPostActivity : AppCompatActivity() {
         }
 
     }
+
 
 
     private fun cropImage(){

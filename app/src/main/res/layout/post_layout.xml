@@ -47,6 +47,7 @@
                     android:src="@drawable/verify" />
 
                 <ImageView
+                    android:id="@+id/moreOptionPost"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
@@ -56,8 +57,6 @@
                     android:src="@drawable/more_option" />
 
             </RelativeLayout>
-
-
 
 
         </LinearLayout>
@@ -74,8 +73,10 @@
             />
         <com.google.android.exoplayer2.ui.PlayerView
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             app:played_color="@color/red"
+            app:resize_mode="fill"
             app:controller_layout_id="@layout/exoplayer_custom"
             android:id="@+id/videoPlayer"/>
 
@@ -126,6 +127,15 @@
 
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/totalLikes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Likes"
+            android:textColor="@color/red"
+            android:fontFamily="@font/amiko"
+            android:layout_margin="3dp"/>
 
     </LinearLayout>
 

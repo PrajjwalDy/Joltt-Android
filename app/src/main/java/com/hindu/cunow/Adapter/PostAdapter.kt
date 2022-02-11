@@ -1,6 +1,10 @@
 package com.hindu.cunow.Adapter
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
+import android.media.Image
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -23,16 +27,20 @@ import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.hindu.cunow.Activity.CommentActivity
 import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.more_option_dialogbox.view.*
+
 class PostAdapter (private val mContext: Context,
                   private val mPost:List<PostModel>,
                   ):RecyclerView.Adapter<PostAdapter.ViewHolder>()
@@ -51,13 +59,55 @@ class PostAdapter (private val mContext: Context,
         val zoom = AnimationUtils.loadAnimation(mContext, R.anim.zoom)
         val post = mPost[position]
         islike(post.postId!!, holder.like)
+        totalLikes(post.postId,holder.totalLikes)
 
         holder.bind(mPost[position],mContext,holder.image,holder.playerView)
         publisher(holder.publisherImage,holder.publisherName,post.publisher!!,holder.verification)
 
         holder.like.setOnClickListener {
-            like(holder.like, post.postId!!,zoom,post.publisher)
+            like(holder.like, post.postId,zoom,post.publisher)
+        }
+        holder.comment.setOnClickListener {
+            val commentIntent = Intent(mContext,CommentActivity::class.java)
+            commentIntent.putExtra("postId",post.postId)
+            commentIntent.putExtra("publisher",post.publisher)
+            mContext.startActivity(commentIntent)
+        }
 
+        holder.moreOption.setOnClickListener {
+            val dialogView = LayoutInflater.from(mContext).inflate(R.layout.more_option_dialogbox, null)
+
+            val dialogBuilder = AlertDialog.Builder(mContext)
+                .setView(dialogView)
+                .setTitle("Options")
+
+            val alertDialog = dialogBuilder.show()
+
+
+//            if (firebaseUser!!.uid != post.postId ){
+//                dialogView.deletePost.visibility = View.GONE
+//                dialogView.editPost.visibility = View.GONE
+//            }
+            dialogView.savePost.setOnClickListener {
+                Toast.makeText(mContext,"Click Received",Toast.LENGTH_SHORT).show()
+                alertDialog.dismiss()
+            }
+            dialogView.download.setOnClickListener {
+                Toast.makeText(mContext,"Click Received",Toast.LENGTH_SHORT).show()
+                alertDialog.dismiss()
+            }
+            dialogView.editPost.setOnClickListener {
+                Toast.makeText(mContext,"Click Received",Toast.LENGTH_SHORT).show()
+                alertDialog.dismiss()
+            }
+            dialogView.deletePost.setOnClickListener {
+                Toast.makeText(mContext,"Click Received",Toast.LENGTH_SHORT).show()
+                alertDialog.dismiss()
+            }
+            dialogView.reportPost.setOnClickListener {
+                Toast.makeText(mContext,"Click Received",Toast.LENGTH_SHORT).show()
+                alertDialog.dismiss()
+            }
         }
     }
 
@@ -67,22 +117,25 @@ class PostAdapter (private val mContext: Context,
 
 
     inner class ViewHolder(@NonNull itemView: View):RecyclerView.ViewHolder(itemView){
-        val image: ImageView = itemView.findViewById(R.id.postImage)
-        val caption: TextView = itemView.findViewById(R.id.caption)
-        val publisherImage:CircleImageView = itemView.findViewById(R.id.publisher_profile_image)
-        val publisherName: TextView = itemView.findViewById(R.id.publisher_Name)
-        val verification:CircleImageView = itemView.findViewById(R.id.verification_image)
-        val like: ImageView = itemView.findViewById(R.id.like)
-        val playerView: PlayerView = itemView.findViewById(R.id.videoPlayer)
+        val image: ImageView = itemView.findViewById(R.id.postImage) as ImageView
+        val caption: TextView = itemView.findViewById(R.id.caption) as TextView
+        val publisherImage:CircleImageView = itemView.findViewById(R.id.publisher_profile_image) as CircleImageView
+        val publisherName: TextView = itemView.findViewById(R.id.publisher_Name) as TextView
+        val verification:CircleImageView = itemView.findViewById(R.id.verification_image) as CircleImageView
+        val like: ImageView = itemView.findViewById(R.id.like) as ImageView
+        val playerView: PlayerView = itemView.findViewById(R.id.videoPlayer) as PlayerView
+        val comment:ImageView = itemView.findViewById(R.id.comment) as ImageView
+        val share:ImageView = itemView.findViewById(R.id.share) as ImageView
+        val moreOption:ImageView = itemView.findViewById(R.id.moreOptionPost) as ImageView
+        val totalLikes: TextView = itemView.findViewById(R.id.totalLikes) as TextView
 
 
         fun bind(list:PostModel,context: Context,imageView: ImageView,playerView: PlayerView){
             caption.text = list.caption
-
             if (list.iImage){
                 imageView.visibility = View.VISIBLE
                 playerView.visibility = View.GONE
-                Glide.with(context).load(list.image).into(imageView)
+                Glide.with(context).load(list.image).into(image)
             }else if(list.video){
                 imageView.visibility = View.GONE
                 playerView.visibility = View.VISIBLE
@@ -223,6 +276,28 @@ class PostAdapter (private val mContext: Context,
 
     enum class URLType(var url:String){
         MP4(""), HLS("")
+    }
+
+    private fun totalLikes(postId: String, totalLikes:TextView){
+        val databaseRef = FirebaseDatabase.getInstance().reference
+            .child("Likes").child(postId)
+        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener{
+            @SuppressLint("SetTextI18n")
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val likes = snapshot.childrenCount.toInt()
+                    if (likes <=1){
+                        totalLikes.text = snapshot.childrenCount.toString() + "Like"
+                    }else{
+                        totalLikes.text = snapshot.childrenCount.toString() + "Likes"
+                    }
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
 }
