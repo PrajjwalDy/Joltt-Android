@@ -1,4 +1,4 @@
-package com.Hindu.cunow.Fragments
+package com.hindu.cunow.Fragments
 
 import androidx.lifecycle.ViewModel
 

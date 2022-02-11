@@ -8,6 +8,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_margin="25dp"
+        android:layout_marginTop="23dp"
+        android:text="new notification" />
 
 </FrameLayout>
