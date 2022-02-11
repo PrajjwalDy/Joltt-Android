@@ -1,6 +1,7 @@
 package com.hindu.cunow.Fragments
 
 import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,6 +15,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.hindu.cunow.Activity.EditProfileActivity
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import kotlinx.android.synthetic.main.profile_fragment.*
@@ -33,6 +35,9 @@ class ProfileFragment : Fragment() {
         firebaseUser = FirebaseAuth.getInstance().currentUser!!
 
         userInfo()
+        root.editProfile_button.setOnClickListener{
+            startActivity(Intent(context,EditProfileActivity::class.java))
+        }
 
         return  root
     }

@@ -192,16 +192,19 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textColor="@color/red"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"
         android:text="Your Informations"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         android:fontFamily="@font/amiko"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="-10dp"
         android:gravity="center_vertical">
 
         <LinearLayout
@@ -402,10 +405,89 @@
         </LinearLayout>
 
 
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="I am a"
+                android:fontFamily="@font/amiko"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/edit_hosteler"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="Hostler"
+                    android:layout_margin="5dp"
+                    android:background="@color/white"
+                    android:textAllCaps="false"
+                    android:textColor="@color/red"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/amiko"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/edit_dayScholar"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:text="Day Scholar"
+                    android:background="@color/white"
+                    android:textAllCaps="false"
+                    android:textColor="@color/red"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/amiko"
+                    />
+
+
+            </LinearLayout>
+            <EditText
+                android:id="@+id/editTextHostel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/red"
+                android:hint="Hostel Name"
+                android:fontFamily="@font/amiko"
+                android:textSize="14sp"/>
+
+
+        </LinearLayout>
 
 
     </LinearLayout>
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/saveInformation"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Save"
+        android:layout_margin="10dp"
+        android:background="@color/red"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:elevation="5dp"
+        android:fontFamily="@font/amiko"
+        />
 
 </LinearLayout>

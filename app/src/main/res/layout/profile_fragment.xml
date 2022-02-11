@@ -21,12 +21,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:fontFamily="@font/happy_monkey"
+                android:fontFamily="@font/amiko"
                 android:text="@string/profile"
                 android:layout_margin="10dp"
                 android:textColor="@color/white"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                android:textSize="18sp"
+                />
         </LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -65,7 +65,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="340dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/test_img"
                 android:adjustViewBounds="true"
                 android:id="@+id/profileImage_profilePage"/>
 
@@ -90,6 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:textAllCaps="true"
+                    android:fontFamily="@font/amiko"
                     android:text="someone example"
                     android:textColor="@color/black"
                     android:textSize="25sp"
@@ -115,6 +115,7 @@
                 android:textSize="16sp"
                 android:layout_gravity="center_horizontal"
                 android:text="Computer Science Engineer"
+                android:fontFamily="@font/amiko"
                 android:layout_marginTop="-5dp"
                 android:layout_marginBottom="5dp"
                 />
@@ -139,6 +140,7 @@
                         android:text="followers"
                         android:textAllCaps="true"
                         android:textSize="18sp"
+                        android:fontFamily="@font/amiko"
                         android:layout_gravity="center_horizontal"/>
 
                     <TextView
@@ -165,6 +167,7 @@
                         android:text="following"
                         android:textAllCaps="true"
                         android:textSize="18sp"
+                        android:fontFamily="@font/amiko"
                         android:layout_gravity="center_horizontal"/>
 
                     <TextView
@@ -185,10 +188,11 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/follow_editProfile_button"
+        android:id="@+id/editProfile_button"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:elevation="5dp"
+        android:textAllCaps="false"
         android:background="@drawable/usernamr_password_bg"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="-7dp"
