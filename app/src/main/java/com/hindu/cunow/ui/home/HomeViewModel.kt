@@ -1,5 +1,8 @@
 package com.hindu.cunow.ui.home
 
+import android.app.Dialog
+import android.app.ProgressDialog
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
@@ -8,10 +11,12 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Callback.IPostCallback
 import com.hindu.cunow.Model.PostModel
+import com.hindu.cunow.R
 
 class HomeViewModel() : ViewModel(), IPostCallback {
 
     private var postLiveData:MutableLiveData<List<PostModel>>? = null
+
     private val postLoadCallback: IPostCallback = this
     private var messageError: MutableLiveData<String>? = null
 

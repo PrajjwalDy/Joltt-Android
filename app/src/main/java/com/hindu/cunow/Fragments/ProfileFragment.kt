@@ -1,5 +1,6 @@
 package com.hindu.cunow.Fragments
 
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
@@ -39,10 +40,25 @@ class ProfileFragment : Fragment() {
             startActivity(Intent(context,EditProfileActivity::class.java))
         }
 
+        root.open_options.setOnClickListener {
+            root.profile_option_ll.visibility = View.VISIBLE
+            root.open_options.visibility = View.GONE
+            root.close_options.visibility = View.VISIBLE
+        }
+
+        root.close_options.setOnClickListener {
+            root.profile_option_ll.visibility = View.GONE
+            root.open_options.visibility = View.VISIBLE
+            root.close_options.visibility = View.GONE
+        }
+
         return  root
     }
 
     private fun userInfo(){
+        val progressDialog = context?.let { Dialog(it) }
+        progressDialog!!.setContentView(R.layout.profile_dropdown_menu)
+        progressDialog.show()
         val userRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser.uid)
         userRef.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -55,7 +71,9 @@ class ProfileFragment : Fragment() {
                         verification_profilePage.visibility = View.VISIBLE
                     }
                 }
+                progressDialog.dismiss()
             }
+
 
             override fun onCancelled(error: DatabaseError) {
                 println("some error occurred")

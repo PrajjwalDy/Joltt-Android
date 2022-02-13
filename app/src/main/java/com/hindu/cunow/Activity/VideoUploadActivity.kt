@@ -5,19 +5,12 @@ import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-<<<<<<< HEAD
-=======
 import androidx.appcompat.app.AppCompatActivity
->>>>>>> origin/master
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.widget.MediaController
 import android.widget.Toast
-<<<<<<< HEAD
-import androidx.appcompat.app.AppCompatActivity
-=======
->>>>>>> origin/master
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
@@ -25,16 +18,10 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.hindu.cunow.MainActivity
 import com.hindu.cunow.R
-<<<<<<< HEAD
 import kotlinx.android.synthetic.main.activity_video_upload.*
 import kotlinx.android.synthetic.main.video_upload_dialogbox.view.*
-=======
-import com.iceteck.silicompressorr.SiliCompressor
-import kotlinx.android.synthetic.main.activity_add_post.*
-import kotlinx.android.synthetic.main.activity_video_upload.*
-import kotlinx.android.synthetic.main.video_upload_dialogbox.view.*
-import java.lang.Boolean.parseBoolean
->>>>>>> origin/master
+
+
 
 
 class VideoUploadActivity : AppCompatActivity() {

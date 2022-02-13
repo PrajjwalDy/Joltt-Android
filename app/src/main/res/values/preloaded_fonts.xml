@@ -2,9 +2,12 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/allan</item>
+        <item>@font/allura</item>
         <item>@font/amiko</item>
         <item>@font/calligraffitti</item>
         <item>@font/convergence</item>
         <item>@font/happy_monkey</item>
+        <item>@font/pinyon_script</item>
+        <item>@font/sofia</item>
     </array>
 </resources>
