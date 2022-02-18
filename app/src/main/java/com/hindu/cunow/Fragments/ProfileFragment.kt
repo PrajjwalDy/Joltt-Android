@@ -23,9 +23,7 @@ import kotlinx.android.synthetic.main.profile_fragment.*
 import kotlinx.android.synthetic.main.profile_fragment.view.*
 
 class ProfileFragment : Fragment() {
-    private lateinit var userId: String
     private lateinit var firebaseUser: FirebaseUser
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,17 +71,9 @@ class ProfileFragment : Fragment() {
                 }
                 progressDialog.dismiss()
             }
-
-
             override fun onCancelled(error: DatabaseError) {
                 println("some error occurred")
             }
-
         })
     }
-
-    private fun followAndFollowingButtonStatus() {
-        TODO("Not yet implemented")
-    }
-
 }

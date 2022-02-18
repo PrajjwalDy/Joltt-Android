@@ -21,17 +21,16 @@
                 android:id="@+id/logo_main"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="-5dp"
+                android:layout_marginStart="5dp"
                 android:src="@drawable/camera" />
 
             <TextView
-                android:layout_toEndOf="@+id/logo_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:fontFamily="@font/pinyon_script"
+                android:layout_toEndOf="@+id/logo_main"
+                android:fontFamily="@font/sofia"
                 android:text="Cunow"
                 android:textColor="@color/red"
                 android:textSize="26sp"
@@ -123,7 +122,6 @@
 
                 </LinearLayout>
 
-
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -157,8 +155,8 @@
                 </LinearLayout>
 
             </LinearLayout>
+
         </LinearLayout>
-        
         
     </androidx.cardview.widget.CardView>
 

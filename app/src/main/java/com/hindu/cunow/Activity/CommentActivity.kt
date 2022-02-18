@@ -3,22 +3,31 @@ package com.hindu.cunow.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.FirebaseDatabase.getInstance
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.installations.FirebaseInstallations
+import com.google.firebase.messaging.FirebaseMessaging
 import com.hindu.cunow.Adapter.CommentAdapter
 import com.hindu.cunow.Model.CommentModel
 import com.hindu.cunow.Model.UserModel
+import com.hindu.cunow.PushNotification.*
 import com.hindu.cunow.R
+import retrofit2.Callback
 import kotlinx.android.synthetic.main.activity_comment.*
 import kotlinx.android.synthetic.main.post_layout.*
+import retrofit2.Call
+import retrofit2.Response
 
 class CommentActivity : AppCompatActivity() {
     private var postId = ""
@@ -27,10 +36,15 @@ class CommentActivity : AppCompatActivity() {
     private var commentList:MutableList<CommentModel>? = null
     private var commentsAdapter: CommentAdapter? = null
 
+    var notify = false
+    var apiService:APIService? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comment)
+
+        apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService::class.java)
 
         val intent = intent
         postId = intent.getStringExtra("postId").toString()
@@ -38,8 +52,7 @@ class CommentActivity : AppCompatActivity() {
 
         firebaseUser = FirebaseAuth.getInstance().currentUser
 
-        var recyclerView: RecyclerView
-        recyclerView = findViewById(R.id.RecyclerViewComment)
+        val recyclerView: RecyclerView = findViewById(R.id.RecyclerViewComment)
         val linearLayoutManager = LinearLayoutManager(this)
         linearLayoutManager.reverseLayout = true
         recyclerView.layoutManager = linearLayoutManager
@@ -51,6 +64,7 @@ class CommentActivity : AppCompatActivity() {
         displayCaption()
         loadComments()
         userInfo()
+        updateToken()
 
 
         addCommentButton.setOnClickListener { view->
@@ -76,7 +90,8 @@ class CommentActivity : AppCompatActivity() {
 
             dataRef.push().setValue(dataMap)
             addCommentEditText.text.clear()
-            loadComments()
+            //loadComments()
+            addNotification()
         }
     }
 
@@ -142,7 +157,7 @@ class CommentActivity : AppCompatActivity() {
                 if (snapshot.exists()){
                     val caption = snapshot.value.toString()
                     postCaptionComment.text = caption
-                }else if (caption.text == ""){
+                }else if (caption.text ==null){
                     postCaptionComment.text = "No Caption Added"
                 }
             }
@@ -173,5 +188,72 @@ class CommentActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun addNotification(){
+        if (publisherId != FirebaseAuth.getInstance().currentUser!!.uid){
+            val dataRef = FirebaseDatabase.getInstance()
+                .reference.child("Notification")
+                .child(publisherId)
+
+            val dataMap = HashMap<String,Any>()
+            dataMap["notificationId"] = dataRef.push().key!!
+            dataMap["notificationText"] = "Commented on your post"+addCommentEditText.text.toString()
+            dataMap["postID"] = postId
+            dataMap["isPost"] = true
+            dataMap["notifierId"] = FirebaseAuth.getInstance().currentUser!!.uid
+
+            dataRef.push().setValue(dataMap)
+            sendNotification()
+        }
+    }
+
+    private fun sendNotification(){
+        val notificationRef = FirebaseDatabase.getInstance().reference.child("Tokens")
+
+        val query = notificationRef.orderByKey().equalTo(publisherId)
+        query.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+               for (data in snapshot.children){
+                   val token: Token? = data.getValue(Token::class.java)
+                   val data2 = Data(firebaseUser!!.uid,
+                       R.mipmap.ic_launcher,
+                       "Commented on your post"+addCommentEditText.text.toString(),
+                       "Post",publisherId)
+
+                   val sender = Sender(data2,token!!.toString())
+
+                   apiService!!.sendNotification(sender)
+                       .enqueue(object : Callback<MyResponse?>{
+                           override fun onResponse(
+                               call: Call<MyResponse?>,
+                               response: Response<MyResponse?>
+                           ) {
+                               if (response.code() == 200)
+                                   if (response.body()!!.success !==1){
+                                       Toast.makeText(this@CommentActivity,"Failed,Nothing Happened",Toast.LENGTH_SHORT).show()
+                                   }
+                           }
+
+                           override fun onFailure(call: Call<MyResponse?>, t: Throwable) {
+                               TODO("Not yet implemented")
+                           }
+
+                       })
+               }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
+    }
+    private fun updateToken(){
+        val refreshToken: String = FirebaseMessaging.getInstance().token.toString()
+        val token:Token = Token(refreshToken)
+        FirebaseDatabase.getInstance().reference.child("Tokens").child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(token)
+
     }
 }

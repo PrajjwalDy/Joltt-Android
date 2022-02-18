@@ -16,6 +16,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.util.Util
 import com.google.android.exoplayer2.MediaItem
@@ -39,14 +40,13 @@ import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.activity_comment.*
 import kotlinx.android.synthetic.main.more_option_dialogbox.view.*
 
 class PostAdapter (private val mContext: Context,
                   private val mPost:List<PostModel>,
                   ):RecyclerView.Adapter<PostAdapter.ViewHolder>()
 {
-                      private var firebaseUser:FirebaseUser? = null
-
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -65,7 +65,12 @@ class PostAdapter (private val mContext: Context,
         publisher(holder.publisherImage,holder.publisherName,post.publisher!!,holder.verification)
 
         holder.like.setOnClickListener {
-            like(holder.like, post.postId,zoom,post.publisher)
+            like(holder.like,
+                post.postId,zoom,
+                post.publisher,
+                holder.animation,
+                holder.caption,
+                holder.totalLikes)
         }
         holder.comment.setOnClickListener {
             val commentIntent = Intent(mContext,CommentActivity::class.java)
@@ -125,7 +130,7 @@ class PostAdapter (private val mContext: Context,
         val like: ImageView = itemView.findViewById(R.id.like) as ImageView
         val playerView: PlayerView = itemView.findViewById(R.id.videoPlayer) as PlayerView
         val comment:ImageView = itemView.findViewById(R.id.comment) as ImageView
-        val share:ImageView = itemView.findViewById(R.id.share) as ImageView
+        val animation:LottieAnimationView = itemView.findViewById(R.id.animation) as LottieAnimationView
         val moreOption:ImageView = itemView.findViewById(R.id.moreOptionPost) as ImageView
         val totalLikes: TextView = itemView.findViewById(R.id.totalLikes) as TextView
 
@@ -172,23 +177,34 @@ class PostAdapter (private val mContext: Context,
         })
     }
     //Like Mechanism
-    private fun like(likeButton: ImageView,postId: String,zoom:Animation,publisherId: String){
+    private fun like(likeButton: ImageView,
+                     postId: String,
+                     zoom:Animation,
+                     publisherId: String,
+                     likeAnimationView: LottieAnimationView,
+                     caption: TextView,
+                     likeTextView: TextView){
         likeButton.startAnimation(zoom)
         if (likeButton.tag == "Like"){
+            likeAnimationView.visibility = View.VISIBLE
+            likeAnimationView.playAnimation()
             FirebaseDatabase.getInstance().reference
                 .child("Likes")
                 .child(postId)
-                .child(publisherId)
+                .child(FirebaseAuth.getInstance().currentUser!!.uid)
                 .setValue(true)
+            addNotification(publisherId,postId,caption)
         }else{
             FirebaseDatabase.getInstance().reference
                 .child("Likes")
                 .child(postId)
-                .child(publisherId)
+                .child(FirebaseAuth.getInstance().currentUser!!.uid)
                 .removeValue()
             likeButton.tag = "Like"
+            likeAnimationView.visibility = View.GONE
         }
         islike(postId,likeButton)
+        totalLikes(postId,likeTextView)
 
     }
 
@@ -250,10 +266,9 @@ class PostAdapter (private val mContext: Context,
             }
         }
 
-
         simpleExoPlayer.setMediaSource(mediaSource)
         simpleExoPlayer.prepare()
-        var playerListener = object :Player.Listener{
+        val playerListener = object :Player.Listener{
 
             override fun onRenderedFirstFrame() {
                 super.onRenderedFirstFrame()
@@ -298,6 +313,23 @@ class PostAdapter (private val mContext: Context,
             }
 
         })
+    }
+
+    private fun addNotification(publisherId: String,postId: String,caption:TextView){
+        if (publisherId != FirebaseAuth.getInstance().currentUser!!.uid){
+            val dataRef = FirebaseDatabase.getInstance()
+                .reference.child("Notification")
+                .child(publisherId)
+
+            val dataMap = HashMap<String,Any>()
+            dataMap["notificationId"] = dataRef.push().key!!
+            dataMap["notificationText"] = "Liked your post "+caption.text.toString()
+            dataMap["postID"] = postId
+            dataMap["isPost"] = true
+            dataMap["notifierId"] = FirebaseAuth.getInstance().currentUser!!.uid
+
+            dataRef.push().setValue(dataMap)
+        }
     }
 
 }
