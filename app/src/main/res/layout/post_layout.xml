@@ -66,17 +66,17 @@
         <ImageView
             android:visibility="gone"
             android:id="@+id/postImage"
-            android:layout_width="410dp"
+            android:layout_width="match_parent"
             android:adjustViewBounds="true"
             android:layout_height="460dp"
             android:src="@drawable/profile_testimg"
             />
         <com.google.android.exoplayer2.ui.PlayerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="450dp"
             android:layout_gravity="center"
             app:played_color="@color/red"
-            app:resize_mode="fill"
+            app:resize_mode="zoom"
             app:controller_layout_id="@layout/exoplayer_custom"
             android:id="@+id/videoPlayer"/>
 

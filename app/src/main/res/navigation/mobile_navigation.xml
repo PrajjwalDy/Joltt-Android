@@ -13,7 +13,11 @@
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.hindu.cunow.Fragments.ExploreFragment"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/explore_fragment" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_confessionRoomFragment"
+            app:destination="@id/confessionRoomFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_addPost"
@@ -29,4 +33,16 @@
         android:id="@+id/navigation_profile"
         android:name="com.hindu.cunow.Fragments.ProfileFragment"
         tools:layout="@layout/profile_fragment" />
+    <fragment
+        android:id="@+id/confessionRoomFragment"
+        android:name="com.hindu.cunow.Fragments.ConfessionRoom.ConfessionRoomFragment"
+        android:label="confession_room_fragment"
+        tools:layout="@layout/confession_room_fragment" >
+        <action
+            android:id="@+id/action_confessionRoomFragment_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
+
+
+
 </navigation>

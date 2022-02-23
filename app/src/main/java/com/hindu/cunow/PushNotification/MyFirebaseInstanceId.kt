@@ -1,5 +1,8 @@
 package com.hindu.cunow.PushNotification
 
+import android.content.ContentValues.TAG
+import android.util.Log
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -18,11 +21,19 @@ class MyFirebaseInstanceId:FirebaseMessagingService() {
       }
   }
 
-    private fun updateToken(refreshToken: String) {
-        val firebaseUser = FirebaseAuth.getInstance().currentUser
-        val ref = FirebaseDatabase.getInstance().reference.child("Tokens")
-        val token = Token(refreshToken)
-        ref.child(firebaseUser!!.uid).setValue(token)
+    private fun updateToken(refreshToken: String){
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task->
+            if (!task.isSuccessful){
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+            val newToken = Token(refreshToken)
+            FirebaseDatabase.getInstance().reference.child("Tokens")
+                .child(FirebaseAuth.getInstance().currentUser!!.uid)
+                .setValue(newToken)
+        })
+
     }
 
 }

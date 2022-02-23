@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.hindu.cunow.R
+import kotlinx.android.synthetic.main.explore_fragment.view.*
 
 class ExploreFragment : Fragment() {
 
@@ -20,13 +22,13 @@ class ExploreFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.explore_fragment, container, false)
-    }
+        val root:View= inflater.inflate(R.layout.explore_fragment, container, false)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ExploreViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
+        root.ll_confessionRoom.setOnClickListener {
+            Navigation.findNavController(root).navigate(R.id.action_navigation_dashboard_to_confessionRoomFragment)
+        }
+
+        return root
+    }
 }

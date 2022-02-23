@@ -43,7 +43,6 @@ class AddPostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_post)
 
-
         storagePostImageRef = FirebaseStorage.getInstance().reference.child("Posted Images")
 
         cropImage()

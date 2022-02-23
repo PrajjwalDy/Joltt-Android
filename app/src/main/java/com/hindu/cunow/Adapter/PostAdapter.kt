@@ -44,8 +44,8 @@ import kotlinx.android.synthetic.main.activity_comment.*
 import kotlinx.android.synthetic.main.more_option_dialogbox.view.*
 
 class PostAdapter (private val mContext: Context,
-                  private val mPost:List<PostModel>,
-                  ):RecyclerView.Adapter<PostAdapter.ViewHolder>()
+                   private val mPost:List<PostModel>,
+                   ):RecyclerView.Adapter<PostAdapter.ViewHolder>()
 {
 
 

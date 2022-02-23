@@ -1,12 +1,15 @@
 package com.hindu.cunow.Activity
 
+import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -77,7 +80,7 @@ class CommentActivity : AppCompatActivity() {
         if (addCommentEditText.text.isEmpty()){
             Snackbar.make(view,"please write something..", Snackbar.LENGTH_SHORT).show()
         }else{
-            val dataRef = FirebaseDatabase.getInstance().reference
+            val dataRef = getInstance().reference
                 .child("Comments")
                 .child(postId)
 
@@ -90,7 +93,7 @@ class CommentActivity : AppCompatActivity() {
 
             dataRef.push().setValue(dataMap)
             addCommentEditText.text.clear()
-            //loadComments()
+            loadComments()
             addNotification()
         }
     }
@@ -149,7 +152,7 @@ class CommentActivity : AppCompatActivity() {
 
     private fun displayCaption(){
         publisherInfo()
-        val postRef = FirebaseDatabase.getInstance().reference.child("Post")
+        val postRef = getInstance().reference.child("Post")
             .child(postId).child("caption")
 
         postRef.addListenerForSingleValueEvent(object : ValueEventListener{
@@ -191,6 +194,7 @@ class CommentActivity : AppCompatActivity() {
     }
 
     private fun addNotification(){
+        //sendNotification()
         if (publisherId != FirebaseAuth.getInstance().currentUser!!.uid){
             val dataRef = FirebaseDatabase.getInstance()
                 .reference.child("Notification")
@@ -204,12 +208,11 @@ class CommentActivity : AppCompatActivity() {
             dataMap["notifierId"] = FirebaseAuth.getInstance().currentUser!!.uid
 
             dataRef.push().setValue(dataMap)
-            sendNotification()
         }
     }
 
     private fun sendNotification(){
-        val notificationRef = FirebaseDatabase.getInstance().reference.child("Tokens")
+        val notificationRef = getInstance().reference.child("Tokens")
 
         val query = notificationRef.orderByKey().equalTo(publisherId)
         query.addListenerForSingleValueEvent(object :ValueEventListener{
@@ -251,9 +254,17 @@ class CommentActivity : AppCompatActivity() {
 
     }
     private fun updateToken(){
-        val refreshToken: String = FirebaseMessaging.getInstance().token.toString()
-        val token:Token = Token(refreshToken)
-        FirebaseDatabase.getInstance().reference.child("Tokens").child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(token)
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener {task->
+            if (!task.isSuccessful){
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+            val token = task.result
+            val newToken = Token(token.toString())
+            getInstance().reference.child("Tokens")
+                .child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(newToken)
+        })
 
     }
 }
