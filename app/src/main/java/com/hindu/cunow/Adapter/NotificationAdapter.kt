@@ -1,5 +1,6 @@
 package com.hindu.cunow.Adapter
 
+import android.app.Dialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -75,6 +76,9 @@ class NotificationAdapter(private val nContext:Context,
     }
 
     private fun loadNotifier(notifierId:String,profileImage:CircleImageView,userName:TextView){
+        val progressDialog = nContext?.let { Dialog(it) }
+        progressDialog!!.setContentView(R.layout.profile_dropdown_menu)
+        progressDialog.show()
         val userDataRef = FirebaseDatabase.getInstance().reference.child("Users").child(notifierId)
 
         userDataRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -90,7 +94,9 @@ class NotificationAdapter(private val nContext:Context,
                 TODO("Not yet implemented")
             }
 
+
     })
+        progressDialog.dismiss()
 
     }
 

@@ -70,7 +70,7 @@ class AddPostActivity : AppCompatActivity() {
         val fileReference = storagePostImageRef!!
             .child(System.currentTimeMillis().toString()+".jpg")
 
-        var uploadTask:StorageTask<*>
+        val uploadTask:StorageTask<*>
         uploadTask = fileReference.putFile(imageUri!!)
 
         uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>>{task->

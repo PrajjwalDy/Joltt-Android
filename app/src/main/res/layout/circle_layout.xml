@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    app:cardElevation="5dp"
+    app:cardCornerRadius="5dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <ImageView
+            android:id="@+id/circle_icon_display"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:src="@drawable/test_img"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/circle_name_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Circle Name"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/amiko"
+            android:textColor="@color/red"
+            android:layout_margin="5dp"/>
+
+        <TextView
+            android:textSize="12sp"
+            android:id="@+id/circle_description_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Circle Name"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/amiko"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/join"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_bg_red"
+            android:layout_gravity="center_horizontal"
+            android:text="Join"
+            android:textAllCaps="false"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:textSize="11sp"
+            android:id="@+id/total_members_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="members"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/amiko"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

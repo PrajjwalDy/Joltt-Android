@@ -73,6 +73,7 @@
                     android:fontFamily="@font/amiko"
                     android:background="@color/white"
                     android:textSize="12sp"
+                    android:visibility="gone"
                     android:focusableInTouchMode="true"
                     android:hint="What's happening in CU?"/>
 

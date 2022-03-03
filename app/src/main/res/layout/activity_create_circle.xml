@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.CreateCircle">
+
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/commentAppbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+
+                android:fontFamily="@font/amiko"
+                android:text="Create Circle"
+                android:textColor="@color/red"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/amiko"
+        android:textSize="16sp"
+        android:textColor="@color/red"
+        android:text="Details"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="10dp"/>
+
+    <EditText
+        android:id="@+id/circle_name_editText"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:fontFamily="@font/amiko"
+        android:backgroundTint="@color/red"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        android:hint="Name"
+        android:padding="5dp"/>
+
+    <EditText
+        android:id="@+id/circle_description_editText"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:fontFamily="@font/amiko"
+        android:textSize="14sp"
+        android:textColor="@color/red"
+        android:backgroundTint="@color/red"
+        android:hint="Discription"
+        android:padding="5dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/amiko"
+        android:textSize="16sp"
+        android:textColor="@color/red"
+        android:text="Privacy"
+        android:layout_marginStart="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="5dp"
+        >
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/private_circle"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="Private"
+            android:layout_margin="5dp"
+            android:background="@color/white"
+            android:textAllCaps="false"
+            android:textColor="@color/red"
+            android:elevation="5dp"
+            android:fontFamily="@font/amiko"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/public_circle"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="Public"
+            android:layout_margin="5dp"
+            android:background="@color/white"
+            android:textAllCaps="false"
+            android:textColor="@color/red"
+            android:elevation="5dp"
+            android:fontFamily="@font/amiko"
+            />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/amiko"
+        android:textSize="16sp"
+        android:textColor="@color/red"
+        android:text="Icon"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="10dp"/>
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    >
+
+    <ImageView
+        android:id="@+id/circle_icon_create"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/select_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/amiko"
+        android:text="+ Select Image"
+        android:textColor="@color/red" />
+
+
+</RelativeLayout>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/create_circle_button"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:background="@drawable/button_bg_red"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Create"
+        android:textColor="@color/white"
+        android:textAllCaps="false"/>
+
+</LinearLayout>

@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_navigation_dashboard_to_confessionRoomFragment"
             app:destination="@id/confessionRoomFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_circleFragment"
+            app:destination="@id/circleFragment" />
     </fragment>
 
     <fragment
@@ -42,7 +45,15 @@
             android:id="@+id/action_confessionRoomFragment_to_navigation_dashboard"
             app:destination="@id/navigation_dashboard" />
     </fragment>
-
+    <fragment
+        android:id="@+id/circleFragment"
+        android:name="com.hindu.cunow.Fragments.Circle.CircleFragment"
+        android:label="circle_fragment"
+        tools:layout="@layout/circle_fragment" >
+        <action
+            android:id="@+id/action_circleFragment_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
 
 
 </navigation>

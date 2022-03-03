@@ -2,6 +2,7 @@ package com.hindu.cunow.Adapter
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.media.Image
@@ -136,6 +137,11 @@ class PostAdapter (private val mContext: Context,
 
 
         fun bind(list:PostModel,context: Context,imageView: ImageView,playerView: PlayerView){
+
+            val progressDialog = Dialog(context)
+            progressDialog.setContentView(R.layout.profile_dropdown_menu)
+            progressDialog.show()
+
             caption.text = list.caption
             if (list.iImage){
                 imageView.visibility = View.VISIBLE
@@ -149,6 +155,7 @@ class PostAdapter (private val mContext: Context,
                 playerView.visibility = View.GONE
                 imageView.visibility = View.GONE
             }
+            progressDialog.dismiss()
         }
     }
 

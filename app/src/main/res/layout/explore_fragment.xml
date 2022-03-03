@@ -38,11 +38,11 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/uid_edit_text"
+            android:id="@+id/search_edit_text"
             android:layout_width="0dp"
             android:layout_weight="1.8"
             android:layout_height="40dp"
-            android:hint="Search"
+            android:hint="Search(lower case only)"
             android:padding="5dp"
             android:backgroundTint="@color/red"
             android:textColorHint="#B3E5FC"
@@ -69,8 +69,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:visibility="gone"
+        android:layout_height="match_parent"
         android:id="@+id/searchUserRV"/>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -160,6 +160,7 @@
             android:layout_weight="1">
 
             <LinearLayout
+                android:id="@+id/circle_ll"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">

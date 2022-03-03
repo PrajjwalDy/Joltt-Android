@@ -1,5 +1,6 @@
 package com.hindu.cunow.ui.notifications
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -56,6 +57,9 @@ class NotificationsFragment : Fragment() {
     }
 
     private fun readNotification() {
+        val progressDialog = context?.let { Dialog(it) }
+        progressDialog!!.setContentView(R.layout.profile_dropdown_menu)
+        progressDialog.show()
         val dataRef = FirebaseDatabase.getInstance().reference.child("Notification")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
 
@@ -78,6 +82,7 @@ class NotificationsFragment : Fragment() {
             }
 
         })
+        progressDialog.dismiss()
     }
 
     override fun onDestroyView() {
