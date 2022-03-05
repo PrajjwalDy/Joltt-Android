@@ -41,6 +41,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:id="@+id/edit_profile"
             >
 
             <ImageView
@@ -65,6 +66,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:id="@+id/privacy"
             >
 
             <ImageView
@@ -89,6 +91,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:id="@+id/about"
             >
 
             <ImageView
@@ -113,6 +116,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:id="@+id/help"
             >
 
             <ImageView
@@ -136,6 +140,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:id="@+id/verify"
             >
 
             <ImageView
@@ -159,9 +164,11 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:id="@+id/logout"
             >
 
             <ImageView
+
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/logout_0"
