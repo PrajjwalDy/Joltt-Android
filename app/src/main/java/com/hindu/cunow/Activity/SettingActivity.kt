@@ -32,5 +32,11 @@ class SettingActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        help.setOnClickListener {
+            val intent = Intent(this, HelpActivity::class.java)
+            startActivity(intent)
+
+        }
+
     }
 }
