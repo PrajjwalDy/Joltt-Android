@@ -6,6 +6,8 @@ class UserModel {
     val fullName:String? =null
     var verification:Boolean = false
     val bio:String? = null
+    val private:Boolean = false
+
 
     val place:String? = null
     val branch:String? = null
