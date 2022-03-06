@@ -27,5 +27,10 @@ class SettingActivity : AppCompatActivity() {
             finish()
         }
 
+        edit_profile.setOnClickListener {
+            val intent = Intent(this, EditProfileActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }
