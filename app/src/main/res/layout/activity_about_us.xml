@@ -25,25 +25,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="a. Our Platform is the set of APIs, SDKs, tools, plugins, code, technology, content, and services that enables others, including app developers and website operators, to develop functionality, retrieve data from H.I.N.D.U and any other H.I.N.D.U Products, or provide data to us."
+        android:text="@string/introduction_a"
 />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="b. To use Platform (including to Process any Platform Data), you agree to these Platform Terms (“Terms”), as well as all other applicable terms and policies. This may include the H.I.N.D.U Terms of Service, the Instagram Terms of Use, the H.I.N.D.U Commercial Terms, the Business Tools Terms, and any H.I.N.D.U Product terms that are applicable."
+        android:text="@string/introduction_b"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="c. You must also comply with the applicable requirements in our Developer Policies and those made available on our Developer Site, including in our Documentation collectively, the “Developer Docs”)"
+        android:text="@string/introduction_c"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="d. If you fail to comply with these Terms or any other applicable terms or policies, we may suspend or terminate your App or account, as described below."
+        android:text="@string/introduction_d"
 />
     <TextView
         android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="Head of CuNow : Prajjwal dubey is the founder of CuNow.where he oversees all functions of the business including engineering, product and operations. A designer at heart, prajjwal is known for balancing sharp design thinking with thoughtful product strategy to create experiences that bring people together and encourage authentic communication."
+        android:text="@string/founder"
 />
     <TextView
         android:layout_width="wrap_content"
@@ -66,6 +66,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="Sparsh kumar, Shivam Rai, Anurag kumar, Ashutosh chaubey: The team of CuNow. All we work in a team. We all are five members of strong programer. We always work in the unity like a strong team. We all are the student of Chandigarh university of 1st year of CSE batch."
+        android:text="@string/co_founder"
         />
 </LinearLayout>
