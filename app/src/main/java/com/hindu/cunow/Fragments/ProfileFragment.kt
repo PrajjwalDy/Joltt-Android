@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Activity.EditProfileActivity
+import com.hindu.cunow.Activity.SettingActivity
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import kotlinx.android.synthetic.main.profile_fragment.*
@@ -54,6 +55,11 @@ class ProfileFragment : Fragment() {
             root.profile_option_ll.visibility = View.GONE
             root.open_options.visibility = View.VISIBLE
             root.close_options.visibility = View.GONE
+        }
+
+        root.settings_account.setOnClickListener {
+            val intent = Intent(context,SettingActivity::class.java)
+            startActivity(intent)
         }
 
 
