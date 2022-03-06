@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".Activity.HelpActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/amiko"
+                android:text="Help"
+                android:layout_margin="10dp"
+                android:textColor="@color/red"
+                android:textSize="18sp"
+
+    />
+        </LinearLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+    <TextView
+        android:layout_width="86dp"
+        android:layout_height="25dp"
+        android:text="Description"
+        android:fontFamily="@font/amiko"
+        />
+<EditText
+    android:layout_width="400dp"
+    android:layout_height="100dp"
+    android:layout_margin="5dp"
+    />
+    <TextView
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:fontFamily="@font/amiko"
+        android:text="Send"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Report and other problem"
+        android:fontFamily="@font/amiko"
+        android:layout_margin="5dp"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Example@gmail.com"
+        android:fontFamily="@font/amiko"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Whatsapp only :: +916387104875"
+        android:fontFamily="@font/amiko"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginTop="200dp"
+        android:text="H.I.N.D.U Prooduction"
+        android:fontFamily="@font/amiko"
+        android:textColor="@color/red"
+        android:textSize="17dp"
+/>
+
+
+
+
+
+</LinearLayout>
