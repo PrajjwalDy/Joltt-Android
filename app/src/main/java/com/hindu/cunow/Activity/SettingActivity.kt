@@ -17,6 +17,7 @@ class SettingActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
         logout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
 
