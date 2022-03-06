@@ -8,7 +8,11 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.hindu.cunow.ui.home.HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_profile"
+            app:destination="@id/navigation_profile" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -20,6 +24,12 @@
         <action
             android:id="@+id/action_navigation_dashboard_to_circleFragment"
             app:destination="@id/circleFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_profile"
+            app:destination="@id/navigation_profile" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_userProfile"
+            app:destination="@id/userProfile" />
     </fragment>
 
     <fragment
@@ -35,7 +45,11 @@
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.hindu.cunow.Fragments.ProfileFragment"
-        tools:layout="@layout/profile_fragment" />
+        tools:layout="@layout/profile_fragment" >
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
     <fragment
         android:id="@+id/confessionRoomFragment"
         android:name="com.hindu.cunow.Fragments.ConfessionRoom.ConfessionRoomFragment"
@@ -53,7 +67,24 @@
         <action
             android:id="@+id/action_circleFragment_to_navigation_dashboard"
             app:destination="@id/navigation_dashboard" />
+        <action
+            android:id="@+id/action_circleFragment_to_circleDetails"
+            app:destination="@id/circleDetails" />
     </fragment>
+    <fragment
+        android:id="@+id/circleDetails"
+        android:name="com.hindu.cunow.Fragments.CircleDetails.CircleDetails"
+        android:label="circle_details_fragment"
+        tools:layout="@layout/circle_details_fragment" >
+        <action
+            android:id="@+id/action_circleDetails_to_circleFragment"
+            app:destination="@id/circleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userProfile"
+        android:name="com.hindu.cunow.Fragments.UserProfile"
+        android:label="fragment_user_profiel"
+        tools:layout="@layout/fragment_user_profiel" />
 
 
 </navigation>

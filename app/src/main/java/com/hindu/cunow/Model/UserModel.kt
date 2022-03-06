@@ -1,7 +1,7 @@
 package com.hindu.cunow.Model
 
 class UserModel {
-
+    val uid:String? = null
     val profileImage:String? = null
     val fullName:String? =null
     var verification:Boolean = false

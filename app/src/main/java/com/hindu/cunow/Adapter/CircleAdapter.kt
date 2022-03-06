@@ -1,5 +1,6 @@
 package com.hindu.cunow.Adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.media.Image
 import android.text.Layout
@@ -10,6 +11,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
@@ -26,6 +28,7 @@ class CircleAdapter(private val mContext:Context,
         return ViewHolder(view)
     }
 
+    @SuppressLint("CommitPrefEdits")
     override fun onBindViewHolder(holder: CircleAdapter.ViewHolder, position: Int) {
         holder.bind(mCircle[position])
         holder.joinButton.setOnClickListener{
@@ -36,6 +39,15 @@ class CircleAdapter(private val mContext:Context,
                 holder.joinButton.text = "Joined"
                 joinCircle(mCircle[position].circleId!!)
             }
+        }
+
+        holder.itemView.setOnClickListener{
+            val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+            pref.putString("circleId",mCircle[position].circleId)
+            pref.putString("admin",mCircle[position].admin)
+            pref.apply()
+
+            Navigation.findNavController(holder.itemView).navigate(R.id.action_circleFragment_to_circleDetails)
         }
 
     }
@@ -54,10 +66,10 @@ class CircleAdapter(private val mContext:Context,
 
         fun bind(list: CircleModel){
             circleName.text = list.circleName
-            circleDescription.text = list.cirlce_description
+            circleDescription.text = list.circle_description
             Glide.with(mContext).load(list.icon).into(iconImage)
 
-        }
+                     }
 
     }
 

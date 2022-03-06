@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.NonNull
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hindu.cunow.Model.UserModel
@@ -23,6 +24,13 @@ class UserAdapter(private val mContext:Context,
 
     override fun onBindViewHolder(holder: UserAdapter.ViewHolder, position: Int) {
         holder.bind(mUser[position])
+        holder.itemView.setOnClickListener {
+            val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+            pref.putString("uid",mUser[position].uid)
+            pref.apply()
+
+            Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_dashboard_to_userProfile)
+        }
     }
 
     override fun getItemCount(): Int {

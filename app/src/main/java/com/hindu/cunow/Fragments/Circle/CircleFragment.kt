@@ -7,12 +7,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.hindu.cunow.Activity.CreateCircle
+import com.hindu.cunow.Adapter.CircleAdapter
 import com.hindu.cunow.R
+import com.hindu.cunow.databinding.CircleFragmentBinding
 import kotlinx.android.synthetic.main.activity_create_circle.view.*
 import kotlinx.android.synthetic.main.circle_fragment.view.*
 
 class CircleFragment : Fragment() {
+
+    var recyclerView: RecyclerView? = null
+    private var circleAdapter: CircleAdapter? = null
+
+    private var _binding: CircleFragmentBinding? =null
+
+    private val binding get() = _binding!!
 
     companion object {
         fun newInstance() = CircleFragment()
@@ -24,13 +37,30 @@ class CircleFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root:View = inflater.inflate(R.layout.circle_fragment, container, false)
+        viewModel = ViewModelProvider(this).get(CircleViewModel::class.java)
+        _binding = CircleFragmentBinding.inflate(inflater,container,false)
+        val root:View = binding.root
+        initView(root)
+
+        viewModel.circleViewModel!!.observe(viewLifecycleOwner, Observer {
+            circleAdapter = context?.let { it1-> CircleAdapter(it1,it) }
+            recyclerView!!.adapter = circleAdapter
+            circleAdapter!!.notifyDataSetChanged()
+        })
 
 
         root.create_circle.setOnClickListener {
             startActivity(Intent(context,CreateCircle::class.java))
         }
         return root
+    }
+
+    private fun initView(root:View){
+        recyclerView = root.findViewById(R.id.circle_RV) as RecyclerView
+        recyclerView!!.setHasFixedSize(true)
+        val linearLayoutManager:LinearLayoutManager = GridLayoutManager(context,3)
+        recyclerView!!.layoutManager = linearLayoutManager
+
     }
 
 
