@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.TermsAndCondition">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/amiko"
+                android:text="Terms And Condition"
+                android:layout_margin="10dp"
+                android:textColor="@color/red"
+                android:textSize="18sp"
+                />
+
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            />
+
+        <TextView
+            android:layout_width="86dp"
+            android:layout_height="25dp"
+            android:text="Account"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/amiko"
+            />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                />
+
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Report and other problem"
+            android:fontFamily="@font/amiko"
+            android:layout_margin="5dp"
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            />
+
+
+
+
+
+    </ScrollView>
+
+        </LinearLayout>
