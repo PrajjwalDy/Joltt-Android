@@ -29,7 +29,6 @@
 
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -37,42 +36,376 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
-        <TextView
-            android:layout_width="86dp"
-            android:layout_height="25dp"
-            android:text="Account"
-            android:layout_margin="10dp"
-            android:fontFamily="@font/amiko"
-            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/amiko"
+                android:text=""
+                android:layout_margin="5dp"
+                android:textColor="@color/red"/>
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="By using the CUNow service you are agreeing to be bound by the following terms and conditions."
+                    android:layout_margin="5dp"
+                    android:fontFamily="@font/amiko"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical">
+
+            <TextView
+                android:layout_width="86dp"
+                android:layout_height="25dp"
+                android:text="Account"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/amiko"
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
+                >
+
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="10dp"
+                    app:tint="@color/red"
+                    />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You are responsible for any activity that occurs under your screen name."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                >
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="10dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You are responsible for keeping your password secure."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="10dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You must not abuse, harass, threaten, impersonate or intimidate other CUNow users."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="10dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You may not use the CUNow service for any illegal or unauthorized purpose. International users agree to comply with all local laws regarding online conduct and acceptable content."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp"
+                   />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="10dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You must not create or submit unwanted email or comments to any CUNow members (Spam)."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp"
+                 />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical"
+                >
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="10dp"
+                    app:tint="@color/red" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You must not transmit any worms or viruses or any code of a destructive nature."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="10dp"
+                    app:tint="@color/red" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="We reserve the right to modify or terminate the CUNow service for any reason, without notice at any time."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp"
                 />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="5dp"
+                    app:tint="@color/red" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="We reserve the right to alter these Terms of Use at any time. If the alterations constitute a material change to the Terms of Use, we will notify you via internet mail according to the preference expressed on your account. What constitutes a (material change) will be determined at our sole discretion, in good faith and using common sense and reasonable judgement."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="5dp"
+                    app:tint="@color/red" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="We reserve the right to refuse service to anyone for any reason at any time."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="5dp"
+                    app:tint="@color/red" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CUnow's terms state they will not rent or sell a user’s information without consent, but may share non-personal information with third-party organizations, service providers, affiliates, and advertising partners that help CUnow provide the service."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp"/>
+                </LinearLayout>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_gravity="center_vertical" >
+    <ImageView
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:src="@drawable/star"
+        android:layout_margin="5dp"
+        app:tint="@color/red"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CUnow's terms state that they may combine a user’s information with other information and share de-identified and aggregated information with third-parties. CUnow may display advertisements and promotions on the service."
+        android:fontFamily="@font/amiko"
+        android:layout_margin="5dp" />
+</LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                 android:orientation="horizontal"
+                android:layout_gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="5dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="In addition, CUnow's terms describe that a person's distinct mobile device identifier and other device-specific information may be collected and stored. This distinct identifier could be used by CUnow or third party affiliates to track and target content and advertising to users."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="5dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CUnow's terms state they use commercially reasonable safeguards to help secure a user's information collected through the service. The terms also state that CUnow takes reasonable steps to verify a user's identity before granting them access to an account. However, the policies do not clearly indicate whether or not a user's data is encrypted while in transit or at rest. CUnow's terms also do not disclose how they would notify users in the event of a data breach."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="86dp"
+                    android:layout_height="25dp"
+                    android:text="POST"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/amiko"
+                    android:textColor="@color/red"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+ <LinearLayout
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:orientation="horizontal"
+     android:layout_gravity="center_vertical">
+     <ImageView
+         android:layout_width="10dp"
+         android:layout_height="10dp"
+         android:src="@drawable/star"
+         android:layout_margin="5dp"
+         app:tint="@color/red"/>
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="You may not post nude, partially nude, or sexually suggestive photos."
+         android:fontFamily="@font/amiko"
+         android:layout_margin="5dp"/>
+
+ </LinearLayout>
 
 
-        <ImageView
-            android:layout_width="10dp"
-            android:layout_height="10dp"/>
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Report and other problem"
-            android:fontFamily="@font/amiko"
-            android:layout_margin="5dp"
-            android:textColor="@color/red"
-            android:textStyle="bold"
-            />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 </LinearLayout>
+
+        </LinearLayout>
 
     </ScrollView>
 

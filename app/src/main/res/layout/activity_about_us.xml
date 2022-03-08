@@ -21,19 +21,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" 1.INTRODUCTION"
+        android:textColor="@color/red"
+        android:textStyle="bold"
      />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="@string/introduction_a"
-/>
+        android:text="a. CUnow is a platform for users to post content, including photos, videos, comments, and other information. CUnow provides social interactions between users who can post comments, likes, or other messages on a user's content. These interactions include direct messages between individual users, and disappearing messages. CUnow's terms state they collect a broad range of personal information from people using the site, and about friends and contacts of people using CUnow. CUnow's terms state they use commercially reasonable safeguards to help secure a user's information collected through the service."/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="@string/introduction_b"
-        />
+        android:text="@string/introduction_b" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,10 +48,13 @@
         android:layout_margin="5dp"
         android:text="@string/introduction_d"
 />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="2.FOUNDER"
+        android:textStyle="bold"
+        android:textColor="@color/red"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -61,7 +66,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="Co-Founder"
+        android:text="3.Co-Founder"
+        android:textStyle="bold"
+        android:textColor="@color/red"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -69,4 +76,5 @@
         android:layout_margin="5dp"
         android:text="@string/co_founder"
         />
+
 </LinearLayout>
