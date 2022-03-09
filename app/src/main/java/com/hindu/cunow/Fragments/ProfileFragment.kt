@@ -20,6 +20,7 @@ import com.hindu.cunow.Activity.EditProfileActivity
 import com.hindu.cunow.Activity.SettingActivity
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
+import kotlinx.android.synthetic.main.fragment_user_profiel.view.*
 import kotlinx.android.synthetic.main.profile_fragment.*
 import kotlinx.android.synthetic.main.profile_fragment.view.*
 
@@ -41,9 +42,9 @@ class ProfileFragment : Fragment() {
         }
 
         userInfo()
-        root.editProfile_button.setOnClickListener{
-            startActivity(Intent(context,EditProfileActivity::class.java))
-        }
+        getFollowers(root)
+        getFollowings(root)
+
 
         root.open_options.setOnClickListener {
             root.profile_option_ll.visibility = View.VISIBLE
@@ -87,6 +88,41 @@ class ProfileFragment : Fragment() {
             override fun onCancelled(error: DatabaseError) {
                 println("some error occurred")
             }
+        })
+    }
+    private fun getFollowers(root: View){
+        val followingRef = FirebaseDatabase.getInstance().reference
+            .child("Follow").child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child("Followers")
+
+        followingRef.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    root.totalFollowers.text = snapshot.childrenCount.toString()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+    private fun getFollowings(root: View){
+        val followingRef = FirebaseDatabase.getInstance().reference
+            .child("Follow").child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child("Following")
+        followingRef.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    root.totalFollowing.text = snapshot.childrenCount.toString()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
         })
     }
 }

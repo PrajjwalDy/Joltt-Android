@@ -262,6 +262,7 @@
                         android:layout_gravity="center_horizontal"/>
 
                     <TextView
+                        android:id="@+id/totalFollowers"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="249"
@@ -289,6 +290,7 @@
                         android:layout_gravity="center_horizontal"/>
 
                     <TextView
+                        android:id="@+id/totalFollowing"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="59"
@@ -305,18 +307,6 @@
 
     </androidx.cardview.widget.CardView>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/editProfile_button"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:elevation="5dp"
-        android:textAllCaps="false"
-        android:backgroundTint="@color/red"
-        android:background="@drawable/usernamr_password_bg"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="-7dp"
-        android:textColor="@color/white"
-        android:text="Edit Profile"
-        android:textSize="18sp"/>
+
 
 </LinearLayout>

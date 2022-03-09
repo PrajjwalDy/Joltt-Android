@@ -48,6 +48,7 @@ class UserAdapter(private val mContext:Context,
             if (list.verification){
                 userVerified.visibility = View.VISIBLE
             }
+
         }
 
     }

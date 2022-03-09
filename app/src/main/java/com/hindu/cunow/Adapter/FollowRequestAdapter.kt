@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -35,7 +36,10 @@ class FollowRequestAdapter(private val mContext:Context,
 
         requesterDetails(mUser[position].requesterId!!,holder.profileImage,holder.name)
         holder.acceptButton.setOnClickListener {
-            acceptRequest(mUser[position].requesterId!!)
+            acceptRequest(mUser[position].requesterId!!,holder.acceptButton)
+        }
+        holder.rejectButton.setOnClickListener {
+            rejectRequest(mUser[position].requesterId!!)
         }
     }
 
@@ -44,8 +48,9 @@ class FollowRequestAdapter(private val mContext:Context,
     }
     inner class ViewHolder(@NonNull itemView:View):RecyclerView.ViewHolder(itemView){
         val profileImage: CircleImageView = itemView.findViewById(R.id.profileImage_requester) as CircleImageView
-        val name:TextView = itemView.findViewById(R.id.requester_verification) as TextView
+        val name:TextView = itemView.findViewById(R.id.fullName_Requester) as TextView
         val acceptButton:Button = itemView.findViewById(R.id.accept_request) as Button
+        val rejectButton:Button = itemView.findViewById(R.id.reject_request) as Button
     }
 
     private fun requesterDetails(requesterId:String,profileImage:ImageView,name:TextView){
@@ -60,14 +65,13 @@ class FollowRequestAdapter(private val mContext:Context,
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
 
         })
 
     }
 
-    private fun acceptRequest(requesterId: String){
+    private fun acceptRequest(requesterId: String,acceptButton: Button){
 
         FirebaseAuth.getInstance().currentUser!!.uid.let { it1 ->
             FirebaseDatabase.getInstance().reference
@@ -83,6 +87,21 @@ class FollowRequestAdapter(private val mContext:Context,
                 .setValue(true)
         }
 
+        FirebaseDatabase.getInstance().reference.child("Users")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child("Requesters")
+            .child(requesterId)
+            .removeValue()
+
+        acceptButton.text = "Accepted"
+
+    }
+    private fun rejectRequest(requesterId: String){
+        FirebaseDatabase.getInstance().reference.child("Users")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child("Requesters")
+            .child(requesterId)
+            .removeValue()
     }
 
 }

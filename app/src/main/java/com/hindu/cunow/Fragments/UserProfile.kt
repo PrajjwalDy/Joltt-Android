@@ -15,6 +15,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.hindu.cunow.Model.RequestModel
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import kotlinx.android.synthetic.main.fragment_user_profiel.*
@@ -40,7 +41,6 @@ class UserProfile : Fragment() {
             this.profileId = pref.getString("uid","none")!!
         }
 
-
         root.open_options_user.setOnClickListener {
             root.userProfile_LL.visibility = View.VISIBLE
             root.open_options_user.visibility = View.GONE
@@ -54,6 +54,9 @@ class UserProfile : Fragment() {
         }
 
         userInfo()
+        checkFollowAndFollowing(root)
+        getFollowers(root)
+        getFollowings(root)
 
         root.follow_unfollow_button.setOnClickListener {
             checkPrivacy(root)
@@ -86,7 +89,6 @@ class UserProfile : Fragment() {
             }
         })
     }
-
     private fun checkPrivacy(root:View){
         val userRef = FirebaseDatabase.getInstance().reference.child("Users").child(profileId)
         userRef.addListenerForSingleValueEvent(object :ValueEventListener{
@@ -103,8 +105,8 @@ class UserProfile : Fragment() {
                     if (data!!.private){
                         firebaseUser.uid.let { it1 ->
                             FirebaseDatabase.getInstance().reference
-                                .child("Users").child(it1.toString())
-                                .child("FollowRequest").child(profileId)
+                                .child("Users").child(profileId)
+                                .child("FollowRequest").child(it1.toString())
                                 .setValue(true)
                             root.follow_unfollow_button.text = "Requested"
                         }
@@ -149,6 +151,85 @@ class UserProfile : Fragment() {
 
                 }
 
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+    private fun checkRequested(root:View){
+        val database = FirebaseDatabase.getInstance().reference.child("Users")
+            .child(profileId)
+            .child("Requesters")
+
+        database.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val dataRef = snapshot.getValue(RequestModel::class.java)
+                if (snapshot.child(FirebaseAuth.getInstance().currentUser!!.uid).exists()){
+                    root.follow_unfollow_button.text = "Requested"
+                }else{
+                    root.follow_unfollow_button.text = "Follow"
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+    private fun checkFollowAndFollowing(root: View){
+        val databaseRef = firebaseUser.uid.let { it1->
+            FirebaseDatabase.getInstance().reference
+                .child("Follow").child(it1.toString())
+                .child("Following")
+        }
+        if (databaseRef!= null){
+            databaseRef.addListenerForSingleValueEvent(object :ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.child(firebaseUser.uid).exists()){
+                        root.follow_unfollow_button.text= "Following"
+                    }else{
+                        checkRequested(root)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+        }
+    }
+    private fun getFollowers(root: View){
+        val followingRef = FirebaseDatabase.getInstance().reference
+            .child("Follow").child(profileId)
+            .child("Followers")
+
+        followingRef.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+               if (snapshot.exists()){
+                   root.totalFollowers_user.text = snapshot.childrenCount.toString()
+               }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+    private fun getFollowings(root: View){
+        val followingRef = FirebaseDatabase.getInstance().reference
+            .child("Follow").child(profileId)
+            .child("Following")
+        followingRef.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    root.totalFollowing_user.text = snapshot.childrenCount.toString()
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {

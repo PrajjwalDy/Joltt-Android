@@ -18,6 +18,9 @@
         android:theme="@style/Theme.CUNow"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activity.FindSupportOnPostAcitvity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.TermsAndCondition"
             android:exported="false" />
         <activity

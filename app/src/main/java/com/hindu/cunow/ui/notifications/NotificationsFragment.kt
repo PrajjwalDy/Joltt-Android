@@ -1,12 +1,14 @@
 package com.hindu.cunow.ui.notifications
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -19,6 +21,7 @@ import com.hindu.cunow.Model.NotificationModel
 import com.hindu.cunow.PushNotification.Token
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.FragmentNotificationsBinding
+import kotlinx.android.synthetic.main.fragment_notifications.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -52,6 +55,9 @@ class NotificationsFragment : Fragment() {
 
         readNotification()
 
+        root.followRequest.setOnClickListener {
+            Navigation.findNavController(root).navigate(R.id.action_navigation_notifications_to_followRequest2)
+        }
 
         return root
     }

@@ -257,6 +257,7 @@
                         android:layout_gravity="center_horizontal"/>
 
                     <TextView
+                        android:id="@+id/totalFollowers_user"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="249"
@@ -284,6 +285,7 @@
                         android:layout_gravity="center_horizontal"/>
 
                     <TextView
+                        android:id="@+id/totalFollowing_user"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="59"

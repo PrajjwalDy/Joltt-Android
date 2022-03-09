@@ -95,19 +95,28 @@ class PostAdapter (private val mContext: Context,
 //                dialogView.editPost.visibility = View.GONE
 //            }
             dialogView.savePost.setOnClickListener {
-                Toast.makeText(mContext,"Click Received",Toast.LENGTH_SHORT).show()
+                FirebaseDatabase.getInstance().reference
+                    .child("Users")
+                    .child(FirebaseAuth.getInstance().currentUser!!.uid)
+                    .child("SavedPosts")
+                    .child(post.postId)
+                    .setValue(true)
                 alertDialog.dismiss()
             }
             dialogView.download.setOnClickListener {
                 Toast.makeText(mContext,"Click Received",Toast.LENGTH_SHORT).show()
                 alertDialog.dismiss()
             }
-            dialogView.editPost.setOnClickListener {
-                Toast.makeText(mContext,"Click Received",Toast.LENGTH_SHORT).show()
-                alertDialog.dismiss()
+
+            if (post.publisher != FirebaseAuth.getInstance().currentUser!!.uid){
+                dialogView.deletePost.visibility = View.GONE
             }
+
             dialogView.deletePost.setOnClickListener {
-                Toast.makeText(mContext,"Click Received",Toast.LENGTH_SHORT).show()
+                FirebaseDatabase.getInstance().reference.child("Posts")
+                    .child(post.postId)
+                    .removeValue()
+                Snackbar.make(holder.itemView,"Post removed success",Snackbar.LENGTH_SHORT).show()
                 alertDialog.dismiss()
             }
             dialogView.reportPost.setOnClickListener {

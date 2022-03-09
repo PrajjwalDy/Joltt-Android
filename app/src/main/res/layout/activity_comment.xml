@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Activity.CommentActivity">
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/commentAppbar"
         android:layout_width="match_parent"
@@ -67,14 +68,21 @@
 
     </LinearLayout>
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/empty" />
+
     <TextView
         android:id="@+id/noCommentsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/captionLayout"
         android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="283dp"
+        android:layout_marginTop="400dp"
         android:text="No comments"
         android:textAlignment="center" />
 
