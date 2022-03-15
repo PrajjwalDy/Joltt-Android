@@ -121,7 +121,7 @@ android:fontFamily="@font/amiko"
                 android:fontFamily="@font/amiko"
                 />
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="-10dp"
@@ -135,7 +135,8 @@ android:fontFamily="@font/amiko"
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="USER NAME ON THE DOCUMENT"
+                    android:textAllCaps="true"
+                    android:text="Full NAME as per DOCUMENT"
                     android:textColor="@color/red"
                     android:fontFamily="@font/amiko"
                     />
@@ -152,7 +153,7 @@ android:fontFamily="@font/amiko"
         </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="-10dp"
@@ -166,12 +167,12 @@ android:fontFamily="@font/amiko"
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="USER uid."
+                        android:text="User UID"
                         android:textColor="@color/red"
                         android:fontFamily="@font/amiko"
                         />
                     <EditText
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/red"
                         android:hint="Chandigarh uid."
@@ -183,7 +184,7 @@ android:fontFamily="@font/amiko"
 
             </LinearLayout>
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="-10dp"
@@ -202,7 +203,7 @@ android:fontFamily="@font/amiko"
                         android:fontFamily="@font/amiko"
                         />
                     <EditText
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/red"
                         android:hint="xxxx xxxx xxxx"

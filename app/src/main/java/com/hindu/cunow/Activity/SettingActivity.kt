@@ -43,5 +43,11 @@ class SettingActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        verify.setOnClickListener {
+            val intent = Intent(this,   VerificationRequest::class.java)
+            startActivity(intent)
+        }
+
+
     }
 }
