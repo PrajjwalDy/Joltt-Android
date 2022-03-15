@@ -38,5 +38,10 @@ class SettingActivity : AppCompatActivity() {
 
         }
 
+        terms_condition.setOnClickListener {
+            val intent = Intent(this, TermsAndCondition::class.java)
+            startActivity(intent)
+        }
+
     }
 }
