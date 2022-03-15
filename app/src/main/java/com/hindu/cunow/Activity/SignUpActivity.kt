@@ -91,6 +91,7 @@ class SignUpActivity : AppCompatActivity() {
         dataMap["phone"] = phone
         dataMap["profileImage"] = "https://uims.cuchd.in/cuimslogo.png"
         dataMap["verification"] = false
+        dataMap["firstVisit"] = false
 
         userRef.child(currentUserID).setValue(dataMap).addOnCompleteListener { task->
             if (task.isSuccessful){

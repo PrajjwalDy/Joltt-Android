@@ -68,8 +68,7 @@ class CircleAdapter(private val mContext:Context,
             circleName.text = list.circleName
             circleDescription.text = list.circle_description
             Glide.with(mContext).load(list.icon).into(iconImage)
-
-                     }
+        }
 
     }
 
@@ -79,8 +78,16 @@ class CircleAdapter(private val mContext:Context,
                 .child("Circle").child(circleId)
                 .child("Members").child(FirebaseAuth.getInstance().currentUser!!.uid)
                 .setValue(true)
-
-
+        val ref = FirebaseDatabase.getInstance()
+            .reference
+            .child("Users")
+            .child(FirebaseAuth
+                .getInstance()
+                .currentUser!!.uid)
+            .child("Requesters")
+        val requestMap = HashMap<String,Any>()
+        requestMap[""] = FirebaseAuth.getInstance().currentUser!!.uid
+        ref.child(circleId).updateChildren(requestMap)
     }
 
     private fun requestToJoin(circleId: String){

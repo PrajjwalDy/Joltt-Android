@@ -142,6 +142,9 @@ class HomeFragment : Fragment() {
         })
     }
 
+    private fun checkFirstVisit(){
+
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -1,4 +1,4 @@
-package com.hindu.cunow.Fragments.Circle
+package com.hindu.cunow.Fragments.Circle.ExploreCircles
 
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
@@ -14,31 +14,30 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hindu.cunow.Activity.CreateCircle
 import com.hindu.cunow.Adapter.CircleAdapter
 import com.hindu.cunow.R
-import com.hindu.cunow.databinding.CircleFragmentBinding
-import kotlinx.android.synthetic.main.activity_create_circle.view.*
-import kotlinx.android.synthetic.main.circle_fragment.view.*
+import com.hindu.cunow.databinding.ExploreCirclesFragmentsFragmentBinding
+import kotlinx.android.synthetic.main.explore_circles_fragments_fragment.view.*
 
-class CircleFragment : Fragment() {
+class ExploreCirclesFragments : Fragment() {
 
     var recyclerView: RecyclerView? = null
     private var circleAdapter: CircleAdapter? = null
 
-    private var _binding: CircleFragmentBinding? =null
+    private var _binding: ExploreCirclesFragmentsFragmentBinding? =null
 
     private val binding get() = _binding!!
 
     companion object {
-        fun newInstance() = CircleFragment()
+        fun newInstance() = ExploreCirclesFragments()
     }
 
-    private lateinit var viewModel: CircleViewModel
+    private lateinit var viewModel: ExploreCirclesFragmentsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(this).get(CircleViewModel::class.java)
-        _binding = CircleFragmentBinding.inflate(inflater,container,false)
+        viewModel = ViewModelProvider(this).get(ExploreCirclesFragmentsViewModel::class.java)
+        _binding = ExploreCirclesFragmentsFragmentBinding.inflate(inflater,container,false)
         val root:View = binding.root
         initView(root)
 
@@ -50,7 +49,7 @@ class CircleFragment : Fragment() {
 
 
         root.create_circle.setOnClickListener {
-            startActivity(Intent(context,CreateCircle::class.java))
+            startActivity(Intent(context, CreateCircle::class.java))
         }
         return root
     }
@@ -58,10 +57,9 @@ class CircleFragment : Fragment() {
     private fun initView(root:View){
         recyclerView = root.findViewById(R.id.circle_RV) as RecyclerView
         recyclerView!!.setHasFixedSize(true)
-        val linearLayoutManager:LinearLayoutManager = GridLayoutManager(context,3)
+        val linearLayoutManager: LinearLayoutManager = GridLayoutManager(context,3)
         recyclerView!!.layoutManager = linearLayoutManager
 
     }
-
 
 }

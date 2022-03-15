@@ -17,4 +17,5 @@ class UserModel {
     val hostelName:String? = null
     val male:Boolean = false
     val female:Boolean = false
+    val firstVisit:Boolean = false
 }

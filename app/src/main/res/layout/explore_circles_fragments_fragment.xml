@@ -4,31 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragments.Circle.CircleFragment">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/CircleAppbar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/white">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/amiko"
-                android:text="Circle"
-                android:textColor="@color/red"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
+    android:orientation="vertical"
+    tools:context=".Fragments.Circle.ExploreCircles.ExploreCirclesFragments">
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
@@ -48,7 +25,7 @@
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:padding="5dp"
-           >
+            >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -59,11 +36,11 @@
                 android:textStyle="bold"
                 android:fontFamily="@font/amiko"/>
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/add"
-                    android:layout_margin="5dp"/>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/add"
+                android:layout_margin="5dp"/>
 
         </LinearLayout>
 
@@ -73,7 +50,5 @@
         android:id="@+id/circle_RV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/CircleAppbar" />
-
-
+        android:layout_marginTop="5dp" />
 </RelativeLayout>

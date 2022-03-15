@@ -1,5 +1,6 @@
 package com.hindu.cunow.Fragments
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.provider.DocumentsContract
@@ -17,6 +18,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Adapter.UserAdapter
+import com.hindu.cunow.Fragments.Circle.CircleTabActivity
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import kotlinx.android.synthetic.main.explore_fragment.view.*
@@ -43,7 +45,10 @@ class ExploreFragment : Fragment() {
         }
 
         root.circle_ll.setOnClickListener {
-            Navigation.findNavController(root).navigate(R.id.action_navigation_dashboard_to_circleFragment)
+            val intent = Intent(context, CircleTabActivity::class.java)
+            startActivity(intent
+            )
+            //Navigation.findNavController(root).navigate(R.id.action_navigation_dashboard_to_circleFragment)
         }
 
         recyclerView = root.findViewById(R.id.searchUserRV)

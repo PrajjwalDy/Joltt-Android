@@ -18,6 +18,15 @@
         android:theme="@style/Theme.CUNow"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activity.VibesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Fragments.Circle.CircleTabActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.WelcomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.FindSupportOnPostAcitvity"
             android:exported="false" />
         <activity

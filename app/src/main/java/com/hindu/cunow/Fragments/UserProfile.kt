@@ -95,11 +95,11 @@ class UserProfile : Fragment() {
             @SuppressLint("SetTextI18n")
             override fun onDataChange(snapshot: DataSnapshot) {
                 val ref = FirebaseDatabase.getInstance().reference.child("Users").child(profileId).child("Requesters")
-                val postId = ref.push().key
-
                 val requestMap = HashMap<String,Any>()
                 requestMap["requesterId"] = FirebaseAuth.getInstance().currentUser!!.uid
                 ref.child(firebaseUser.uid).updateChildren(requestMap)
+
+
                 if (snapshot.exists()){
                     val data = snapshot.getValue(UserModel::class.java)
                     if (data!!.private){

@@ -19,7 +19,6 @@
 
     <TextView
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:fontFamily="@font/amiko"
@@ -28,64 +27,83 @@
         android:textColor="@color/red"
         android:textSize="18sp"
         />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" 1.INTRODUCTION"
-        android:textColor="@color/red"
-        android:textStyle="bold"
-     />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="a. CUnow is a platform for users to post content, including photos, videos, comments, and other information. CUnow provides social interactions between users who can post comments, likes, or other messages on a user's content. These interactions include direct messages between individual users, and disappearing messages. CUnow's terms state they collect a broad range of personal information from people using the site, and about friends and contacts of people using CUnow. CUnow's terms state they use commercially reasonable safeguards to help secure a user's information collected through the service."/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="@string/introduction_b" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="@string/introduction_c"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="@string/introduction_d"
-/>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2.FOUNDER"
-        android:textStyle="bold"
-        android:textColor="@color/red"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="@string/founder"
-/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="3.Co-Founder"
-        android:textStyle="bold"
-        android:textColor="@color/red"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="@string/co_founder"
-        />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 1.INTRODUCTION"
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="a. CUnow is a platform for users to post content, including photos, videos, comments, and other information. CUnow provides social interactions between users who can post comments, likes, or other messages on a user's content. These interactions include direct messages between individual users, and disappearing messages. CUnow's terms state they collect a broad range of personal information from people using the site, and about friends and contacts of people using CUnow. CUnow's terms state they use commercially reasonable safeguards to help secure a user's information collected through the service."/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/introduction_b" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/introduction_c"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/introduction_d"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2.FOUNDER"
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/founder"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="3.Co-Founder"
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/co_founder"
+                />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </ScrollView>
+
+
 
 </LinearLayout>
