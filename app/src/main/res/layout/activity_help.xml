@@ -37,12 +37,14 @@
         android:fontFamily="@font/amiko"
         />
 <EditText
+    android:id="@+id/help_editText"
     android:layout_width="400dp"
     android:layout_height="100dp"
     android:layout_margin="5dp"
     android:backgroundTint="@color/red"
     />
     <Button
+        android:id="@+id/send_btn"
         android:layout_width="100dp"
         android:textAllCaps="false"
         android:layout_height="40dp"
