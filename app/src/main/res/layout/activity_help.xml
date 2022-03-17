@@ -30,6 +30,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
     <TextView
+
         android:layout_width="86dp"
         android:layout_height="25dp"
         android:text="Description"
