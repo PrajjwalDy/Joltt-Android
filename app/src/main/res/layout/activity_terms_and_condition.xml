@@ -36,8 +36,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
+
+
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -375,12 +377,86 @@
      <TextView
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:text="You may not post nude, partially nude, or sexually suggestive photos."
+         android:text="You may not post sexually suggestive photos."
          android:fontFamily="@font/amiko"
          android:layout_margin="5dp"/>
 
  </LinearLayout>
 
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:layout_gravity="center_vertical">
+              <ImageView
+                  android:layout_width="10dp"
+                  android:layout_height="10dp"
+                  android:src="@drawable/star"
+                  android:layout_margin="5dp"
+                  app:tint="@color/red"/>
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="CUnow's terms state it is a platform for users to post content, including photos, comments and other materials to the service and to share user content publicly. This means that other users may search, see, use, or share any user content that is posted and made publicly available through the service. "
+                  android:fontFamily="@font/amiko"
+                  android:layout_margin="5dp"/>
+
+          </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="86dp"
+                    android:layout_height="25dp"
+                    android:text="COMMENT"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/amiko"
+                    android:textColor="@color/red"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical">
+          <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+              android:src="@drawable/star"
+              android:layout_margin="5dp"
+              app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CUnow's terms state they provide social interactions between users who can post comments, likes or other messages on a user's content. These interactions include direct messages between individual users, and disappearing messages."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="5dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp"/>
+            </LinearLayout>
 
 
 
@@ -403,7 +479,13 @@
 
 
 
-</LinearLayout>
+
+
+
+
+
+
+        </LinearLayout>
 
         </LinearLayout>
 

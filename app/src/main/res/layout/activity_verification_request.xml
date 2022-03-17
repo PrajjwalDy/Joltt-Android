@@ -80,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="If you request for verification then your followers should be up to 3 thousand otherwise the request will not be verified."
+                    android:text="If you request for verification then your followers should be up to 3k otherwise the request will not be verified."
                     android:fontFamily="@font/amiko"
                     android:textStyle="bold"/>
 
@@ -236,7 +236,7 @@ android:fontFamily="@font/amiko"
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/amiko"
                 android:text="H.I.N.D.U Production"
-                android:layout_margin="10dp"
+                android:layout_margin="90dp"
                 android:textColor="@color/red"
                 android:textSize="18sp"
                 />
