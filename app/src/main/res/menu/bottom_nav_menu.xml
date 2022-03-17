@@ -14,7 +14,7 @@
     <item
         android:id="@+id/navigation_addPost"
         android:icon="@drawable/play_vid"
-        android:title="VidB" />
+        android:title="Vibes" />
 
     <item
         android:id="@+id/navigation_notifications"

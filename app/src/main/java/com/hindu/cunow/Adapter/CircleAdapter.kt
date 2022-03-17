@@ -84,9 +84,9 @@ class CircleAdapter(private val mContext:Context,
             .child(FirebaseAuth
                 .getInstance()
                 .currentUser!!.uid)
-            .child("Requesters")
+            .child("Joined_Circles")
         val requestMap = HashMap<String,Any>()
-        requestMap[""] = FirebaseAuth.getInstance().currentUser!!.uid
+        requestMap["JCId"] = circleId
         ref.child(circleId).updateChildren(requestMap)
     }
 

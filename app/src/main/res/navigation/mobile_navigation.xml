@@ -67,7 +67,7 @@
         android:id="@+id/circleFragment"
         android:name="com.hindu.cunow.Fragments.Circle.CircleFragment"
         android:label="circle_fragment"
-        tools:layout="@layout/circle_fragment" >
+        tools:layout="@layout/circle_fragment">
         <action
             android:id="@+id/action_circleFragment_to_navigation_dashboard"
             app:destination="@id/navigation_dashboard" />

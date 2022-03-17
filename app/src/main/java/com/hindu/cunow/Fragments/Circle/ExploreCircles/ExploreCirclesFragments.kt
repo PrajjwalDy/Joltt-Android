@@ -26,10 +26,6 @@ class ExploreCirclesFragments : Fragment() {
 
     private val binding get() = _binding!!
 
-    companion object {
-        fun newInstance() = ExploreCirclesFragments()
-    }
-
     private lateinit var viewModel: ExploreCirclesFragmentsViewModel
 
     override fun onCreateView(

@@ -93,7 +93,6 @@ class CommentActivity : AppCompatActivity() {
 
             dataRef.push().setValue(dataMap)
             addCommentEditText.text.clear()
-            loadComments()
             addNotification()
         }
     }
@@ -125,9 +124,10 @@ class CommentActivity : AppCompatActivity() {
         val databaseRef = FirebaseDatabase.getInstance().reference
             .child("Comments")
             .child(postId)
-        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener{
+        databaseRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
+                    commentList!!.clear()
                     noCommentsText.visibility = View.GONE
                     RecyclerViewComment.visibility = View.VISIBLE
                     for (snapshot in snapshot.children){

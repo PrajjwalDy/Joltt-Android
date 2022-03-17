@@ -57,6 +57,7 @@
           android:id="@+id/vibe_profileImage"/>
 
       <TextView
+          android:id="@+id/fullName_viber"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="FullName"
@@ -69,12 +70,14 @@
 
     <TextView
         android:id="@+id/vibeCaption"
+        android:background="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:layout_marginStart="10dp"
-        android:text="Vibe Caption"
+        android:padding="2dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="70dp"/>
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="70dp"
+        android:text="Vibe Caption"
+        android:textColor="@color/red" />
 
 </RelativeLayout>

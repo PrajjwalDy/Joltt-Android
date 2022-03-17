@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circle_icon_joined"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:src="@drawable/profile_testimg" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/circle_icon_joined"
+            android:orientation="vertical">
+
+            <TextView
+                android:fontFamily="@font/amiko"
+                android:id="@+id/circle_name_joined"
+                android:layout_width="wrap_content"
+                android:textColor="@color/red"
+                android:layout_height="wrap_content"
+                android:text="Circle Name"
+                android:textSize="14sp" />
+
+            <TextView
+                android:fontFamily="@font/amiko"
+                android:id="@+id/circle_description_joined"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="circle description"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/circle_joined_moreOption"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/more_option"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
