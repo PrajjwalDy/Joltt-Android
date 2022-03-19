@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.CircleFlowActivity">
+    
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar_circleFlow"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/white">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/circleName_CF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/amiko"
+                android:text=""
+                android:layout_margin="10dp"
+                android:textColor="@color/red"
+                android:textSize="18sp"
+                />
+        </LinearLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:id="@+id/progress_line_ll"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appBar_circleFlow"
+        android:orientation="vertical">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            app:lottie_rawRes="@raw/uploading_image"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Uploading Image"
+            android:layout_gravity="center_horizontal"
+            android:textSize="12sp"/>
+
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/circle_flow_RV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/progress_line_ll" />
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/sendingImage_CF"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_above="@+id/sendingLayout"
+        android:layout_centerHorizontal="true"/>
+
+
+    <RelativeLayout
+        android:id="@+id/sendingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <EditText
+            android:id="@+id/circleFlow_message"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toStartOf="@+id/send_CF"
+            android:layout_toEndOf="@+id/selectMedia_CF"
+            android:backgroundTint="@color/white"
+            android:hint="Message"
+            android:textColor="@color/red" />
+
+        <ImageView
+            android:id="@+id/selectMedia_CF"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/gallery" />
+
+        <ImageView
+            android:id="@+id/send_CF"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/send"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

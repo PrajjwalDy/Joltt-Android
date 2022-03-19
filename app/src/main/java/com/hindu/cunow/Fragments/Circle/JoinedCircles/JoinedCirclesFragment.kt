@@ -39,8 +39,6 @@ class JoinedCirclesFragment : Fragment() {
             circleAdapter!!.notifyDataSetChanged()
         })
 
-
-
         return root
     }
 
