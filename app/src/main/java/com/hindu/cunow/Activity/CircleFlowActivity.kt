@@ -57,10 +57,11 @@ class CircleFlowActivity : AppCompatActivity() {
         val intent = intent
         circleId = intent.getStringExtra("circleId").toString()
 
-        val recyclerView: RecyclerView = findViewById(R.id.circle_flow_RV)
+        val recyclerView: RecyclerView= findViewById(R.id.circle_flow_RV)
         val linearLayoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayoutManager
         linearLayoutManager.stackFromEnd = true
+
 
         flowList = ArrayList()
         flowAdapter = CircleFlowAdapter(this, flowList as ArrayList<CircleFlowModel>)
@@ -72,13 +73,13 @@ class CircleFlowActivity : AppCompatActivity() {
         }
 
         send_CF.setOnClickListener {view->
-            if (media == "yes"){
+            if (imageUri != null){
                 uploadImage()
             }else{
                 sendMessage(view)
             }
         }
-        retrieveFlow()
+        retrieveFlow(recyclerView)
         circleInfo()
 
     }
@@ -103,6 +104,7 @@ class CircleFlowActivity : AppCompatActivity() {
             dataMap["circleFlowId"] = commentId!!
             dataMap["circleFlowText"] = circleFlow_message.text.toString()
             dataMap["circleFlowSender"] = FirebaseAuth.getInstance().currentUser!!.uid
+            dataMap["messageImage"] = false
 
             dataRef.push().setValue(dataMap)
             circleFlow_message.text.clear()
@@ -141,12 +143,14 @@ class CircleFlowActivity : AppCompatActivity() {
                 postMap["circleFlowSender"] = FirebaseAuth.getInstance().currentUser!!.uid
                 postMap["circleFlowText"] = circleFlow_message.text.toString()
                 postMap["circleFlowImg"] = myUrl
+                postMap["messageImage"] = true
 
                 ref.child(postId).updateChildren(postMap)
 
                 Toast.makeText(this,"Image shared successfully", Toast.LENGTH_SHORT).show()
                 progress_line_ll.visibility = View.GONE
                 media = ""
+                imageUri = null
             }else{
                 Toast.makeText(this,"Something went wrong", Toast.LENGTH_SHORT).show()
                 progress_line_ll.visibility = View.GONE
@@ -155,7 +159,7 @@ class CircleFlowActivity : AppCompatActivity() {
 
     }
 
-    private fun retrieveFlow(){
+    private fun retrieveFlow(recyclerView: RecyclerView){
         val databaseRef = FirebaseDatabase.getInstance().reference
             .child("CircleFlow")
             .child(circleId)

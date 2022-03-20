@@ -12,11 +12,10 @@
         android:layout_height="20dp"
         android:layout_centerVertical="true"
         android:layout_marginStart="5dp"
-        android:layout_toStartOf="@+id/CV_item"
         android:src="@drawable/profile_testimg"/>
 
     <androidx.cardview.widget.CardView
-        android:layout_centerHorizontal="true"
+        android:layout_toEndOf="@+id/profileImage_CF"
         android:id="@+id/CV_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

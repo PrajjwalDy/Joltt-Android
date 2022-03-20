@@ -43,7 +43,8 @@
         <com.airbnb.lottie.LottieAnimationView
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            app:lottie_rawRes="@raw/uploading_image"
+            android:scaleType="fitXY"
+            app:lottie_rawRes="@raw/progress_line"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"/>
 
@@ -57,10 +58,12 @@
 
     </LinearLayout>
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/circle_flow_RV"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/sendingLayout"
         android:layout_below="@+id/progress_line_ll" />
 
     <ImageView

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull
 import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -25,15 +26,23 @@ class CircleFlowAdapter(private val mContext:Context,
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        position: Int
     ): CircleFlowAdapter.ViewHolder {
-        val view = LayoutInflater.from(mContext).inflate(R.layout.circle_flow_item,parent,false)
-        return ViewHolder(view)
+        return if (position ==1)
+        {
+            val view = LayoutInflater.from(mContext).inflate(R.layout.circle_flow_item, parent, false)
+            ViewHolder(view)
+        }
+        else
+        {
+            val view = LayoutInflater.from(mContext).inflate(R.layout.circle_flow_second, parent, false)
+            ViewHolder(view)
+        }
     }
 
     override fun onBindViewHolder(holder: CircleFlowAdapter.ViewHolder, position: Int) {
         holder.bind(mCircle[position])
-        loadSender(mCircle[position].circleFlowSender!!,holder.profileImage_CF)
+
     }
 
     override fun getItemCount(): Int {
@@ -41,23 +50,32 @@ class CircleFlowAdapter(private val mContext:Context,
     }
 
     inner class ViewHolder(@NonNull itemView: View):RecyclerView.ViewHolder(itemView){
-        val circleFlowImage:ImageView = itemView.findViewById(R.id.circleFlow_Image) as ImageView
-        val circleFlowText:TextView = itemView.findViewById(R.id.circleFlow_text) as TextView
-        val profileImage_CF:CircleImageView = itemView.findViewById(R.id.profileImage_CF) as CircleImageView
+        val circleFlowImage:ImageView? = itemView.findViewById(R.id.circleFlow_Image) as? ImageView
+        val circleFlowText:TextView? = itemView.findViewById(R.id.circleFlow_text) as? TextView
+        val profileImage_CF:CircleImageView? = itemView.findViewById(R.id.profileImage_CF) as? CircleImageView
+        val circleFlowImage_sender:ImageView? = itemView.findViewById(R.id.circleFlow_Image_sender) as? ImageView
 
         fun bind(list:CircleFlowModel){
-            if (list.circleFlowText == null){
-                circleFlowText.visibility = View.GONE
+                circleFlowText!!.text = list.circleFlowText
+
+            if (list.messageImage){
+                if (!list.circleFlowSender.equals(FirebaseAuth.getInstance().currentUser!!.uid)){
+                    circleFlowImage!!.visibility = View.VISIBLE
+                    Glide.with(mContext).load(list.circleFlowImg).into(circleFlowImage)
+                    circleFlowText.visibility = View.GONE
+                }else if (list.circleFlowSender.equals(FirebaseAuth.getInstance().currentUser!!.uid)){
+                    circleFlowText.visibility = View.GONE
+                    circleFlowImage_sender!!.visibility = View.VISIBLE
+                    Glide.with(mContext).load(list.circleFlowImg).into(circleFlowImage_sender)
+                }
             }else{
-                circleFlowText.text = list.circleFlowText
+                if (!list.circleFlowSender.equals(FirebaseAuth.getInstance().currentUser!!.uid)){
+                    circleFlowImage!!.visibility = View.GONE
+                }else if (list.circleFlowSender.equals(FirebaseAuth.getInstance().currentUser!!.uid)){
+                    circleFlowImage_sender!!.visibility = View.GONE
+                }
             }
 
-            if (list.circleFlowImg != null){
-                circleFlowImage.visibility = View.VISIBLE
-                Glide.with(mContext).load(list.circleFlowImg).into(circleFlowImage)
-            }else{
-                circleFlowImage.visibility = View.GONE
-            }
         }
     }
 
@@ -77,6 +95,15 @@ class CircleFlowAdapter(private val mContext:Context,
             }
 
         })
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (mCircle[position].circleFlowSender.equals(FirebaseAuth.getInstance().currentUser!!.uid)) {
+            0
+        }else{
+            1
+        }
+
     }
 
 

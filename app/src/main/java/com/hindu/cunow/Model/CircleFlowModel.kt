@@ -5,4 +5,5 @@ class CircleFlowModel {
     var circleFlowText:String? = null
     var circleFlowSender:String? = null
     var circleFlowId:String? = null
+    var messageImage:Boolean = false
 }
