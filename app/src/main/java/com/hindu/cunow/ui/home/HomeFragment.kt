@@ -42,7 +42,6 @@ class HomeFragment : Fragment() {
 
     var recyclerView: RecyclerView? = null
     private var postAdapter: PostAdapter? = null
-   // private var postList: MutableList<PostModel>? = null
 
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null

@@ -16,6 +16,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.hindu.cunow.Activity.AboutMeTabsActivity
 import com.hindu.cunow.Activity.EditProfileActivity
 import com.hindu.cunow.Activity.SettingActivity
 import com.hindu.cunow.Model.UserModel
@@ -51,18 +52,19 @@ class ProfileFragment : Fragment() {
             root.open_options.visibility = View.GONE
             root.close_options.visibility = View.VISIBLE
         }
-
         root.close_options.setOnClickListener {
             root.profile_option_ll.visibility = View.GONE
             root.open_options.visibility = View.VISIBLE
             root.close_options.visibility = View.GONE
         }
-
         root.settings_account.setOnClickListener {
             val intent = Intent(context,SettingActivity::class.java)
             startActivity(intent)
         }
-
+        root.aboutMe_ll.setOnClickListener {
+            val intent = Intent(context,AboutMeTabsActivity::class.java)
+            startActivity(intent)
+        }
 
         return  root
     }
