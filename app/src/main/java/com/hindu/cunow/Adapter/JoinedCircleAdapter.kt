@@ -2,6 +2,7 @@ package com.hindu.cunow.Adapter
 
 import android.content.ClipDescription
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.hindu.cunow.Activity.CircleFlowActivity
+import com.hindu.cunow.Activity.CommentActivity
 import com.hindu.cunow.Model.CircleModel
 import com.hindu.cunow.Model.JoinedCircleModel
 import com.hindu.cunow.R
@@ -60,6 +63,11 @@ class JoinedCircleAdapter(private val mContext:Context,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         fetchJoined(holder.iconImage,holder.circleName,holder.circleDescription,mCircle[position].JCId!!)
+        holder.itemView.setOnClickListener {
+            val commentIntent = Intent(mContext, CircleFlowActivity::class.java)
+            commentIntent.putExtra("circleId",mCircle[position].JCId!!)
+            mContext.startActivity(commentIntent)
+        }
     }
 
     override fun getItemCount(): Int {

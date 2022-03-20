@@ -18,6 +18,12 @@
         android:theme="@style/Theme.CUNow"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activity.AboutMeTabsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.CircleFlowActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.VerificationRequest"
             android:exported="false" />
         <activity
