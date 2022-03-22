@@ -31,452 +31,472 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <RelativeLayout
-        android:visibility="gone"
-        android:id="@+id/displayName_ProfileImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/editProfileImage"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_margin="10dp"
-            android:src="@drawable/profileuser"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/ll_name_bio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/editProfileImage">
-
-            <TextView
-                android:id="@+id/editProfileUserName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/amiko"
-                android:text="Edward Larry"
-                android:textColor="@color/black"
-                android:textSize="18sp"/>
-
-            <TextView
-                android:id="@+id/editBio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/amiko"
-                android:text="Co-founder &amp; Senior disigner"
-                android:layout_gravity="center_horizontal"
-                android:textColor="#90A4AE"
-                android:textSize="14sp"/>
-
-
-        </LinearLayout>
-
-
-
-        <ImageView
-            android:id="@+id/editButton_name_profile_Image"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/edit"
-            android:layout_toEndOf="@+id/ll_name_bio"
-            android:layout_centerVertical="true"
-            android:layout_margin="10dp"/>
-
-        <ImageView
-            android:id="@+id/saveButton_name_profile_Image"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/check"
-            android:visibility="gone"
-            android:layout_toEndOf="@+id/ll_name_bio"
-            android:layout_centerVertical="true"
-            android:layout_margin="10dp"/>
-
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/EditName_ProfileImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal">
-
-        <LinearLayout
-            android:id="@+id/change_ProfileImage_ll"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/change_ProfileImage"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginStart="10dp"
+            <RelativeLayout
+                android:id="@+id/EditName_ProfileImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:src="@drawable/profileuser" />
+                android:layout_gravity="center_horizontal">
+
+                <LinearLayout
+                    android:id="@+id/change_ProfileImage_ll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/change_ProfileImage"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/profileuser" />
+
+                    <TextView
+                        android:id="@+id/change_ProfileImage_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/amiko"
+                        android:text="Change Porfile Image"
+                        android:textColor="@color/red"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:id="@+id/edit_ll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:orientation="vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/change_ProfileImage_ll">
+
+                    <EditText
+                        android:id="@+id/ProfileUserName_editText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/amiko"
+                        android:hint="Edward Larry"
+                        android:textColor="@color/red"
+                        android:backgroundTint="@color/red"
+                        android:textSize="14sp"/>
+
+                    <EditText
+                        android:id="@+id/Bio_EditText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/amiko"
+                        android:hint="co-founder at Larry Chemicals"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@color/red"
+                        android:backgroundTint="@color/red"
+                        android:textSize="12sp"/>
+
+
+                </LinearLayout>
+
+
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:src="@drawable/minus"
+                android:scaleType="fitXY"/>
 
             <TextView
-                android:id="@+id/change_ProfileImage_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/amiko"
-                android:text="Change Porfile Image"
+                android:textSize="14sp"
                 android:textColor="@color/red"
-                android:textSize="12sp" />
-
-        </LinearLayout>
-
-
-
-        <LinearLayout
-            android:id="@+id/edit_ll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:orientation="vertical"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/change_ProfileImage_ll">
-
-            <EditText
-                android:id="@+id/ProfileUserName_editText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/amiko"
-                android:hint="Edward Larry"
-                android:textColor="@color/red"
-                android:backgroundTint="@color/red"
-                android:textSize="14sp"/>
-
-            <EditText
-                android:id="@+id/Bio_EditText"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/amiko"
-                android:hint="co-founder at Larry Chemicals"
                 android:layout_gravity="center_horizontal"
-                android:textColor="@color/red"
-                android:backgroundTint="@color/red"
-                android:textSize="12sp"/>
-
-
-        </LinearLayout>
-
-
-
-    </RelativeLayout>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:src="@drawable/minus"
-        android:scaleType="fitXY"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:textColor="@color/red"
-        android:layout_gravity="center_horizontal"
-        android:textStyle="bold"
-        android:text="Your Informations"
-        android:layout_margin="10dp"
-        android:fontFamily="@font/amiko"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="-10dp"
-        android:gravity="center_vertical">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="I'm From this cool place"
-                android:fontFamily="@font/amiko"
-                />
-
-            <EditText
-                android:id="@+id/editTextAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/red"
-                android:hint="Chandigarh India"
-                android:fontFamily="@font/amiko"
-                android:textSize="14dp"/>
-
-
-        </LinearLayout>
-
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="My Awsome Branch is"
-                android:fontFamily="@font/amiko"
-                />
-
-            <EditText
-                android:id="@+id/editTextBatch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/red"
-                android:hint="Computer Science Engineering"
-                android:fontFamily="@font/amiko"
-                android:textSize="14sp"/>
-
-        </LinearLayout>
-
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Year"
-                android:fontFamily="@font/amiko"
-                />
-
-            <EditText
-                android:id="@+id/editTextYear"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:backgroundTint="@color/red"
-                android:hint="2016"
-                android:fontFamily="@font/amiko"
-                android:textSize="14sp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="My Section is"
-                android:fontFamily="@font/amiko"
-                />
-
-            <EditText
-                android:id="@+id/editTextSection"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:backgroundTint="@color/red"
-                android:hint="203"
-                android:fontFamily="@font/amiko"
-                android:textSize="14sp"/>
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="My Gender is"
-                android:fontFamily="@font/amiko"
-                />
+                android:textStyle="bold"
+                android:text="Your Informations"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/amiko"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="-10dp"
+                android:gravity="center_vertical">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/edit_gender_male"
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:text="Male"
-                    android:layout_margin="5dp"
-                    android:background="@color/white"
-                    android:textAllCaps="false"
-                    android:textColor="@color/red"
-                    android:elevation="5dp"
-                    android:fontFamily="@font/amiko"
-                    />
+                    android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/edit_gender_female"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:layout_margin="5dp"
-                    android:text="Female"
-                    android:background="@color/white"
-                    android:textAllCaps="false"
-                    android:textColor="@color/red"
-                    android:elevation="5dp"
-                    android:fontFamily="@font/amiko"
-                    />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="I'm From this cool place"
+                        android:fontFamily="@font/amiko"
+                        />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/edit_gender_other"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:layout_margin="5dp"
-                    android:text="Other"
-                    android:background="@color/white"
-                    android:textAllCaps="false"
-                    android:textColor="@color/red"
-                    android:elevation="5dp"
-                    android:fontFamily="@font/amiko"
-                    />
+                    <EditText
+                        android:id="@+id/editTextAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/red"
+                        android:hint="Chandigarh India"
+                        android:fontFamily="@font/amiko"
+                        android:textSize="14dp"/>
+
+
+                </LinearLayout>
+
+
 
             </LinearLayout>
-
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="I am a"
-                android:fontFamily="@font/amiko"
-                />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/edit_hosteler"
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:text="Hostler"
-                    android:layout_margin="5dp"
-                    android:background="@color/white"
-                    android:textAllCaps="false"
-                    android:textColor="@color/red"
-                    android:elevation="5dp"
-                    android:fontFamily="@font/amiko"
-                    />
+                    android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/edit_dayScholar"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:layout_margin="5dp"
-                    android:text="Day Scholar"
-                    android:background="@color/white"
-                    android:textAllCaps="false"
-                    android:textColor="@color/red"
-                    android:elevation="5dp"
-                    android:fontFamily="@font/amiko"
-                    />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="My Awsome Branch is"
+                        android:fontFamily="@font/amiko"
+                        />
+
+                    <EditText
+                        android:id="@+id/editTextBatch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/red"
+                        android:hint="Computer Science Engineering"
+                        android:fontFamily="@font/amiko"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+
 
 
             </LinearLayout>
-            <EditText
-                android:id="@+id/editTextHostel"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/red"
-                android:hint="Hostel Name"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Year"
+                        android:fontFamily="@font/amiko"
+                        />
+
+                    <EditText
+                        android:id="@+id/editTextYear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:backgroundTint="@color/red"
+                        android:hint="2016"
+                        android:fontFamily="@font/amiko"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="My Section is"
+                        android:fontFamily="@font/amiko"
+                        />
+
+                    <EditText
+                        android:id="@+id/editTextSection"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:backgroundTint="@color/red"
+                        android:hint="203"
+                        android:fontFamily="@font/amiko"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Relationship Status"
+                        android:fontFamily="@font/amiko"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/edit_single"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:text="Single"
+                            android:layout_margin="5dp"
+                            android:background="@color/white"
+                            android:textAllCaps="false"
+                            android:textColor="@color/red"
+                            android:elevation="5dp"
+                            android:fontFamily="@font/amiko"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/edit_mingle"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:layout_margin="5dp"
+                            android:text="Mingle"
+                            android:background="@color/white"
+                            android:textAllCaps="false"
+                            android:textColor="@color/red"
+                            android:elevation="5dp"
+                            android:fontFamily="@font/amiko"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/edit_crush"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:layout_margin="5dp"
+                            android:text="Have a Crush"
+                            android:background="@color/white"
+                            android:textAllCaps="false"
+                            android:textColor="@color/red"
+                            android:elevation="5dp"
+                            android:fontFamily="@font/amiko"
+                            />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="My Gender is"
+                        android:fontFamily="@font/amiko"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/edit_gender_male"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:text="Male"
+                            android:layout_margin="5dp"
+                            android:background="@color/white"
+                            android:textAllCaps="false"
+                            android:textColor="@color/red"
+                            android:elevation="5dp"
+                            android:fontFamily="@font/amiko"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/edit_gender_female"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:layout_margin="5dp"
+                            android:text="Female"
+                            android:background="@color/white"
+                            android:textAllCaps="false"
+                            android:textColor="@color/red"
+                            android:elevation="5dp"
+                            android:fontFamily="@font/amiko"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/edit_gender_other"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:layout_margin="5dp"
+                            android:text="Other"
+                            android:background="@color/white"
+                            android:textAllCaps="false"
+                            android:textColor="@color/red"
+                            android:elevation="5dp"
+                            android:fontFamily="@font/amiko"
+                            />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="I am a"
+                        android:fontFamily="@font/amiko"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/edit_hosteler"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:text="Hostler"
+                            android:layout_margin="5dp"
+                            android:background="@color/white"
+                            android:textAllCaps="false"
+                            android:textColor="@color/red"
+                            android:elevation="5dp"
+                            android:fontFamily="@font/amiko"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/edit_dayScholar"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:layout_margin="5dp"
+                            android:text="Day Scholar"
+                            android:background="@color/white"
+                            android:textAllCaps="false"
+                            android:textColor="@color/red"
+                            android:elevation="5dp"
+                            android:fontFamily="@font/amiko"
+                            />
+
+
+                    </LinearLayout>
+                    <EditText
+                        android:id="@+id/editTextHostel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/red"
+                        android:hint="Hostel Name"
+                        android:fontFamily="@font/amiko"
+                        android:textSize="14sp"/>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/saveInformation"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Save"
+                android:layout_margin="10dp"
+                android:background="@color/red"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:elevation="5dp"
                 android:fontFamily="@font/amiko"
-                android:textSize="14sp"/>
-
-
+                />
         </LinearLayout>
 
 
-    </LinearLayout>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/saveInformation"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_gravity="center_horizontal"
-        android:text="Save"
-        android:layout_margin="10dp"
-        android:background="@color/red"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:elevation="5dp"
-        android:fontFamily="@font/amiko"
-        />
+    </ScrollView>
 
 </LinearLayout>
