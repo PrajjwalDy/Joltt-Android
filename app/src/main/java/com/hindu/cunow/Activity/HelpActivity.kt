@@ -23,18 +23,23 @@ class HelpActivity : AppCompatActivity() {
     }
 
     private fun requestHelp(){
-        val ref = FirebaseDatabase.getInstance().reference.child("Help")
-        val helpId = ref.push().key
+        if(help_editText.text.isEmpty()){
+            Toast.makeText(this,"Enter your query",Toast.LENGTH_LONG).show()
+        }else{
+            val ref = FirebaseDatabase.getInstance().reference.child("Help")
+            val helpId = ref.push().key
 
-        val postMap = HashMap<String,Any>()
-        postMap["helpId"] = helpId!!
-        postMap["helpDescription"] = help_editText.text.toString()
-        postMap["helpReq"] = FirebaseAuth.getInstance().currentUser!!.uid
+            val postMap = HashMap<String,Any>()
+            postMap["helpId"] = helpId!!
+            postMap["helpDescription"] = help_editText.text.toString()
+            postMap["helpReq"] = FirebaseAuth.getInstance().currentUser!!.uid
 
-        ref.child(helpId).updateChildren(postMap)
+            ref.child(helpId).updateChildren(postMap)
 
-        help_editText.text.clear()
-        Toast.makeText(this,"Help sent success",Toast.LENGTH_LONG).show()
+            help_editText.text.clear()
+            Toast.makeText(this,"Help sent success",Toast.LENGTH_LONG).show()
+        }
+
     }
 
 }

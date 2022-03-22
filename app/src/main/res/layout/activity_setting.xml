@@ -218,7 +218,7 @@
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/amiko"
                 android:text="H.I.N.D.U Production"
-                android:layout_margin="10dp"
+                android:layout_margin="110dp"
                 android:textColor="@color/red"
                 android:textSize="18sp"
                 />
