@@ -31,6 +31,7 @@ class EditProfileActivity : AppCompatActivity() {
 
     var checker = ""
     var hosteler = ""
+    var relation = ""
 
     private var myUrl = ""
     private var imageUri:Uri? = null
@@ -67,11 +68,44 @@ class EditProfileActivity : AppCompatActivity() {
             edit_gender_male.setBackgroundColor(resources.getColor(R.color.white))
             edit_gender_male.setTextColor(resources.getColor(R.color.red))
         }
+
+        //Relation Button Deceleration
+        edit_single.setOnClickListener {
+            relation = "single"
+            edit_single.setBackgroundColor(resources.getColor(R.color.pink))
+            edit_single.setTextColor(resources.getColor(R.color.white))
+            edit_mingle.setBackgroundColor(resources.getColor(R.color.white))
+            edit_mingle.setTextColor(resources.getColor(R.color.red))
+            edit_crush.setBackgroundColor(resources.getColor(R.color.white))
+            edit_crush.setTextColor(resources.getColor(R.color.red))
+        }
+        edit_mingle.setOnClickListener {
+            relation = "mingle"
+            edit_mingle.setBackgroundColor(resources.getColor(R.color.pink))
+            edit_mingle.setTextColor(resources.getColor(R.color.white))
+            edit_single.setBackgroundColor(resources.getColor(R.color.white))
+            edit_single.setTextColor(resources.getColor(R.color.red))
+            edit_crush.setBackgroundColor(resources.getColor(R.color.white))
+            edit_crush.setTextColor(resources.getColor(R.color.red))
+        }
+        edit_crush.setOnClickListener {
+            relation = "crush"
+            edit_crush.setBackgroundColor(resources.getColor(R.color.pink))
+            edit_crush.setTextColor(resources.getColor(R.color.white))
+            edit_single.setBackgroundColor(resources.getColor(R.color.white))
+            edit_single.setTextColor(resources.getColor(R.color.red))
+            edit_mingle.setBackgroundColor(resources.getColor(R.color.white))
+            edit_mingle.setTextColor(resources.getColor(R.color.red))
+        }
+
+
         edit_hosteler.setOnClickListener {
             hosteler = "yes"
             edit_hosteler.setBackgroundColor(resources.getColor(R.color.red))
             edit_hosteler.setTextColor(resources.getColor(R.color.white))
         }
+
+
         saveInformation.setOnClickListener {
             updateInformation(it)
         }
@@ -94,6 +128,9 @@ class EditProfileActivity : AppCompatActivity() {
         dataMap["hostelName"] = editTextHostel.text.toString()
         dataMap["male"] = checker == "male"
         dataMap["female"] = checker == "female"
+        dataMap["single"] = relation == "single"
+        dataMap["committed"] = relation == "mingle"
+        dataMap["crush"] = relation == "crush"
 
         databaseRef.child(FirebaseAuth.getInstance().currentUser!!.uid)
             .updateChildren(dataMap)
@@ -196,6 +233,31 @@ class EditProfileActivity : AppCompatActivity() {
                         edit_dayScholar.setBackgroundColor(resources.getColor(R.color.red))
                         edit_dayScholar.setTextColor(resources.getColor(R.color.white))
                     }
+                    if (users.single){
+                        relation = "single"
+                        edit_single.setBackgroundColor(resources.getColor(R.color.pink))
+                        edit_single.setTextColor(resources.getColor(R.color.white))
+                        edit_mingle.setBackgroundColor(resources.getColor(R.color.white))
+                        edit_mingle.setTextColor(resources.getColor(R.color.red))
+                        edit_crush.setBackgroundColor(resources.getColor(R.color.white))
+                        edit_crush.setTextColor(resources.getColor(R.color.red))
+                    }else if (users.committed){
+                        relation = "mingle"
+                        edit_mingle.setBackgroundColor(resources.getColor(R.color.pink))
+                        edit_mingle.setTextColor(resources.getColor(R.color.white))
+                        edit_single.setBackgroundColor(resources.getColor(R.color.white))
+                        edit_single.setTextColor(resources.getColor(R.color.red))
+                        edit_crush.setBackgroundColor(resources.getColor(R.color.white))
+                        edit_crush.setTextColor(resources.getColor(R.color.red))
+                    } else if (users.crush){
+                        relation = "crush"
+                        edit_crush.setBackgroundColor(resources.getColor(R.color.pink))
+                        edit_crush.setTextColor(resources.getColor(R.color.white))
+                        edit_single.setBackgroundColor(resources.getColor(R.color.white))
+                        edit_single.setTextColor(resources.getColor(R.color.red))
+                        edit_mingle.setBackgroundColor(resources.getColor(R.color.white))
+                        edit_mingle.setTextColor(resources.getColor(R.color.red))
+                    }
                 }
             }
 
@@ -212,7 +274,7 @@ class EditProfileActivity : AppCompatActivity() {
             {
                 val result = CropImage.getActivityResult(data)
                 imageUri = result.uri
-                editProfileImage.setImageURI(imageUri)
+                change_ProfileImage.setImageURI(imageUri)
                 updateProfileImage()
             }
 
