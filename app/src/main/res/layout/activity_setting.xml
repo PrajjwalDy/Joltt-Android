@@ -40,6 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_margin="10dp"
             android:gravity="center_vertical"
             android:id="@+id/edit_profile"
             >
@@ -65,6 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_margin="10dp"
             android:gravity="center_vertical"
             android:id="@+id/privacy"
             >
@@ -90,6 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_margin="10dp"
             android:gravity="center_vertical"
             android:id="@+id/about_us"
             >
@@ -115,6 +118,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_margin="10dp"
             android:gravity="center_vertical"
             android:id="@+id/help"
             >
@@ -139,6 +143,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_margin="10dp"
             android:gravity="center_vertical"
             android:id="@+id/verify"
             >
@@ -164,6 +169,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:layout_margin="10dp"
             android:id="@+id/terms_condition"
             >
 
@@ -189,6 +195,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_margin="10dp"
             android:gravity="center_vertical"
             android:id="@+id/logout"
             >
@@ -217,8 +224,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/amiko"
+                android:layout_marginTop="150dp"
                 android:text="H.I.N.D.U Production"
-                android:layout_margin="110dp"
                 android:textColor="@color/red"
                 android:textSize="18sp"
                 />
