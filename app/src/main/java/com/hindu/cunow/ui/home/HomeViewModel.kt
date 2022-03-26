@@ -13,7 +13,7 @@ import com.hindu.cunow.Callback.IPostCallback
 import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.R
 
-class HomeViewModel() : ViewModel(), IPostCallback {
+class HomeViewModel : ViewModel(), IPostCallback {
 
     private var postLiveData:MutableLiveData<List<PostModel>>? = null
 

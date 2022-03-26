@@ -60,6 +60,7 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         homeViewModel.postModel!!.observe(viewLifecycleOwner, Observer {
+            checkFirstVisit()
             initView(root)
             postAdapter = context?.let { it1-> PostAdapter(it1,it) }
             recyclerView!!.adapter = postAdapter
@@ -67,7 +68,7 @@ class HomeFragment : Fragment() {
 
         })
 
-        root.select_media_img.setOnClickListener {
+        root.create.setOnClickListener {
             val dialogView = LayoutInflater.from(context).inflate(R.layout.image_or_video_dialogbox, null)
 
             val dialogBuilder = AlertDialog.Builder(context)
@@ -83,30 +84,28 @@ class HomeFragment : Fragment() {
                 alertDialog.dismiss()
             }
 
+        }
 
+        root.imin.setOnClickListener {
+            updateVisit(root)
         }
 
         return root
     }
 
-    private fun postText(view: View){
-        Snackbar.make(view,"adding post....",Snackbar.LENGTH_SHORT).show()
+    private fun updateVisit(view: View){
 
-        val ref = FirebaseDatabase.getInstance().reference.child("Post")
-        val postId = ref.push().key
+        val ref = FirebaseDatabase.getInstance().reference
+            .child("Users")
 
         val postMap = HashMap<String,Any>()
-        postMap["postId"] = postId!!
-        postMap["publisher"] = FirebaseAuth.getInstance().currentUser!!.uid
-        postMap["caption"] = caption_only.text.toString()
-        postMap["image"] = ""
+        postMap["firstVisit"] = false
+        ref.child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .updateChildren(postMap)
 
-        ref.child(postId).updateChildren(postMap)
-
-        Snackbar.make(view,"post added successfully",Snackbar.LENGTH_SHORT).show()
-
-        caption_only.text.clear()
+        checkFirstVisit()
     }
+
     private fun initView(root:View){
         recyclerView = root.findViewById(R.id.postRecyclerView) as RecyclerView
         recyclerView!!.setHasFixedSize(true)
@@ -142,8 +141,31 @@ class HomeFragment : Fragment() {
     }
 
     private fun checkFirstVisit(){
+        val dataRef = FirebaseDatabase
+            .getInstance().reference.child("Users")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+        dataRef.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val data = snapshot.getValue(UserModel::class.java)
+                    if (data!!.firstVisit){
+                        welcome_screen.visibility = View.VISIBLE
+                        postLayout_ll.visibility = View.GONE
+                        logo_welcome.visibility = View.VISIBLE
+                    }else{
+                        postLayout_ll.visibility = View.VISIBLE
+                    }
+                }
+            }
 
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
+
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -76,8 +76,8 @@ class NotificationAdapter(private val nContext:Context,
     }
 
     private fun loadNotifier(notifierId:String,profileImage:CircleImageView,userName:TextView){
-        val progressDialog = nContext?.let { Dialog(it) }
-        progressDialog!!.setContentView(R.layout.profile_dropdown_menu)
+        val progressDialog = nContext.let { Dialog(it) }
+        progressDialog.setContentView(R.layout.profile_dropdown_menu)
         progressDialog.show()
         val userDataRef = FirebaseDatabase.getInstance().reference.child("Users").child(notifierId)
 

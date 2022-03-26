@@ -46,6 +46,7 @@ class FollowRequestAdapter(private val mContext:Context,
     override fun getItemCount(): Int {
         return mUser.size
     }
+
     inner class ViewHolder(@NonNull itemView:View):RecyclerView.ViewHolder(itemView){
         val profileImage: CircleImageView = itemView.findViewById(R.id.profileImage_requester) as CircleImageView
         val name:TextView = itemView.findViewById(R.id.fullName_Requester) as TextView
@@ -73,17 +74,19 @@ class FollowRequestAdapter(private val mContext:Context,
 
     private fun acceptRequest(requesterId: String,acceptButton: Button){
 
-        FirebaseAuth.getInstance().currentUser!!.uid.let { it1 ->
+        requesterId.let { it1 ->
             FirebaseDatabase.getInstance().reference
-                .child("Follow").child(it1.toString())
-                .child("Following").child(requesterId)
+                .child("Follow")
+                .child(it1.toString())
+                .child("Following")
+                .child(FirebaseAuth.getInstance().currentUser!!.uid)
                 .setValue(true)
         }
 
         FirebaseAuth.getInstance().currentUser!!.uid.let { it1->
             FirebaseDatabase.getInstance().reference
-                .child("Follow").child(requesterId)
-                .child("Followers").child(it1.toString())
+                .child("Follow").child(it1.toString())
+                .child("Followers").child(requesterId)
                 .setValue(true)
         }
 

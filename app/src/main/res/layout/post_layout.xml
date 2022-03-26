@@ -68,6 +68,7 @@
             android:id="@+id/postImage"
             android:layout_width="match_parent"
             android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
             android:layout_height="460dp"
             android:src="@drawable/profile_testimg"
             />

@@ -21,9 +21,7 @@
         <action
             android:id="@+id/action_navigation_dashboard_to_confessionRoomFragment"
             app:destination="@id/confessionRoomFragment" />
-        <action
-            android:id="@+id/action_navigation_dashboard_to_circleFragment"
-            app:destination="@id/circleFragment" />
+
         <action
             android:id="@+id/action_navigation_dashboard_to_navigation_profile"
             app:destination="@id/navigation_profile" />
@@ -53,6 +51,12 @@
         <action
             android:id="@+id/action_navigation_profile_to_navigation_dashboard"
             app:destination="@id/navigation_dashboard" />
+        <action
+            android:id="@+id/action_navigation_profile_to_myCirclesFragment"
+            app:destination="@id/myCirclesFragment" />
+        <action
+            android:id="@+id/action_navigation_profile_to_myPostsFragemt"
+            app:destination="@id/myPostsFragemt" />
     </fragment>
     <fragment
         android:id="@+id/confessionRoomFragment"
@@ -63,26 +67,16 @@
             android:id="@+id/action_confessionRoomFragment_to_navigation_dashboard"
             app:destination="@id/navigation_dashboard" />
     </fragment>
-    <fragment
-        android:id="@+id/circleFragment"
-        android:name="com.hindu.cunow.Fragments.Circle.CircleFragment"
-        android:label="circle_fragment"
-        tools:layout="@layout/circle_fragment">
-        <action
-            android:id="@+id/action_circleFragment_to_navigation_dashboard"
-            app:destination="@id/navigation_dashboard" />
-        <action
-            android:id="@+id/action_circleFragment_to_circleDetails"
-            app:destination="@id/circleDetails" />
-    </fragment>
+
     <fragment
         android:id="@+id/circleDetails"
         android:name="com.hindu.cunow.Fragments.CircleDetails.CircleDetails"
         android:label="circle_details_fragment"
         tools:layout="@layout/circle_details_fragment" >
+
         <action
-            android:id="@+id/action_circleDetails_to_circleFragment"
-            app:destination="@id/circleFragment" />
+            android:id="@+id/action_circleDetails_to_exploreCirclesFragments2"
+            app:destination="@id/exploreCirclesFragments2" />
     </fragment>
     <fragment
         android:id="@+id/userProfile"
@@ -97,6 +91,27 @@
         <action
             android:id="@+id/action_followRequest2_to_navigation_notifications"
             app:destination="@id/navigation_notifications" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/myCirclesFragment"
+        android:name="com.hindu.cunow.Fragments.Circle.MyCircles.MyCirclesFragment"
+        android:label="my_circles_fragment"
+        tools:layout="@layout/my_circles_fragment" />
+
+    <fragment
+        android:id="@+id/myPostsFragemt"
+        android:name="com.hindu.cunow.Fragments.AboutMe.Posts.MyPostsFragemt"
+        android:label="my_posts_fragemt_fragment"
+        tools:layout="@layout/my_posts_fragemt_fragment" />
+    <fragment
+        android:id="@+id/exploreCirclesFragments2"
+        android:name="com.hindu.cunow.Fragments.Circle.ExploreCircles.ExploreCirclesFragments"
+        android:label="explore_circles_fragments_fragment"
+        tools:layout="@layout/explore_circles_fragments_fragment" >
+        <action
+            android:id="@+id/action_exploreCirclesFragments2_to_circleDetails"
+            app:destination="@id/circleDetails" />
     </fragment>
 
 

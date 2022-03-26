@@ -53,6 +53,11 @@ class UserProfile : Fragment() {
             root.close_options_user.visibility = View.GONE
         }
 
+        root.aboutUser.setOnClickListener {
+
+        }
+
+        privacy(root)
         userInfo()
         checkFollowAndFollowing(root)
         getFollowers(root)
@@ -89,16 +94,12 @@ class UserProfile : Fragment() {
             }
         })
     }
+
     private fun checkPrivacy(root:View){
         val userRef = FirebaseDatabase.getInstance().reference.child("Users").child(profileId)
         userRef.addListenerForSingleValueEvent(object :ValueEventListener{
             @SuppressLint("SetTextI18n")
             override fun onDataChange(snapshot: DataSnapshot) {
-                val ref = FirebaseDatabase.getInstance().reference.child("Users").child(profileId).child("Requesters")
-                val requestMap = HashMap<String,Any>()
-                requestMap["requesterId"] = FirebaseAuth.getInstance().currentUser!!.uid
-                ref.child(firebaseUser.uid).updateChildren(requestMap)
-
 
                 if (snapshot.exists()){
                     val data = snapshot.getValue(UserModel::class.java)
@@ -109,6 +110,15 @@ class UserProfile : Fragment() {
                                 .child("FollowRequest").child(it1.toString())
                                 .setValue(true)
                             root.follow_unfollow_button.text = "Requested"
+
+                            val ref = FirebaseDatabase.getInstance().reference
+                                .child("Users")
+                                .child(profileId)
+                                .child("Requesters")
+                            val requestMap = HashMap<String,Any>()
+                            requestMap["requesterId"] = FirebaseAuth.getInstance().currentUser!!.uid
+                            ref.child(firebaseUser.uid).updateChildren(requestMap)
+
                         }
 
                     }else{
@@ -159,12 +169,13 @@ class UserProfile : Fragment() {
 
         })
     }
+
     private fun checkRequested(root:View){
         val database = FirebaseDatabase.getInstance().reference.child("Users")
             .child(profileId)
             .child("Requesters")
 
-        database.addListenerForSingleValueEvent(object :ValueEventListener{
+        database.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 val dataRef = snapshot.getValue(RequestModel::class.java)
                 if (snapshot.child(FirebaseAuth.getInstance().currentUser!!.uid).exists()){
@@ -180,29 +191,29 @@ class UserProfile : Fragment() {
 
         })
     }
+
     private fun checkFollowAndFollowing(root: View){
-        val databaseRef = firebaseUser.uid.let { it1->
+        val databaseRef =
             FirebaseDatabase.getInstance().reference
-                .child("Follow").child(it1.toString())
-                .child("Following")
-        }
-        if (databaseRef!= null){
-            databaseRef.addListenerForSingleValueEvent(object :ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.child(firebaseUser.uid).exists()){
-                        root.follow_unfollow_button.text= "Following"
-                    }else{
-                        checkRequested(root)
-                    }
-                }
+                .child("Follow").child(profileId)
+                .child("Followers")
 
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
+        databaseRef.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.child(firebaseUser.uid).exists()){
+                    root.follow_unfollow_button.text= "Following"
+                }else{
+                    checkRequested(root)
                 }
+            }
 
-            })
-        }
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
+
     private fun getFollowers(root: View){
         val followingRef = FirebaseDatabase.getInstance().reference
             .child("Follow").child(profileId)
@@ -221,6 +232,7 @@ class UserProfile : Fragment() {
 
         })
     }
+
     private fun getFollowings(root: View){
         val followingRef = FirebaseDatabase.getInstance().reference
             .child("Follow").child(profileId)
@@ -229,6 +241,25 @@ class UserProfile : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     root.totalFollowing_user.text = snapshot.childrenCount.toString()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    private fun privacy(root: View){
+        val userRef = FirebaseDatabase.getInstance().reference.child("Users").child(profileId)
+        userRef.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val data = snapshot.getValue(UserModel::class.java)
+                    if (data!!.private) {
+                        ll_moreOption_user.visibility = View.GONE
+                    }
                 }
             }
 

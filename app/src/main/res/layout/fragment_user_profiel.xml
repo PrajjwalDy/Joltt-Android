@@ -30,7 +30,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
     <LinearLayout
         android:id="@+id/userProfile_LL"
         android:layout_width="250dp"
@@ -42,6 +41,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/aboutUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -63,6 +63,7 @@
 
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/photsUsers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -84,6 +85,7 @@
 
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/addToCircle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -105,6 +107,7 @@
 
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/findSupportUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -130,7 +133,7 @@
 
     <RelativeLayout
         android:elevation="5dp"
-        android:id="@+id/ll_moreOption_profile"
+        android:id="@+id/ll_moreOption_user"
         android:layout_width="251dp"
         android:layout_height="30dp"
         android:background="@drawable/view_more"
@@ -315,7 +318,5 @@
         android:textColor="@color/white"
         android:text="Follow"
         android:textSize="18sp"/>
-
-
 
 </LinearLayout>

@@ -41,13 +41,13 @@ class CircleAdapter(private val mContext:Context,
             }
         }
 
-        holder.itemView.setOnClickListener{
+        holder.iconImage.setOnClickListener {
             val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
             pref.putString("circleId",mCircle[position].circleId)
             pref.putString("admin",mCircle[position].admin)
             pref.apply()
 
-            Navigation.findNavController(holder.itemView).navigate(R.id.action_circleFragment_to_circleDetails)
+            Navigation.findNavController(holder.itemView).navigate(R.id.action_exploreCirclesFragments2_to_circleDetails)
         }
 
     }
@@ -95,6 +95,10 @@ class CircleAdapter(private val mContext:Context,
             .child("Circle").child(circleId)
             .child("Requests").child(FirebaseAuth.getInstance().currentUser!!.uid)
             .setValue(true)
+
+    }
+
+    private fun checkJoining(){
 
     }
 

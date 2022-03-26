@@ -29,6 +29,8 @@ class MyPostsFragemtViewModel : ViewModel(), IPostCallback {
 
         }
 
+
+
     private fun loadPost() {
         val postList=ArrayList<PostModel>()
         val dataReference = FirebaseDatabase.getInstance().reference.child("Post")

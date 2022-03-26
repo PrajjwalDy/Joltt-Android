@@ -18,6 +18,18 @@
         android:theme="@style/Theme.CUNow"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activity.ViewFullActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.UserDetailsTabsAcitvity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.AddVibesAcitvity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.PrivacySettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.AboutMeTabsActivity"
             android:exported="false" />
         <activity

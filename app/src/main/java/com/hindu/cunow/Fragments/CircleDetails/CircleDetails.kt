@@ -26,9 +26,6 @@ class CircleDetails : Fragment() {
     private lateinit var admin: String
     private lateinit var firebaseUser:FirebaseUser
 
-
-
-
     private lateinit var viewModel: CircleDetailsViewModel
 
     override fun onCreateView(
