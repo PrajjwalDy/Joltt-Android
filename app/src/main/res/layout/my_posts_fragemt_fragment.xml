@@ -15,7 +15,7 @@
         <ImageView
             android:id="@+id/postVertical_profile"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="20dp"
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:src="@drawable/vertical_view"
@@ -24,7 +24,7 @@
         <ImageView
             android:id="@+id/postGrid_profile"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="20dp"
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:src="@drawable/grid" />

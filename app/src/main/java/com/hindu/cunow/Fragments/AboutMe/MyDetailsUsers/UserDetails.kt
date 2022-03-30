@@ -44,9 +44,7 @@ import kotlinx.android.synthetic.main.my_details_fragment.view.*
             .getInstance().reference
             .child("Users")
             .child(
-                FirebaseAuth
-                    .getInstance()
-                    .currentUser!!.uid
+               profileId
             )
 
         dataRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -56,7 +54,7 @@ import kotlinx.android.synthetic.main.my_details_fragment.view.*
                     root.from_users.text = users!!.place
                     root.branch_user.text = users.branch
                     root.year_users.text = users.year
-                    root.section_profile.text = users.section
+                    root.section_users.text = users.section
 
                     if (users.male){
                         root.genderImage_user.setImageResource(R.drawable.male)

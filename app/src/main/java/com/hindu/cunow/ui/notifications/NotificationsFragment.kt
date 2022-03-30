@@ -27,6 +27,7 @@ import kotlin.collections.ArrayList
 
 class NotificationsFragment : Fragment() {
 
+    var recyclerView:RecyclerView? = null
     private lateinit var notificationsViewModel: NotificationsViewModel
     private var _binding: FragmentNotificationsBinding? = null
 
@@ -45,15 +46,12 @@ class NotificationsFragment : Fragment() {
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val recyclerView: RecyclerView = root.findViewById(R.id.notificationRecycler) as RecyclerView
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-
-        notificationList = ArrayList()
-        notificationAdapter = context?.let { NotificationAdapter(it,notificationList as ArrayList<NotificationModel>) }
-        recyclerView.adapter = notificationAdapter
-
-        readNotification()
+        notificationsViewModel.notificationViewModel.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            initView(root)
+            notificationAdapter = context?.let { it1-> NotificationAdapter(it1,it) }
+            recyclerView!!.adapter = notificationAdapter
+            notificationAdapter!!.notifyDataSetChanged()
+        })
 
         root.followRequest.setOnClickListener {
             Navigation.findNavController(root).navigate(R.id.action_navigation_notifications_to_followRequest2)
@@ -62,7 +60,24 @@ class NotificationsFragment : Fragment() {
         return root
     }
 
-    private fun readNotification() {
+
+    private fun initView(root:View){
+        recyclerView = root.findViewById(R.id.notificationRecycler) as RecyclerView
+        recyclerView!!.setHasFixedSize(true)
+        val linearLayoutManager = LinearLayoutManager(context)
+        linearLayoutManager.reverseLayout = true
+        linearLayoutManager.stackFromEnd = true
+        recyclerView!!.layoutManager = linearLayoutManager
+    }
+
+
+
+
+
+
+
+
+    /*private fun readNotification() {
         val progressDialog = context?.let { Dialog(it) }
         progressDialog!!.setContentView(R.layout.profile_dropdown_menu)
         progressDialog.show()
@@ -89,7 +104,7 @@ class NotificationsFragment : Fragment() {
 
         })
         progressDialog.dismiss()
-    }
+    }*/
 
     override fun onDestroyView() {
         super.onDestroyView()

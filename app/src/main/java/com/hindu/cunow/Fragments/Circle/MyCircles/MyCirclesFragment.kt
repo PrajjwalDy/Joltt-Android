@@ -6,13 +6,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.hindu.cunow.Adapter.CircleAdapter
+import com.hindu.cunow.Adapter.JoinedCircleAdapter
+import com.hindu.cunow.Fragments.Circle.ExploreCircles.ExploreCirclesFragmentsViewModel
 import com.hindu.cunow.R
+import com.hindu.cunow.databinding.ExploreCirclesFragmentsFragmentBinding
+import com.hindu.cunow.databinding.MyCirclesFragmentBinding
 
 class MyCirclesFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = MyCirclesFragment()
-    }
+    var recyclerView: RecyclerView? = null
+    private var circleAdapter: CircleAdapter? = null
+
+
+    private var _binding: MyCirclesFragmentBinding? =null
+
+    private val binding get() = _binding!!
 
     private lateinit var viewModel: MyCirclesViewModel
 
@@ -20,13 +33,30 @@ class MyCirclesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.my_circles_fragment, container, false)
+        viewModel = ViewModelProvider(this).get(MyCirclesViewModel::class.java)
+        _binding = MyCirclesFragmentBinding.inflate(inflater,container,false)
+        val root:View = binding.root
+
+        viewModel.circleViewModel!!.observe(viewLifecycleOwner, Observer {
+            init(root)
+            circleAdapter = context?.let { it1-> CircleAdapter(it1,it) }
+            recyclerView!!.adapter = circleAdapter
+            circleAdapter!!.notifyDataSetChanged()
+        })
+
+        return root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MyCirclesViewModel::class.java)
-        // TODO: Use the ViewModel
+    private fun init(root: View) {
+
+        recyclerView = root.findViewById(R.id.myCircle_RV) as RecyclerView
+        recyclerView!!.setHasFixedSize(true)
+        val linearLayoutManager = LinearLayoutManager(context)
+        linearLayoutManager.reverseLayout = true
+        linearLayoutManager.stackFromEnd = true
+        recyclerView!!.layoutManager = linearLayoutManager
+
     }
+
 
 }

@@ -3,11 +3,13 @@ package com.hindu.cunow.Fragments
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -15,6 +17,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.hindu.cunow.Activity.UserSupportActivity
 import com.hindu.cunow.Model.RequestModel
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
@@ -53,8 +56,24 @@ class UserProfile : Fragment() {
             root.close_options_user.visibility = View.GONE
         }
 
-        root.aboutUser.setOnClickListener {
+        root.photosUsers.setOnClickListener {
+            val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
+            pref!!.putString("uid",profileId)
+            pref.apply()
+            Navigation.findNavController(root).navigate(R.id.action_userProfile_to_userPostsFragment)
+        }
 
+        root.aboutUser.setOnClickListener {
+            val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
+            pref!!.putString("uid",profileId)
+            pref.apply()
+            Navigation.findNavController(root).navigate(R.id.action_userProfile_to_userDetails)
+        }
+
+        root.findSupportUser.setOnClickListener {
+            val intent = Intent(context,UserSupportActivity::class.java)
+            intent.putExtra("uid",profileId)
+            startActivity(intent)
         }
 
         privacy(root)
@@ -62,6 +81,8 @@ class UserProfile : Fragment() {
         checkFollowAndFollowing(root)
         getFollowers(root)
         getFollowings(root)
+        isBlocked(root)
+        haveBlocked(root)
 
         root.follow_unfollow_button.setOnClickListener {
             checkPrivacy(root)
@@ -260,6 +281,46 @@ class UserProfile : Fragment() {
                     if (data!!.private) {
                         ll_moreOption_user.visibility = View.GONE
                     }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    private fun isBlocked(root: View){
+        val database = FirebaseDatabase.getInstance().reference.child("Users")
+            .child(profileId)
+            .child("BlockedUsers")
+
+        database.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val dataRef = snapshot.getValue(RequestModel::class.java)
+                if (snapshot.child(FirebaseAuth.getInstance().currentUser!!.uid).exists()){
+                    root.follow_unfollow_button.visibility = View.GONE
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    private fun haveBlocked(root: View){
+        val database = FirebaseDatabase.getInstance().reference.child("Users")
+            .child(firebaseUser.uid)
+            .child("Blocked")
+
+        database.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val dataRef = snapshot.getValue(RequestModel::class.java)
+                if (snapshot.child(FirebaseAuth.getInstance().currentUser!!.uid).exists()){
+                    root.follow_unfollow_button.visibility = View.GONE
                 }
             }
 
