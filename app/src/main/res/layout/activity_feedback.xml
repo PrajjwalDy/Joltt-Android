@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Activity.FeedbackActivity">
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/FeedbackAppbar"
         android:layout_width="match_parent"
@@ -30,14 +31,73 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <LinearLayout
+        android:id="@+id/ll_feedLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:lottie_rawRes="@raw/feedback"
+            app:lottie_autoPlay="true"
+            android:layout_margin="10dp"
+            app:lottie_loop="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="We are glad to here from you"
+            android:layout_gravity="center_horizontal"
+            android:textSize="16sp"
+            android:fontFamily="@font/amiko"
+            android:textColor="@color/red"/>
+
+        <EditText
+            android:id="@+id/fName"
+            android:layout_width="match_parent"
+            android:background="@drawable/login_box"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/red"
+            android:layout_margin="10dp"
+            android:hint="Your Name"/>
+
+        <EditText
+            android:id="@+id/feedText"
+            android:layout_width="match_parent"
+            android:background="@drawable/login_box"
+            android:layout_height="200dp"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:textColor="@color/red"
+            android:hint="Write your feeling about us here"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/sendFeedback"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:text="Send"
+            android:textAllCaps="false"
+            android:background="@drawable/button_bg_red"/>
+
+    </LinearLayout>
 
     <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/done"
         android:layout_gravity="center_horizontal"
         android:layout_width="150dp"
+        android:visibility="gone"
         android:layout_height="150dp"
-        app:lottie_rawRes="@raw/uploading_image"
+        app:lottie_rawRes="@raw/feedback_sent"
         app:lottie_autoPlay="true"
-        android:layout_margin="10dp"
+        android:layout_marginTop="200dp"
         app:lottie_loop="true"/>
 
 

@@ -1,5 +1,6 @@
 package com.hindu.cunow.Adapter
 
+import android.app.AlertDialog
 import android.content.Context
 import android.media.Image
 import android.view.LayoutInflater
@@ -20,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Model.ConfessionModel
 import com.hindu.cunow.R
+import kotlinx.android.synthetic.main.more_option_confession.view.*
 
 class ConfessionAdapter(private val mContext: Context,
                         private val mConfession:List<ConfessionModel>,
@@ -41,6 +43,26 @@ class ConfessionAdapter(private val mContext: Context,
 
         holder.like.setOnClickListener {
             like(holder.like,cList.confesserId!!,cList.confessionId!!,zoom)
+        }
+
+        holder.moreOption.setOnClickListener {
+            val dialogView = LayoutInflater.from(mContext).inflate(R.layout.more_option_confession, null)
+
+            val dialogBuilder = AlertDialog.Builder(mContext)
+                .setView(dialogView)
+
+            val alertDialog = dialogBuilder.show()
+
+            dialogView.reportConfession.setOnClickListener {
+
+            }
+
+            if (cList.confesserId != FirebaseAuth.getInstance().currentUser!!.uid){
+                dialogView.deleteConfession.visibility = View.GONE
+            }
+            dialogView.deleteConfession.setOnClickListener {
+
+            }
         }
 
     }

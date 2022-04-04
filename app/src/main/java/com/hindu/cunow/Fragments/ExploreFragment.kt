@@ -17,6 +17,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.hindu.cunow.Activity.FeedbackActivity
 import com.hindu.cunow.Adapter.UserAdapter
 import com.hindu.cunow.Fragments.Circle.CircleTabActivity
 import com.hindu.cunow.Model.UserModel
@@ -46,9 +47,12 @@ class ExploreFragment : Fragment() {
 
         root.circle_ll.setOnClickListener {
             val intent = Intent(context, CircleTabActivity::class.java)
-            startActivity(intent
-            )
+            startActivity(intent)
             //Navigation.findNavController(root).navigate(R.id.action_navigation_dashboard_to_circleFragment)
+        }
+        root.feedback.setOnClickListener {
+            val intent = Intent(context, FeedbackActivity::class.java)
+            startActivity(intent)
         }
 
         recyclerView = root.findViewById(R.id.searchUserRV)

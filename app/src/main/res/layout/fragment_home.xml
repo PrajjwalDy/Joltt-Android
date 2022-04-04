@@ -187,13 +187,6 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/logo_welcome"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:visibility="gone"
-        android:layout_margin="10dp"
-        android:src="@drawable/camera"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/welcome_screen"

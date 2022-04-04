@@ -125,22 +125,59 @@ class UserProfile : Fragment() {
                 if (snapshot.exists()){
                     val data = snapshot.getValue(UserModel::class.java)
                     if (data!!.private){
-                        firebaseUser.uid.let { it1 ->
-                            FirebaseDatabase.getInstance().reference
-                                .child("Users").child(profileId)
-                                .child("FollowRequest").child(it1.toString())
-                                .setValue(true)
-                            root.follow_unfollow_button.text = "Requested"
+                        when (root.follow_unfollow_button.text.toString()){
+                            "Follow"->{
+                                firebaseUser.uid.let { it1 ->
+                                    FirebaseDatabase.getInstance().reference
+                                        .child("Users").child(profileId)
+                                        .child("FollowRequest").child(it1.toString())
+                                        .setValue(true)
+                                    root.follow_unfollow_button.text = "Requested"
 
-                            val ref = FirebaseDatabase.getInstance().reference
-                                .child("Users")
-                                .child(profileId)
-                                .child("Requesters")
-                            val requestMap = HashMap<String,Any>()
-                            requestMap["requesterId"] = FirebaseAuth.getInstance().currentUser!!.uid
-                            ref.child(firebaseUser.uid).updateChildren(requestMap)
+                                    val ref = FirebaseDatabase.getInstance().reference
+                                        .child("Users")
+                                        .child(profileId)
+                                        .child("Requesters")
+                                    val requestMap = HashMap<String,Any>()
+                                    requestMap["requesterId"] = FirebaseAuth.getInstance().currentUser!!.uid
+                                    ref.child(firebaseUser.uid).updateChildren(requestMap)
 
+                                }
+                            }
+                            "Requested"->{
+                                FirebaseDatabase.getInstance().reference.child("Users")
+                                    .child(profileId)
+                                    .child("Requesters")
+                                    .child(FirebaseAuth.getInstance().currentUser!!.uid)
+                                    .removeValue()
+                            }
+                            "Unblock" ->{
+                                FirebaseDatabase.getInstance().reference
+                                    .child("Users")
+                                    .child(firebaseUser.uid)
+                                    .child("BlockedUsers")
+                                    .child(profileId)
+                                    .removeValue()
+                            }
+                            "Following" -> {
+                                firebaseUser.uid.let { it1->
+                                    FirebaseDatabase.getInstance().reference
+                                        .child("Follow").child(it1.toString())
+                                        .child("Following").child(profileId)
+                                        .removeValue()
+                                }
+
+                                firebaseUser.uid.let { it1->
+                                    FirebaseDatabase.getInstance().reference
+                                        .child("Follow").child(profileId)
+                                        .child("Followers").child(it1.toString()
+                                        )
+                                        .removeValue()
+                                }
+                            }
                         }
+
+
 
                     }else{
 
@@ -176,6 +213,21 @@ class UserProfile : Fragment() {
                                         )
                                         .removeValue()
                                 }
+                            }
+                            "Unblock" ->{
+                                FirebaseDatabase.getInstance().reference
+                                    .child("Users")
+                                    .child(firebaseUser.uid)
+                                    .child("BlockedUsers")
+                                    .child(profileId)
+                                    .removeValue()
+                            }
+                            "Requested" ->{
+                                FirebaseDatabase.getInstance().reference.child("Users")
+                                    .child(profileId)
+                                    .child("Requesters")
+                                    .child(FirebaseAuth.getInstance().currentUser!!.uid)
+                                    .removeValue()
                             }
                         }
                     }
@@ -225,6 +277,7 @@ class UserProfile : Fragment() {
                     root.follow_unfollow_button.text= "Following"
                 }else{
                     checkRequested(root)
+                    haveBlocked(root)
                 }
             }
 
@@ -301,6 +354,7 @@ class UserProfile : Fragment() {
                 val dataRef = snapshot.getValue(RequestModel::class.java)
                 if (snapshot.child(FirebaseAuth.getInstance().currentUser!!.uid).exists()){
                     root.follow_unfollow_button.visibility = View.GONE
+                    ll_moreOption_user.visibility = View.GONE
                 }
             }
 
@@ -314,13 +368,13 @@ class UserProfile : Fragment() {
     private fun haveBlocked(root: View){
         val database = FirebaseDatabase.getInstance().reference.child("Users")
             .child(firebaseUser.uid)
-            .child("Blocked")
+            .child("BlockedUsers")
 
         database.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 val dataRef = snapshot.getValue(RequestModel::class.java)
-                if (snapshot.child(FirebaseAuth.getInstance().currentUser!!.uid).exists()){
-                    root.follow_unfollow_button.visibility = View.GONE
+                if (snapshot.child(profileId).exists()){
+                    root.follow_unfollow_button.text = "Unblock"
                 }
             }
 

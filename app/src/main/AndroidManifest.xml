@@ -18,6 +18,9 @@
         android:theme="@style/Theme.CUNow"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activity.CircleDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.UserSupportActivity"
             android:exported="false" />
         <activity

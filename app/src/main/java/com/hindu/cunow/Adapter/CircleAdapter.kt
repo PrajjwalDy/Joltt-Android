@@ -2,6 +2,7 @@ package com.hindu.cunow.Adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.media.Image
 import android.text.Layout
 import android.view.LayoutInflater
@@ -17,6 +18,8 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
+import com.hindu.cunow.Activity.CircleDetailsActivity
+import com.hindu.cunow.MainActivity
 import com.hindu.cunow.Model.CircleModel
 import com.hindu.cunow.R
 import org.w3c.dom.Text
@@ -42,14 +45,11 @@ class CircleAdapter(private val mContext:Context,
         }
 
         holder.iconImage.setOnClickListener {
-            val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
-            pref.putString("circleId",mCircle[position].circleId)
-            pref.putString("admin",mCircle[position].admin)
-            pref.apply()
-
-            Navigation.findNavController(holder.itemView).navigate(R.id.action_exploreCirclesFragments2_to_circleDetails)
+            val intent = Intent(mContext,CircleDetailsActivity::class.java)
+            intent.putExtra("circleId",mCircle[position].circleId)
+            intent.putExtra("admin",mCircle[position].admin)
+            mContext.startActivity(intent)
         }
-
     }
 
     override fun getItemCount(): Int {

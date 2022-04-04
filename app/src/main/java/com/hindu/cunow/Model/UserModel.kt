@@ -22,5 +22,6 @@ class UserModel {
     val committed:Boolean = false
     val crush:Boolean = false
     val single:Boolean = false
+    val confessionVisited:Boolean = false
 
 }

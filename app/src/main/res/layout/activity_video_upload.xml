@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -45,52 +46,50 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <VideoView
+        android:id="@+id/videoPreview"
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:layout_gravity="center"
-        android:id="@+id/videoPreview"
-        />
-    
+        android:layout_gravity="center" />
+
     <EditText
         android:id="@+id/captionVideo"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:textSize="12sp"
+        android:layout_margin="10dp"
         android:backgroundTint="@color/red"
         android:hint="Say somethig aboot your post"
         android:padding="10dp"
-        android:layout_margin="10dp"/>
-    
+        android:textSize="12sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_weight="1"
             android:layout_margin="5dp"
+            android:layout_weight="1"
             android:background="@color/white"
-            android:fontFamily="@font/amiko"
             android:elevation="5dp"
-            android:textColor="@color/red"
+            android:fontFamily="@font/amiko"
             android:text="Add Location"
             android:textAllCaps="false"
-            />
+            android:textColor="@color/red" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:fontFamily="@font/amiko"
-            android:layout_weight="1"
             android:layout_margin="5dp"
+            android:layout_weight="1"
             android:background="@color/white"
             android:elevation="5dp"
-            android:textColor="@color/red"
+            android:fontFamily="@font/amiko"
             android:text="Change Video"
             android:textAllCaps="false"
-            />
+            android:textColor="@color/red" />
 
     </LinearLayout>
 

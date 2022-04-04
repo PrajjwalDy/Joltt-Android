@@ -87,6 +87,7 @@ class UserSupportActivity : AppCompatActivity() {
         dataRef.child(commentId)
             .updateChildren(dataMap)
         Toast.makeText(this, "User reported successfully", Toast.LENGTH_SHORT).show()
+        finish()
     }
 
 
@@ -107,6 +108,7 @@ class UserSupportActivity : AppCompatActivity() {
                 .removeValue()
         }
         block()
+        finish()
     }
 
     private fun block(){
@@ -116,6 +118,8 @@ class UserSupportActivity : AppCompatActivity() {
             .child("BlockedUsers")
             .child(profileId)
             .setValue(true)
+
+        finish()
     }
 
 }

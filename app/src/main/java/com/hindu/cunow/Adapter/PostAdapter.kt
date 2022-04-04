@@ -113,7 +113,7 @@ class PostAdapter (private val mContext: Context,
             }
 
             dialogView.deletePost.setOnClickListener {
-                FirebaseDatabase.getInstance().reference.child("Posts")
+                FirebaseDatabase.getInstance().reference.child("Post")
                     .child(post.postId)
                     .removeValue()
                 Snackbar.make(holder.itemView,"Post removed success",Snackbar.LENGTH_SHORT).show()

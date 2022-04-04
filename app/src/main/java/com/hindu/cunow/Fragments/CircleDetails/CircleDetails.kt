@@ -43,52 +43,16 @@ class CircleDetails : Fragment() {
             this.admin = pref.getString("admin","none")!!
         }
 
-        getCircleDetails(root)
-        getAdmin(root)
+        /*getCircleDetails(root)
+        getAdmin(root)*/
 
 
         return root
     }
 
-    private fun getCircleDetails(root:View){
-        val dataRef = FirebaseDatabase.getInstance().reference.child("Circle").child(circleId)
 
-        dataRef.addListenerForSingleValueEvent(object :ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
-                    val data = snapshot.getValue(CircleModel::class.java)
-                    Glide.with(context!!).load(data!!.icon).into(circleIcon_details)
-                    circle_name_details.text = data.circleName
-                    circle_description_details.text = data.circle_description
-                }
 
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
-    }
-
-    private fun getAdmin(root: View){
-
-        val userData = FirebaseDatabase.getInstance().reference.child("Users").child(admin)
-        userData.addListenerForSingleValueEvent(object :ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
-                    val user = snapshot.getValue(UserModel::class.java)
-                    Glide.with(context!!).load(user!!.profileImage).into(root.profileImage_circleAdmin)
-                    root.fullName_admin.text = user.fullName
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
-    }
 
 
 }

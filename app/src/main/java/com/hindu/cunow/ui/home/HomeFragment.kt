@@ -1,6 +1,7 @@
 package com.hindu.cunow.ui.home
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
@@ -27,6 +28,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Activity.AddPostActivity
+import com.hindu.cunow.Activity.AddVibesAcitvity
 import com.hindu.cunow.Activity.VideoUploadActivity
 import com.hindu.cunow.Adapter.PostAdapter
 import com.hindu.cunow.Model.PostModel
@@ -81,6 +83,10 @@ class HomeFragment : Fragment() {
             }
             dialogView.selectVideo.setOnClickListener {
                 startActivity(Intent(context,VideoUploadActivity::class.java))
+                alertDialog.dismiss()
+            }
+            dialogView.selectVibe.setOnClickListener {
+                startActivity(Intent(context,AddVibesAcitvity::class.java))
                 alertDialog.dismiss()
             }
 
@@ -141,6 +147,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun checkFirstVisit(){
+        val progressDialog = context?.let { Dialog(it) }
+        progressDialog!!.setContentView(R.layout.profile_dropdown_menu)
+        progressDialog.show()
         val dataRef = FirebaseDatabase
             .getInstance().reference.child("Users")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
@@ -151,12 +160,14 @@ class HomeFragment : Fragment() {
                     if (data!!.firstVisit){
                         welcome_screen.visibility = View.VISIBLE
                         postLayout_ll.visibility = View.GONE
-                        logo_welcome.visibility = View.VISIBLE
                     }else{
                         postLayout_ll.visibility = View.VISIBLE
                     }
                 }
+            progressDialog.dismiss()
             }
+
+
 
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")

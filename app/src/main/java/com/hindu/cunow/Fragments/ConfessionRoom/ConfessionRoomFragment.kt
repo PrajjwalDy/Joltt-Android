@@ -1,5 +1,6 @@
 package com.hindu.cunow.Fragments.ConfessionRoom
 
+import android.app.Dialog
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -12,10 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Activity.AddConfessionActivity
 import com.hindu.cunow.Activity.AddPostActivity
 import com.hindu.cunow.Adapter.ConfessionAdapter
+import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.ConfessionRoomFragmentBinding
 import kotlinx.android.synthetic.main.confession_room_fragment.*
@@ -42,6 +47,7 @@ class ConfessionRoomFragment : Fragment() {
         _binding = ConfessionRoomFragmentBinding.inflate(inflater,container,false)
         val root: View = binding.root
         initView(root)
+        checkFirstVisit()
 
         viewModel.confessionViewModel!!.observe(viewLifecycleOwner, Observer {
 
@@ -59,6 +65,9 @@ class ConfessionRoomFragment : Fragment() {
         root.confess_button.setOnClickListener {
             root.confess_button.visibility = View.GONE
             root.CV_upload_confession.visibility =View.VISIBLE
+        }
+        root.accept_confession_tnc.setOnClickListener {
+            updateVisit(root)
         }
 
         return root
@@ -97,6 +106,47 @@ class ConfessionRoomFragment : Fragment() {
         Snackbar.make(view,"confession added successfully", Snackbar.LENGTH_SHORT).show()
 
         confess_editText.text.clear()
+
+    }
+
+    private fun checkFirstVisit(){
+        val progressDialog = context?.let { Dialog(it) }
+        progressDialog!!.setContentView(R.layout.profile_dropdown_menu)
+        progressDialog.show()
+        val dataRef = FirebaseDatabase
+            .getInstance().reference.child("Users")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+        dataRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val data = snapshot.getValue(UserModel::class.java)
+                    if (data!!.confessionVisited){
+                        tnc_confessionView.visibility = View.VISIBLE
+                    }else{
+                        confession_main_ll.visibility = View.VISIBLE
+                    }
+                }
+                progressDialog.dismiss()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    private fun updateVisit(view: View){
+
+        val ref = FirebaseDatabase.getInstance().reference
+            .child("Users")
+
+        val postMap = HashMap<String,Any>()
+        postMap["confessionVisited"] = false
+        ref.child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .updateChildren(postMap)
+
+        checkFirstVisit()
     }
 
 }
