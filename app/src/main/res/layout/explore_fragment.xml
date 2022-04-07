@@ -54,7 +54,7 @@
             android:layout_weight="0.3"
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/note"/>
+            android:src="@drawable/candidate"/>
 
 
 
@@ -121,6 +121,7 @@
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/explore_people"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_margin="5dp"
@@ -137,14 +138,14 @@
                     android:layout_margin="10dp"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/working"
+                    android:src="@drawable/user"
                     android:layout_gravity="center_horizontal"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Work"
+                    android:text="People"
                     android:textColor="@color/red"
                     android:textStyle="bold"
                     android:textSize="16sp"/>
@@ -192,6 +193,7 @@
             android:layout_weight="1">
 
             <LinearLayout
+                android:id="@+id/publicPost"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -200,14 +202,14 @@
                     android:layout_margin="10dp"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/calendar"
+                    android:src="@drawable/post"
                     android:layout_gravity="center_horizontal"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Events"
+                    android:text="Posts"
                     android:textColor="@color/red"
                     android:textStyle="bold"
                     android:textSize="16sp"/>

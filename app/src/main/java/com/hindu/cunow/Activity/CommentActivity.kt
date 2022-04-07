@@ -198,18 +198,27 @@ class CommentActivity : AppCompatActivity() {
         if (publisherId != FirebaseAuth.getInstance().currentUser!!.uid){
             val dataRef = FirebaseDatabase.getInstance()
                 .reference.child("Notification")
+                .child("AllNotification")
                 .child(publisherId)
+            val notificationId = dataRef.push().key!!
 
             val dataMap = HashMap<String,Any>()
-            dataMap["notificationId"] = dataRef.push().key!!
+            dataMap["notificationId"] = notificationId
             dataMap["notificationText"] = "Commented on your post"+addCommentEditText.text.toString()
             dataMap["postID"] = postId
             dataMap["isPost"] = true
             dataMap["notifierId"] = FirebaseAuth.getInstance().currentUser!!.uid
 
             dataRef.push().setValue(dataMap)
+
+            val databaseRef = FirebaseDatabase.getInstance().reference
+                .child("Notification")
+                .child("UnReadNotification")
+                .child(publisherId).child(notificationId).setValue(true)
+
         }
     }
+
 
     private fun sendNotification(){
         val notificationRef = getInstance().reference.child("Tokens")

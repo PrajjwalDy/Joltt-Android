@@ -5,6 +5,7 @@ import android.app.ProgressDialog
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -17,6 +18,7 @@ class HomeViewModel : ViewModel(), IPostCallback {
 
     private var postLiveData:MutableLiveData<List<PostModel>>? = null
 
+    var followingList:MutableList<String>? = null
     private val postLoadCallback: IPostCallback = this
     private var messageError: MutableLiveData<String>? = null
 
@@ -34,13 +36,20 @@ class HomeViewModel : ViewModel(), IPostCallback {
     }
 
     private fun loadPost() {
+        checkFollowing()
         val postList=ArrayList<PostModel>()
         val dataReference = FirebaseDatabase.getInstance().reference.child("Post")
         dataReference.addListenerForSingleValueEvent(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (snapshot in snapshot.children){
                     val postModel = snapshot.getValue<PostModel>(PostModel::class.java) as PostModel
-                    postList.add(postModel)
+                    //postList.add(postModel)
+                    for (id in (followingList as ArrayList<String>)){
+                        if (postModel!!.publisher == id){
+                            postList.add(postModel)
+                        }
+                    }
+
                 }
                 postLoadCallback.onPostPCallbackLoadSuccess(postList)
             }
@@ -52,6 +61,32 @@ class HomeViewModel : ViewModel(), IPostCallback {
         })
     }
 
+    private fun checkFollowing(){
+        followingList = ArrayList()
+
+        val userDataRef = FirebaseDatabase.getInstance().reference.child("Follow")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child("Following")
+        userDataRef.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    (followingList as ArrayList<String>).clear()
+
+                    for (snapshot in snapshot.children){
+                        snapshot.key?.let { (followingList as ArrayList<String>).add(it) }
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+
+
     override fun onPostCallbackLoadFailed(str: String) {
         val mutableLiveData = messageError
         mutableLiveData!!.value = str
@@ -59,7 +94,6 @@ class HomeViewModel : ViewModel(), IPostCallback {
 
     override fun onPostPCallbackLoadSuccess(list: List<PostModel>) {
         val mutableLiveData = postLiveData
-
         mutableLiveData!!.value = list
     }
 

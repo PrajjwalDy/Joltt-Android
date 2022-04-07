@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_navigation_home_to_navigation_profile"
             app:destination="@id/navigation_profile" />
+        <action
+            android:id="@+id/action_navigation_home_to_userProfile"
+            app:destination="@id/userProfile" />
     </fragment>
 
     <fragment
@@ -28,6 +31,12 @@
         <action
             android:id="@+id/action_navigation_dashboard_to_userProfile"
             app:destination="@id/userProfile" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_publicPostFragement"
+            app:destination="@id/publicPostFragement" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_peopleFragment"
+            app:destination="@id/peopleFragment" />
     </fragment>
 
     <fragment
@@ -130,6 +139,20 @@
         android:name="com.hindu.cunow.Fragments.AboutMe.MyDetailsUsers.UserDetails"
         android:label="fragment_user_details"
         tools:layout="@layout/fragment_user_details" />
+    <fragment
+        android:id="@+id/publicPostFragement"
+        android:name="com.hindu.cunow.Fragments.PublicPost.PublicPostFragement"
+        android:label="public_post_fragement_fragment"
+        tools:layout="@layout/public_post_fragement_fragment" />
+    <fragment
+        android:id="@+id/peopleFragment"
+        android:name="com.hindu.cunow.Fragments.People.PeopleFragment"
+        android:label="people_fragment"
+        tools:layout="@layout/people_fragment" >
+        <action
+            android:id="@+id/action_peopleFragment_to_userProfile"
+            app:destination="@id/userProfile" />
+    </fragment>
 
 
 </navigation>

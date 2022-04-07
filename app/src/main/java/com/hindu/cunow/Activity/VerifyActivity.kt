@@ -38,10 +38,6 @@ class VerifyActivity : AppCompatActivity() {
 
             }
 
-
-
-
-
         }
 
     }

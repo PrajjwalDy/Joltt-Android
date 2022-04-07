@@ -2,6 +2,7 @@ package com.hindu.cunow.Adapter
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -18,10 +19,12 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
+import com.hindu.cunow.Activity.ViewFullActivity
 import com.hindu.cunow.Model.NotificationModel
 import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
+import com.iceteck.silicompressorr.videocompression.MediaController.mContext
 import de.hdodenhof.circleimageview.CircleImageView
 import org.w3c.dom.Text
 
@@ -37,6 +40,12 @@ class NotificationAdapter(private val nContext:Context,
 
     override fun onBindViewHolder(holder: NotificationAdapter.ViewHolder, position: Int) {
         holder.bind(nList[position])
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(nContext,ViewFullActivity::class.java)
+            intent.putExtra("postId",nList[position].postID)
+            nContext.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {

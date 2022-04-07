@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginTop="2dp"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImage_explore"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/profile_testimg"/>
+
+        <LinearLayout
+            android:id="@+id/details_ll"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/profileImage_explore"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/fullName_explore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="fullname"
+                android:textColor="@color/red"
+                android:textSize="16sp"
+                android:fontFamily="@font/amiko"/>
+
+            <TextView
+                android:id="@+id/userBio_explore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bio"
+                android:textSize="14sp"
+                android:fontFamily="@font/amiko"/>
+
+        </LinearLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userVerified_explore"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:visibility="gone"
+            android:layout_toEndOf="@+id/details_ll"
+            android:src="@drawable/verify" />
+
+        <ImageView
+            android:id="@+id/moreOption_explore"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/more_option"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

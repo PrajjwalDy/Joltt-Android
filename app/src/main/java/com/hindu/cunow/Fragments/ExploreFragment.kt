@@ -48,11 +48,19 @@ class ExploreFragment : Fragment() {
         root.circle_ll.setOnClickListener {
             val intent = Intent(context, CircleTabActivity::class.java)
             startActivity(intent)
-            //Navigation.findNavController(root).navigate(R.id.action_navigation_dashboard_to_circleFragment)
+
         }
         root.feedback.setOnClickListener {
             val intent = Intent(context, FeedbackActivity::class.java)
             startActivity(intent)
+        }
+
+        root.publicPost.setOnClickListener {
+            Navigation.findNavController(root).navigate(R.id.action_navigation_dashboard_to_publicPostFragement)
+        }
+
+        root.explore_people.setOnClickListener {
+            Navigation.findNavController(root).navigate(R.id.action_navigation_dashboard_to_peopleFragment)
         }
 
         recyclerView = root.findViewById(R.id.searchUserRV)

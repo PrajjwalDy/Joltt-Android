@@ -53,6 +53,8 @@ class NotificationsFragment : Fragment() {
             notificationAdapter!!.notifyDataSetChanged()
         })
 
+        markAllAsRead()
+
         root.followRequest.setOnClickListener {
             Navigation.findNavController(root).navigate(R.id.action_navigation_notifications_to_followRequest2)
         }
@@ -109,6 +111,14 @@ class NotificationsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun markAllAsRead(){
+        val notification = FirebaseDatabase.getInstance().reference
+            .child("Notification")
+            .child("UnReadNotification")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .removeValue()
     }
 
 }

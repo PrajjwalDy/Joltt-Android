@@ -16,6 +16,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.NonNull
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
@@ -64,6 +65,14 @@ class PostAdapter (private val mContext: Context,
 
         holder.bind(mPost[position],mContext,holder.image,holder.playerView)
         publisher(holder.publisherImage,holder.publisherName,post.publisher!!,holder.verification)
+
+        holder.publisherName.setOnClickListener {
+            val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+            pref.putString("uid",post.publisher)
+            pref.apply()
+
+            Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_home_to_userProfile)
+        }
 
         holder.like.setOnClickListener {
             like(holder.like,
@@ -225,9 +234,7 @@ class PostAdapter (private val mContext: Context,
     }
 
 
-    private fun islike(postId:String,
-                     likeButton:ImageView,
-                     ){
+    private fun islike(postId:String, likeButton:ImageView){
         val firebaseUser = FirebaseAuth.getInstance().currentUser
 
         val likeRef = FirebaseDatabase.getInstance().reference
@@ -335,16 +342,26 @@ class PostAdapter (private val mContext: Context,
         if (publisherId != FirebaseAuth.getInstance().currentUser!!.uid){
             val dataRef = FirebaseDatabase.getInstance()
                 .reference.child("Notification")
+                .child("AllNotification")
                 .child(publisherId)
 
+            val notificationId = dataRef.push().key!!
+
             val dataMap = HashMap<String,Any>()
-            dataMap["notificationId"] = dataRef.push().key!!
+            dataMap["notificationId"] = notificationId
             dataMap["notificationText"] = "Liked your post "+caption.text.toString()
             dataMap["postID"] = postId
             dataMap["isPost"] = true
             dataMap["notifierId"] = FirebaseAuth.getInstance().currentUser!!.uid
 
             dataRef.push().setValue(dataMap)
+
+            val databaseRef = FirebaseDatabase.getInstance().reference
+                .child("Notification")
+                .child("UnReadNotification")
+                .child(publisherId).child(notificationId).setValue(true)
+
+
         }
     }
 

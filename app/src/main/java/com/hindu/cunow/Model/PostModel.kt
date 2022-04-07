@@ -9,4 +9,5 @@ class PostModel {
     val videoId:String? = null
     val video: Boolean = false
     val iImage: Boolean = false
+    val public:Boolean = false
 }

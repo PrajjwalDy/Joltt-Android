@@ -1,6 +1,7 @@
 package com.hindu.cunow.Adapter
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,7 @@ import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
+import com.hindu.cunow.Activity.ViewFullActivity
 import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.R
 
@@ -53,7 +55,21 @@ class PostGridAdapter(private val mContext: Context,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val post = mPost[position]
         holder.bind(mPost[position])
+        holder.itemView.setOnClickListener {
+            val intent = Intent(mContext,ViewFullActivity::class.java)
+            intent.putExtra("postId",post.postId)
+            intent.putExtra("publisher",post.publisher)
+            mContext.startActivity(intent)
+        }
+
+        holder.playerView.setOnClickListener {
+            val intent = Intent(mContext,ViewFullActivity::class.java)
+            intent.putExtra("postId",post.postId)
+            intent.putExtra("publisher",post.publisher)
+            mContext.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -109,7 +125,6 @@ class PostGridAdapter(private val mContext: Context,
         simpleExoPlayer.addListener(playerListener)
 
     }
-
 
     enum class URLType(var url:String){
         MP4(""), HLS("")
