@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hindu.cunow.Adapter.PostGridAdapter
+import com.hindu.cunow.Adapter.PublicPostAdapter
 import com.hindu.cunow.Fragments.AboutMe.Posts.MyPostsFragemtViewModel
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.MyPostsFragemtFragmentBinding
@@ -19,7 +20,7 @@ import com.hindu.cunow.databinding.PublicPostFragementFragmentBinding
 class PublicPostFragement : Fragment() {
 
     var recyclerViewGrid: RecyclerView? = null
-    private var postGridAdapter: PostGridAdapter? = null
+    private var publicPostAdapter: PublicPostAdapter? = null
 
     private lateinit var viewModel: PublicPostFragementViewModel
     private var _binding:PublicPostFragementFragmentBinding? = null
@@ -39,9 +40,9 @@ class PublicPostFragement : Fragment() {
 
         viewModel.postModel!!.observe(viewLifecycleOwner, Observer {
             initView2(root)
-            postGridAdapter = context?.let { it1-> PostGridAdapter(it1,it) }
-            recyclerViewGrid!!.adapter = postGridAdapter
-            postGridAdapter!!.notifyDataSetChanged()
+            publicPostAdapter = context?.let { it1-> PublicPostAdapter(it1,it) }
+            recyclerViewGrid!!.adapter = publicPostAdapter
+            publicPostAdapter!!.notifyDataSetChanged()
         })
 
         return root

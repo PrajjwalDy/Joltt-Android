@@ -1,7 +1,6 @@
 package com.hindu.cunow.Adapter
 
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -22,17 +21,15 @@ import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
-import com.hindu.cunow.Activity.ViewFullActivity
 import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.R
 
-class PostGridAdapter(private val mContext: Context,
-                      private val mPost:List<PostModel>,
-): RecyclerView.Adapter<PostGridAdapter.ViewHolder>() {
+class PublicPostAdapter(private val mContext: Context,
+                        private val mPost:List<PostModel>): RecyclerView.Adapter<PublicPostAdapter.ViewHolder>() {
 
     inner class ViewHolder(@NonNull itemView: View):RecyclerView.ViewHolder(itemView){
-        val imageView: ImageView = itemView.findViewById(R.id.postImage_grid) as ImageView
-        val playerView: PlayerView = itemView.findViewById(R.id.videoPlayer_grid) as PlayerView
+        val imageView: ImageView = itemView.findViewById(R.id.postImage_public) as ImageView
+        val playerView: PlayerView = itemView.findViewById(R.id.videoPlayer_public) as PlayerView
 
         fun bind(list:PostModel){
             if (list.iImage){
@@ -51,32 +48,28 @@ class PostGridAdapter(private val mContext: Context,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(mContext).inflate(R.layout.grid_post_layout,parent,false)
+        val view = LayoutInflater.from(mContext).inflate(R.layout.public_post_item,parent,false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val post = mPost[position]
+
         holder.bind(mPost[position])
         holder.itemView.setOnClickListener {
 
-            /*val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+            val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
             pref.putString("postId",mPost[position].postId)
             pref.apply()
 
-            Navigation.findNavController(holder.itemView).navigate(R.id.action_publicPostFragement_to_fullPostView)*/
-
-            val intent = Intent(mContext,ViewFullActivity::class.java)
-            intent.putExtra("postId",post.postId)
-            intent.putExtra("publisher",post.publisher)
-            mContext.startActivity(intent)
+            Navigation.findNavController(holder.itemView).navigate(R.id.action_publicPostFragement_to_fullPostView)
         }
 
-        holder.playerView.setOnClickListener {
-            val intent = Intent(mContext,ViewFullActivity::class.java)
-            intent.putExtra("postId",post.postId)
-            intent.putExtra("publisher",post.publisher)
-            mContext.startActivity(intent)
+        holder.playerView.setOnClickListener{
+            val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+            pref.putString("postId",mPost[position].postId)
+            pref.apply()
+
+            Navigation.findNavController(holder.itemView).navigate(R.id.action_publicPostFragement_to_fullPostView)
         }
     }
 

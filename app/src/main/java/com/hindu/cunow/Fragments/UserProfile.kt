@@ -35,7 +35,6 @@ class UserProfile : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val root:View = inflater.inflate(R.layout.fragment_user_profiel, container, false)
 
         firebaseUser = FirebaseAuth.getInstance().currentUser!!

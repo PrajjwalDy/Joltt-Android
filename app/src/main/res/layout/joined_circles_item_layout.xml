@@ -48,10 +48,10 @@
             android:id="@+id/circle_joined_moreOption"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/more_option"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="10dp" />
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/more_option" />
 
     </RelativeLayout>
 

@@ -1,5 +1,6 @@
 package com.hindu.cunow.Adapter
 
+import android.app.AlertDialog
 import android.content.ClipDescription
 import android.content.Context
 import android.content.Intent
@@ -21,6 +22,7 @@ import com.hindu.cunow.Activity.CommentActivity
 import com.hindu.cunow.Model.CircleModel
 import com.hindu.cunow.Model.JoinedCircleModel
 import com.hindu.cunow.R
+import kotlinx.android.synthetic.main.circle_more_option.view.*
 
 class JoinedCircleAdapter(private val mContext:Context,
                           private val mCircle: List<JoinedCircleModel>
@@ -31,6 +33,7 @@ class JoinedCircleAdapter(private val mContext:Context,
         val iconImage: ImageView = itemView.findViewById(R.id.circle_icon_joined) as ImageView
         val circleName: TextView = itemView.findViewById(R.id.circle_name_joined) as TextView
         val circleDescription:TextView = itemView.findViewById(R.id.circle_description_joined) as TextView
+        val circleMoreOption:ImageView = itemView.findViewById(R.id.circle_joined_moreOption) as ImageView
 
     }
 
@@ -67,6 +70,26 @@ class JoinedCircleAdapter(private val mContext:Context,
             val commentIntent = Intent(mContext, CircleFlowActivity::class.java)
             commentIntent.putExtra("circleId",mCircle[position].JCId!!)
             mContext.startActivity(commentIntent)
+        }
+
+        holder.circleMoreOption.setOnClickListener {
+            val dialogView = LayoutInflater.from(mContext).inflate(R.layout.circle_more_option, null)
+
+            val dialogBuilder = AlertDialog.Builder(mContext)
+                .setView(dialogView)
+                .setTitle("Options")
+
+            val alertDialog = dialogBuilder.show()
+
+            dialogView.leaveCircle.setOnClickListener {
+                FirebaseDatabase.getInstance().reference
+                    .child("Users")
+                    .child(FirebaseAuth.getInstance().currentUser!!.uid)
+                    .child("Joined_Circles")
+                    .child(mCircle[position].JCId!!)
+                    .removeValue()
+            }
+
         }
     }
 

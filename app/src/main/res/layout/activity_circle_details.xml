@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -29,11 +30,21 @@
                 android:textStyle="bold" />
 
             <ImageView
+                android:id="@+id/addMembers"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/more_option"
+                android:layout_marginEnd="20dp"
+                android:layout_toStartOf="@+id/moreOptionCircle"
+                android:layout_centerVertical="true"
+                android:src="@drawable/add_members" />
+
+            <ImageView
+                android:id="@+id/moreOptionCircle"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:src="@drawable/more_option" />
 
         </RelativeLayout>
 
@@ -41,65 +52,65 @@
 
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circleIcon_details"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
         android:layout_margin="20dp"
-        android:src="@drawable/profile_testimg"
-        android:id="@+id/circleIcon_details"/>
+        android:src="@drawable/profile_testimg" />
 
     <TextView
         android:id="@+id/circle_name_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/red"
-        android:text="Circle Name"
-        android:fontFamily="@font/amiko"
         android:layout_gravity="center_horizontal"
-        android:textSize="16dp"/>
+        android:fontFamily="@font/amiko"
+        android:text="Circle Name"
+        android:textColor="@color/red"
+        android:textSize="16dp" />
 
 
     <TextView
         android:id="@+id/circle_description_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:text="This is my circle"
-        android:fontFamily="@font/amiko"
         android:layout_gravity="center_horizontal"
-        android:textSize="14dp"/>
+        android:fontFamily="@font/amiko"
+        android:text="This is my circle"
+        android:textColor="@color/black"
+        android:textSize="14dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Members"
         android:layout_margin="10dp"
+        android:fontFamily="@font/amiko"
+        android:text="Members"
         android:textColor="@color/red"
         android:textSize="16dp"
-        android:textStyle="bold"
-        android:fontFamily="@font/amiko"/>
+        android:textStyle="bold" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="5dp"
         android:layout_margin="10dp"
+        app:cardCornerRadius="5dp"
         app:cardElevation="5dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profileImage_circleAdmin"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_centerVertical="true"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 android:src="@drawable/test_img" />
@@ -108,21 +119,21 @@
                 android:id="@+id/fullName_admin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/profileImage_circleAdmin"
                 android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/profileImage_circleAdmin"
                 android:text="Full Name"
-                android:textSize="14sp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:text="Admin"
                 android:layout_marginEnd="10dp"
-                android:textSize="12sp"
-                android:textColor="@color/red"/>
+                android:text="Admin"
+                android:textColor="@color/red"
+                android:textSize="12sp" />
 
 
         </RelativeLayout>
@@ -130,9 +141,9 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/circleMember_details_RV"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/circleMember_details_RV"/>
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

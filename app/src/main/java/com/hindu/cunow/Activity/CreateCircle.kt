@@ -88,13 +88,28 @@ class CreateCircle : AppCompatActivity() {
                 circleMap["circleId"] = circleId!!
                 circleMap["circleName"] = circle_name_editText.text.toString()
                 circleMap["icon"] = iconUrl
-                circleMap["private"] = private == "yes"
+                circleMap["privateC"] = private == "yes"
                 circleMap["admin"] = FirebaseAuth.getInstance().currentUser!!.uid
                 circleMap["circle_description"] = circle_description_editText.text.toString()
 
                 ref.child(circleId).updateChildren(circleMap)
 
                 Toast.makeText(this,"Circle Created Successfully",Toast.LENGTH_SHORT).show()
+                FirebaseDatabase.getInstance().reference
+                    .child("Circle").child(circleId)
+                    .child("Members").child(FirebaseAuth.getInstance().currentUser!!.uid)
+                    .setValue(true)
+
+                val join_ref = FirebaseDatabase.getInstance()
+                    .reference
+                    .child("Users")
+                    .child(FirebaseAuth
+                        .getInstance()
+                        .currentUser!!.uid)
+                    .child("Joined_Circles")
+                val requestMap = HashMap<String,Any>()
+                requestMap["JCId"] = circleId
+                join_ref.child(circleId).updateChildren(requestMap)
                 finish()
                 progressDialog.dismiss()
 

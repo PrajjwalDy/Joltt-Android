@@ -17,7 +17,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Activity.CircleDetailsActivity
 import com.hindu.cunow.MainActivity
 import com.hindu.cunow.Model.CircleModel
@@ -34,15 +37,24 @@ class CircleAdapter(private val mContext:Context,
     @SuppressLint("CommitPrefEdits")
     override fun onBindViewHolder(holder: CircleAdapter.ViewHolder, position: Int) {
         holder.bind(mCircle[position])
+
+        checkJoining(mCircle[position].circleId!!,holder.joinButton)
+
         holder.joinButton.setOnClickListener{
-            if (mCircle[position].parivate){
-                requestToJoin(mCircle[position].circleId!!)
+            if (mCircle[position].privateC){
                 holder.joinButton.text = "Requested"
+                requestToJoin(mCircle[position].circleId!!)
             }else{
                 holder.joinButton.text = "Joined"
                 joinCircle(mCircle[position].circleId!!)
             }
         }
+
+        if (mCircle[position].admin == FirebaseAuth.getInstance().currentUser!!.uid){
+            holder.joinButton.visibility = View.GONE
+            //holder.itemView.visibility = View.GONE
+        }
+
 
         holder.iconImage.setOnClickListener {
             val intent = Intent(mContext,CircleDetailsActivity::class.java)
@@ -50,6 +62,8 @@ class CircleAdapter(private val mContext:Context,
             intent.putExtra("admin",mCircle[position].admin)
             mContext.startActivity(intent)
         }
+
+
     }
 
     override fun getItemCount(): Int {
@@ -93,13 +107,53 @@ class CircleAdapter(private val mContext:Context,
     private fun requestToJoin(circleId: String){
         FirebaseDatabase.getInstance().reference
             .child("Circle").child(circleId)
-            .child("Requests").child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child("JoinRequests").child(FirebaseAuth.getInstance().currentUser!!.uid)
             .setValue(true)
 
     }
 
-    private fun checkJoining(){
+    private fun checkJoining(circleId: String,join:Button){
+        val circleData = FirebaseDatabase.getInstance().reference
+            .child("Circle")
+            .child(circleId)
+            .child("Members")
 
+        circleData.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.child(FirebaseAuth.getInstance().currentUser!!.uid).exists()){
+                    join.text = "Joined"
+                }else{
+                    checkRequested(circleId,join)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    private fun checkRequested(circleId: String,join: Button){
+        val circleData = FirebaseDatabase.getInstance().reference
+            .child("Circle")
+            .child(circleId)
+            .child("JoinRequests")
+
+        circleData.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.child(FirebaseAuth.getInstance().currentUser!!.uid).exists()){
+                    join.text = "Requested"
+                }else{
+                    join.text = "Join"
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
 

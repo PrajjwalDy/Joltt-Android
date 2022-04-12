@@ -8,6 +8,7 @@
     <VideoView
         android:id="@+id/vibes_viedoView"
         android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
         android:layout_height="match_parent" />
 
     <ProgressBar

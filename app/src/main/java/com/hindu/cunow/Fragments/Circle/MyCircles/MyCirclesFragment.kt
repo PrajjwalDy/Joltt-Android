@@ -12,9 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hindu.cunow.Adapter.CircleAdapter
 import com.hindu.cunow.Adapter.JoinedCircleAdapter
-import com.hindu.cunow.Fragments.Circle.ExploreCircles.ExploreCirclesFragmentsViewModel
 import com.hindu.cunow.R
-import com.hindu.cunow.databinding.ExploreCirclesFragmentsFragmentBinding
 import com.hindu.cunow.databinding.MyCirclesFragmentBinding
 
 class MyCirclesFragment : Fragment() {
@@ -51,9 +49,7 @@ class MyCirclesFragment : Fragment() {
 
         recyclerView = root.findViewById(R.id.myCircle_RV) as RecyclerView
         recyclerView!!.setHasFixedSize(true)
-        val linearLayoutManager = LinearLayoutManager(context)
-        linearLayoutManager.reverseLayout = true
-        linearLayoutManager.stackFromEnd = true
+        val linearLayoutManager: LinearLayoutManager = GridLayoutManager(context,3)
         recyclerView!!.layoutManager = linearLayoutManager
 
     }
