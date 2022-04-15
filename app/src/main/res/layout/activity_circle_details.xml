@@ -33,10 +33,20 @@
                 android:id="@+id/addMembers"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                android:layout_centerVertical="true"
                 android:layout_marginEnd="20dp"
                 android:layout_toStartOf="@+id/moreOptionCircle"
-                android:layout_centerVertical="true"
                 android:src="@drawable/add_members" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/notificationDot"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_toStartOf="@+id/moreOptionCircle"
+                android:visibility="gone"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/notification_dot" />
 
             <ImageView
                 android:id="@+id/moreOptionCircle"

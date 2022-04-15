@@ -42,6 +42,7 @@ class CircleFlowAdapter(private val mContext:Context,
 
     override fun onBindViewHolder(holder: CircleFlowAdapter.ViewHolder, position: Int) {
         holder.bind(mCircle[position])
+        loadSender(mCircle[position].circleFlowSender!!,holder.profileImage!!,holder.fullName!!)
 
     }
 
@@ -52,8 +53,9 @@ class CircleFlowAdapter(private val mContext:Context,
     inner class ViewHolder(@NonNull itemView: View):RecyclerView.ViewHolder(itemView){
         val circleFlowImage:ImageView? = itemView.findViewById(R.id.circleFlow_Image) as? ImageView
         val circleFlowText:TextView? = itemView.findViewById(R.id.circleFlow_text) as? TextView
-        val profileImage_CF:CircleImageView? = itemView.findViewById(R.id.profileImage_CF) as? CircleImageView
+        val profileImage:CircleImageView? = itemView.findViewById(R.id.profileImage_CF) as? CircleImageView
         val circleFlowImage_sender:ImageView? = itemView.findViewById(R.id.circleFlow_Image_sender) as? ImageView
+        val fullName:TextView? = itemView.findViewById(R.id.fullNameCF)
 
         fun bind(list:CircleFlowModel){
                 circleFlowText!!.text = list.circleFlowText
@@ -79,7 +81,7 @@ class CircleFlowAdapter(private val mContext:Context,
         }
     }
 
-    private fun loadSender(sederId:String, profileImage:ImageView){
+    private fun loadSender(sederId:String,profileImage:ImageView,fullName:TextView){
         val userDataRef = FirebaseDatabase.getInstance().reference.child("Users").child(sederId)
 
         userDataRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -87,6 +89,8 @@ class CircleFlowAdapter(private val mContext:Context,
                 if (snapshot.exists()){
                     val data = snapshot.getValue(UserModel::class.java)
                     Glide.with(mContext).load(data!!.profileImage).into(profileImage)
+                    fullName.text = data.fullName
+
                 }
             }
 

@@ -5,36 +5,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/red"
+    android:background="@color/white"
     tools:context=".Activity.LogInActivity">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="50dp"
+        android:src="@drawable/app_logo"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="100dp"
-        android:fontFamily="@font/allan"
         android:text="CUNow"
-        android:textColor="@color/white"
-        android:textSize="40sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="-50dp"
+        android:textColor="@color/red"
+        android:textSize="22sp"
+        android:fontFamily="@font/amiko"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/red"
+        android:fontFamily="@font/amiko"
+        android:layout_marginTop="10dp"
+        android:text="Bringing CU closer together"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="50dp"
         android:orientation="vertical">
-
-
 
         <EditText
             android:id="@+id/uid_edit_text"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/usernamr_password_bg"
+            android:background="@drawable/box_grey"
             android:layout_margin="20dp"
+            android:fontFamily="@font/amiko"
             android:hint="UID"
             android:textAlignment="center"
             android:textColor="@color/red"/>
@@ -44,10 +59,11 @@
             android:id="@+id/password_edit_text"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/usernamr_password_bg"
+            android:background="@drawable/box_grey"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
+            android:fontFamily="@font/amiko"
             android:hint="Password"
             android:textAlignment="center"
             android:textColor="@color/red"/>
@@ -58,7 +74,9 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:text="Login"
+            android:elevation="5dp"
             android:textColor="@color/red"
+            android:fontFamily="@font/amiko"
             android:id="@+id/login_btn"
             android:textSize="18sp"
             android:background="@drawable/usernamr_password_bg"/>
@@ -69,7 +87,7 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:layout_gravity="end"
-            android:textColor="@color/white"
+            android:textColor="@color/red"
             android:layout_margin="5dp"
             android:text="forget password"/>
 
@@ -82,9 +100,10 @@
         android:layout_height="wrap_content"
         android:text="Create new account"
         android:layout_marginTop="10dp"
-        android:textColor="@color/white"
+        android:textColor="@color/red"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:fontFamily="@font/amiko"
         android:layout_gravity="center_horizontal"/>
 
     <TextView
@@ -94,7 +113,8 @@
         android:textSize="15dp"
         android:layout_marginTop="100dp"
         android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="@color/red"
+        android:fontFamily="@font/amiko"
         android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>

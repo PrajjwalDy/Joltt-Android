@@ -1,5 +1,6 @@
 package com.hindu.cunow.Activity
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -19,9 +20,11 @@ import com.hindu.cunow.Adapter.CircleMemberAdapter
 import com.hindu.cunow.Model.CircleModel
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
+import kotlinx.android.synthetic.main.activity_add_members.*
 import kotlinx.android.synthetic.main.activity_circle_details.*
 import kotlinx.android.synthetic.main.activity_circle_details.view.*
 import kotlinx.android.synthetic.main.admin_option_cirlce.view.*
+import kotlinx.android.synthetic.main.circle_members_layout.*
 
 class CircleDetailsActivity : AppCompatActivity() {
 
@@ -88,6 +91,7 @@ class CircleDetailsActivity : AppCompatActivity() {
         loadMembers()
         getCircleDetails()
         getAdmin()
+        totalRequests()
     }
 
     private fun getCircleDetails(){
@@ -163,12 +167,35 @@ class CircleDetailsActivity : AppCompatActivity() {
 
                     for (id in memberList!!){
                             if (user!!.uid == id){
-                                (userList as ArrayList<UserModel>).add(user!!)
+                                (userList as ArrayList<UserModel>).add(user)
                             }
                     }
                 }
 
                 circleMemberAdapter!!.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    private fun totalRequests(){
+        val data = FirebaseDatabase.getInstance().reference.child("Circle")
+            .child(circleId)
+            .child("JoinRequests")
+
+        data.addValueEventListener(object :ValueEventListener{
+            @SuppressLint("SetTextI18n")
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val totalRequests = snapshot.childrenCount.toInt()
+                    if (totalRequests >0){
+                        notificationDot.visibility = View.VISIBLE
+                    }
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
