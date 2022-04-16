@@ -35,7 +35,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun signUp() {
         val fullName = fullName_edit_text.text.toString().trim{ it <= ' '}
-        val uid = uid_edit_text.text.toString()+"@cuchd.in"
+        val uid = uid_edit_text.text.toString()//+"@cuchd.in"
         val phone = phone_edit_text.text.toString().trim{ it <= ' '}
         val password = password_Create_AC.text.toString()
 

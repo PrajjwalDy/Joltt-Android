@@ -192,8 +192,6 @@ class UserProfile : Fragment() {
                             }
                         }
 
-
-
                     }else{
 
                         when (root.follow_unfollow_button.text.toString()) {

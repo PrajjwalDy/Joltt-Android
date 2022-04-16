@@ -153,7 +153,7 @@ class HomeFragment : Fragment() {
                     val data = snapshot.getValue(UserModel::class.java)
                     if (data!!.firstVisit){
                         welcome_screen.visibility = View.VISIBLE
-                        postLayout_ll.visibility = View.GONE
+                        //postLayout_ll.visibility = View.GONE
                     }else{
                         postLayout_ll.visibility = View.VISIBLE
                     }
@@ -176,7 +176,7 @@ class HomeFragment : Fragment() {
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
             .child("Following")
 
-        database.addValueEventListener(object :ValueEventListener{
+        database.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     val count = snapshot.childrenCount.toInt()
@@ -184,7 +184,6 @@ class HomeFragment : Fragment() {
                         ll_empty_posts.visibility = View.VISIBLE
                         postRecyclerView.visibility = View.GONE
                     }else{
-                        ll_empty_posts.visibility = View.GONE
                         postRecyclerView.visibility = View.VISIBLE
                     }
                 }
