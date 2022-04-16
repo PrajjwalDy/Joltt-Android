@@ -15,6 +15,12 @@
         <action
             android:id="@+id/action_navigation_home_to_userProfile"
             app:destination="@id/userProfile" />
+        <action
+            android:id="@+id/action_navigation_home_to_peopleFragment"
+            app:destination="@id/peopleFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_confessionRoomFragment"
+            app:destination="@id/confessionRoomFragment" />
     </fragment>
 
     <fragment

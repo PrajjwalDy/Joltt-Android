@@ -188,12 +188,18 @@ class CircleFlowActivity : AppCompatActivity() {
         val circleData= FirebaseDatabase.getInstance().reference
             .child("Circle")
             .child(circleId)
-        circleData.addListenerForSingleValueEvent(object :ValueEventListener{
+        circleData.addValueEventListener(object :ValueEventListener{
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     val data = snapshot.getValue(CircleModel::class.java)
                     circleName_CF.text = data!!.circleName
+
+                    if (!data.mPermission && data.admin != FirebaseAuth.getInstance().currentUser!!.uid){
+                        sendingLayout.visibility = View.GONE
+                    }else{
+                        sendingLayout.visibility = View.VISIBLE
+                    }
                 }
             }
 

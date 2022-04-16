@@ -110,10 +110,10 @@
             android:id="@+id/send_CF"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:src="@drawable/send"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            android:src="@drawable/send" />
 
     </RelativeLayout>
 

@@ -6,14 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activity.PrivacySettingsActivity">
+    tools:context=".Activity.CirclePermissionActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/CircleAppbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal">
@@ -22,19 +23,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_margin="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 android:fontFamily="@font/amiko"
-                android:text="Privacy Settings"
+                android:text="Permission"
                 android:textColor="@color/red"
-                android:textSize="18sp" />
-        </LinearLayout>
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Account Privacy"
+        android:text="Circle Privacy"
         android:layout_margin="10dp"
         android:textSize="16sp"
         android:fontFamily="@font/amiko"
@@ -47,7 +54,7 @@
         android:gravity="center_vertical">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/accountPrivacy_private"
+            android:id="@+id/setPrivateCircle"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
@@ -60,7 +67,7 @@
             android:layout_margin="5dp"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/accountPrivacy_public"
+            android:id="@+id/setAsPublicCircle"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
@@ -77,7 +84,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Post Privacy"
+        android:text="Who can send message?"
         android:layout_margin="10dp"
         android:textSize="16sp"
         android:fontFamily="@font/amiko"
@@ -90,11 +97,11 @@
         android:gravity="center_vertical">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/postPrivacy_followers"
+            android:id="@+id/onlyMeCanSend"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="Only Followers"
+            android:text="Only me"
             android:textColor="@color/red"
             android:textAllCaps="false"
             android:fontFamily="@font/amiko"
@@ -103,11 +110,11 @@
             android:layout_margin="5dp"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/postPrivacy_public"
+            android:id="@+id/everyoneCanSend"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="Public"
+            android:text="Everyone"
             android:textColor="@color/red"
             android:textAllCaps="false"
             android:fontFamily="@font/amiko"

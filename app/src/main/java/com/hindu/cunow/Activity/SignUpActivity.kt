@@ -8,6 +8,7 @@ import android.text.TextUtils
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.hindu.cunow.MainActivity
@@ -91,7 +92,10 @@ class SignUpActivity : AppCompatActivity() {
         dataMap["phone"] = phone
         dataMap["profileImage"] = "https://uims.cuchd.in/cuimslogo.png"
         dataMap["verification"] = false
-        dataMap["firstVisit"] = false
+        dataMap["firstVisit"] = true
+        dataMap["searchName"] = fullName.toString().toLowerCase()
+        dataMap["private"] = false
+        dataMap["firstVisit"] = true
 
         userRef.child(currentUserID).setValue(dataMap).addOnCompleteListener { task->
             if (task.isSuccessful){
@@ -104,6 +108,12 @@ class SignUpActivity : AppCompatActivity() {
                             val intent = Intent(this@SignUpActivity, VerifyActivity::class.java)
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                             startActivity(intent)
+                            firebaseUser.uid.let { it1 ->
+                                FirebaseDatabase.getInstance().reference
+                                    .child("Follow").child(it1.toString())
+                                    .child("Following").child(firebaseUser.uid)
+                                    .setValue(true)
+                            }
                         }else{
                             Toast.makeText(this, "Some Error occurred or you may entered wrong UID", Toast.LENGTH_LONG).show()
                         }

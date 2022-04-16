@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -82,12 +83,7 @@ class JoinedCircleAdapter(private val mContext:Context,
             val alertDialog = dialogBuilder.show()
 
             dialogView.leaveCircle.setOnClickListener {
-                FirebaseDatabase.getInstance().reference
-                    .child("Users")
-                    .child(FirebaseAuth.getInstance().currentUser!!.uid)
-                    .child("Joined_Circles")
-                    .child(mCircle[position].JCId!!)
-                    .removeValue()
+                leaveCircle(mCircle[position].JCId!!)
             }
 
         }
@@ -95,5 +91,18 @@ class JoinedCircleAdapter(private val mContext:Context,
 
     override fun getItemCount(): Int {
         return mCircle.size
+    }
+
+    private fun leaveCircle(circleId: String){
+        FirebaseDatabase.getInstance().reference.child("Circle")
+            .child(circleId).child("Members")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid).removeValue()
+        FirebaseDatabase.getInstance().reference.child("Users")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child("Joined_Circles")
+            .child(circleId)
+            .removeValue()
+
+        Toast.makeText(mContext,"You left the circle successfully", Toast.LENGTH_SHORT).show()
     }
 }

@@ -235,6 +235,7 @@
                     app:cardElevation="7dp">
 
                     <LinearLayout
+                        android:id="@+id/people_welcome"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
@@ -244,7 +245,7 @@
                             android:layout_height="50dp"
                             android:layout_gravity="center_horizontal"
                             android:layout_margin="10dp"
-                            android:src="@drawable/working" />
+                            android:src="@drawable/user" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -259,6 +260,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/confession_welcome"
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_margin="5dp"
@@ -291,6 +293,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/circle_welcome"
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_margin="5dp"
@@ -307,7 +310,7 @@
                             android:layout_height="50dp"
                             android:layout_gravity="center_horizontal"
                             android:layout_margin="10dp"
-                            android:src="@drawable/working" />
+                            android:src="@drawable/mycircle" />
 
                         <TextView
                             android:layout_width="wrap_content"

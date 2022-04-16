@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -31,6 +32,7 @@ import com.hindu.cunow.Activity.AddPostActivity
 import com.hindu.cunow.Activity.AddVibesAcitvity
 import com.hindu.cunow.Activity.VideoUploadActivity
 import com.hindu.cunow.Adapter.PostAdapter
+import com.hindu.cunow.Fragments.Circle.CircleTabActivity
 import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
@@ -61,15 +63,15 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
         homeViewModel.postModel!!.observe(viewLifecycleOwner, Observer {
-            checkFirstVisit()
             initView(root)
             postAdapter = context?.let { it1-> PostAdapter(it1,it) }
             recyclerView!!.adapter = postAdapter
             postAdapter!!.notifyDataSetChanged()
 
         })
-
+        checkFirstVisit()
         root.create.setOnClickListener {
             val dialogView = LayoutInflater.from(context).inflate(R.layout.image_or_video_dialogbox, null)
 
@@ -96,6 +98,19 @@ class HomeFragment : Fragment() {
             updateVisit(root)
         }
 
+        root.people_welcome.setOnClickListener {
+            Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_peopleFragment)
+        }
+
+        root.confession_welcome.setOnClickListener {
+            Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_confessionRoomFragment)
+        }
+
+        root.circle_welcome.setOnClickListener {
+            val intent = Intent(context, CircleTabActivity::class.java)
+            startActivity(intent)
+        }
+
         return root
     }
 
@@ -120,31 +135,10 @@ class HomeFragment : Fragment() {
         linearLayoutManager.reverseLayout = true
         linearLayoutManager.stackFromEnd = true
         recyclerView!!.layoutManager = linearLayoutManager
-        loadUserImage(root)
+        //loadUserImage(root)
 
     }
 
-    private fun loadUserImage(root: View){
-        val dataRef = FirebaseDatabase
-            .getInstance().reference.child("Users")
-            .child(FirebaseAuth.getInstance().currentUser!!.uid)
-
-        dataRef.addListenerForSingleValueEvent(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val listData = snapshot.getValue(UserModel::class.java)
-                if (listData!!.profileImage == ""){
-                    root.userProfileImg.visibility = View.GONE
-                }else{
-                    Glide.with(context!!).load(listData.profileImage).into(root.userProfileImg)
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
-    }
 
     private fun checkFirstVisit(){
         val progressDialog = context?.let { Dialog(it) }
@@ -166,8 +160,6 @@ class HomeFragment : Fragment() {
                 }
             progressDialog.dismiss()
             }
-
-
 
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")

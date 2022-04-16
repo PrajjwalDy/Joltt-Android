@@ -21,6 +21,7 @@ import com.hindu.cunow.Activity.UserSupportActivity
 import com.hindu.cunow.Model.RequestModel
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
+import kotlinx.android.synthetic.main.activity_comment.*
 import kotlinx.android.synthetic.main.fragment_user_profiel.*
 import kotlinx.android.synthetic.main.fragment_user_profiel.view.*
 import kotlinx.android.synthetic.main.profile_fragment.*
@@ -140,7 +141,7 @@ class UserProfile : Fragment() {
                                     val requestMap = HashMap<String,Any>()
                                     requestMap["requesterId"] = FirebaseAuth.getInstance().currentUser!!.uid
                                     ref.child(firebaseUser.uid).updateChildren(requestMap)
-
+                                    addNotification(message = "is requested to follow you")
                                 }
                             }
                             "Requested"->{
@@ -195,6 +196,7 @@ class UserProfile : Fragment() {
                                         .child("Followers").child(it1.toString())
                                         .setValue(true)
                                 }
+                                addNotification(message = "is now following you")
 
                             }
                             "Following" -> {
@@ -382,6 +384,32 @@ class UserProfile : Fragment() {
             }
 
         })
+    }
+
+    private fun addNotification(message:String){
+        //sendNotification()
+        if (profileId != FirebaseAuth.getInstance().currentUser!!.uid){
+            val dataRef = FirebaseDatabase.getInstance()
+                .reference.child("Notification")
+                .child("AllNotification")
+                .child(profileId)
+            val notificationId = dataRef.push().key!!
+
+            val dataMap = HashMap<String,Any>()
+            dataMap["notificationId"] = notificationId
+            dataMap["notificationText"] = message
+            dataMap["postID"] = ""
+            dataMap["isPost"] = false
+            dataMap["notifierId"] = FirebaseAuth.getInstance().currentUser!!.uid
+
+            dataRef.push().setValue(dataMap)
+
+            val databaseRef = FirebaseDatabase.getInstance().reference
+                .child("Notification")
+                .child("UnReadNotification")
+                .child(profileId).child(notificationId).setValue(true)
+
+        }
     }
 
 

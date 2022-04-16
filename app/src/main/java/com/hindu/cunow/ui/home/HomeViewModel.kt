@@ -28,7 +28,7 @@ class HomeViewModel : ViewModel(), IPostCallback {
         if (postLiveData == null){
             postLiveData = MutableLiveData()
             messageError = MutableLiveData()
-            loadPost()
+            checkFollowing()
         }
         val mutableLiveData = postLiveData
         return mutableLiveData
@@ -36,20 +36,19 @@ class HomeViewModel : ViewModel(), IPostCallback {
     }
 
     private fun loadPost() {
-        checkFollowing()
+        //checkFollowing()
         val postList=ArrayList<PostModel>()
         val dataReference = FirebaseDatabase.getInstance().reference.child("Post")
-        dataReference.addListenerForSingleValueEvent(object:ValueEventListener{
+        dataReference.addValueEventListener(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                postList.clear()
                 for (snapshot in snapshot.children){
                     val postModel = snapshot.getValue<PostModel>(PostModel::class.java) as PostModel
-                    //postList.add(postModel)
                     for (id in (followingList as ArrayList<String>)){
-                        if (postModel!!.publisher == id){
+                        if (postModel.publisher == id){
                             postList.add(postModel)
-                        }
+                       }
                     }
-
                 }
                 postLoadCallback.onPostPCallbackLoadSuccess(postList)
             }
@@ -67,7 +66,7 @@ class HomeViewModel : ViewModel(), IPostCallback {
         val userDataRef = FirebaseDatabase.getInstance().reference.child("Follow")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
             .child("Following")
-        userDataRef.addListenerForSingleValueEvent(object :ValueEventListener{
+        userDataRef.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     (followingList as ArrayList<String>).clear()
@@ -75,6 +74,7 @@ class HomeViewModel : ViewModel(), IPostCallback {
                     for (snapshot in snapshot.children){
                         snapshot.key?.let { (followingList as ArrayList<String>).add(it) }
                     }
+                    loadPost()
                 }
             }
 

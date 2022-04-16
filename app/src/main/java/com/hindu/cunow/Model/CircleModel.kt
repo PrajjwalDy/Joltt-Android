@@ -7,6 +7,7 @@ class CircleModel {
     var circle_description:String? = null
     var admin:String? = null
     var privateC:Boolean = false
+    var mPermission:Boolean = false
 
 
 }

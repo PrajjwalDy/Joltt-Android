@@ -9,9 +9,16 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.ktx.Firebase
 import com.hindu.cunow.Adapter.JoinedCircleAdapter
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.JoinedCirclesFragmentBinding
+import kotlinx.android.synthetic.main.joined_circles_fragment.*
 
 class JoinedCirclesFragment : Fragment() {
 
@@ -39,6 +46,8 @@ class JoinedCirclesFragment : Fragment() {
             circleAdapter!!.notifyDataSetChanged()
         })
 
+        countJoined()
+
         return root
     }
 
@@ -50,6 +59,33 @@ class JoinedCirclesFragment : Fragment() {
         linearLayoutManager.stackFromEnd = true
         recyclerView!!.layoutManager = linearLayoutManager
 
+    }
+
+    private fun countJoined(){
+        val database = FirebaseDatabase.getInstance().reference.child("Users")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child("Joined_Circles")
+
+        database.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val count = snapshot.childrenCount.toInt()
+                    if (count <=0){
+                        ll_empty_joined.visibility = View.VISIBLE
+                        joined_circles_RV.visibility = View.GONE
+                    }else{
+
+                        ll_empty_joined.visibility = View.GONE
+                        joined_circles_RV.visibility = View.VISIBLE
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
 }

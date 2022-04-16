@@ -16,9 +16,7 @@ class VerifyActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_verify)
 
-
         startActivity()
-
     }
 
     private fun startActivity(){
@@ -32,8 +30,7 @@ class VerifyActivity : AppCompatActivity() {
                     val intent = Intent(this@VerifyActivity, MainActivity::class.java)
                     startActivity(intent)
                 }else{
-                    val intent = Intent(this@VerifyActivity, VerifyActivity::class.java)
-                    startActivity(intent)
+                    Toast.makeText(this, "UID isn't verified yet!",Toast.LENGTH_SHORT).show()
                 }
 
             }

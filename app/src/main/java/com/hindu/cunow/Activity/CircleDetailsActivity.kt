@@ -57,6 +57,10 @@ class CircleDetailsActivity : AppCompatActivity() {
             val alertDialog = dialogBuilder.show()
 
             dialogView.circlePermission.setOnClickListener {
+                val intent = Intent(this,CirclePermissionActivity::class.java)
+                intent.putExtra("circleId",circleId)
+                intent.putExtra("admin",admin)
+                startActivity(intent)
                 alertDialog.dismiss()
             }
 
@@ -93,6 +97,8 @@ class CircleDetailsActivity : AppCompatActivity() {
         getAdmin()
         totalRequests()
     }
+
+
 
     private fun getCircleDetails(){
         val dataRef = FirebaseDatabase.getInstance().reference.child("Circle").child(circleId)
@@ -204,5 +210,6 @@ class CircleDetailsActivity : AppCompatActivity() {
 
         })
     }
+
 
 }
