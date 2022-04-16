@@ -29,8 +29,9 @@ class ConfessionRoomViewModel : ViewModel(), IConfessionCallback {
     private fun loadConfession(){
         val confessionList = ArrayList<ConfessionModel>()
         val database = FirebaseDatabase.getInstance().reference.child("Confession")
-        database.addListenerForSingleValueEvent(object : ValueEventListener{
+        database.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                confessionList.clear()
                 for (snapshot in snapshot.children){
                     val dataModel = snapshot.getValue(ConfessionModel::class.java) as ConfessionModel
                     confessionList.add(dataModel)

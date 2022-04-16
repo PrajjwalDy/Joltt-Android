@@ -60,7 +60,6 @@ class ViewFullActivity : AppCompatActivity() {
                     }else{
                         playVideo(userData.videoId!!)
                     }
-
                 }
             }
             override fun onCancelled(error: DatabaseError) {

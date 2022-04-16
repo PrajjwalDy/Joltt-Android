@@ -63,25 +63,21 @@ class AddPostActivity : AppCompatActivity() {
 
             dialogView.post_public.setOnClickListener {view->
                 privacy = "public"
-                Snackbar.make(view,"Post privacy set to public", Snackbar.LENGTH_SHORT).show()
+                Toast.makeText(this,"Post privacy set to public", Toast.LENGTH_SHORT).show()
                 alertDialog.dismiss()
             }
 
             dialogView.post_private.setOnClickListener {view->
                 privacy = "private"
-                Snackbar.make(view,"Post privacy set to private", Snackbar.LENGTH_SHORT).show()
+                Toast.makeText(this,"Post privacy set to public",Toast.LENGTH_SHORT).show()
                 alertDialog.dismiss()
             }
-
         }
-
     }
-
-
 
     private fun cropImage(){
         CropImage.activity()
-            .setAspectRatio(1, 1)
+            .setAspectRatio(3, 4)
             .start(this)
 
     }

@@ -411,7 +411,7 @@ class UserProfile : Fragment() {
             val dataMap = HashMap<String,Any>()
             dataMap["notificationId"] = notificationId
             dataMap["notificationText"] = message
-            dataMap["postID"] = ""
+            dataMap["postID"] = profileId
             dataMap["isPost"] = false
             dataMap["notifierId"] = FirebaseAuth.getInstance().currentUser!!.uid
 

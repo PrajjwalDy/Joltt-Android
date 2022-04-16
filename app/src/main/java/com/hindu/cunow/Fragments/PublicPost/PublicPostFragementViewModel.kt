@@ -36,6 +36,7 @@ class PublicPostFragementViewModel : ViewModel(), IPostCallback {
                     if (postModel.public){
                         postList.add(postModel)
                     }
+                    postList.reverse()
                 }
                 postLoadCallback.onPostPCallbackLoadSuccess(postList)
             }

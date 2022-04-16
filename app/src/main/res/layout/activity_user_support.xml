@@ -47,6 +47,7 @@
         app:cardCornerRadius="3pt">
 
         <TextView
+            android:id="@+id/q1_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/amiko"
@@ -65,6 +66,7 @@
         app:cardCornerRadius="3pt">
 
         <TextView
+            android:id="@+id/q2_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/amiko"
@@ -83,6 +85,7 @@
         app:cardCornerRadius="3pt">
 
         <TextView
+            android:id="@+id/q3_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/amiko"

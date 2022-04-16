@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
@@ -42,9 +43,20 @@ class NotificationAdapter(private val nContext:Context,
         holder.bind(nList[position])
 
         holder.itemView.setOnClickListener {
-            val intent = Intent(nContext,ViewFullActivity::class.java)
-            intent.putExtra("postId",nList[position].postID)
-            nContext.startActivity(intent)
+            if (nList[position].isPost){
+                val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+                pref.putString("postId",nList[position].postID)
+                pref.apply()
+
+                Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_notifications_to_fullPostView)
+            }else{
+                val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+                pref.putString("profileId",nList[position].postID)
+                pref.apply()
+
+                Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_notifications_to_navigation_profile)
+            }
+
         }
     }
 

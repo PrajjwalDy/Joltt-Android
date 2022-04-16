@@ -57,6 +57,12 @@
         <action
             android:id="@+id/action_navigation_notifications_to_followRequest2"
             app:destination="@id/followRequest2" />
+        <action
+            android:id="@+id/action_navigation_notifications_to_fullPostView"
+            app:destination="@id/fullPostView" />
+        <action
+            android:id="@+id/action_navigation_notifications_to_navigation_profile"
+            app:destination="@id/navigation_profile" />
     </fragment>
 
     <fragment

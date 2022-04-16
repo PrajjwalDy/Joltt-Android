@@ -129,6 +129,7 @@ class CommentActivity : AppCompatActivity() {
                 if (snapshot.exists()){
                     commentList!!.clear()
                     noCommentsText.visibility = View.GONE
+                    comment_empty_animation.visibility = View.GONE
                     RecyclerViewComment.visibility = View.VISIBLE
                     for (snapshot in snapshot.children){
                         val comment = snapshot.getValue(CommentModel::class.java)

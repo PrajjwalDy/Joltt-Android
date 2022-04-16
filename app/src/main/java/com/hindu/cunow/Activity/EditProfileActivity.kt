@@ -103,6 +103,15 @@ class EditProfileActivity : AppCompatActivity() {
             hosteler = "yes"
             edit_hosteler.setBackgroundColor(resources.getColor(R.color.red))
             edit_hosteler.setTextColor(resources.getColor(R.color.white))
+            edit_dayScholar.setBackgroundColor(resources.getColor(R.color.white))
+            edit_dayScholar.setTextColor(resources.getColor(R.color.red))
+        }
+        edit_dayScholar.setOnClickListener {
+            hosteler = "no"
+            edit_hosteler.setBackgroundColor(resources.getColor(R.color.white))
+            edit_hosteler.setTextColor(resources.getColor(R.color.red))
+            edit_dayScholar.setBackgroundColor(resources.getColor(R.color.red))
+            edit_dayScholar.setTextColor(resources.getColor(R.color.white))
         }
 
 

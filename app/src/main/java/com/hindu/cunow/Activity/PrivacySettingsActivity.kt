@@ -44,7 +44,7 @@ class PrivacySettingsActivity : AppCompatActivity() {
                         accountPrivacy_private.setTextColor(resources.getColor(R.color.white))
                         accountPrivacy_public.setBackgroundColor(resources.getColor(R.color.white))
                         accountPrivacy_public.setTextColor(resources.getColor(R.color.red))
-                    }else{
+                    }else if(!user.private){
                         accountPrivacy_private.setBackgroundColor(resources.getColor(R.color.white))
                         accountPrivacy_private.setTextColor(resources.getColor(R.color.red))
                         accountPrivacy_public.setBackgroundColor(resources.getColor(R.color.red))
@@ -75,9 +75,10 @@ class PrivacySettingsActivity : AppCompatActivity() {
             .child("Users")
 
         val dataMap = HashMap<String,Any>()
-        dataMap["private"] = true
+        dataMap["private"] = false
         userData.child(FirebaseAuth.getInstance().currentUser!!.uid).updateChildren(dataMap)
         Snackbar.make(view,"Privacy Updated", Snackbar.LENGTH_SHORT).show()
+        checkAccountPrivacy()
     }
 
 }

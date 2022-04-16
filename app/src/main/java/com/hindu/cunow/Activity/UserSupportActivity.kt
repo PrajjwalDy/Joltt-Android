@@ -30,6 +30,10 @@ class UserSupportActivity : AppCompatActivity() {
             supportQ1.setCardBackgroundColor(Color.parseColor("#009eff"))
             supportQ2.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
             supportQ3.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
+            q1_text.setTextColor(resources.getColor(R.color.white))
+            q2_text.setTextColor(resources.getColor(R.color.red))
+            q3_text.setTextColor(resources.getColor(R.color.red))
+
             quote = "1"
 
         }
@@ -38,6 +42,9 @@ class UserSupportActivity : AppCompatActivity() {
             supportQ1.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
             supportQ2.setCardBackgroundColor(Color.parseColor("#009eff"))
             supportQ3.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
+            q1_text.setTextColor(resources.getColor(R.color.red))
+            q2_text.setTextColor(resources.getColor(R.color.white))
+            q3_text.setTextColor(resources.getColor(R.color.red))
             quote = "2"
         }
 
@@ -45,6 +52,9 @@ class UserSupportActivity : AppCompatActivity() {
             supportQ1.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
             supportQ2.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
             supportQ3.setCardBackgroundColor(Color.parseColor("#009eff"))
+            q1_text.setTextColor(resources.getColor(R.color.red))
+            q2_text.setTextColor(resources.getColor(R.color.red))
+            q3_text.setTextColor(resources.getColor(R.color.white))
             quote = "3"
         }
 
@@ -121,5 +131,4 @@ class UserSupportActivity : AppCompatActivity() {
 
         finish()
     }
-
 }
