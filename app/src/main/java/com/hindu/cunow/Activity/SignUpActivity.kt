@@ -14,6 +14,8 @@ import com.google.firebase.ktx.Firebase
 import com.hindu.cunow.MainActivity
 import com.hindu.cunow.R
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import java.util.*
+import kotlin.collections.HashMap
 
 class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,7 +95,7 @@ class SignUpActivity : AppCompatActivity() {
         dataMap["profileImage"] = "https://uims.cuchd.in/cuimslogo.png"
         dataMap["verification"] = false
         dataMap["firstVisit"] = true
-        dataMap["searchName"] = fullName.toString().toLowerCase()
+        dataMap["searchName"] = fullName.toString().lowercase(Locale.getDefault())
         dataMap["private"] = false
         dataMap["firstVisit"] = true
 

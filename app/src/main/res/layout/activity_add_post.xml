@@ -73,7 +73,7 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/changeImage_btn"
+            android:id="@+id/changePrivacy_btn"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
@@ -81,7 +81,7 @@
             android:fontFamily="@font/amiko"
             android:textAllCaps="false"
             android:background="@color/white"
-            android:text="Change Image"
+            android:text="Post Privacy"
             android:textColor="@color/red"/>
 
         <androidx.appcompat.widget.AppCompatButton

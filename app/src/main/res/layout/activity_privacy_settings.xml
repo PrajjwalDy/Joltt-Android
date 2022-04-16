@@ -31,6 +31,14 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:lottie_rawRes="@raw/privacy_lock"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="20dp"
+        app:lottie_autoPlay="true" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -74,7 +82,7 @@
 
     </LinearLayout>
 
-    <TextView
+    <!--<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Post Privacy"
@@ -115,6 +123,6 @@
             android:elevation="5dp"
             android:layout_margin="5dp"/>
 
-    </LinearLayout>
+    </LinearLayout>-->
 
 </LinearLayout>

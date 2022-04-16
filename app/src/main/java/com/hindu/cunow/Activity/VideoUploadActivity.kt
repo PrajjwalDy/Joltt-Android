@@ -13,19 +13,18 @@ import android.widget.MediaController
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.hindu.cunow.MainActivity
 import com.hindu.cunow.R
 import kotlinx.android.synthetic.main.activity_video_upload.*
+import kotlinx.android.synthetic.main.post_privacy_dialog.view.*
 import kotlinx.android.synthetic.main.video_upload_dialogbox.view.*
 
-
-
-
 class VideoUploadActivity : AppCompatActivity() {
-
+    private var privacy = ""
     //constants to pick video
     private val VIDEO_PICK_GALLARY_CODE = 100
     private val VIDEO_PICK_CAMERA_CODE = 101
@@ -53,6 +52,32 @@ class VideoUploadActivity : AppCompatActivity() {
         }else{
             Toast.makeText(this,"Video Picked",Toast.LENGTH_SHORT).show()
         }
+
+        postPrivacy_video.setOnClickListener {
+            val dialogView = LayoutInflater.from(this).inflate(R.layout.post_privacy_dialog, null)
+
+            val dialogBuilder = android.app.AlertDialog.Builder(this)
+                .setView(dialogView)
+
+            val alertDialog = dialogBuilder.show()
+
+            dialogView.post_public.setOnClickListener {view->
+                privacy = "public"
+                Snackbar.make(view,"Post privacy set to public", Snackbar.LENGTH_SHORT).show()
+                alertDialog.dismiss()
+            }
+
+            dialogView.post_private.setOnClickListener {view->
+                privacy = "private"
+                Snackbar.make(view,"Post privacy set to private", Snackbar.LENGTH_SHORT).show()
+                alertDialog.dismiss()
+            }
+        }
+
+        changeVideo.setOnClickListener {
+            videoPickDialog()
+        }
+
 
     }
 
@@ -202,6 +227,12 @@ class VideoUploadActivity : AppCompatActivity() {
                         startActivity(Intent(this,MainActivity::class.java))
                         finish()
                         progressDialog.dismiss()
+                        FirebaseAuth.getInstance().currentUser!!.uid.let { it1 ->
+                            FirebaseDatabase.getInstance().reference
+                                .child("Users").child(it1.toString())
+                                .child("MyPosts").child(postId)
+                                .setValue(true)
+                        }
                     }
                         .addOnFailureListener { takeSnapshot
                             progressDialog.dismiss()

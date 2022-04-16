@@ -43,7 +43,7 @@ import kotlinx.android.synthetic.main.image_or_video_dialogbox.view.*
 import kotlinx.android.synthetic.main.more_option_dialogbox.view.*
 
 class HomeFragment : Fragment() {
-
+    private var checker = ""
     var recyclerView: RecyclerView? = null
     private var postAdapter: PostAdapter? = null
 
@@ -158,6 +158,7 @@ class HomeFragment : Fragment() {
                         postLayout_ll.visibility = View.VISIBLE
                     }
                 }
+                checkFollowingList()
             progressDialog.dismiss()
             }
 
@@ -166,6 +167,55 @@ class HomeFragment : Fragment() {
             }
 
         })
+    }
+
+    private fun checkFollowingList(){
+        checkPost()
+        val database = FirebaseDatabase.getInstance().reference
+            .child("Follow")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child("Following")
+
+        database.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val count = snapshot.childrenCount.toInt()
+                    if (count <=1 && checker == "no" ){
+                        ll_empty_posts.visibility = View.VISIBLE
+                        postRecyclerView.visibility = View.GONE
+                    }else{
+                        ll_empty_posts.visibility = View.GONE
+                        postRecyclerView.visibility = View.VISIBLE
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    private fun checkPost(){
+        val database = FirebaseDatabase.getInstance().reference
+            .child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child("MyPosts")
+
+            database.addValueEventListener(object :ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if(snapshot.exists()){
+                        checker = "yes"
+                    }else{
+                        checker = "no"
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
     }
 
 

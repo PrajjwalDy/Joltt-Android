@@ -17,6 +17,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.hindu.cunow.Activity.ShowUsersActivity
 import com.hindu.cunow.Activity.UserSupportActivity
 import com.hindu.cunow.Model.RequestModel
 import com.hindu.cunow.Model.UserModel
@@ -86,6 +87,20 @@ class UserProfile : Fragment() {
 
         root.follow_unfollow_button.setOnClickListener {
             checkPrivacy(root)
+        }
+
+        root.totalFollowers_user.setOnClickListener {
+            val intent = Intent(context, ShowUsersActivity::class.java)
+            intent.putExtra("id",profileId)
+            intent.putExtra("title","Followers")
+            startActivity(intent)
+        }
+
+        root.totalFollowing_user.setOnClickListener {
+            val intent = Intent(context, ShowUsersActivity::class.java)
+            intent.putExtra("id",profileId)
+            intent.putExtra("title","Followings")
+            startActivity(intent)
         }
 
         return root

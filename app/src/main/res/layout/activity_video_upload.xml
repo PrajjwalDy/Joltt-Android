@@ -68,6 +68,7 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/postPrivacy_video"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_margin="5dp"
@@ -75,11 +76,12 @@
             android:background="@color/white"
             android:elevation="5dp"
             android:fontFamily="@font/amiko"
-            android:text="Add Location"
+            android:text="Post Privacy"
             android:textAllCaps="false"
             android:textColor="@color/red" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/changeVideo"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_margin="5dp"

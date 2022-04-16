@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
+import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.gms.tasks.Continuation
@@ -32,9 +33,10 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import kotlinx.android.synthetic.main.activity_add_post.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.post_privacy_dialog.view.*
 
 class AddPostActivity : AppCompatActivity() {
-
+    private var privacy = ""
     private  var myUrl = ""
     private var imageUri : Uri? = null
     private var storagePostImageRef: StorageReference? = null
@@ -49,6 +51,28 @@ class AddPostActivity : AppCompatActivity() {
 
         shareImage_btn.setOnClickListener {
             uploadImage()
+        }
+
+        changePrivacy_btn.setOnClickListener {
+            val dialogView = LayoutInflater.from(this).inflate(R.layout.post_privacy_dialog, null)
+
+            val dialogBuilder = android.app.AlertDialog.Builder(this)
+                .setView(dialogView)
+
+            val alertDialog = dialogBuilder.show()
+
+            dialogView.post_public.setOnClickListener {view->
+                privacy = "public"
+                Snackbar.make(view,"Post privacy set to public", Snackbar.LENGTH_SHORT).show()
+                alertDialog.dismiss()
+            }
+
+            dialogView.post_private.setOnClickListener {view->
+                privacy = "private"
+                Snackbar.make(view,"Post privacy set to private", Snackbar.LENGTH_SHORT).show()
+                alertDialog.dismiss()
+            }
+
         }
 
     }
@@ -96,12 +120,19 @@ class AddPostActivity : AppCompatActivity() {
                 postMap["image"] = myUrl
                 postMap["iImage"] = true
                 postMap["video"] = false
+                postMap["public"] = privacy == "public"
 
                 ref.child(postId).updateChildren(postMap)
 
                 Toast.makeText(this,"Image shared successfully",Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this@AddPostActivity,MainActivity::class.java))
                 finish()
+                FirebaseAuth.getInstance().currentUser!!.uid.let { it1 ->
+                    FirebaseDatabase.getInstance().reference
+                        .child("Users").child(it1.toString())
+                        .child("MyPosts").child(postId)
+                        .setValue(true)
+                }
                 progressDialog.dismiss()
             }else{
                 Toast.makeText(this,"Something went wrong",Toast.LENGTH_SHORT).show()

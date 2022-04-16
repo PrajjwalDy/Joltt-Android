@@ -48,6 +48,10 @@ class SettingActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        privacy_settings.setOnClickListener {
+            val intent = Intent(this,   PrivacySettingsActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 }

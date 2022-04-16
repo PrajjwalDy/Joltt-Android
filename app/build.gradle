@@ -8,6 +8,12 @@ plugins {
 }
 
 android {
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
     compileSdk 31
 
     defaultConfig {

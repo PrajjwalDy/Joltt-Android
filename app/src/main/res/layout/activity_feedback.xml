@@ -73,7 +73,7 @@
             android:padding="10dp"
             android:layout_margin="10dp"
             android:textColor="@color/red"
-            android:hint="Write your feeling about us here"/>
+            android:hint="Write your feeling about us or suggestions for us here"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/sendFeedback"
@@ -97,8 +97,7 @@
         android:layout_height="150dp"
         app:lottie_rawRes="@raw/feedback_sent"
         app:lottie_autoPlay="true"
-        android:layout_marginTop="200dp"
-        app:lottie_loop="true"/>
+        android:layout_marginTop="200dp"/>
 
 
 

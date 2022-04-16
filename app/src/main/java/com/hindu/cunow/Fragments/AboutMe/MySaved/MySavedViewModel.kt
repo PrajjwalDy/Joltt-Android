@@ -67,13 +67,13 @@ class MySavedViewModel : ViewModel(), IPostCallback {
         postRef.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
-                    (postList as ArrayList<PostModel>).clear()
+                    postList.clear()
                     for (snapshot in snapshot.children){
                         val post = snapshot.getValue(PostModel::class.java)
 
                         for (key in mySavedImg!!){
                             if (post!!.postId == key){
-                                (postList as ArrayList<PostModel>).add(post)
+                                postList.add(post)
                             }
                         }
                     }

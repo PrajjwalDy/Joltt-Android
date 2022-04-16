@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Activity.AboutMeTabsActivity
 import com.hindu.cunow.Activity.EditProfileActivity
 import com.hindu.cunow.Activity.SettingActivity
+import com.hindu.cunow.Activity.ShowUsersActivity
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import kotlinx.android.synthetic.main.fragment_user_profiel.view.*
@@ -72,6 +73,20 @@ class ProfileFragment : Fragment() {
         }
         root.myPhotos.setOnClickListener {
             Navigation.findNavController(root).navigate(R.id.action_navigation_profile_to_myPostsFragemt)
+        }
+
+        root.totalFollowers.setOnClickListener {
+            val intent = Intent(context,ShowUsersActivity::class.java)
+            intent.putExtra("id",FirebaseAuth.getInstance().currentUser!!.uid)
+            intent.putExtra("title","Followers")
+            startActivity(intent)
+        }
+
+        root.totalFollowing.setOnClickListener {
+            val intent = Intent(context,ShowUsersActivity::class.java)
+            intent.putExtra("id",FirebaseAuth.getInstance().currentUser!!.uid)
+            intent.putExtra("title","Followings")
+            startActivity(intent)
         }
 
         return  root
