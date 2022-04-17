@@ -46,7 +46,7 @@ class NotificationAdapter(private val nContext:Context,
         holder.itemView.setOnClickListener {
             if (!notification.postN){
                 val pref = nContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
-                pref.putString("profileId",nList[position].notifierId)
+                pref.putString("uid",nList[position].notifierId)
                 pref.apply()
 
                 Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_notifications_to_userProfile)

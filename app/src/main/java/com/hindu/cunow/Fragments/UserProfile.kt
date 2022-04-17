@@ -39,6 +39,8 @@ class UserProfile : Fragment() {
     ): View? {
         val root:View = inflater.inflate(R.layout.fragment_user_profiel, container, false)
 
+
+
         firebaseUser = FirebaseAuth.getInstance().currentUser!!
         val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)
         if (pref != null){
@@ -105,7 +107,6 @@ class UserProfile : Fragment() {
 
         return root
     }
-
 
     private fun userInfo(){
         val progressDialog = context?.let { Dialog(it) }
