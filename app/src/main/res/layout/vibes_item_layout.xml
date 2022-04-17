@@ -35,12 +35,13 @@
             android:layout_margin="10dp"
             android:src="@drawable/blank_heart"/>
 
-        <ImageView
-            android:id="@+id/commentButton_vibes"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="10dp"
-            android:src="@drawable/comment"/>
+        <TextView
+            android:id="@+id/vibes_totalLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Like"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal"/>
 
 
     </LinearLayout>

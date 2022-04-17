@@ -164,10 +164,14 @@ class AddVibesAcitvity : AppCompatActivity() {
                 postMap["vibeDescription"] = caption_vibes.text.toString()
                 postMap["vibe"] = "$downloadUri"
 
+                Toast.makeText(this,"Vibe shared successfully",Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, VibesActivity::class.java))
+                finish()
                 progressDialog.dismiss()
+                //progressDialog.dismiss()
                 ref.child(postId).setValue(postMap).addOnCanceledListener{
-                    Toast.makeText(this,"Vibe shared successfully",Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, VibesActivity::class.java))
+                    Toast.makeText(this,"Something Went wrong",Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, MainActivity::class.java))
                     finish()
                     progressDialog.dismiss()
                 }

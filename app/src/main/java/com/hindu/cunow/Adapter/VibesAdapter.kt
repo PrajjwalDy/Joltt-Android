@@ -42,9 +42,9 @@ class VibesAdapter(arrVideo:ArrayList<VibesModel>,private val mContext:Context):
         viber(holder.profileImage,holder.viberName,arrVideoModel[position].viberId!!)
 
         holder.likeButton.setOnClickListener {
-            likeVibe(holder.likeButton,arrVideoModel[position].viberId!!,zoom
-            )
+            likeVibe(holder.likeButton,arrVideoModel[position].vibeId!!,zoom)
         }
+        totalLike(holder.totalLike,arrVideoModel[position].vibeId!!)
     }
 
     override fun getItemCount(): Int {
@@ -56,7 +56,7 @@ class VibesAdapter(arrVideo:ArrayList<VibesModel>,private val mContext:Context):
         val viberName:TextView = itemView.findViewById(R.id.fullName_viber) as TextView
         val profileImage:CircleImageView = itemView.findViewById(R.id.vibe_profileImage) as CircleImageView
         val likeButton:ImageView = itemView.findViewById(R.id.likeButton_vibes) as ImageView
-        val commentButton:ImageView = itemView.findViewById(R.id.commentButton_vibes) as ImageView
+        val totalLike:TextView = itemView.findViewById(R.id.vibes_totalLike) as TextView
 
         fun setVibeData(videoModel:VibesModel){
             itemView.vibeCaption.text = videoModel.vibeDescription
@@ -149,6 +149,28 @@ class VibesAdapter(arrVideo:ArrayList<VibesModel>,private val mContext:Context):
                     likeButton.tag = "Like"
                     if (likeButton.tag == "Like"){
                         likeButton.setImageResource(R.drawable.blank_heart)
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+    private fun totalLike(totalLike:TextView,vibeId: String){
+        val data = FirebaseDatabase.getInstance().reference.child("VibeLikes")
+            .child(vibeId)
+        data.addValueEventListener(object :ValueEventListener{
+            @SuppressLint("SetTextI18n")
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val count = snapshot.childrenCount.toInt()
+                    if (count <=1){
+                        totalLike.text = snapshot.childrenCount.toString() + "Like"
+                    }else{
+                        totalLike.text = snapshot.childrenCount.toString() + "Likes"
                     }
                 }
             }
