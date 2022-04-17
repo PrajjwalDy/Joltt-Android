@@ -112,10 +112,6 @@ class PostAdapter (private val mContext: Context,
                     .setValue(true)
                 alertDialog.dismiss()
             }
-            dialogView.download.setOnClickListener {
-                Toast.makeText(mContext,"Click Received",Toast.LENGTH_SHORT).show()
-                alertDialog.dismiss()
-            }
 
             if (post.publisher != FirebaseAuth.getInstance().currentUser!!.uid){
                 dialogView.deletePost.visibility = View.GONE

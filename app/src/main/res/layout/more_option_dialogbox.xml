@@ -36,55 +36,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/download"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/download_option"
-                android:layout_margin="10dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/red"
-                android:text="Download"
-                android:layout_margin="5dp"
-                android:fontFamily="@font/amiko"
-                android:textSize="12sp"/>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:id="@+id/editPost"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/edit_post"
-                android:layout_margin="10dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/red"
-                android:text="Edit Post"
-                android:layout_margin="5dp"
-                android:fontFamily="@font/amiko"
-                android:textSize="12sp"/>
-
-
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/deletePost"
