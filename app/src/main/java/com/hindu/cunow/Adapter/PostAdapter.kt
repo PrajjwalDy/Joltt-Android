@@ -351,7 +351,7 @@ class PostAdapter (private val mContext: Context,
             dataMap["notificationId"] = notificationId
             dataMap["notificationText"] = "Liked your post "+caption.text.toString()
             dataMap["postID"] = postId
-            dataMap["isPost"] = true
+            dataMap["postN"] = true
             dataMap["notifierId"] = FirebaseAuth.getInstance().currentUser!!.uid
 
             dataRef.push().setValue(dataMap)

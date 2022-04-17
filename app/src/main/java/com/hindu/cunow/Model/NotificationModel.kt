@@ -5,5 +5,5 @@ class NotificationModel {
     var notifierId: String? = null
     var notificationText:String? = null
     var postID:String? = null
-    var isPost:Boolean = false
+    var postN:Boolean = false
 }

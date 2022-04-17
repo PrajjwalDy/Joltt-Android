@@ -63,6 +63,12 @@
         <action
             android:id="@+id/action_navigation_notifications_to_navigation_profile"
             app:destination="@id/navigation_profile" />
+        <action
+            android:id="@+id/action_navigation_notifications_to_navigation_profile2"
+            app:destination="@id/navigation_profile" />
+        <action
+            android:id="@+id/action_navigation_notifications_to_userProfile"
+            app:destination="@id/userProfile" />
     </fragment>
 
     <fragment

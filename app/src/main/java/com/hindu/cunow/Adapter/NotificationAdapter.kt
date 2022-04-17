@@ -40,21 +40,23 @@ class NotificationAdapter(private val nContext:Context,
     }
 
     override fun onBindViewHolder(holder: NotificationAdapter.ViewHolder, position: Int) {
+        val notification = nList[position]
         holder.bind(nList[position])
 
         holder.itemView.setOnClickListener {
-            if (nList[position].isPost){
-                val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+            if (!notification.postN){
+                val pref = nContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+                pref.putString("profileId",nList[position].notifierId)
+                pref.apply()
+
+                Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_notifications_to_userProfile)
+
+            }else{
+                val pref = nContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
                 pref.putString("postId",nList[position].postID)
                 pref.apply()
 
                 Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_notifications_to_fullPostView)
-            }else{
-                val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
-                pref.putString("profileId",nList[position].postID)
-                pref.apply()
-
-                Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_notifications_to_navigation_profile)
             }
 
         }

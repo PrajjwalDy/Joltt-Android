@@ -207,7 +207,7 @@ class CommentActivity : AppCompatActivity() {
             dataMap["notificationId"] = notificationId
             dataMap["notificationText"] = "Commented on your post"+addCommentEditText.text.toString()
             dataMap["postID"] = postId
-            dataMap["isPost"] = true
+            dataMap["postN"] = true
             dataMap["notifierId"] = FirebaseAuth.getInstance().currentUser!!.uid
 
             dataRef.push().setValue(dataMap)
