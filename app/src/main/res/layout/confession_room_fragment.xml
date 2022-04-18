@@ -169,6 +169,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_margin="5dp"
             android:fontFamily="@font/amiko"
+            android:textAlignment="center"
             android:text="Before you enter you must read and accept our TnC for Confession room"
             android:textColor="@color/black"
             android:textSize="14sp" />

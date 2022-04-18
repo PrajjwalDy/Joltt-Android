@@ -30,12 +30,17 @@ class SignUpActivity : AppCompatActivity() {
             signUp()
         }
 
+        tnc_SignUP.setOnClickListener {
+            val intent = Intent(this,TermsAndCondition::class.java)
+            startActivity(intent)
+        }
+
     }
 
 
     private fun signUp() {
         val fullName = fullName_edit_text.text.toString().trim{ it <= ' '}
-        val uid = uid_edit_text.text.toString()//+"@cuchd.in"
+        val uid = uid_edit_text.text.toString()+"@cuchd.in"
         val phone = phone_edit_text.text.toString().trim{ it <= ' '}
         val password = password_Create_AC.text.toString()
 
@@ -92,12 +97,13 @@ class SignUpActivity : AppCompatActivity() {
         dataMap["ID"] = uid
         dataMap["password"] = password
         dataMap["phone"] = phone
-        dataMap["profileImage"] = "https://uims.cuchd.in/cuimslogo.png"
+        dataMap["profileImage"] = "https://developers.google.cn/web/images/contributors/no-photo.jpg"
         dataMap["verification"] = false
         dataMap["firstVisit"] = true
         dataMap["searchName"] = fullName.toString().lowercase(Locale.getDefault())
         dataMap["private"] = false
         dataMap["firstVisit"] = true
+        dataMap["confessionVisited"] = true
 
         userRef.child(currentUserID).setValue(dataMap).addOnCompleteListener { task->
             if (task.isSuccessful){

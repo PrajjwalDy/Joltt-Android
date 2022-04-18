@@ -5,26 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/red"
+    android:background="@color/white"
     tools:context=".Activity.SignUpActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
-        android:fontFamily="@font/allan"
-        android:text="CUNow"
-        android:textColor="@color/white"
-        android:textSize="40sp"
-        android:textStyle="bold" />
+        android:src="@drawable/app_logo" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
 
@@ -33,7 +29,7 @@
             android:id="@+id/fullName_edit_text"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/usernamr_password_bg"
+            android:background="@drawable/box_grey"
             android:layout_margin="20dp"
             android:hint="Full Name"
             android:textAlignment="center"
@@ -43,11 +39,11 @@
             android:id="@+id/uid_edit_text"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/usernamr_password_bg"
+            android:background="@drawable/box_grey"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
-            android:hint="UID"
+            android:hint="UID(21BCS****)"
             android:textAlignment="center"
             android:textColor="@color/red"/>
 
@@ -55,7 +51,7 @@
             android:id="@+id/phone_edit_text"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/usernamr_password_bg"
+            android:background="@drawable/box_grey"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:inputType="phone"
@@ -68,7 +64,7 @@
             android:id="@+id/password_Create_AC"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/usernamr_password_bg"
+            android:background="@drawable/box_grey"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
@@ -83,6 +79,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
+            android:fontFamily="@font/amiko"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/usernamr_password_bg"
             android:textColor="@color/red"
@@ -90,7 +87,6 @@
             android:textStyle="bold"
             android:textSize="18sp"
             android:text="DiveUp"/>
-
 
     </LinearLayout>
 
@@ -101,9 +97,21 @@
         android:layout_height="wrap_content"
         android:text="Already have account? DiveIn"
         android:layout_marginTop="10dp"
-        android:textColor="@color/white"
+        android:textColor="@color/red"
         android:textSize="18sp"
+        android:fontFamily="@font/amiko"
         android:textStyle="bold"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/tnc_SignUP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Read Terms &amp; Conditions"
+        android:textSize="15dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/amiko"
+        android:textColor="@color/red"
         android:layout_gravity="center_horizontal"/>
 
     <TextView
@@ -111,9 +119,10 @@
         android:layout_height="wrap_content"
         android:text="H.I.N.D.U Production"
         android:textSize="15dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="70dp"
+        android:fontFamily="@font/amiko"
         android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="@color/red"
         android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>

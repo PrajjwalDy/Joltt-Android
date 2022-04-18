@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Activity.AddConfessionActivity
 import com.hindu.cunow.Activity.AddPostActivity
+import com.hindu.cunow.Activity.TermsAndCondition
 import com.hindu.cunow.Adapter.ConfessionAdapter
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
@@ -68,6 +69,11 @@ class ConfessionRoomFragment : Fragment() {
         }
         root.accept_confession_tnc.setOnClickListener {
             updateVisit(root)
+        }
+
+        root.terms_condition_confession.setOnClickListener {
+            val intent = Intent(context,TermsAndCondition::class.java)
+            startActivity(intent)
         }
 
         return root

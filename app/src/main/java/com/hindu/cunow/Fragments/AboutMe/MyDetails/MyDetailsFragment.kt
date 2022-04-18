@@ -76,7 +76,8 @@ class MyDetailsFragment : Fragment() {
                     if (users.hostler){
                         root.hostelName_profile.text = "of "+users.hostelName
                     }else{
-                        root.hostelName_profile.text = "Day-Scholar from "+users.hostelName
+                        root.isHosteler_profile.text = "Day-Scholar from"
+                        root.hostelName_profile.text = users.hostelName
                     }
                 }
             }
