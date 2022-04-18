@@ -133,9 +133,105 @@
                     android:layout_height="wrap_content"
                     android:text="You are responsible for keeping your password secure."
                     android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"
-                    />
+                    android:layout_margin="5dp" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                >
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="10dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Be respectful – maintain a friendly environment."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                >
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="10dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Do not post material that is inappropriate or that could reasonably be deemed defamatory, offensive or obscene."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                >
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="10dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Do not use these online spaces for illegal purposes or to breach any laws."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                >
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="10dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="We reserve the right to remove comments and/or posts. We also reserve the right to restrict users who don’t follow these guidelines, have online pages containing offensive material and/content, or for any other reason."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                >
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="10dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="avoid quoting out of context and include a credit for the original author as the source of material"
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp" />
+            </LinearLayout>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -345,6 +441,26 @@
                     android:text="CUnow's terms state they use commercially reasonable safeguards to help secure a user's information collected through the service. The terms also state that CUnow takes reasonable steps to verify a user's identity before granting them access to an account. However, the policies do not clearly indicate whether or not a user's data is encrypted while in transit or at rest. CUnow's terms also do not disclose how they would notify users in the event of a data breach."
                     android:fontFamily="@font/amiko"
                     android:layout_margin="5dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                >
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="5dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You will not share your account or password with anyone, and you must protect the security of your account and your password. You’re responsible for notifying us of any unauthorized use. You’re responsible for any activity associated with your account."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -841,6 +957,193 @@ android:text="The categories of collected personally identifiable information ar
                     android:fontFamily="@font/amiko"
                     android:layout_margin="5dp"/>
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical">
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/doble_arrow"
+                    android:layout_margin="7dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="296dp"
+                    android:layout_height="35dp"
+                    android:text="CONFESSION ROOM and CIRCLE"
+                    android:layout_margin="7dp"
+                    android:fontFamily="@font/amiko"
+                    android:textColor="@color/red"
+                    android:textStyle="bold" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="5dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="The CUNow Circle policies will apply to each Member."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="5dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Circle is only for connecting people, user can create both private and public circles."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="5dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                  android:text="You can't point someone out with the wrong words in a circle."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="5dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="If someone reports that a user is using wrong words in the circle, we will investigate the whole matter. After all we will take action."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="5dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Confession Room takes the privacy of its users very seriously"
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="5dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="
+We’re always trying to improve the Services, so they may change over time. We may suspend or discontinue any part of the Services, or we may introduce new features or impose limits on certain features or restrict access to parts or all of the Services."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp"/>
+            </LinearLayout>
+            <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical">
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:src="@drawable/star"
+                android:layout_margin="5dp"
+                app:tint="@color/red"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="
+User should not create any such circle which is Violence or related to dirty video....if we get such report then we will take action against it."
+                android:fontFamily="@font/amiko"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="5dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Whenever you upload material to the Confession Room, or to make contact with other users of the Confession Room, you must comply with our Acceptable Use Standards. You warrant that any such contribution does comply with those standards, and you indemnify us for any breach of that warranty."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="5dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="We also have the right to disclose your identity to any third party who is claiming that any material posted or uploaded by you to our platform is defamatory of them, a violation of their intellectual property rights, or of their right to privacy."
+                    android:fontFamily="@font/amiko"
+                    android:layout_margin="5dp"/>
+            </LinearLayout>
+
+
+
 
 
 
