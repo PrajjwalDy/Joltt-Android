@@ -62,6 +62,7 @@ class PostAdapter (private val mContext: Context,
         val post = mPost[position]
         islike(post.postId!!, holder.like)
         totalLikes(post.postId,holder.totalLikes)
+        totalComments(holder.totalComments,post.postId)
 
         holder.bind(mPost[position],mContext,holder.image,holder.playerView)
         publisher(holder.publisherImage,holder.publisherName,post.publisher!!,holder.verification)
@@ -148,6 +149,7 @@ class PostAdapter (private val mContext: Context,
         val animation:LottieAnimationView = itemView.findViewById(R.id.animation) as LottieAnimationView
         val moreOption:ImageView = itemView.findViewById(R.id.moreOptionPost) as ImageView
         val totalLikes: TextView = itemView.findViewById(R.id.totalLikes) as TextView
+        val totalComments:TextView = itemView.findViewById(R.id.totalComments)
 
 
         fun bind(list:PostModel,context: Context,imageView: ImageView,playerView: PlayerView){
@@ -359,6 +361,30 @@ class PostAdapter (private val mContext: Context,
 
 
         }
+    }
+
+    private fun totalComments(totalComments:TextView, postId: String){
+        val postData = FirebaseDatabase.getInstance().reference.child("Comments")
+            .child(postId)
+
+        postData.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val count = snapshot.childrenCount.toInt()
+                    if (count <=0){
+                        totalComments.text = ""
+                    }else{
+                        totalComments.text = snapshot.childrenCount.toString() + "Commented"
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
     }
 
 }

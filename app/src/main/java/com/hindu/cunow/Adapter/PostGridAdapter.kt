@@ -64,7 +64,7 @@ class PostGridAdapter(private val mContext: Context,
             pref.putString("postId",mPost[position].postId)
             pref.apply()
 
-            Navigation.findNavController(holder.itemView).navigate(R.id.action_publicPostFragement_to_fullPostView)*/
+            Navigation.findNavController(holder.itemView).navigate(R.id.action_userPostsFragment_to_fullPostView)*/
 
             val intent = Intent(mContext,ViewFullActivity::class.java)
             intent.putExtra("postId",post.postId)

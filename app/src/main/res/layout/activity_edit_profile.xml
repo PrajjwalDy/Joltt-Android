@@ -69,7 +69,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/amiko"
-                        android:text="Change Porfile Image"
+                        android:text="Change Profile Image"
                         android:textColor="@color/red"
                         android:textSize="12sp" />
 
@@ -184,7 +184,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="My Awsome Branch is"
+                        android:text="My Awesome Branch is"
                         android:fontFamily="@font/amiko"
                         />
 
@@ -471,7 +471,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/red"
-                        android:hint="Hostel Name"
+                        android:hint="Hostel Name/Address"
                         android:fontFamily="@font/amiko"
                         android:textSize="14sp"/>
 

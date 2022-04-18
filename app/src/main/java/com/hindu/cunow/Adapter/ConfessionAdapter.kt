@@ -1,5 +1,6 @@
 package com.hindu.cunow.Adapter
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -42,6 +43,7 @@ class ConfessionAdapter(private val mContext: Context,
         val cList = mConfession[position]
 
         isLike(cList.confessionId!!,holder.like)
+        totalLike(cList.confessionId!!,holder.totalLike)
 
         holder.like.setOnClickListener {
             like(holder.like,cList.confesserId!!,cList.confessionId!!,zoom)
@@ -83,9 +85,10 @@ class ConfessionAdapter(private val mContext: Context,
         val confessionImage:ImageView = itemView.findViewById(R.id.confessionImage) as ImageView
         val like:ImageView = itemView.findViewById(R.id.confessionLike) as ImageView
         val confessionText:TextView = itemView.findViewById(R.id.confessionText) as TextView
-        val confessionCaption:TextView = itemView.findViewById(R.id.captionConfession) as TextView
+        val totalLike:TextView = itemView.findViewById(R.id.totalLike_confession) as TextView
         val moreOption:ImageView= itemView.findViewById(R.id.moreOptionConfession) as ImageView
         val imageCard:CardView = itemView.findViewById(R.id.imageCard)as CardView
+
 
         //member function
         fun bind(list:ConfessionModel){
@@ -150,6 +153,30 @@ class ConfessionAdapter(private val mContext: Context,
 
     private fun addNotification(publisherId: String,confessionId: String){
 
+    }
+
+    private fun totalLike(confessionId: String,totalLike:TextView){
+        val database = FirebaseDatabase.getInstance().reference.child("ConfessionLike")
+            .child(confessionId)
+
+        database.addValueEventListener(object:ValueEventListener{
+            @SuppressLint("SetTextI18n")
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val count = snapshot.childrenCount.toInt()
+                    if (count <= 1){
+                        totalLike.text = count.toString()+"Like"
+                    }else{
+                        totalLike.text = count.toString()+"Likes"
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
 }

@@ -51,9 +51,14 @@ class CircleMemberAdapter(private val mContext: Context,
 
         isJoined(mUser[position].uid!!, holder.remove,holder.addMember)
 
-        if (admin != FirebaseAuth.getInstance().currentUser!!.uid){
+        if (admin == FirebaseAuth.getInstance().currentUser!!.uid){
+            holder.remove.visibility = View.VISIBLE
+            holder.addMember.visibility = View.VISIBLE
+        }else{
             holder.remove.visibility = View.GONE
+            holder.addMember.visibility = View.GONE
         }
+        //holder.remove.visibility = View.GONE
 
         holder.remove.setOnClickListener {
             removeMember(mUser[position].uid!!)
@@ -92,7 +97,7 @@ class CircleMemberAdapter(private val mContext: Context,
             circleData.addValueEventListener(object :ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.child(userId).exists()){
-                        remove.visibility = View.VISIBLE
+                        //remove.visibility = View.VISIBLE
                         addMember.visibility = View.GONE
                     }else{
                         remove.visibility = View.GONE

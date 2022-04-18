@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="3dp"
     android:layout_margin="3dp"
-    app:cardElevation="3dp"
-    app:cardCornerRadius="3dp"
-    android:layout_height="wrap_content">
+    app:cardCornerRadius="3dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profileImage_explore"
+            android:id="@+id/profileImage_showUser"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_margin="10dp"
@@ -23,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/profileImage_explore"
+            android:layout_toEndOf="@+id/profileImage_showUser"
             android:orientation="vertical">
 
             <LinearLayout
@@ -32,7 +33,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/fullName_explore"
+                    android:id="@+id/fullName_showUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="fullname"
@@ -42,7 +43,7 @@
                     android:fontFamily="@font/amiko"/>
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/userVerified_explore"
+                    android:id="@+id/userVerified_showUser"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_marginStart="10dp"
@@ -53,7 +54,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/userBio_explore"
+                android:id="@+id/userBio_showUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bio"

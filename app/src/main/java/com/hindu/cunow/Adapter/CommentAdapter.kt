@@ -1,13 +1,17 @@
 package com.hindu.cunow.Adapter
 
+import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -16,9 +20,12 @@ import com.hindu.cunow.Model.CommentModel
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.comments_more_option.view.*
 
 class CommentAdapter(private val mContext: Context,
-                     private val mComment:List<CommentModel>):RecyclerView.Adapter<CommentAdapter.ViewHolder>() {
+                     private val mComment:List<CommentModel>,
+                     private val publisher:String,
+                     private val postId:String):RecyclerView.Adapter<CommentAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentAdapter.ViewHolder {
@@ -30,6 +37,32 @@ class CommentAdapter(private val mContext: Context,
        holder.bind(mComment[position])
 
         commentPublisher(holder.profileImage,holder.publisherName,mComment[position].commenter!!)
+
+        if (mComment[position].commenter == FirebaseAuth.getInstance().currentUser!!.uid || mComment[position].commenter == publisher){
+            holder.moreOption.visibility = View.VISIBLE
+        }else{
+            holder.moreOption.visibility = View.GONE
+        }
+
+        holder.moreOption.setOnClickListener {
+            val dialogView = LayoutInflater.from(mContext).inflate(R.layout.comments_more_option, null)
+
+            val dialogBuilder = AlertDialog.Builder(mContext)
+                .setView(dialogView)
+
+            val alertDialog = dialogBuilder.show()
+
+            dialogView.deleteComment.setOnClickListener {
+                FirebaseDatabase.getInstance().reference
+                    .child("Comments")
+                    .child(postId)
+                    .child(mComment[position].commentId!!)
+                    .removeValue()
+                Toast.makeText(mContext,"comment removed",Toast.LENGTH_SHORT).show()
+                alertDialog.dismiss()
+            }
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -41,6 +74,7 @@ class CommentAdapter(private val mContext: Context,
         val profileImage:CircleImageView = itemView.findViewById(R.id.commentProfileImage) as CircleImageView
         val publisherName:TextView = itemView.findViewById(R.id.commenterName) as TextView
         val commentText:TextView = itemView.findViewById(R.id.commentedText) as TextView
+        val moreOption: ImageView = itemView.findViewById(R.id.moreOptionComment) as ImageView
 
 
         fun bind(list: CommentModel){

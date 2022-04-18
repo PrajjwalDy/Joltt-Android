@@ -92,17 +92,19 @@ class UserProfile : Fragment() {
         }
 
         root.totalFollowers_user.setOnClickListener {
-            val intent = Intent(context, ShowUsersActivity::class.java)
-            intent.putExtra("id",profileId)
-            intent.putExtra("title","Followers")
-            startActivity(intent)
+            val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
+            pref!!.putString("uid",profileId)
+            pref.putString("title","Followers")
+            pref.apply()
+            Navigation.findNavController(root).navigate(R.id.action_userProfile_to_showUserFragment)
         }
 
         root.totalFollowing_user.setOnClickListener {
-            val intent = Intent(context, ShowUsersActivity::class.java)
-            intent.putExtra("id",profileId)
-            intent.putExtra("title","Followings")
-            startActivity(intent)
+            val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
+            pref!!.putString("uid",profileId)
+            pref.putString("title","Following")
+            pref.apply()
+            Navigation.findNavController(root).navigate(R.id.action_userProfile_to_showUserFragment)
         }
 
         return root
@@ -329,7 +331,8 @@ class UserProfile : Fragment() {
         followingRef.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
-                    root.totalFollowing_user.text = snapshot.childrenCount.toString()
+                    val count = snapshot.childrenCount.toInt()-1
+                    root.totalFollowing_user.text = count.toString()
                 }
             }
 

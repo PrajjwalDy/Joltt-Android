@@ -43,9 +43,13 @@ class CircleDetailsActivity : AppCompatActivity() {
         circleId = intent.getStringExtra("circleId").toString()
         admin = intent.getStringExtra("admin").toString()
 
-        if (admin != FirebaseAuth.getInstance().currentUser!!.uid){
+        if (admin == FirebaseAuth.getInstance().currentUser!!.uid){
+            moreOptionCircle.visibility = View.VISIBLE
+            addMembers.visibility = View.VISIBLE
+        }else{
             moreOptionCircle.visibility = View.GONE
             addMembers.visibility = View.GONE
+            notificationDot.visibility = View.GONE
         }
 
         moreOptionCircle.setOnClickListener {

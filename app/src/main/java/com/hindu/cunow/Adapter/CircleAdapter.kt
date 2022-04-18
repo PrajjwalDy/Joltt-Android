@@ -56,7 +56,7 @@ class CircleAdapter(private val mContext:Context,
         }
 
 
-        holder.iconImage.setOnClickListener {
+        holder.itemView.setOnClickListener {
             val intent = Intent(mContext,CircleDetailsActivity::class.java)
             intent.putExtra("circleId",mCircle[position].circleId)
             intent.putExtra("admin",mCircle[position].admin)

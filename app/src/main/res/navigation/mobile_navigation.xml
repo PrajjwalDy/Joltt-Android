@@ -84,6 +84,9 @@
         <action
             android:id="@+id/action_navigation_profile_to_myPostsFragemt"
             app:destination="@id/myPostsFragemt" />
+        <action
+            android:id="@+id/action_navigation_profile_to_showUserFragment"
+            app:destination="@id/showUserFragment" />
     </fragment>
     <fragment
         android:id="@+id/confessionRoomFragment"
@@ -116,6 +119,9 @@
         <action
             android:id="@+id/action_userProfile_to_userDetails"
             app:destination="@id/userDetails" />
+        <action
+            android:id="@+id/action_userProfile_to_showUserFragment"
+            app:destination="@id/showUserFragment" />
     </fragment>
     <fragment
         android:id="@+id/followRequest2"
@@ -137,7 +143,11 @@
         android:id="@+id/myPostsFragemt"
         android:name="com.hindu.cunow.Fragments.AboutMe.Posts.MyPostsFragemt"
         android:label="my_posts_fragemt_fragment"
-        tools:layout="@layout/my_posts_fragemt_fragment" />
+        tools:layout="@layout/my_posts_fragemt_fragment" >
+        <action
+            android:id="@+id/action_myPostsFragemt_to_showUserFragment"
+            app:destination="@id/showUserFragment" />
+    </fragment>
     <fragment
         android:id="@+id/exploreCirclesFragments2"
         android:name="com.hindu.cunow.Fragments.Circle.ExploreCircles.ExploreCirclesFragments"
@@ -151,7 +161,11 @@
         android:id="@+id/userPostsFragment"
         android:name="com.hindu.cunow.Fragments.AboutMe.UserPosts.UserPostsFragment"
         android:label="user_posts_fragment"
-        tools:layout="@layout/user_posts_fragment" />
+        tools:layout="@layout/user_posts_fragment" >
+        <action
+            android:id="@+id/action_userPostsFragment_to_fullPostView"
+            app:destination="@id/fullPostView" />
+    </fragment>
     <fragment
         android:id="@+id/userDetails"
         android:name="com.hindu.cunow.Fragments.AboutMe.MyDetailsUsers.UserDetails"
@@ -180,6 +194,15 @@
         android:name="com.hindu.cunow.Fragments.FullPostView"
         android:label="fragment_full_post_view"
         tools:layout="@layout/fragment_full_post_view" />
+    <fragment
+        android:id="@+id/showUserFragment"
+        android:name="com.hindu.cunow.Fragments.ShowUserFragment"
+        android:label="show_user_fragment"
+        tools:layout="@layout/show_user_fragment" >
+        <action
+            android:id="@+id/action_showUserFragment_to_userProfile"
+            app:destination="@id/userProfile" />
+    </fragment>
 
 
 </navigation>

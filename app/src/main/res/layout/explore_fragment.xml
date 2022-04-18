@@ -106,7 +106,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Confess here its secerat "
+                android:text="Confess here its secret "
                 android:textColor="@color/white"
                 android:textSize="12sp"/>
         </LinearLayout>

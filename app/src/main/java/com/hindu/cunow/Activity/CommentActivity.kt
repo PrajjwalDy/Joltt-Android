@@ -62,7 +62,7 @@ class CommentActivity : AppCompatActivity() {
         linearLayoutManager.stackFromEnd = true
 
         commentList = ArrayList()
-        commentsAdapter = CommentAdapter(this, commentList as ArrayList<CommentModel>)
+        commentsAdapter = CommentAdapter(this, commentList as ArrayList<CommentModel>,publisherId,postId)
         recyclerView.adapter = commentsAdapter
         displayCaption()
         loadComments()
@@ -91,7 +91,7 @@ class CommentActivity : AppCompatActivity() {
             dataMap["commentText"] = addCommentEditText.text.toString()
             dataMap["commenter"] = firebaseUser!!.uid
 
-            dataRef.push().setValue(dataMap)
+            dataRef.child(commentId).updateChildren(dataMap)
             addCommentEditText.text.clear()
             addNotification()
         }

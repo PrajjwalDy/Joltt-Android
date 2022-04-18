@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
+    app:cardCornerRadius="3dp"
+    android:layout_margin="5dp"
     tools:context=".Activity.ViewFullActivity">
 
     <LinearLayout
@@ -15,10 +17,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content">
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -99,6 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            android:visibility="gone"
             android:layout_margin="5dp"
             android:orientation="horizontal">
 
@@ -147,16 +152,8 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/totalLikes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:fontFamily="@font/amiko"
-            android:text="No Likes"
-            android:textColor="@color/red" />
 
     </LinearLayout>
 
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>

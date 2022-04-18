@@ -76,17 +76,19 @@ class ProfileFragment : Fragment() {
         }
 
         root.totalFollowers.setOnClickListener {
-            val intent = Intent(context,ShowUsersActivity::class.java)
-            intent.putExtra("id",FirebaseAuth.getInstance().currentUser!!.uid)
-            intent.putExtra("title","Followers")
-            startActivity(intent)
+            val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
+            pref!!.putString("uid",FirebaseAuth.getInstance().currentUser!!.uid)
+            pref.putString("title","Followers")
+            pref.apply()
+            Navigation.findNavController(root).navigate(R.id.action_navigation_profile_to_showUserFragment)
         }
 
         root.totalFollowing.setOnClickListener {
-            val intent = Intent(context,ShowUsersActivity::class.java)
-            intent.putExtra("id",FirebaseAuth.getInstance().currentUser!!.uid)
-            intent.putExtra("title","Followings")
-            startActivity(intent)
+            val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
+            pref!!.putString("uid",FirebaseAuth.getInstance().currentUser!!.uid)
+            pref.putString("title","Following")
+            pref.apply()
+            Navigation.findNavController(root).navigate(R.id.action_navigation_profile_to_showUserFragment)
         }
 
         return  root
@@ -123,7 +125,8 @@ class ProfileFragment : Fragment() {
         followingRef.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
-                    root.totalFollowers.text = snapshot.childrenCount.toString()
+                    val count = snapshot.childrenCount.toInt()
+                    root.totalFollowers.text = count.toString()
                 }
             }
 
@@ -140,7 +143,8 @@ class ProfileFragment : Fragment() {
         followingRef.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
-                    root.totalFollowing.text = snapshot.childrenCount.toString()
+                    val count = snapshot.childrenCount.toInt()-1
+                    root.totalFollowing.text = count.toString()
                 }
             }
 

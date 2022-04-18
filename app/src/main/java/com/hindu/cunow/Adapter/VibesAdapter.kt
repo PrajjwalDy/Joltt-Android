@@ -36,8 +36,10 @@ class VibesAdapter(arrVideo:ArrayList<VibesModel>,private val mContext:Context):
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val zoom = AnimationUtils.loadAnimation(mContext, R.anim.zoom)
+
         holder.setVibeData(arrVideoModel[position])
-        isLike(holder.likeButton,arrVideoModel[position].viberId!!)
+
+        isLike(holder.likeButton,arrVideoModel[position].vibeId!!)
 
         viber(holder.profileImage,holder.viberName,arrVideoModel[position].viberId!!)
 
@@ -140,7 +142,7 @@ class VibesAdapter(arrVideo:ArrayList<VibesModel>,private val mContext:Context):
         val likeRef = FirebaseDatabase.getInstance().reference
             .child("VibeLikes")
             .child(vibeId)
-        likeRef.addListenerForSingleValueEvent(object : ValueEventListener{
+        likeRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.child(firebaseUser!!.uid).exists()){
                     likeButton.setImageResource(R.drawable.filled_heart)

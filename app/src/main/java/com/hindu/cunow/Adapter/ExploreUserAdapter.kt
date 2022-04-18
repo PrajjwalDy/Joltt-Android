@@ -29,6 +29,8 @@ class ExploreUserAdapter(private val mContext:Context,
                                      bio.text  = list.bio
                                      if (list.verification){
                                          verification.visibility = View.VISIBLE
+                                     }else{
+                                         verification.visibility = View.GONE
                                      }
 
                                  }
