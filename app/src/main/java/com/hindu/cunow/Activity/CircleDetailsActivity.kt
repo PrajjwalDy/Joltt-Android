@@ -39,6 +39,8 @@ class CircleDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_circle_details)
 
+        firebaseUser = FirebaseAuth.getInstance().currentUser!!
+
         val intent = intent
         circleId = intent.getStringExtra("circleId").toString()
         admin = intent.getStringExtra("admin").toString()
@@ -202,7 +204,7 @@ class CircleDetailsActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     val totalRequests = snapshot.childrenCount.toInt()
-                    if (totalRequests >0){
+                    if (totalRequests >0 && admin == firebaseUser.uid){
                         notificationDot.visibility = View.VISIBLE
                     }
                 }
