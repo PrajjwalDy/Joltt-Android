@@ -21,12 +21,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_margin="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 android:fontFamily="@font/amiko"
                 android:text="Video Preview"
                 android:textColor="@color/red"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:id="@+id/caption_privacy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="30dp"
+                android:layout_toStartOf="@+id/next_step_video"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/edit_post" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Caption &amp; privacy"
+                    android:textSize="12sp" />
+
+
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/next_step_video"
@@ -45,16 +73,11 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <VideoView
-        android:id="@+id/videoPreview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" />
-
     <EditText
         android:id="@+id/captionVideo"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:visibility="gone"
         android:layout_margin="10dp"
         android:backgroundTint="@color/red"
         android:hint="Say somethig aboot your post"
@@ -62,9 +85,11 @@
         android:textSize="12sp" />
 
     <LinearLayout
+        android:id="@+id/buttonPanel_video"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
+        android:visibility="gone"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
@@ -94,6 +119,15 @@
             android:textColor="@color/red" />
 
     </LinearLayout>
+    <VideoView
+        android:id="@+id/videoPreview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+
+
+
 
 
 </LinearLayout>

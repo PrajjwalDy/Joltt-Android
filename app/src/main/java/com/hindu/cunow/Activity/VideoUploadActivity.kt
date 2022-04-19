@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.MediaController
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -44,6 +45,12 @@ class VideoUploadActivity : AppCompatActivity() {
 
         next_step_video.setOnClickListener {
             uploadVideo()
+        }
+
+        caption_privacy.setOnClickListener {
+            videoPreview.visibility = View.GONE
+            captionVideo.visibility = View.VISIBLE
+            buttonPanel_video.visibility = View.VISIBLE
         }
 
 
