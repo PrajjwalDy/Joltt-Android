@@ -18,6 +18,9 @@
         android:theme="@style/Theme.CUNow"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activity.ForgetPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.ShowUsersActivity"
             android:exported="false" />
         <activity

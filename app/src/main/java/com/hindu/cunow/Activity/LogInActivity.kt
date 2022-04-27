@@ -30,6 +30,12 @@ class LogInActivity : AppCompatActivity() {
             startActivity(intent)
 
         }
+
+        forget_password_txt.setOnClickListener {
+            val intent = Intent(this, ForgetPasswordActivity::class.java)
+            startActivity(intent)
+
+        }
     }
 
     private fun login(){

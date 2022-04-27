@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white">
-        <LinearLayout
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal">
@@ -21,13 +22,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_margin="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 android:fontFamily="@font/amiko"
                 android:text="Edit My Profile"
                 android:textColor="@color/red"
                 android:textSize="18dp"
                 android:textStyle="bold" />
-        </LinearLayout>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/right_arrow"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                android:id="@+id/proceed_editProfile"/>
+        </RelativeLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -253,9 +266,9 @@
                         android:id="@+id/editTextSection"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
+                        android:inputType="text"
                         android:backgroundTint="@color/red"
-                        android:hint="203"
+                        android:hint="203-A"
                         android:fontFamily="@font/amiko"
                         android:textSize="14sp"/>
 

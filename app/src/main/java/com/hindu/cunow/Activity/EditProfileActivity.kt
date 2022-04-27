@@ -120,6 +120,10 @@ class EditProfileActivity : AppCompatActivity() {
             updateInformation(it)
         }
 
+        proceed_editProfile.setOnClickListener {
+            updateInformation(it)
+        }
+
     }
 
     private fun updateInformation(view: View){

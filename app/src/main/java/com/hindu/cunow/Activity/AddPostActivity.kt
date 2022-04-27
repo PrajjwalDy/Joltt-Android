@@ -36,7 +36,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.post_privacy_dialog.view.*
 
 class AddPostActivity : AppCompatActivity() {
-    private var privacy = ""
+    private var privacy = "public"
     private  var myUrl = ""
     private var imageUri : Uri? = null
     private var storagePostImageRef: StorageReference? = null

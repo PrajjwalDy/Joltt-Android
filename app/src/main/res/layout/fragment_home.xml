@@ -62,6 +62,45 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/developerMessage_CV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:cardElevation="3dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/dev_message_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/amiko"
+                    android:textColor="@color/black"
+                    android:text="This is a sample text the message from develper will be shown here"/>
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/closeMessage_btn"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:textColor="@color/red"
+                    android:background="@drawable/box_grey"
+                    android:text="Close"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="5dp"/>
+
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:id="@+id/CV_AddPost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

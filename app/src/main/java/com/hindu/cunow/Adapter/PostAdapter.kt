@@ -38,6 +38,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Activity.CommentActivity
+import com.hindu.cunow.Activity.HelpActivity
 import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
@@ -126,7 +127,8 @@ class PostAdapter (private val mContext: Context,
                 alertDialog.dismiss()
             }
             dialogView.reportPost.setOnClickListener {
-                Toast.makeText(mContext,"Click Received",Toast.LENGTH_SHORT).show()
+                val intent = Intent(mContext, HelpActivity::class.java)
+                mContext.startActivity(intent)
                 alertDialog.dismiss()
             }
         }

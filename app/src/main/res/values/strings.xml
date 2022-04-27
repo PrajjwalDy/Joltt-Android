@@ -14,4 +14,5 @@
     <string name="co_founder">Sparsh Kumar, Shivam Rai, Ashutosh Chaubey: The team of CuNow. All we work in a team. We all are four members of strong programmer. We always work in the unity like a strong team. We all are the student of Chandigarh university of 1st year of CSE batch.</string>
     <string name="welcome_to_cunow">Welcome to CUNow, explore from here or dive in to get started</string>
     <string name="mail_message">We have sent a verification email to your CU mail(***@cuchd.in <b>REFER TO JUNK FOLDER</b>)please verify your account and then press REFRESH button</string>
+    <string name="forgetPassword">We will send you password reset mail to your CU mail(****@cuchd.in) In case you didn\'t get/can\'t find it please check in <b>JUNK FOLDER</b> to.</string>
 </resources>

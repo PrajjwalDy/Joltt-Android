@@ -33,6 +33,7 @@ import com.hindu.cunow.Activity.AddVibesAcitvity
 import com.hindu.cunow.Activity.VideoUploadActivity
 import com.hindu.cunow.Adapter.PostAdapter
 import com.hindu.cunow.Fragments.Circle.CircleTabActivity
+import com.hindu.cunow.Model.DevMessageModel
 import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
@@ -71,7 +72,9 @@ class HomeFragment : Fragment() {
             postAdapter!!.notifyDataSetChanged()
 
         })
+
         checkFirstVisit()
+        developerMessage()
         root.create.setOnClickListener {
             val dialogView = LayoutInflater.from(context).inflate(R.layout.image_or_video_dialogbox, null)
 
@@ -93,7 +96,6 @@ class HomeFragment : Fragment() {
             }
 
         }
-
         root.imin.setOnClickListener {
             updateVisit(root)
         }
@@ -109,6 +111,10 @@ class HomeFragment : Fragment() {
         root.circle_welcome.setOnClickListener {
             val intent = Intent(context, CircleTabActivity::class.java)
             startActivity(intent)
+        }
+
+        root.closeMessage_btn.setOnClickListener {
+            root.developerMessage_CV.visibility = View.GONE
         }
 
         return root
@@ -221,5 +227,25 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun developerMessage(){
+        val database = FirebaseDatabase.getInstance().reference.child("DevMessage")
+        database.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    developerMessage_CV.visibility = View.VISIBLE
+                    val data = snapshot.getValue(DevMessageModel::class.java)
+                    dev_message_tv.text = data!!.message
+                }else{
+                    developerMessage_CV.visibility = View.GONE
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 }

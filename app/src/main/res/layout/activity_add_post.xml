@@ -50,7 +50,7 @@
         android:id="@+id/postImage_preview"
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:scaleType="center"
+        android:scaleType="centerInside"
         android:src="@drawable/gallery"/>
 
     <EditText
