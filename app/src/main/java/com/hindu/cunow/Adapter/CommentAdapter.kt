@@ -38,11 +38,6 @@ class CommentAdapter(private val mContext: Context,
 
         commentPublisher(holder.profileImage,holder.publisherName,mComment[position].commenter!!)
 
-        if (mComment[position].commenter == FirebaseAuth.getInstance().currentUser!!.uid || mComment[position].commenter == publisher){
-            holder.moreOption.visibility = View.VISIBLE
-        }else{
-            holder.moreOption.visibility = View.GONE
-        }
 
         holder.moreOption.setOnClickListener {
             val dialogView = LayoutInflater.from(mContext).inflate(R.layout.comments_more_option, null)
@@ -50,7 +45,14 @@ class CommentAdapter(private val mContext: Context,
             val dialogBuilder = AlertDialog.Builder(mContext)
                 .setView(dialogView)
 
+
             val alertDialog = dialogBuilder.show()
+
+            if (mComment[position].commenter == FirebaseAuth.getInstance().currentUser!!.uid || mComment[position].commenter == publisher){
+                dialogView.deleteComment.visibility = View.VISIBLE
+            }else{
+                dialogView.deleteComment.visibility = View.GONE
+            }
 
             dialogView.deleteComment.setOnClickListener {
                 FirebaseDatabase.getInstance().reference
@@ -60,6 +62,10 @@ class CommentAdapter(private val mContext: Context,
                     .removeValue()
                 Toast.makeText(mContext,"comment removed",Toast.LENGTH_SHORT).show()
                 alertDialog.dismiss()
+            }
+
+            dialogView.setOnClickListener {
+                Toast.makeText(mContext,"Comment Reported as abuse",Toast.LENGTH_SHORT).show()
             }
         }
 

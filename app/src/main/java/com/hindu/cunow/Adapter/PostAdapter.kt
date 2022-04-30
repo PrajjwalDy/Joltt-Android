@@ -39,6 +39,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Activity.CommentActivity
 import com.hindu.cunow.Activity.HelpActivity
+import com.hindu.cunow.Activity.ReportPostActivity
 import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
@@ -101,10 +102,6 @@ class PostAdapter (private val mContext: Context,
             val alertDialog = dialogBuilder.show()
 
 
-//            if (firebaseUser!!.uid != post.postId ){
-//                dialogView.deletePost.visibility = View.GONE
-//                dialogView.editPost.visibility = View.GONE
-//            }
             dialogView.savePost.setOnClickListener {
                 FirebaseDatabase.getInstance().reference
                     .child("Users")
@@ -127,8 +124,9 @@ class PostAdapter (private val mContext: Context,
                 alertDialog.dismiss()
             }
             dialogView.reportPost.setOnClickListener {
-                val intent = Intent(mContext, HelpActivity::class.java)
-                mContext.startActivity(intent)
+                val commentIntent = Intent(mContext,ReportPostActivity::class.java)
+                commentIntent.putExtra("postId",post.postId)
+                mContext.startActivity(commentIntent)
                 alertDialog.dismiss()
             }
         }

@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Activity.HelpActivity
+import com.hindu.cunow.Activity.ReportPostActivity
 import com.hindu.cunow.Model.ConfessionModel
 import com.hindu.cunow.R
 import kotlinx.android.synthetic.main.more_option_confession.view.*
@@ -58,7 +59,8 @@ class ConfessionAdapter(private val mContext: Context,
             val alertDialog = dialogBuilder.show()
 
             dialogView.reportConfession.setOnClickListener {
-                val intent = Intent(mContext,HelpActivity::class.java)
+                val intent = Intent(mContext,ReportPostActivity::class.java)
+                intent.putExtra("postId",mConfession[position].confessionId)
                 mContext.startActivity(intent)
                 alertDialog.dismiss()
             }
