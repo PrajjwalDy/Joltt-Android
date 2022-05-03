@@ -45,12 +45,6 @@ class MySavedViewModel : ViewModel(), IPostCallback {
                     }
                     readSaved()
                 }
-
-               /* for (snapshot in snapshot.children){
-                    val postModel = snapshot.getValue<PostModel>(PostModel::class.java) as PostModel
-                        postList.add(postModel)
-
-                }*/
                 postLoadCallback.onPostPCallbackLoadSuccess(postList)
             }
 

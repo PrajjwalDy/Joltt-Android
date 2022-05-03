@@ -17,6 +17,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.hindu.cunow.Activity.ChatActivity
 import com.hindu.cunow.Activity.ShowUsersActivity
 import com.hindu.cunow.Activity.UserSupportActivity
 import com.hindu.cunow.Model.RequestModel
@@ -75,6 +76,12 @@ class UserProfile : Fragment() {
 
         root.findSupportUser.setOnClickListener {
             val intent = Intent(context,UserSupportActivity::class.java)
+            intent.putExtra("uid",profileId)
+            startActivity(intent)
+        }
+
+        root.chat_ll.setOnClickListener {
+            val intent = Intent(context,ChatActivity::class.java)
             intent.putExtra("uid",profileId)
             startActivity(intent)
         }

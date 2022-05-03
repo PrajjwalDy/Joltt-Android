@@ -18,6 +18,15 @@
         android:theme="@style/Theme.CUNow"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Fragments.Pages.PagesTabActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.CreatePageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.ChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.ReportPostActivity"
             android:exported="false" />
         <activity

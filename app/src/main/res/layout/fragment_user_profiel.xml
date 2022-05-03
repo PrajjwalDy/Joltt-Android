@@ -107,6 +107,28 @@
 
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/chat_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/message"
+                android:layout_margin="5dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Message"
+                android:fontFamily="@font/amiko"
+                android:textColor="@color/red"/>
+
+        </LinearLayout>
+        <LinearLayout
             android:id="@+id/findSupportUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -148,6 +170,7 @@
             android:layout_marginTop="5dp"
             android:src="@drawable/open_angle"
             app:tint="@color/white" />
+
         <ImageView
             android:id="@+id/close_options_user"
             android:layout_width="match_parent"

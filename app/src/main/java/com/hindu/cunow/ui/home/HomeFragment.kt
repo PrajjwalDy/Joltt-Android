@@ -75,6 +75,7 @@ class HomeFragment : Fragment() {
 
         checkFirstVisit()
         developerMessage()
+        chatNotification()
         root.create.setOnClickListener {
             val dialogView = LayoutInflater.from(context).inflate(R.layout.image_or_video_dialogbox, null)
 
@@ -117,6 +118,11 @@ class HomeFragment : Fragment() {
             root.developerMessage_CV.visibility = View.GONE
         }
 
+        root.chat.setOnClickListener {
+            Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_chatFragment)
+        }
+
+
         return root
     }
 
@@ -144,7 +150,6 @@ class HomeFragment : Fragment() {
         //loadUserImage(root)
 
     }
-
 
     private fun checkFirstVisit(){
         val progressDialog = context?.let { Dialog(it) }
@@ -223,7 +228,6 @@ class HomeFragment : Fragment() {
             })
     }
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -239,6 +243,25 @@ class HomeFragment : Fragment() {
                     dev_message_tv.text = data!!.message
                 }else{
                     developerMessage_CV.visibility = View.GONE
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    private fun chatNotification(){
+        val data = FirebaseDatabase.getInstance().reference.child("ChatMessageCount")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+
+        data.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    chatNotification_Count.visibility = View.VISIBLE
+                    chatNotification_Count.text = snapshot.childrenCount.toString()
                 }
             }
 
