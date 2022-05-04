@@ -41,7 +41,16 @@ class CreatePageActivity : AppCompatActivity() {
         }
 
         createPage_Btn.setOnClickListener {
-            createPage()
+            if (pageDescription.text.isEmpty() && pageName.text.isEmpty() && imageUri == null){
+                Toast.makeText(
+                    this,
+                    "Please have the required credential to create the page",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }else{
+                createPage()
+            }
+
         }
     }
 
@@ -82,8 +91,21 @@ class CreatePageActivity : AppCompatActivity() {
 
                 ref.child(pageId).updateChildren(pageDataMap)
 
-                Toast.makeText(this,"Page Created Successfully", Toast.LENGTH_SHORT).show()
+                FirebaseDatabase.getInstance().reference
+                    .child("Users")
+                    .child(FirebaseAuth.getInstance().currentUser!!.uid)
+                    .child("FollowingPages")
+                    .child(pageId)
+                    .setValue(true)
 
+                FirebaseDatabase.getInstance().reference.child("Pages")
+                    .child(pageId)
+                    .child("pageFollowers")
+                    .child(FirebaseAuth.getInstance().currentUser!!.uid)
+                    .setValue(true)
+
+                Toast.makeText(this,"Page Created Successfully", Toast.LENGTH_SHORT).show()
+                progressDialog.dismiss()
             }else{
                 Toast.makeText(this,"Something went wrong",Toast.LENGTH_SHORT).show()
                 progressDialog.dismiss()
@@ -96,7 +118,7 @@ class CreatePageActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK&& data != null){
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK&& data != null){
             val result = CropImage.getActivityResult(data)
             imageUri = result.uri
             pageIcon_Image.setImageURI(imageUri)

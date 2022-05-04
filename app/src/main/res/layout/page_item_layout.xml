@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="3dp"
+    android:layout_margin="3dp"
+    app:cardElevation="3dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/pagesIco"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/profile_testimg"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:src="@drawable/minus"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitXY"/>
+
+
+        </LinearLayout>
+
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+           <TextView
+               android:id="@+id/pageName_CV"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Page Name"
+               android:fontFamily="@font/amiko"
+               android:textSize="16sp"
+               android:textColor="@color/red"
+               android:layout_marginStart="20dp"/>
+
+           <TextView
+               android:id="@+id/pageDescription_Cv"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_below="@+id/pageName_CV"
+               android:layout_marginStart="20dp"
+               android:text="Description" />
+
+
+           <Button
+               android:id="@+id/pageFollow_Btn"
+               android:layout_width="150dp"
+               android:layout_height="40dp"
+               android:layout_alignParentEnd="true"
+               android:layout_centerVertical="true"
+               android:layout_marginStart="10dp"
+               android:layout_marginTop="10dp"
+               android:layout_marginEnd="10dp"
+               android:layout_marginBottom="10dp"
+               android:fontFamily="@font/amiko"
+               android:text="Follow" />
+
+
+       </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

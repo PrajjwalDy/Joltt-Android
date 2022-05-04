@@ -30,6 +30,29 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/CP_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/CP_img"
+                android:fontFamily="@font/amiko"
+                android:text="CreatePage"
+                android:textColor="@color/red"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/CP_img"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/add" />
+
 
         </RelativeLayout>
 

@@ -1,12 +1,15 @@
 package com.hindu.cunow.Fragments.Pages
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.hindu.cunow.Activity.CreatePageActivity
 import com.hindu.cunow.Adapter.PageTabAdapter
 import com.hindu.cunow.R
+import kotlinx.android.synthetic.main.activity_pages_tab.*
 
 class PagesTabActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +34,17 @@ class PagesTabActivity : AppCompatActivity() {
             }
 
         }.attach()
+
+        CP_img.setOnClickListener {
+            val intent = Intent(this, CreatePageActivity::class.java)
+            startActivity(intent)
+        }
+
+        CP_TV.setOnClickListener {
+            val intent = Intent(this, CreatePageActivity::class.java)
+            startActivity(intent)
+        }
+
 
     }
 }

@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Activity.FeedbackActivity
 import com.hindu.cunow.Adapter.UserAdapter
 import com.hindu.cunow.Fragments.Circle.CircleTabActivity
+import com.hindu.cunow.Fragments.Pages.PagesTabActivity
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import kotlinx.android.synthetic.main.explore_fragment.view.*
@@ -94,6 +95,11 @@ class ExploreFragment : Fragment() {
             }
 
         })
+
+        root.pages.setOnClickListener {
+            val intent = Intent(context,PagesTabActivity::class.java)
+            startActivity(intent)
+        }
 
 
         return root
