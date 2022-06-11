@@ -72,6 +72,9 @@
         <action
             android:id="@+id/action_navigation_notifications_to_userProfile"
             app:destination="@id/userProfile" />
+        <action
+            android:id="@+id/action_navigation_notifications_to_viewConfessionFragment"
+            app:destination="@id/viewConfessionFragment" />
     </fragment>
 
     <fragment
@@ -211,6 +214,11 @@
         android:name="com.hindu.cunow.Fragments.Chat.ChatFragment"
         android:label="chat_fragment"
         tools:layout="@layout/chat_fragment" />
+    <fragment
+        android:id="@+id/viewConfessionFragment"
+        android:name="com.hindu.cunow.Fragments.ViewConfessionFragment"
+        android:label="fragment_view_confession"
+        tools:layout="@layout/fragment_view_confession" />
 
 
 </navigation>

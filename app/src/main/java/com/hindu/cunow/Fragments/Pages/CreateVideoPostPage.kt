@@ -1,4 +1,4 @@
-package com.hindu.cunow.Activity
+package com.hindu.cunow.Fragments.Pages
 
 import android.Manifest
 import android.app.Dialog
@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.MediaController
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -18,14 +19,16 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.hindu.cunow.MainActivity
 import com.hindu.cunow.R
-import com.iceteck.silicompressorr.SiliCompressor
-import kotlinx.android.synthetic.main.activity_add_vibes_acitvity.*
+import kotlinx.android.synthetic.main.activity_create_video_post_page.*
 import kotlinx.android.synthetic.main.activity_video_upload.*
-import kotlinx.android.synthetic.main.vibes_item_layout.*
 import kotlinx.android.synthetic.main.video_upload_dialogbox.view.*
 
-class AddVibesAcitvity : AppCompatActivity() {
+class CreateVideoPostPage : AppCompatActivity() {
 
+    private var privacy = "public"
+    private var pageId =""
+    private var pageAdmin = ""
+    private var pageName = ""
     //constants to pick video
     private val VIDEO_PICK_GALLARY_CODE = 100
     private val VIDEO_PICK_CAMERA_CODE = 101
@@ -37,42 +40,57 @@ class AddVibesAcitvity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_vibes_acitvity)
+        setContentView(R.layout.activity_create_video_post_page)
+
+        val intent = intent
+        pageId = intent.getStringExtra("pageId").toString()
+        pageAdmin = intent.getStringExtra("pageAdmin").toString()
+        pageName = intent.getStringExtra("pageName").toString()
 
         //init camera permission
         cameraPermission = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
-        upload_vibes.setOnClickListener {
-            uploadVideo()
+        /*caption_privacy.setOnClickListener {
+            videoPreviewPage.visibility = View.GONE
+            captionVideo_page.visibility = View.VISIBLE
+            buttonPanel_video_page.visibility = View.VISIBLE
         }
 
-        if(videoUri == null){
+
+*/
+        next_step_video_page.setOnClickListener {
+            println("Page Admin is: "+pageAdmin)
+            println("Page Name is: "+pageName)
+            println("Page ID is: "+pageId)
+        }
+
+        if (videoUri == null){
             videoPickDialog()
         }else{
             Toast.makeText(this,"Video Picked", Toast.LENGTH_SHORT).show()
         }
-    }
 
+    }
 
     private fun setVideoToVideoView() {
         val mediaController = MediaController(this)
-        mediaController.setAnchorView(vibesPreview)
+        mediaController.setAnchorView(videoPreviewPage)
 
         //media controller
-        vibesPreview.setMediaController(mediaController)
-        vibesPreview.setVideoURI(videoUri)
-        vibesPreview.requestFocus()
-        vibesPreview.setOnPreparedListener { mediaPlayer ->
+        videoPreviewPage.setMediaController(mediaController)
+        videoPreviewPage.setVideoURI(videoUri)
+        videoPreviewPage.requestFocus()
+        videoPreviewPage.setOnPreparedListener { mediaPlayer ->
             val videoRatio = mediaPlayer.videoWidth / mediaPlayer.videoHeight.toFloat()
-            val screenRatio = vibesPreview.width / vibesPreview.height.toFloat()
+            val screenRatio = videoPreviewPage.width / videoPreviewPage.height.toFloat()
             val scaleX = videoRatio / screenRatio
             if (scaleX >= 1f) {
-                vibesPreview.scaleX = scaleX
+                videoPreviewPage.scaleX = scaleX
             } else {
-                vibesPreview.scaleY = 1f / scaleX
+                videoPreviewPage.scaleY = 1f / scaleX
             }
         }
-        vibesPreview.start()
+        videoPreviewPage.start()
         //videoPreview.setOnPreparedListener{videoPreview.pause()}
     }
 
@@ -95,8 +113,8 @@ class AddVibesAcitvity : AppCompatActivity() {
                 recordVideo()
             }
         }
-    }
 
+    }
     private fun requestCameraPermission(){
         //RequestCameraPermission
         ActivityCompat.requestPermissions(
@@ -136,57 +154,6 @@ class AddVibesAcitvity : AppCompatActivity() {
         startActivityForResult(intent,VIDEO_PICK_CAMERA_CODE)
     }
 
-    private fun uploadVideo(){
-        val progressDialog = Dialog(this)
-        progressDialog.setContentView(R.layout.porgress_dialog)
-        progressDialog.show()
-
-
-        val timestamp = ""+System.currentTimeMillis()
-        val filePathName = "Vibes/vibes_$timestamp"
-        //upload video using url of video to storage
-        println("reached here1")
-        val storageReference = FirebaseStorage.getInstance().getReference(filePathName)
-
-        storageReference.putFile(videoUri!!).addOnSuccessListener { takeSnapshot ->
-
-            val uriTask = takeSnapshot.storage.downloadUrl
-
-            while (!uriTask.isSuccessful);
-            val downloadUri = uriTask.result
-            if (uriTask.isSuccessful){
-                println("reached here2")
-
-                val ref = FirebaseDatabase.getInstance().reference.child("Vibes")
-                val postId = ref.push().key
-                val postMap = HashMap<String,Any>()
-                postMap["vibeId"] = postId!!
-                postMap["viberId"] = FirebaseAuth.getInstance().currentUser!!.uid
-                postMap["vibeDescription"] = caption_vibes.text.toString()
-                postMap["vibe"] = "$downloadUri"
-
-                Toast.makeText(this,"Vibe shared successfully",Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, VibesActivity::class.java))
-                finish()
-                progressDialog.dismiss()
-                //progressDialog.dismiss()
-                ref.child(postId).setValue(postMap).addOnCanceledListener{
-                    Toast.makeText(this,"Something Went wrong",Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
-                    progressDialog.dismiss()
-                }
-                    .addOnFailureListener { takeSnapshot
-                        progressDialog.dismiss()
-                    }
-            }
-
-        }
-            .addOnFailureListener{
-                progressDialog.dismiss()
-            }
-
-    }
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -208,6 +175,67 @@ class AddVibesAcitvity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
+    private fun uploadVideo(){
+        val progressDialog = Dialog(this)
+        progressDialog.setContentView(R.layout.porgress_dialog)
+        progressDialog.show()
+
+
+        val timestamp = ""+System.currentTimeMillis()
+        val filePathName = "Videos/video_$timestamp"
+        //upload video using url of video to storage
+        println("reached here1")
+        val storageReference = FirebaseStorage.getInstance().getReference(filePathName)
+
+        storageReference.putFile(videoUri!!).addOnSuccessListener { takeSnapshot ->
+
+            val uriTask = takeSnapshot.storage.downloadUrl
+
+            while (!uriTask.isSuccessful);
+            val downloadUri = uriTask.result
+            if (uriTask.isSuccessful){
+                println("reached here2")
+
+                val ref = FirebaseDatabase.getInstance().reference.child("Post")
+                val postId = ref.push().key
+                val postMap = HashMap<String,Any>()
+                postMap["postId"] = postId!!
+                postMap["publisher"] = pageId
+                postMap["caption"] = captionVideo.text.toString()
+                postMap["videoId"] = "$downloadUri"
+                postMap["iImage"] = false
+                postMap["video"] = true
+                postMap["page"] = true
+
+                println("reached her3")
+                Toast.makeText(this,"Video shared successfully",Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+                progressDialog.dismiss()
+                ref.child(postId).setValue(postMap).addOnCanceledListener{
+                    Toast.makeText(this,"Image shared successfully",Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                    progressDialog.dismiss()
+                    FirebaseAuth.getInstance().currentUser!!.uid.let { it1 ->
+                        FirebaseDatabase.getInstance().reference
+                            .child("Users").child(it1.toString())
+                            .child("MyPosts").child(postId)
+                            .setValue(true)
+                    }
+                }
+                    .addOnFailureListener { takeSnapshot
+                        progressDialog.dismiss()
+                    }
+            }
+
+        }
+            .addOnFailureListener{
+                progressDialog.dismiss()
+            }
+
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -224,5 +252,8 @@ class AddVibesAcitvity : AppCompatActivity() {
             Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show()
         }
     }
+
+
+
 
 }

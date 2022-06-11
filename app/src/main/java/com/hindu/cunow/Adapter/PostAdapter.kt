@@ -3,10 +3,13 @@ package com.hindu.cunow.Adapter
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.media.Image
 import android.net.Uri
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +43,7 @@ import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Activity.CommentActivity
 import com.hindu.cunow.Activity.HelpActivity
 import com.hindu.cunow.Activity.ReportPostActivity
+import com.hindu.cunow.Model.PageModel
 import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
@@ -67,7 +71,12 @@ class PostAdapter (private val mContext: Context,
         totalComments(holder.totalComments,post.postId)
 
         holder.bind(mPost[position],mContext,holder.image,holder.playerView)
-        publisher(holder.publisherImage,holder.publisherName,post.publisher!!,holder.verification)
+
+        if (mPost[position].page!!){
+            pageInfo(holder.publisherImage,holder.publisherName,post.publisher!!)
+        }else{
+            publisher(holder.publisherImage,holder.publisherName,post.publisher!!,holder.verification)
+        }
 
         holder.publisherName.setOnClickListener {
             val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
@@ -83,13 +92,25 @@ class PostAdapter (private val mContext: Context,
                 post.publisher,
                 holder.animation,
                 holder.caption,
-                holder.totalLikes)
+                holder.totalLikes,
+            )
         }
         holder.comment.setOnClickListener {
-            val commentIntent = Intent(mContext,CommentActivity::class.java)
-            commentIntent.putExtra("postId",post.postId)
-            commentIntent.putExtra("publisher",post.publisher)
-            mContext.startActivity(commentIntent)
+            if (post.page){
+                val commentIntent = Intent(mContext,CommentActivity::class.java)
+                commentIntent.putExtra("postId",post.postId)
+                commentIntent.putExtra("publisher",post.publisher)
+                commentIntent.putExtra("pageName",post.pageName)
+                commentIntent.putExtra("pageAdmin",post.pageAdmin)
+                commentIntent.putExtra("page",post.page)
+                mContext.startActivity(commentIntent)
+            }else{
+                val commentIntent = Intent(mContext,CommentActivity::class.java)
+                commentIntent.putExtra("postId",post.postId)
+                commentIntent.putExtra("publisher",post.publisher)
+                mContext.startActivity(commentIntent)
+            }
+
         }
 
         holder.moreOption.setOnClickListener {
@@ -100,7 +121,6 @@ class PostAdapter (private val mContext: Context,
                 .setTitle("Options")
 
             val alertDialog = dialogBuilder.show()
-
 
             dialogView.savePost.setOnClickListener {
                 FirebaseDatabase.getInstance().reference
@@ -131,6 +151,8 @@ class PostAdapter (private val mContext: Context,
             }
         }
     }
+
+
 
     override fun getItemCount(): Int {
         return mPost.size
@@ -216,7 +238,26 @@ class PostAdapter (private val mContext: Context,
                 .child(postId)
                 .child(FirebaseAuth.getInstance().currentUser!!.uid)
                 .setValue(true)
-            addNotification(publisherId,postId,caption)
+
+            val ref = FirebaseDatabase.getInstance().reference.child("Post").child(postId)
+            ref.addValueEventListener(object :ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()){
+                        val data = snapshot.getValue(PostModel::class.java)
+                        if (data!!.page){
+                            addPageNotification(data.pageAdmin!!,data.pageId!!,data.pageName!!)
+                        }else{
+                            addNotification(publisherId,postId,caption)
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+
         }else{
             FirebaseDatabase.getInstance().reference
                 .child("Likes")
@@ -386,5 +427,72 @@ class PostAdapter (private val mContext: Context,
         })
 
     }
+
+    private fun addPageNotification(pageAdmin: String,pageId: String,pageName:String){
+        if (pageAdmin != FirebaseAuth.getInstance().currentUser!!.uid){
+            val dataRef = FirebaseDatabase.getInstance()
+                .reference.child("Notification")
+                .child("AllNotification")
+                .child(pageAdmin)
+
+            val notificationId = dataRef.push().key!!
+
+            val dataMap = HashMap<String,Any>()
+            dataMap["notificationId"] = notificationId
+            dataMap["notificationText"] = "You have new notifications for page:"+pageName
+            dataMap["postID"] = pageId
+            dataMap["postN"] = false
+            dataMap["pageN"] = true
+            dataMap["notifierId"] = FirebaseAuth.getInstance().currentUser!!.uid
+
+            dataRef.push().setValue(dataMap)
+
+            FirebaseDatabase.getInstance().reference
+                .child("Notification")
+                .child("UnReadNotification")
+                .child(pageAdmin).child(notificationId).setValue(true)
+        }
+    }
+
+    private fun pageInfo(profileImage:CircleImageView, name:TextView,publisherId:String) {
+        val userDataRef = FirebaseDatabase.getInstance().reference.child("Pages").child(publisherId)
+
+        userDataRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val data = snapshot.getValue(PageModel::class.java)
+                    Glide.with(mContext).load(data!!.pageIcon).into(profileImage)
+                    name.text = data.pageName
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    /*private fun checkPage(postId: String,circleImageView: CircleImageView,name: TextView,publisherId: String,verifImage: CircleImageView){
+        val data = FirebaseDatabase.getInstance().reference
+            .child("Posts")
+            .child(postId)
+        data.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.hasChild("page")){
+
+                    val value = snapshot.getValue(PostModel::class.java)
+                    if (value.page){
+
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }*/
 
 }

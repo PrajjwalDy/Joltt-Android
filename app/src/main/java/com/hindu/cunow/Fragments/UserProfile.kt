@@ -406,7 +406,6 @@ class UserProfile : Fragment() {
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
-
         })
     }
 
@@ -435,6 +434,5 @@ class UserProfile : Fragment() {
 
         }
     }
-
 
 }

@@ -18,6 +18,24 @@
         android:theme="@style/Theme.CUNow"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".AcademicsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Fragments.Pages.MyPages.PageNotificationsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Fragments.ConfessionRoom.ConfessionCommentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Fragments.Pages.CreateVideoPostPage"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.CreatePagePostActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Fragments.Pages.PageDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".Fragments.Pages.PagesTabActivity"
             android:exported="false" />
         <activity

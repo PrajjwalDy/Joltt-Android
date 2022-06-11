@@ -19,6 +19,7 @@ class HomeViewModel : ViewModel(), IPostCallback {
     private var postLiveData:MutableLiveData<List<PostModel>>? = null
 
     var followingList:MutableList<String>? = null
+    var pageList:MutableList<String>? = null
     private val postLoadCallback: IPostCallback = this
     private var messageError: MutableLiveData<String>? = null
 
@@ -28,7 +29,9 @@ class HomeViewModel : ViewModel(), IPostCallback {
         if (postLiveData == null){
             postLiveData = MutableLiveData()
             messageError = MutableLiveData()
+            pageList()
             checkFollowing()
+
         }
         val mutableLiveData = postLiveData
         return mutableLiveData
@@ -49,6 +52,12 @@ class HomeViewModel : ViewModel(), IPostCallback {
                             postList.add(postModel)
                        }
                     }
+                    for (id in (pageList as ArrayList<String>)) {
+                            if (postModel.publisher == id) {
+                                postList.add(postModel)
+                            }
+                        }
+
                 }
                 postLoadCallback.onPostPCallbackLoadSuccess(postList)
             }
@@ -75,6 +84,53 @@ class HomeViewModel : ViewModel(), IPostCallback {
                         snapshot.key?.let { (followingList as ArrayList<String>).add(it) }
                     }
                     loadPost()
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    /*private fun loadPagePost(){
+        val postList=ArrayList<PostModel>()
+        val dataReference = FirebaseDatabase.getInstance().reference.child("Post")
+        dataReference.addValueEventListener(object:ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                postList.clear()
+                for (snapshot in snapshot.children){
+                    val postModel = snapshot.getValue<PostModel>(PostModel::class.java) as PostModel
+                    for (id in (pageList as ArrayList<String>)){
+                        if (postModel.publisher == id){
+                            postList.add(postModel)
+                        }
+                    }
+                }
+                postLoadCallback.onPostPCallbackLoadSuccess(postList)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                postLoadCallback.onPostCallbackLoadFailed(error.message)
+            }
+
+        })
+    }*/
+
+    private fun pageList(){
+        pageList = ArrayList()
+        val data = FirebaseDatabase.getInstance().reference.child("Users")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child("FollowingPages")
+
+        data.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    (pageList as ArrayList<String>).clear()
+                    for (snapshot in snapshot.children){
+                        snapshot.key?.let { (pageList as ArrayList<String>).add(it) }
+                        //loadPagePost()
+                    }
                 }
             }
 

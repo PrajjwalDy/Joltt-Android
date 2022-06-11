@@ -201,7 +201,6 @@ class EditProfileActivity : AppCompatActivity() {
                     progressDialog.dismiss()
                 }
             }
-
         }
     }
 

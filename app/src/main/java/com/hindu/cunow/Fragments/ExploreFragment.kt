@@ -32,6 +32,7 @@ class ExploreFragment : Fragment() {
     private var recyclerView:RecyclerView? = null
     private var userAdapter:UserAdapter? = null
     private var mUser:MutableList<UserModel>? = null
+    private var checker = "Name"
 
     private lateinit var viewModel: ExploreViewModel
 
@@ -41,7 +42,6 @@ class ExploreFragment : Fragment() {
     ): View? {
         val root:View= inflater.inflate(R.layout.explore_fragment, container, false)
 
-
         root.ll_confessionRoom.setOnClickListener {
             Navigation.findNavController(root).navigate(R.id.action_navigation_dashboard_to_confessionRoomFragment)
         }
@@ -49,7 +49,6 @@ class ExploreFragment : Fragment() {
         root.circle_ll.setOnClickListener {
             val intent = Intent(context, CircleTabActivity::class.java)
             startActivity(intent)
-
         }
         root.feedback.setOnClickListener {
             val intent = Intent(context, FeedbackActivity::class.java)
@@ -72,6 +71,18 @@ class ExploreFragment : Fragment() {
         userAdapter = context?.let { UserAdapter(it,mUser as ArrayList<UserModel>) }
         recyclerView?.adapter = userAdapter
 
+        root.searchWithName.setOnClickListener {
+            checker = "Name"
+            root.searchWithUID.background= resources.getDrawable(R.drawable.box_grey)
+        }
+
+        root.searchWithUID.setOnClickListener {
+            checker = "UID"
+            root.searchWithName.background= resources.getDrawable(R.drawable.box_grey)
+            root.searchWithUID.background= resources.getDrawable(R.drawable.search_bf)
+            root.searchWithUID.setBackgroundDrawable(resources.getDrawable(R.drawable.search_bf))
+        }
+
 
         root.search_edit_text.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -85,13 +96,16 @@ class ExploreFragment : Fragment() {
                 else{
                     recyclerView?.visibility = View.VISIBLE
                     retrieveUsers()
-                    searchUsers(p0!!.toString())
-
+                    if (checker == "Name"){
+                        searchUsers(p0!!.toString())
+                    }else if (checker == "UID"){
+                        searchWithUID(p0.toString())
+                    }else{
+                        searchUsers(p0!!.toString())
+                    }
                 }
             }
-
             override fun afterTextChanged(p0: Editable?) {
-
             }
 
         })
@@ -109,6 +123,32 @@ class ExploreFragment : Fragment() {
         val array = FirebaseDatabase.getInstance().reference
             .child("Users")
             .orderByChild("searchName")
+            .startAt(input)
+            .endAt(input +"\uf88f")
+        array.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                mUser?.clear()
+
+                for (snapshot in snapshot.children){
+                    val user = snapshot.getValue(UserModel::class.java)
+                    if (user != null){
+                        mUser?.add(user)
+                    }
+                }
+                userAdapter?.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    private fun searchWithUID(input:String){
+        val array = FirebaseDatabase.getInstance().reference
+            .child("Users")
+            .orderByChild("UID")
             .startAt(input)
             .endAt(input +"\uf88f")
         array.addListenerForSingleValueEvent(object :ValueEventListener{

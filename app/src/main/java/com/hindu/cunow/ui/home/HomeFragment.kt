@@ -254,7 +254,7 @@ class HomeFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     chatNotification_Count.visibility = View.VISIBLE
-                    chatNotification_Count.text = snapshot.childrenCount.toString()
+                    chatNotification_Count_text.text = snapshot.childrenCount.toString()
                 }
             }
 

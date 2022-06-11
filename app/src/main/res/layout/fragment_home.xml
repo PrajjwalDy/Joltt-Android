@@ -57,8 +57,6 @@
                     android:src="@drawable/add" />
 
 
-
-
                 <ImageView
                     android:id="@+id/chat"
                     android:layout_width="25dp"
@@ -68,19 +66,30 @@
                     android:layout_marginEnd="20dp"
                     android:src="@drawable/message" />
 
-                <TextView
+                <RelativeLayout
                     android:id="@+id/chatNotification_Count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/pink"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_alignParentEnd="true"
+                    android:layout_marginTop="2dp"
                     android:layout_marginEnd="10dp"
-                    android:layout_centerVertical="true"
                     android:visibility="gone"
-                    android:padding="5dp"
-                    android:textColor="@color/white"
-                    android:background="@drawable/chat_notification"
-                    android:text="1"/>
+                    android:background="@drawable/ic_elips_chat"
+                    >
+
+                    <TextView
+                        android:id="@+id/chatNotification_Count_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:text="1"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+
 
 
             </RelativeLayout>

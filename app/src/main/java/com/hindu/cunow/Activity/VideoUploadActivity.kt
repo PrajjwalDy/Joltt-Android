@@ -20,12 +20,13 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.hindu.cunow.MainActivity
 import com.hindu.cunow.R
+import com.iceteck.silicompressorr.SiliCompressor
 import kotlinx.android.synthetic.main.activity_video_upload.*
 import kotlinx.android.synthetic.main.post_privacy_dialog.view.*
 import kotlinx.android.synthetic.main.video_upload_dialogbox.view.*
 
 class VideoUploadActivity : AppCompatActivity() {
-    private var privacy = ""
+    private var privacy = "public"
     //constants to pick video
     private val VIDEO_PICK_GALLARY_CODE = 100
     private val VIDEO_PICK_CAMERA_CODE = 101
@@ -38,7 +39,6 @@ class VideoUploadActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_upload)
-
 
         //init camera permission
         cameraPermission = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -223,6 +223,7 @@ class VideoUploadActivity : AppCompatActivity() {
                     postMap["videoId"] = "$downloadUri"
                     postMap["iImage"] = false
                     postMap["video"] = true
+                    postMap["page"] = true
 
                     println("reached her3")
                     Toast.makeText(this,"Video shared successfully",Toast.LENGTH_SHORT).show()
@@ -251,6 +252,10 @@ class VideoUploadActivity : AppCompatActivity() {
                     progressDialog.dismiss()
                 }
 
+    }
+
+    private fun compressVideo(){
+        SiliCompressor.with(this).compressVideo(videoUri,toString())
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

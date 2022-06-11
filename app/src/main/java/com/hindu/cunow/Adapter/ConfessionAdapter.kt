@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,10 +20,11 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.hindu.cunow.Activity.HelpActivity
 import com.hindu.cunow.Activity.ReportPostActivity
+import com.hindu.cunow.Fragments.ConfessionRoom.ConfessionCommentActivity
 import com.hindu.cunow.Model.ConfessionModel
 import com.hindu.cunow.R
+import kotlinx.android.synthetic.main.activity_comment.*
 import kotlinx.android.synthetic.main.more_option_confession.view.*
 
 class ConfessionAdapter(private val mContext: Context,
@@ -46,8 +46,14 @@ class ConfessionAdapter(private val mContext: Context,
         isLike(cList.confessionId!!,holder.like)
         totalLike(cList.confessionId!!,holder.totalLike)
 
+        holder.comment.setOnClickListener {
+            val intent = Intent(mContext,ConfessionCommentActivity::class.java)
+            intent.putExtra("confessionId",cList.confessionId)
+            mContext.startActivity(intent)
+        }
+
         holder.like.setOnClickListener {
-            like(holder.like,cList.confesserId!!,cList.confessionId!!,zoom)
+            like(holder.like,cList.confesserId!!,cList.confessionId!!,cList.confessionText!!,zoom)
         }
 
         holder.moreOption.setOnClickListener {
@@ -83,7 +89,7 @@ class ConfessionAdapter(private val mContext: Context,
     }
 
     inner class ViewHolder(@NonNull itemView: View):RecyclerView.ViewHolder(itemView){
-        //val comment:ImageView = itemView.findViewById(R.id.confessionComment) as ImageView
+        val comment:ImageView = itemView.findViewById(R.id.confessionComment) as ImageView
         val confessionImage:ImageView = itemView.findViewById(R.id.confessionImage) as ImageView
         val like:ImageView = itemView.findViewById(R.id.confessionLike) as ImageView
         val confessionText:TextView = itemView.findViewById(R.id.confessionText) as TextView
@@ -106,7 +112,7 @@ class ConfessionAdapter(private val mContext: Context,
 
     }
 
-    private fun like(likeButton:ImageView,publisherId:String,confessionId:String,zoom:Animation){
+    private fun like(likeButton:ImageView,confessorId:String,confessionId:String,confessionText: String,zoom:Animation){
 
         likeButton.startAnimation(zoom)
         if (likeButton.tag == "Like"){
@@ -115,7 +121,7 @@ class ConfessionAdapter(private val mContext: Context,
                 .child(confessionId)
                 .child(FirebaseAuth.getInstance().currentUser!!.uid)
                 .setValue(true)
-            addNotification(publisherId,confessionId)
+            addNotification(confessorId,confessionText,confessionId)
         }else{
             FirebaseDatabase.getInstance().reference
                 .child("ConfessionLike")
@@ -153,10 +159,6 @@ class ConfessionAdapter(private val mContext: Context,
         })
     }
 
-    private fun addNotification(publisherId: String,confessionId: String){
-
-    }
-
     private fun totalLike(confessionId: String,totalLike:TextView){
         val database = FirebaseDatabase.getInstance().reference.child("ConfessionLike")
             .child(confessionId)
@@ -180,5 +182,35 @@ class ConfessionAdapter(private val mContext: Context,
 
         })
     }
+
+
+        private fun addNotification(confessorId:String,confessionText:String,confessionId: String){
+            //sendNotification()
+            if (confessorId != FirebaseAuth.getInstance().currentUser!!.uid){
+                val dataRef = FirebaseDatabase.getInstance()
+                    .reference.child("Notification")
+                    .child("AllNotification")
+                    .child(confessorId)
+                val notificationId = dataRef.push().key!!
+
+                val dataMap = HashMap<String,Any>()
+                dataMap["notificationId"] = notificationId
+                dataMap["notificationText"] = "new like on confession"+confessionText
+                dataMap["postID"] = confessionId
+                dataMap["postN"] = false
+                dataMap["pageN"] = false
+                dataMap["confession"] = true
+                dataMap["notifierId"] = FirebaseAuth.getInstance().currentUser!!.uid
+
+                dataRef.push().setValue(dataMap)
+
+                FirebaseDatabase.getInstance().reference
+                    .child("Notification")
+                    .child("UnReadNotification")
+                    .child(confessorId).child(notificationId).setValue(true)
+
+            }
+        }
+
 
 }

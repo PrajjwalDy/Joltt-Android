@@ -1,6 +1,7 @@
 package com.hindu.cunow.Adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,9 +16,11 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.hindu.cunow.Fragments.Pages.PageDetailsActivity
 import com.hindu.cunow.Model.PageModel
 import com.hindu.cunow.R
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.activity_pages_tab.*
 import org.w3c.dom.Text
 
 class PageAdapter(private var mContext: Context,
@@ -48,6 +51,19 @@ class PageAdapter(private var mContext: Context,
         checkFollowing(holder.followButton,mPage[position].pageId!!)
         holder.followButton.setOnClickListener {
             followPage(holder.followButton,mPage[position].pageId!!)
+        }
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(mContext,PageDetailsActivity::class.java)
+            intent.putExtra("pageId",mPage[position].pageId)
+            intent.putExtra("pageAdmin",mPage[position].pageAdmin)
+            intent.putExtra("pageName",mPage[position].pageName)
+            mContext.startActivity(intent)
+        }
+        if (mPage[position].pageAdmin == FirebaseAuth.getInstance().currentUser!!.uid){
+            holder.followButton.visibility =View.GONE
+        }else{
+            holder.followButton.visibility =View.VISIBLE
         }
     }
 

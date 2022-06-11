@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.hindu.cunow.Activity.ViewFullActivity
+import com.hindu.cunow.Fragments.Pages.PageDetailsActivity
 import com.hindu.cunow.Model.NotificationModel
 import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.Model.UserModel
@@ -43,20 +44,32 @@ class NotificationAdapter(private val nContext:Context,
         val notification = nList[position]
         holder.bind(nList[position])
 
+
         holder.itemView.setOnClickListener {
-            if (!notification.postN){
-                val pref = nContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
-                pref.putString("uid",nList[position].notifierId)
-                pref.apply()
-
-                Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_notifications_to_userProfile)
-
-            }else{
+            if (notification.postN){
                 val pref = nContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
                 pref.putString("postId",nList[position].postID)
                 pref.apply()
 
                 Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_notifications_to_fullPostView)
+
+            }else if (notification.pageN){
+                val intent = Intent(nContext,PageDetailsActivity::class.java)
+                intent.putExtra("pageId",notification.postID)
+                intent.putExtra("pageAdmin",FirebaseAuth.getInstance().currentUser!!.uid)
+                nContext.startActivity(intent)
+
+            }else if (notification.confession){
+                val pref = nContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+                pref.putString("confessionId",nList[position].postID)
+                pref.apply()
+                Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_notifications_to_viewConfessionFragment)
+            } else{
+                val pref = nContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+                pref.putString("uid",nList[position].notifierId)
+                pref.apply()
+
+                Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_notifications_to_userProfile)
             }
 
         }
@@ -74,8 +87,22 @@ class NotificationAdapter(private val nContext:Context,
         val notificationText:TextView = itemView.findViewById(R.id.notificationText) as TextView
 
         fun bind(list: NotificationModel){
+
+            if(list.pageN){
+                userName.visibility = View.GONE
+                profileImage.visibility = View.GONE
+            }else{
+                userName.visibility = View.VISIBLE
+                profileImage.visibility = View.VISIBLE
+                loadNotifier(list.notifierId!!,profileImage,userName)
+            }
+
+            if(list.confession){
+                postImage.visibility = View.GONE
+            }else{
+                postImage.visibility = View.VISIBLE
+            }
             notificationText.text = list.notificationText
-            loadNotifier(list.notifierId!!,profileImage,userName)
             loadPostImage(list.postID!!,postImage)
         }
     }

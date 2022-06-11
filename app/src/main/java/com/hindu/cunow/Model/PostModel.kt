@@ -10,4 +10,8 @@ class PostModel {
     val video: Boolean = false
     val iImage: Boolean = false
     val public:Boolean = false
+    val pageId:String? = null
+    val page:Boolean = false
+    val pageAdmin:String? = null
+    val pageName:String? = null
 }

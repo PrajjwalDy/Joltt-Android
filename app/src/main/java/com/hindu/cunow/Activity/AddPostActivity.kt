@@ -116,6 +116,7 @@ class AddPostActivity : AppCompatActivity() {
                 postMap["image"] = myUrl
                 postMap["iImage"] = true
                 postMap["video"] = false
+                postMap["page"] = false
                 postMap["public"] = privacy == "public"
 
                 ref.child(postId).updateChildren(postMap)

@@ -35,6 +35,9 @@ import retrofit2.Response
 class CommentActivity : AppCompatActivity() {
     private var postId = ""
     private var publisherId = ""
+    private var pageName = ""
+    private var pageAdmin = ""
+    private var page:Boolean = false
     private var firebaseUser: FirebaseUser? = null
     private var commentList:MutableList<CommentModel>? = null
     private var commentsAdapter: CommentAdapter? = null
@@ -52,6 +55,9 @@ class CommentActivity : AppCompatActivity() {
         val intent = intent
         postId = intent.getStringExtra("postId").toString()
         publisherId = intent.getStringExtra("publisher").toString()
+        pageAdmin = intent.getStringExtra("pageAdmin").toString()
+        pageName = intent.getStringExtra("pageName").toString()
+        page = intent.getBooleanExtra("page",false)
 
         firebaseUser = FirebaseAuth.getInstance().currentUser
 
@@ -93,7 +99,11 @@ class CommentActivity : AppCompatActivity() {
 
             dataRef.child(commentId).updateChildren(dataMap)
             addCommentEditText.text.clear()
-            addNotification()
+            if (page){
+                addPageNotification()
+            }else{
+                addNotification()
+            }
         }
     }
 
@@ -145,7 +155,8 @@ class CommentActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                noCommentsText.visibility = View.VISIBLE
+                RecyclerViewComment.visibility = View.GONE
             }
 
         })
@@ -216,6 +227,32 @@ class CommentActivity : AppCompatActivity() {
                 .child("Notification")
                 .child("UnReadNotification")
                 .child(publisherId).child(notificationId).setValue(true)
+
+        }
+    }
+
+    private fun addPageNotification(){
+        if (publisherId != FirebaseAuth.getInstance().currentUser!!.uid){
+            val dataRef = FirebaseDatabase.getInstance()
+                .reference.child("Notification")
+                .child("AllNotification")
+                .child(pageAdmin)
+            val notificationId = dataRef.push().key!!
+
+            val dataMap = HashMap<String,Any>()
+            dataMap["notificationId"] = notificationId
+            dataMap["notificationText"] = "you have new notifications on page:"+pageName
+            dataMap["postID"] = postId
+            dataMap["postN"] = true
+            dataMap["pageN"] = true
+            dataMap["notifierId"] = FirebaseAuth.getInstance().currentUser!!.uid
+
+            dataRef.push().setValue(dataMap)
+
+            FirebaseDatabase.getInstance().reference
+                .child("Notification")
+                .child("UnReadNotification")
+                .child(pageAdmin).child(notificationId).setValue(true)
 
         }
     }
