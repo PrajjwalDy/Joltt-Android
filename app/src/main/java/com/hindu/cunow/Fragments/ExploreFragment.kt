@@ -74,6 +74,10 @@ class ExploreFragment : Fragment() {
         root.searchWithName.setOnClickListener {
             checker = "Name"
             root.searchWithUID.background= resources.getDrawable(R.drawable.box_grey)
+            root.searchWithName.background= resources.getDrawable(R.drawable.search_bf)
+            root.searchWithName.setBackgroundDrawable(resources.getDrawable(R.drawable.search_bf))
+            root.searchWithUID.setTextColor(resources.getColor(R.color.red))
+            root.searchWithName.setTextColor(resources.getColor(R.color.white))
         }
 
         root.searchWithUID.setOnClickListener {
@@ -81,6 +85,8 @@ class ExploreFragment : Fragment() {
             root.searchWithName.background= resources.getDrawable(R.drawable.box_grey)
             root.searchWithUID.background= resources.getDrawable(R.drawable.search_bf)
             root.searchWithUID.setBackgroundDrawable(resources.getDrawable(R.drawable.search_bf))
+            root.searchWithUID.setTextColor(resources.getColor(R.color.white))
+            root.searchWithName.setTextColor(resources.getColor(R.color.red))
         }
 
 
@@ -125,7 +131,7 @@ class ExploreFragment : Fragment() {
             .orderByChild("searchName")
             .startAt(input)
             .endAt(input +"\uf88f")
-        array.addListenerForSingleValueEvent(object :ValueEventListener{
+        array.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 mUser?.clear()
 
@@ -148,10 +154,10 @@ class ExploreFragment : Fragment() {
     private fun searchWithUID(input:String){
         val array = FirebaseDatabase.getInstance().reference
             .child("Users")
-            .orderByChild("UID")
+            .orderByChild("ID")
             .startAt(input)
             .endAt(input +"\uf88f")
-        array.addListenerForSingleValueEvent(object :ValueEventListener{
+        array.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 mUser?.clear()
 
