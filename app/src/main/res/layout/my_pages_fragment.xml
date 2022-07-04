@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Fragments.Pages.MyPages.MyPagesFragment">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:id="@+id/no_page_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nothing to show. Pages created by you will visible here"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="200dp"/>
 
-</FrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:id="@+id/myPages_RV"/>
+
+
+</LinearLayout>

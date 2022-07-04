@@ -45,10 +45,12 @@ class PageDetailsActivity : AppCompatActivity() {
             pageFollow_Btn_pd.visibility = View.GONE
             createPost_page.visibility = View.VISIBLE
             createPost_page_img.visibility = View.VISIBLE
+            pageNotification.visibility = View.VISIBLE
         }else{
             pageFollow_Btn_pd.visibility = View.VISIBLE
             createPost_page.visibility = View.GONE
             createPost_page_img.visibility = View.GONE
+            pageNotification.visibility = View.GONE
         }
 
         createPost_page_img.setOnClickListener {
@@ -167,7 +169,7 @@ class PageDetailsActivity : AppCompatActivity() {
 
         data.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                pageFollowersCount.text = "Followed by: "+snapshot.childrenCount.toString()
+                pageFollowersCount.text = snapshot.childrenCount.toString()
             }
             override fun onCancelled(error: DatabaseError) {
             }

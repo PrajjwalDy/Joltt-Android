@@ -75,6 +75,9 @@
         <action
             android:id="@+id/action_navigation_notifications_to_viewConfessionFragment"
             app:destination="@id/viewConfessionFragment" />
+        <action
+            android:id="@+id/action_navigation_notifications_to_pageNotificationFragment"
+            app:destination="@id/pageNotificationFragment" />
     </fragment>
 
     <fragment
@@ -219,6 +222,15 @@
         android:name="com.hindu.cunow.Fragments.ViewConfessionFragment"
         android:label="fragment_view_confession"
         tools:layout="@layout/fragment_view_confession" />
+    <fragment
+        android:id="@+id/pageNotificationFragment"
+        android:name="com.hindu.cunow.Fragments.Pages.PageNotification.PageNotificationFragment"
+        android:label="fragment_page_notification"
+        tools:layout="@layout/fragment_page_notification" >
+        <action
+            android:id="@+id/action_pageNotificationFragment_to_fullPostView"
+            app:destination="@id/fullPostView" />
+    </fragment>
 
 
 </navigation>

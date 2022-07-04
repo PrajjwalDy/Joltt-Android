@@ -94,7 +94,7 @@ class ViewFullActivity : AppCompatActivity() {
                 mediaSource = ProgressiveMediaSource.Factory(datasourceFactory).createMediaSource(
                     MediaItem.fromUri(Uri.parse(urlType.url))
                 )
-            }
+            }else->{}
         }
 
         simpleExoPlayer.setMediaSource(mediaSource)

@@ -43,6 +43,7 @@ import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Activity.CommentActivity
 import com.hindu.cunow.Activity.HelpActivity
 import com.hindu.cunow.Activity.ReportPostActivity
+import com.hindu.cunow.Fragments.Pages.PageDetailsActivity
 import com.hindu.cunow.Model.PageModel
 import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.Model.UserModel
@@ -79,11 +80,19 @@ class PostAdapter (private val mContext: Context,
         }
 
         holder.publisherName.setOnClickListener {
-            val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
-            pref.putString("uid",post.publisher)
-            pref.apply()
+            if (mPost[position].page){
+                val intent = Intent(mContext, PageDetailsActivity::class.java)
+                intent.putExtra("pageId",mPost[position].publisher)
+                intent.putExtra("pageAdmin",mPost[position].pageAdmin)
+                mContext.startActivity(intent)
+            }else{
+                val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+                pref.putString("uid",post.publisher)
+                pref.apply()
 
-            Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_home_to_userProfile)
+                Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_home_to_userProfile)
+            }
+
         }
 
         holder.like.setOnClickListener {
@@ -103,6 +112,7 @@ class PostAdapter (private val mContext: Context,
                 commentIntent.putExtra("pageName",post.pageName)
                 commentIntent.putExtra("pageAdmin",post.pageAdmin)
                 commentIntent.putExtra("page",post.page)
+                commentIntent.putExtra("pageId",post.publisher)
                 mContext.startActivity(commentIntent)
             }else{
                 val commentIntent = Intent(mContext,CommentActivity::class.java)
@@ -245,7 +255,10 @@ class PostAdapter (private val mContext: Context,
                     if (snapshot.exists()){
                         val data = snapshot.getValue(PostModel::class.java)
                         if (data!!.page){
-                            addPageNotification(data.pageAdmin!!,data.pageId!!,data.pageName!!)
+                            /*println(data.pageAdmin)
+                            println(data.pageName)
+                            println(data.pageId)*/
+                            addPageNotification(data.pageAdmin!!,data.postId!!,data.pageName!!,data.publisher!!)
                         }else{
                             addNotification(publisherId,postId,caption)
                         }
@@ -325,7 +338,7 @@ class PostAdapter (private val mContext: Context,
                 mediaSource = ProgressiveMediaSource.Factory(datasourceFactory).createMediaSource(
                     MediaItem.fromUri(Uri.parse(urlType.url))
                 )
-            }
+            }else->{}
         }
 
         simpleExoPlayer.setMediaSource(mediaSource)
@@ -428,7 +441,7 @@ class PostAdapter (private val mContext: Context,
 
     }
 
-    private fun addPageNotification(pageAdmin: String,pageId: String,pageName:String){
+    private fun addPageNotification(pageAdmin: String,postId: String,pageName:String,pageId:String){
         if (pageAdmin != FirebaseAuth.getInstance().currentUser!!.uid){
             val dataRef = FirebaseDatabase.getInstance()
                 .reference.child("Notification")
@@ -440,12 +453,14 @@ class PostAdapter (private val mContext: Context,
             val dataMap = HashMap<String,Any>()
             dataMap["notificationId"] = notificationId
             dataMap["notificationText"] = "You have new notifications for page:"+pageName
-            dataMap["postID"] = pageId
+            dataMap["postID"] = postId
             dataMap["postN"] = false
             dataMap["pageN"] = true
+            dataMap["pageId"] = pageId
             dataMap["notifierId"] = FirebaseAuth.getInstance().currentUser!!.uid
 
             dataRef.push().setValue(dataMap)
+            addPageN(pageAdmin,postId,pageName,pageId)
 
             FirebaseDatabase.getInstance().reference
                 .child("Notification")
@@ -453,7 +468,25 @@ class PostAdapter (private val mContext: Context,
                 .child(pageAdmin).child(notificationId).setValue(true)
         }
     }
+    private fun addPageN(pageAdmin: String,postId: String,pageName:String,pageId:String){
+        val dataNRef = FirebaseDatabase.getInstance()
+            .reference.child("PageNotification")
+            .child("AllNotifications")
+            .child(pageAdmin)
+            .child(pageId)
 
+        val nId = dataNRef.push().key!!
+
+        val dataNMap = HashMap<String,Any>()
+        dataNMap["nId"] = nId
+        dataNMap["nText"] = "new like on post: "
+        dataNMap["postImage"] = postId
+        dataNMap["iPost"] = true
+        dataNMap["pageId"] = pageId
+        dataNMap["notifier"] = FirebaseAuth.getInstance().currentUser!!.uid
+
+        dataNRef.child(nId).updateChildren(dataNMap)
+    }
     private fun pageInfo(profileImage:CircleImageView, name:TextView,publisherId:String) {
         val userDataRef = FirebaseDatabase.getInstance().reference.child("Pages").child(publisherId)
 

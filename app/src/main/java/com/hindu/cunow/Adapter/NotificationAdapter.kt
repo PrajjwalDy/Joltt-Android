@@ -51,13 +51,26 @@ class NotificationAdapter(private val nContext:Context,
                 pref.putString("postId",nList[position].postID)
                 pref.apply()
 
-                Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_notifications_to_fullPostView)
+                Navigation.
+                findNavController(holder
+                    .itemView).navigate(R.id
+                    .action_navigation_notifications_to_fullPostView)
 
             }else if (notification.pageN){
-                val intent = Intent(nContext,PageDetailsActivity::class.java)
+                val pref = nContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+                pref.putString("pageId",nList[position].pageId)
+                pref.apply()
+
+                Navigation.
+                findNavController(holder
+                    .itemView).navigate(R.id
+                    .action_navigation_notifications_to_pageNotificationFragment)
+
+
+                /*val intent = Intent(nContext,PageDetailsActivity::class.java)
                 intent.putExtra("pageId",notification.postID)
                 intent.putExtra("pageAdmin",FirebaseAuth.getInstance().currentUser!!.uid)
-                nContext.startActivity(intent)
+                nContext.startActivity(intent)*/
 
             }else if (notification.confession){
                 val pref = nContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
@@ -71,7 +84,6 @@ class NotificationAdapter(private val nContext:Context,
 
                 Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_notifications_to_userProfile)
             }
-
         }
     }
 
@@ -91,6 +103,7 @@ class NotificationAdapter(private val nContext:Context,
             if(list.pageN){
                 userName.visibility = View.GONE
                 profileImage.visibility = View.GONE
+                postImage.visibility = View.GONE
             }else{
                 userName.visibility = View.VISIBLE
                 profileImage.visibility = View.VISIBLE

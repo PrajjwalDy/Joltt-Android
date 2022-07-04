@@ -102,7 +102,7 @@ class PublicPostAdapter(private val mContext: Context,
                 mediaSource = ProgressiveMediaSource.Factory(datasourceFactory).createMediaSource(
                     MediaItem.fromUri(Uri.parse(urlType.url))
                 )
-            }
+            }else->{}
         }
 
         simpleExoPlayer.setMediaSource(mediaSource)

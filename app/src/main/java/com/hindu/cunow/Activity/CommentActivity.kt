@@ -35,6 +35,7 @@ import retrofit2.Response
 class CommentActivity : AppCompatActivity() {
     private var postId = ""
     private var publisherId = ""
+    private var pageId = ""
     private var pageName = ""
     private var pageAdmin = ""
     private var page:Boolean = false
@@ -58,6 +59,7 @@ class CommentActivity : AppCompatActivity() {
         pageAdmin = intent.getStringExtra("pageAdmin").toString()
         pageName = intent.getStringExtra("pageName").toString()
         page = intent.getBooleanExtra("page",false)
+        pageId = intent.getStringExtra("pageId").toString()
 
         firebaseUser = FirebaseAuth.getInstance().currentUser
 
@@ -235,7 +237,7 @@ class CommentActivity : AppCompatActivity() {
         if (publisherId != FirebaseAuth.getInstance().currentUser!!.uid){
             val dataRef = FirebaseDatabase.getInstance()
                 .reference.child("Notification")
-                .child("AllNotification")
+                .child("AllNotifications")
                 .child(pageAdmin)
             val notificationId = dataRef.push().key!!
 
@@ -248,6 +250,24 @@ class CommentActivity : AppCompatActivity() {
             dataMap["notifierId"] = FirebaseAuth.getInstance().currentUser!!.uid
 
             dataRef.push().setValue(dataMap)
+
+            val dataNRef = FirebaseDatabase.getInstance()
+                .reference.child("PageNotification")
+                .child("AllNotification")
+                .child(pageAdmin)
+                .child(pageId)
+
+            val nId = dataNRef.push().key!!
+
+            val dataNMap = HashMap<String,Any>()
+            dataNMap["nId"] = nId
+            dataNMap["nText"] = "You have new notifications for page:"+pageName
+            dataNMap["postImage"] = postId
+            dataNMap["iPost"] = true
+            dataNMap["pageId"] = pageId
+            dataNMap["notifier"] = FirebaseAuth.getInstance().currentUser!!.uid
+
+            dataNRef.child(nId).updateChildren(dataNMap)
 
             FirebaseDatabase.getInstance().reference
                 .child("Notification")
