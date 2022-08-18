@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +27,7 @@ class ChatListAdapter(private val mContext:Context,
         val profileImage:CircleImageView = itemView.findViewById(R.id.chatProfileImage) as CircleImageView
         val name:TextView = itemView.findViewById(R.id.chatFullName) as TextView
         val textCount:TextView = itemView.findViewById(R.id.textCount_TV) as TextView
+        val layout:RelativeLayout = itemView.findViewById(R.id.RL_chat_count) as RelativeLayout
 
         fun bind(list:UserModel){
             Glide.with(mContext).load(list.profileImage).into(profileImage)
@@ -50,7 +52,7 @@ class ChatListAdapter(private val mContext:Context,
                 .child(mUser[position].uid!!).removeValue()
         }
 
-        countUnreadMessage(holder.textCount, mUser[position].uid!!)
+        countUnreadMessage(holder.textCount, mUser[position].uid!!,holder.layout)
 
     }
 
@@ -58,17 +60,19 @@ class ChatListAdapter(private val mContext:Context,
         return mUser.size
     }
 
-    private fun countUnreadMessage(count:TextView,profileId:String){
+    private fun countUnreadMessage(count:TextView,profileId:String,layout:RelativeLayout){
         val data = FirebaseDatabase.getInstance().reference.child("ChatMessageCount")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
             .child(profileId)
         data.addValueEventListener(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
+                    layout.visibility = View.VISIBLE
                     count.visibility = View.VISIBLE
                     count.text = snapshot.childrenCount.toString()
                 }else{
                     count.visibility = View.GONE
+                    layout.visibility = View.GONE
                 }
             }
 

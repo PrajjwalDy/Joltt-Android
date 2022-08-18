@@ -27,7 +27,7 @@ import com.hindu.cunow.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var uiModeManager:UiModeManager
+    //private lateinit var uiModeManager:UiModeManager
 
     private val CHANNEL_ID = "CUNOW_PUSH_001"
 
@@ -38,10 +38,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        //uiModeManager = (UiModeManager).getSystemService(UI_MODE_SERVICE)
-
-        //uiModeManager.nightMode = UiModeManager.MODE_NIGHT_NO
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -55,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
         navView.setupWithNavController(navController)
         checkNewNotification()
-        createNotificationChannel()
+        //createNotificationChannel()
 
     }
 

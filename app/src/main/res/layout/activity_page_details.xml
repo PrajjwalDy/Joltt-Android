@@ -154,7 +154,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/createPost_page"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:background="@drawable/box_grey"
@@ -166,7 +166,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/pageFollow_Btn_pd"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:background="@drawable/box_grey"

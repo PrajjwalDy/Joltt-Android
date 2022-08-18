@@ -250,11 +250,13 @@ class HomeFragment : Fragment() {
         val data = FirebaseDatabase.getInstance().reference.child("ChatMessageCount")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
 
-        data.addValueEventListener(object :ValueEventListener{
+        data.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     chatNotification_Count.visibility = View.VISIBLE
                     chatNotification_Count_text.text = snapshot.childrenCount.toString()
+                }else{
+                    chatNotification_Count.visibility = View.GONE
                 }
             }
 

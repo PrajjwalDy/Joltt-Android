@@ -83,7 +83,6 @@ class LogInActivity : AppCompatActivity() {
                             progressDialog.dismiss()
                         }
                     }
-
             }
         }
     }

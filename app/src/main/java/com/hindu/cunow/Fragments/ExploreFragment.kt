@@ -72,6 +72,7 @@ class ExploreFragment : Fragment() {
         recyclerView?.adapter = userAdapter
 
         root.searchWithName.setOnClickListener {
+            root.search_edit_text.text.clear()
             checker = "Name"
             root.searchWithUID.background= resources.getDrawable(R.drawable.box_grey)
             root.searchWithName.background= resources.getDrawable(R.drawable.search_bf)
@@ -81,6 +82,7 @@ class ExploreFragment : Fragment() {
         }
 
         root.searchWithUID.setOnClickListener {
+            root.search_edit_text.text.clear()
             checker = "UID"
             root.searchWithName.background= resources.getDrawable(R.drawable.box_grey)
             root.searchWithUID.background= resources.getDrawable(R.drawable.search_bf)

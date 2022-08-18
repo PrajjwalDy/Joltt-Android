@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.Circle.ThreadActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar_thread_flow"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/thread_name_appbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/amiko"
+                android:text="Thread"
+                android:textColor="@color/red"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/uploadingImage_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="5dp"
+                android:fontFamily="@font/amiko"
+                android:text="Uploading Image"
+                android:textColor="@color/red" />
+
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:visibility="gone"
+                android:id="@+id/uploadingImage_anim"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/uploadingImage_txt"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/sending_image" />
+
+        </RelativeLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:id="@+id/RV_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/appBar_thread_flow">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/thread_flow_RV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/sendingLayout_ll" />
+
+        <RelativeLayout
+            android:id="@+id/sendingLayout_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <EditText
+                android:id="@+id/threadFlow_ET"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/box_grey"
+                android:layout_toStartOf="@+id/send_TF"
+                android:layout_toEndOf="@+id/selectMedia_TF"
+                android:padding="5dp"
+                android:hint="Message"
+                android:textColor="@color/red" />
+
+            <ImageView
+                android:id="@+id/selectMedia_TF"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/gallery" />
+
+            <ImageView
+                android:id="@+id/send_TF"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="5dp"
+                android:src="@drawable/send" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/sendImage_TF_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_below="@id/appBar_thread_flow">
+
+        <TextView
+            android:id="@+id/changeImage_thread"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/amiko"
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            android:text="Change Image"
+            />
+
+        <TextView
+            android:id="@+id/Image_thread_close"
+            android:layout_width="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:text="Cancle"
+            android:fontFamily="@font/amiko"
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"
+            />
+
+        <ImageView
+            android:id="@+id/uploadImage_thread"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_below="@+id/Image_thread_close"
+            android:scaleType="fitCenter"
+            android:src="@drawable/test_img" />
+
+        <EditText
+            android:id="@+id/image_message_ET"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/uploadImage_thread"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="message"
+            android:padding="5dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/box_grey" />
+
+        <ImageView
+            android:id="@+id/sendImage_TF"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/send"
+            android:layout_below="@+id/image_message_ET"
+            android:layout_centerHorizontal="true"/>
+
+
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

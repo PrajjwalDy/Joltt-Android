@@ -50,8 +50,8 @@
 
     <fragment
         android:id="@+id/navigation_addPost"
-        android:name="com.hindu.cunow.Fragments.CreatePostFragment"
-        tools:layout="@layout/create_post_fragment" />
+        android:name="com.hindu.cunow.Fragments.ConfessionRoom.ConfessionRoomFragment"
+        tools:layout="@layout/confession_room_fragment" />
 
     <fragment
         android:id="@+id/navigation_notifications"

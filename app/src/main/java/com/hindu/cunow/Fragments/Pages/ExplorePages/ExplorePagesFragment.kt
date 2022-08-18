@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hindu.cunow.Adapter.PageAdapter
@@ -45,9 +46,7 @@ class ExplorePagesFragment : Fragment() {
     private fun initView(root:View){
         recyclerView = root.findViewById(R.id.explorePages_RV) as RecyclerView
         recyclerView!!.setHasFixedSize(true)
-        val linearLayoutManager = LinearLayoutManager(context)
-        linearLayoutManager.reverseLayout = true
-        linearLayoutManager.stackFromEnd = true
+        val linearLayoutManager:LinearLayoutManager= GridLayoutManager(context,2)
         recyclerView!!.layoutManager = linearLayoutManager
     }
 

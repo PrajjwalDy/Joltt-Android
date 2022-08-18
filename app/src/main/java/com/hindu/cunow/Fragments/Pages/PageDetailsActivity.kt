@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -39,7 +40,7 @@ class PageDetailsActivity : AppCompatActivity() {
         pageAdmin = intent.getStringExtra("pageAdmin").toString()
         pageName = intent.getStringExtra("pageName").toString()
         pageId = intent.getStringExtra("pageId").toString()
-
+        checkFollowing()
 
         if (pageAdmin == FirebaseAuth.getInstance().currentUser!!.uid){
             pageFollow_Btn_pd.visibility = View.GONE
@@ -51,6 +52,39 @@ class PageDetailsActivity : AppCompatActivity() {
             createPost_page.visibility = View.GONE
             createPost_page_img.visibility = View.GONE
             pageNotification.visibility = View.GONE
+        }
+        pageFollow_Btn_pd.setOnClickListener {
+            when (pageFollow_Btn_pd.text.toString()) {
+                "Follow" -> {
+                    FirebaseDatabase.getInstance().reference
+                        .child("Users")
+                        .child(FirebaseAuth.getInstance().currentUser!!.uid)
+                        .child("FollowingPages")
+                        .child(pageId)
+                        .setValue(true)
+
+                    FirebaseDatabase.getInstance().reference.child("Pages")
+                        .child(pageId)
+                        .child("pageFollowers")
+                        .child(FirebaseAuth.getInstance().currentUser!!.uid)
+                        .setValue(true)
+                }
+                "Unfollow"->{
+                    FirebaseDatabase.getInstance().reference
+                        .child("Users")
+                        .child(FirebaseAuth.getInstance().currentUser!!.uid)
+                        .child("FollowingPages")
+                        .child(pageId)
+                        .removeValue()
+
+                    FirebaseDatabase.getInstance().reference.child("Pages")
+                        .child(pageId)
+                        .child("pageFollowers")
+                        .child(FirebaseAuth.getInstance().currentUser!!.uid)
+                        .removeValue()
+                }
+
+            }
         }
 
         createPost_page_img.setOnClickListener {
@@ -172,6 +206,26 @@ class PageDetailsActivity : AppCompatActivity() {
                 pageFollowersCount.text = snapshot.childrenCount.toString()
             }
             override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
+    }
+
+    private fun checkFollowing(){
+        val data = FirebaseDatabase.getInstance().reference.child("Pages")
+            .child(pageId)
+            .child("pageFollowers")
+        data.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.hasChild(FirebaseAuth.getInstance().currentUser!!.uid)){
+                    pageFollow_Btn_pd.text = "Unfollow"
+                }else{
+                    pageFollow_Btn_pd.text = "Follow"
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
             }
 
         })

@@ -25,10 +25,10 @@ class CircleTabActivity : AppCompatActivity() {
                     tab.text = "Joined"
                 }
                 1-> {
-                    tab.text = "Explore Circles"
+                    tab.text = "Explore Threads"
                 }
                 2 ->{
-                    tab.text = "My Circles"
+                    tab.text = "My Threads"
                 }
             }
 
