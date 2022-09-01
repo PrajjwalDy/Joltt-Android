@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/red"
+    tools:context=".Activity.FacultySignup">
+    
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_backbutton"
+        android:layout_margin="20dp"/>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="-30dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/amiko"
+            android:text="AcademicsNow"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/academics_now" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Signup"
+        android:layout_gravity="center_horizontal"
+        android:textStyle=""
+        android:fontFamily="@font/amiko"
+        android:textSize="25dp"
+        android:layout_margin="-20dp"
+        android:textColor="@color/white"/>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:background="@drawable/f_login_bg"
+       android:orientation="vertical">
+
+
+
+       <EditText
+           android:id="@+id/faculty_name"
+           android:layout_width="match_parent"
+           android:layout_height="50dp"
+           android:background="@drawable/box_grey"
+           android:layout_margin="10dp"
+           android:hint="Full Name"
+           android:padding="5dp"
+           android:textColor="@color/red"/>
+
+       <EditText
+           android:id="@+id/faculty_email"
+           android:layout_width="match_parent"
+           android:layout_height="50dp"
+           android:inputType="textEmailAddress"
+           android:background="@drawable/box_grey"
+           android:layout_margin="10dp"
+           android:hint="Email"
+           android:padding="5dp"
+           android:textColor="@color/red"/>
+
+       <EditText
+           android:id="@+id/faculty_eid"
+           android:layout_width="match_parent"
+           android:layout_height="50dp"
+           android:background="@drawable/box_grey"
+           android:layout_margin="10dp"
+           android:hint="EID"
+           android:padding="5dp"
+           android:textColor="@color/red"/>
+
+
+       <EditText
+           android:id="@+id/faculty_phone"
+           android:layout_width="match_parent"
+           android:layout_height="50dp"
+           android:background="@drawable/box_grey"
+           android:layout_margin="10dp"
+           android:hint="Phone number"
+           android:inputType="phone"
+           android:padding="5dp"
+           android:textColor="@color/red"/>
+
+       <EditText
+           android:id="@+id/faculty_password"
+           android:layout_width="match_parent"
+           android:layout_height="50dp"
+           android:inputType="textPassword"
+           android:background="@drawable/box_grey"
+           android:layout_margin="10dp"
+           android:hint="Password"
+           android:padding="5dp"
+           android:textColor="@color/red"/>
+
+       <androidx.appcompat.widget.AppCompatButton
+           android:id="@+id/faculty_signup_button"
+           android:layout_width="300dp"
+           android:layout_height="40dp"
+           android:layout_gravity="center_horizontal"
+           android:background="@drawable/button_bg_red"
+           android:layout_margin="10dp"
+           android:textColor="@color/white"
+           android:textSize="18sp"
+           android:text="SignUp"
+           android:textAllCaps="false"/>
+
+       <TextView
+           android:id="@+id/faculty_cna_login_button"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="LogIn"
+           android:textSize="16sp"
+           android:layout_gravity="center_horizontal"
+           android:layout_marginTop="10dp"/>
+
+
+   </LinearLayout>
+
+
+
+
+</LinearLayout>

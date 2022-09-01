@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/red"
+    android:orientation="vertical"
+    tools:context=".Activity.FacultyLogin">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_backbutton"
+        android:layout_margin="20dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="-20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/amiko"
+            android:text="AcademicsNow"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/academics_now" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LogIn"
+        android:layout_gravity="center_horizontal"
+        android:textStyle=""
+        android:fontFamily="@font/amiko"
+        android:textSize="25dp"
+        android:layout_margin="10dp"
+        android:textColor="@color/white"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/f_login_bg"
+        android:orientation="vertical">
+
+
+
+        <EditText
+            android:id="@+id/faculty_email_login"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/box_grey"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="10dp"
+            android:hint="Email"
+            android:padding="5dp"
+            android:textColor="@color/red"/>
+
+
+
+        <EditText
+            android:id="@+id/faculty_password_login"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:inputType="textPassword"
+            android:background="@drawable/box_grey"
+            android:layout_margin="10dp"
+            android:hint="Password"
+            android:padding="5dp"
+            android:textColor="@color/red"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/faculty_login_button"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_bg_red"
+            android:layout_margin="10dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:text="LogIn"
+            android:textAllCaps="false"/>
+
+
+        <TextView
+            android:id="@+id/faculty_cna_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create new account"
+            android:textSize="16sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

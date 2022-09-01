@@ -18,6 +18,24 @@
         android:theme="@style/Theme.CUNow"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".FacultyVerificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.FacultyLogin"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.LandingPageActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.FacultySignup"
+            android:exported="false" />
+        <activity
             android:name=".Fragments.Circle.ThreadActivity"
             android:exported="false" />
         <activity
@@ -162,14 +180,8 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Activity.LogInActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"
