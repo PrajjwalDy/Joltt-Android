@@ -8,7 +8,12 @@ import android.text.TextUtils
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.MainActivity
+import com.hindu.cunow.Model.FacultyData
 import com.hindu.cunow.R
 import kotlinx.android.synthetic.main.activity_comment.*
 import kotlinx.android.synthetic.main.activity_faculty_login.*
@@ -28,9 +33,6 @@ class FacultyLogin : AppCompatActivity() {
             val intent = Intent(this, FacultySignup::class.java)
             startActivity(intent)
         }
-
-
-
 
     }
 
@@ -62,13 +64,10 @@ class FacultyLogin : AppCompatActivity() {
                             FirebaseAuth.getInstance().currentUser?.reload()?.addOnCompleteListener { task ->
                                 if (user!!.isEmailVerified) {
                                     progressDialog.dismiss()
-                                    val intent = Intent(this@FacultyLogin, MainActivity::class.java)
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                                    startActivity(intent)
-                                    Toast.makeText(this@FacultyLogin, "LogIn Success", Toast.LENGTH_SHORT).show()
+                                    checkStatus()
                                 } else{
                                     progressDialog.dismiss()
-                                    val intent = Intent(this@FacultyLogin,VerifyActivity::class.java)
+                                    val intent = Intent(this@FacultyLogin,FacultyVerificationActivity::class.java)
                                     startActivity(intent)
                                 }
                         }
@@ -83,5 +82,35 @@ class FacultyLogin : AppCompatActivity() {
                     }
             }
         }
+    }
+
+    private fun checkStatus(){
+        val data = FirebaseDatabase.getInstance()
+            .reference
+            .child("Faculty")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+
+        data.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val faculty = snapshot.getValue(FacultyData::class.java)
+                if (faculty!!.F_Verified!!){
+                    val intent = Intent(this@FacultyLogin, MainActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                    Toast.makeText(this@FacultyLogin, "LogIn Success", Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(this@FacultyLogin, "Account isn't verified yet!", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@FacultyLogin, FacultyVerificationActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@FacultyLogin, error.message, Toast.LENGTH_SHORT).show()
+            }
+
+        })
+
     }
 }

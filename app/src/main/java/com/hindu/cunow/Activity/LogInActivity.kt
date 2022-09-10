@@ -103,4 +103,8 @@ val user : FirebaseUser? = FirebaseAuth.getInstance().currentUser
         }
 
     }
+
+    private fun checkStatus(){
+
+    }
 }

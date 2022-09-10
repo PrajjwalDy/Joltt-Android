@@ -15,4 +15,5 @@
     <string name="welcome_to_cunow">Welcome to CUNow, explore from here or dive in to get started</string>
     <string name="mail_message">We have sent a verification email to your CU mail(***@cuchd.in <b>REFER TO JUNK FOLDER</b>)please verify your account and then press REFRESH button</string>
     <string name="forgetPassword">We will send you password reset mail to your CU mail(****@cuchd.in) In case you didn\'t get/can\'t find it please check in <b>JUNK FOLDER</b> to.</string>
+    <string name="email_verify_note">Note: If you didn\'t recieve the mail please refer to junk or spam folder of your inbox.</string>
 </resources>

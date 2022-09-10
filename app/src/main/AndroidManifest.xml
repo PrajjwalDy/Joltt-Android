@@ -18,7 +18,7 @@
         android:theme="@style/Theme.CUNow"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".FacultyVerificationActivity"
+            android:name=".Activity.FacultyVerificationActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.FacultyLogin"

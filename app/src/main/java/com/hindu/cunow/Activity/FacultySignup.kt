@@ -85,12 +85,14 @@ class FacultySignup : AppCompatActivity() {
         val userRef = database.reference.child("Faculty")
 
         val dataMap = HashMap<String,Any>()
-        dataMap["uid"] = currentUserID
-        dataMap["fullName"] = facultyName
-        dataMap["EID"] = EID
-        dataMap["facultyPhone"] = facultyPhone
-        dataMap["facultyEmail"] = facultyEmail
-        dataMap["password"] = password
+        dataMap["F_UID"] = currentUserID
+        dataMap["F_Name"] = facultyName
+        dataMap["F_EID"] = EID
+        dataMap["F_Phone"] = facultyPhone
+        dataMap["F_Email"] = facultyEmail
+        dataMap["F_Password"] = password
+        dataMap["F_Verified"] = false
+        dataMap["Faculty_Y"] = true
 
         userRef.child(currentUserID).setValue(dataMap).addOnCompleteListener{task->
             if(task.isSuccessful){
@@ -99,7 +101,7 @@ class FacultySignup : AppCompatActivity() {
                 firebaseUser!!.sendEmailVerification()
                     .addOnCompleteListener{task->
                         Toast.makeText(this, "Verification link send success", Toast.LENGTH_LONG).show()
-                        val intent = Intent(this@FacultySignup, VerifyActivity::class.java)
+                        val intent = Intent(this@FacultySignup, FacultyVerificationActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
                         firebaseUser.uid.let { it1 ->
