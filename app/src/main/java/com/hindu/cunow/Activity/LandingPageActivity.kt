@@ -1,9 +1,12 @@
 package com.hindu.cunow.Activity
 
+import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -39,7 +42,10 @@ class LandingPageActivity : AppCompatActivity() {
 
         val user : FirebaseUser? = FirebaseAuth.getInstance().currentUser
         if(FirebaseAuth.getInstance().currentUser != null){
+
+
             checkUser(user)
+
         }
     }
 
@@ -56,7 +62,7 @@ class LandingPageActivity : AppCompatActivity() {
                     val intent = Intent(this@LandingPageActivity, MainActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
-                    Toast.makeText(this@LandingPageActivity, "LogIn Success", Toast.LENGTH_SHORT).show()
+
                 }else{
                     Toast.makeText(this@LandingPageActivity, "Account isn't verified yet!", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this@LandingPageActivity, FacultyVerificationActivity::class.java)
@@ -74,6 +80,11 @@ class LandingPageActivity : AppCompatActivity() {
     }
 
     private fun checkUser(user : FirebaseUser?){
+        val progressDialog = Dialog(this)
+        progressDialog.setContentView(R.layout.profile_dropdown_menu)
+        progressDialog.show()
+        mainLL.visibility = View.GONE
+
         val userData = FirebaseDatabase.getInstance()
             .reference.child("Faculty")
 
@@ -88,17 +99,20 @@ class LandingPageActivity : AppCompatActivity() {
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
                         finish()
-
                     }
                 }
+                progressDialog.dismiss()
+                mainLL.visibility = View.VISIBLE
+
             }
 
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
 
-        })
 
+
+        })
 
     }
 }
