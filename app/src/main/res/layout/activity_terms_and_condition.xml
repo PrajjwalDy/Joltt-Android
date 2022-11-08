@@ -16,7 +16,7 @@
             android:layout_height="50dp"
             android:orientation="horizontal">
 
-            <TextView
+        <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -24,9 +24,7 @@
                 android:text="Terms And Condition"
                 android:layout_margin="10dp"
                 android:textColor="@color/red"
-                android:textSize="18sp"
-                />
-
+                android:textSize="18sp"/>
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>
     <ScrollView

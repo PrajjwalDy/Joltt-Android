@@ -38,7 +38,7 @@ class AddVibesAcitvity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_vibes_acitvity)
-
+   supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         //init camera permission
         cameraPermission = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
 

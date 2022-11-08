@@ -39,7 +39,7 @@ class LogInActivity : AppCompatActivity() {
     }
 
     private fun login(){
-        val email = uid_edit_text.text.toString()+"@cuchd.in"
+        val email = uid_edit_text.text.toString() //+"@cuchd.in"
         val password = password_edit_text.text.toString()
 
         when{
