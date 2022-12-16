@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_navigation_dashboard_to_peopleFragment"
             app:destination="@id/peopleFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_academicsFragment"
+            app:destination="@id/academicsFragment" />
     </fragment>
 
     <fragment
@@ -231,6 +234,11 @@
             android:id="@+id/action_pageNotificationFragment_to_fullPostView"
             app:destination="@id/fullPostView" />
     </fragment>
+    <fragment
+        android:id="@+id/academicsFragment"
+        android:name="com.hindu.cunow.Fragments.Academics.AcademicsFragment"
+        android:label="fragment_academics"
+        tools:layout="@layout/fragment_academics" />
 
 
 </navigation>

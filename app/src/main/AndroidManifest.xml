@@ -18,6 +18,13 @@
         android:theme="@style/Theme.CUNow"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".AddSubjectsActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Activity.FacultyVerificationActivity"
             android:exported="false" />
         <activity

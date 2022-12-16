@@ -7,6 +7,6 @@ class FacultyData {
     val F_Phone:String? = null
     val F_Email:String? = null
     val F_Verified:Boolean = false
-    val Faculty_Y:Boolean = true
+    val Faculty_Y:Boolean = false
 
 }

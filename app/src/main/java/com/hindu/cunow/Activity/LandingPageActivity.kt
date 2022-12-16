@@ -16,6 +16,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.MainActivity
 import com.hindu.cunow.Model.FacultyData
+import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import kotlinx.android.synthetic.main.activity_landing_page.*
 
@@ -23,6 +24,16 @@ class LandingPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_landing_page)
+
+        val user : FirebaseUser? = FirebaseAuth.getInstance().currentUser
+        if(FirebaseAuth.getInstance().currentUser != null){
+            mainLL.visibility = View.GONE
+            eye_LL.visibility = View.VISIBLE
+            checkUser(user)
+        }else{
+            mainLL.visibility = View.VISIBLE
+            eye_LL.visibility = View.GONE
+        }
 
         landing_faculty_button.setOnClickListener {
             val intent = Intent(this, FacultyLogin::class.java)
@@ -42,10 +53,12 @@ class LandingPageActivity : AppCompatActivity() {
 
         val user : FirebaseUser? = FirebaseAuth.getInstance().currentUser
         if(FirebaseAuth.getInstance().currentUser != null){
-
-
+            mainLL.visibility = View.GONE
+            eye_LL.visibility = View.VISIBLE
             checkUser(user)
-
+        }else{
+            mainLL.visibility = View.VISIBLE
+            eye_LL.visibility = View.GONE
         }
     }
 
@@ -86,12 +99,14 @@ class LandingPageActivity : AppCompatActivity() {
         mainLL.visibility = View.GONE
 
         val userData = FirebaseDatabase.getInstance()
-            .reference.child("Faculty")
+            .reference.child("Users")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+
 
         userData.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                val data = snapshot.getValue(FacultyData::class.java)
-                if(data!!.Faculty_Y){
+                val data = snapshot.getValue(UserModel::class.java)
+                if(data!!.faculty){
                     checkStatus()
                 }else{
                     if (user!!.isEmailVerified){

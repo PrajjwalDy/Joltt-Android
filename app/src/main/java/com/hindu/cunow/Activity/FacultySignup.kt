@@ -135,7 +135,7 @@ class FacultySignup : AppCompatActivity() {
         dataMap["searchName"] = facultyName.toString().lowercase(Locale.getDefault())
         dataMap["private"] = false
         dataMap["firstVisit"] = true
-        dataMap["faculty"] = 0
+        dataMap["faculty"] = true
         dataMap["confessionVisited"] = true
 
         userRef.child(currentUserID).setValue(dataMap).addOnCompleteListener{task->

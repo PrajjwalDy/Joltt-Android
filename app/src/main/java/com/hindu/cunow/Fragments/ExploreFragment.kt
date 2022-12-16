@@ -63,6 +63,10 @@ class ExploreFragment : Fragment() {
             Navigation.findNavController(root).navigate(R.id.action_navigation_dashboard_to_peopleFragment)
         }
 
+        root.academicsNow.setOnClickListener {
+            Navigation.findNavController(root).navigate(R.id.action_navigation_dashboard_to_academicsFragment)
+        }
+
         recyclerView = root.findViewById(R.id.searchUserRV)
         recyclerView!!.setHasFixedSize(true)
         recyclerView!!.layoutManager = LinearLayoutManager(context)

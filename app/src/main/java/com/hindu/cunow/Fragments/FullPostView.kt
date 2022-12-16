@@ -1,5 +1,6 @@
 package com.hindu.cunow.Fragments
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -52,6 +53,7 @@ class FullPostView : Fragment() {
         return root
     }
 
+    @SuppressLint("SuspiciousIndentation")
     private fun returnPost(input:String){
         val array = FirebaseDatabase.getInstance().reference
             .child("Post")
