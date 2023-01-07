@@ -28,6 +28,9 @@ import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import com.iceteck.silicompressorr.videocompression.MediaController.mContext
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.w3c.dom.Text
 
 class NotificationAdapter(private val nContext:Context,
@@ -107,7 +110,9 @@ class NotificationAdapter(private val nContext:Context,
             }else{
                 userName.visibility = View.VISIBLE
                 profileImage.visibility = View.VISIBLE
-                loadNotifier(list.notifierId!!,profileImage,userName)
+                CoroutineScope(Dispatchers.IO).launch {
+                    loadNotifier(list.notifierId!!,profileImage,userName)
+                }
             }
 
             if(list.confession){
@@ -116,11 +121,13 @@ class NotificationAdapter(private val nContext:Context,
                 postImage.visibility = View.VISIBLE
             }
             notificationText.text = list.notificationText
-            loadPostImage(list.postID!!,postImage)
+            CoroutineScope(Dispatchers.IO).launch {
+                loadPostImage(list.postID!!,postImage)
+            }
         }
     }
 
-    private fun loadPostImage(postId:String,postImage:ImageView){
+    private suspend fun loadPostImage(postId:String,postImage:ImageView){
         val postRef = FirebaseDatabase.getInstance().reference
             .child("Post")
             .child(postId)
@@ -138,10 +145,10 @@ class NotificationAdapter(private val nContext:Context,
         })
     }
 
-    private fun loadNotifier(notifierId:String,profileImage:CircleImageView,userName:TextView){
-        val progressDialog = nContext.let { Dialog(it) }
-        progressDialog.setContentView(R.layout.profile_dropdown_menu)
-        progressDialog.show()
+    private suspend fun loadNotifier(notifierId:String,profileImage:CircleImageView,userName:TextView){
+//        val progressDialog = nContext.let { Dialog(it) }
+//        progressDialog.setContentView(R.layout.profile_dropdown_menu)
+//        progressDialog.show()
         val userDataRef = FirebaseDatabase.getInstance().reference.child("Users").child(notifierId)
 
         userDataRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -159,7 +166,7 @@ class NotificationAdapter(private val nContext:Context,
 
 
     })
-        progressDialog.dismiss()
+        //progressDialog.dismiss()
 
     }
 

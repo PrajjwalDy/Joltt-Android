@@ -13,6 +13,9 @@ import com.hindu.cunow.Callback.IJoinedCircleCallback
 import com.hindu.cunow.Callback.INotificationCallback
 import com.hindu.cunow.Model.JoinedCircleModel
 import com.hindu.cunow.Model.NotificationModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class NotificationsViewModel : ViewModel(), INotificationCallback {
     private var notificationLiveData: MutableLiveData<List<NotificationModel>>? = null
@@ -25,13 +28,16 @@ class NotificationsViewModel : ViewModel(), INotificationCallback {
         if (notificationLiveData == null){
             notificationLiveData = MutableLiveData()
             messageError = MutableLiveData()
-            loadNotification()
+            CoroutineScope(Dispatchers.IO).launch {
+                loadNotification()
+            }
+
         }
         val mutableLiveData = notificationLiveData
         return mutableLiveData!!
     }
 
-    private fun loadNotification(){
+    private suspend fun loadNotification(){
         val notificationList = ArrayList<NotificationModel>()
         val notificationData = FirebaseDatabase.getInstance().reference.child("Notification").child("AllNotification")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)

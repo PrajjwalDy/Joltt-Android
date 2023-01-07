@@ -22,6 +22,9 @@ import com.hindu.cunow.PushNotification.Token
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.FragmentNotificationsBinding
 import kotlinx.android.synthetic.main.fragment_notifications.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -47,7 +50,7 @@ class NotificationsFragment : Fragment() {
         val root: View = binding.root
 
         notificationsViewModel.notificationViewModel.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            initView(root)
+                initView(root)
             notificationAdapter = context?.let { it1-> NotificationAdapter(it1,it) }
             recyclerView!!.adapter = notificationAdapter
             notificationAdapter!!.notifyDataSetChanged()
@@ -63,7 +66,7 @@ class NotificationsFragment : Fragment() {
     }
 
 
-    private fun initView(root:View){
+    private  fun initView(root:View){
         recyclerView = root.findViewById(R.id.notificationRecycler) as RecyclerView
         recyclerView!!.setHasFixedSize(true)
         val linearLayoutManager = LinearLayoutManager(context)
