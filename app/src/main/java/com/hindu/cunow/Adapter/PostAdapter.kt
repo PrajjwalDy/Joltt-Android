@@ -51,6 +51,9 @@ import com.hindu.cunow.R
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_comment.*
 import kotlinx.android.synthetic.main.more_option_dialogbox.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class PostAdapter (private val mContext: Context,
                    private val mPost:List<PostModel>,
@@ -67,16 +70,24 @@ class PostAdapter (private val mContext: Context,
 
         val zoom = AnimationUtils.loadAnimation(mContext, R.anim.zoom)
         val post = mPost[position]
-        islike(post.postId!!, holder.like)
-        totalLikes(post.postId,holder.totalLikes)
-        totalComments(holder.totalComments,post.postId)
+        CoroutineScope(Dispatchers.IO).launch {
+            islike(post.postId!!, holder.like)
+            totalLikes(post.postId,holder.totalLikes)
+            totalComments(holder.totalComments,post.postId)
+        }
+
 
         holder.bind(mPost[position],mContext,holder.image,holder.playerView)
 
         if (mPost[position].page!!){
-            pageInfo(holder.publisherImage,holder.publisherName,post.publisher!!)
+            CoroutineScope(Dispatchers.IO).launch {
+                pageInfo(holder.publisherImage,holder.publisherName,post.publisher!!)
+            }
+
         }else{
-            publisher(holder.publisherImage,holder.publisherName,post.publisher!!,holder.verification)
+            CoroutineScope(Dispatchers.IO).launch {
+                publisher(holder.publisherImage,holder.publisherName,post.publisher!!,holder.verification)
+            }
         }
 
         holder.publisherName.setOnClickListener {
@@ -97,8 +108,8 @@ class PostAdapter (private val mContext: Context,
 
         holder.like.setOnClickListener {
             like(holder.like,
-                post.postId,zoom,
-                post.publisher,
+                post.postId!!,zoom,
+                post.publisher!!,
                 holder.animation,
                 holder.caption,
                 holder.totalLikes,
@@ -137,7 +148,7 @@ class PostAdapter (private val mContext: Context,
                     .child("Users")
                     .child(FirebaseAuth.getInstance().currentUser!!.uid)
                     .child("SavedPosts")
-                    .child(post.postId)
+                    .child(post.postId!!)
                     .setValue(true)
                 alertDialog.dismiss()
             }
@@ -148,7 +159,7 @@ class PostAdapter (private val mContext: Context,
 
             dialogView.deletePost.setOnClickListener {
                 FirebaseDatabase.getInstance().reference.child("Post")
-                    .child(post.postId)
+                    .child(post.postId!!)
                     .removeValue()
                 Snackbar.make(holder.itemView,"Post removed success",Snackbar.LENGTH_SHORT).show()
                 alertDialog.dismiss()
@@ -207,7 +218,7 @@ class PostAdapter (private val mContext: Context,
         }
     }
 
-    private fun publisher(profileImage:CircleImageView, name:TextView,publisherId:String,verifImage:CircleImageView){
+    private suspend fun publisher(profileImage:CircleImageView, name:TextView,publisherId:String,verifImage:CircleImageView){
 
         val userDataRef = FirebaseDatabase.getInstance().reference.child("Users").child(publisherId)
 
@@ -282,13 +293,14 @@ class PostAdapter (private val mContext: Context,
             likeButton.tag = "Like"
             likeAnimationView.visibility = View.GONE
         }
-        islike(postId,likeButton)
-        totalLikes(postId,likeTextView)
-
+        CoroutineScope(Dispatchers.IO).launch {
+            islike(postId,likeButton)
+            totalLikes(postId,likeTextView)
+        }
     }
 
 
-    private fun islike(postId:String, likeButton:ImageView){
+    private suspend fun islike(postId:String, likeButton:ImageView){
         val firebaseUser = FirebaseAuth.getInstance().currentUser
 
         val likeRef = FirebaseDatabase.getInstance().reference
@@ -371,7 +383,7 @@ class PostAdapter (private val mContext: Context,
         MP4(""), HLS("")
     }
 
-    private fun totalLikes(postId: String, totalLikes:TextView){
+    private suspend fun totalLikes(postId: String, totalLikes:TextView){
         val databaseRef = FirebaseDatabase.getInstance().reference
             .child("Likes").child(postId)
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener{
@@ -421,7 +433,7 @@ class PostAdapter (private val mContext: Context,
         }
     }
 
-    private fun totalComments(totalComments:TextView, postId: String){
+    private suspend fun totalComments(totalComments:TextView, postId: String){
         val postData = FirebaseDatabase.getInstance().reference.child("Comments")
             .child(postId)
 
@@ -492,7 +504,7 @@ class PostAdapter (private val mContext: Context,
 
         dataNRef.child(nId).updateChildren(dataNMap)
     }
-    private fun pageInfo(profileImage:CircleImageView, name:TextView,publisherId:String) {
+    private suspend fun pageInfo(profileImage:CircleImageView, name:TextView,publisherId:String) {
         val userDataRef = FirebaseDatabase.getInstance().reference.child("Pages").child(publisherId)
 
         userDataRef.addListenerForSingleValueEvent(object : ValueEventListener {
