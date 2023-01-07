@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".Network"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -33,11 +34,12 @@
         <activity
             android:name=".Activity.LandingPageActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".Activity.FacultySignup"
@@ -190,6 +192,7 @@
             android:name=".Activity.LogInActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
         </activity>
         <activity
             android:name=".MainActivity"

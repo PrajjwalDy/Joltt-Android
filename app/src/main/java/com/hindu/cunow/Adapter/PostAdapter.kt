@@ -230,6 +230,7 @@ class PostAdapter (private val mContext: Context,
             }
 
         })
+        userDataRef.keepSynced(true)
     }
     //Like Mechanism
     private fun like(likeButton: ImageView,
@@ -270,6 +271,7 @@ class PostAdapter (private val mContext: Context,
                 }
 
             })
+            ref.keepSynced(true)
 
         }else{
             FirebaseDatabase.getInstance().reference
@@ -310,6 +312,7 @@ class PostAdapter (private val mContext: Context,
             }
 
         })
+        likeRef.keepSynced(true)
 
     }
 
@@ -388,6 +391,7 @@ class PostAdapter (private val mContext: Context,
             }
 
         })
+        databaseRef.keepSynced(true)
     }
 
     private fun addNotification(publisherId: String,postId: String,caption:TextView){
@@ -438,6 +442,7 @@ class PostAdapter (private val mContext: Context,
             }
 
         })
+        postData.keepSynced(true)
 
     }
 

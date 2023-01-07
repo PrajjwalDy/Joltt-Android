@@ -13,6 +13,9 @@ import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Callback.IPostCallback
 import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel(), IPostCallback {
 
@@ -38,7 +41,9 @@ class HomeViewModel : ViewModel(), IPostCallback {
 
     }
 
-    private fun loadPost() {
+
+
+    private suspend fun loadPost() {
         //checkFollowing()
         val postList=ArrayList<PostModel>()
         val dataReference = FirebaseDatabase.getInstance().reference.child("Post")
@@ -66,7 +71,10 @@ class HomeViewModel : ViewModel(), IPostCallback {
                 postLoadCallback.onPostCallbackLoadFailed(error.message)
             }
 
+
+
         })
+        dataReference.keepSynced(true)
     }
 
     private fun checkFollowing(){
@@ -83,7 +91,9 @@ class HomeViewModel : ViewModel(), IPostCallback {
                     for (snapshot in snapshot.children){
                         snapshot.key?.let { (followingList as ArrayList<String>).add(it) }
                     }
-                    loadPost()
+                    CoroutineScope(Dispatchers.IO).launch {
+                        loadPost()
+                    }
                 }
             }
             override fun onCancelled(error: DatabaseError) {
@@ -91,6 +101,7 @@ class HomeViewModel : ViewModel(), IPostCallback {
             }
 
         })
+        userDataRef.keepSynced(true)
     }
 
     /*private fun loadPagePost(){
