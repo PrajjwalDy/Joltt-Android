@@ -54,6 +54,7 @@ import kotlinx.android.synthetic.main.more_option_dialogbox.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 class PostAdapter (private val mContext: Context,
                    private val mPost:List<PostModel>,
@@ -172,8 +173,6 @@ class PostAdapter (private val mContext: Context,
             }
         }
     }
-
-
 
     override fun getItemCount(): Int {
         return mPost.size
@@ -370,7 +369,7 @@ class PostAdapter (private val mContext: Context,
 
             override fun onPlayerError(error: PlaybackException) {
                 super.onPlayerError(error)
-                Toast.makeText(mContext,"Some Error Occurred",Toast.LENGTH_SHORT).show()
+                //Toast.makeText(mContext,"Some Error Occurred",Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -485,6 +484,7 @@ class PostAdapter (private val mContext: Context,
                 .child(pageAdmin).child(notificationId).setValue(true)
         }
     }
+
     private fun addPageN(pageAdmin: String,postId: String,pageName:String,pageId:String){
         val dataNRef = FirebaseDatabase.getInstance()
             .reference.child("PageNotification")
@@ -504,6 +504,7 @@ class PostAdapter (private val mContext: Context,
 
         dataNRef.child(nId).updateChildren(dataNMap)
     }
+
     private suspend fun pageInfo(profileImage:CircleImageView, name:TextView,publisherId:String) {
         val userDataRef = FirebaseDatabase.getInstance().reference.child("Pages").child(publisherId)
 

@@ -3,8 +3,10 @@ package com.hindu.cunow.ui.home
 import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Context
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -32,8 +34,12 @@ class HomeViewModel : ViewModel(), IPostCallback {
         if (postLiveData == null){
             postLiveData = MutableLiveData()
             messageError = MutableLiveData()
-            pageList()
-            checkFollowing()
+
+            viewModelScope.launch(Dispatchers.IO) {
+                pageList()
+                checkFollowing()
+            }
+
 
         }
         val mutableLiveData = postLiveData
@@ -77,7 +83,7 @@ class HomeViewModel : ViewModel(), IPostCallback {
         dataReference.keepSynced(true)
     }
 
-    private fun checkFollowing(){
+    private suspend fun checkFollowing(){
         followingList = ArrayList()
 
         val userDataRef = FirebaseDatabase.getInstance().reference.child("Follow")
@@ -128,7 +134,7 @@ class HomeViewModel : ViewModel(), IPostCallback {
         })
     }*/
 
-    private fun pageList(){
+    private suspend fun pageList(){
         pageList = ArrayList()
         val data = FirebaseDatabase.getInstance().reference.child("Users")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)

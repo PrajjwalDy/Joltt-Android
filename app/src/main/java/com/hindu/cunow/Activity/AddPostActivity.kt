@@ -5,6 +5,8 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -34,6 +36,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import kotlinx.android.synthetic.main.activity_add_post.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.post_privacy_dialog.view.*
+import java.io.ByteArrayOutputStream
 
 class AddPostActivity : AppCompatActivity() {
     private var privacy = "public"
@@ -87,24 +90,26 @@ class AddPostActivity : AppCompatActivity() {
         progressDialog.setContentView(R.layout.porgress_dialog)
         progressDialog.show()
 
+        val inputStream = contentResolver.openInputStream(imageUri!!)
+        val image = BitmapFactory.decodeStream(inputStream)
+
+        val baos = ByteArrayOutputStream()
+        val options = 40
+        image.compress(Bitmap.CompressFormat.JPEG, options, baos)
+        val data = baos.toByteArray()
+
         val fileReference = storagePostImageRef!!
             .child(System.currentTimeMillis().toString()+".jpg")
 
         val uploadTask:StorageTask<*>
-        uploadTask = fileReference.putFile(imageUri!!)
+        uploadTask = fileReference.putBytes(data)
 
-        uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>>{task->
-            if (!task.isSuccessful){
-                task.exception?.let {
-                    throw it
-                    progressDialog.dismiss()
-                }
-            }
-            return@Continuation fileReference.downloadUrl
-        }).addOnCompleteListener(OnCompleteListener<Uri>{task ->
-            if (task.isSuccessful){
-                val downloadUrl = task.result
-                myUrl = downloadUrl.toString()
+        uploadTask
+        .addOnSuccessListener{
+            val downloadUrl = it.metadata!!.reference!!.downloadUrl
+            downloadUrl.addOnSuccessListener {
+                // Save the download URL to the database
+                val imageUrl = it.toString()
 
                 val ref = FirebaseDatabase.getInstance().reference.child("Post")
                 val postId = ref.push().key
@@ -113,7 +118,7 @@ class AddPostActivity : AppCompatActivity() {
                 postMap["postId"] = postId!!
                 postMap["publisher"] = FirebaseAuth.getInstance().currentUser!!.uid
                 postMap["caption"] = caption_image.text.toString()
-                postMap["image"] = myUrl
+                postMap["image"] = imageUrl
                 postMap["iImage"] = true
                 postMap["video"] = false
                 postMap["page"] = false
@@ -131,11 +136,9 @@ class AddPostActivity : AppCompatActivity() {
                         .setValue(true)
                 }
                 progressDialog.dismiss()
-            }else{
-                Toast.makeText(this,"Something went wrong",Toast.LENGTH_SHORT).show()
-                progressDialog.dismiss()
             }
-        })
+
+        }
 
     }
 
