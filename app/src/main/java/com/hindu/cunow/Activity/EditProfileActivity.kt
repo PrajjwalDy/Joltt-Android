@@ -204,7 +204,6 @@ class EditProfileActivity : AppCompatActivity() {
         }
     }
 
-
     private fun retrieveUserData() {
         val dataRef = FirebaseDatabase
             .getInstance().reference

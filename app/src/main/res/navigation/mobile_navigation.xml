@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.hindu.cunow.Fragments.ExploreFragment"
+        android:name="com.hindu.cunow.Fragments.Explore.ExploreFragment"
         tools:layout="@layout/explore_fragment" >
         <action
             android:id="@+id/action_navigation_dashboard_to_confessionRoomFragment"
@@ -49,6 +49,18 @@
         <action
             android:id="@+id/action_navigation_dashboard_to_academicsFragment"
             app:destination="@id/academicsFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_hasTagFragment"
+            app:destination="@id/hasTagFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_hackathonsFragment"
+            app:destination="@id/hackathonsFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_internshipsFragment"
+            app:destination="@id/internshipsFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_eventFragment"
+            app:destination="@id/eventFragment" />
     </fragment>
 
     <fragment
@@ -239,6 +251,31 @@
         android:name="com.hindu.cunow.Fragments.Academics.AcademicsFragment"
         android:label="fragment_academics"
         tools:layout="@layout/fragment_academics" />
+    <fragment
+        android:id="@+id/hasTagFragment"
+        android:name="com.hindu.cunow.Fragments.HashTag.HasTagFragment"
+        android:label="fragment_has_tag"
+        tools:layout="@layout/fragment_has_tag" />
+    <fragment
+        android:id="@+id/homeTab"
+        android:name="com.hindu.cunow.Fragments.ExploreTabs.HomeTab"
+        android:label="fragment_home_tab"
+        tools:layout="@layout/fragment_home_tab" />
+    <fragment
+        android:id="@+id/eventFragment"
+        android:name="com.hindu.cunow.Fragments.Event.EventFragment"
+        android:label="fragment_event"
+        tools:layout="@layout/fragment_event" />
+    <fragment
+        android:id="@+id/internshipsFragment"
+        android:name="com.hindu.cunow.Fragments.Internship.InternshipsFragment"
+        android:label="fragment_internships"
+        tools:layout="@layout/fragment_internships" />
+    <fragment
+        android:id="@+id/hackathonsFragment"
+        android:name="com.hindu.cunow.Fragments.Hackathons.HackathonsFragment"
+        android:label="fragment_hackathons"
+        tools:layout="@layout/fragment_hackathons" />
 
 
 </navigation>

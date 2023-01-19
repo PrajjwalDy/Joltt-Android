@@ -1,9 +1,7 @@
-package com.hindu.cunow.Fragments
+package com.hindu.cunow.Fragments.Explore
 
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.provider.DocumentsContract
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.fragment.app.Fragment
@@ -13,18 +11,24 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Activity.FeedbackActivity
+import com.hindu.cunow.Adapter.AboutMeTabsAdapter
+import com.hindu.cunow.Adapter.ExploreTabAdapter
 import com.hindu.cunow.Adapter.UserAdapter
 import com.hindu.cunow.Fragments.Circle.CircleTabActivity
 import com.hindu.cunow.Fragments.Pages.PagesTabActivity
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import kotlinx.android.synthetic.main.explore_fragment.view.*
-import java.util.*
+import kotlinx.android.synthetic.main.tag_item_layout.view.*
 import kotlin.collections.ArrayList
 
 class ExploreFragment : Fragment() {
@@ -36,36 +40,15 @@ class ExploreFragment : Fragment() {
 
     private lateinit var viewModel: ExploreViewModel
 
+    private lateinit var tabLayout: TabLayout
+    private lateinit var viewPager: ViewPager2
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val root:View= inflater.inflate(R.layout.explore_fragment, container, false)
 
-        root.ll_confessionRoom.setOnClickListener {
-            Navigation.findNavController(root).navigate(R.id.action_navigation_dashboard_to_confessionRoomFragment)
-        }
-
-        root.circle_ll.setOnClickListener {
-            val intent = Intent(context, CircleTabActivity::class.java)
-            startActivity(intent)
-        }
-        root.feedback.setOnClickListener {
-            val intent = Intent(context, FeedbackActivity::class.java)
-            startActivity(intent)
-        }
-
-        root.publicPost.setOnClickListener {
-            Navigation.findNavController(root).navigate(R.id.action_navigation_dashboard_to_publicPostFragement)
-        }
-
-        root.explore_people.setOnClickListener {
-            Navigation.findNavController(root).navigate(R.id.action_navigation_dashboard_to_peopleFragment)
-        }
-
-        root.academicsNow.setOnClickListener {
-            Navigation.findNavController(root).navigate(R.id.action_navigation_dashboard_to_academicsFragment)
-        }
 
         recyclerView = root.findViewById(R.id.searchUserRV)
         recyclerView!!.setHasFixedSize(true)
@@ -79,8 +62,8 @@ class ExploreFragment : Fragment() {
             root.search_edit_text.text.clear()
             checker = "Name"
             root.searchWithUID.background= resources.getDrawable(R.drawable.box_grey)
-            root.searchWithName.background= resources.getDrawable(R.drawable.search_bf)
-            root.searchWithName.setBackgroundDrawable(resources.getDrawable(R.drawable.search_bf))
+            root.searchWithName.background= resources.getDrawable(R.drawable.green_button)
+            root.searchWithName.setBackgroundDrawable(resources.getDrawable(R.drawable.green_button))
             root.searchWithUID.setTextColor(resources.getColor(R.color.red))
             root.searchWithName.setTextColor(resources.getColor(R.color.white))
         }
@@ -89,12 +72,11 @@ class ExploreFragment : Fragment() {
             root.search_edit_text.text.clear()
             checker = "UID"
             root.searchWithName.background= resources.getDrawable(R.drawable.box_grey)
-            root.searchWithUID.background= resources.getDrawable(R.drawable.search_bf)
-            root.searchWithUID.setBackgroundDrawable(resources.getDrawable(R.drawable.search_bf))
+            root.searchWithUID.background= resources.getDrawable(R.drawable.green_button)
+            root.searchWithUID.setBackgroundDrawable(resources.getDrawable(R.drawable.green_button))
             root.searchWithUID.setTextColor(resources.getColor(R.color.white))
             root.searchWithName.setTextColor(resources.getColor(R.color.red))
         }
-
 
         root.search_edit_text.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -122,14 +104,49 @@ class ExploreFragment : Fragment() {
 
         })
 
-        root.pages.setOnClickListener {
-            val intent = Intent(context,PagesTabActivity::class.java)
-            startActivity(intent)
-        }
-
 
         return root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        tabLayout = view.findViewById(R.id.explore_tabs_layout)
+        viewPager = view.findViewById(R.id.explore_viewPager)
+
+        val adapter = ExploreTabAdapter(childFragmentManager,lifecycle)
+        viewPager.adapter = adapter
+
+        TabLayoutMediator(tabLayout,viewPager){tab,position->
+
+            when(position){
+                0-> {
+                    tab.text = "Home"
+                }
+                1->{
+                    tab.text = "Trending"
+                }
+                2->{
+                    tab.text = "Academics"
+                }
+                3->{
+                    tab.text = "Events"
+                }
+                4->{
+                    tab.text = "Post"
+                }
+                5->{
+                    tab.text = "Internships"
+                }
+                6->{
+                    tab.text = "Hackathons"
+                }
+            }
+
+        }.attach()
+
+    }
+
 
     private fun searchUsers(input:String){
         val array = FirebaseDatabase.getInstance().reference

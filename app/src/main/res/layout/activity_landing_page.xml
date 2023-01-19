@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/basic_bg_landing"
     android:orientation="vertical"
     tools:context=".Activity.LandingPageActivity">
 
@@ -17,84 +18,115 @@
         <com.airbnb.lottie.LottieAnimationView
             android:layout_width="200dp"
             android:layout_height="200dp"
-            app:lottie_rawRes="@raw/eye"
             app:lottie_autoPlay="true"
-            app:lottie_loop="true"/>
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/eye" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="-80dp"
+            android:fontFamily="@font/amiko"
             android:text="See You"
+            android:textColor="@color/red"
             android:textSize="18sp"
-            android:fontFamily="@font/amiko"
-            android:textStyle="bold"
-            android:textColor="@color/red"
-            android:layout_marginTop="-80dp"/>
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/mainLL"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        android:orientation="vertical"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="20dp"
-            android:fontFamily="@font/amiko"
-            android:text="CUNow"
-            android:textColor="@color/red"
-            android:textSize="35sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="30dp"
-            android:fontFamily="@font/amiko"
-            android:text="I'm a"
-            android:textColor="@color/red"
-            android:textSize="25dp" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/landing_faculty_button"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="15dp"
-            android:background="@drawable/button_bg_red"
-            android:fontFamily="@font/amiko"
-            android:text="Faculty"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/landing_student_button"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="15dp"
-            android:background="@drawable/button_bg_red"
-            android:fontFamily="@font/amiko"
-            android:text="Student"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-        <ImageView
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="50dp"
-            android:src="@drawable/logo_cunow" />
-
     </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/mainLL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/queensides"
+                android:text="@string/namaste_welcome_to"
+                android:textColor="@color/teal_200"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/queensides"
+                android:text="Usersity"
+                android:textColor="@color/teal_200"
+                android:textSize="35sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="80dp"
+                android:fontFamily="@font/queensides"
+                android:text="Continue as"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/landing_faculty_button"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/white_round_corner_bg"
+                android:fontFamily="@font/queensides"
+                android:text="Faculty"
+                android:textAllCaps="false"
+                android:textColor="@color/red"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="or"
+                android:textColor="@color/white" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/landing_student_button"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="15dp"
+                android:background="@drawable/white_round_corner_bg"
+                android:fontFamily="@font/queensides"
+                android:text="student"
+                android:textAllCaps="false"
+                android:textColor="@color/red"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="250dp"
+                android:fontFamily="@font/queensides"
+                android:text="H.I.N.D.U Production"
+                android:textColor="@color/white"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
 
 </LinearLayout>

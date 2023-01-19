@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tagName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="#tageName"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/amiko"
+                android:textColor="@color/red"/>
+
+            <TextView
+                android:id="@+id/tag_trend"
+                android:layout_below="@+id/tagName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="#tageName"
+                />
+
+        <TextView
+            android:id="@+id/postCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="43K posts"
+            android:layout_marginEnd="5dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"/>
+
+
+
+
+    </RelativeLayout>
+
+
+
+</androidx.cardview.widget.CardView>

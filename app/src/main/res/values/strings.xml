@@ -17,4 +17,5 @@
     <string name="forgetPassword">We will send you password reset mail to your CU mail(****@cuchd.in) In case you didn\'t get/can\'t find it please check in <b>JUNK FOLDER</b> to.</string>
     <string name="email_verify_note">Note: If you didn\'t recieve the mail please refer to junk or spam folder of your inbox.</string>
     <string name="academics_help1">Subjects you add will appear here.\n To add new subject click on Add(+) button located below</string>
+    <string name="namaste_welcome_to">Welcome to</string>
 </resources>

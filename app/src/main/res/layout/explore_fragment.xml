@@ -5,9 +5,9 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".Fragments.ExploreFragment">
+    tools:context=".Fragments.Explore.ExploreFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <!--<com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white">
@@ -29,7 +29,7 @@
                 />
         </LinearLayout>
 
-    </com.google.android.material.appbar.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,66 +40,46 @@
 
         <EditText
             android:id="@+id/search_edit_text"
-            android:layout_width="0dp"
-            android:layout_weight="1.8"
+            android:layout_width="200dp"
             android:layout_height="40dp"
-            android:hint="Search(lower case only)"
+            android:hint="Search(lowercase)"
             android:padding="5dp"
-            android:backgroundTint="@color/red"
-            android:textColorHint="#B3E5FC"
+            android:background="@drawable/box_grey"
             android:layout_marginStart="10dp"
             android:textColor="@color/red"/>
 
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_weight="0.3"
-            android:layout_height="30dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/candidate"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/searchWithName"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/search_bf"
+                android:text="Name"
+                android:textColor="@color/white"
+                android:fontFamily="@font/amiko"
+                android:textAllCaps="false"
+                android:layout_margin="5dp"/>
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/searchWithUID"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:text="With UID"
+                android:fontFamily="@font/amiko"
+                android:textColor="@color/red"
+                android:textAllCaps="false"
+                android:layout_weight="1"
+                android:background="@drawable/box_grey"
+                android:layout_margin="5dp"/>
 
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Filter"
-        android:layout_marginStart="10dp"
-        android:textColor="@color/red"
-        android:textSize="16sp"
-        android:fontFamily="@font/amiko"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/searchWithName"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:background="@drawable/search_bf"
-            android:text="Search with Name"
-            android:textColor="@color/white"
-            android:fontFamily="@font/amiko"
-            android:textAllCaps="false"
-            android:layout_margin="5dp"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/searchWithUID"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:text="Search with UID"
-            android:fontFamily="@font/amiko"
-            android:textColor="@color/red"
-            android:textAllCaps="false"
-            android:layout_weight="1"
-            android:background="@drawable/box_grey"
-            android:layout_margin="5dp"/>
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -112,279 +92,25 @@
         android:scaleType="fitXY"
         android:layout_margin="5dp"/>
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/explore_tabs_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabMode="scrollable"
+            app:tabGravity="center"
+            />
+
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/explore_viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:visibility="gone"
         android:layout_height="match_parent"
         android:id="@+id/searchUserRV"/>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="10dp"
-        android:elevation="7dp"
-        app:cardBackgroundColor="@color/red"
-        app:cardCornerRadius="8dp">
-
-        <LinearLayout
-            android:id="@+id/ll_confessionRoom"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@drawable/search_bf">
-
-            <ImageView
-                android:layout_margin="10dp"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/diary"
-                android:layout_gravity="center_horizontal"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Confession Room"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="16sp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Confess here its secret "
-                android:textColor="@color/white"
-                android:textSize="12sp"/>
-        </LinearLayout>
-
-
-    </androidx.cardview.widget.CardView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/explore_people"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_margin="5dp"
-            app:cardElevation="7dp"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                >
-
-                <ImageView
-                    android:layout_margin="10dp"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/user"
-                    android:layout_gravity="center_horizontal"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="People"
-                    android:textColor="@color/red"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
-            </LinearLayout>
-
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_margin="5dp"
-            app:cardElevation="7dp"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:id="@+id/circle_ll"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_margin="10dp"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/mycircle"
-                    android:layout_gravity="center_horizontal"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Thread"
-                    android:textColor="@color/red"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:orientation="horizontal">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/pages"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_margin="5dp"
-            app:cardElevation="7dp"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="5dp"
-                >
-
-                <ImageView
-                    android:layout_margin="10dp"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/website"
-                    android:layout_gravity="center_horizontal"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="PagesNow"
-                    android:textColor="@color/red"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_margin="5dp"
-            app:cardElevation="7dp"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:id="@+id/publicPost"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_margin="10dp"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/post"
-                    android:layout_gravity="center_horizontal"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="PostsNow"
-                    android:textColor="@color/red"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:orientation="horizontal">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/feedback"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_margin="5dp"
-            app:cardElevation="7dp"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="5dp"
-                >
-
-                <ImageView
-                    android:layout_margin="10dp"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/rating"
-                    android:layout_gravity="center_horizontal"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Feedback"
-                    android:textColor="@color/red"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/academicsNow"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_margin="5dp"
-            app:cardElevation="7dp"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="5dp"
-                >
-
-                <ImageView
-                    android:layout_margin="10dp"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/academics"
-                    android:layout_gravity="center_horizontal"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="AcademicsNow"
-                    android:textColor="@color/red"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
 
 </LinearLayout>

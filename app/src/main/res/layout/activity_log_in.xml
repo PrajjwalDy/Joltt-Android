@@ -4,118 +4,153 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/basic_bg"
     android:orientation="vertical"
-    android:background="@color/white"
     tools:context=".Activity.LogInActivity">
 
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="50dp"
-        android:src="@drawable/app_logo"/>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CUNow"
-        android:layout_marginTop="-50dp"
-        android:textColor="@color/red"
-        android:textSize="22sp"
-        android:fontFamily="@font/amiko"
-        android:layout_gravity="center_horizontal"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@color/red"
-        android:fontFamily="@font/amiko"
-        android:layout_marginTop="10dp"
-        android:text="Bringing CU closer together"/>
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/queensides"
+        android:text="LOGIN"
+        android:textStyle="bold"
+        android:textColor="@color/teal_200"
+        android:textSize="30sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
         android:layout_marginTop="50dp"
+        android:layout_marginEnd="10dp"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/uid_edit_text"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/box_grey"
+            android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:fontFamily="@font/amiko"
-            android:hint="UID"
-            android:textAlignment="center"
-            android:textColor="@color/red"/>
+            android:background="@drawable/text_field_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="5dp"
+                android:src="@drawable/people"
+                app:tint="@color/red" />
 
 
-        <EditText
-            android:inputType="textPassword"
-            android:id="@+id/password_edit_text"
+            <EditText
+                android:id="@+id/uid_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/text_field_bg"
+                android:fontFamily="@font/amiko"
+                android:hint="UID"
+                android:padding="5dp"
+                android:textColor="@color/red" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/box_grey"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:fontFamily="@font/amiko"
-            android:hint="Password"
-            android:textAlignment="center"
-            android:textColor="@color/red"/>
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/text_field_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:text="Login"
-            android:elevation="5dp"
-            android:textColor="@color/red"
-            android:fontFamily="@font/amiko"
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="5dp"
+                android:src="@drawable/lock"
+                app:tint="@color/red" />
+
+
+            <EditText
+                android:id="@+id/password_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/text_field_bg"
+                android:fontFamily="@font/amiko"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="5dp"
+                android:textColor="@color/red" />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/login_btn"
-            android:textSize="18sp"
-            android:background="@drawable/usernamr_password_bg"/>
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/text_field_bg"
+            android:elevation="5dp"
+            android:fontFamily="@font/queensides"
+            android:text="Login"
+            android:textColor="@color/red"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/forget_password_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
             android:layout_gravity="end"
-            android:textColor="@color/red"
             android:layout_margin="5dp"
-            android:text="forget password"/>
+            android:text="forget password"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
     </LinearLayout>
-
 
     <TextView
         android:id="@+id/createAccount_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create new account"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:textColor="@color/red"
+        android:fontFamily="@font/queensides"
+        android:text="Create new account"
+        android:textColor="@color/teal_200"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:fontFamily="@font/amiko"
-        android:layout_gravity="center_horizontal"/>
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="H.I.N.D.U Production"
-        android:textSize="15dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="100dp"
-        android:textStyle="bold"
-        android:textColor="@color/red"
-        android:fontFamily="@font/amiko"
-        android:layout_gravity="center_horizontal"/>
+        android:fontFamily="@font/queensides"
+        android:text="Usersity"
+        android:textColor="@color/teal_200"
+        android:textSize="35sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/queensides"
+        android:text="Bringing us closer together"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/queensides"
+        android:text="H.I.N.D.U Production"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:textStyle="bold" />
 
 </LinearLayout>

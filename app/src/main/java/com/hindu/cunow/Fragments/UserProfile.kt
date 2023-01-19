@@ -29,6 +29,10 @@ import kotlinx.android.synthetic.main.fragment_user_profiel.view.*
 import kotlinx.android.synthetic.main.profile_fragment.*
 import kotlinx.android.synthetic.main.profile_fragment.verification_profilePage
 import kotlinx.android.synthetic.main.profile_fragment.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 class UserProfile : Fragment() {
     private lateinit var profileId:String
@@ -86,16 +90,27 @@ class UserProfile : Fragment() {
             startActivity(intent)
         }
 
-        privacy(root)
-        userInfo()
-        checkFollowAndFollowing(root)
-        getFollowers(root)
-        getFollowings(root)
-        isBlocked(root)
-        haveBlocked(root)
+        CoroutineScope(Dispatchers.IO).launch {
+            launch { privacy(root) }
+            launch { userInfo() }
+            launch { checkFollowAndFollowing(root) }
+            launch { getFollowers(root) }
+            launch { getFollowings(root) }
+            launch { isBlocked(root)
+                haveBlocked(root) }
+        }
+
+
+
+
+
+
+
 
         root.follow_unfollow_button.setOnClickListener {
-            checkPrivacy(root)
+            CoroutineScope(Dispatchers.IO).launch{
+                checkPrivacy(root)
+            }
         }
 
         root.totalFollowers_user.setOnClickListener {
@@ -117,10 +132,8 @@ class UserProfile : Fragment() {
         return root
     }
 
-    private fun userInfo(){
-        val progressDialog = context?.let { Dialog(it) }
-        progressDialog!!.setContentView(R.layout.profile_dropdown_menu)
-        progressDialog.show()
+    private suspend fun userInfo(){
+
         val userRef = FirebaseDatabase.getInstance().reference.child("Users").child(profileId)
         userRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -133,7 +146,6 @@ class UserProfile : Fragment() {
                         verification_UserPage.visibility = View.VISIBLE
                     }
                 }
-                progressDialog.dismiss()
             }
             override fun onCancelled(error: DatabaseError) {
                 println("some error occurred")
@@ -141,7 +153,7 @@ class UserProfile : Fragment() {
         })
     }
 
-    private fun checkPrivacy(root:View){
+    private suspend fun checkPrivacy(root:View){
         val userRef = FirebaseDatabase.getInstance().reference.child("Users").child(profileId)
         userRef.addListenerForSingleValueEvent(object :ValueEventListener{
             @SuppressLint("SetTextI18n")
@@ -166,7 +178,9 @@ class UserProfile : Fragment() {
                                     val requestMap = HashMap<String,Any>()
                                     requestMap["requesterId"] = FirebaseAuth.getInstance().currentUser!!.uid
                                     ref.child(firebaseUser.uid).updateChildren(requestMap)
-                                    addNotification(message = "is requested to follow you")
+                                    CoroutineScope(Dispatchers.IO).launch {
+                                        addNotification(message = "is requested to follow you")
+                                    }
                                 }
                             }
                             "Requested"->{
@@ -219,7 +233,10 @@ class UserProfile : Fragment() {
                                         .child("Followers").child(it1.toString())
                                         .setValue(true)
                                 }
-                                addNotification(message = "is now following you")
+                                CoroutineScope(Dispatchers.IO).launch{
+                                    addNotification(message = "is now following you")
+                                }
+
 
                             }
                             "Following" -> {
@@ -267,7 +284,7 @@ class UserProfile : Fragment() {
         })
     }
 
-    private fun checkRequested(root:View){
+    private suspend fun checkRequested(root:View){
         val database = FirebaseDatabase.getInstance().reference.child("Users")
             .child(profileId)
             .child("Requesters")
@@ -289,7 +306,7 @@ class UserProfile : Fragment() {
         })
     }
 
-    private fun checkFollowAndFollowing(root: View){
+    private suspend fun checkFollowAndFollowing(root: View){
         val databaseRef =
             FirebaseDatabase.getInstance().reference
                 .child("Follow").child(profileId)
@@ -300,8 +317,12 @@ class UserProfile : Fragment() {
                 if (snapshot.child(firebaseUser.uid).exists()){
                     root.follow_unfollow_button.text= "Following"
                 }else{
-                    checkRequested(root)
-                    haveBlocked(root)
+                    CoroutineScope(Dispatchers.IO).launch {
+                        launch {checkRequested(root)  }
+                        launch { haveBlocked(root) }
+                    }
+
+
                 }
             }
 
@@ -312,7 +333,7 @@ class UserProfile : Fragment() {
         })
     }
 
-    private fun getFollowers(root: View){
+    private suspend fun getFollowers(root: View){
         val followingRef = FirebaseDatabase.getInstance().reference
             .child("Follow").child(profileId)
             .child("Followers")
@@ -331,7 +352,7 @@ class UserProfile : Fragment() {
         })
     }
 
-    private fun getFollowings(root: View){
+    private suspend fun getFollowings(root: View){
         val followingRef = FirebaseDatabase.getInstance().reference
             .child("Follow").child(profileId)
             .child("Following")
@@ -350,7 +371,7 @@ class UserProfile : Fragment() {
         })
     }
 
-    private fun privacy(root: View){
+    private suspend fun privacy(root: View){
         val userRef = FirebaseDatabase.getInstance().reference.child("Users").child(profileId)
         userRef.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -369,7 +390,7 @@ class UserProfile : Fragment() {
         })
     }
 
-    private fun isBlocked(root: View){
+    private suspend fun isBlocked(root: View){
         val database = FirebaseDatabase.getInstance().reference.child("Users")
             .child(profileId)
             .child("BlockedUsers")
@@ -390,7 +411,7 @@ class UserProfile : Fragment() {
         })
     }
 
-    private fun haveBlocked(root: View){
+    private suspend fun haveBlocked(root: View){
         val database = FirebaseDatabase.getInstance().reference.child("Users")
             .child(firebaseUser.uid)
             .child("BlockedUsers")
@@ -409,7 +430,7 @@ class UserProfile : Fragment() {
         })
     }
 
-    private fun addNotification(message:String){
+    private suspend fun addNotification(message:String){
         //sendNotification()
         if (profileId != FirebaseAuth.getInstance().currentUser!!.uid){
             val dataRef = FirebaseDatabase.getInstance()

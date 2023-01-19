@@ -116,6 +116,7 @@ class PostAdapter (private val mContext: Context,
                 holder.totalLikes,
             )
         }
+
         holder.comment.setOnClickListener {
             if (post.page){
                 val commentIntent = Intent(mContext,CommentActivity::class.java)
@@ -523,27 +524,5 @@ class PostAdapter (private val mContext: Context,
 
         })
     }
-
-    /*private fun checkPage(postId: String,circleImageView: CircleImageView,name: TextView,publisherId: String,verifImage: CircleImageView){
-        val data = FirebaseDatabase.getInstance().reference
-            .child("Posts")
-            .child(postId)
-        data.addValueEventListener(object :ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.hasChild("page")){
-
-                    val value = snapshot.getValue(PostModel::class.java)
-                    if (value.page){
-
-                    }
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
-    }*/
 
 }

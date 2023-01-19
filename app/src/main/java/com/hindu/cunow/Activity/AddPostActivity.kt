@@ -8,39 +8,38 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.google.android.gms.tasks.Continuation
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
-import com.google.android.material.snackbar.Snackbar
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.hindu.cunow.R
-import com.theartofdev.edmodo.cropper.CropImage
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.StorageTask
-import com.google.firebase.storage.UploadTask
 import com.hindu.cunow.MainActivity
+import com.hindu.cunow.Model.HashTagModel
+import com.hindu.cunow.R
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import com.theartofdev.edmodo.cropper.CropImage
 import kotlinx.android.synthetic.main.activity_add_post.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.post_privacy_dialog.view.*
 import java.io.ByteArrayOutputStream
 
 class AddPostActivity : AppCompatActivity() {
     private var privacy = "public"
-    private  var myUrl = ""
+    var myUrl = 0
     private var imageUri : Uri? = null
     private var storagePostImageRef: StorageReference? = null
 
@@ -125,7 +124,8 @@ class AddPostActivity : AppCompatActivity() {
                 postMap["public"] = privacy == "public"
 
                 ref.child(postId).updateChildren(postMap)
-
+                //saveTags(postId)
+                buildHasTag(postId)
                 Toast.makeText(this,"Image shared successfully",Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this@AddPostActivity,MainActivity::class.java))
                 finish()
@@ -135,6 +135,7 @@ class AddPostActivity : AppCompatActivity() {
                         .child("MyPosts").child(postId)
                         .setValue(true)
                 }
+
                 progressDialog.dismiss()
             }
 
@@ -154,62 +155,35 @@ class AddPostActivity : AppCompatActivity() {
 
     }
 
-    private fun choosePhotoFromGallery() {
-        Dexter.withActivity(this)
-            .withPermissions(
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            )
-            .withListener(object : MultiplePermissionsListener {
-                override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
-
-                    // Here after all the permission are granted launch the gallery to select and image.
-                    if (report!!.areAllPermissionsGranted()) {
-
-                        val galleryIntent = Intent(
-                            Intent.ACTION_PICK,
-                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                        )
-
-                        startActivityForResult(galleryIntent, GALLERY)
-                    }
-                }
-
-                override fun onPermissionRationaleShouldBeShown(
-                    permissions: MutableList<PermissionRequest>?,
-                    token: PermissionToken?
-                ) {
-                    showRationalDialogForPermissions()
-                }
-            }).onSameThread()
-            .check()
-    }
-
-    private fun showRationalDialogForPermissions() {
-        AlertDialog.Builder(this)
-            .setMessage("It Looks like you have turned off permissions required for this feature. It can be enabled under Application Settings")
-            .setPositiveButton(
-                "GO TO SETTINGS"
-            ) { _, _ ->
-                try {
-                    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                    val uri = Uri.fromParts("package", packageName, null)
-                    intent.data = uri
-                    startActivity(intent)
-                } catch (e: ActivityNotFoundException) {
-                    e.printStackTrace()
-                }
-            }
-            .setNegativeButton("Cancel") { dialog,
-                                           _ ->
-                dialog.dismiss()
-            }.show()
-    }
-
     companion object {
         private const val GALLERY = 1
         private const val CAMERA = 2
         // A constant variable for place picker
         private const val PLACE_AUTOCOMPLETE_REQUEST_CODE = 3
+    }
+
+    private fun buildHasTag(postId:String){
+        val sentence = caption_image.text.toString().trim{ it <= ' '}
+        val words = sentence.split(" ")
+
+        // Initialize an empty list of hashtags
+        val hashtags = mutableListOf<String>()
+
+        // Extract hashtags from the words
+        for (word in words) {
+            if (word.startsWith("#")) {
+                hashtags.add(word)
+            }
+        }
+        val hashtagsRef = FirebaseDatabase.getInstance().getReference("hashtags")
+
+        for (hashtag in hashtags) {
+
+            val key = hashtag.toString().removeRange(0,1)
+            val tagMap = HashMap<String,Any>()
+            tagMap["tagName"] = hashtag
+            hashtagsRef.child(key).updateChildren(tagMap)
+            hashtagsRef.child(key).child("posts").child(postId).setValue(true)
+        }
     }
 }

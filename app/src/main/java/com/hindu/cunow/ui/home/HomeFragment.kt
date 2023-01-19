@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -35,6 +36,9 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.image_or_video_dialogbox.view.*
 import kotlinx.android.synthetic.main.more_option_dialogbox.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
     private var checker = ""
@@ -64,11 +68,17 @@ class HomeFragment : Fragment() {
             recyclerView!!.adapter = postAdapter
             postAdapter!!.notifyDataSetChanged()
 
+
         })
 
         checkFirstVisit()
-        developerMessage()
-        chatNotification()
+        CoroutineScope(Dispatchers.IO).launch(){
+            launch {developerMessage()}
+            launch {chatNotification()}
+
+        }
+
+
         root.create.setOnClickListener {
             val dialogView = LayoutInflater.from(context).inflate(R.layout.image_or_video_dialogbox, null)
 
@@ -200,7 +210,7 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun checkPost(){
+    private  fun checkPost(){
         val database = FirebaseDatabase.getInstance().reference
             .child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
             .child("MyPosts")
@@ -226,7 +236,7 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    private fun developerMessage(){
+    private suspend fun developerMessage(){
         val database = FirebaseDatabase.getInstance().reference.child("DevMessage")
         database.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -246,7 +256,7 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun chatNotification(){
+    private suspend fun chatNotification(){
         val data = FirebaseDatabase.getInstance().reference.child("ChatMessageCount")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
 

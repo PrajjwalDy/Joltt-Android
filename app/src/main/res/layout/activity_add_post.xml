@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -34,36 +35,35 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
-                android:visibility="gone"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
                 android:padding="5dp"
-                android:src="@drawable/right_arrow" />
+                android:src="@drawable/right_arrow"
+                android:visibility="gone" />
 
 
         </RelativeLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
     <ImageView
         android:id="@+id/postImage_preview"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:scaleType="centerInside"
-        android:src="@drawable/gallery"/>
+        android:src="@drawable/gallery" />
 
     <EditText
         android:id="@+id/caption_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:padding="5dp"
-        android:fontFamily="@font/amiko"
-        android:textSize="12sp"
         android:backgroundTint="@color/red"
+        android:fontFamily="@font/amiko"
         android:hint="Describe something about this image"
-        android:textColor="@color/red"/>
+        android:padding="5dp"
+        android:textColor="@color/red"
+        android:textSize="12sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -76,27 +76,35 @@
             android:id="@+id/changePrivacy_btn"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_weight="1"
             android:layout_margin="5dp"
-            android:fontFamily="@font/amiko"
-            android:textAllCaps="false"
+            android:layout_weight="1"
             android:background="@color/white"
+            android:fontFamily="@font/amiko"
             android:text="Post Privacy"
-            android:textColor="@color/red"/>
+            android:textAllCaps="false"
+            android:textColor="@color/red" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/shareImage_btn"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_weight="1"
             android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:fontFamily="@font/amiko"
             android:text="Upload"
             android:textAllCaps="false"
-            android:fontFamily="@font/amiko"
-            android:background="@color/white"
-            android:textColor="@color/red"/>
+            android:textColor="@color/red" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/pc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp" />
 
 
 </LinearLayout>
