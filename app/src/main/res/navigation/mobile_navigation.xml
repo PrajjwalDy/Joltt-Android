@@ -61,12 +61,33 @@
         <action
             android:id="@+id/action_navigation_dashboard_to_eventFragment"
             app:destination="@id/eventFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_fullPostView"
+            app:destination="@id/fullPostView" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_projectsFragment"
+            app:destination="@id/projectsFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_schemesFragment"
+            app:destination="@id/schemesFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_abroadFragment"
+            app:destination="@id/abroadFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_clubsFragment"
+            app:destination="@id/clubsFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_communityFragment"
+            app:destination="@id/communityFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_coursesFragment"
+            app:destination="@id/coursesFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_addPost"
-        android:name="com.hindu.cunow.Fragments.ConfessionRoom.ConfessionRoomFragment"
-        tools:layout="@layout/confession_room_fragment" />
+        android:name="com.hindu.cunow.Fragments.Academics.AcademicsFragment"
+        tools:layout="@layout/fragment_academics" />
 
     <fragment
         android:id="@+id/navigation_notifications"
@@ -276,6 +297,36 @@
         android:name="com.hindu.cunow.Fragments.Hackathons.HackathonsFragment"
         android:label="fragment_hackathons"
         tools:layout="@layout/fragment_hackathons" />
+    <fragment
+        android:id="@+id/projectsFragment"
+        android:name="com.hindu.cunow.Fragments.Projects.ProjectsFragment"
+        android:label="fragment_projects"
+        tools:layout="@layout/fragment_projects" />
+    <fragment
+        android:id="@+id/schemesFragment"
+        android:name="com.hindu.cunow.Fragments.Schemes.SchemesFragment"
+        android:label="fragment_schemes"
+        tools:layout="@layout/fragment_schemes" />
+    <fragment
+        android:id="@+id/abroadFragment"
+        android:name="com.hindu.cunow.Fragments.Abroad.AbroadFragment"
+        android:label="fragment_abroad"
+        tools:layout="@layout/fragment_abroad" />
+    <fragment
+        android:id="@+id/clubsFragment"
+        android:name="com.hindu.cunow.Fragments.clubs.ClubsFragment"
+        android:label="fragment_clubs"
+        tools:layout="@layout/fragment_clubs" />
+    <fragment
+        android:id="@+id/communityFragment"
+        android:name="com.hindu.cunow.Fragments.community.CommunityFragment"
+        android:label="fragment_community"
+        tools:layout="@layout/fragment_community" />
+    <fragment
+        android:id="@+id/coursesFragment"
+        android:name="com.hindu.cunow.Fragments.Courses.CoursesFragment"
+        android:label="fragment_courses"
+        tools:layout="@layout/fragment_courses" />
 
 
 </navigation>

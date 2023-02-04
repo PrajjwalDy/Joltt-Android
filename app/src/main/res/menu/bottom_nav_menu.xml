@@ -13,8 +13,8 @@
 
     <item
         android:id="@+id/navigation_addPost"
-        android:icon="@drawable/diary"
-        android:title="Confession" />
+        android:icon="@drawable/mortarboard"
+        android:title="Academics" />
 
     <item
         android:id="@+id/navigation_notifications"

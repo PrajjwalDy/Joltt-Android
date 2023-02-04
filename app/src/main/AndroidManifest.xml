@@ -19,6 +19,12 @@
         android:theme="@style/Theme.CUNow"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activity.CommunityRepliesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.AddEventActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddSubjectsActivity"
             android:exported="false">
             <meta-data
@@ -34,12 +40,11 @@
         <activity
             android:name=".Activity.LandingPageActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".Activity.FacultySignup"
@@ -107,7 +112,7 @@
         <activity
             android:name=".Activity.AddVibesAcitvity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Activity.PrivacySettingsActivity"
             android:exported="false" />
@@ -189,9 +194,7 @@
             android:exported="false" />
         <activity
             android:name=".Activity.LogInActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

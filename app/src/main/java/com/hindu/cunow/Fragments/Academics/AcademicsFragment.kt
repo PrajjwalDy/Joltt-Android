@@ -55,7 +55,7 @@ class AcademicsFragment : Fragment() {
         userData.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val data = snapshot.getValue(UserModel::class.java)
-                if(data!!.faculty){
+                if(data!!.facultY){
                     root.addSubjects.visibility = View.VISIBLE
                 }else{
                     root.addSubjects.visibility = View.GONE
@@ -69,7 +69,7 @@ class AcademicsFragment : Fragment() {
             }
         })
 
+        userData.keepSynced(true)
+
     }
-
-
 }

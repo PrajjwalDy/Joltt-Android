@@ -13,7 +13,7 @@
         android:background="@color/white">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/amiko"
-                android:text="ExploreNow"
+                android:text="Explore"
                 android:layout_margin="10dp"
                 android:textStyle="bold"
                 android:textColor="@color/red"
@@ -31,66 +31,16 @@
 
     </com.google.android.material.appbar.AppBarLayout>-->
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/search_edit_text"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:hint="Search(lowercase)"
-            android:padding="5dp"
-            android:background="@drawable/box_grey"
-            android:layout_marginStart="10dp"
-            android:textColor="@color/red"/>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/searchWithName"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:background="@drawable/search_bf"
-                android:text="Name"
-                android:textColor="@color/white"
-                android:fontFamily="@font/amiko"
-                android:textAllCaps="false"
-                android:layout_margin="5dp"/>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/searchWithUID"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:text="With UID"
-                android:fontFamily="@font/amiko"
-                android:textColor="@color/red"
-                android:textAllCaps="false"
-                android:layout_weight="1"
-                android:background="@drawable/box_grey"
-                android:layout_margin="5dp"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:src="@drawable/minus"
-        android:scaleType="fitXY"
-        android:layout_margin="5dp"/>
+        android:layout_gravity="center_vertical"
+        android:fontFamily="@font/queensides"
+        android:text="Explore"
+        android:layout_margin="10dp"
+        android:textColor="@color/red"
+        android:textSize="35sp"
+        />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/explore_tabs_layout"
@@ -106,11 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="match_parent"
-        android:id="@+id/searchUserRV"/>
+
 
 
 </LinearLayout>

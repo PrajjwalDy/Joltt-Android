@@ -23,6 +23,6 @@ class UserModel {
     val crush:Boolean = false
     val single:Boolean = false
     val confessionVisited:Boolean = false
-    val faculty:Boolean =false
+    val facultY:Boolean =false
 
 }

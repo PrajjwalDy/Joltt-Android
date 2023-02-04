@@ -17,7 +17,7 @@ import com.hindu.cunow.Fragments.PublicPost.PublicPostFragement
 
 class ExploreTabAdapter(fm:FragmentManager,lifecycle:Lifecycle):FragmentStateAdapter(fm,lifecycle) {
     override fun getItemCount(): Int {
-        return 7
+        return 4
     }
 
     override fun createFragment(position: Int): Fragment {
@@ -29,21 +29,11 @@ class ExploreTabAdapter(fm:FragmentManager,lifecycle:Lifecycle):FragmentStateAda
                 HasTagFragment()
             }
             2->{
-                AcademicsFragment()
-            }
-            3->{
-                EventFragment()
-            }
-            4->{
-                PublicPostFragement()
-            }
-            5->{
                 InternshipsFragment()
             }
-            6->{
+            3->{
                 HackathonsFragment()
             }
-
 
             else->{
                 HomeTab()

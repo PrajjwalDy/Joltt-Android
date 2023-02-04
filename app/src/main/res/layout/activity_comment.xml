@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".Activity.CommentActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <!--<com.google.android.material.appbar.AppBarLayout
         android:id="@+id/commentAppbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -29,10 +29,21 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-    </com.google.android.material.appbar.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>-->
+
+    <TextView
+        android:id="@+id/h_comments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/queensides"
+        android:text="Comments"
+        android:textColor="@color/red"
+        android:textSize="35dp" />
+
 
     <LinearLayout
-        android:layout_below="@+id/commentAppbar"
+        android:layout_below="@+id/h_comments"
         android:id="@+id/captionLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -72,9 +72,9 @@ class PostAdapter (private val mContext: Context,
         val zoom = AnimationUtils.loadAnimation(mContext, R.anim.zoom)
         val post = mPost[position]
         CoroutineScope(Dispatchers.IO).launch {
-            islike(post.postId!!, holder.like)
-            totalLikes(post.postId,holder.totalLikes)
-            totalComments(holder.totalComments,post.postId)
+            launch { islike(post.postId!!, holder.like) }
+            launch { totalLikes(post.postId!!,holder.totalLikes) }
+            launch { totalComments(holder.totalComments,post.postId!!) }
         }
 
 
@@ -104,9 +104,7 @@ class PostAdapter (private val mContext: Context,
 
                 Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_home_to_userProfile)
             }
-
         }
-
         holder.like.setOnClickListener {
             like(holder.like,
                 post.postId!!,zoom,
@@ -267,9 +265,6 @@ class PostAdapter (private val mContext: Context,
                     if (snapshot.exists()){
                         val data = snapshot.getValue(PostModel::class.java)
                         if (data!!.page){
-                            /*println(data.pageAdmin)
-                            println(data.pageName)
-                            println(data.pageId)*/
                             addPageNotification(data.pageAdmin!!,data.postId!!,data.pageName!!,data.publisher!!)
                         }else{
                             addNotification(publisherId,postId,caption)
@@ -299,7 +294,6 @@ class PostAdapter (private val mContext: Context,
         }
     }
 
-
     private suspend fun islike(postId:String, likeButton:ImageView){
         val firebaseUser = FirebaseAuth.getInstance().currentUser
 
@@ -327,11 +321,9 @@ class PostAdapter (private val mContext: Context,
         likeRef.keepSynced(true)
 
     }
-
     private fun playVideo(videoView:PlayerView,videoUrl: String){
         initPlayer(videoView,videoUrl)
     }
-
     private fun initPlayer(videoView:PlayerView,videoUrl: String) {
         lateinit var simpleExoPlayer:SimpleExoPlayer
         lateinit var mediaSource: MediaSource
@@ -377,8 +369,6 @@ class PostAdapter (private val mContext: Context,
         simpleExoPlayer.addListener(playerListener)
 
     }
-
-
     enum class URLType(var url:String){
         MP4(""), HLS("")
     }

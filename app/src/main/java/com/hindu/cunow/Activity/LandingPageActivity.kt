@@ -106,7 +106,7 @@ class LandingPageActivity : AppCompatActivity() {
         userData.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 val data = snapshot.getValue(UserModel::class.java)
-                if(data!!.faculty){
+                if(data!!.facultY){
                     checkStatus()
                 }else{
                     if (user!!.isEmailVerified){

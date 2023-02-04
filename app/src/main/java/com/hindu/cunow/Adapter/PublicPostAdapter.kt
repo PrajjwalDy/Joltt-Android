@@ -23,6 +23,7 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
 import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.R
+import java.io.IOException
 
 class PublicPostAdapter(private val mContext: Context,
                         private val mPost:List<PostModel>): RecyclerView.Adapter<PublicPostAdapter.ViewHolder>() {
@@ -57,13 +58,13 @@ class PublicPostAdapter(private val mContext: Context,
         holder.bind(mPost[position])
         holder.itemView.setOnClickListener {
 
-            val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
-            pref.putString("postId",mPost[position].postId)
-            pref.apply()
+                    val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+                    pref.putString("postId",mPost[position].postId)
+                    pref.apply()
 
-            Navigation.findNavController(holder.itemView).navigate(R.id.action_publicPostFragement_to_fullPostView)
+                    Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_dashboard_to_fullPostView)
+
         }
-
         holder.playerView.setOnClickListener{
             val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
             pref.putString("postId",mPost[position].postId)

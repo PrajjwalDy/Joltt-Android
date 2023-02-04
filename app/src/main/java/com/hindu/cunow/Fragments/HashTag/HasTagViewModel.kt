@@ -35,7 +35,9 @@ class HasTagViewModel : ViewModel(),IHashTagCallBack{
 
     private suspend fun loadTags() {
         val tagList = ArrayList<HashTagModel>()
-        val userData = FirebaseDatabase.getInstance().reference.child("hashtags")
+        val userData = FirebaseDatabase.getInstance().reference
+            .child("hashtags")
+            .orderByChild("postCount")
         userData.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 tagList.clear()
@@ -43,6 +45,7 @@ class HasTagViewModel : ViewModel(),IHashTagCallBack{
                     val user = snapshot.getValue(HashTagModel::class.java)
                     tagList.add(user!!)
                 }
+                tagList.sortBy { it.postCount }
                 hashCallback.onTagListLoadSuccess(tagList)
             }
 

@@ -64,10 +64,9 @@ class HomeFragment : Fragment() {
 
         homeViewModel.postModel!!.observe(viewLifecycleOwner, Observer {
             initView(root)
-            postAdapter = context?.let { it1-> PostAdapter(it1,it) }
+            postAdapter = context?.let { it1-> PostAdapter(it1, it as List<PostModel>) }
             recyclerView!!.adapter = postAdapter
             postAdapter!!.notifyDataSetChanged()
-
 
         })
 
@@ -75,9 +74,7 @@ class HomeFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch(){
             launch {developerMessage()}
             launch {chatNotification()}
-
         }
-
 
         root.create.setOnClickListener {
             val dialogView = LayoutInflater.from(context).inflate(R.layout.image_or_video_dialogbox, null)

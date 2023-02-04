@@ -27,6 +27,8 @@ class HomeViewModel : ViewModel(), IPostCallback {
     var pageList:MutableList<String>? = null
     private val postLoadCallback: IPostCallback = this
     private var messageError: MutableLiveData<String>? = null
+    var lastLoadedKey: String? = null
+    var loading = false
 
 
     val postModel: MutableLiveData<List<PostModel>>?
@@ -50,7 +52,6 @@ class HomeViewModel : ViewModel(), IPostCallback {
 
 
     private suspend fun loadPost() {
-        //checkFollowing()
         val postList=ArrayList<PostModel>()
         val dataReference = FirebaseDatabase.getInstance().reference.child("Post")
         dataReference.addValueEventListener(object:ValueEventListener{
@@ -61,13 +62,13 @@ class HomeViewModel : ViewModel(), IPostCallback {
                     for (id in (followingList as ArrayList<String>)){
                         if (postModel.publisher == id){
                             postList.add(postModel)
-                       }
+                        }
                     }
                     for (id in (pageList as ArrayList<String>)) {
-                            if (postModel.publisher == id) {
-                                postList.add(postModel)
-                            }
+                        if (postModel.publisher == id) {
+                            postList.add(postModel)
                         }
+                    }
 
                 }
                 postLoadCallback.onPostPCallbackLoadSuccess(postList)

@@ -13,6 +13,7 @@ import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -152,7 +153,6 @@ class AddPostActivity : AppCompatActivity() {
             imageUri = result.uri
             postImage_preview.setImageURI(imageUri)
         }
-
     }
 
     companion object {
@@ -178,12 +178,38 @@ class AddPostActivity : AppCompatActivity() {
         val hashtagsRef = FirebaseDatabase.getInstance().getReference("hashtags")
 
         for (hashtag in hashtags) {
-
             val key = hashtag.toString().removeRange(0,1)
             val tagMap = HashMap<String,Any>()
             tagMap["tagName"] = hashtag
             hashtagsRef.child(key).updateChildren(tagMap)
             hashtagsRef.child(key).child("posts").child(postId).setValue(true)
+            getPostCount(hashtag)
         }
+    }
+
+    private fun getPostCount(tag:String){
+        val key = tag.removeRange(0,1)
+        val dataRef = FirebaseDatabase.getInstance()
+            .reference.child("hashtags")
+            .child(key)
+            .child("posts")
+
+        dataRef.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val hashtagsRef = FirebaseDatabase.getInstance().reference
+                        .child("hashtags")
+                        .child(key)
+                    val tagMap = HashMap<String,Any>()
+                    tagMap["postCount"] = snapshot.childrenCount.toInt()
+                    hashtagsRef.updateChildren(tagMap)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 }
