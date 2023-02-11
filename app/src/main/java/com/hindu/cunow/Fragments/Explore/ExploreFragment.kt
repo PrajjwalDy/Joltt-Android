@@ -33,13 +33,6 @@ import kotlin.collections.ArrayList
 
 class ExploreFragment : Fragment() {
 
-    private var recyclerView:RecyclerView? = null
-    private var userAdapter:UserAdapter? = null
-    private var mUser:MutableList<UserModel>? = null
-    private var checker = "Name"
-
-    private lateinit var viewModel: ExploreViewModel
-
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
 
@@ -48,10 +41,6 @@ class ExploreFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root:View= inflater.inflate(R.layout.explore_fragment, container, false)
-
-
-
-
 
         return root
     }

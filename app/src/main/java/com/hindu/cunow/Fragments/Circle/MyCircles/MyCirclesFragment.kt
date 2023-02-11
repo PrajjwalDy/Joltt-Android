@@ -19,12 +19,8 @@ class MyCirclesFragment : Fragment() {
 
     var recyclerView: RecyclerView? = null
     private var circleAdapter: CircleAdapter? = null
-
-
     private var _binding: MyCirclesFragmentBinding? =null
-
     private val binding get() = _binding!!
-
     private lateinit var viewModel: MyCirclesViewModel
 
     override fun onCreateView(

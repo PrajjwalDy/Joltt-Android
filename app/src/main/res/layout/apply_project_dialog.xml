@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Application Form"
+        android:layout_gravity="center_horizontal"
+        android:textSize="18sp"
+        android:textColor="@color/red"
+        android:fontFamily="@font/amiko"
+        android:layout_margin="5dp"/>
+
+
+    <EditText
+        android:id="@+id/about_applicant"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:background="@drawable/box_grey"
+        android:layout_margin="5dp"
+        android:hint="Discribe yourself and your experties relevant to this project"
+        android:padding="5dp"/>
+
+    <EditText
+        android:id="@+id/applicant_whatsapp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:hint="Whatsapp No."
+        android:padding="5dp"
+        android:background="@drawable/box_grey"
+        android:layout_margin="5dp"/>
+
+
+    <Button
+        android:id="@+id/submit_application"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/green_button"
+        android:layout_margin="10dp"
+        android:text="Submit"
+        android:fontFamily="@font/amiko"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Note: you must ensure that your profile is completed because other data's like name, uid, education will be fetched from your profile. Incomplete profile will lead to rejection of application."
+        android:justificationMode="inter_word"
+        android:textColor="@color/black"
+        android:layout_margin="5dp"/>
+
+
+
+</LinearLayout>

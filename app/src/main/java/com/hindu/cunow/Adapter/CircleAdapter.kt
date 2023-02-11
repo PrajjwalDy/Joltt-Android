@@ -63,7 +63,6 @@ class CircleAdapter(private val mContext:Context,
             mContext.startActivity(intent)
         }
 
-
     }
 
     override fun getItemCount(): Int {

@@ -19,13 +19,19 @@
         android:theme="@style/Theme.CUNow"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activity.AddProjectActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.ProjectDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.CommunityRepliesActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.AddEventActivity"
             android:exported="false" />
         <activity
-            android:name=".AddSubjectsActivity"
+            android:name=".Activity.AddSubjectsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

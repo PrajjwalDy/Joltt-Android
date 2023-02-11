@@ -6,5 +6,6 @@ class EventModel {
     val eventName:String? = null
     val eventDescription:String? = null
     val eventHost:String? =null
+    val eventHostId:String? = null
 
 }
