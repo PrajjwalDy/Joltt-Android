@@ -35,10 +35,10 @@ class ApplicantAdapter(private val mContext:Context,
                                        userInfo(profileImage,userName,list.applicantId!!)
                                    }
                                    reject.setOnClickListener {
-                                       rejectRequest(list.projectId!!,list.applicantId!!)
+                                       rejectRequest(list.projectId!!,list.applicationId!!)
                                    }
                                    approve.setOnClickListener {
-                                       approveRequest(list.projectId!!,list.applicantId!!)
+                                       approveRequest(list.projectId!!,list.applicationId!!)
                                    }
                                }
 

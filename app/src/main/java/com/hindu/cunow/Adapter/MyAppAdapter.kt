@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.database.DataSnapshot
@@ -17,6 +18,7 @@ import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Model.MyAppModel
 import com.hindu.cunow.Model.ProjectModel
 import com.hindu.cunow.R
+import kotlinx.android.synthetic.main.activity_edit_profile.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,7 +33,8 @@ class MyAppAdapter(private val mContext:Context,
 
                            fun bind(list:MyAppModel){
                                CoroutineScope(Dispatchers.IO).launch {
-                                   getProjectDetails(projectName,projectImage,list.projectId!!)
+                                   launch { getProjectDetails(projectName,projectImage,list.projectId!!) }
+                                   launch { applicationStatus(list.projectId!!,list.applicationId!!,statusButton) }
                                }
                            }
                        }
@@ -46,7 +49,7 @@ class MyAppAdapter(private val mContext:Context,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bind(mApp[position])
     }
 
     private fun getProjectDetails(projectName:TextView,projectImage:ImageView,projectId:String){
@@ -68,8 +71,36 @@ class MyAppAdapter(private val mContext:Context,
         })
     }
 
-    private fun applicationStatus(){
+    private fun applicationStatus(projectId:String,applicationId:String,button: AppCompatButton){
         val ref = FirebaseDatabase.getInstance().reference
             .child("Project")
+            .child(projectId)
+            .child("JoiningRequests")
+            .child(applicationId)
+        ref.addValueEventListener(object:ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val data = snapshot.getValue(MyAppModel::class.java)
+                    if (data!!.appStatus == 0){
+                        button.setBackgroundResource(R.drawable.status_button_bg_pending)
+                        button.setTextColor(ContextCompat.getColor(mContext,R.color.yellow))
+                    }else if(data!!.appStatus == 1){
+                        button.setBackgroundResource(R.drawable.status_button_bg_rejected)
+                        button.setTextColor(ContextCompat.getColor(mContext,R.color.reddish))
+                    }else if (data!!.appStatus == 2){
+                        button.setBackgroundResource(R.drawable.status_button_bg_approved)
+                        button.setTextColor(ContextCompat.getColor(mContext,R.color.red))
+                    }else{
+                        button.setBackgroundResource(R.drawable.status_button_bg_pending)
+                        button.setTextColor(ContextCompat.getColor(mContext,R.color.yellow))
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                println(error.message)
+            }
+
+        })
     }
 }

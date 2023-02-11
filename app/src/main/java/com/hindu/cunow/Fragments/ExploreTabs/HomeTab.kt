@@ -139,11 +139,8 @@ class HomeTab : Fragment() {
             startActivity(Intent(context, FeedbackActivity::class.java))
         }
 
-
         return root
     }
-
-
     private fun searchUsers(input: String) {
         val array = FirebaseDatabase.getInstance().reference
             .child("Users")
@@ -169,7 +166,6 @@ class HomeTab : Fragment() {
 
         })
     }
-
     private fun searchWithUID(input: String) {
         val array = FirebaseDatabase.getInstance().reference
             .child("Users")
@@ -217,6 +213,5 @@ class HomeTab : Fragment() {
 
         })
     }
-
 
 }

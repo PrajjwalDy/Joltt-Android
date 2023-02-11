@@ -139,6 +139,7 @@ class ProjectAdapter(private val mContext:Context,
         dataMap["applicationId"] = applicationId.toString()
         dataMap["applicantId"] = FirebaseAuth.getInstance().currentUser!!.uid
         dataMap["aboutApplicant"] = about.text.toString()
+        dataMap["appStatus"] = 0
         dataMap["applicantWhatsapp"] = whatsapp.text.toString()
 
         ref.child(applicationId!!).updateChildren(dataMap)
