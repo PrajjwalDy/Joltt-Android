@@ -29,6 +29,9 @@ import com.hindu.cunow.R
 import retrofit2.Callback
 import kotlinx.android.synthetic.main.activity_comment.*
 import kotlinx.android.synthetic.main.post_layout.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
 
@@ -72,16 +75,15 @@ class CommentActivity : AppCompatActivity() {
         commentList = ArrayList()
         commentsAdapter = CommentAdapter(this, commentList as ArrayList<CommentModel>,publisherId,postId)
         recyclerView.adapter = commentsAdapter
-        displayCaption()
-        loadComments()
-        userInfo()
-        updateToken()
-
-
+        CoroutineScope(Dispatchers.IO).launch {
+            launch { displayCaption() }
+            launch { loadComments() }
+            launch { userInfo() }
+            launch { updateToken() }
+        }
         addCommentButton.setOnClickListener { view->
             addComment(view)
         }
-
     }
 
     private fun addComment(view:View){
@@ -108,7 +110,6 @@ class CommentActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun userInfo(){
         val usersRef = FirebaseDatabase.getInstance().reference
             .child("Users")
@@ -131,7 +132,6 @@ class CommentActivity : AppCompatActivity() {
             }
         )
     }
-
     private fun loadComments(){
         val databaseRef = FirebaseDatabase.getInstance().reference
             .child("Comments")
@@ -153,7 +153,6 @@ class CommentActivity : AppCompatActivity() {
                     noCommentsText.visibility = View.VISIBLE
                     RecyclerViewComment.visibility = View.GONE
                 }
-
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -163,7 +162,6 @@ class CommentActivity : AppCompatActivity() {
 
         })
     }
-
     private fun displayCaption(){
         publisherInfo()
         val postRef = getInstance().reference.child("Post")
@@ -185,7 +183,6 @@ class CommentActivity : AppCompatActivity() {
 
         })
     }
-
     private fun publisherInfo(){
         val userDataRef = FirebaseDatabase.getInstance().reference
             .child("Users")
@@ -206,7 +203,6 @@ class CommentActivity : AppCompatActivity() {
 
         })
     }
-
     private fun addNotification(){
         //sendNotification()
         if (publisherId != FirebaseAuth.getInstance().currentUser!!.uid){
@@ -232,7 +228,6 @@ class CommentActivity : AppCompatActivity() {
 
         }
     }
-
     private fun addPageNotification(){
         if (publisherId != FirebaseAuth.getInstance().currentUser!!.uid){
             val dataRef = FirebaseDatabase.getInstance()
@@ -276,8 +271,6 @@ class CommentActivity : AppCompatActivity() {
 
         }
     }
-
-
     private fun sendNotification(){
         val notificationRef = getInstance().reference.child("Tokens")
 

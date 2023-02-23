@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,11 +19,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="35sp"
-                android:text="Project Details"
                 android:layout_margin="10dp"
                 android:fontFamily="@font/queensides"
-                android:textColor="@color/red"/>
+                android:text="Project Details"
+                android:textColor="@color/red"
+                android:textSize="35sp" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -38,22 +37,23 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/projectDetails_Image_CV"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/projectDetails_Image_CV"
                         android:orientation="horizontal">
+
                         <androidx.cardview.widget.CardView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:cardCornerRadius="5pt"
                             android:layout_margin="10dp"
+                            app:cardCornerRadius="5pt"
                             app:cardElevation="5pt">
 
                             <ImageView
+                                android:id="@+id/projectImage_detailsActivity"
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
-                                android:id="@+id/projectImage_detailsActivity"
-                                android:scaleType="fitXY"/>
+                                android:scaleType="fitXY" />
 
 
                         </androidx.cardview.widget.CardView>
@@ -62,11 +62,11 @@
                             android:id="@+id/projectName_DetailActivity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
-                            android:layout_gravity="center_vertical"
                             android:fontFamily="@font/amiko"
                             android:text="Lorem Ipsum"
                             android:textColor="@color/red"
@@ -100,16 +100,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/amiko"
                 android:text="Joining Requests"
-                android:textStyle="bold"
-                android:textSize="18sp"
                 android:textColor="@color/red"
-                android:fontFamily="@font/amiko"/>
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/no_request_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/amiko"
+                android:text="Nothing to show here"
+                android:textSize="14sp" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/joinRequests_Projects_RV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/joinRequests_Projects_RV"/>
+                android:visibility="gone" />
 
         </LinearLayout>
 

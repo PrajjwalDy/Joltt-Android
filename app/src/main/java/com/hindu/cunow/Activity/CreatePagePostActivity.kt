@@ -31,8 +31,6 @@ class CreatePagePostActivity : AppCompatActivity() {
     private var pageName = ""
     private var imageUri : Uri? = null
     private var storagePostImageRef: StorageReference? = null
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_page_post)

@@ -21,8 +21,6 @@ class FeedbackActivity : AppCompatActivity() {
         }
 
     }
-
-
     private fun requestHelp(){
         if(fName.text.isEmpty()||feedText.text.isEmpty()){
             Toast.makeText(this,"Credentials are Required", Toast.LENGTH_LONG).show()

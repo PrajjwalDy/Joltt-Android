@@ -27,7 +27,6 @@ class AddConfessionActivity : AppCompatActivity() {
     private  var myUrl = ""
     private var imageUri : Uri? = null
     private var storagePostImageRef: StorageReference? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_confession)
