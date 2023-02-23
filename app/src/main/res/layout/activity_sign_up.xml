@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/basic_bg_su"
     android:orientation="vertical"
     tools:context=".Activity.SignUpActivity">
 
@@ -17,146 +16,69 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="30dp"
-                android:fontFamily="@font/queensides"
-                android:text="SIGN UP"
-                android:textStyle="bold"
-                android:textColor="@color/teal_200"
-                android:textSize="30sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/queensides"
-                android:text="Let us know about yourself"
-                android:textColor="@color/teal_200"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="198dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/signup_header"
+
+                />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="10dp"
+                android:layout_height="515dp"
+                android:layout_marginTop="-10dp"
+                android:background="@drawable/ocean_green_bg"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <EditText
+                    android:id="@+id/fullName_edit_text"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_margin="20dp"
-                    android:background="@drawable/text_field_bg"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:background="@drawable/ocean_green_button"
+                    android:hint="Full Name"
+                    android:padding="5dp"
+                    android:textColor="@color/red" />
 
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginStart="5dp"
-                        android:src="@drawable/people"
-                        app:tint="@color/red" />
-
-                    <EditText
-                        android:id="@+id/fullName_edit_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@drawable/text_field_bg"
-                        android:hint="Full Name"
-                        android:padding="5dp"
-                        android:textColor="@color/red" />
-
-                </LinearLayout>
-
-                <LinearLayout
+                <EditText
+                    android:id="@+id/uid_edit_text"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/text_field_bg"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:background="@drawable/ocean_green_button"
+                    android:hint="UID(21BCS****)"
+                    android:padding="5dp"
+                    android:textColor="@color/red" />
 
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:src="@drawable/idcard" />
-
-                    <EditText
-                        android:id="@+id/uid_edit_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@drawable/text_field_bg"
-                        android:hint="UID(21BCS****)"
-                        android:padding="5dp"
-                        android:textColor="@color/red" />
-
-                </LinearLayout>
-
-                <LinearLayout
+                <EditText
+                    android:id="@+id/phone_edit_text"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/text_field_bg"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:background="@drawable/ocean_green_button"
+                    android:hint="Phone No."
+                    android:inputType="phone"
+                    android:padding="5dp"
+                    android:textColor="@color/red" />
 
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginStart="5dp"
-                        android:src="@drawable/phonecall"
-                        app:tint="@color/red" />
-
-                    <EditText
-                        android:id="@+id/phone_edit_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@drawable/text_field_bg"
-                        android:hint="Phone No."
-                        android:inputType="phone"
-                        android:padding="5dp"
-                        android:textColor="@color/red" />
-
-                </LinearLayout>
-
-                <LinearLayout
+                <EditText
+                    android:id="@+id/password_Create_AC"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/text_field_bg"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginStart="5dp"
-                        android:src="@drawable/lock"
-                        app:tint="@color/red" />
-
-                    <EditText
-                        android:id="@+id/password_Create_AC"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@drawable/text_field_bg"
-                        android:hint="Password"
-                        android:padding="5dp"
-                        android:textColor="@color/red" />
-
-                </LinearLayout>
+                    android:background="@drawable/ocean_green_button"
+                    android:hint="Password"
+                    android:padding="5dp"
+                    android:textColor="@color/red" />
 
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -165,27 +87,56 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="20dp"
-                    android:background="@drawable/text_field_bg"
+                    android:background="@drawable/green_button"
                     android:fontFamily="@font/queensides"
-                    android:text="SIGN UP"
+                    android:text="Sign Up"
                     android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="-20dp"
+                    android:fontFamily="@font/comfortaa"
+                    android:text="theCampus"
+                    android:textColor="@color/red"
+                    android:textSize="35dp"
+
+                    />
+
+
+                <TextView
+                    android:id="@+id/logInAccount_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/queensides"
+                    android:text="Already have account?"
                     android:textColor="@color/red"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="39dp"
+                    android:fontFamily="@font/comfortaa"
+                    android:text="H.I.N.D.U Production"
+                    android:textColor="@color/red"
+                    android:textSize="13dp"
+
+                    />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/logInAccount_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/queensides"
-                android:text="Already have account? DiveIn"
-                android:textColor="@color/teal_200"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+
 
             <TextView
                 android:id="@+id/tnc_SignUP"
@@ -196,30 +147,13 @@
                 android:fontFamily="@font/queensides"
                 android:text="Read Terms &amp; Conditions"
                 android:textColor="@color/teal_200"
+                android:visibility="gone"
                 android:textSize="15dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:fontFamily="@font/queensides"
-                android:text="Usersity"
-                android:layout_gravity="center_horizontal"
-                android:textStyle="bold"
-                android:textColor="@color/teal_200"
-                android:textSize="35sp" />
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="50dp"
-                android:fontFamily="@font/queensides"
-                android:text="H.I.N.D.U Production"
-                android:textColor="@color/white"
-                android:textSize="15dp"
-                android:textStyle="bold" />
+
+
 
         </LinearLayout>
 
