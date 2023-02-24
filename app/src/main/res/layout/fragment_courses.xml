@@ -6,14 +6,29 @@
     android:orientation="vertical"
     tools:context=".Fragments.Courses.CoursesFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:fontFamily="@font/queensides"
-        android:text="Free Courses"
-        android:textColor="@color/red"
-        android:textSize="35sp" />
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/comfortaa"
+                android:text="Free Courses"
+                android:layout_margin="10dp"
+                android:textColor="@color/red"
+                android:textSize="20sp"
+                />
+        </LinearLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/coursesRV"

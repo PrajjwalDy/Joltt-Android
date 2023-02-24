@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    app:cardCornerRadius="12dp"
+    android:layout_margin="1dp"
     android:layout_height="wrap_content">
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,11 +45,11 @@
                     android:id="@+id/verification_image"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
-                    android:visibility="gone"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="5dp"
                     android:layout_toEndOf="@+id/publisher_Name"
-                    android:src="@drawable/verify" />
+                    android:src="@drawable/verify"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/moreOptionPost"
@@ -63,117 +63,143 @@
 
             </RelativeLayout>
 
-
         </LinearLayout>
-
-
-        <ImageView
-            android:visibility="gone"
-            android:id="@+id/postImage"
-            android:layout_width="match_parent"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            android:layout_height="460dp"
-            android:src="@drawable/profile_testimg"
-            />
-        <com.google.android.exoplayer2.ui.PlayerView
-            android:layout_width="match_parent"
-            android:layout_height="450dp"
-            android:layout_gravity="center"
-            app:played_color="@color/red"
-            app:resize_mode="zoom"
-            app:controller_layout_id="@layout/exoplayer_custom"
-            android:id="@+id/videoPlayer"/>
-
 
         <TextView
             android:id="@+id/caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle=""
-            android:layout_margin="5dp"
+            android:layout_marginStart="65dp"
             android:fontFamily="@font/amiko"
+            android:text="@string/lorem_sample"
+            android:visibility="gone"
+            android:layout_marginTop="-10dp"
             android:textColor="@color/black"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_gravity="bottom"
-            android:orientation="horizontal">
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:cardCornerRadius="20dp">
 
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="5dp">
-
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/animation"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_centerInParent="true"
-                    app:lottie_rawRes="@raw/confessionroom_like_animation" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/like"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_centerInParent="true"
-                    android:layout_gravity="center_horizontal"
-                    android:src="@drawable/blank_heart"
-                    />
+                    android:id="@+id/postImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_testimg"
+                    android:visibility="gone" />
+
+                <com.google.android.exoplayer2.ui.PlayerView
+                    android:id="@+id/videoPlayer"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_gravity="center"
+                    app:controller_layout_id="@layout/exoplayer_custom"
+                    app:played_color="@color/red"
+                    app:resize_mode="zoom" />
 
             </RelativeLayout>
 
 
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/like_rl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="5dp">
 
 
                 <ImageView
-                    android:id="@+id/comment"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="5dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/comment" />
+                    android:id="@+id/like"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/blank_heart" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animation"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerInParent="true"
+                    app:lottie_rawRes="@raw/confessionroom_like_animation" />
 
 
-                <ImageView
-                    android:id="@+id/share"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="5dp"
-                    android:visibility="gone"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/send"
-                    />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/comment"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toStartOf="@+id/totalLikes"
+                android:src="@drawable/comment" />
 
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/totalComments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="3dp"
+                android:layout_toStartOf="@id/comment"
+                android:fontFamily="@font/amiko"
+                android:text="0"
+                android:textColor="@color/red" />
 
-        <TextView
-            android:id="@+id/totalLikes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="No Likes"
-            android:textColor="@color/red"
-            android:fontFamily="@font/amiko"
-            android:layout_margin="3dp"/>
+            <ImageView
+                android:id="@+id/share"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:src="@drawable/send"
+                android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/totalComments"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="No Comments"
-            android:textColor="@color/red"
-            android:fontFamily="@font/amiko"
-            android:layout_margin="3dp"/>
+
+            <TextView
+                android:id="@+id/totalLikes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_toStartOf="@id/like_rl"
+                android:fontFamily="@font/amiko"
+                android:text="0"
+                android:textColor="@color/red" />
+
+
+        </RelativeLayout>
+
 
     </LinearLayout>
-
-
-
 
 </androidx.cardview.widget.CardView>

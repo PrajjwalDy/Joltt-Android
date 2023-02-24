@@ -19,13 +19,12 @@ class CoursesViewModel : ViewModel(), ICourseCallback {
 
     val courseModel: MutableLiveData<List<CourseModel>>?
         get() {
-            if (courseModel == null) {
+            if (courseLiveData == null) {
                 courseLiveData = MutableLiveData()
                 messageError = MutableLiveData()
                 CoroutineScope(Dispatchers.IO).launch {
                     loadData()
                 }
-
             }
             return courseLiveData
         }

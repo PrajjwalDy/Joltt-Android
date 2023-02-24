@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context=".Fragments.community.CommunityFragment">
 
-    <!--<com.google.android.material.appbar.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/communityAppbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -22,34 +22,19 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="10dp"
-                android:fontFamily="@font/amiko"
+                android:fontFamily="@font/comfortaa"
                 android:text="Community"
                 android:textColor="@color/red"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
         </LinearLayout>
 
-    </com.google.android.material.appbar.AppBarLayout>-->
-
-    <TextView
-        android:id="@+id/h1_community"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/queensides"
-        android:text="Community"
-        android:textColor="@color/red"
-        android:textSize="35sp" />
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/h1_community"
+        android:layout_below="@+id/communityAppbar"
         android:id="@+id/community_RV"/>
-
 
     <Button
         android:id="@+id/add_button_commnunity"

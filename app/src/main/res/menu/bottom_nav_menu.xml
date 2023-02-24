@@ -12,11 +12,6 @@
         android:title="Explore" />
 
     <item
-        android:id="@+id/navigation_addPost"
-        android:icon="@drawable/mortarboard"
-        android:title="Academics" />
-
-    <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/notification"
         android:title="Notification" />

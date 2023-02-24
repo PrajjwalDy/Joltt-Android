@@ -77,7 +77,6 @@ class PostAdapter (private val mContext: Context,
             launch { totalComments(holder.totalComments,post.postId!!) }
         }
 
-
         holder.bind(mPost[position],mContext,holder.image,holder.playerView)
 
         if (mPost[position].page!!){
@@ -198,8 +197,13 @@ class PostAdapter (private val mContext: Context,
             val progressDialog = Dialog(context)
             progressDialog.setContentView(R.layout.profile_dropdown_menu)
             progressDialog.show()
+            if (list.caption == ""){
+                caption.visibility = View.GONE
+            }else{
+                caption.visibility = View.VISIBLE
+                caption.text = list.caption
+            }
 
-            caption.text = list.caption
             if (list.iImage){
                 imageView.visibility = View.VISIBLE
                 playerView.visibility = View.GONE
@@ -380,12 +384,7 @@ class PostAdapter (private val mContext: Context,
             @SuppressLint("SetTextI18n")
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
-                    val likes = snapshot.childrenCount.toInt()
-                    if (likes <=1){
-                        totalLikes.text = snapshot.childrenCount.toString() + "Like"
-                    }else{
-                        totalLikes.text = snapshot.childrenCount.toString() + "Likes"
-                    }
+                    totalLikes.text = snapshot.childrenCount.toString()
                 }
             }
             override fun onCancelled(error: DatabaseError) {
@@ -430,12 +429,7 @@ class PostAdapter (private val mContext: Context,
         postData.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
-                    val count = snapshot.childrenCount.toInt()
-                    if (count <=0){
-                        totalComments.text = ""
-                    }else{
-                        totalComments.text = snapshot.childrenCount.toString() + "Commented"
-                    }
+                    totalComments.text = snapshot.childrenCount.toString()
                 }
             }
 

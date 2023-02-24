@@ -84,7 +84,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
-                            android:padding="5dp"
+                            android:padding="2dp"
                             android:src="@drawable/diary"
                             app:tint="@color/red" />
                     </RelativeLayout>
@@ -160,7 +160,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
-                            android:padding="5dp"
+                            android:padding="2dp"
                             android:src="@drawable/event"
                             app:tint="@color/red" />
                     </RelativeLayout>
@@ -199,7 +199,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
-                            android:padding="5dp"
+                            android:padding="3dp"
                             android:src="@drawable/bank"
                             app:tint="@color/red" />
                     </RelativeLayout>
@@ -247,7 +247,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
-                            android:padding="5dp"
+                            android:padding="0dp"
                             android:src="@drawable/traveling"
                             app:tint="@color/red" />
                     </RelativeLayout>
@@ -286,7 +286,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
-                            android:padding="5dp"
+                            android:padding="3dp"
                             android:src="@drawable/club"
                             app:tint="@color/red" />
                     </RelativeLayout>
@@ -324,7 +324,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
-                            android:padding="5dp"
+                            android:padding="2dp"
                             android:src="@drawable/community"
                             app:tint="@color/red" />
                     </RelativeLayout>
@@ -363,7 +363,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
-                            android:padding="5dp"
+                            android:padding="3dp"
                             android:src="@drawable/pages"
                             app:tint="@color/red" />
                     </RelativeLayout>
@@ -414,7 +414,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
-                            android:padding="5dp"
+                            android:padding="2dp"
                             android:src="@drawable/projects"
                             app:tint="@color/red" />
                     </RelativeLayout>
@@ -452,8 +452,8 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
-                            android:padding="5dp"
-                            android:src="@drawable/community"
+                            android:padding="2dp"
+                            android:src="@drawable/computer"
                             app:tint="@color/red" />
                     </RelativeLayout>
 
@@ -487,11 +487,11 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_centerInParent="true"
-                            android:layout_marginStart="10dp"
+                            android:layout_marginStart="12dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
-                            android:padding="5dp"
+                            android:padding="3dp"
                             android:src="@drawable/people"
                             app:tint="@color/red" />
                     </RelativeLayout>
@@ -530,7 +530,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
-                            android:padding="5dp"
+                            android:padding="3dp"
                             android:src="@drawable/star"
                             app:tint="@color/red" />
                     </RelativeLayout>

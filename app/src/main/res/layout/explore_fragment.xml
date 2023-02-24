@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".Fragments.Explore.ExploreFragment">
 
-    <!--<com.google.android.material.appbar.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white">
@@ -20,43 +20,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:fontFamily="@font/amiko"
+                android:fontFamily="@font/comfortaa"
                 android:text="Explore"
                 android:layout_margin="10dp"
-                android:textStyle="bold"
                 android:textColor="@color/red"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 />
         </LinearLayout>
 
-    </com.google.android.material.appbar.AppBarLayout>-->
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:fontFamily="@font/queensides"
-        android:text="Explore"
-        android:layout_margin="10dp"
-        android:textColor="@color/red"
-        android:textSize="35sp"
-        />
+    </com.google.android.material.appbar.AppBarLayout>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/explore_tabs_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabMode="scrollable"
-            app:tabGravity="center"
-            />
-
+            app:tabGravity="center"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/explore_viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-
-
-
 </LinearLayout>

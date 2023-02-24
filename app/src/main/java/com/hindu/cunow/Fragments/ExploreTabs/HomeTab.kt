@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -52,23 +53,6 @@ class HomeTab : Fragment() {
         userAdapter = context?.let { UserAdapter(it, mUser as ArrayList<UserModel>) }
         recyclerView?.adapter = userAdapter
 
-       root.filter.setOnClickListener {
-           val dialogView = LayoutInflater.from(context).inflate(R.layout.filter_dialog_box, null)
-
-           val dialogBuilder = AlertDialog.Builder(context)
-               .setView(dialogView)
-
-           val alertDialog = dialogBuilder.show()
-           dialogView.with_name.setOnClickListener {
-               checker="Name"
-               alertDialog.dismiss()
-           }
-           dialogView.with_UID.setOnClickListener {
-               checker = "UID"
-               alertDialog.dismiss()
-           }
-
-       }
 
         root.search_edit_text.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -81,13 +65,7 @@ class HomeTab : Fragment() {
                 } else {
                     recyclerView?.visibility = View.VISIBLE
                     retrieveUsers()
-                    if (checker == "Name") {
-                        searchUsers(p0!!.toString())
-                    } else if (checker == "UID") {
-                        searchWithUID(p0.toString())
-                    } else {
-                        searchUsers(p0!!.toString())
-                    }
+                    searchUsers(p0!!.toString())
                 }
             }
 
@@ -144,32 +122,7 @@ class HomeTab : Fragment() {
     private fun searchUsers(input: String) {
         val array = FirebaseDatabase.getInstance().reference
             .child("Users")
-            .orderByChild("searchName")
-            .startAt(input)
-            .endAt(input + "\uf88f")
-        array.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                mUser?.clear()
-
-                for (snapshot in snapshot.children) {
-                    val user = snapshot.getValue(UserModel::class.java)
-                    if (user != null) {
-                        mUser?.add(user)
-                    }
-                }
-                userAdapter?.notifyDataSetChanged()
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
-    }
-    private fun searchWithUID(input: String) {
-        val array = FirebaseDatabase.getInstance().reference
-            .child("Users")
-            .orderByChild("ID")
+            .orderByChild("full")
             .startAt(input)
             .endAt(input + "\uf88f")
         array.addValueEventListener(object : ValueEventListener {
