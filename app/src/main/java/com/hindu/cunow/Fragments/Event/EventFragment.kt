@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hindu.cunow.Activity.AddEventActivity
@@ -42,6 +43,10 @@ class EventFragment : Fragment() {
 
         root.addEvent_button.setOnClickListener {
             startActivity(Intent(context, AddEventActivity::class.java))
+        }
+        root.eventBack.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_eventFragment_to_navigation_dashboard)
         }
         return root
     }

@@ -19,6 +19,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.NonNull
+import androidx.cardview.widget.CardView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
@@ -170,6 +171,7 @@ class PostAdapter (private val mContext: Context,
                 alertDialog.dismiss()
             }
         }
+        holder.postCardView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.context, R.anim.card_view_anim))
     }
 
     override fun getItemCount(): Int {
@@ -190,6 +192,7 @@ class PostAdapter (private val mContext: Context,
         val moreOption:ImageView = itemView.findViewById(R.id.moreOptionPost) as ImageView
         val totalLikes: TextView = itemView.findViewById(R.id.totalLikes) as TextView
         val totalComments:TextView = itemView.findViewById(R.id.totalComments)
+        val postCardView:CardView = itemView.findViewById(R.id.postCV)
 
 
         fun bind(list:PostModel,context: Context,imageView: ImageView,playerView: PlayerView){
@@ -217,6 +220,7 @@ class PostAdapter (private val mContext: Context,
                 imageView.visibility = View.GONE
             }
             progressDialog.dismiss()
+
         }
     }
 
@@ -376,7 +380,6 @@ class PostAdapter (private val mContext: Context,
     enum class URLType(var url:String){
         MP4(""), HLS("")
     }
-
     private suspend fun totalLikes(postId: String, totalLikes:TextView){
         val databaseRef = FirebaseDatabase.getInstance().reference
             .child("Likes").child(postId)

@@ -84,6 +84,9 @@ class CommentActivity : AppCompatActivity() {
         addCommentButton.setOnClickListener { view->
             addComment(view)
         }
+        commentBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun addComment(view:View){

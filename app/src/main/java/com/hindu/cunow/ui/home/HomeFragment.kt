@@ -91,10 +91,6 @@ class HomeFragment : Fragment() {
                 startActivity(Intent(context,VideoUploadActivity::class.java))
                 alertDialog.dismiss()
             }
-            dialogView.selectVibe.setOnClickListener {
-                startActivity(Intent(context,AddVibesAcitvity::class.java))
-                alertDialog.dismiss()
-            }
 
         }
         root.imin.setOnClickListener {
@@ -138,7 +134,6 @@ class HomeFragment : Fragment() {
 
         checkFirstVisit()
     }
-
     private fun initView(root:View){
         recyclerView = root.findViewById(R.id.postRecyclerView) as RecyclerView
         recyclerView!!.setHasFixedSize(true)
@@ -150,7 +145,6 @@ class HomeFragment : Fragment() {
         //loadUserImage(root)
 
     }
-
     private fun checkFirstVisit(){
         val progressDialog = context?.let { Dialog(it) }
         progressDialog!!.setContentView(R.layout.profile_dropdown_menu)
@@ -179,7 +173,6 @@ class HomeFragment : Fragment() {
 
         })
     }
-
     private fun checkFollowingList(){
         checkPost()
         val database = FirebaseDatabase.getInstance().reference
@@ -206,7 +199,6 @@ class HomeFragment : Fragment() {
 
         })
     }
-
     private  fun checkPost(){
         val database = FirebaseDatabase.getInstance().reference
             .child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
@@ -227,7 +219,6 @@ class HomeFragment : Fragment() {
 
             })
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

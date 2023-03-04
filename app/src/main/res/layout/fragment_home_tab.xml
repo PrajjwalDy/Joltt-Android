@@ -32,10 +32,11 @@
             android:id="@+id/filter"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:padding="3dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="5dp"
-            android:src="@drawable/filter" />
+            android:src="@drawable/search" />
 
     </RelativeLayout>
 

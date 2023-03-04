@@ -40,7 +40,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun signUp() {
         val fullName = fullName_edit_text.text.toString().trim{ it <= ' '}
-        val uid = uid_edit_text.text.toString()+"@cuchd.in"
+        val uid = uid_edit_text.text.toString()
         val phone = phone_edit_text.text.toString().trim{ it <= ' '}
         val password = password_Create_AC.text.toString()
 
@@ -60,7 +60,7 @@ class SignUpActivity : AppCompatActivity() {
 
             else ->{
                 val progressDialog = ProgressDialog(this@SignUpActivity)
-                progressDialog.setTitle("DivingUp")
+                progressDialog.setTitle("Registration in progress")
                 progressDialog.setTitle("Please wait")
                 progressDialog.setCanceledOnTouchOutside(false)
                 progressDialog.show()
@@ -70,7 +70,7 @@ class SignUpActivity : AppCompatActivity() {
                 mAuth.createUserWithEmailAndPassword(uid,password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful){
-                            savedata(fullName,uid, phone, password, progressDialog)
+                            saveData(fullName,uid, phone, password, progressDialog)
                         }else{
                             val message = task.exception.toString()
                             Toast.makeText(this, "Some Error Occurred: $message", Toast.LENGTH_LONG).show()
@@ -82,9 +82,7 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
     }
-
-
-    private fun savedata(fullName: String, uid: String, phone: String, password: String,progressDialog:ProgressDialog) {
+    private fun saveData(fullName: String, uid: String, phone: String, password: String,progressDialog:ProgressDialog) {
 
         val currentUserID = FirebaseAuth.getInstance().currentUser!!.uid
         val firebaseUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser

@@ -25,13 +25,11 @@ class HashTagAdapter(private val mContext:Context,private val mHash:List<HashTag
 
 
     inner class ViewHolder(@NonNull itemView: View):RecyclerView.ViewHolder(itemView){
-        val tagName:TextView = itemView.findViewById(R.id.tagName) as TextView
-        private val trendName: TextView = itemView.findViewById(R.id.tag_trend) as TextView
+        private val tagName:TextView = itemView.findViewById(R.id.tagName) as TextView
         val postCount:TextView = itemView.findViewById(R.id.postCount) as TextView
 
          fun bind(list:HashTagModel){
             tagName.text = list.tagName
-            trendName.text = list.trendName
         }
     }
 
@@ -62,7 +60,7 @@ class HashTagAdapter(private val mContext:Context,private val mHash:List<HashTag
         dataRef.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
-                    postCount.text = snapshot.childrenCount.toString()
+                    postCount.text = snapshot.childrenCount.toString() +" posts"
                 }
             }
 

@@ -89,7 +89,7 @@ class LogInActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-val user : FirebaseUser? = FirebaseAuth.getInstance().currentUser
+       val user : FirebaseUser? = FirebaseAuth.getInstance().currentUser
 
             if (FirebaseAuth.getInstance().currentUser != null){
 
@@ -101,10 +101,6 @@ val user : FirebaseUser? = FirebaseAuth.getInstance().currentUser
 
                 }
         }
-
-    }
-
-    private fun checkStatus(){
 
     }
 }

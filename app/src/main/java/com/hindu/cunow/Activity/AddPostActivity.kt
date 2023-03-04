@@ -161,7 +161,6 @@ class AddPostActivity : AppCompatActivity() {
         // A constant variable for place picker
         private const val PLACE_AUTOCOMPLETE_REQUEST_CODE = 3
     }
-
     private fun buildHasTag(postId:String){
         val sentence = caption_image.text.toString().trim{ it <= ' '}
         val words = sentence.split(" ")
@@ -207,7 +206,6 @@ class AddPostActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
 
         })

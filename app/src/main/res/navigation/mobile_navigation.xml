@@ -286,7 +286,11 @@
         android:id="@+id/eventFragment"
         android:name="com.hindu.cunow.Fragments.Event.EventFragment"
         android:label="fragment_event"
-        tools:layout="@layout/fragment_event" />
+        tools:layout="@layout/fragment_event" >
+        <action
+            android:id="@+id/action_eventFragment_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
     <fragment
         android:id="@+id/internshipsFragment"
         android:name="com.hindu.cunow.Fragments.Internship.InternshipsFragment"

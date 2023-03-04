@@ -7,10 +7,9 @@
     android:orientation="vertical"
     tools:context=".Activity.SignUpActivity">
 
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,17 +18,16 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="198dp"
+                android:layout_height="200dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:src="@drawable/signup_header"
 
                 />
 
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="515dp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="-10dp"
                 android:background="@drawable/ocean_green_bg"
                 android:orientation="vertical">
@@ -51,7 +49,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/ocean_green_button"
-                    android:hint="UID(21BCS****)"
+                    android:hint="Email id"
                     android:padding="5dp"
                     android:textColor="@color/red" />
 
@@ -80,7 +78,6 @@
                     android:padding="5dp"
                     android:textColor="@color/red" />
 
-
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/signUp_button"
                     android:layout_width="match_parent"
@@ -95,7 +92,6 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -107,7 +103,6 @@
                     android:textSize="35dp"
 
                     />
-
 
                 <TextView
                     android:id="@+id/logInAccount_text"
@@ -121,7 +116,6 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -134,6 +128,7 @@
                     android:textSize="13dp"
 
                     />
+
             </LinearLayout>
 
 

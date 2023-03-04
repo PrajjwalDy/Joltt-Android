@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".Activity.CommentActivity">
 
-    <!--<com.google.android.material.appbar.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/commentAppbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -17,33 +17,29 @@
             android:layout_height="50dp"
             android:orientation="horizontal">
 
+            <ImageView
+                android:id="@+id/commentBack"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                app:srcCompat= "@drawable/back"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/amiko"
+                android:layout_margin="5dp"
+                android:fontFamily="@font/comfortaa"
                 android:text="Comments"
                 android:textColor="@color/red"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textSize="20dp" />
         </LinearLayout>
 
-    </com.google.android.material.appbar.AppBarLayout>-->
-
-    <TextView
-        android:id="@+id/h_comments"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:fontFamily="@font/queensides"
-        android:text="Comments"
-        android:textColor="@color/red"
-        android:textSize="35dp" />
-
+    </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
-        android:layout_below="@+id/h_comments"
+        android:layout_below="@+id/commentAppbar"
         android:id="@+id/captionLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

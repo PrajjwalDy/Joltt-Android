@@ -5,4 +5,5 @@ class InternshipModel{
     val internId:String? = null
     val internImg:String?= null
     val internDesc:String?= null
+    val topics:String? = null
 }

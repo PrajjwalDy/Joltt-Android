@@ -42,7 +42,6 @@ class ExplorePagesFragment : Fragment() {
 
         return root
     }
-
     private fun initView(root:View){
         recyclerView = root.findViewById(R.id.explorePages_RV) as RecyclerView
         recyclerView!!.setHasFixedSize(true)

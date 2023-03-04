@@ -23,7 +23,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_margin="10dp"
-                android:src="@drawable/gallery" />
+                android:src="@drawable/photo" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -48,7 +48,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_margin="10dp"
-                android:src="@drawable/select_video" />
+                android:src="@drawable/videocamera" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -62,31 +62,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/selectVibe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/play_vid"
-                app:tint="@color/red" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:fontFamily="@font/amiko"
-                android:text="Vibes"
-                android:textColor="@color/red"
-                android:textSize="12sp" />
-
-
-        </LinearLayout>
 
     </LinearLayout>
 

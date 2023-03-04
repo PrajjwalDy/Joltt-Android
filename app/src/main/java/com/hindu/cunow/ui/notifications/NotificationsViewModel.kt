@@ -31,7 +31,6 @@ class NotificationsViewModel : ViewModel(), INotificationCallback {
             CoroutineScope(Dispatchers.IO).launch {
                 loadNotification()
             }
-
         }
         val mutableLiveData = notificationLiveData
         return mutableLiveData!!

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.InterestActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/skip_interest"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rounded_corner_grey"
+            android:fontFamily="@font/comfortaa"
+            android:text="skip"
+            android:textAllCaps="false"
+            android:textColor="@color/red" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/proceed_interest"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rounded_corner_green"
+            android:fontFamily="@font/comfortaa"
+            android:text="Next"
+            android:textAllCaps="false"
+            android:textColor="@color/grey" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="294dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:srcCompat="@drawable/interest" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/interest_RV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

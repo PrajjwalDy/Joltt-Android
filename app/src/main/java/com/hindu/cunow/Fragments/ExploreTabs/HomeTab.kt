@@ -122,7 +122,7 @@ class HomeTab : Fragment() {
     private fun searchUsers(input: String) {
         val array = FirebaseDatabase.getInstance().reference
             .child("Users")
-            .orderByChild("full")
+            .orderByChild("searchName")
             .startAt(input)
             .endAt(input + "\uf88f")
         array.addValueEventListener(object : ValueEventListener {

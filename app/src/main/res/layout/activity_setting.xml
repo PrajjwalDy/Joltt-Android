@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="10dp"
-                android:fontFamily="@font/amiko"
+                android:fontFamily="@font/comfortaa"
                 android:text="Settings"
                 android:textColor="@color/red"
                 android:textSize="18sp" />
@@ -36,9 +36,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
         <LinearLayout
             android:id="@+id/edit_profile"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="center_vertical"
@@ -54,7 +55,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/amiko"
+                android:fontFamily="@font/comfortaa"
                 android:text="Edit Profile"
                 android:textColor="@color/red" />
 
@@ -63,7 +64,7 @@
 
         <LinearLayout
             android:id="@+id/privacy_settings"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="center_vertical"
@@ -79,7 +80,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/amiko"
+                android:fontFamily="@font/comfortaa"
                 android:text="Privacy Setting"
                 android:textColor="@color/red" />
 
@@ -88,7 +89,7 @@
 
         <LinearLayout
             android:id="@+id/about_us"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="center_vertical"
@@ -104,7 +105,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/amiko"
+                android:fontFamily="@font/comfortaa"
                 android:text="About Us"
                 android:textColor="@color/red" />
 
@@ -113,7 +114,7 @@
 
         <LinearLayout
             android:id="@+id/help"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="center_vertical"
@@ -129,7 +130,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/amiko"
+                android:fontFamily="@font/comfortaa"
                 android:text="Help"
                 android:textColor="@color/red" />
 
@@ -138,7 +139,7 @@
 
         <LinearLayout
             android:id="@+id/verify"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="center_vertical"
@@ -154,7 +155,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/amiko"
+                android:fontFamily="@font/comfortaa"
                 android:text="Verification"
                 android:textColor="@color/red" />
 
@@ -163,7 +164,7 @@
 
         <LinearLayout
             android:id="@+id/terms_condition"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="center_vertical"
@@ -180,7 +181,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/amiko"
+                android:fontFamily="@font/comfortaa"
                 android:text="Terms and Conditions"
                 android:textColor="@color/red" />
 
@@ -188,8 +189,32 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/webscraping"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/hosting"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/comfortaa"
+                android:text="Web Scraping"
+                android:textColor="@color/red" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/logout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="center_vertical"
@@ -206,12 +231,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/amiko"
-                android:text="Log out"
+                android:fontFamily="@font/comfortaa"
+                android:text="Logout"
                 android:textColor="@color/red" />
-
-
         </LinearLayout>
+
 
 
         <TextView
@@ -219,11 +243,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="150dp"
-            android:fontFamily="@font/amiko"
+            android:fontFamily="@font/comfortaa"
             android:text="H.I.N.D.U Production"
             android:textColor="@color/red"
             android:textSize="18sp" />
-
 
     </LinearLayout>
 

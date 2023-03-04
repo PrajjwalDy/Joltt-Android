@@ -38,6 +38,11 @@ class NotificationsFragment : Fragment() {
     private var notificationAdapter: NotificationAdapter? = null
     private val binding get() = _binding!!
 
+    private val adapter = notificationList?.let { NotificationAdapter(requireContext(), it) }
+
+    val databaseReference = FirebaseDatabase.getInstance().reference
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -65,9 +70,18 @@ class NotificationsFragment : Fragment() {
         return root
     }
 
-
     private  fun initView(root:View){
         recyclerView = root.findViewById(R.id.notificationRecycler) as RecyclerView
+        /*recyclerView!!.addOnScrollListener(object :RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
+                if (lastVisibleItemPosition == adapter!!.itemCount-1){
+                }
+            }
+        })*/
+
         recyclerView!!.setHasFixedSize(true)
         val linearLayoutManager = LinearLayoutManager(context)
         linearLayoutManager.reverseLayout = true
@@ -75,47 +89,10 @@ class NotificationsFragment : Fragment() {
         recyclerView!!.layoutManager = linearLayoutManager
     }
 
-
-
-
-
-
-
-
-    /*private fun readNotification() {
-        val progressDialog = context?.let { Dialog(it) }
-        progressDialog!!.setContentView(R.layout.profile_dropdown_menu)
-        progressDialog.show()
-        val dataRef = FirebaseDatabase.getInstance().reference.child("Notification")
-            .child(FirebaseAuth.getInstance().currentUser!!.uid)
-
-        dataRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
-                    (notificationList as ArrayList<NotificationModel>).clear()
-                    for (snapshot in snapshot.children){
-                        val data = snapshot.getValue(NotificationModel::class.java)
-                        (notificationList as ArrayList<NotificationModel>).add(data!!)
-
-                        Collections.reverse(notificationList)
-                        notificationAdapter!!.notifyDataSetChanged()
-                    }
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
-        progressDialog.dismiss()
-    }*/
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
     private fun markAllAsRead(){
         val notification = FirebaseDatabase.getInstance().reference
             .child("Notification")

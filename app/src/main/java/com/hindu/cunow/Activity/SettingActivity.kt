@@ -18,10 +18,12 @@ class SettingActivity : AppCompatActivity() {
         }
 
 
+
+
         logout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
 
-            val intent = Intent(this@SettingActivity,LandingPageActivity::class.java)
+            val intent = Intent(this@SettingActivity,WelcomeActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
             finish()
@@ -53,5 +55,8 @@ class SettingActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        webscraping.setOnClickListener {
+            startActivity(Intent(this,WebScraping::class.java))
+        }
     }
 }
