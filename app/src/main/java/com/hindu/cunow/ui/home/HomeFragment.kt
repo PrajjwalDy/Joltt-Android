@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -44,11 +46,15 @@ class HomeFragment : Fragment() {
     private var checker = ""
     var recyclerView: RecyclerView? = null
     private var postAdapter: PostAdapter? = null
-
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
-
     private val binding get() = _binding!!
+    private var clicked= false
+
+    private val rotateOpen: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_open_anim) }
+    private val rotateClose: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_close_anim) }
+    private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.from_bottom_anim) }
+    private val toBottom: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.to_bottom_anim) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,8 +76,9 @@ class HomeFragment : Fragment() {
 
         })
 
-        checkFirstVisit()
+
         CoroutineScope(Dispatchers.IO).launch(){
+            launch { checkFirstVisit() }
             launch {developerMessage()}
             launch {chatNotification()}
         }
@@ -93,6 +100,7 @@ class HomeFragment : Fragment() {
             }
 
         }
+
         root.imin.setOnClickListener {
             updateVisit(root)
         }
@@ -118,6 +126,17 @@ class HomeFragment : Fragment() {
             Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_chatFragment)
         }
 
+        root.create_post_fab.setOnClickListener {
+            addButtonClicked()
+        }
+
+        root.add_image.setOnClickListener {
+            startActivity(Intent(context,AddPostActivity::class.java))
+        }
+
+        root.add_video.setOnClickListener {
+            startActivity(Intent(context,VideoUploadActivity::class.java))
+        }
 
         return root
     }
@@ -131,8 +150,10 @@ class HomeFragment : Fragment() {
         postMap["firstVisit"] = false
         ref.child(FirebaseAuth.getInstance().currentUser!!.uid)
             .updateChildren(postMap)
+        CoroutineScope(Dispatchers.IO).launch {
+            checkFirstVisit()
+        }
 
-        checkFirstVisit()
     }
     private fun initView(root:View){
         recyclerView = root.findViewById(R.id.postRecyclerView) as RecyclerView
@@ -145,10 +166,8 @@ class HomeFragment : Fragment() {
         //loadUserImage(root)
 
     }
-    private fun checkFirstVisit(){
-        val progressDialog = context?.let { Dialog(it) }
-        progressDialog!!.setContentView(R.layout.profile_dropdown_menu)
-        progressDialog.show()
+
+    private suspend fun checkFirstVisit(){
         val dataRef = FirebaseDatabase
             .getInstance().reference.child("Users")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
@@ -163,8 +182,9 @@ class HomeFragment : Fragment() {
                         postLayout_ll.visibility = View.VISIBLE
                     }
                 }
-                checkFollowingList()
-            progressDialog.dismiss()
+                CoroutineScope(Dispatchers.IO).launch {
+                    checkFollowingList()
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -173,7 +193,8 @@ class HomeFragment : Fragment() {
 
         })
     }
-    private fun checkFollowingList(){
+
+    private suspend fun checkFollowingList(){
         checkPost()
         val database = FirebaseDatabase.getInstance().reference
             .child("Follow")
@@ -199,6 +220,7 @@ class HomeFragment : Fragment() {
 
         })
     }
+
     private  fun checkPost(){
         val database = FirebaseDatabase.getInstance().reference
             .child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
@@ -219,6 +241,7 @@ class HomeFragment : Fragment() {
 
             })
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -263,5 +286,36 @@ class HomeFragment : Fragment() {
             }
 
         })
+    }
+
+    private fun addButtonClicked(){
+        setVisibility(clicked)
+        setAnimation(clicked)
+        clicked = !clicked
+    }
+
+    private fun setVisibility(clicked:Boolean) {
+        if (!clicked){
+            add_image.visibility = View.VISIBLE
+            add_text.visibility = View.VISIBLE
+            add_video.visibility = View.VISIBLE
+        }else{
+            add_image.visibility = View.GONE
+            add_text.visibility = View.GONE
+            add_video.visibility = View.GONE
+        }
+    }
+    private fun setAnimation(clicked:Boolean) {
+        if (!clicked){
+            add_text.startAnimation(fromBottom)
+            add_image.startAnimation(fromBottom)
+            add_video.startAnimation(fromBottom)
+            create_post_fab.startAnimation(rotateOpen)
+        }else{
+            add_text.startAnimation(toBottom)
+            add_image.startAnimation(toBottom)
+            add_video.startAnimation(toBottom)
+            create_post_fab.startAnimation(rotateClose)
+        }
     }
 }

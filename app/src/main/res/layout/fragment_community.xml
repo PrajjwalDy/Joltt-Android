@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".Fragments.community.CommunityFragment">
 
@@ -16,6 +17,14 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/communityBack"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:srcCompat="@drawable/back"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"/>
 
             <TextView
                 android:layout_width="wrap_content"

@@ -11,6 +11,7 @@
         android:icon="@drawable/explore"
         android:title="Explore" />
 
+
     <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/notification"

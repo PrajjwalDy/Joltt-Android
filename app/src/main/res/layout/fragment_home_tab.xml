@@ -72,8 +72,8 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
                         android:layout_gravity="center_horizontal"
                         android:background="@drawable/circular_items">
 
@@ -86,8 +86,7 @@
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
                             android:padding="2dp"
-                            android:src="@drawable/diary"
-                            app:tint="@color/red" />
+                            android:src="@drawable/diary" />
                     </RelativeLayout>
 
                     <TextView
@@ -110,8 +109,8 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
                         android:layout_gravity="center_horizontal"
                         android:background="@drawable/circular_items">
 
@@ -123,9 +122,8 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
-                            android:padding="5dp"
-                            android:src="@drawable/posts"
-                            app:tint="@color/red" />
+                            android:padding="2dp"
+                            android:src="@drawable/posts" />
                     </RelativeLayout>
 
                     <TextView
@@ -148,8 +146,8 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
                         android:layout_gravity="center_horizontal"
                         android:background="@drawable/circular_items">
 
@@ -162,8 +160,7 @@
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
                             android:padding="2dp"
-                            android:src="@drawable/event"
-                            app:tint="@color/red" />
+                            android:src="@drawable/event" />
                     </RelativeLayout>
 
 
@@ -177,6 +174,17 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
                 <LinearLayout
                     android:id="@+id/ll_govt_schemes"
                     android:layout_width="0dp"
@@ -187,8 +195,8 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
                         android:layout_gravity="center_horizontal"
                         android:background="@drawable/circular_items">
 
@@ -201,8 +209,7 @@
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
                             android:padding="3dp"
-                            android:src="@drawable/bank"
-                            app:tint="@color/red" />
+                            android:src="@drawable/bank" />
                     </RelativeLayout>
 
                     <TextView
@@ -216,15 +223,6 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
                 <LinearLayout
                     android:id="@+id/ll_study_abroad"
                     android:layout_width="0dp"
@@ -235,8 +233,8 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
                         android:layout_gravity="center_horizontal"
                         android:background="@drawable/circular_items">
 
@@ -249,8 +247,8 @@
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
                             android:padding="0dp"
-                            android:src="@drawable/traveling"
-                            app:tint="@color/red" />
+                            android:src="@drawable/travelling"
+                            />
                     </RelativeLayout>
 
                     <TextView
@@ -274,8 +272,8 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
                         android:layout_gravity="center_horizontal"
                         android:background="@drawable/circular_items">
 
@@ -288,8 +286,7 @@
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
                             android:padding="3dp"
-                            android:src="@drawable/club"
-                            app:tint="@color/red" />
+                            android:src="@drawable/club" />
                     </RelativeLayout>
 
                     <TextView
@@ -302,45 +299,19 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/ll_community"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="10dp"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/circular_items">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_centerInParent="true"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:padding="2dp"
-                            android:src="@drawable/community"
-                            app:tint="@color/red" />
-                    </RelativeLayout>
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="Community"
-                        android:textColor="@color/red"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
 
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
                 <LinearLayout
                     android:id="@+id/ll_pages"
                     android:layout_width="0dp"
@@ -351,8 +322,8 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
                         android:layout_gravity="center_horizontal"
                         android:background="@drawable/circular_items">
 
@@ -365,8 +336,7 @@
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
                             android:padding="3dp"
-                            android:src="@drawable/pages"
-                            app:tint="@color/red" />
+                            android:src="@drawable/pages" />
                     </RelativeLayout>
 
                     <TextView
@@ -381,14 +351,6 @@
                 </LinearLayout>
 
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
 
 
 
@@ -402,8 +364,8 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
                         android:layout_gravity="center_horizontal"
                         android:background="@drawable/circular_items">
 
@@ -416,8 +378,7 @@
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
                             android:padding="2dp"
-                            android:src="@drawable/projects"
-                            app:tint="@color/red" />
+                            android:src="@drawable/projects" />
                     </RelativeLayout>
 
                     <TextView
@@ -440,8 +401,8 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
                         android:layout_gravity="center_horizontal"
                         android:background="@drawable/circular_items">
 
@@ -454,8 +415,7 @@
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
                             android:padding="2dp"
-                            android:src="@drawable/computer"
-                            app:tint="@color/red" />
+                            android:src="@drawable/courses" />
                     </RelativeLayout>
 
 
@@ -469,8 +429,22 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
+
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
                 <LinearLayout
-                    android:id="@+id/ll_people"
+                    android:id="@+id/ll_community"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
@@ -479,8 +453,8 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
                         android:layout_gravity="center_horizontal"
                         android:background="@drawable/circular_items">
 
@@ -488,13 +462,12 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_centerInParent="true"
-                            android:layout_marginStart="12dp"
+                            android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
-                            android:padding="3dp"
-                            android:src="@drawable/people"
-                            app:tint="@color/red" />
+                            android:padding="2dp"
+                            android:src="@drawable/community" />
                     </RelativeLayout>
 
 
@@ -502,7 +475,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="People"
+                        android:text="Community"
                         android:textColor="@color/red"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -518,8 +491,8 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
                         android:layout_gravity="center_horizontal"
                         android:background="@drawable/circular_items">
 
@@ -533,7 +506,7 @@
                             android:layout_marginBottom="10dp"
                             android:padding="3dp"
                             android:src="@drawable/star"
-                            app:tint="@color/red" />
+                            />
                     </RelativeLayout>
 
 
@@ -547,17 +520,46 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/ll_people"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/circular_items">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:padding="3dp"
+                            android:src="@drawable/people"
+                            />
+                    </RelativeLayout>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="People"
+                        android:textColor="@color/red"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
             </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="For You"
-                android:layout_margin="10dp"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="@color/red"/>
 
         </LinearLayout>
     </ScrollView>

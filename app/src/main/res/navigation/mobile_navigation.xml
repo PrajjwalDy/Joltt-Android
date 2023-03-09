@@ -310,7 +310,11 @@
         android:id="@+id/schemesFragment"
         android:name="com.hindu.cunow.Fragments.Schemes.SchemesFragment"
         android:label="fragment_schemes"
-        tools:layout="@layout/fragment_schemes" />
+        tools:layout="@layout/fragment_schemes" >
+        <action
+            android:id="@+id/action_schemesFragment_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
     <fragment
         android:id="@+id/abroadFragment"
         android:name="com.hindu.cunow.Fragments.Abroad.AbroadFragment"

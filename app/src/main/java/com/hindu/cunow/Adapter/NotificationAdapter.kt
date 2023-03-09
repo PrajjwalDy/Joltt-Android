@@ -1,10 +1,7 @@
 package com.hindu.cunow.Adapter
 
-import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -13,32 +10,29 @@ import androidx.annotation.NonNull
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.firebase.ui.database.paging.FirebaseDataSource
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.ktx.Firebase
-import com.hindu.cunow.Activity.ViewFullActivity
-import com.hindu.cunow.Fragments.Pages.PageDetailsActivity
 import com.hindu.cunow.Model.NotificationModel
 import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
-import com.iceteck.silicompressorr.videocompression.MediaController.mContext
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.w3c.dom.Text
 
 class NotificationAdapter(private val nContext:Context,
                           private  val nList:List<NotificationModel>):RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
 
     private val dataSource = com.hindu.cunow.datasource.FirebaseDataSource()
     private val data = mutableListOf<NotificationModel>()
+
+    fun addData(nList: List<NotificationModel>){
+        data.addAll(nList)
+        notifyDataSetChanged()
+    }
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
