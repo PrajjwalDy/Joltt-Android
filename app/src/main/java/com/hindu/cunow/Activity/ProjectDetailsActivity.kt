@@ -32,7 +32,7 @@ class ProjectDetailsActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             getProjectDetails()
         }
-        val recyclerView:RecyclerView = findViewById(R.id.joinRequests_Projects_RV)
+        /*val recyclerView:RecyclerView = findViewById(R.id.joinRequests_Projects_RV)
         val linearLayoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayoutManager
         linearLayoutManager.reverseLayout = true
@@ -43,7 +43,7 @@ class ProjectDetailsActivity : AppCompatActivity() {
         recyclerView.adapter = projectAdapter
         CoroutineScope(Dispatchers.IO).launch {
             launch { loadRequests() }
-        }
+        }*/
     }
     private fun getProjectDetails(){
         val ref = firebase
@@ -66,7 +66,7 @@ class ProjectDetailsActivity : AppCompatActivity() {
         })
     }
 
-    private fun loadRequests(){
+    /*private fun loadRequests(){
         val ref = firebase.child("Projects").child(projectId)
             .child("JoiningRequests")
         ref.addValueEventListener(object :ValueEventListener{
@@ -89,6 +89,6 @@ class ProjectDetailsActivity : AppCompatActivity() {
                 println(error.message)
             }
         })
-    }
+    }*/
 
 }

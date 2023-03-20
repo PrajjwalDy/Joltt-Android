@@ -7,28 +7,7 @@
     android:orientation="vertical"
     tools:context=".Fragments.UserProfile">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/white">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:fontFamily="@font/amiko"
-                android:text="@string/profile"
-                android:layout_margin="10dp"
-                android:textColor="@color/red"
-                android:textSize="18sp"
-                />
-        </LinearLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
         android:id="@+id/userProfile_LL"
@@ -184,15 +163,7 @@
 
     </RelativeLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/profileImage_CV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="7dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        app:cardElevation="5dp">
+
 
 
         <LinearLayout
@@ -200,12 +171,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/userProfileImage"
-                android:layout_width="match_parent"
-                android:layout_height="320dp"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop" />
+                android:layout_width="130dp"
+                android:src="@drawable/test_img"
+                android:layout_gravity="center_horizontal"
+
+                android:layout_height="130dp"
+                />
 
             <ImageView
                 android:layout_width="match_parent"
@@ -327,7 +300,6 @@
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/follow_unfollow_button"

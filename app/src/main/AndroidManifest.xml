@@ -19,12 +19,6 @@
         android:theme="@style/Theme.CUNow"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Activity.WebScraping"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.InterestActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activity.AddProjectActivity"
             android:exported="false" />
         <activity
@@ -51,7 +45,8 @@
             android:exported="false" />
         <activity
             android:name=".Activity.LandingPageActivity"
-            android:exported="false" />
+            android:exported="false">
+        </activity>
         <activity
             android:name=".Activity.FacultySignup"
             android:exported="false" />
@@ -140,6 +135,7 @@
         <activity
             android:name=".Activity.WelcomeActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

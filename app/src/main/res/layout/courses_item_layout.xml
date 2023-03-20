@@ -2,49 +2,54 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="7pt"
-    android:layout_margin="1dp"
+    android:layout_margin="2dp"
     app:cardBackgroundColor="@color/grey">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_alignParentLeft="true"
             android:id="@+id/courseImage"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
             android:src="@drawable/test_img"
+            android:layout_margin="10dp"
             android:scaleType="centerCrop"/>
 
         <TextView
             android:id="@+id/courseName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/courseImage"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_centerVertical="true"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
-            android:layout_toStartOf="@+id/coursePlatform"
+            android:layout_toEndOf="@+id/courseImage"
             android:fontFamily="@font/amiko"
             android:text="Lorem Ipsum"
             android:textColor="@color/red"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/coursePlatform"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/courseImage"
-            android:textColor="@color/red"
+            android:layout_below="@+id/courseName"
+            android:layout_toEndOf="@id/courseImage"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="7dp"
+            android:fontFamily="@font/amiko"
             android:text="Platform"
-            android:layout_margin="5dp"
-            android:fontFamily="@font/amiko"/>
+            android:textColor="@color/red" />
 
 
     </RelativeLayout>
