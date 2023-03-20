@@ -78,15 +78,7 @@
             </androidx.cardview.widget.CardView>
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:fontFamily="@font/queensides"
-                android:text="Usersity"
-                android:textColor="@color/red"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+
 
         </LinearLayout>
 

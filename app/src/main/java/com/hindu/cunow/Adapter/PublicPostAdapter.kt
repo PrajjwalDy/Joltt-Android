@@ -62,7 +62,7 @@ class PublicPostAdapter(private val mContext: Context,
                     pref.putString("postId",mPost[position].postId)
                     pref.apply()
 
-                    Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_dashboard_to_fullPostView)
+                    Navigation.findNavController(holder.itemView).navigate(R.id.action_publicPostFragement_to_fullPostView)
 
         }
         holder.playerView.setOnClickListener{

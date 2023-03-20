@@ -13,7 +13,7 @@
         android:toYScale="0.8" />
 
     <alpha
-        android:duration="800"
+        android:duration="300"
         android:fromAlpha="0"
         android:toAlpha="1"/>
 

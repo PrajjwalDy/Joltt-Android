@@ -40,7 +40,7 @@ class ProjectAdapter(private val mContext:Context,
                              private val projectName: TextView = itemView.findViewById(R.id.projectName) as TextView
                              private val button: Button = itemView.findViewById(R.id.apply_to_project_button) as Button
                              private val profileImage:CircleImageView = itemView.findViewById(R.id.project_profileImage) as CircleImageView
-                             private val userName: TextView = itemView.findViewById(R.id.projectName) as TextView
+                             private val userName: TextView = itemView.findViewById(R.id.userName_project) as TextView
 
                              fun bind(list:ProjectModel){
                                  Glide.with(mContext).load(list.projectImage).into(projectImage)

@@ -1,6 +1,7 @@
 package com.hindu.cunow.Adapter
 
 import android.content.Context
+import android.content.Intent
 import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.hindu.cunow.Activity.CommentActivity
+import com.hindu.cunow.Activity.EventDetails
 import com.hindu.cunow.Model.EventModel
 import com.hindu.cunow.R
 import org.w3c.dom.Text
@@ -50,7 +53,13 @@ class EventAdapter(private val mContext: Context,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val event = mEvent[position]
+
         holder.bind(mEvent[position])
+        holder.itemView.setOnClickListener {
+            val intent = Intent(mContext, EventDetails::class.java)
+            intent.putExtra("eventId",event.eventId)
+        }
     }
 
     private fun addInterest(id:String, button: Button){

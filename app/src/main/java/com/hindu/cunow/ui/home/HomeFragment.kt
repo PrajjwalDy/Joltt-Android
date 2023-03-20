@@ -34,6 +34,7 @@ import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.FragmentHomeBinding
+import kotlinx.android.synthetic.main.add_community_post_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.image_or_video_dialogbox.view.*
@@ -142,6 +143,20 @@ class HomeFragment : Fragment() {
 
         root.add_text.setOnClickListener {
 
+        }
+
+        root.add_text.setOnClickListener{
+            val dialogView = LayoutInflater.from(context).inflate(R.layout.add_only_text_dialog, null)
+
+            val dialogBuilder = AlertDialog.Builder(context)
+                .setView(dialogView)
+
+            val alertDialog = dialogBuilder.show()
+
+            dialogView.com_post.setOnClickListener {
+//                addCommunityPost(root,dialogView.com_editText)
+                alertDialog.dismiss()
+            }
         }
 
         return root

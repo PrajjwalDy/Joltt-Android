@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.EventDetails"
+    android:orientation="vertical"
+    android:background="@color/red"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/internshipImage_details"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/test_img"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+
+        />
+
+    <TextView
+        android:id="@+id/internshipName_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="INTERNSHIP NAME"
+        android:layout_marginTop="10dp"
+        android:textSize="25dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/comfortaa"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:cardBackgroundColor="@color/teal_700"
+        app:cardCornerRadius="7pt"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Discription :-"
+                android:textSize="10pt"
+                android:textColor="@color/black"
+                />
+
+            <TextView
+                android:id="@+id/internshipDescription_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="lllljfidwjafos joijdsofa fas  joijodsfja ijsajdiofg sda jiojosadfjosojnvlkajsf joi ojoioiasdojfva sz ijijojjsladjfoaiusfssparshjoougoeamsdf ooreoasfweqf aoiio ojoowfoasoz hjoqjjd80jnrmfoaosrn  iu09uasdrlf h JIODJSAOFIJ"
+                android:textColor="@color/black"
+                android:layout_marginBottom="30dp"
+                android:layout_marginEnd="20dp"
+                android:textSize="17dp"
+                />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <Button
+        android:id="@+id/internshipApply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:text="Apply"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:paddingLeft="90dp"
+        android:paddingRight="90dp"
+        />
+
+
+
+</LinearLayout>
