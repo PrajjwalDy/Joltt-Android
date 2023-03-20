@@ -140,6 +140,10 @@ class HomeFragment : Fragment() {
             startActivity(Intent(context,VideoUploadActivity::class.java))
         }
 
+        root.add_text.setOnClickListener {
+
+        }
+
         return root
     }
 

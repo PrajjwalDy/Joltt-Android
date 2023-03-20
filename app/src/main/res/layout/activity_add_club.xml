@@ -57,6 +57,7 @@
             android:textColor="@color/red"/>
 
         <EditText
+            android:id="@+id/clubName_et"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="20dp"
@@ -68,6 +69,7 @@
             android:background="@drawable/ocean_green_button"/>
 
         <EditText
+            android:id="@+id/club_description_et"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginStart="20dp"
@@ -152,11 +154,10 @@
             app:cardCornerRadius="12pt">
 
             <ImageView
+                android:id="@+id/imagePreview_club"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:src="@drawable/ic_image"
-                android:scaleType="fitCenter"
-                app:tint="@color/white"/>
+                android:src="@drawable/ic_image"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -182,9 +183,6 @@
             android:textAllCaps="false"
             android:textSize="16sp"
             android:fontFamily="@font/comfortaa"/>
-
-
-
 
     </LinearLayout>
 
