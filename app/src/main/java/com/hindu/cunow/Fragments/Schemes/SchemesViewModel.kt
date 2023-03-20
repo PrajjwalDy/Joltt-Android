@@ -33,7 +33,7 @@ class SchemesViewModel : ViewModel(), ISchemeCallback {
 
     private fun loadData(){
         val interList = ArrayList<SchemeModel>()
-        val data = FirebaseDatabase.getInstance().reference.child("Internships")
+        val data = FirebaseDatabase.getInstance().reference.child("GovtSchemes")
         data.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 interList.clear()
