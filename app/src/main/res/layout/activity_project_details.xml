@@ -16,14 +16,28 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/queensides"
-                android:text="Project Details"
-                android:textColor="@color/red"
-                android:textSize="35sp" />
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="10dp"
+                        android:fontFamily="@font/comfortaa"
+                        android:text="Course"
+                        android:textColor="@color/red"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+            </com.google.android.material.appbar.AppBarLayout>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -40,7 +54,9 @@
                         android:id="@+id/projectDetails_Image_CV"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="wrap_content"
@@ -62,7 +78,7 @@
                             android:id="@+id/projectName_DetailActivity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
+                            android:layout_gravity="center"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="10dp"
@@ -95,32 +111,6 @@
                 </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/amiko"
-                android:text="Joining Requests"
-                android:textColor="@color/red"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/no_request_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="50dp"
-                android:fontFamily="@font/amiko"
-                android:text="Nothing to show here"
-                android:textSize="14sp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/joinRequests_Projects_RV"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone" />
 
         </LinearLayout>
 

@@ -1,7 +1,9 @@
 package com.hindu.cunow.Activity
 
+import android.app.DatePickerDialog
 import android.app.ProgressDialog
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -34,6 +36,12 @@ class SignUpActivity : AppCompatActivity() {
             val intent = Intent(this,TermsAndCondition::class.java)
             startActivity(intent)
         }
+
+        date_of_birth.setOnClickListener{
+            selectDate()
+        }
+
+
 
     }
 
@@ -82,6 +90,28 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun selectDate() {
+        val myCalander = Calendar.getInstance()
+        val year = myCalander.get(Calendar.YEAR)
+        val month = myCalander.get(Calendar.MONTH)
+        val date = myCalander.get(Calendar.DAY_OF_MONTH)
+
+
+        val dpd = DatePickerDialog(this ,
+            {_, year, month, dayOfMonth ->
+
+                val sDate =  "$dayOfMonth/${month+1}/$year"
+                date_of_birth?.text = sDate.toString()
+            },
+
+            year,month,date
+        )
+        dpd.show()
+
+    }
+
+
     private fun saveData(fullName: String, uid: String, phone: String, password: String,progressDialog:ProgressDialog) {
 
         val currentUserID = FirebaseAuth.getInstance().currentUser!!.uid
@@ -102,6 +132,7 @@ class SignUpActivity : AppCompatActivity() {
         dataMap["private"] = false
         dataMap["firstVisit"] = true
         dataMap["confessionVisited"] = true
+        dataMap["userDob"] = date_of_birth.toString()
 
         userRef.child(currentUserID).setValue(dataMap).addOnCompleteListener { task->
             if (task.isSuccessful){

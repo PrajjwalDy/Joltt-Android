@@ -1,13 +1,11 @@
 package com.hindu.cunow.Fragments
 
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.hindu.cunow.Activity.VibesActivity
 import com.hindu.cunow.R
 
 class CreatePostFragment : Fragment() {
@@ -21,8 +19,8 @@ class CreatePostFragment : Fragment() {
     ): View? {
         val root:View = inflater.inflate(R.layout.create_post_fragment, container, false)
 
-        val intent = Intent(context,VibesActivity::class.java)
-        startActivity(intent)
+        /*val intent = Intent(context,VibesActivity::class.java)
+        startActivity(intent)*/
 
         return root
     }

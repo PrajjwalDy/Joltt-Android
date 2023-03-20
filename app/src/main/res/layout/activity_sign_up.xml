@@ -75,7 +75,22 @@
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/ocean_green_button"
                     android:hint="Password"
+                    android:inputType="textPassword"
                     android:padding="5dp"
+                    android:textColor="@color/red" />
+
+                <TextView
+                    android:id="@+id/date_of_birth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/ocean_green_button"
+                    android:hint="DD/MM/YYYY"
+                    android:textSize="18dp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="12dp"
                     android:textColor="@color/red" />
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -109,25 +124,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
                     android:fontFamily="@font/queensides"
-                    android:text="Already have account?"
+                    android:text="Already have account? Log in"
                     android:textColor="@color/red"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="39dp"
-                    android:fontFamily="@font/comfortaa"
-                    android:text="H.I.N.D.U Production"
-                    android:textColor="@color/red"
-                    android:textSize="13dp"
 
-                    />
 
             </LinearLayout>
 

@@ -166,7 +166,7 @@ class AddVibesAcitvity : AppCompatActivity() {
                 postMap["vibe"] = "$downloadUri"
 
                 Toast.makeText(this,"Vibe shared successfully",Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, VibesActivity::class.java))
+                //startActivity(Intent(this, VibesActivity::class.java))
                 finish()
                 progressDialog.dismiss()
                 //progressDialog.dismiss()

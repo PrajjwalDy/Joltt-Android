@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/comfortaa"
-                android:text="Free Courses"
+                android:text="Courses"
                 android:layout_margin="10dp"
                 android:textColor="@color/red"
                 android:textSize="20sp"

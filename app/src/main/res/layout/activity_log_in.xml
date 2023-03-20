@@ -63,6 +63,8 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
 
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -72,22 +74,26 @@
             android:fontFamily="@font/comfortaa"
             android:textColor="@color/red"/>
 
-
         <TextView
             android:id="@+id/forget_password_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_margin="5dp"
-            android:text="forget password"
+            android:layout_gravity="start"
+
+            android:layout_marginStart="20dp"
+            android:text="Forget password"
             android:textColor="@color/grey"
+
             android:textSize="16sp" />
+
+
+
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+
             android:fontFamily="@font/comfortaa"
             android:text="Don't have account yet?"
             android:layout_marginStart="20dp"
