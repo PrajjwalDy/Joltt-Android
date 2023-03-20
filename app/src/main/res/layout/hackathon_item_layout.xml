@@ -42,6 +42,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:text="Hackathon Name"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textColor="@color/red"
                 android:fontFamily="@font/amiko"/>
 
