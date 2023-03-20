@@ -40,7 +40,6 @@
         android:layout_marginTop="-10dp"/>
 
     <LinearLayout
-        android:visibility="gone"
         android:id="@+id/ll_view_1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -81,6 +80,7 @@
             android:background="@drawable/ocean_green_button"/>
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/next_btn_v1"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="20dp"
@@ -93,6 +93,8 @@
     </LinearLayout>
     
     <LinearLayout
+        android:id="@+id/ll_view_2"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -107,10 +109,83 @@
         
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="300dp"
             android:layout_marginTop="10dp"
             android:id="@+id/club_tags_RV"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/next_btn_v2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/green_button"
+            android:text="Next"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:fontFamily="@font/comfortaa"/>
             
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ll_view_3"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select your icon"
+            android:layout_marginStart="10dp"
+            android:textSize="18sp"
+            android:fontFamily="@font/comfortaa"
+            android:textColor="@color/red"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="20dp"
+            app:cardBackgroundColor="@color/red"
+            android:layout_gravity="center_horizontal"
+            app:cardCornerRadius="12pt">
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/ic_image"
+                android:scaleType="fitCenter"
+                app:tint="@color/white"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/selectClub_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:text="Select icon"
+            android:textSize="16sp"
+            android:layout_gravity="center_horizontal"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/next_btn_v3"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/green_button"
+            android:text="Finish"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:fontFamily="@font/comfortaa"/>
+
+
+
+
     </LinearLayout>
 
 

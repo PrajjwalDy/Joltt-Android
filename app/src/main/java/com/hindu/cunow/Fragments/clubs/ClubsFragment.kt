@@ -10,10 +10,6 @@ import com.hindu.cunow.R
 
 class ClubsFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ClubsFragment()
-    }
-
     private lateinit var viewModel: ClubsViewModel
 
     override fun onCreateView(
