@@ -41,7 +41,7 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/abroad_image"
+            android:id="@+id/abr_image"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/test_img"

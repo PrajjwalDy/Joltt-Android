@@ -16,19 +16,19 @@ class AbroadAdapter(private val mContext: Context,
                     private val mList:List<AbroadModel>):RecyclerView.Adapter<AbroadAdapter.ViewHolder>() {
 
                         inner class ViewHolder(@NonNull itemView: View):RecyclerView.ViewHolder(itemView){
-                            val image:ImageView = itemView.findViewById(R.id.abroad_image) as ImageView
+                            val abrImage:ImageView = itemView.findViewById(R.id.abr_image)
                             val title:TextView = itemView.findViewById(R.id.abroad_title) as TextView
                             val description:TextView = itemView.findViewById(R.id.abroad_description) as TextView
 
                             fun bind(list:AbroadModel){
                                 title.text = list.abroadTitle
                                 description.text = list.abroadDetails
-                                Glide.with(mContext).load(list.abroadImage).into(image)
+                                Glide.with(mContext).load(list.abroadImage).into(abrImage)
                             }
                         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(mContext).inflate(R.layout.notification_layout,parent,false)
+        val view = LayoutInflater.from(mContext).inflate(R.layout.abroad_item_layout,parent,false)
         return ViewHolder(view)
     }
 
