@@ -155,9 +155,6 @@ class SignUpActivity : AppCompatActivity() {
                             Toast.makeText(this, "Some Error occurred or you may entered wrong UID", Toast.LENGTH_LONG).show()
                         }
                     }
-
-
-
             }else{
                 val message = task.exception.toString()
                 Toast.makeText(this, "Some Error Occurred: $message", Toast.LENGTH_LONG).show()

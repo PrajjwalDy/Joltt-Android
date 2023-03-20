@@ -63,8 +63,8 @@ class ConfessionRoomFragment : Fragment() {
             startActivity(Intent(context, AddConfessionActivity::class.java))
         }
 
-        root.confess_button.setOnClickListener {
-            root.confess_button.visibility = View.GONE
+        root.button_confession.setOnClickListener {
+            root.button_confession.visibility = View.GONE
             root.CV_upload_confession.visibility =View.VISIBLE
         }
         root.accept_confession_tnc.setOnClickListener {

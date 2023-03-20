@@ -29,14 +29,15 @@ class NotificationsFragment : Fragment() {
     var recyclerView:RecyclerView? = null
     private lateinit var notificationsViewModel: NotificationsViewModel
     private var _binding: FragmentNotificationsBinding? = null
-    /*private var notificationList: List<NotificationModel>? = null
-    private var notificationAdapter: NotificationAdapter? = null*/
+
+    private var notificationList: List<NotificationModel>? = null
+    private var notificationAdapter: NotificationAdapter? = null
 
     private val binding get() = _binding!!
 
     //Pagination
     private lateinit var database:DatabaseReference
-    private lateinit var adapter: NotificationAdapter
+    //private lateinit var adapter: NotificationAdapter
     private lateinit var data: MutableList<NotificationModel>
     private var lastLoadedItemName: String? = null
 
@@ -52,13 +53,16 @@ class NotificationsFragment : Fragment() {
         val root: View = binding.root
 
         notificationsViewModel.notificationViewModel.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            //initView(root)
-            //notificationAdapter = context?.let { it1-> NotificationAdapter(it1,it) }
-            //recyclerView!!.adapter = adapter
-            //initView(root)
+            initView(root)
+            notificationAdapter = context?.let { it1-> NotificationAdapter(it1,it) }
+            recyclerView!!.adapter = notificationAdapter
+            notificationAdapter!!.notifyDataSetChanged()
+            CoroutineScope(Dispatchers.IO).launch {
+                markAllAsRead()
+            }
         })
 
-        database = FirebaseDatabase.getInstance().reference
+        /*database = FirebaseDatabase.getInstance().reference
             .child("Notification")
             .child("AllNotification")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
@@ -86,7 +90,7 @@ class NotificationsFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch{
             launch { loadInitialData() }
             launch { markAllAsRead() }
-        }
+        }*/
 
         root.followRequest.setOnClickListener {
             Navigation.findNavController(root).navigate(R.id.action_navigation_notifications_to_followRequest2)
@@ -95,18 +99,17 @@ class NotificationsFragment : Fragment() {
         return root
     }
 
-    /*private  fun initView(root:View){
+    private  fun initView(root:View){
 
         recyclerView = root.findViewById(R.id.notificationRecycler) as RecyclerView
-
-        *//*recyclerView!!.setHasFixedSize(true)
+        recyclerView!!.setHasFixedSize(true)
         val linearLayoutManager = LinearLayoutManager(context)
         linearLayoutManager.reverseLayout = true
         linearLayoutManager.stackFromEnd = true
-        recyclerView!!.layoutManager = linearLayoutManager*//*
-    }*/
+        recyclerView!!.layoutManager = linearLayoutManager
+    }
 
-    private fun loadInitialData(){
+   /* private fun loadInitialData(){
         database.orderByKey().limitToLast(10).get().addOnSuccessListener { snapshot->
             val newData = mutableListOf<NotificationModel>()
             snapshot.children.forEach { child->
@@ -120,7 +123,6 @@ class NotificationsFragment : Fragment() {
             adapter.notifyDataSetChanged()
         }
     }
-
     private suspend fun loadMoreData(){
         if (lastLoadedItemName == null) {
             return
@@ -142,7 +144,7 @@ class NotificationsFragment : Fragment() {
                 adapter.notifyDataSetChanged()
             }
         }
-    }
+    }*/
 
     override fun onDestroyView() {
         super.onDestroyView()

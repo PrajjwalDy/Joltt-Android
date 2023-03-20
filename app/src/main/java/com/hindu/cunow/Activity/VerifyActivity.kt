@@ -27,7 +27,7 @@ class VerifyActivity : AppCompatActivity() {
 
             FirebaseAuth.getInstance().currentUser?.reload()?.addOnCompleteListener { task->
                 if (firebaseUser!!.isEmailVerified){
-                    val intent = Intent(this@VerifyActivity, MainActivity::class.java)
+                    val intent = Intent(this@VerifyActivity, InterestActivity::class.java)
                     startActivity(intent)
                 }else{
                     Toast.makeText(this, "UID isn't verified yet!",Toast.LENGTH_SHORT).show()

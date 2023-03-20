@@ -45,7 +45,6 @@ class UserProfile : Fragment() {
         val root:View = inflater.inflate(R.layout.fragment_user_profiel, container, false)
 
 
-
         firebaseUser = FirebaseAuth.getInstance().currentUser!!
         val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)
         if (pref != null){
@@ -99,12 +98,6 @@ class UserProfile : Fragment() {
             launch { isBlocked(root)
                 haveBlocked(root) }
         }
-
-
-
-
-
-
 
 
         root.follow_unfollow_button.setOnClickListener {

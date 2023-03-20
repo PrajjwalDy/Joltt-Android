@@ -26,13 +26,6 @@ import kotlinx.coroutines.launch
 class NotificationAdapter(private val nContext:Context,
                           private  val nList:List<NotificationModel>):RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
 
-    private val dataSource = com.hindu.cunow.datasource.FirebaseDataSource()
-    private val data = mutableListOf<NotificationModel>()
-
-    fun addData(nList: List<NotificationModel>){
-        data.addAll(nList)
-        notifyDataSetChanged()
-    }
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -160,11 +153,8 @@ class NotificationAdapter(private val nContext:Context,
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
-
-
     })
         //progressDialog.dismiss()
-
     }
 
 }
