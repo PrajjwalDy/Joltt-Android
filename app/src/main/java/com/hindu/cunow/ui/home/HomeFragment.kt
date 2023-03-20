@@ -55,6 +55,8 @@ class HomeFragment : Fragment() {
     private val rotateClose: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_close_anim) }
     private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.from_bottom_anim) }
     private val toBottom: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.to_bottom_anim) }
+    private val toInvisibility: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.to_invisibility) }
+    private val toVisibility: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.to_visibility) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -142,10 +144,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun updateVisit(view: View){
-
         val ref = FirebaseDatabase.getInstance().reference
             .child("Users")
-
         val postMap = HashMap<String,Any>()
         postMap["firstVisit"] = false
         ref.child(FirebaseAuth.getInstance().currentUser!!.uid)
@@ -153,7 +153,6 @@ class HomeFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             checkFirstVisit()
         }
-
     }
     private fun initView(root:View){
         recyclerView = root.findViewById(R.id.postRecyclerView) as RecyclerView
@@ -165,8 +164,20 @@ class HomeFragment : Fragment() {
         recyclerView!!.layoutManager = linearLayoutManager
         //loadUserImage(root)
 
-    }
+        recyclerView!!.addOnScrollListener(object :RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if(dy >0 && create_post_fab.visibility == View.VISIBLE){
+                    //create_post_fab.startAnimation(toInvisibility)
+                    root.create_post_fab.visibility = View.GONE
+                }else if(dy<0 && create_post_fab.visibility == View.GONE){
+                    //create_post_fab.startAnimation(toVisibility)
+                    root.create_post_fab.visibility = View.VISIBLE
+                }
+            }
+        })
 
+    }
     private suspend fun checkFirstVisit(){
         val dataRef = FirebaseDatabase
             .getInstance().reference.child("Users")
@@ -193,7 +204,6 @@ class HomeFragment : Fragment() {
 
         })
     }
-
     private suspend fun checkFollowingList(){
         checkPost()
         val database = FirebaseDatabase.getInstance().reference
@@ -220,7 +230,6 @@ class HomeFragment : Fragment() {
 
         })
     }
-
     private  fun checkPost(){
         val database = FirebaseDatabase.getInstance().reference
             .child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
@@ -241,12 +250,10 @@ class HomeFragment : Fragment() {
 
             })
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
     private suspend fun developerMessage(){
         val database = FirebaseDatabase.getInstance().reference.child("DevMessage")
         database.addValueEventListener(object :ValueEventListener{
@@ -266,7 +273,6 @@ class HomeFragment : Fragment() {
 
         })
     }
-
     private suspend fun chatNotification(){
         val data = FirebaseDatabase.getInstance().reference.child("ChatMessageCount")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
@@ -287,13 +293,11 @@ class HomeFragment : Fragment() {
 
         })
     }
-
     private fun addButtonClicked(){
         setVisibility(clicked)
         setAnimation(clicked)
         clicked = !clicked
     }
-
     private fun setVisibility(clicked:Boolean) {
         if (!clicked){
             add_image.visibility = View.VISIBLE

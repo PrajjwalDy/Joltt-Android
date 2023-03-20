@@ -6,27 +6,41 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
+import com.hindu.cunow.Adapter.AbroadAdapter
+import com.hindu.cunow.Model.AbroadModel
 import com.hindu.cunow.R
+import com.hindu.cunow.databinding.FragmentAbroadBinding
 
 class AbroadFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = AbroadFragment()
-    }
+    var recyclerView:RecyclerView? = null
+    private var abroadAdapter:AbroadAdapter? = null
 
     private lateinit var viewModel: AbroadViewModel
+    private var _binding:FragmentAbroadBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_abroad, container, false)
+        viewModel = ViewModelProvider(this).get(AbroadViewModel::class.java)
+        _binding = FragmentAbroadBinding.inflate(inflater,container,false)
+        val root:View = binding.root
+
+        viewModel.abroadView!!.observe(viewLifecycleOwner, Observer {
+
+        })
+
+        return root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AbroadViewModel::class.java)
-        // TODO: Use the ViewModel
+    private fun initView(root:View){
+        recyclerView = root.findViewById(R.id.abroadRV) as RecyclerView
+        recyclerView!!.setHasFixedSize(true)
+
+
     }
 
 }

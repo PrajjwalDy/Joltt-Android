@@ -11,9 +11,12 @@
     <color name="white">#FFFFFFFF</color>
     <color name="reddish">#D50000</color>
     <color name="grey">#54CBAF</color>
+    <color name="light_grey">#BAEBDF</color>
     <color name="yellow_grey">#FFF176</color>
     <color name="yellow">#FFD600</color>
     <color name="red_grey">#FFAB91</color>
+    <color name="vivaMagenta">#FF3A63</color>
+
 
 
 </resources>
