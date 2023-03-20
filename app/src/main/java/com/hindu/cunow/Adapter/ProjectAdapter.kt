@@ -129,9 +129,7 @@ class ProjectAdapter(private val mContext:Context,
 
     private fun addApplication(id:String,about:EditText,whatsapp:EditText){
         val ref = FirebaseDatabase.getInstance().reference
-            .child("Projects")
-            .child(id)
-            .child("applications")
+            .child("ProjectApplications")
 
         val applicationId = ref.push().key
 
@@ -140,6 +138,7 @@ class ProjectAdapter(private val mContext:Context,
         dataMap["applicantId"] = FirebaseAuth.getInstance().currentUser!!.uid
         dataMap["aboutApplicant"] = about.text.toString()
         dataMap["appStatus"] = 0
+        dataMap["projectID"] = id
         dataMap["applicantWhatsapp"] = whatsapp.text.toString()
 
         ref.child(applicationId!!).updateChildren(dataMap)

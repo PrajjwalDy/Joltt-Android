@@ -33,8 +33,8 @@ class MyAppAdapter(private val mContext:Context,
 
                            fun bind(list:MyAppModel){
                                CoroutineScope(Dispatchers.IO).launch {
-                                   launch { getProjectDetails(projectName,projectImage,list.projectId!!) }
-                                   launch { applicationStatus(list.projectId!!,list.applicationId!!,statusButton) }
+                                   launch { getProjectDetails(projectName,projectImage,list.projectID!!) }
+                                   launch { applicationStatus(list.projectID!!,list.applicationId!!,statusButton) }
                                }
                            }
                        }
@@ -73,9 +73,7 @@ class MyAppAdapter(private val mContext:Context,
 
     private fun applicationStatus(projectId:String,applicationId:String,button: AppCompatButton){
         val ref = FirebaseDatabase.getInstance().reference
-            .child("Project")
-            .child(projectId)
-            .child("JoiningRequests")
+            .child("ProjectApplications")
             .child(applicationId)
         ref.addValueEventListener(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {

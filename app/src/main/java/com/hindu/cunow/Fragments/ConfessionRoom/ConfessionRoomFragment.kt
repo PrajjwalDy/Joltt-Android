@@ -112,6 +112,8 @@ class ConfessionRoomFragment : Fragment() {
         Snackbar.make(view,"confession added successfully", Snackbar.LENGTH_SHORT).show()
 
         confess_editText.text.clear()
+        CV_upload_confession.visibility =View.GONE
+        button_confession.visibility = View.VISIBLE
 
     }
 

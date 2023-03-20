@@ -1,4 +1,4 @@
-package com.hindu.cunow.Fragments.Projects.MyApplications
+package com.hindu.cunow.Fragments.Clubs
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,48 +7,45 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.hindu.cunow.Adapter.MyAppAdapter
-import com.hindu.cunow.Adapter.ProjectAdapter
+import com.hindu.cunow.Adapter.ClubsAdapter
+import com.hindu.cunow.Adapter.CourseAdapter
 import com.hindu.cunow.R
-import com.hindu.cunow.databinding.FragmentMyApplicationsBinding
-import com.hindu.cunow.databinding.FragmentMyProjectsBinding
+import com.hindu.cunow.databinding.FragmentClubs2Binding
 
-class MyApplicationsFragment : Fragment() {
-
+class ClubsFragment : Fragment() {
     var recyclerView:RecyclerView? = null
-    private var myAppAdapter: MyAppAdapter? = null
-    private var _binding:FragmentMyApplicationsBinding? = null
+    private lateinit var viewModel: ClubsViewModel
+    private var clubsAdapter:ClubsAdapter? = null
+    private var _binding:FragmentClubs2Binding? = null
     private val binding get() = _binding!!
-
-    private lateinit var viewModel: MyApplicationsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(this).get(MyApplicationsViewModel::class.java)
-        _binding = FragmentMyApplicationsBinding.inflate(inflater,container,false)
+        viewModel = ViewModelProvider(this).get(ClubsViewModel::class.java)
+        _binding = FragmentClubs2Binding.inflate(inflater,container, false)
         val root:View = binding.root
 
-        viewModel.myAppModel!!.observe(viewLifecycleOwner, Observer {
+        viewModel.clubModel!!.observe(viewLifecycleOwner, Observer {
             initView(root)
-            myAppAdapter = context?.let { it1-> MyAppAdapter(it1,it) }
-            recyclerView!!.adapter = myAppAdapter
-            myAppAdapter!!.notifyDataSetChanged()
+            clubsAdapter = context?.let { it1-> ClubsAdapter(it1,it) }
+            recyclerView!!.adapter = clubsAdapter
+            clubsAdapter!!.notifyDataSetChanged()
         })
 
         return root
     }
 
     private fun initView(root: View) {
-        recyclerView = root.findViewById(R.id.myAPP_RV) as RecyclerView
+        recyclerView = root.findViewById(R.id.clubsRV) as RecyclerView
         recyclerView!!.setHasFixedSize(true)
         val linearLayoutManger = LinearLayoutManager(context)
         linearLayoutManger.reverseLayout = true
         linearLayoutManger.stackFromEnd = true
         recyclerView!!.layoutManager = linearLayoutManger
     }
-
 }

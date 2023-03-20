@@ -1,4 +1,4 @@
-package com.hindu.cunow.Fragments.Projects.MyApplications
+package com.hindu.cunow.Fragments.Clubs
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -6,23 +6,21 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.hindu.cunow.Callback.IApplicationCallback
 import com.hindu.cunow.Callback.IClubsCallback
 import com.hindu.cunow.Model.ClubModel
-import com.hindu.cunow.Model.MyAppModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MyApplicationsViewModel : ViewModel(), IApplicationCallback {
-    private var myAppLiveData: MutableLiveData<List<MyAppModel>>? = null
-    private val appCallback: IApplicationCallback = this
+class ClubsViewModel : ViewModel(), IClubsCallback {
+    private var clubLiveData: MutableLiveData<List<ClubModel>>? = null
+    private val clubCallback: IClubsCallback = this
     private var messageError: MutableLiveData<String>? = null
 
-    val myAppModel:MutableLiveData<List<MyAppModel>>?
-    get() {
-        if (myAppLiveData == null){
-            myAppLiveData = MutableLiveData()
+    val clubModel: MutableLiveData<List<ClubModel>>?
+    get()  {
+        if (clubLiveData == null){
+            clubLiveData = MutableLiveData()
             messageError = MutableLiveData()
             messageError = MutableLiveData()
             CoroutineScope(Dispatchers.IO).launch {
@@ -30,36 +28,36 @@ class MyApplicationsViewModel : ViewModel(), IApplicationCallback {
             }
 
         }
-        return myAppLiveData
+        return clubLiveData
     }
 
     private fun loadData(){
-        val appList = ArrayList<MyAppModel>()
-        val data = FirebaseDatabase.getInstance().reference.child("ProjectApplications")
+        val clubList = ArrayList<ClubModel>()
+        val data = FirebaseDatabase.getInstance().reference.child("Clubs")
         data.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                appList.clear()
+                clubList.clear()
                 for (snapshot in snapshot.children){
-                    val data = snapshot.getValue((MyAppModel::class.java))
-                    appList.add(data!!)
+                    val data = snapshot.getValue((ClubModel::class.java))
+                    clubList.add(data!!)
                 }
-                appCallback.onAbroadListLoadSuccess(appList)
+                clubCallback.onClubListLoadSuccess(clubList)
             }
 
             override fun onCancelled(error: DatabaseError) {
-                appCallback.onAbroadListLoadFailed(error.message)
+                clubCallback.onClubListLoadFailed(error.message)
             }
 
         })
     }
 
-    override fun onAbroadListLoadFailed(str: String) {
+    override fun onClubListLoadFailed(str: String) {
         val mutableLiveData = messageError
         mutableLiveData!!.value = str
     }
 
-    override fun onAbroadListLoadSuccess(list: List<MyAppModel>) {
-        val mutableLiveData = myAppLiveData
+    override fun onClubListLoadSuccess(list: List<ClubModel>) {
+        val mutableLiveData = clubLiveData
         mutableLiveData!!.value = list
     }
 }

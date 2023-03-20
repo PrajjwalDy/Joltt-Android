@@ -35,6 +35,8 @@ import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.FragmentHomeBinding
 import kotlinx.android.synthetic.main.add_community_post_dialog.view.*
+import kotlinx.android.synthetic.main.add_only_text_dialog.*
+import kotlinx.android.synthetic.main.add_only_text_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.image_or_video_dialogbox.view.*
@@ -141,10 +143,6 @@ class HomeFragment : Fragment() {
             startActivity(Intent(context,VideoUploadActivity::class.java))
         }
 
-        root.add_text.setOnClickListener {
-
-        }
-
         root.add_text.setOnClickListener{
             val dialogView = LayoutInflater.from(context).inflate(R.layout.add_only_text_dialog, null)
 
@@ -153,8 +151,24 @@ class HomeFragment : Fragment() {
 
             val alertDialog = dialogBuilder.show()
 
-            dialogView.com_post.setOnClickListener {
-//                addCommunityPost(root,dialogView.com_editText)
+            dialogView.post_onlyText.setOnClickListener {
+                if (dialogView.addText_ET.text.isEmpty()){
+                    Toast.makeText(context,"Please Write something",Toast.LENGTH_SHORT).show()
+                }else{
+                    val dataRef = FirebaseDatabase.getInstance().reference.child("Post")
+                    val postId = dataRef.push().key
+                    val dataMap = HashMap<String,Any>()
+
+                    dataMap["postId"] = postId!!
+                    dataMap["caption"] = dialogView.addText_ET.text.toString()
+                    dataMap["publisher"] = FirebaseAuth.getInstance().currentUser!!.uid
+                    dataMap["iImage"] = false
+                    dataMap["video"] = false
+                    dataMap["page"] = false
+                    dataMap["public"] = false
+                    dataRef.child(postId).updateChildren(dataMap)
+                    Toast.makeText(context,"Post add successfully", Toast.LENGTH_SHORT).show()
+                }
                 alertDialog.dismiss()
             }
         }
@@ -341,4 +355,6 @@ class HomeFragment : Fragment() {
             create_post_fab.startAnimation(rotateClose)
         }
     }
+
+
 }
