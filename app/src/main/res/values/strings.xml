@@ -13,8 +13,8 @@
     <string name="introduction_a">a. Our Platform is the set of APIs, SDKs, tools, plugins, code, technology, content, and services that enables others, including app developers and website operators, to develop functionality, retrieve data from H.I.N.D.U and any other H.I.N.D.U Products, or provide data to us.</string>
     <string name="co_founder">Sparsh Kumar, Shivam Rai, Ashutosh Chaubey: The team of CuNow. All we work in a team. We all are four members of strong programmer. We always work in the unity like a strong team. We all are the student of Chandigarh university of 1st year of CSE batch.</string>
     <string name="welcome_to_cunow">Welcome to CUNow, explore from here or dive in to get started</string>
-    <string name="mail_message">We have sent a verification email to your CU mail(***@cuchd.in <b>REFER TO JUNK FOLDER</b>)please verify your account and then press REFRESH button</string>
-    <string name="forgetPassword">We will send you password reset mail to your CU mail(****@cuchd.in) In case you didn\'t get/can\'t find it please check in <b>JUNK FOLDER</b> to.</string>
+    <string name="mail_message">We have sent a verification email to your email please verify your account and then press REFRESH button</string>
+    <string name="forgetPassword">We will send you password reset mail to your mail In case you didn\'t get/can\'t find it please check in <b>JUNK FOLDER</b> to.</string>
     <string name="email_verify_note">Note: If you didn\'t recieve the mail please refer to junk or spam folder of your inbox.</string>
     <string name="academics_help1">Subjects you add will appear here.\n To add new subject click on Add(+) button located below</string>
     <string name="namaste_welcome_to">Welcome to</string>
