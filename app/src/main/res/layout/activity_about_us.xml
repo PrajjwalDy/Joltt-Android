@@ -16,6 +16,13 @@
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/aboutus" />
+    <ImageView
+        android:id="@+id/About_Back"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="5dp"
+        app:srcCompat= "@drawable/back"/>
 
     <TextView
         android:layout_width="match_parent"

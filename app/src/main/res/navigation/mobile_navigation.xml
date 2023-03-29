@@ -74,14 +74,29 @@
             android:id="@+id/action_navigation_dashboard_to_abroadFragment"
             app:destination="@id/abroadFragment" />
         <action
+            android:id="@+id/action_navigation_dashboard_to_clubsFragment"
+            app:destination="@id/clubsFragment" />
+        <action
             android:id="@+id/action_navigation_dashboard_to_communityFragment"
             app:destination="@id/communityFragment" />
         <action
             android:id="@+id/action_navigation_dashboard_to_coursesFragment"
             app:destination="@id/coursesFragment" />
         <action
-            android:id="@+id/action_navigation_dashboard_to_clubsFragment"
-            app:destination="@id/clubsFragment" />
+            android:id="@+id/action_navigation_dashboard_to_communityFragment2"
+            app:destination="@id/communityFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_communityFragment3"
+            app:destination="@id/communityFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_communityFragment4"
+            app:destination="@id/communityFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_communityFragment5"
+            app:destination="@id/communityFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_communityFragment6"
+            app:destination="@id/communityFragment" />
     </fragment>
 
     <fragment
@@ -310,32 +325,37 @@
         android:id="@+id/schemesFragment"
         android:name="com.hindu.cunow.Fragments.Schemes.SchemesFragment"
         android:label="fragment_schemes"
-        tools:layout="@layout/fragment_schemes" >
-        <action
-            android:id="@+id/action_schemesFragment_to_navigation_dashboard"
-            app:destination="@id/navigation_dashboard" />
-    </fragment>
+        tools:layout="@layout/fragment_schemes" />
     <fragment
         android:id="@+id/abroadFragment"
         android:name="com.hindu.cunow.Fragments.Abroad.AbroadFragment"
         android:label="fragment_abroad"
         tools:layout="@layout/fragment_abroad" />
-
+    <fragment
+        android:id="@+id/clubsFragment"
+        android:name="com.hindu.cunow.Fragments.clubs.ClubsFragment"
+        android:label="fragment_clubs"
+        tools:layout="@layout/fragment_clubs" />
     <fragment
         android:id="@+id/communityFragment"
         android:name="com.hindu.cunow.Fragments.community.CommunityFragment"
         android:label="fragment_community"
-        tools:layout="@layout/fragment_community" />
+        tools:layout="@layout/fragment_community" >
+        <action
+            android:id="@+id/action_communityFragment_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+        <action
+            android:id="@+id/action_communityFragment_to_navigation_dashboard2"
+            app:destination="@id/navigation_dashboard" />
+        <action
+            android:id="@+id/action_communityFragment_to_navigation_dashboard3"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
     <fragment
         android:id="@+id/coursesFragment"
         android:name="com.hindu.cunow.Fragments.Courses.CoursesFragment"
         android:label="fragment_courses"
         tools:layout="@layout/fragment_courses" />
-    <fragment
-        android:id="@+id/clubsFragment"
-        android:name="com.hindu.cunow.Fragments.Clubs.ClubsFragment"
-        android:label="fragment_clubs2"
-        tools:layout="@layout/fragment_clubs2" />
 
 
 </navigation>

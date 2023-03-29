@@ -16,11 +16,12 @@
             android:layout_height="50dp"
             android:orientation="horizontal">
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/verification"
-                android:layout_margin="12dp"
-                app:tint="@color/red"/>
+                android:id="@+id/Verification_Back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                app:srcCompat= "@drawable/back"/>
             <TextView
                 android:id="@+id/verify_request"
                 android:layout_width="wrap_content"

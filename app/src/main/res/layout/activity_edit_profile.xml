@@ -13,34 +13,39 @@
         android:layout_height="50dp"
         android:background="@color/white">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal">
-
+            <ImageView
+                android:id="@+id/Edit_Back"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                app:srcCompat= "@drawable/back"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
+                android:fontFamily="@font/amiko"
+                android:text="Edit My Profile"
+                android:layout_margin="10dp"
+                android:textColor="@color/red"
+                android:textSize="18sp"/>
+
+            <ImageView
+                android:id="@+id/proceed_editProfile"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="180dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
-                android:fontFamily="@font/amiko"
-                android:text="Edit My Profile"
-                android:textColor="@color/red"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/right_arrow"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_margin="10dp"
-                android:id="@+id/proceed_editProfile"/>
-        </RelativeLayout>
+                android:src="@drawable/right_arrow" />
+        </LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 

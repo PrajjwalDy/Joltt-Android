@@ -13,6 +13,9 @@ class VerificationRequest : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_verification_request)
+        Verification_Back.setOnClickListener {
+            finish()
+        }
 
         requester_verification.setOnClickListener {
             requestVerification()
