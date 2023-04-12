@@ -144,7 +144,8 @@
             android:exported="false" />
         <activity
             android:name=".Activity.AboutMeTabsActivity"
-            android:exported="false" />
+            android:exported="false"
+           />
         <activity
             android:name=".Activity.CircleFlowActivity"
             android:exported="false" />
@@ -220,7 +221,8 @@
         <activity
             android:name=".Activity.VerifyActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            />
         <activity
             android:name=".Activity.SignUpActivity"
             android:exported="false" />

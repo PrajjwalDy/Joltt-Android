@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -50,7 +51,8 @@ class CommunityFragment : Fragment() {
 
 
         root.add_button_commnunity.setOnClickListener {
-            val dialogView = LayoutInflater.from(context).inflate(R.layout.add_community_post_dialog, null)
+            val dialogView =
+                LayoutInflater.from(context).inflate(R.layout.add_community_post_dialog, null)
 
             val dialogBuilder = AlertDialog.Builder(context)
                 .setView(dialogView)
@@ -58,11 +60,14 @@ class CommunityFragment : Fragment() {
             val alertDialog = dialogBuilder.show()
 
             dialogView.com_post.setOnClickListener {
-                addCommunityPost(root,dialogView.com_editText)
+                addCommunityPost(root, dialogView.com_editText)
                 alertDialog.dismiss()
             }
 
-
+            }
+        root.communityBack.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_communityFragment_to_navigation_dashboard3)
         }
 
         return root

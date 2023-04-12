@@ -11,11 +11,17 @@ class SettingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
+        Setting_Back.setOnClickListener {
+            finish()
+        }
 
         about_us.setOnClickListener {
             val intent = Intent(this,AboutUs::class.java)
             startActivity(intent)
-        }
+
+            }
+
+
 
         logout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
@@ -24,6 +30,8 @@ class SettingActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
             finish()
+
+
         }
 
         edit_profile.setOnClickListener {

@@ -40,6 +40,9 @@ class EditProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
+        Edit_Back.setOnClickListener {
+            finish()
+        }
 
         val view  = View(this)
 
