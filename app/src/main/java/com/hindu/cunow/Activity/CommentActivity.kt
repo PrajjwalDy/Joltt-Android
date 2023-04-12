@@ -91,7 +91,7 @@ class CommentActivity : AppCompatActivity() {
 
     private fun addComment(view:View){
         if (addCommentEditText.text.isEmpty()){
-            Snackbar.make(view,"please write something..", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(view,"please write something...", Snackbar.LENGTH_SHORT).show()
         }else{
             val dataRef = getInstance().reference
                 .child("Comments")

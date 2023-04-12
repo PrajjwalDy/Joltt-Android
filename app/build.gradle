@@ -91,9 +91,12 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:6.2.1'
 
     //WebScrapping
-    implementation 'org.jsoup:jsoup:1.15.4'
+    implementation 'org.jsoup:jsoup:1.14.3'
     ext.anko_version='0.10.8'
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
+
+    /*implementation 'org.seleniumhq.selenium:selenium-java:4.8.3'
+    implementation 'org.seleniumhq.selenium:selenium-chrome-driver:4.8.3'*/
 
 
 

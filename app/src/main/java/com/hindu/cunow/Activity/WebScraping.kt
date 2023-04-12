@@ -1,7 +1,7 @@
 package com.hindu.cunow.Activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.hindu.cunow.R
 import org.jetbrains.anko.doAsync
 import org.jsoup.Jsoup
@@ -13,14 +13,13 @@ class WebScraping : AppCompatActivity() {
 
 
         doAsync {
-            var data = Jsoup.connect("https://www.amazon.jobs/en/teams/internships-for-students").get()
-            var details = data.getElementsByClass("job-tile")
-            println("web scraping")
-            for(img in details){
-                var im = img.getElementsByClass("job-title").text()
-                println(im)
-            }
 
+
+
+            var data = Jsoup.connect("https://devfolio.co/hackathons/open.").get()
+            println(data)
+            /*var details = data.getElementsByClass("main-box-inside")
+            println(details)*/
         }
     }
 }

@@ -9,7 +9,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -21,15 +25,35 @@ import com.hindu.cunow.Activity.AboutMeTabsActivity
 import com.hindu.cunow.Activity.EditProfileActivity
 import com.hindu.cunow.Activity.SettingActivity
 import com.hindu.cunow.Activity.ShowUsersActivity
+import com.hindu.cunow.Adapter.MyPostAdapter
+import com.hindu.cunow.Adapter.PostAdapter
+import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_user_profiel.view.*
+import kotlinx.android.synthetic.main.my_details_fragment.view.*
 import kotlinx.android.synthetic.main.profile_fragment.*
 import kotlinx.android.synthetic.main.profile_fragment.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
+    private var recyclerView: RecyclerView? = null
+    private var postAdapter: MyPostAdapter? = null
+    private var mPost:MutableList<PostModel>? = null
+    private var clicked= false
+
     private lateinit var firebaseUser: FirebaseUser
     private lateinit var profileId:String
+
+    private val rotateOpen: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_open_anim) }
+    private val rotateClose: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_close_anim) }
+    private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.from_bottom_anim) }
+    private val toBottom: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.to_bottom_anim) }
+    private val toInvisibility: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.to_invisibility) }
+    private val toVisibility: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.to_visibility) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,38 +68,13 @@ class ProfileFragment : Fragment() {
             this.profileId = pref.getString("uid","none")!!
         }
 
-        userInfo()
-        getFollowers(root)
-        getFollowings(root)
-
-
-        root.open_options.setOnClickListener {
-            root.profile_option_ll.visibility = View.VISIBLE
-            root.open_options.visibility = View.GONE
-            root.close_options.visibility = View.VISIBLE
-        }
-        root.close_options.setOnClickListener {
-            root.profile_option_ll.visibility = View.GONE
-            root.open_options.visibility = View.VISIBLE
-            root.close_options.visibility = View.GONE
-        }
-        root.settings_account.setOnClickListener {
-            val intent = Intent(context,SettingActivity::class.java)
-            startActivity(intent)
-        }
-        root.aboutMe_ll.setOnClickListener {
-            val intent = Intent(context,AboutMeTabsActivity::class.java)
-            startActivity(intent)
+        CoroutineScope(Dispatchers.IO).launch {
+            launch { userInfo() }
+            launch { getFollowers(root) }
+            launch { getFollowings(root) }
         }
 
-        root.myCircles.setOnClickListener {
-            Navigation.findNavController(root).navigate(R.id.action_navigation_profile_to_myCirclesFragment)
-        }
-        root.myPhotos.setOnClickListener {
-            Navigation.findNavController(root).navigate(R.id.action_navigation_profile_to_myPostsFragemt)
-        }
-
-        root.totalFollowers.setOnClickListener {
+        root.followersCount.setOnClickListener {
             val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
             pref!!.putString("uid",FirebaseAuth.getInstance().currentUser!!.uid)
             pref.putString("title","Followers")
@@ -83,7 +82,7 @@ class ProfileFragment : Fragment() {
             Navigation.findNavController(root).navigate(R.id.action_navigation_profile_to_showUserFragment)
         }
 
-        root.totalFollowing.setOnClickListener {
+        root.followingCount.setOnClickListener {
             val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
             pref!!.putString("uid",FirebaseAuth.getInstance().currentUser!!.uid)
             pref.putString("title","Following")
@@ -91,26 +90,47 @@ class ProfileFragment : Fragment() {
             Navigation.findNavController(root).navigate(R.id.action_navigation_profile_to_showUserFragment)
         }
 
+        recyclerView = root.findViewById(R.id.myPostRV)
+        recyclerView!!.setHasFixedSize(true)
+        recyclerView!!.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false)
+
+        mPost = ArrayList()
+        postAdapter = context?.let { MyPostAdapter(it,mPost as ArrayList<PostModel>) }
+        recyclerView?.adapter = postAdapter
+        postAdapter!!.notifyDataSetChanged()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            launch { retrievePost() }
+        }
+
+        root.profileMenu.setOnClickListener {
+            addButtonClicked()
+        }
+
+        root.settingFab.setOnClickListener {
+            val intent = Intent(context, SettingActivity::class.java)
+            startActivity(intent)
+        }
+
+        root.editProfile_fab.setOnClickListener {
+            val intent = Intent(context, EditProfileActivity::class.java)
+            startActivity(intent)
+        }
+
         return  root
     }
 
     private fun userInfo(){
-        val progressDialog = context?.let { Dialog(it) }
-        progressDialog!!.setContentView(R.layout.profile_dropdown_menu)
-        progressDialog.show()
         val userRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser.uid)
         userRef.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     val userData = snapshot.getValue(UserModel::class.java)
-                    context?.let { Glide.with(it).load(userData!!.profileImage).into(profileImage_profilePage) }
-                    fullName_profilePage.text = userData!!.fullName
-                    user_bio.text = userData.bio
-                    if (userData.verification){
-                        verification_profilePage.visibility = View.VISIBLE
-                    }
+                    context?.let { Glide.with(it).load(userData!!.profileImage).into(profileImage) }
+                    userFullName.text = userData!!.fullName
+                    userBio.text = userData.bio
+
                 }
-                progressDialog.dismiss()
             }
             override fun onCancelled(error: DatabaseError) {
                 println("some error occurred")
@@ -126,7 +146,7 @@ class ProfileFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     val count = snapshot.childrenCount.toInt()
-                    root.totalFollowers.text = count.toString()
+                    root.followersCount.text = count.toString()
                 }
             }
 
@@ -144,7 +164,7 @@ class ProfileFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     val count = snapshot.childrenCount.toInt()-1
-                    root.totalFollowing.text = count.toString()
+                    root.followingCount.text = count.toString()
                 }
             }
 
@@ -154,4 +174,56 @@ class ProfileFragment : Fragment() {
 
         })
     }
+    private fun retrievePost(){
+        val postRef = FirebaseDatabase.getInstance().reference.child("Post")
+        postRef.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                mPost!!.clear()
+                for(snapshot in snapshot.children){
+                    val post = snapshot.getValue(PostModel::class.java)
+                    if (post != null){
+                        if(post.publisher == FirebaseAuth.getInstance().currentUser!!.uid){
+                            mPost!!.add(post)
+                        }
+                    }
+                    postAdapter!!.notifyDataSetChanged()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    private fun addButtonClicked(){
+        setVisibility(clicked)
+        setAnimation(clicked)
+        clicked = !clicked
+    }
+    private fun setVisibility(clicked:Boolean) {
+        if (!clicked){
+            editProfile_fab.visibility = View.VISIBLE
+            settingFab.visibility = View.VISIBLE
+        }else {
+            editProfile_fab.visibility = View.GONE
+            settingFab.visibility = View.GONE
+        }
+    }
+    private fun setAnimation(clicked:Boolean) {
+        if (!clicked){
+            editProfile_fab.startAnimation(fromBottom)
+            settingFab.startAnimation(fromBottom)
+            profileMenu.startAnimation(rotateOpen)
+            profileMenu.setImageResource(R.drawable.close_angle)
+        }else{
+            editProfile_fab.startAnimation(toBottom)
+            settingFab.startAnimation(toBottom)
+            profileMenu.startAnimation(rotateClose)
+            profileMenu.setImageResource(R.drawable.menu)
+        }
+    }
+
+
 }

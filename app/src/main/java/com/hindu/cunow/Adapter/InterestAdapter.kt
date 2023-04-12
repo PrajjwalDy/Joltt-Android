@@ -23,7 +23,6 @@ import org.jsoup.select.Evaluator.Id
 class InterestAdapter(private val mContext: Context,
                       private val mInterest:List<InterestModel>):RecyclerView.Adapter<InterestAdapter.ViewHolder>() {
 
-    var checker = "click"
                           inner class ViewHolder(@NonNull itemView:View):RecyclerView.ViewHolder(itemView){
                                val interest: TextView = itemView.findViewById(R.id.interestName) as TextView
                                val card:CardView = itemView.findViewById(R.id.interestCV) as CardView
@@ -31,7 +30,6 @@ class InterestAdapter(private val mContext: Context,
                                   interest.text = list.interestTV
                               }
                           }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(mContext).inflate(R.layout.interest_item_layout, parent,false)
         return ViewHolder(view)
@@ -42,22 +40,25 @@ class InterestAdapter(private val mContext: Context,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        var checker = false
         holder.bind(mInterest[position])
         holder.itemView.setOnClickListener {
-                if (checker =="click"){
+
+            if (!checker){
                     holder.card.setCardBackgroundColor(Color.parseColor("#FF3A63"))
                     holder.interest.setTextColor(Color.WHITE)
-                    checker = "clicked"
-                    CoroutineScope(Dispatchers.IO).launch {
-                        addInterest(mInterest[position].inteID!!)
-                    }
+                    checker = true
+                CoroutineScope(Dispatchers.IO).launch{
+                    addInterest(mInterest[position].inteID!!)
+                }
+
                 }else{
                     holder.card.setCardBackgroundColor(Color.parseColor("#BAEBDF"))
                     holder.interest.setTextColor(Color.parseColor("#226880"))
-                    checker ="click"
-                    CoroutineScope(Dispatchers.IO).launch {
-                        removeInterest(mInterest[position].inteID!!)
-                    }
+                    checker = false
+                CoroutineScope(Dispatchers.IO).launch {
+                    removeInterest(mInterest[position].inteID!!)
+                  }
                 }
         }
     }

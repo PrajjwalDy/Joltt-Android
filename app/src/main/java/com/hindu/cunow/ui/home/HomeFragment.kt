@@ -1,5 +1,6 @@
 package com.hindu.cunow.ui.home
 
+import android.animation.ValueAnimator
 import android.app.AlertDialog
 import android.app.Dialog
 import android.app.ProgressDialog
@@ -58,8 +59,8 @@ class HomeFragment : Fragment() {
     private val rotateClose: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_close_anim) }
     private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.from_bottom_anim) }
     private val toBottom: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.to_bottom_anim) }
-    private val toInvisibility: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.to_invisibility) }
-    private val toVisibility: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.to_visibility) }
+    private val toInvisibility: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.hide_appbar) }
+    private val toVisibility: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.unhide_appbar) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -81,29 +82,9 @@ class HomeFragment : Fragment() {
 
         })
 
-
         CoroutineScope(Dispatchers.IO).launch(){
             launch { checkFirstVisit() }
             launch {developerMessage()}
-            launch {chatNotification()}
-        }
-
-        root.create.setOnClickListener {
-            val dialogView = LayoutInflater.from(context).inflate(R.layout.image_or_video_dialogbox, null)
-
-            val dialogBuilder = AlertDialog.Builder(context)
-                .setView(dialogView)
-
-            val alertDialog = dialogBuilder.show()
-            dialogView.selectImage.setOnClickListener {
-                startActivity(Intent(context,AddPostActivity::class.java))
-                alertDialog.dismiss()
-            }
-            dialogView.selectVideo.setOnClickListener {
-                startActivity(Intent(context,VideoUploadActivity::class.java))
-                alertDialog.dismiss()
-            }
-
         }
 
         root.imin.setOnClickListener {
@@ -125,10 +106,6 @@ class HomeFragment : Fragment() {
 
         root.closeMessage_btn.setOnClickListener {
             root.developerMessage_CV.visibility = View.GONE
-        }
-
-        root.chat.setOnClickListener {
-            Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_chatFragment)
         }
 
         root.create_post_fab.setOnClickListener {
@@ -198,14 +175,31 @@ class HomeFragment : Fragment() {
         //loadUserImage(root)
 
         recyclerView!!.addOnScrollListener(object :RecyclerView.OnScrollListener(){
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+
+            /*override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if(dy >0 && create_post_fab.visibility == View.VISIBLE){
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+                if(dy >=0 && appBar_HomeFragment.visibility == View.VISIBLE){
                     //create_post_fab.startAnimation(toInvisibility)
-                    root.create_post_fab.visibility = View.GONE
-                }else if(dy<0 && create_post_fab.visibility == View.GONE){
+                    //root.create_post_fab.visibility = View.GONE
+                    appBar_HomeFragment.startAnimation(toInvisibility)
+                    appBar_HomeFragment.visibility = View.GONE
+
+                }else if(dy<=0  && appBar_HomeFragment.visibility == View.GONE){
                     //create_post_fab.startAnimation(toVisibility)
-                    root.create_post_fab.visibility = View.VISIBLE
+                    //root.create_post_fab.visibility = View.VISIBLE
+                    appBar_HomeFragment.startAnimation(toVisibility)
+                    appBar_HomeFragment.visibility = View.VISIBLE
+                }
+            }*/
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    create_post_fab.show()
+                } else {
+                    create_post_fab.hide()
                 }
             }
         })
@@ -306,7 +300,7 @@ class HomeFragment : Fragment() {
 
         })
     }
-    private suspend fun chatNotification(){
+    /*private suspend fun chatNotification(){
         val data = FirebaseDatabase.getInstance().reference.child("ChatMessageCount")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
 
@@ -325,7 +319,7 @@ class HomeFragment : Fragment() {
             }
 
         })
-    }
+    }*/
     private fun addButtonClicked(){
         setVisibility(clicked)
         setAnimation(clicked)

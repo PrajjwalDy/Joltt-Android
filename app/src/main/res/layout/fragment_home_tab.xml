@@ -22,7 +22,6 @@
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
             android:layout_toStartOf="@+id/filter"
-            android:background="@color/grey"
             android:hint="Search(lowercase)"
             android:padding="5dp"
             android:textColor="@color/red" />

@@ -19,6 +19,9 @@
         android:theme="@style/Theme.CUNow"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".TestProfile"
+            android:exported="false" />
+        <activity
             android:name=".internshipsDetails"
             android:exported="false">
             <meta-data
