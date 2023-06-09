@@ -94,7 +94,6 @@ class ShowUsersActivity : AppCompatActivity() {
 
                 for (snapshot in snapshot.children){
                     val user = snapshot.getValue(UserModel::class.java)
-
                     for (id in idList!!){
                         if (user!!.uid == id){
                             (userList as ArrayList<UserModel>).add(user)

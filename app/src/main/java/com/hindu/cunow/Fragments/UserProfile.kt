@@ -89,6 +89,7 @@ class UserProfile : Fragment() {
             startActivity(intent)
         }
 
+
         CoroutineScope(Dispatchers.IO).launch {
             launch { privacy(root) }
             launch { userInfo() }

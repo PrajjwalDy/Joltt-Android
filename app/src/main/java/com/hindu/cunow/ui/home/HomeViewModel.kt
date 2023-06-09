@@ -1,9 +1,5 @@
 package com.hindu.cunow.ui.home
 
-import android.app.Dialog
-import android.app.ProgressDialog
-import android.content.Context
-import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,7 +10,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Callback.IPostCallback
 import com.hindu.cunow.Model.PostModel
-import com.hindu.cunow.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,22 +27,19 @@ class HomeViewModel : ViewModel(), IPostCallback {
 
 
     val postModel: MutableLiveData<List<PostModel>>?
-    get() {
-        if (postLiveData == null){
-            postLiveData = MutableLiveData()
-            messageError = MutableLiveData()
+        get() {
+            if (postLiveData == null) {
+                postLiveData = MutableLiveData()
+                messageError = MutableLiveData()
 
-            viewModelScope.launch(Dispatchers.IO) {
-                pageList()
-                checkFollowing()
+                viewModelScope.launch(Dispatchers.IO) {
+                    pageList()
+                    checkFollowing()
+                }
             }
-
+            return postLiveData
 
         }
-        val mutableLiveData = postLiveData
-        return mutableLiveData
-
-    }
 
 
 

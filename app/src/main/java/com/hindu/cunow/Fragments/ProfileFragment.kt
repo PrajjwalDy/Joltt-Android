@@ -117,6 +117,10 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
         }
 
+        root.profileImage.setOnClickListener {
+            Navigation.findNavController(root).navigate(R.id.action_navigation_profile_to_myDetailsFragment)
+        }
+
         return  root
     }
 

@@ -94,6 +94,7 @@
                         android:layout_gravity="center_horizontal"
                         android:text="Confession"
                         android:textColor="@color/red"
+                        android:fontFamily="@font/comfortaa"
                         android:textSize="12sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -132,6 +133,7 @@
                         android:text="Posts"
                         android:textColor="@color/red"
                         android:textSize="12sp"
+                        android:fontFamily="@font/comfortaa"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -168,6 +170,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:text="Events"
+                        android:fontFamily="@font/comfortaa"
                         android:textColor="@color/red"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -218,6 +221,7 @@
                         android:text="Schemes"
                         android:textColor="@color/red"
                         android:textAlignment="center"
+                        android:fontFamily="@font/comfortaa"
                         android:textSize="12sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -256,6 +260,7 @@
                         android:layout_gravity="center_horizontal"
                         android:text="Abroad"
                         android:textColor="@color/red"
+                        android:fontFamily="@font/comfortaa"
                         android:textAlignment="center"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -292,7 +297,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="Clubs"
+                        android:text="Jobs"
+                        android:fontFamily="@font/comfortaa"
                         android:textColor="@color/red"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -343,6 +349,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:text="Pages"
+                        android:fontFamily="@font/comfortaa"
                         android:textColor="@color/red"
                         android:textAlignment="center"
                         android:textSize="12sp"
@@ -387,6 +394,7 @@
                         android:text="Projects"
                         android:textColor="@color/red"
                         android:textSize="12sp"
+                        android:fontFamily="@font/comfortaa"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -425,6 +433,7 @@
                         android:text="Courses"
                         android:textColor="@color/red"
                         android:textSize="12sp"
+                        android:fontFamily="@font/comfortaa"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -474,9 +483,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="Community"
+                        android:text="Flash"
                         android:textColor="@color/red"
                         android:textSize="12sp"
+                        android:fontFamily="@font/comfortaa"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -504,8 +514,7 @@
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
                             android:padding="3dp"
-                            android:src="@drawable/star"
-                            />
+                            android:src="@drawable/star" />
                     </RelativeLayout>
 
 
@@ -514,6 +523,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:text="Feedback"
+                        android:fontFamily="@font/comfortaa"
                         android:textColor="@color/red"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -555,6 +565,7 @@
                         android:text="People"
                         android:textColor="@color/red"
                         android:textSize="12sp"
+                        android:fontFamily="@font/comfortaa"
                         android:textStyle="bold" />
                 </LinearLayout>
 

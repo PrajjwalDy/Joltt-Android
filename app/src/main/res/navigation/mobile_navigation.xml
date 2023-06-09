@@ -74,9 +74,6 @@
             android:id="@+id/action_navigation_dashboard_to_abroadFragment"
             app:destination="@id/abroadFragment" />
         <action
-            android:id="@+id/action_navigation_dashboard_to_clubsFragment"
-            app:destination="@id/clubsFragment" />
-        <action
             android:id="@+id/action_navigation_dashboard_to_communityFragment"
             app:destination="@id/communityFragment" />
         <action
@@ -97,6 +94,9 @@
         <action
             android:id="@+id/action_navigation_dashboard_to_communityFragment6"
             app:destination="@id/communityFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_clubsFragment"
+            app:destination="@id/clubsFragment" />
     </fragment>
 
     <fragment
@@ -147,6 +147,9 @@
         <action
             android:id="@+id/action_navigation_profile_to_showUserFragment"
             app:destination="@id/showUserFragment" />
+        <action
+            android:id="@+id/action_navigation_profile_to_myDetailsFragment"
+            app:destination="@id/myDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/confessionRoomFragment"
@@ -332,11 +335,6 @@
         android:label="fragment_abroad"
         tools:layout="@layout/fragment_abroad" />
     <fragment
-        android:id="@+id/clubsFragment"
-        android:name="com.hindu.cunow.Fragments.clubs.ClubsFragment"
-        android:label="fragment_clubs"
-        tools:layout="@layout/fragment_clubs" />
-    <fragment
         android:id="@+id/communityFragment"
         android:name="com.hindu.cunow.Fragments.community.CommunityFragment"
         android:label="fragment_community"
@@ -356,6 +354,16 @@
         android:name="com.hindu.cunow.Fragments.Courses.CoursesFragment"
         android:label="fragment_courses"
         tools:layout="@layout/fragment_courses" />
+    <fragment
+        android:id="@+id/clubsFragment"
+        android:name="com.hindu.cunow.Fragments.Clubs.ClubsFragment"
+        android:label="fragment_clubs2"
+        tools:layout="@layout/fragment_clubs2" />
+    <fragment
+        android:id="@+id/myDetailsFragment"
+        android:name="com.hindu.cunow.Fragments.AboutMe.MyDetails.MyDetailsFragment"
+        android:label="my_details_fragment"
+        tools:layout="@layout/my_details_fragment" />
 
 
 </navigation>

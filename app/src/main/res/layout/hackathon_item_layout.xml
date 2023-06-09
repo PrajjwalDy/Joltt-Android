@@ -1,55 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@color/grey"
-    app:cardCornerRadius="7pt"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="2dp"
-    android:layout_height="wrap_content">
+    app:cardCornerRadius="7pt">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        android:orientation="horizontal">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/hackImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:src="@drawable/test_img"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/viva_magenta_round_bg">
 
             <TextView
                 android:id="@+id/hackathon_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="6dp"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:fontFamily="@font/comfortaa"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:maxWidth="250dp"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
                 android:text="Hackathon Name"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/red"
-                android:fontFamily="@font/amiko"/>
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/hackathon_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:layout_margin="2dp"
-                android:text="Hackathon Name"
-                android:textColor="@color/red"
-                android:fontFamily="@font/amiko"/>
+        </RelativeLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/comfortaa"
+                    android:text="Theme"
+                    android:textColor="@color/red"
+                    />
+
+                <TextView
+                    android:id="@+id/hackthonTheme"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="2dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/amiko"
+                    android:maxLines="1"
+                    android:text="No Restrictions"
+                    android:textColor="@color/red"
+                    android:textSize="14sp" />
+
+
+                <RelativeLayout
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/grey_round_corner">
+
+                    <TextView
+                        android:id="@+id/hackathonType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/comfortaa"
+                        android:text="Online"
+                        android:textColor="@color/red"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:layout_width="180dp"
+                    android:layout_height="35dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/rounded_corner_green">
+
+                    <TextView
+                        android:id="@+id/hackDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/comfortaa"
+                        android:text="Starts 13/05/2023"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
 
         </LinearLayout>
 
     </LinearLayout>
+
+
 
 
 </androidx.cardview.widget.CardView>

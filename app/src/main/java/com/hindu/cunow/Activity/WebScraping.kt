@@ -14,12 +14,16 @@ class WebScraping : AppCompatActivity() {
 
         doAsync {
 
+            val doc = Jsoup.connect("https://devfolio.co/hackathons/open").get()
 
+            val elements = doc.select("div [class=sc-iBkjds.eTjKde.CompactHackathonCard__StyledCard-sc-1294b781-0.bBknpa]")
 
-            var data = Jsoup.connect("https://devfolio.co/hackathons/open.").get()
-            println(data)
-            /*var details = data.getElementsByClass("main-box-inside")
-            println(details)*/
+            println(elements)
+            /*for (element in elements){
+                val data= element.text()
+                println(data)
+            }*/
+
         }
     }
 }

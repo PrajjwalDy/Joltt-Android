@@ -50,7 +50,7 @@ class AboutMeTabsActivity : AppCompatActivity() {
          val actionBar = supportActionBar
          if(actionBar != null){
              actionBar.setDisplayHomeAsUpEnabled(true)
-             actionBar.setHomeAsUpIndicator(R.drawable.eye)
+             //actionBar.setHomeAsUpIndicator(R.drawable.eye)
          }
 
      }

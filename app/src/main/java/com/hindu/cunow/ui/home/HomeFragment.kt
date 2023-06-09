@@ -173,7 +173,6 @@ class HomeFragment : Fragment() {
         linearLayoutManager.stackFromEnd = true
         recyclerView!!.layoutManager = linearLayoutManager
         //loadUserImage(root)
-
         recyclerView!!.addOnScrollListener(object :RecyclerView.OnScrollListener(){
 
             /*override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {

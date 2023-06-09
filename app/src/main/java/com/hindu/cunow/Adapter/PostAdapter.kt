@@ -1,5 +1,7 @@
 package com.hindu.cunow.Adapter
 
+import android.animation.Animator
+import android.animation.Animator.AnimatorListener
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
@@ -61,8 +63,6 @@ class PostAdapter (private val mContext: Context,
                    private val mPost:List<PostModel>,
                    ):RecyclerView.Adapter<PostAdapter.ViewHolder>()
 {
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(mContext).inflate(R.layout.post_layout,parent,false)
         return ViewHolder(view)
@@ -260,7 +260,26 @@ class PostAdapter (private val mContext: Context,
         likeButton.startAnimation(zoom)
         if (likeButton.tag == "Like"){
             likeAnimationView.visibility = View.VISIBLE
+            likeAnimationView.speed = 2.0f
             likeAnimationView.playAnimation()
+            likeAnimationView.addAnimatorListener(object : Animator.AnimatorListener{
+                override fun onAnimationStart(animation: Animator?) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onAnimationEnd(animation: Animator?) {
+                    likeAnimationView.visibility = View.GONE
+                }
+
+                override fun onAnimationCancel(animation: Animator?) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onAnimationRepeat(animation: Animator?) {
+                    TODO("Not yet implemented")
+                }
+
+            })
             FirebaseDatabase.getInstance().reference
                 .child("Likes")
                 .child(postId)
@@ -311,12 +330,12 @@ class PostAdapter (private val mContext: Context,
         likeRef.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.child(firebaseUser!!.uid).exists()){
-                    likeButton.setImageResource(R.drawable.filled_heart)
+                    likeButton.setImageResource(R.drawable.thunder_filled)
                     likeButton.tag = "Liked"
                 }else{
                     likeButton.tag = "Like"
                     if (likeButton.tag == "Like"){
-                        likeButton.setImageResource(R.drawable.blank_heart)
+                        likeButton.setImageResource(R.drawable.thunder_blank)
                     }
                 }
             }
@@ -397,7 +416,6 @@ class PostAdapter (private val mContext: Context,
         })
         databaseRef.keepSynced(true)
     }
-
     private fun addNotification(publisherId: String,postId: String,caption:TextView){
         if (publisherId != FirebaseAuth.getInstance().currentUser!!.uid){
             val dataRef = FirebaseDatabase.getInstance()
@@ -424,7 +442,6 @@ class PostAdapter (private val mContext: Context,
 
         }
     }
-
     private suspend fun totalComments(totalComments:TextView, postId: String){
         val postData = FirebaseDatabase.getInstance().reference.child("Comments")
             .child(postId)
@@ -444,7 +461,6 @@ class PostAdapter (private val mContext: Context,
         postData.keepSynced(true)
 
     }
-
     private fun addPageNotification(pageAdmin: String,postId: String,pageName:String,pageId:String){
         if (pageAdmin != FirebaseAuth.getInstance().currentUser!!.uid){
             val dataRef = FirebaseDatabase.getInstance()
@@ -472,7 +488,6 @@ class PostAdapter (private val mContext: Context,
                 .child(pageAdmin).child(notificationId).setValue(true)
         }
     }
-
     private fun addPageN(pageAdmin: String,postId: String,pageName:String,pageId:String){
         val dataNRef = FirebaseDatabase.getInstance()
             .reference.child("PageNotification")
@@ -492,7 +507,6 @@ class PostAdapter (private val mContext: Context,
 
         dataNRef.child(nId).updateChildren(dataNMap)
     }
-
     private suspend fun pageInfo(profileImage:CircleImageView, name:TextView,publisherId:String) {
         val userDataRef = FirebaseDatabase.getInstance().reference.child("Pages").child(publisherId)
 

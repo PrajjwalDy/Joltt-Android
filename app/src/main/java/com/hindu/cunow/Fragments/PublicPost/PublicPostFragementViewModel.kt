@@ -24,7 +24,6 @@ class PublicPostFragementViewModel : ViewModel(), IPostCallback {
             }
             val mutableLiveData = postLiveData
             return mutableLiveData
-
         }
     private fun loadPost() {
         val postList=ArrayList<PostModel>()

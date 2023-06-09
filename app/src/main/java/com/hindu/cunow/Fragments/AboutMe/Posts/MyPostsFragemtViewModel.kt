@@ -12,10 +12,8 @@ import com.hindu.cunow.Model.PostModel
 
 class MyPostsFragemtViewModel : ViewModel(), IPostCallback {
     private var postLiveData: MutableLiveData<List<PostModel>>? = null
-
     private val postLoadCallback: IPostCallback = this
     private var messageError: MutableLiveData<String>? = null
-
 
     val postModel: MutableLiveData<List<PostModel>>?
         get() {
@@ -28,8 +26,6 @@ class MyPostsFragemtViewModel : ViewModel(), IPostCallback {
             return mutableLiveData
 
         }
-
-
 
     private fun loadPost() {
         val postList=ArrayList<PostModel>()
@@ -61,15 +57,4 @@ class MyPostsFragemtViewModel : ViewModel(), IPostCallback {
         val mutableLiveData = postLiveData
         mutableLiveData!!.value = list
     }
-
-//    override fun onPostCallbackLoadFailed(str: String) {
-//        val mutableLiveData = messageError
-//        mutableLiveData!!.value = str
-//    }
-//
-//    override fun onPostPCallbackLoadSuccess(list: List<PostModel>) {
-//        val mutableLiveData = postLiveData
-//
-//        mutableLiveData!!.value = list
-//    }
 }

@@ -53,32 +53,35 @@ class MyDetailsFragment : Fragment() {
                     val users = snapshot.getValue(UserModel::class.java)
                     root.from_profile.text = users!!.place
                     root.branch_profile.text = users.branch
-                    root.year_profile.text = users.year
-                    root.section_profile.text = users.section
+                    root.year_profile.text = "Year: "+users.year
 
                     if (users.male){
                         root.genderImage_profile.setImageResource(R.drawable.male)
+                        if (users.single){
+                            root.RS_Image_profile.setImageResource(R.drawable.single_male)
+                            root.relation_txt.text = "Single"
+                        }else if (users.committed){
+                            root.RS_Image_profile.setImageResource(R.drawable.com_male)
+                            root.relation_txt.text = "Committed"
+                        }else if (users.crush){
+                            root.RS_Image_profile.setImageResource(R.drawable.crush_male)
+                            root.relation_txt.text = "Have a Crush"
+                        }
                     }else if (users.female){
                         root.genderImage_profile.setImageResource(R.drawable.female)
+                        if (users.single){
+                            root.RS_Image_profile.setImageResource(R.drawable.single)
+                            root.relation_txt.text = "Single"
+                        }else if (users.committed){
+                            root.RS_Image_profile.setImageResource(R.drawable.com_female)
+                            root.relation_txt.text = "Committed"
+                        }else if (users.crush){
+                            root.RS_Image_profile.setImageResource(R.drawable.crush_female)
+                            root.relation_txt.text = "Have a Crush"
+                        }
                     }
 
-                    if (users.single){
-                        root.RS_Image_profile.setImageResource(R.drawable.happy)
-                        root.RS_Text_profile.text = "Single"
-                    }else if (users.committed){
-                        root.RS_Image_profile.setImageResource(R.drawable.comitted)
-                        root.RS_Text_profile.text = "Committed"
-                    }else if (users.crush){
-                        root.RS_Image_profile.setImageResource(R.drawable.crush)
-                        root.RS_Text_profile.text = "Have a Crush"
-                    }
 
-                    if (users.hostler){
-                        root.hostelName_profile.text = "of "+users.hostelName
-                    }else{
-                        root.isHosteler_profile.text = "Day-Scholar from"
-                        root.hostelName_profile.text = users.hostelName
-                    }
                 }
             }
 
