@@ -193,6 +193,7 @@ class PostAdapter (private val mContext: Context,
         val totalLikes: TextView = itemView.findViewById(R.id.totalLikes) as TextView
         val totalComments:TextView = itemView.findViewById(R.id.totalComments)
         val postCardView:CardView = itemView.findViewById(R.id.postCV)
+        val mediaCV: CardView = itemView.findViewById(R.id.media_cv) as CardView
 
 
         fun bind(list:PostModel,context: Context,imageView: ImageView,playerView: PlayerView){
@@ -210,14 +211,17 @@ class PostAdapter (private val mContext: Context,
             if (list.iImage){
                 imageView.visibility = View.VISIBLE
                 playerView.visibility = View.GONE
+                mediaCV.visibility = View.VISIBLE
                 Glide.with(context).load(list.image).into(image)
             }else if(list.video){
                 imageView.visibility = View.GONE
                 playerView.visibility = View.VISIBLE
                 playVideo(playerView,list.videoId!!)
+                mediaCV.visibility = View.VISIBLE
             }else{
                 playerView.visibility = View.GONE
                 imageView.visibility = View.GONE
+                mediaCV.visibility = View.GONE
             }
             progressDialog.dismiss()
 
