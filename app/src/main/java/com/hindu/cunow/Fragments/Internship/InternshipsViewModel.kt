@@ -39,15 +39,15 @@ class InternshipsViewModel : ViewModel(), IInternshipCallback {
                 interList.clear()
                 for(snapshot in snapshot.children){
                     val data = snapshot.getValue((InternshipModel::class.java))
-                    val topics = data!!.topics.toString()
-                    val words = topics.split(" ")
+                    /*val data = snapshot.getValue((InternshipModel::class.java))
+                    val words = topics.split(" ")*/
                     val topicList = mutableListOf<String>()
 
-                    for (topic in words){
+                   /* for (topic in words){
                         if (topic.startsWith("#")){
                             topicList.add(topic)
                         }
-                    }
+                    }*/
 
                     interList.add(data!!)
                 }

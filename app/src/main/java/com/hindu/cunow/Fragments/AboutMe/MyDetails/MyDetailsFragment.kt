@@ -57,6 +57,7 @@ class MyDetailsFragment : Fragment() {
 
                     if (users.male){
                         root.genderImage_profile.setImageResource(R.drawable.male)
+                        gender_txt.text = "Male"
                         if (users.single){
                             root.RS_Image_profile.setImageResource(R.drawable.single_male)
                             root.relation_txt.text = "Single"
@@ -69,6 +70,7 @@ class MyDetailsFragment : Fragment() {
                         }
                     }else if (users.female){
                         root.genderImage_profile.setImageResource(R.drawable.female)
+                        gender_txt.text = "Female"
                         if (users.single){
                             root.RS_Image_profile.setImageResource(R.drawable.single)
                             root.relation_txt.text = "Single"
@@ -80,8 +82,6 @@ class MyDetailsFragment : Fragment() {
                             root.relation_txt.text = "Have a Crush"
                         }
                     }
-
-
                 }
             }
 

@@ -259,27 +259,6 @@ class PostAdapter (private val mContext: Context,
                      likeTextView: TextView){
         likeButton.startAnimation(zoom)
         if (likeButton.tag == "Like"){
-            likeAnimationView.visibility = View.VISIBLE
-            likeAnimationView.speed = 2.0f
-            likeAnimationView.playAnimation()
-            likeAnimationView.addAnimatorListener(object : Animator.AnimatorListener{
-                override fun onAnimationStart(animation: Animator?) {
-                    TODO("Not yet implemented")
-                }
-
-                override fun onAnimationEnd(animation: Animator?) {
-                    likeAnimationView.visibility = View.GONE
-                }
-
-                override fun onAnimationCancel(animation: Animator?) {
-                    TODO("Not yet implemented")
-                }
-
-                override fun onAnimationRepeat(animation: Animator?) {
-                    TODO("Not yet implemented")
-                }
-
-            })
             FirebaseDatabase.getInstance().reference
                 .child("Likes")
                 .child(postId)
@@ -313,7 +292,6 @@ class PostAdapter (private val mContext: Context,
                 .child(FirebaseAuth.getInstance().currentUser!!.uid)
                 .removeValue()
             likeButton.tag = "Like"
-            likeAnimationView.visibility = View.GONE
         }
         CoroutineScope(Dispatchers.IO).launch {
             islike(postId,likeButton)

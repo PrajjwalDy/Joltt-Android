@@ -9,18 +9,16 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/location_image"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:background="@drawable/location_image">
 
         <ImageView
             android:id="@+id/locationPin"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="80dp"
+            android:layout_marginTop="50dp"
             android:src="@drawable/location_pin" />
-
 
         <TextView
             android:id="@+id/from_profile"
@@ -35,167 +33,348 @@
             android:textColor="@color/red"
             android:textSize="14sp" />
 
-
-    </RelativeLayout>
-
-
-    <!--Gender and Relationship-->
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_margin="20dp"
-        app:cardCornerRadius="12dp"
-        app:cardBackgroundColor="@color/red"
-        app:cardElevation="7dp">
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-
+            android:layout_alignParentBottom="true">
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/transparent_bg_white">
+                
+                <LinearLayout
+                    android:id="@+id/ll_about_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="About"
+                        android:layout_margin="10dp"
+                        android:textSize="16sp"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@color/red"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/comfortaa"/>
 
-                <ImageView
-                    android:id="@+id/genderImage_profile"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="10dp"
-                    android:src="@drawable/male" />
+                    <!--Gender and Relationship-->
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_margin="20dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardBackgroundColor="@color/red"
+                        app:cardElevation="7dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/genderImage_profile"
+                                    android:layout_width="100dp"
+                                    android:layout_height="100dp"
+                                    android:layout_margin="10dp"
+                                    android:src="@drawable/male" />
+
+                                <TextView
+                                    android:id="@+id/gender_txt"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Gender"
+                                    android:fontFamily="@font/comfortaa"
+                                    android:layout_marginTop="-10dp"
+                                    android:textColor="@color/white"/>
+
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/RS_Image_profile"
+                                    android:layout_width="100dp"
+                                    android:layout_height="100dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/single" />
+
+                                <TextView
+                                    android:id="@+id/relation_txt"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Gender"
+                                    android:fontFamily="@font/comfortaa"
+                                    android:textColor="@color/white"/>
+
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        app:cardBackgroundColor="@color/red"
+                        app:cardCornerRadius="12dp"
+                        android:layout_marginTop="-10dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/institutionName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/comfortaa"
+                                android:text="Chadigarh University"
+                                android:textColor="@color/white"
+                                android:textSize="16sp" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="-15dp"
+                                android:id="@+id/divider_img"
+                                android:src="@drawable/divider" />
+
+
+                            <TextView
+                                android:id="@+id/student_course"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/comfortaa"
+                                android:text="Bachelor of Engineering"
+                                android:layout_toStartOf="@+id/divider_img"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                android:layout_below="@+id/institutionName"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="-5dp"
+                                />
+
+                            <TextView
+                                android:id="@+id/branch_profile"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/comfortaa"
+                                android:text="Computer Science Engineering"
+                                android:layout_toStartOf="@+id/divider_img"
+                                android:textColor="@color/white"
+                                android:layout_marginTop="5dp"
+                                android:layout_below="@+id/student_course"
+                                android:layout_marginStart="10dp"
+                                />
+
+                            <TextView
+                                android:id="@+id/year_profile"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:fontFamily="@font/amiko"
+                                android:text="Year: 2021"
+                                android:textAlignment="center"
+                                android:layout_marginTop="5dp"
+                                android:layout_below="@+id/branch_profile"
+                                android:textColor="@color/white" />
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+                    
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/gender_txt"
+                    android:id="@+id/h1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Gender"
-                    android:fontFamily="@font/comfortaa"
-                    android:layout_marginTop="-10dp"
-                    android:textColor="@color/white"/>
-
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/RS_Image_profile"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/single" />
-
-                <TextView
-                    android:id="@+id/relation_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Gender"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/comfortaa"
-                    android:textColor="@color/white"/>
+                    android:layout_gravity="center_horizontal"
+                    android:text="Skills"
+                    android:textColor="@color/red"
+                    android:textSize="16sp" />
 
 
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="6pt"
+                    app:cardBackgroundColor="@color/red">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/image_skills"
+                            android:layout_width="150dp"
+                            android:layout_height="300dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:src="@drawable/skills" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toEndOf="@+id/image_skills"/>
+
+
+                    </RelativeLayout>
+
+
+                </androidx.cardview.widget.CardView>
+                
+
+                
+
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/rounded_corner_grey">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="0dp"
+                                android:layout_centerInParent="true"
+                                android:layout_margin="5dp"
+                                android:fontFamily="@font/comfortaa"
+                                android:text="Skills"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/rounded_corner_grey">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/comfortaa"
+                                android:text="Photos"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/rounded_corner_grey">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="0dp"
+                                android:layout_centerInParent="true"
+                                android:layout_margin="5dp"
+                                android:fontFamily="@font/comfortaa"
+                                android:text="Interests"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/rounded_corner_grey">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="0dp"
+                                android:layout_centerInParent="true"
+                                android:layout_margin="5dp"
+                                android:fontFamily="@font/comfortaa"
+                                android:text="Experience"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+
+                        </RelativeLayout>
+
+
+
+                    </LinearLayout>
+
+
+
+                </HorizontalScrollView>
 
             </LinearLayout>
 
-
-        </LinearLayout>
-
-
-    </androidx.cardview.widget.CardView>
+        </ScrollView>
 
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        app:cardBackgroundColor="@color/red"
-        app:cardCornerRadius="12dp"
-        android:layout_marginTop="-10dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/institutionName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:textStyle="bold"
-                android:fontFamily="@font/comfortaa"
-                android:text="Chadigarh University"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="-15dp"
-                android:id="@+id/divider_img"
-                android:src="@drawable/divider" />
 
 
-            <TextView
-                android:id="@+id/student_course"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/comfortaa"
-                android:text="Bachelor of Engineering"
-                android:layout_toStartOf="@+id/divider_img"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:layout_below="@+id/institutionName"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="-5dp"
-                />
 
-            <TextView
-                android:id="@+id/branch_profile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/comfortaa"
-                android:text="Computer Science Engineering"
-                android:layout_toStartOf="@+id/divider_img"
-                android:textColor="@color/white"
-                android:layout_marginTop="5dp"
-                android:layout_below="@+id/student_course"
-                android:layout_marginStart="10dp"
-                />
-
-            <TextView
-                android:id="@+id/year_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/amiko"
-                android:text="Year: 2021"
-                android:textAlignment="center"
-                android:layout_marginTop="5dp"
-                android:layout_below="@+id/branch_profile"
-                android:textColor="@color/white" />
-
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
 </LinearLayout>
