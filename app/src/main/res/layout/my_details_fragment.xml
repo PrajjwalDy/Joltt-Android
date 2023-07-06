@@ -12,13 +12,15 @@
         android:layout_height="match_parent"
         android:background="@drawable/location_image">
 
-        <ImageView
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/locationPin"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginStart="80dp"
             android:layout_marginTop="50dp"
-            android:src="@drawable/location_pin" />
+            app:lottie_rawRes="@raw/locationpin"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"/>
 
         <TextView
             android:id="@+id/from_profile"
@@ -26,8 +28,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/locationPin"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="-20dp"
             android:layout_toEndOf="@+id/locationPin"
+            android:layout_marginTop="-30dp"
             android:fontFamily="@font/amiko"
             android:text="Varanasi, Uttar Pradesh,India"
             android:textColor="@color/red"
@@ -39,15 +42,114 @@
             android:layout_alignParentBottom="true">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:elevation="5pt"
                 android:background="@drawable/transparent_bg_white">
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:id="@+id/skill_btn"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/rounded_corner_grey">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/comfortaa"
+                                android:text="Skills"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/photos_btn"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/rounded_corner_grey">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/comfortaa"
+                                android:text="Photos"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/interest_btn"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/rounded_corner_grey">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_margin="5dp"
+                                android:layout_marginStart="0dp"
+                                android:fontFamily="@font/comfortaa"
+                                android:text="Interests"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/experience_btn"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/rounded_corner_grey">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_margin="5dp"
+                                android:layout_marginStart="0dp"
+                                android:fontFamily="@font/comfortaa"
+                                android:text="Experience"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+
+                </HorizontalScrollView>
                 
                 <LinearLayout
                     android:id="@+id/ll_about_profile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
                     android:orientation="vertical">
                     <TextView
                         android:layout_width="wrap_content"
@@ -220,159 +322,175 @@
                     
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/h1"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/ll_skills"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/comfortaa"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Skills"
-                    android:textColor="@color/red"
-                    android:textSize="16sp" />
+                    android:visibility="gone"
+                    android:orientation="vertical">
 
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    app:cardCornerRadius="6pt"
-                    app:cardBackgroundColor="@color/red">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:id="@+id/image_skills"
-                            android:layout_width="150dp"
-                            android:layout_height="300dp"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:src="@drawable/skills" />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toEndOf="@+id/image_skills"/>
-
-
-                    </RelativeLayout>
-
-
-                </androidx.cardview.widget.CardView>
-                
-
-                
-
-
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/h1"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/comfortaa"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Skills"
+                        android:textColor="@color/red"
+                        android:textSize="16sp" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        app:cardCornerRadius="6pt"
+                        app:cardBackgroundColor="@color/red">
 
                         <RelativeLayout
-                            android:layout_width="80dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:background="@drawable/rounded_corner_grey">
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="0dp"
-                                android:layout_centerInParent="true"
-                                android:layout_margin="5dp"
-                                android:fontFamily="@font/comfortaa"
-                                android:text="Skills"
-                                android:textColor="@color/black"
-                                android:textSize="15sp" />
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:background="@drawable/rounded_corner_grey">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
+                            <ImageView
+                                android:id="@+id/image_skills"
+                                android:layout_width="150dp"
+                                android:layout_height="300dp"
                                 android:layout_marginStart="5dp"
                                 android:layout_marginTop="5dp"
                                 android:layout_marginEnd="5dp"
                                 android:layout_marginBottom="5dp"
-                                android:fontFamily="@font/comfortaa"
-                                android:text="Photos"
-                                android:textColor="@color/black"
-                                android:textSize="15sp" />
+                                android:src="@drawable/skills" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_toEndOf="@+id/image_skills"/>
+
 
                         </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_interests"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/comfortaa"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Interests"
+                        android:textColor="@color/red"
+                        android:textSize="16sp" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        app:cardCornerRadius="6pt"
+                        app:cardBackgroundColor="@color/red">
 
                         <RelativeLayout
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:background="@drawable/rounded_corner_grey">
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="0dp"
-                                android:layout_centerInParent="true"
-                                android:layout_margin="5dp"
-                                android:fontFamily="@font/comfortaa"
-                                android:text="Interests"
-                                android:textColor="@color/black"
-                                android:textSize="15sp" />
+                            <ImageView
+                                android:id="@+id/image_interest"
+                                android:layout_width="300dp"
+                                android:layout_height="100dp"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginBottom="5dp"
+                                android:src="@drawable/intersets_image" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/profile_interest_rv"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_below="@+id/image_interest"/>
+
 
                         </RelativeLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_experience"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/comfortaa"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Experience"
+                        android:textColor="@color/red"
+                        android:textSize="16sp" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        app:cardCornerRadius="6pt"
+                        app:cardBackgroundColor="@color/red">
 
                         <RelativeLayout
-                            android:layout_width="120dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:background="@drawable/rounded_corner_grey">
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="0dp"
-                                android:layout_centerInParent="true"
-                                android:layout_margin="5dp"
-                                android:fontFamily="@font/comfortaa"
-                                android:text="Experience"
-                                android:textColor="@color/black"
-                                android:textSize="15sp" />
+                            <ImageView
+                                android:id="@+id/image_experience"
+                                android:layout_width="300dp"
+                                android:layout_height="100dp"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginBottom="5dp"
+                                android:src="@drawable/experience_image" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/profile_experience_rv"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_below="@+id/image_experience"/>
+
 
                         </RelativeLayout>
 
 
+                    </androidx.cardview.widget.CardView>
 
-                    </LinearLayout>
-
-
-
-                </HorizontalScrollView>
+                </LinearLayout>
 
             </LinearLayout>
 
         </ScrollView>
-
-
-
 
 
     </RelativeLayout>
