@@ -24,10 +24,6 @@ class FollowRequest : Fragment() {
 
     private val binding get() = _binding!!
 
-    companion object {
-        fun newInstance() = FollowRequest()
-    }
-
     private lateinit var viewModel: FollowRequestViewModel
 
     override fun onCreateView(

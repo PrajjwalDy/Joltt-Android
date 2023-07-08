@@ -105,7 +105,6 @@ class NotificationAdapter(private val nContext:Context,
                     loadNotifier(list.notifierId!!,profileImage,userName)
                 }
             }
-
             if(list.confession){
                 postImage.visibility = View.GONE
             }else{

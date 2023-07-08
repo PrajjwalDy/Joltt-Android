@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -47,10 +48,12 @@ class MyDetailsFragment : Fragment() {
         _binding = MyDetailsFragmentBinding.inflate(inflater,container,false)
         val root:View = binidng.root
 
+        //Top Function Call
         retrieveUserData(root)
 
         //root.locationPin.startAnimation(navigation)
 
+        //Skill Button
         root.skill_btn.setOnClickListener{
 
 
@@ -73,6 +76,7 @@ class MyDetailsFragment : Fragment() {
 
         }
 
+        //Interest Button
         root.interest_btn.setOnClickListener {
 
 
@@ -102,10 +106,10 @@ class MyDetailsFragment : Fragment() {
                 interestAdapter = context?.let { it1 ->InterestAdapter_Prof(it1,it) }
                 recyclerView1.adapter = interestAdapter
                 interestAdapter!!.notifyDataSetChanged()
-
             })
         }
 
+        //Experience button
         root.experience_btn.setOnClickListener {
             root.experience_btn.startAnimation(toBottom)
             root.experience_btn.visibility = View.GONE
@@ -131,6 +135,7 @@ class MyDetailsFragment : Fragment() {
 
     }
 
+    //Retrieve User Data
     private fun retrieveUserData(root:View) {
         val dataRef = FirebaseDatabase
             .getInstance().reference
@@ -185,18 +190,20 @@ class MyDetailsFragment : Fragment() {
         })
     }
 
-
-    //Global Init function
+    //Global Init function for RecyclerView
     private fun initView(recyclerView: RecyclerView){
         recyclerView.setHasFixedSize(true)
-        recyclerView.isNestedScrollingEnabled = false
+        val linearLayoutManager:LinearLayoutManager=GridLayoutManager(context, 3)
+        recyclerView!!.layoutManager = linearLayoutManager
+
+
+
+        /*recyclerView.isNestedScrollingEnabled = false
         val linearLayoutManager = LinearLayoutManager(context)
         linearLayoutManager.reverseLayout = true
         linearLayoutManager.stackFromEnd = true
-        recyclerView.layoutManager = linearLayoutManager
+        recyclerView.layoutManager = linearLayoutManager*/
 
     }
-
-
 
 }

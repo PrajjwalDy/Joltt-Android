@@ -47,6 +47,7 @@
                 android:elevation="5pt"
                 android:background="@drawable/transparent_bg_white">
 
+                <!--Menu horizontal scroll-->
                 <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -145,7 +146,8 @@
 
 
                 </HorizontalScrollView>
-                
+
+                <!--Linear Layout About-->
                 <LinearLayout
                     android:id="@+id/ll_about_profile"
                     android:layout_width="match_parent"
@@ -322,6 +324,7 @@
                     
                 </LinearLayout>
 
+                <!--Linear Layout Skills-->
                 <LinearLayout
                     android:id="@+id/ll_skills"
                     android:layout_width="match_parent"
@@ -376,6 +379,7 @@
 
                 </LinearLayout>
 
+                <!--Linear Layout Interest-->
                 <LinearLayout
                     android:id="@+id/ll_interests"
                     android:layout_width="match_parent"
@@ -432,6 +436,7 @@
 
                 </LinearLayout>
 
+                <!--Linear Layout Experience-->
                 <LinearLayout
                     android:id="@+id/ll_experience"
                     android:layout_width="match_parent"

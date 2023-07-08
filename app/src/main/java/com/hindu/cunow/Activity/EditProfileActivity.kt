@@ -26,11 +26,13 @@ import com.hindu.cunow.R
 import com.theartofdev.edmodo.cropper.CropImage
 import kotlinx.android.synthetic.main.activity_add_post.*
 import kotlinx.android.synthetic.main.activity_edit_profile.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class EditProfileActivity : AppCompatActivity() {
 
     var checker = ""
-    var hosteler = ""
     var relation = ""
 
     private var myUrl = ""
@@ -57,6 +59,7 @@ class EditProfileActivity : AppCompatActivity() {
                 .start(this@EditProfileActivity)
         }
 
+        //GENDER BUTTON
         edit_gender_male.setOnClickListener {
             checker = "male"
             edit_gender_male.setBackgroundColor(resources.getColor(R.color.red))
@@ -101,34 +104,19 @@ class EditProfileActivity : AppCompatActivity() {
             edit_mingle.setTextColor(resources.getColor(R.color.red))
         }
 
-
-        edit_hosteler.setOnClickListener {
-            hosteler = "yes"
-            edit_hosteler.setBackgroundColor(resources.getColor(R.color.red))
-            edit_hosteler.setTextColor(resources.getColor(R.color.white))
-            edit_dayScholar.setBackgroundColor(resources.getColor(R.color.white))
-            edit_dayScholar.setTextColor(resources.getColor(R.color.red))
-        }
-
-        edit_dayScholar.setOnClickListener {
-            hosteler = "no"
-            edit_hosteler.setBackgroundColor(resources.getColor(R.color.white))
-            edit_hosteler.setTextColor(resources.getColor(R.color.red))
-            edit_dayScholar.setBackgroundColor(resources.getColor(R.color.red))
-            edit_dayScholar.setTextColor(resources.getColor(R.color.white))
-        }
-
-
-        saveInformation.setOnClickListener {
-            updateInformation(it)
-        }
-
+        //DONE BUTTON
         proceed_editProfile.setOnClickListener {
-            updateInformation(it)
-        }
+            CoroutineScope(Dispatchers.IO).launch {
+                launch { updateInformation(it) }
+                launch { updateExperience() }
+                launch { updateSkills() }
+            }
 
+
+        }
     }
 
+    //UPDATE INFORMATION
     private fun updateInformation(view: View){
         val progressDialog = Dialog(this)
         progressDialog.setContentView(R.layout.common_loading_progress)
@@ -140,14 +128,13 @@ class EditProfileActivity : AppCompatActivity() {
         dataMap["place"] = editTextAddress.text.toString()
         dataMap["branch"] = editTextBatch.text.toString()
         dataMap["year"] = editTextYear.text.toString()
-        dataMap["hostler"] = hosteler == "yes"
-        dataMap["section"] = editTextSection.text.toString()
-        dataMap["hostelName"] = editTextHostel.text.toString()
         dataMap["male"] = checker == "male"
         dataMap["female"] = checker == "female"
         dataMap["single"] = relation == "single"
         dataMap["committed"] = relation == "mingle"
         dataMap["crush"] = relation == "crush"
+        dataMap["college"] = ET_college.text.toString()
+        dataMap["course"] = ET_course.text.toString()
 
         databaseRef.child(FirebaseAuth.getInstance().currentUser!!.uid)
             .updateChildren(dataMap)
@@ -156,6 +143,7 @@ class EditProfileActivity : AppCompatActivity() {
         finish()
     }
 
+    //UPDATE PROFILE IMAGE
     private fun updateProfileImage() {
         if (imageUri == null) {
             Toast.makeText(this,"You haven't selected any picture",Toast.LENGTH_SHORT).show()
@@ -207,15 +195,14 @@ class EditProfileActivity : AppCompatActivity() {
         }
     }
 
+    //RETRIEVE INFORMATION
     private fun retrieveUserData() {
         val dataRef = FirebaseDatabase
             .getInstance().reference
             .child("Users")
-            .child(
-                FirebaseAuth
+            .child(FirebaseAuth
                     .getInstance()
-                    .currentUser!!.uid
-            )
+                    .currentUser!!.uid)
 
         dataRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -228,9 +215,9 @@ class EditProfileActivity : AppCompatActivity() {
                     Bio_EditText.setText(users.bio)
                     editTextAddress.setText(users.place)
                     editTextBatch.setText(users.branch)
+                    ET_course.setText(users.course)
                     editTextYear.setText(users.year)
-                    editTextSection.setText(users.section)
-                    editTextHostel.setText(users.hostelName)
+                    ET_college.setText(users.college)
                     if (users.male) {
                         checker ="male"
                         edit_gender_male.setBackgroundColor(resources.getColor(R.color.red))
@@ -239,14 +226,6 @@ class EditProfileActivity : AppCompatActivity() {
                         checker ="female"
                         edit_gender_female.setBackgroundColor(resources.getColor(R.color.red))
                         edit_gender_female.setTextColor(resources.getColor(R.color.white))
-                    }
-                    if (users.hostler) {
-                        hosteler="yes"
-                        edit_hosteler.setBackgroundColor(resources.getColor(R.color.red))
-                        edit_hosteler.setTextColor(resources.getColor(R.color.white))
-                    } else {
-                        edit_dayScholar.setBackgroundColor(resources.getColor(R.color.red))
-                        edit_dayScholar.setTextColor(resources.getColor(R.color.white))
                     }
                     if (users.single){
                         relation = "single"
@@ -280,6 +259,54 @@ class EditProfileActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun updateSkills(){
+        val sentence  = editText_skills.text.toString().trim{it <=' '}
+        val words = sentence.split(",")
+
+        //Initialize an empty list of skills
+        val skills = mutableListOf<String>()
+
+        //Extract skills from the words
+        for (word in words){
+            skills.add(word)
+        }
+
+        val databaseRef = FirebaseDatabase.getInstance()
+            .getReference("Skills")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+        for (skill in skills){
+            val key = skill.toString()
+            val map = HashMap<String,Any>()
+            map["skillName"] = skill
+            databaseRef.child(key).updateChildren(map)
+        }
+
+    }
+
+    //Update Experience
+    private fun updateExperience(){
+        val sentence  = editText_skills.text.toString().trim{it <=' '}
+        val words = sentence.split(",")
+
+        //Initialize an empty list of skills
+        val experience = mutableListOf<String>()
+
+        //Extract skills from the words
+        for (word in words){
+            experience.add(word)
+        }
+
+        val databaseRef = FirebaseDatabase.getInstance()
+            .getReference("Experience")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+        for (experience in experience){
+            val key = experience.toString()
+            val map = HashMap<String,Any>()
+            map["expName"] = experience
+            databaseRef.child(key).updateChildren(map)
+        }
     }
 
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

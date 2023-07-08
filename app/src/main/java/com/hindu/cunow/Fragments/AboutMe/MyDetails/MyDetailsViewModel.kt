@@ -66,6 +66,7 @@ class MyDetailsViewModel : ViewModel(), IinterestCallback {
                             if (interest!!.inteID == key){
                                 interestList.add(interest)
                             }
+                            interestList.reverse()
                         }
                     }
                 }

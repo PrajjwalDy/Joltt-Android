@@ -56,6 +56,8 @@ class AddPostActivity : AppCompatActivity() {
             uploadImage()
         }
 
+        //PRIVACY BUTTON
+
         changePrivacy_btn.setOnClickListener {
             val dialogView = LayoutInflater.from(this).inflate(R.layout.post_privacy_dialog, null)
 
@@ -78,6 +80,7 @@ class AddPostActivity : AppCompatActivity() {
         }
     }
 
+    //CROP IMAGE
     private fun cropImage(){
         CropImage.activity()
             .setAspectRatio(3, 4)
@@ -85,6 +88,8 @@ class AddPostActivity : AppCompatActivity() {
 
     }
 
+
+    //UPLOAD IMAGE
     private fun uploadImage(){
         val progressDialog = Dialog(this)
         progressDialog.setContentView(R.layout.porgress_dialog)
@@ -161,6 +166,8 @@ class AddPostActivity : AppCompatActivity() {
         // A constant variable for place picker
         private const val PLACE_AUTOCOMPLETE_REQUEST_CODE = 3
     }
+
+    // HASHTAG FUNCTION
     private fun buildHasTag(postId:String){
         val sentence = caption_image.text.toString().trim{ it <= ' '}
         val words = sentence.split(" ")
@@ -186,6 +193,7 @@ class AddPostActivity : AppCompatActivity() {
         }
     }
 
+    //POST COUNT
     private fun getPostCount(tag:String){
         val key = tag.removeRange(0,1)
         val dataRef = FirebaseDatabase.getInstance()
