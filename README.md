@@ -1,8 +1,6 @@
 # JOLTT
 # Joltt - Student Companion App
 
-![Joltt Logo](/path/to/logo.png)
-
 Joltt is a comprehensive student companion app designed to enhance the academic and social experience of students. It provides a wide range of features, including social media functionality, internship search, worldwide events, job listings, government schemes for students, project collaboration, free courses, page creation, and an anonymous confession room. This readme file serves as a guide to understand the features and functionality of the Joltt app.
 
 ## Features
