@@ -105,9 +105,9 @@ class EditProfileActivity : AppCompatActivity() {
         }
 
         //DONE BUTTON
-        proceed_editProfile.setOnClickListener {
+        proceed_editProfile.setOnClickListener {view->
             CoroutineScope(Dispatchers.IO).launch {
-                launch { updateInformation(it) }
+                launch { updateInformation(view) }
                 launch { updateExperience() }
                 launch { updateSkills() }
             }
@@ -118,9 +118,6 @@ class EditProfileActivity : AppCompatActivity() {
 
     //UPDATE INFORMATION
     private fun updateInformation(view: View){
-        val progressDialog = Dialog(this)
-        progressDialog.setContentView(R.layout.common_loading_progress)
-        progressDialog.show()
         val databaseRef = FirebaseDatabase.getInstance().reference.child("Users")
         val dataMap = HashMap<String,Any>()
         dataMap["fullName"] = ProfileUserName_editText.text.toString()
@@ -128,6 +125,8 @@ class EditProfileActivity : AppCompatActivity() {
         dataMap["place"] = editTextAddress.text.toString()
         dataMap["branch"] = editTextBatch.text.toString()
         dataMap["year"] = editTextYear.text.toString()
+        dataMap["skills"] = editText_skills.text.toString()
+        dataMap["experience"] = editText_experience.text.toString()
         dataMap["male"] = checker == "male"
         dataMap["female"] = checker == "female"
         dataMap["single"] = relation == "single"
@@ -138,7 +137,6 @@ class EditProfileActivity : AppCompatActivity() {
 
         databaseRef.child(FirebaseAuth.getInstance().currentUser!!.uid)
             .updateChildren(dataMap)
-        progressDialog.dismiss()
         Snackbar.make(view,"Update successful", Snackbar.LENGTH_SHORT).show()
         finish()
     }
@@ -217,6 +215,8 @@ class EditProfileActivity : AppCompatActivity() {
                     editTextBatch.setText(users.branch)
                     ET_course.setText(users.course)
                     editTextYear.setText(users.year)
+                    editText_skills.setText(users.skills)
+                    editText_experience.setText(users.experience)
                     ET_college.setText(users.college)
                     if (users.male) {
                         checker ="male"
@@ -261,6 +261,7 @@ class EditProfileActivity : AppCompatActivity() {
         })
     }
 
+    //Update Skills
     private fun updateSkills(){
         val sentence  = editText_skills.text.toString().trim{it <=' '}
         val words = sentence.split(",")
@@ -287,7 +288,7 @@ class EditProfileActivity : AppCompatActivity() {
 
     //Update Experience
     private fun updateExperience(){
-        val sentence  = editText_skills.text.toString().trim{it <=' '}
+        val sentence  = editText_experience.text.toString().trim{it <=' '}
         val words = sentence.split(",")
 
         //Initialize an empty list of skills

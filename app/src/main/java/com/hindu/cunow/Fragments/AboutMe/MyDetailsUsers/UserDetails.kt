@@ -33,7 +33,6 @@ import kotlinx.android.synthetic.main.my_details_fragment.view.*
             this.profileId = pref.getString("uid","none")!!
         }
 
-
         retrieveUserData(root)
 
         return root
@@ -54,7 +53,6 @@ import kotlinx.android.synthetic.main.my_details_fragment.view.*
                     root.from_users.text = users!!.place
                     root.branch_user.text = users.branch
                     root.year_users.text = users.year
-                    root.section_users.text = users.section
 
                     if (users.male){
                         root.genderImage_user.setImageResource(R.drawable.male)
@@ -71,12 +69,6 @@ import kotlinx.android.synthetic.main.my_details_fragment.view.*
                     }else if (users.crush){
                         root.RS_Image_users.setImageResource(R.drawable.crush)
                         root.RS_Text_Users.text = "Have a Crush"
-                    }
-
-                    if (users.hostler){
-                        root.hostelName_users.text = "of "+users.hostelName
-                    }else{
-                        root.isHosteler_users.text = "Day-Scholar"
                     }
                 }
             }

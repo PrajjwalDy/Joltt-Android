@@ -30,27 +30,35 @@ class MyPostAdapter(private val mContext:Context,
                         inner class ViewHolder(@NonNull itemView: View):RecyclerView.ViewHolder(itemView){
                             val image: ImageView = itemView.findViewById(R.id.imagePost) as ImageView
                             val caption: TextView = itemView.findViewById(R.id.postCaption) as TextView
+                            val caption2: TextView = itemView.findViewById(R.id.postCaption2) as TextView
                             val playerView: PlayerView = itemView.findViewById(R.id.videoView) as PlayerView
 
                             fun bind(list:PostModel){
                                 if (list.caption == ""){
                                     caption.visibility = View.GONE
+                                    caption2.visibility = View.GONE
                                 }else{
                                     caption.visibility = View.VISIBLE
                                     caption.text = list.caption
+                                    caption2.visibility = View.VISIBLE
+                                    caption2.text = list.caption
                                 }
 
                                 if (list.iImage){
                                     image.visibility = View.VISIBLE
                                     playerView.visibility = View.GONE
+                                    caption2.visibility = View.GONE
                                     Glide.with(mContext).load(list.image).into(image)
                                 }else if(list.video){
                                     image.visibility = View.GONE
                                     playerView.visibility = View.VISIBLE
+                                    caption2.visibility = View.GONE
                                     playVideo(playerView,list.videoId!!)
                                 }else{
                                     playerView.visibility = View.GONE
                                     image.visibility = View.GONE
+                                    caption2.visibility = View.VISIBLE
+                                    caption.visibility = View.GONE
                                 }
                             }
                         }

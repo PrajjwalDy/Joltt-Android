@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -72,6 +73,7 @@ class ProfileFragment : Fragment() {
             launch { userInfo() }
             launch { getFollowers(root) }
             launch { getFollowings(root) }
+            launch { getPostCount() }
         }
 
         root.followersCount.setOnClickListener {
@@ -92,7 +94,8 @@ class ProfileFragment : Fragment() {
 
         recyclerView = root.findViewById(R.id.myPostRV)
         recyclerView!!.setHasFixedSize(true)
-        recyclerView!!.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false)
+        val layoutManager:LinearLayoutManager = GridLayoutManager(context,2)
+        recyclerView!!.layoutManager = layoutManager
 
         mPost = ArrayList()
         postAdapter = context?.let { MyPostAdapter(it,mPost as ArrayList<PostModel>) }
@@ -229,5 +232,24 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    private fun getPostCount(){
+        val database = FirebaseDatabase.getInstance().reference.child("Users")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child("MyPosts")
+
+        database.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val count = snapshot.childrenCount.toInt()
+                    postCount_profile.text = count.toString()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
 
 }

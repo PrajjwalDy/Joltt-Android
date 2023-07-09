@@ -10,28 +10,28 @@ import com.hindu.cunow.Callback.IUserCallback
 import com.hindu.cunow.Model.UserModel
 
 class PeopleViewModel : ViewModel(), IUserCallback {
-    private var userLiveData:MutableLiveData<List<UserModel>>? = null
+    private var userLiveData: MutableLiveData<List<UserModel>>? = null
 
-    private val userCallback:IUserCallback = this
-    private var messageError:MutableLiveData<String>? =null
+    private val userCallback: IUserCallback = this
+    private var messageError: MutableLiveData<String>? = null
 
-    val userModel:MutableLiveData<List<UserModel>>?
-    get() {
-        if (userLiveData == null){
-            userLiveData = MutableLiveData()
-            messageError = MutableLiveData()
-            loadUser()
+    val userModel: MutableLiveData<List<UserModel>>?
+        get() {
+            if (userLiveData == null) {
+                userLiveData = MutableLiveData()
+                messageError = MutableLiveData()
+                loadUser()
+            }
+            val mutableLiveData = userLiveData
+            return mutableLiveData
         }
-        val mutableLiveData = userLiveData
-        return mutableLiveData
-    }
 
-    private  fun loadUser(){
+    private fun loadUser() {
         val userList = ArrayList<UserModel>()
         val userData = FirebaseDatabase.getInstance().reference.child("Users")
-        userData.addListenerForSingleValueEvent(object :ValueEventListener{
+        userData.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                for (snapshot in snapshot.children){
+                for (snapshot in snapshot.children) {
                     val user = snapshot.getValue(UserModel::class.java)
                     userList.add(user!!)
                 }

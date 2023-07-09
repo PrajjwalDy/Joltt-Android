@@ -18,9 +18,9 @@
             android:layout_height="100dp"
             android:layout_marginStart="80dp"
             android:layout_marginTop="50dp"
-            app:lottie_rawRes="@raw/locationpin"
             app:lottie_autoPlay="true"
-            app:lottie_loop="true"/>
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/locationpin" />
 
         <TextView
             android:id="@+id/from_profile"
@@ -29,8 +29,8 @@
             android:layout_below="@+id/locationPin"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="-20dp"
-            android:layout_toEndOf="@+id/locationPin"
             android:layout_marginTop="-30dp"
+            android:layout_toEndOf="@+id/locationPin"
             android:fontFamily="@font/amiko"
             android:text="Varanasi, Uttar Pradesh,India"
             android:textColor="@color/red"
@@ -39,13 +39,16 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true">
+            android:layout_below="@+id/from_profile"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="100dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:background="@drawable/transparent_bg_white"
                 android:elevation="5pt"
-                android:background="@drawable/transparent_bg_white">
+                android:orientation="vertical">
 
                 <!--Menu horizontal scroll-->
                 <HorizontalScrollView
@@ -84,7 +87,8 @@
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:background="@drawable/rounded_corner_grey">
+                            android:background="@drawable/rounded_corner_grey"
+                            android:visibility="gone">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -153,16 +157,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="About"
-                        android:layout_margin="10dp"
-                        android:textSize="16sp"
                         android:layout_gravity="center_horizontal"
+                        android:layout_margin="10dp"
+                        android:fontFamily="@font/comfortaa"
+                        android:text="About"
                         android:textColor="@color/red"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/comfortaa"/>
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <!--Gender and Relationship-->
 
@@ -170,8 +175,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:layout_margin="20dp"
-                        app:cardCornerRadius="12dp"
                         app:cardBackgroundColor="@color/red"
+                        app:cardCornerRadius="12dp"
                         app:cardElevation="7dp">
 
                         <LinearLayout
@@ -184,9 +189,9 @@
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
+                                android:layout_gravity="center"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:layout_gravity="center"
                                 android:orientation="vertical">
 
                                 <ImageView
@@ -200,11 +205,10 @@
                                     android:id="@+id/gender_txt"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Gender"
-                                    android:fontFamily="@font/comfortaa"
                                     android:layout_marginTop="-10dp"
-                                    android:textColor="@color/white"/>
-
+                                    android:fontFamily="@font/comfortaa"
+                                    android:text="Gender"
+                                    android:textColor="@color/white" />
 
 
                             </LinearLayout>
@@ -212,8 +216,8 @@
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight="1"
                                 android:layout_gravity="center"
+                                android:layout_weight="1"
                                 android:gravity="center"
                                 android:orientation="vertical">
 
@@ -228,10 +232,9 @@
                                     android:id="@+id/relation_txt"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Gender"
                                     android:fontFamily="@font/comfortaa"
-                                    android:textColor="@color/white"/>
-
+                                    android:text="Gender"
+                                    android:textColor="@color/white" />
 
 
                             </LinearLayout>
@@ -246,10 +249,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:layout_marginStart="20dp"
+                        android:layout_marginTop="-10dp"
                         android:layout_marginEnd="20dp"
                         app:cardBackgroundColor="@color/red"
-                        app:cardCornerRadius="12dp"
-                        android:layout_marginTop="-10dp">
+                        app:cardCornerRadius="12dp">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -263,19 +266,19 @@
                                 android:layout_marginTop="10dp"
                                 android:layout_marginEnd="10dp"
                                 android:layout_marginBottom="10dp"
-                                android:textStyle="bold"
                                 android:fontFamily="@font/comfortaa"
                                 android:text="Chadigarh University"
                                 android:textColor="@color/white"
-                                android:textSize="16sp" />
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
 
                             <ImageView
+                                android:id="@+id/divider_img"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginEnd="-15dp"
-                                android:id="@+id/divider_img"
                                 android:src="@drawable/divider" />
 
 
@@ -283,45 +286,43 @@
                                 android:id="@+id/student_course"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/comfortaa"
-                                android:text="Bachelor of Engineering"
-                                android:layout_toStartOf="@+id/divider_img"
-                                android:textColor="@color/white"
-                                android:textSize="14sp"
                                 android:layout_below="@+id/institutionName"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="-5dp"
-                                />
+                                android:layout_toStartOf="@+id/divider_img"
+                                android:fontFamily="@font/comfortaa"
+                                android:text="Bachelor of Engineering"
+                                android:textColor="@color/white"
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/branch_profile"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/comfortaa"
-                                android:text="Computer Science Engineering"
-                                android:layout_toStartOf="@+id/divider_img"
-                                android:textColor="@color/white"
-                                android:layout_marginTop="5dp"
                                 android:layout_below="@+id/student_course"
                                 android:layout_marginStart="10dp"
-                                />
+                                android:layout_marginTop="5dp"
+                                android:layout_toStartOf="@+id/divider_img"
+                                android:fontFamily="@font/comfortaa"
+                                android:text="Computer Science Engineering"
+                                android:textColor="@color/white" />
 
                             <TextView
                                 android:id="@+id/year_profile"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_below="@+id/branch_profile"
                                 android:layout_marginStart="10dp"
+                                android:layout_marginTop="5dp"
                                 android:fontFamily="@font/amiko"
                                 android:text="Year: 2021"
                                 android:textAlignment="center"
-                                android:layout_marginTop="5dp"
-                                android:layout_below="@+id/branch_profile"
                                 android:textColor="@color/white" />
 
                         </RelativeLayout>
 
                     </androidx.cardview.widget.CardView>
-                    
+
                 </LinearLayout>
 
                 <!--Linear Layout Skills-->
@@ -329,19 +330,19 @@
                     android:id="@+id/ll_skills"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/h1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
                         android:fontFamily="@font/comfortaa"
-                        android:layout_gravity="center_horizontal"
                         android:text="Skills"
                         android:textColor="@color/red"
                         android:textSize="16sp" />
@@ -350,8 +351,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        app:cardCornerRadius="6pt"
-                        app:cardBackgroundColor="@color/red">
+                        android:elevation="7dp"
+                        app:cardBackgroundColor="@color/light_grey"
+                        app:cardCornerRadius="6pt">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -368,9 +370,12 @@
                                 android:src="@drawable/skills" />
 
                             <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/profile_skill_rv"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_toEndOf="@+id/image_skills"/>
+                                android:layout_centerVertical="true"
+                                android:layout_marginTop="50dp"
+                                android:layout_toEndOf="@+id/image_skills" />
 
 
                         </RelativeLayout>
@@ -384,18 +389,18 @@
                     android:id="@+id/ll_interests"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="gone"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
                         android:fontFamily="@font/comfortaa"
-                        android:layout_gravity="center_horizontal"
                         android:text="Interests"
                         android:textColor="@color/red"
                         android:textSize="16sp" />
@@ -404,8 +409,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        app:cardCornerRadius="6pt"
-                        app:cardBackgroundColor="@color/red">
+                        android:elevation="7dp"
+                        app:cardBackgroundColor="@color/red"
+                        app:cardCornerRadius="6pt">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -415,10 +421,10 @@
                                 android:id="@+id/image_interest"
                                 android:layout_width="300dp"
                                 android:layout_height="100dp"
+                                android:layout_centerHorizontal="true"
                                 android:layout_marginStart="5dp"
                                 android:layout_marginTop="5dp"
                                 android:layout_marginEnd="5dp"
-                                android:layout_centerHorizontal="true"
                                 android:layout_marginBottom="5dp"
                                 android:src="@drawable/intersets_image" />
 
@@ -426,7 +432,7 @@
                                 android:id="@+id/profile_interest_rv"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_below="@+id/image_interest"/>
+                                android:layout_below="@+id/image_interest" />
 
 
                         </RelativeLayout>
@@ -441,18 +447,18 @@
                     android:id="@+id/ll_experience"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="gone"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
                         android:fontFamily="@font/comfortaa"
-                        android:layout_gravity="center_horizontal"
                         android:text="Experience"
                         android:textColor="@color/red"
                         android:textSize="16sp" />
@@ -461,8 +467,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        app:cardCornerRadius="6pt"
-                        app:cardBackgroundColor="@color/red">
+                        android:elevation="7dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="6pt">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -472,18 +479,19 @@
                                 android:id="@+id/image_experience"
                                 android:layout_width="300dp"
                                 android:layout_height="100dp"
+                                android:layout_centerHorizontal="true"
                                 android:layout_marginStart="5dp"
                                 android:layout_marginTop="5dp"
                                 android:layout_marginEnd="5dp"
-                                android:layout_centerHorizontal="true"
                                 android:layout_marginBottom="5dp"
                                 android:src="@drawable/experience_image" />
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/profile_experience_rv"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:layout_below="@+id/image_experience"/>
+                                android:layout_below="@+id/image_experience"
+                                android:layout_centerHorizontal="true" />
 
 
                         </RelativeLayout>

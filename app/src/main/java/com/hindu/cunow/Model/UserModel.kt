@@ -15,6 +15,8 @@ class UserModel {
     val year:String? = null
     val course:String? = null
     val college:String? = null
+    val skills:String? = null
+    val experience:String? = null
     val male:Boolean = false
     val female:Boolean = false
     val firstVisit:Boolean = false

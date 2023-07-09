@@ -18,8 +18,10 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.hindu.cunow.Adapter.ExpAdapter
 import com.hindu.cunow.Adapter.InterestAdapter
 import com.hindu.cunow.Adapter.InterestAdapter_Prof
+import com.hindu.cunow.Adapter.SkillAdapter
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.MyDetailsFragmentBinding
@@ -31,6 +33,9 @@ class MyDetailsFragment : Fragment() {
     var recyclerView:RecyclerView? = null
     private var interestAdapter: InterestAdapter_Prof? = null
     private lateinit var viewModel: MyDetailsViewModel
+
+    private var expAdapter_Prof: ExpAdapter? = null
+    private var skillAdapter:SkillAdapter? = null
 
     private var _binding:MyDetailsFragmentBinding? = null
     private val binidng get() = _binding!!
@@ -51,14 +56,13 @@ class MyDetailsFragment : Fragment() {
         //Top Function Call
         retrieveUserData(root)
 
-        //root.locationPin.startAnimation(navigation)
-
         //Skill Button
         root.skill_btn.setOnClickListener{
+            val recyclerView:RecyclerView = root.findViewById(R.id.profile_skill_rv)
 
-
-            root.skill_btn.startAnimation(toBottom)
             root.skill_btn.visibility = View.GONE
+            root.interest_btn.visibility = View.VISIBLE
+            root.experience_btn.visibility = View.VISIBLE
 
             //visibility of the Layouts
 
@@ -74,16 +78,22 @@ class MyDetailsFragment : Fragment() {
             root.ll_experience.visibility = View.GONE
             root.ll_experience.startAnimation(toBottom)
 
+            viewModel.mySkillModel!!.observe(viewLifecycleOwner, Observer {
+                initView2(recyclerView)
+                skillAdapter = context?.let { it1->SkillAdapter(it1,it) }
+                recyclerView.adapter = skillAdapter
+                skillAdapter!!.notifyDataSetChanged()
+            })
+
         }
 
         //Interest Button
         root.interest_btn.setOnClickListener {
-
-
             val recyclerView1:RecyclerView = root.findViewById(R.id.profile_interest_rv)
 
-            root.interest_btn.startAnimation(toBottom)
             root.interest_btn.visibility = View.GONE
+            root.experience_btn.visibility = View.VISIBLE
+            root.skill_btn.visibility = View.VISIBLE
 
 
             //visibility of the Layouts
@@ -102,7 +112,7 @@ class MyDetailsFragment : Fragment() {
 
             //loadData
             viewModel.myInterestModel!!.observe(viewLifecycleOwner, Observer {
-                initView(recyclerView1)
+                initView(recyclerView1,3)
                 interestAdapter = context?.let { it1 ->InterestAdapter_Prof(it1,it) }
                 recyclerView1.adapter = interestAdapter
                 interestAdapter!!.notifyDataSetChanged()
@@ -111,8 +121,12 @@ class MyDetailsFragment : Fragment() {
 
         //Experience button
         root.experience_btn.setOnClickListener {
-            root.experience_btn.startAnimation(toBottom)
+
+            val recyclerView:RecyclerView = root.findViewById(R.id.profile_experience_rv)
+
             root.experience_btn.visibility = View.GONE
+            root.interest_btn.visibility = View.VISIBLE
+            root.skill_btn.visibility = View.VISIBLE
 
             //visibility and animation of the layouts
 
@@ -128,6 +142,12 @@ class MyDetailsFragment : Fragment() {
             root.ll_about_profile.visibility = View.GONE
             root.ll_about_profile.startAnimation(toBottom)
 
+            viewModel.myExpModel!!.observe(viewLifecycleOwner, Observer {
+                initView(recyclerView,2)
+                expAdapter_Prof = context?.let { it1-> ExpAdapter(it1,it) }
+                recyclerView.adapter = expAdapter_Prof
+                expAdapter_Prof!!.notifyDataSetChanged()
+            })
 
         }
 
@@ -191,12 +211,10 @@ class MyDetailsFragment : Fragment() {
     }
 
     //Global Init function for RecyclerView
-    private fun initView(recyclerView: RecyclerView){
+    private fun initView(recyclerView: RecyclerView,spanCount:Int){
         recyclerView.setHasFixedSize(true)
-        val linearLayoutManager:LinearLayoutManager=GridLayoutManager(context, 3)
-        recyclerView!!.layoutManager = linearLayoutManager
-
-
+        val linearLayoutManager:LinearLayoutManager=GridLayoutManager(context, spanCount)
+        recyclerView.layoutManager = linearLayoutManager
 
         /*recyclerView.isNestedScrollingEnabled = false
         val linearLayoutManager = LinearLayoutManager(context)
@@ -204,6 +222,14 @@ class MyDetailsFragment : Fragment() {
         linearLayoutManager.stackFromEnd = true
         recyclerView.layoutManager = linearLayoutManager*/
 
+    }
+
+    private fun initView2(recyclerView: RecyclerView){
+        recyclerView.isNestedScrollingEnabled = false
+       val linearLayoutManager = LinearLayoutManager(context)
+       linearLayoutManager.reverseLayout = true
+       linearLayoutManager.stackFromEnd = true
+       recyclerView.layoutManager = linearLayoutManager
     }
 
 }
