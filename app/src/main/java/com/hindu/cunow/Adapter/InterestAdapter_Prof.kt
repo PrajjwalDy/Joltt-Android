@@ -25,7 +25,6 @@ class InterestAdapter_Prof(private val mContext: Context,
 
                           inner class ViewHolder(@NonNull itemView:View):RecyclerView.ViewHolder(itemView){
                                val interest: TextView = itemView.findViewById(R.id.interestName_profile) as TextView
-                               //val card:CardView = itemView.findViewById(R.id.interestCV) as CardView
                               fun bind(list:InterestModel){
                                   interest.text = list.interestTV
                               }

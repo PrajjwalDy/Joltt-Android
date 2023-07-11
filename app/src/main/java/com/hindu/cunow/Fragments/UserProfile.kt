@@ -4,12 +4,18 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -20,14 +26,19 @@ import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Activity.ChatActivity
 import com.hindu.cunow.Activity.ShowUsersActivity
 import com.hindu.cunow.Activity.UserSupportActivity
+import com.hindu.cunow.Adapter.MyPostAdapter
+import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.Model.RequestModel
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import kotlinx.android.synthetic.main.activity_comment.*
+import kotlinx.android.synthetic.main.fragment_home.add_image
+import kotlinx.android.synthetic.main.fragment_home.add_text
+import kotlinx.android.synthetic.main.fragment_home.add_video
+import kotlinx.android.synthetic.main.fragment_home.create_post_fab
 import kotlinx.android.synthetic.main.fragment_user_profiel.*
 import kotlinx.android.synthetic.main.fragment_user_profiel.view.*
 import kotlinx.android.synthetic.main.profile_fragment.*
-import kotlinx.android.synthetic.main.profile_fragment.verification_profilePage
 import kotlinx.android.synthetic.main.profile_fragment.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -37,6 +48,17 @@ import kotlinx.coroutines.launch
 class UserProfile : Fragment() {
     private lateinit var profileId:String
     private lateinit var firebaseUser: FirebaseUser
+    private var clicked= false
+
+    private var recyclerView: RecyclerView? = null
+    private var postAdapter: MyPostAdapter? = null
+    private var mPost:MutableList<PostModel>? = null
+
+    //Animations
+    private val rotateOpen: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_open_anim) }
+    private val rotateClose: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_close_anim) }
+    private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.from_bottom_anim) }
+    private val toBottom: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.to_bottom_anim) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,24 +73,41 @@ class UserProfile : Fragment() {
             this.profileId = pref.getString("uid","none")!!
         }
 
-        root.open_options_user.setOnClickListener {
-            root.userProfile_LL.visibility = View.VISIBLE
-            root.open_options_user.visibility = View.GONE
-            root.close_options_user.visibility = View.VISIBLE
+        //Social Link implementation
+        root.github.setOnClickListener {
+            val url = gitlink.text.toString()
+            openInBrowser(url)
+        }
+        root.linkedin.setOnClickListener {
+            val url = linkednLink.text.toString()
+            openInBrowser(url)
+        }
+        root.portfolio.setOnClickListener {
+            val url = portfolioLink.text.toString()
+            openInBrowser(url)
+        }
+        root.instagram.setOnClickListener {
+            val url = instagramLink.text.toString()
+            openInBrowser(url)
+        }
+        root.threads.setOnClickListener {
+            val url = threadsLink.text.toString()
+            openInBrowser(url)
+        }
+        root.twitter.setOnClickListener {
+            val url = twitterLink.text.toString()
+            openInBrowser(url)
         }
 
-        root.close_options_user.setOnClickListener {
-            root.userProfile_LL.visibility = View.GONE
-            root.open_options_user.visibility = View.VISIBLE
-            root.close_options_user.visibility = View.GONE
+
+
+
+
+        root.userMenu.setOnClickListener{
+            addButtonClicked()
         }
 
-        root.photosUsers.setOnClickListener {
-            val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
-            pref!!.putString("uid",profileId)
-            pref.apply()
-            Navigation.findNavController(root).navigate(R.id.action_userProfile_to_userPostsFragment)
-        }
+        //About User FAB
 
         root.aboutUser.setOnClickListener {
             val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
@@ -76,19 +115,33 @@ class UserProfile : Fragment() {
             pref.apply()
             Navigation.findNavController(root).navigate(R.id.action_userProfile_to_userDetails)
         }
-
-        root.findSupportUser.setOnClickListener {
+        //Block User FAB
+        root.blockUser.setOnClickListener {
             val intent = Intent(context,UserSupportActivity::class.java)
             intent.putExtra("uid",profileId)
             startActivity(intent)
         }
 
-        root.chat_ll.setOnClickListener {
+        //Chat User FAB
+        root.chatUser.setOnClickListener {
             val intent = Intent(context,ChatActivity::class.java)
             intent.putExtra("uid",profileId)
             startActivity(intent)
         }
 
+        //Recycler View Declaration
+        recyclerView = root.findViewById(R.id.usersPostRecyclerView)
+        recyclerView!!.setHasFixedSize(true)
+        val layoutManager: LinearLayoutManager = GridLayoutManager(context,2)
+        recyclerView!!.layoutManager = layoutManager
+
+        mPost = ArrayList()
+        postAdapter = context?.let { MyPostAdapter(it,mPost as ArrayList<PostModel>) }
+        recyclerView?.adapter = postAdapter
+        postAdapter!!.notifyDataSetChanged()
+
+
+        //Function Call
 
         CoroutineScope(Dispatchers.IO).launch {
             launch { privacy(root) }
@@ -98,16 +151,19 @@ class UserProfile : Fragment() {
             launch { getFollowings(root) }
             launch { isBlocked(root)
                 haveBlocked(root) }
+            launch { retrievePost() }
+            launch { getPostCount() }
         }
 
-
-        root.follow_unfollow_button.setOnClickListener {
+        //Follow button status
+        root.infuseButton.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch{
                 checkPrivacy(root)
             }
         }
 
-        root.totalFollowers_user.setOnClickListener {
+        //Total following and followers on click
+        root.totalFollowers.setOnClickListener {
             val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
             pref!!.putString("uid",profileId)
             pref.putString("title","Followers")
@@ -115,7 +171,7 @@ class UserProfile : Fragment() {
             Navigation.findNavController(root).navigate(R.id.action_userProfile_to_showUserFragment)
         }
 
-        root.totalFollowing_user.setOnClickListener {
+        root.totalFollowing.setOnClickListener {
             val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
             pref!!.putString("uid",profileId)
             pref.putString("title","Following")
@@ -126,6 +182,44 @@ class UserProfile : Fragment() {
         return root
     }
 
+    //open in browser
+    private fun openInBrowser(url:String){
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
+    }
+
+    //Animating the FABs
+    private fun addButtonClicked(){
+        setVisibility(clicked)
+        setAnimation(clicked)
+        clicked = !clicked
+    }
+    private fun setVisibility(clicked:Boolean) {
+        if (!clicked){
+            blockUser.visibility = View.VISIBLE
+            aboutUser.visibility = View.VISIBLE
+            chatUser.visibility = View.VISIBLE
+        }else{
+            blockUser.visibility = View.GONE
+            aboutUser.visibility = View.GONE
+            chatUser.visibility = View.GONE
+        }
+    }
+    private fun setAnimation(clicked:Boolean) {
+        if (!clicked){
+            blockUser.startAnimation(fromBottom)
+            aboutUser.startAnimation(fromBottom)
+            chatUser.startAnimation(fromBottom)
+            userMenu.startAnimation(rotateOpen)
+        }else{
+            blockUser.startAnimation(toBottom)
+            aboutUser.startAnimation(toBottom)
+            chatUser.startAnimation(toBottom)
+            userMenu.startAnimation(rotateClose)
+        }
+    }
+    //User Info Retrieve Function
     private suspend fun userInfo(){
 
         val userRef = FirebaseDatabase.getInstance().reference.child("Users").child(profileId)
@@ -136,9 +230,15 @@ class UserProfile : Fragment() {
                     Glide.with(context!!).load(userData!!.profileImage).into(userProfileImage)
                     userName_profile.text = userData.fullName
                     user_bio_profile.text = userData.bio
-                    if (userData.verification){
+                    gitlink.text = userData.githubLink
+                    linkednLink.text = userData.linkedin
+                    portfolioLink.text = userData.portfolio
+                    instagramLink.text = userData.instagram
+                    twitterLink.text = userData.twitter
+                    threadsLink.text = userData.threads
+                    /*if (userData.verification){
                         verification_UserPage.visibility = View.VISIBLE
-                    }
+                    }*/
                 }
             }
             override fun onCancelled(error: DatabaseError) {
@@ -147,6 +247,7 @@ class UserProfile : Fragment() {
         })
     }
 
+    //Privacy Status Function Function
     private suspend fun checkPrivacy(root:View){
         val userRef = FirebaseDatabase.getInstance().reference.child("Users").child(profileId)
         userRef.addListenerForSingleValueEvent(object :ValueEventListener{
@@ -156,14 +257,14 @@ class UserProfile : Fragment() {
                 if (snapshot.exists()){
                     val data = snapshot.getValue(UserModel::class.java)
                     if (data!!.private){
-                        when (root.follow_unfollow_button.text.toString()){
-                            "Follow"->{
+                        when (root.infuseTxt.text.toString()){
+                            "Infuse"->{
                                 firebaseUser.uid.let { it1 ->
                                     FirebaseDatabase.getInstance().reference
                                         .child("Users").child(profileId)
                                         .child("FollowRequest").child(it1.toString())
                                         .setValue(true)
-                                    root.follow_unfollow_button.text = "Requested"
+                                    root.infuseTxt.text = "Requested"
 
                                     val ref = FirebaseDatabase.getInstance().reference
                                         .child("Users")
@@ -192,7 +293,7 @@ class UserProfile : Fragment() {
                                     .child(profileId)
                                     .removeValue()
                             }
-                            "Following" -> {
+                            "Defuse" -> {
                                 firebaseUser.uid.let { it1->
                                     FirebaseDatabase.getInstance().reference
                                         .child("Follow").child(it1.toString())
@@ -212,8 +313,8 @@ class UserProfile : Fragment() {
 
                     }else{
 
-                        when (root.follow_unfollow_button.text.toString()) {
-                            "Follow" -> {
+                        when (root.infuseTxt.text.toString()) {
+                            "Infuse" -> {
                                 firebaseUser.uid.let { it1 ->
                                     FirebaseDatabase.getInstance().reference
                                         .child("Follow").child(it1.toString())
@@ -233,7 +334,7 @@ class UserProfile : Fragment() {
 
 
                             }
-                            "Following" -> {
+                            "Defuse" -> {
                                 firebaseUser.uid.let { it1->
                                     FirebaseDatabase.getInstance().reference
                                         .child("Follow").child(it1.toString())
@@ -278,6 +379,7 @@ class UserProfile : Fragment() {
         })
     }
 
+    //Infuse Request Check
     private suspend fun checkRequested(root:View){
         val database = FirebaseDatabase.getInstance().reference.child("Users")
             .child(profileId)
@@ -287,9 +389,9 @@ class UserProfile : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val dataRef = snapshot.getValue(RequestModel::class.java)
                 if (snapshot.child(FirebaseAuth.getInstance().currentUser!!.uid).exists()){
-                    root.follow_unfollow_button.text = "Requested"
+                    root.infuseTxt.text = "Requested"
                 }else{
-                    root.follow_unfollow_button.text = "Follow"
+                    root.infuseTxt.text = "Infuse"
                 }
             }
 
@@ -300,6 +402,7 @@ class UserProfile : Fragment() {
         })
     }
 
+    //Check Following and Following Fuction
     private suspend fun checkFollowAndFollowing(root: View){
         val databaseRef =
             FirebaseDatabase.getInstance().reference
@@ -309,7 +412,7 @@ class UserProfile : Fragment() {
         databaseRef.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.child(firebaseUser.uid).exists()){
-                    root.follow_unfollow_button.text= "Following"
+                    root.infuseTxt.text= "Defuse"
                 }else{
                     CoroutineScope(Dispatchers.IO).launch {
                         launch {checkRequested(root)  }
@@ -326,7 +429,7 @@ class UserProfile : Fragment() {
 
         })
     }
-
+    //Get Followers
     private suspend fun getFollowers(root: View){
         val followingRef = FirebaseDatabase.getInstance().reference
             .child("Follow").child(profileId)
@@ -335,7 +438,7 @@ class UserProfile : Fragment() {
         followingRef.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                if (snapshot.exists()){
-                   root.totalFollowers_user.text = snapshot.childrenCount.toString()
+                   root.totalFollowers.text = snapshot.childrenCount.toString()
                }
             }
 
@@ -346,6 +449,7 @@ class UserProfile : Fragment() {
         })
     }
 
+    //Get Following
     private suspend fun getFollowings(root: View){
         val followingRef = FirebaseDatabase.getInstance().reference
             .child("Follow").child(profileId)
@@ -354,7 +458,7 @@ class UserProfile : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     val count = snapshot.childrenCount.toInt()-1
-                    root.totalFollowing_user.text = count.toString()
+                    root.totalFollowing.text = count.toString()
                 }
             }
 
@@ -365,6 +469,7 @@ class UserProfile : Fragment() {
         })
     }
 
+    //Get Privacy
     private suspend fun privacy(root: View){
         val userRef = FirebaseDatabase.getInstance().reference.child("Users").child(profileId)
         userRef.addListenerForSingleValueEvent(object :ValueEventListener{
@@ -372,7 +477,18 @@ class UserProfile : Fragment() {
                 if (snapshot.exists()){
                     val data = snapshot.getValue(UserModel::class.java)
                     if (data!!.private) {
-                        ll_moreOption_user.visibility = View.GONE
+                        isCurrentUserInList { isInList->
+                            if (isInList){
+                                usersPostRecyclerView.visibility = View.VISIBLE
+                                user_socialLinks_RL.visibility = View.VISIBLE
+                                userMenu.visibility = View.VISIBLE
+                            }else{
+                                privateAC_LL.visibility = View.VISIBLE
+                                usersPostRecyclerView.visibility = View.GONE
+                                user_socialLinks_RL.visibility = View.GONE
+                                userMenu.visibility = View.GONE
+                            }
+                        }
                     }
                 }
             }
@@ -384,6 +500,7 @@ class UserProfile : Fragment() {
         })
     }
 
+    //Is Blocked Function
     private suspend fun isBlocked(root: View){
         val database = FirebaseDatabase.getInstance().reference.child("Users")
             .child(profileId)
@@ -393,8 +510,11 @@ class UserProfile : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val dataRef = snapshot.getValue(RequestModel::class.java)
                 if (snapshot.child(FirebaseAuth.getInstance().currentUser!!.uid).exists()){
-                    root.follow_unfollow_button.visibility = View.GONE
-                    ll_moreOption_user.visibility = View.GONE
+                    root.infuseButton.visibility = View.GONE
+                    user_socialLinks_RL.visibility = View.GONE
+                    userName_profile.text = "Username"
+                    user_bio_profile.text = " "
+                    rl_countDetails_user.visibility = View.VISIBLE
                 }
             }
 
@@ -405,6 +525,7 @@ class UserProfile : Fragment() {
         })
     }
 
+    //Check Block Status Function
     private suspend fun haveBlocked(root: View){
         val database = FirebaseDatabase.getInstance().reference.child("Users")
             .child(firebaseUser.uid)
@@ -414,7 +535,7 @@ class UserProfile : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val dataRef = snapshot.getValue(RequestModel::class.java)
                 if (snapshot.child(profileId).exists()){
-                    root.follow_unfollow_button.text = "Unblock"
+                    root.infuseTxt.text = "Unblock"
                 }
             }
 
@@ -424,6 +545,7 @@ class UserProfile : Fragment() {
         })
     }
 
+    //Add Notification
     private suspend fun addNotification(message:String){
         //sendNotification()
         if (profileId != FirebaseAuth.getInstance().currentUser!!.uid){
@@ -449,5 +571,76 @@ class UserProfile : Fragment() {
 
         }
     }
+
+    //User Post function
+    private fun retrievePost(){
+        val postRef = FirebaseDatabase.getInstance().reference.child("Post")
+        postRef.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                mPost!!.clear()
+                for(snapshot in snapshot.children){
+                    val post = snapshot.getValue(PostModel::class.java)
+                    if (post != null){
+                        if(post.publisher == profileId){
+                            mPost!!.add(post)
+                        }
+                    }
+                    postAdapter!!.notifyDataSetChanged()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+    //Post count
+    private fun getPostCount(){
+        val database = FirebaseDatabase.getInstance().reference.child("Users")
+            .child(profileId)
+            .child("MyPosts")
+
+        database.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val count = snapshot.childrenCount.toInt()
+                    postcount_user.text = count.toString()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    //Checking current user is in users following list
+    fun isCurrentUserInList(callback: (Boolean) -> Unit) {
+        val database = FirebaseDatabase.getInstance()
+        val usersRef = database.reference.child("Follow").child(profileId)
+            .child("Following")
+
+        //val query = usersRef.child(profileId).child("Following").orderByValue().equalTo(FirebaseAuth.getInstance().currentUser!!.uid)
+        usersRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.hasChild(FirebaseAuth.getInstance().currentUser!!.uid)){
+                    callback.invoke(true)
+                }else{
+                    callback.invoke(false)
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle the error
+                println("Error: ${databaseError.message}")
+                callback(false) // Assuming false when an error occurs
+            }
+        })
+    }
+
+
+
 
 }

@@ -53,14 +53,44 @@ class HomeFragment : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private var clicked= false
+    private var clicked = false
 
-    private val rotateOpen: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_open_anim) }
-    private val rotateClose: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_close_anim) }
-    private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.from_bottom_anim) }
-    private val toBottom: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.to_bottom_anim) }
-    private val toInvisibility: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.hide_appbar) }
-    private val toVisibility: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.unhide_appbar) }
+    private val rotateOpen: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            context,
+            R.anim.rotate_open_anim
+        )
+    }
+    private val rotateClose: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            context,
+            R.anim.rotate_close_anim
+        )
+    }
+    private val fromBottom: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            context,
+            R.anim.from_bottom_anim
+        )
+    }
+    private val toBottom: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            context,
+            R.anim.to_bottom_anim
+        )
+    }
+    private val toInvisibility: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            context,
+            R.anim.hide_appbar
+        )
+    }
+    private val toVisibility: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            context,
+            R.anim.unhide_appbar
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,15 +106,15 @@ class HomeFragment : Fragment() {
 
         homeViewModel.postModel!!.observe(viewLifecycleOwner, Observer {
             initView(root)
-            postAdapter = context?.let { it1-> PostAdapter(it1, it as List<PostModel>) }
+            postAdapter = context?.let { it1 -> PostAdapter(it1, it as List<PostModel>) }
             recyclerView!!.adapter = postAdapter
             postAdapter!!.notifyDataSetChanged()
 
         })
 
-        CoroutineScope(Dispatchers.IO).launch(){
+        CoroutineScope(Dispatchers.IO).launch() {
             launch { checkFirstVisit() }
-            launch {developerMessage()}
+            launch { developerMessage() }
         }
 
         root.imin.setOnClickListener {
@@ -92,11 +122,13 @@ class HomeFragment : Fragment() {
         }
 
         root.people_welcome.setOnClickListener {
-            Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_peopleFragment)
+            Navigation.findNavController(root)
+                .navigate(R.id.action_navigation_home_to_peopleFragment)
         }
 
         root.confession_welcome.setOnClickListener {
-            Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_confessionRoomFragment)
+            Navigation.findNavController(root)
+                .navigate(R.id.action_navigation_home_to_confessionRoomFragment)
         }
 
         root.circle_welcome.setOnClickListener {
@@ -113,15 +145,16 @@ class HomeFragment : Fragment() {
         }
 
         root.add_image.setOnClickListener {
-            startActivity(Intent(context,AddPostActivity::class.java))
+            startActivity(Intent(context, AddPostActivity::class.java))
         }
 
         root.add_video.setOnClickListener {
-            startActivity(Intent(context,VideoUploadActivity::class.java))
+            startActivity(Intent(context, VideoUploadActivity::class.java))
         }
 
-        root.add_text.setOnClickListener{
-            val dialogView = LayoutInflater.from(context).inflate(R.layout.add_only_text_dialog, null)
+        root.add_text.setOnClickListener {
+            val dialogView =
+                LayoutInflater.from(context).inflate(R.layout.add_only_text_dialog, null)
 
             val dialogBuilder = AlertDialog.Builder(context)
                 .setView(dialogView)
@@ -129,12 +162,12 @@ class HomeFragment : Fragment() {
             val alertDialog = dialogBuilder.show()
 
             dialogView.post_onlyText.setOnClickListener {
-                if (dialogView.addText_ET.text.isEmpty()){
-                    Toast.makeText(context,"Please Write something",Toast.LENGTH_SHORT).show()
-                }else{
+                if (dialogView.addText_ET.text.isEmpty()) {
+                    Toast.makeText(context, "Please Write something", Toast.LENGTH_SHORT).show()
+                } else {
                     val dataRef = FirebaseDatabase.getInstance().reference.child("Post")
                     val postId = dataRef.push().key
-                    val dataMap = HashMap<String,Any>()
+                    val dataMap = HashMap<String, Any>()
 
                     dataMap["postId"] = postId!!
                     dataMap["caption"] = dialogView.addText_ET.text.toString()
@@ -144,7 +177,7 @@ class HomeFragment : Fragment() {
                     dataMap["page"] = false
                     dataMap["public"] = false
                     dataRef.child(postId).updateChildren(dataMap)
-                    Toast.makeText(context,"Post add successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Post add successfully", Toast.LENGTH_SHORT).show()
                 }
                 alertDialog.dismiss()
             }
@@ -153,10 +186,10 @@ class HomeFragment : Fragment() {
         return root
     }
 
-    private fun updateVisit(view: View){
+    private fun updateVisit(view: View) {
         val ref = FirebaseDatabase.getInstance().reference
             .child("Users")
-        val postMap = HashMap<String,Any>()
+        val postMap = HashMap<String, Any>()
         postMap["firstVisit"] = false
         ref.child(FirebaseAuth.getInstance().currentUser!!.uid)
             .updateChildren(postMap)
@@ -164,7 +197,8 @@ class HomeFragment : Fragment() {
             checkFirstVisit()
         }
     }
-    private fun initView(root:View){
+
+    private fun initView(root: View) {
         recyclerView = root.findViewById(R.id.postRecyclerView) as RecyclerView
         recyclerView!!.setHasFixedSize(true)
         recyclerView!!.isNestedScrollingEnabled = false
@@ -173,7 +207,7 @@ class HomeFragment : Fragment() {
         linearLayoutManager.stackFromEnd = true
         recyclerView!!.layoutManager = linearLayoutManager
         //loadUserImage(root)
-        recyclerView!!.addOnScrollListener(object :RecyclerView.OnScrollListener(){
+        recyclerView!!.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             /*override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -204,18 +238,19 @@ class HomeFragment : Fragment() {
         })
 
     }
-    private suspend fun checkFirstVisit(){
+
+    private suspend fun checkFirstVisit() {
         val dataRef = FirebaseDatabase
             .getInstance().reference.child("Users")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
-        dataRef.addListenerForSingleValueEvent(object :ValueEventListener{
+        dataRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
                     val data = snapshot.getValue(UserModel::class.java)
-                    if (data!!.firstVisit){
+                    if (data!!.firstVisit) {
                         welcome_screen.visibility = View.VISIBLE
                         //postLayout_ll.visibility = View.GONE
-                    }else{
+                    } else {
                         postLayout_ll.visibility = View.VISIBLE
                     }
                 }
@@ -230,21 +265,22 @@ class HomeFragment : Fragment() {
 
         })
     }
-    private suspend fun checkFollowingList(){
+
+    private suspend fun checkFollowingList() {
         checkPost()
         val database = FirebaseDatabase.getInstance().reference
             .child("Follow")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
             .child("Following")
 
-        database.addListenerForSingleValueEvent(object :ValueEventListener{
+        database.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
                     val count = snapshot.childrenCount.toInt()
-                    if (count <=1 && checker == "no" ){
+                    if (count <= 1 && checker == "no") {
                         ll_empty_posts.visibility = View.VISIBLE
                         postRecyclerView.visibility = View.GONE
-                    }else{
+                    } else {
                         postRecyclerView.visibility = View.VISIBLE
                     }
                 }
@@ -256,39 +292,42 @@ class HomeFragment : Fragment() {
 
         })
     }
-    private  fun checkPost(){
+
+    private fun checkPost() {
         val database = FirebaseDatabase.getInstance().reference
             .child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
             .child("MyPosts")
 
-            database.addValueEventListener(object :ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if(snapshot.exists()){
-                        checker = "yes"
-                    }else{
-                        checker = "no"
-                    }
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    checker = "yes"
+                } else {
+                    checker = "no"
                 }
+            }
 
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
 
-            })
+        })
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-    private suspend fun developerMessage(){
+
+    private suspend fun developerMessage() {
         val database = FirebaseDatabase.getInstance().reference.child("DevMessage")
-        database.addValueEventListener(object :ValueEventListener{
+        database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
                     developerMessage_CV.visibility = View.VISIBLE
                     val data = snapshot.getValue(DevMessageModel::class.java)
                     dev_message_tv.text = data!!.message
-                }else{
+                } else {
                     developerMessage_CV.visibility = View.GONE
                 }
             }
@@ -299,6 +338,7 @@ class HomeFragment : Fragment() {
 
         })
     }
+
     /*private suspend fun chatNotification(){
         val data = FirebaseDatabase.getInstance().reference.child("ChatMessageCount")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
@@ -319,29 +359,31 @@ class HomeFragment : Fragment() {
 
         })
     }*/
-    private fun addButtonClicked(){
+    private fun addButtonClicked() {
         setVisibility(clicked)
         setAnimation(clicked)
         clicked = !clicked
     }
-    private fun setVisibility(clicked:Boolean) {
-        if (!clicked){
+
+    private fun setVisibility(clicked: Boolean) {
+        if (!clicked) {
             add_image.visibility = View.VISIBLE
             add_text.visibility = View.VISIBLE
             add_video.visibility = View.VISIBLE
-        }else{
+        } else {
             add_image.visibility = View.GONE
             add_text.visibility = View.GONE
             add_video.visibility = View.GONE
         }
     }
-    private fun setAnimation(clicked:Boolean) {
-        if (!clicked){
+
+    private fun setAnimation(clicked: Boolean) {
+        if (!clicked) {
             add_text.startAnimation(fromBottom)
             add_image.startAnimation(fromBottom)
             add_video.startAnimation(fromBottom)
             create_post_fab.startAnimation(rotateOpen)
-        }else{
+        } else {
             add_text.startAnimation(toBottom)
             add_image.startAnimation(toBottom)
             add_video.startAnimation(toBottom)

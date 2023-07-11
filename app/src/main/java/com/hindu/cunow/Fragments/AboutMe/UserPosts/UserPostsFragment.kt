@@ -36,7 +36,6 @@ class UserPostsFragment : Fragment() {
     private var postAdapter: PostAdapter? = null
     private var postGridAdapter: PostGridAdapter? = null
 
-    private lateinit var viewModel: UserPostsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

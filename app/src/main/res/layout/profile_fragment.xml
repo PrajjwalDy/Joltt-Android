@@ -1,332 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".Fragments.ProfileFragment">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:orientation="vertical">
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/white">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:fontFamily="@font/amiko"
-                    android:text="@string/profile"
-                    android:layout_margin="10dp"
-                    android:textColor="@color/red"
-                    android:textSize="18sp"
-                    />
-            </LinearLayout>
-
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <LinearLayout
-            android:id="@+id/profile_option_ll"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:elevation="5dp"
-            android:background="#E1F5FE"
-            android:layout_gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/aboutMe_ll"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/about"
-                    android:layout_margin="5dp"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="About me"
-                    android:fontFamily="@font/amiko"
-                    android:textColor="@color/red"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/myPhotos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/photos"
-                    android:layout_margin="5dp"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Photos"
-                    android:fontFamily="@font/amiko"
-                    android:textColor="@color/red"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/myCircles"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/mycircle"
-                    android:layout_margin="5dp"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="My Circle"
-                    android:fontFamily="@font/amiko"
-                    android:textColor="@color/red"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/settings_account"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/settings"
-                    android:layout_margin="5dp"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Settings"
-                    android:fontFamily="@font/amiko"
-                    android:textColor="@color/red"/>
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <RelativeLayout
-            android:elevation="5dp"
-            android:id="@+id/ll_moreOption_profile"
-            android:layout_width="251dp"
-            android:layout_height="30dp"
-            android:background="@drawable/view_more"
-            android:layout_gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/open_options"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/open_angle"
-                app:tint="@color/white" />
-            <ImageView
-                android:id="@+id/close_options"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="5dp"
-                android:visibility="gone"
-                android:src="@drawable/close_angle"
-                app:tint="@color/white"
-                />
-
-        </RelativeLayout>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/profileImage_CV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="7dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            app:cardElevation="5dp">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/profileImage_profilePage"
-                    android:layout_width="match_parent"
-                    android:layout_height="340dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="centerCrop" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:src="@drawable/minus"
-                    android:scaleType="fitXY"
-                    android:layout_marginTop="1dp"
-                    app:tint="@color/red" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/fullName_profilePage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:textAllCaps="true"
-                        android:fontFamily="@font/amiko"
-                        android:text="someone example"
-                        android:textColor="@color/black"
-                        android:textSize="22sp"
-                        android:layout_gravity="center_vertical"
-                        />
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:visibility="gone"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/verify"
-                        android:layout_gravity="center_vertical"
-                        android:id="@+id/verification_profilePage"/>
-
-                </LinearLayout>
-
-
-
-                <TextView
-                    android:id="@+id/user_bio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Computer Science Engineer"
-                    android:fontFamily="@font/amiko"
-                    android:layout_marginTop="-5dp"
-                    android:maxLines="2"
-                    android:layout_marginBottom="5dp"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="followers"
-                            android:textAllCaps="true"
-                            android:textSize="18sp"
-                            android:fontFamily="@font/amiko"
-                            android:layout_gravity="center_horizontal"/>
-
-                        <TextView
-                            android:id="@+id/totalFollowers"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="0"
-                            android:textAllCaps="true"
-                            android:textSize="22sp"
-                            android:textColor="@color/black"
-                            android:layout_gravity="center_horizontal"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="following"
-                            android:textAllCaps="true"
-                            android:textSize="18sp"
-                            android:fontFamily="@font/amiko"
-                            android:layout_gravity="center_horizontal"/>
-
-                        <TextView
-                            android:id="@+id/totalFollowing"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="0"
-                            android:textAllCaps="true"
-                            android:textSize="22sp"
-                            android:textColor="@color/black"
-                            android:layout_gravity="center_horizontal"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/editProfile_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/settingFab"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_marginBottom="18dp"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="18dp"
+        android:layout_marginBottom="18dp"
+        android:clickable="true"
+        android:focusable="true"
         android:visibility="gone"
         app:srcCompat="@drawable/ic_settings"
         app:tint="@color/white" />
@@ -336,11 +27,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/profileMenu"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="18dp"
         android:clickable="true"
         android:focusable="true"
         android:visibility="gone"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="18dp"
         app:srcCompat="@drawable/ic_edit"
         app:tint="@color/white" />
 
@@ -354,307 +45,306 @@
         android:layout_marginTop="18dp"
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="18dp"
+        android:backgroundTint="@color/red"
         android:clickable="true"
         android:focusable="true"
-        android:backgroundTint="@color/red"
         app:srcCompat="@drawable/menu"
         app:tint="@color/white" />
 
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <!--<RelativeLayout
+            android:id="@+id/SRL_1"
+            android:layout_width="50dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
 
-            <RelativeLayout
-                android:id="@+id/SRL_1"
-                android:layout_width="50dp"
-                android:layout_height="200dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp">
 
-                android:layout_marginBottom="10dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_centerHorizontal="true"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/github" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_margin="5dp"
-                    android:layout_centerHorizontal="true"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/briefcase" />
-
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_toStartOf="@+id/profileImage"
-                android:layout_width="50dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_toEndOf="@+id/SRL_1">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_centerInParent="true"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/linkedin" />
-
-                </LinearLayout>
-
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/SRL_2"
-                android:layout_width="50dp"
-                android:layout_height="200dp"
-                android:layout_toEndOf="@+id/profileImage"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_margin="5dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/instagram" />
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="50dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_toEndOf="@+id/SRL_2">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:gravity="center_horizontal"
-                    android:layout_centerHorizontal="true"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/twitter" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_margin="5dp"
-                    android:layout_centerHorizontal="true"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/threads" />
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profileImage"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="40dp"
-                android:src="@drawable/test_img" />
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/github" />
 
-            <TextView
-                android:id="@+id/userFullName"
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/profileImage"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="5dp"
                 android:layout_centerHorizontal="true"
-                android:fontFamily="@font/comfortaa"
-                android:text="Lorem Ipsum"
-                android:textColor="@color/red"
-                android:textSize="25sp" />
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/userBio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/userFullName"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="@font/comfortaa"
-                android:text="UI/UX Designer"
-                android:textColor="@color/red"
-                android:textAlignment="center"
-                android:textSize="16sp" />
-
-            <RelativeLayout
-                android:id="@+id/rl_countDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/userBio"
-                android:layout_centerHorizontal="true">
-
-                <LinearLayout
-                    android:id="@+id/ll_posts"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/postCount_profile"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/comfortaa"
-                        android:text="0"
-                        android:textColor="@color/red"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/comfortaa"
-                        android:text="Posts"
-                        android:textColor="@color/red"
-                        android:textSize="16sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_followers"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_margin="20dp"
-                    android:layout_toEndOf="@+id/ll_posts"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/followersCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/comfortaa"
-                        android:text="0"
-                        android:textColor="@color/red"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/comfortaa"
-                        android:text="Followers"
-                        android:textColor="@color/red"
-                        android:textSize="16sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_following"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:layout_toEndOf="@id/ll_followers"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/followingCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/comfortaa"
-                        android:text="0"
-                        android:textColor="@color/red"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/comfortaa"
-                        android:text="Following"
-                        android:textColor="@color/red"
-                        android:textSize="16sp" />
-
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/briefcase" />
 
 
-            </RelativeLayout>
-
-
-            <TextView
-                android:id="@+id/pst_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rl_countDetails"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:fontFamily="@font/comfortaa"
-                android:text="Post"
-                android:textColor="@color/red"
-                android:textSize="18sp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/myPostRV"
-                android:layout_width="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/pst_txt"
-                android:layout_marginTop="11dp" />
+            </LinearLayout>
 
         </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_toStartOf="@+id/profileImage"
+            android:layout_width="50dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toEndOf="@+id/SRL_1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_centerInParent="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/linkedin" />
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>-->
+
+        <!--<RelativeLayout
+            android:id="@+id/SRL_2"
+            android:layout_width="50dp"
+            android:layout_height="200dp"
+            android:layout_toEndOf="@+id/profileImage"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="5dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/instagram" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toEndOf="@+id/SRL_2">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/twitter" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="5dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/threads" />
+
+            </LinearLayout>
+
+        </RelativeLayout>-->
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/test_img" />
+
+
+        <TextView
+            android:id="@+id/userFullName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profileImage"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/comfortaa"
+            android:text="Lorem Ipsum"
+            android:textColor="@color/red"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/userBio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userFullName"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/comfortaa"
+            android:text="UI/UX Designer"
+            android:textAlignment="center"
+            android:textColor="@color/red"
+            android:textSize="16sp" />
+
+        <RelativeLayout
+            android:id="@+id/rl_countDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userBio"
+            android:layout_centerHorizontal="true">
+
+            <LinearLayout
+                android:id="@+id/ll_posts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/postCount_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/comfortaa"
+                    android:text="0"
+                    android:textColor="@color/red"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/comfortaa"
+                    android:text="Posts"
+                    android:textColor="@color/red"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_followers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="20dp"
+                android:layout_toEndOf="@+id/ll_posts"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/totalFollowers_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/comfortaa"
+                    android:text="0"
+                    android:textColor="@color/red"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/comfortaa"
+                    android:text="Followers"
+                    android:textColor="@color/red"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_following"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_toEndOf="@id/ll_followers"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/totalFollowing_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/comfortaa"
+                    android:text="0"
+                    android:textColor="@color/red"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/comfortaa"
+                    android:text="Following"
+                    android:textColor="@color/red"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/pst_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_countDetails"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/comfortaa"
+            android:text="Post"
+            android:textColor="@color/red"
+            android:textSize="18sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/myPostRV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pst_txt"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="11dp" />
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

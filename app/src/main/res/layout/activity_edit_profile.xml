@@ -63,430 +63,584 @@
 
 
     <!--Scroll View Whole layout-->
-    <ScrollView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:layout_margin="5dp"
+        app:cardElevation="10dp">
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <!--Profile Image and Name-->
-            <RelativeLayout
-                android:id="@+id/EditName_ProfileImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal">
-
-                <LinearLayout
-                    android:id="@+id/change_ProfileImage_ll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/change_ProfileImage"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:src="@drawable/profileuser" />
-
-                    <TextView
-                        android:id="@+id/change_ProfileImage_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/comfortaa"
-                        android:text="Change Profile Image"
-                        android:textColor="@color/red"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
-
-
-
-                <LinearLayout
-                    android:id="@+id/edit_ll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:orientation="vertical"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/change_ProfileImage_ll">
-
-                    <EditText
-                        android:id="@+id/ProfileUserName_editText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/comfortaa"
-                        android:hint="Edward Larry"
-                        android:textColor="@color/red"
-                        android:backgroundTint="@color/red"
-                        android:textSize="14sp"/>
-
-                    <EditText
-                        android:id="@+id/Bio_EditText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/comfortaa"
-                        android:hint="co-founder at Larry Chemicals"
-                        android:layout_gravity="center_horizontal"
-                        android:textColor="@color/red"
-                        android:backgroundTint="@color/red"
-                        android:textSize="12sp"/>
-
-
-                </LinearLayout>
-
-
-
-            </RelativeLayout>
-
-            <!--Divider Line-->
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:src="@drawable/minus"
-                android:layout_marginBottom="10dp"
-                android:scaleType="fitXY"/>
-
-            <!--Address-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
+                <!--Profile Image and Name-->
+                <RelativeLayout
+                    android:id="@+id/EditName_ProfileImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="I'm From this cool place"
-                    android:fontFamily="@font/comfortaa"
-                    />
-
-                <EditText
-                    android:id="@+id/editTextAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/red"
-                    android:hint="Chandigarh India"
-                    android:fontFamily="@font/comfortaa"
-                    android:textSize="14dp"/>
-
-            </LinearLayout>
-
-            <!--Address-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="College"
-                    android:fontFamily="@font/comfortaa"
-                    />
-
-                <EditText
-                    android:id="@+id/ET_college"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/red"
-                    android:hint="Chandigarh University"
-                    android:fontFamily="@font/comfortaa"
-                    android:textSize="14dp"/>
-
-            </LinearLayout>
-            
-            <!--Course and Year-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Course"
-                        android:fontFamily="@font/comfortaa"
-                        />
-
-                    <EditText
-                        android:id="@+id/ET_course"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:backgroundTint="@color/red"
-                        android:hint="BE"
-                        android:fontFamily="@font/comfortaa"
-                        android:textSize="14sp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Branch"
-                        android:fontFamily="@font/comfortaa"
-                        />
-
-                    <EditText
-                        android:id="@+id/editTextBatch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:backgroundTint="@color/red"
-                        android:hint="CSE"
-                        android:fontFamily="@font/comfortaa"
-                        android:textSize="14sp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Year"
-                        android:fontFamily="@font/comfortaa"
-                        />
-
-                    <EditText
-                        android:id="@+id/editTextYear"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:backgroundTint="@color/red"
-                        android:hint="2016"
-                        android:fontFamily="@font/comfortaa"
-                        android:textSize="14sp"/>
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <!--Relationship-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Relationship Status"
-                        android:fontFamily="@font/comfortaa"
-                        />
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal">
 
                     <LinearLayout
+                        android:id="@+id/change_ProfileImage_ll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/change_ProfileImage"
+                            android:layout_width="65dp"
+                            android:layout_height="65dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:src="@drawable/profileuser" />
+
+                        <TextView
+                            android:id="@+id/change_ProfileImage_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/comfortaa"
+                            android:text="Change Profile Image"
+                            android:textColor="@color/red"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+
+
+                    <LinearLayout
+                        android:id="@+id/edit_ll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:orientation="vertical"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/change_ProfileImage_ll">
+
+                        <EditText
+                            android:id="@+id/ProfileUserName_editText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/comfortaa"
+                            android:hint="Edward Larry"
+                            android:textColor="@color/red"
+                            android:backgroundTint="@color/red"
+                            android:textSize="14sp"/>
+
+                        <EditText
+                            android:id="@+id/Bio_EditText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/comfortaa"
+                            android:hint="co-founder at Larry Chemicals"
+                            android:layout_gravity="center_horizontal"
+                            android:textColor="@color/red"
+                            android:backgroundTint="@color/red"
+                            android:textSize="12sp"/>
+
+
+                    </LinearLayout>
+
+
+
+                </RelativeLayout>
+
+                <!--Divider Line-->
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:src="@drawable/minus"
+                    android:layout_marginBottom="10dp"
+                    android:scaleType="fitXY"/>
+
+                <!--Address-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="I'm From this cool place"
+                        android:fontFamily="@font/comfortaa"
+                        />
+
+                    <EditText
+                        android:id="@+id/editTextAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:backgroundTint="@color/red"
+                        android:hint="Chandigarh India"
+                        android:fontFamily="@font/comfortaa"
+                        android:textSize="14dp"/>
 
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/edit_single"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:text="Single"
-                            android:layout_margin="5dp"
-                            android:background="@color/white"
-                            android:textAllCaps="false"
-                            android:textColor="@color/red"
-                            android:elevation="5dp"
+                </LinearLayout>
+
+                <!--Address-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="College"
+                        android:fontFamily="@font/comfortaa"
+                        />
+
+                    <EditText
+                        android:id="@+id/ET_college"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/red"
+                        android:hint="Chandigarh University"
+                        android:fontFamily="@font/comfortaa"
+                        android:textSize="14dp"/>
+
+                </LinearLayout>
+
+                <!--Course and Year-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Course"
                             android:fontFamily="@font/comfortaa"
                             />
 
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/edit_mingle"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:layout_margin="5dp"
-                            android:text="Mingle"
-                            android:background="@color/white"
-                            android:textAllCaps="false"
-                            android:textColor="@color/red"
-                            android:elevation="5dp"
+                        <EditText
+                            android:id="@+id/ET_course"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:backgroundTint="@color/red"
+                            android:hint="BE"
+                            android:fontFamily="@font/comfortaa"
+                            android:textSize="14sp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Branch"
                             android:fontFamily="@font/comfortaa"
                             />
 
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/edit_crush"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:layout_margin="5dp"
-                            android:text="Have a Crush"
-                            android:background="@color/white"
-                            android:textAllCaps="false"
-                            android:textColor="@color/red"
-                            android:elevation="5dp"
+                        <EditText
+                            android:id="@+id/editTextBatch"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:backgroundTint="@color/red"
+                            android:hint="CSE"
+                            android:fontFamily="@font/comfortaa"
+                            android:textSize="14sp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Year"
                             android:fontFamily="@font/comfortaa"
                             />
+
+                        <EditText
+                            android:id="@+id/editTextYear"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:backgroundTint="@color/red"
+                            android:hint="2016"
+                            android:fontFamily="@font/comfortaa"
+                            android:textSize="14sp"/>
 
                     </LinearLayout>
 
 
                 </LinearLayout>
 
-
-            </LinearLayout>
-
-            <!--Gender-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
+                <!--Relationship-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="My Gender is"
-                        android:fontFamily="@font/comfortaa"
-                        />
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
 
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/edit_gender_male"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:text="Male"
-                            android:layout_margin="5dp"
-                            android:background="@color/white"
-                            android:textAllCaps="false"
-                            android:textColor="@color/red"
-                            android:elevation="5dp"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Relationship Status"
                             android:fontFamily="@font/comfortaa"
                             />
 
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/edit_gender_female"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:layout_margin="5dp"
-                            android:text="Female"
-                            android:background="@color/white"
-                            android:textAllCaps="false"
-                            android:textColor="@color/red"
-                            android:elevation="5dp"
-                            android:fontFamily="@font/comfortaa"
-                            />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/edit_gender_other"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:layout_margin="5dp"
-                            android:text="Other"
-                            android:background="@color/white"
-                            android:textAllCaps="false"
-                            android:textColor="@color/red"
-                            android:elevation="5dp"
-                            android:fontFamily="@font/comfortaa"
-                            />
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/edit_single"
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_weight="1"
+                                android:text="Single"
+                                android:layout_margin="5dp"
+                                android:background="@color/white"
+                                android:textAllCaps="false"
+                                android:textColor="@color/red"
+                                android:elevation="5dp"
+                                android:fontFamily="@font/comfortaa"
+                                />
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/edit_mingle"
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_weight="1"
+                                android:layout_margin="5dp"
+                                android:text="Mingle"
+                                android:background="@color/white"
+                                android:textAllCaps="false"
+                                android:textColor="@color/red"
+                                android:elevation="5dp"
+                                android:fontFamily="@font/comfortaa"
+                                />
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/edit_crush"
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_weight="1"
+                                android:layout_margin="5dp"
+                                android:text="Have a Crush"
+                                android:background="@color/white"
+                                android:textAllCaps="false"
+                                android:textColor="@color/red"
+                                android:elevation="5dp"
+                                android:fontFamily="@font/comfortaa"
+                                />
+
+                        </LinearLayout>
+
 
                     </LinearLayout>
 
 
                 </LinearLayout>
 
+                <!--Gender-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="My Gender is"
+                            android:fontFamily="@font/comfortaa"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/edit_gender_male"
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_weight="1"
+                                android:text="Male"
+                                android:layout_margin="5dp"
+                                android:background="@color/white"
+                                android:textAllCaps="false"
+                                android:textColor="@color/red"
+                                android:elevation="5dp"
+                                android:fontFamily="@font/comfortaa"
+                                />
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/edit_gender_female"
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_weight="1"
+                                android:layout_margin="5dp"
+                                android:text="Female"
+                                android:background="@color/white"
+                                android:textAllCaps="false"
+                                android:textColor="@color/red"
+                                android:elevation="5dp"
+                                android:fontFamily="@font/comfortaa"
+                                />
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/edit_gender_other"
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_weight="1"
+                                android:layout_margin="5dp"
+                                android:text="Other"
+                                android:background="@color/white"
+                                android:textAllCaps="false"
+                                android:textColor="@color/red"
+                                android:elevation="5dp"
+                                android:fontFamily="@font/comfortaa"
+                                />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <!--Experience-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="I've Experience in"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/comfortaa"/>
+                <EditText
+                    android:id="@+id/editText_experience"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_margin="10dp"
+                    android:autofillHints="auto"
+                    android:hint="Content Writing, UI Designing(use ',' to seperate)"
+                    android:textSize="14sp"
+                    android:padding="5dp"
+                    android:background="@drawable/edit_text_faculty_bg"/>
+
+                <!--Skills-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="My Skills are"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/comfortaa"/>
+                <EditText
+                    android:id="@+id/editText_skills"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_margin="10dp"
+                    android:hint="Graphic Designing, Photoshop, Animation(use ',' to seperate), Illustration"
+                    android:textSize="14sp"
+                    android:padding="5dp"
+                    android:background="@drawable/edit_text_faculty_bg"
+                    android:autofillHints="auto" />
+
+                <!--Social Links Edit Text-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="GitHub Link"
+                        android:fontFamily="@font/comfortaa"
+                        />
+
+                    <EditText
+                        android:id="@+id/ET_github"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/red"
+                        android:hint="https://"
+                        android:fontFamily="@font/comfortaa"
+                        android:textSize="14dp"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Linkedin Profile"
+                        android:fontFamily="@font/comfortaa"
+                        />
+
+                    <EditText
+                        android:id="@+id/ET_linkedin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/red"
+                        android:hint="http://"
+                        android:fontFamily="@font/comfortaa"
+                        android:textSize="14dp"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Portfolio Link"
+                        android:fontFamily="@font/comfortaa"
+                        />
+
+                    <EditText
+                        android:id="@+id/ET_portfolio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/red"
+                        android:hint="Chandigarh University"
+                        android:fontFamily="@font/comfortaa"
+                        android:textSize="14dp"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Instagram"
+                        android:fontFamily="@font/comfortaa"
+                        />
+
+                    <EditText
+                        android:id="@+id/ET_instagram"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/red"
+                        android:hint="https://"
+                        android:fontFamily="@font/comfortaa"
+                        android:textSize="14dp"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Twitter"
+                        android:fontFamily="@font/comfortaa"
+                        />
+
+                    <EditText
+                        android:id="@+id/ET_twitter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/red"
+                        android:hint="https://"
+                        android:fontFamily="@font/comfortaa"
+                        android:textSize="14dp"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Threads"
+                        android:fontFamily="@font/comfortaa"
+                        />
+
+                    <EditText
+                        android:id="@+id/ET_threads"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/red"
+                        android:hint="https://"
+                        android:fontFamily="@font/comfortaa"
+                        android:textSize="14dp"/>
+
+                </LinearLayout>
+
+
 
             </LinearLayout>
 
-            <!--Experience-->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="I've Experience in"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/comfortaa"/>
-            
-            <EditText
-                android:id="@+id/editText_experience"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_margin="10dp"
-                android:autofillHints="auto"
-                android:hint="Content Writing, UI Designing(use ',' to seperate)"
-                android:textSize="14sp"
-                android:padding="5dp"
-                android:background="@drawable/edit_text_faculty_bg"/>
 
-            <!--Skills-->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="My Skills are"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/comfortaa"/>
+        </ScrollView>
 
-            <EditText
-                android:id="@+id/editText_skills"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_margin="10dp"
-                android:hint="Graphic Designing, Photoshop, Animation(use ',' to seperate), Illustration"
-                android:textSize="14sp"
-                android:padding="5dp"
-                android:background="@drawable/edit_text_faculty_bg"
-                android:autofillHints="auto" />
-                
-            
-        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
-
-    </ScrollView>
 
 </LinearLayout>

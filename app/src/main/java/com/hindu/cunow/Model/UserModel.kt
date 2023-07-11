@@ -26,4 +26,13 @@ class UserModel {
     val confessionVisited:Boolean = false
     val facultY:Boolean =false
 
+    //Social Links
+    val threads:String? = null
+    val twitter:String? = null
+    val instagram:String? = null
+    val linkedin:String? = null
+    val portfolio:String? = null
+    val githubLink:String? = null
+
+
 }

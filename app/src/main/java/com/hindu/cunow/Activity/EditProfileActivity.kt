@@ -134,6 +134,12 @@ class EditProfileActivity : AppCompatActivity() {
         dataMap["crush"] = relation == "crush"
         dataMap["college"] = ET_college.text.toString()
         dataMap["course"] = ET_course.text.toString()
+        dataMap["githubLink"] = ET_github.text.toString()
+        dataMap["linkedin"] = ET_linkedin.text.toString()
+        dataMap["portfolio"] = ET_portfolio.text.toString()
+        dataMap["instagram"] = ET_instagram.text.toString()
+        dataMap["twitter"] = ET_twitter.text.toString()
+        dataMap["threads"] = ET_threads.text.toString()
 
         databaseRef.child(FirebaseAuth.getInstance().currentUser!!.uid)
             .updateChildren(dataMap)
@@ -218,6 +224,13 @@ class EditProfileActivity : AppCompatActivity() {
                     editText_skills.setText(users.skills)
                     editText_experience.setText(users.experience)
                     ET_college.setText(users.college)
+                    ET_github.setText(users.githubLink)
+                    ET_linkedin.setText(users.linkedin)
+                    ET_portfolio.setText(users.portfolio)
+                    ET_instagram.setText(users.instagram)
+                    ET_twitter.setText(users.twitter)
+                    ET_threads.setText(users.threads)
+
                     if (users.male) {
                         checker ="male"
                         edit_gender_male.setBackgroundColor(resources.getColor(R.color.red))

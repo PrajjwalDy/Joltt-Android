@@ -1,9 +1,7 @@
 package com.hindu.cunow.Fragments
 
-import android.app.Dialog
 import android.content.Context
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,12 +20,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.hindu.cunow.Activity.AboutMeTabsActivity
 import com.hindu.cunow.Activity.EditProfileActivity
 import com.hindu.cunow.Activity.SettingActivity
-import com.hindu.cunow.Activity.ShowUsersActivity
 import com.hindu.cunow.Adapter.MyPostAdapter
-import com.hindu.cunow.Adapter.PostAdapter
 import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
@@ -76,7 +71,7 @@ class ProfileFragment : Fragment() {
             launch { getPostCount() }
         }
 
-        root.followersCount.setOnClickListener {
+        root.totalFollowers_user.setOnClickListener {
             val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
             pref!!.putString("uid",FirebaseAuth.getInstance().currentUser!!.uid)
             pref.putString("title","Followers")
@@ -84,7 +79,7 @@ class ProfileFragment : Fragment() {
             Navigation.findNavController(root).navigate(R.id.action_navigation_profile_to_showUserFragment)
         }
 
-        root.followingCount.setOnClickListener {
+        root.totalFollowing_user.setOnClickListener {
             val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
             pref!!.putString("uid",FirebaseAuth.getInstance().currentUser!!.uid)
             pref.putString("title","Following")
@@ -153,7 +148,7 @@ class ProfileFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     val count = snapshot.childrenCount.toInt()
-                    root.followersCount.text = count.toString()
+                    root.totalFollowers_user.text = count.toString()
                 }
             }
 
@@ -171,7 +166,7 @@ class ProfileFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     val count = snapshot.childrenCount.toInt()-1
-                    root.followingCount.text = count.toString()
+                    root.totalFollowing_user.text = count.toString()
                 }
             }
 
@@ -203,7 +198,6 @@ class ProfileFragment : Fragment() {
 
         })
     }
-
     private fun addButtonClicked(){
         setVisibility(clicked)
         setAnimation(clicked)
@@ -251,5 +245,7 @@ class ProfileFragment : Fragment() {
 
         })
     }
+
+    //User Post init function
 
 }
