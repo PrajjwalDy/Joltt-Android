@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.hindu.cunow.MainActivity
@@ -23,14 +24,14 @@ class VerifyActivity : AppCompatActivity() {
         val firebaseUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
         val user = FirebaseAuth.getInstance().currentUser
 
-        proceed_to_verification.setOnClickListener {
+        proceed_to_verification.setOnClickListener {view->
 
             FirebaseAuth.getInstance().currentUser?.reload()?.addOnCompleteListener { task->
                 if (firebaseUser!!.isEmailVerified){
                     val intent = Intent(this@VerifyActivity, InterestActivity::class.java)
                     startActivity(intent)
                 }else{
-                    Toast.makeText(this, "UID isn't verified yet!",Toast.LENGTH_SHORT).show()
+                    Snackbar.make(this,view,"Email isn't verified yet!", Snackbar.LENGTH_LONG).show()
                 }
 
             }

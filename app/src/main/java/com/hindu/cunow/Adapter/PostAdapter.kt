@@ -63,6 +63,14 @@ class PostAdapter (private val mContext: Context,
                    private val mPost:List<PostModel>,
                    ):RecyclerView.Adapter<PostAdapter.ViewHolder>()
 {
+
+    private var posts: List<PostModel> = emptyList()
+
+    fun setPosts(filteredPosts: List<PostModel>) {
+        posts = filteredPosts
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(mContext).inflate(R.layout.post_layout,parent,false)
         return ViewHolder(view)

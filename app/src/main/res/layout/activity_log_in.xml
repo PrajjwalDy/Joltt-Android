@@ -8,14 +8,26 @@
 
     tools:context=".Activity.LogInActivity">
 
-
-    <ImageView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/welcome_back"
-        android:layout_marginTop="-140dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"/>
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/welcome_back"
+            android:layout_marginTop="-140dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"/>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:src="@drawable/campus_logo"
+            android:layout_margin="10dp"/>
+
+    </RelativeLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,14 +77,6 @@
 
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="theCampus"
-            android:layout_gravity="center_horizontal"
-            android:textSize="35dp"
-            android:fontFamily="@font/comfortaa"
-            android:textColor="@color/red"/>
 
         <TextView
             android:id="@+id/forget_password_txt"

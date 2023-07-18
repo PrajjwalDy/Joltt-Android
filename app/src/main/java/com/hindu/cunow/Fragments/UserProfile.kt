@@ -54,6 +54,8 @@ class UserProfile : Fragment() {
     private var postAdapter: MyPostAdapter? = null
     private var mPost:MutableList<PostModel>? = null
 
+
+
     //Animations
     private val rotateOpen: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_open_anim) }
     private val rotateClose: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_close_anim) }

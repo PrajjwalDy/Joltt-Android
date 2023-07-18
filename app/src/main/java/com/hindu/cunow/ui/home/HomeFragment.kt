@@ -24,14 +24,17 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.GenericTypeIndicator
 import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Activity.AddPostActivity
 import com.hindu.cunow.Activity.AddVibesAcitvity
 import com.hindu.cunow.Activity.VideoUploadActivity
+import com.hindu.cunow.Adapter.PageAdapter
 import com.hindu.cunow.Adapter.PostAdapter
 import com.hindu.cunow.Fragments.Circle.CircleTabActivity
 import com.hindu.cunow.Model.DevMessageModel
 import com.hindu.cunow.Model.PostModel
+import com.hindu.cunow.Model.UserInterest
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.FragmentHomeBinding
@@ -54,6 +57,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private var clicked = false
+    private var postList: MutableList<PostModel>? = null
 
     private val rotateOpen: Animation by lazy {
         AnimationUtils.loadAnimation(
@@ -79,26 +83,13 @@ class HomeFragment : Fragment() {
             R.anim.to_bottom_anim
         )
     }
-    private val toInvisibility: Animation by lazy {
-        AnimationUtils.loadAnimation(
-            context,
-            R.anim.hide_appbar
-        )
-    }
-    private val toVisibility: Animation by lazy {
-        AnimationUtils.loadAnimation(
-            context,
-            R.anim.unhide_appbar
-        )
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -106,7 +97,7 @@ class HomeFragment : Fragment() {
 
         homeViewModel.postModel!!.observe(viewLifecycleOwner, Observer {
             initView(root)
-            postAdapter = context?.let { it1 -> PostAdapter(it1, it as List<PostModel>) }
+            postAdapter = context?.let { it1-> PostAdapter(it1,it) }
             recyclerView!!.adapter = postAdapter
             postAdapter!!.notifyDataSetChanged()
 
@@ -117,10 +108,12 @@ class HomeFragment : Fragment() {
             launch { developerMessage() }
         }
 
+        //first time visit
         root.imin.setOnClickListener {
             updateVisit(root)
         }
 
+        //Welcome Menu
         root.people_welcome.setOnClickListener {
             Navigation.findNavController(root)
                 .navigate(R.id.action_navigation_home_to_peopleFragment)
@@ -131,15 +124,13 @@ class HomeFragment : Fragment() {
                 .navigate(R.id.action_navigation_home_to_confessionRoomFragment)
         }
 
-        root.circle_welcome.setOnClickListener {
-            val intent = Intent(context, CircleTabActivity::class.java)
-            startActivity(intent)
-        }
 
+        //Close Developer Message
         root.closeMessage_btn.setOnClickListener {
             root.developerMessage_CV.visibility = View.GONE
         }
 
+        //Create Post Floating Action Button
         root.create_post_fab.setOnClickListener {
             addButtonClicked()
         }
@@ -153,34 +144,33 @@ class HomeFragment : Fragment() {
         }
 
         root.add_text.setOnClickListener {
-            val dialogView =
-                LayoutInflater.from(context).inflate(R.layout.add_only_text_dialog, null)
+            root.onlyText_CV.visibility = View.VISIBLE
+        }
 
-            val dialogBuilder = AlertDialog.Builder(context)
-                .setView(dialogView)
+        root.uploadTextBtn.setOnClickListener {
+            if (addText_ET.text.isEmpty()) {
+                Toast.makeText(context, "Please Write something", Toast.LENGTH_SHORT).show()
+            } else {
+                val dataRef = FirebaseDatabase.getInstance().reference.child("Post")
+                val postId = dataRef.push().key
+                val dataMap = HashMap<String, Any>()
 
-            val alertDialog = dialogBuilder.show()
-
-            dialogView.post_onlyText.setOnClickListener {
-                if (dialogView.addText_ET.text.isEmpty()) {
-                    Toast.makeText(context, "Please Write something", Toast.LENGTH_SHORT).show()
-                } else {
-                    val dataRef = FirebaseDatabase.getInstance().reference.child("Post")
-                    val postId = dataRef.push().key
-                    val dataMap = HashMap<String, Any>()
-
-                    dataMap["postId"] = postId!!
-                    dataMap["caption"] = dialogView.addText_ET.text.toString()
-                    dataMap["publisher"] = FirebaseAuth.getInstance().currentUser!!.uid
-                    dataMap["iImage"] = false
-                    dataMap["video"] = false
-                    dataMap["page"] = false
-                    dataMap["public"] = false
-                    dataRef.child(postId).updateChildren(dataMap)
-                    Toast.makeText(context, "Post add successfully", Toast.LENGTH_SHORT).show()
-                }
-                alertDialog.dismiss()
+                dataMap["postId"] = postId!!
+                dataMap["caption"] = addText_ET.text.toString()
+                dataMap["publisher"] = FirebaseAuth.getInstance().currentUser!!.uid
+                dataMap["iImage"] = false
+                dataMap["video"] = false
+                dataMap["page"] = false
+                dataMap["public"] = false
+                dataRef.child(postId).updateChildren(dataMap)
+                Toast.makeText(context, "Post add successfully", Toast.LENGTH_SHORT).show()
+                root.onlyText_CV.visibility = View.GONE
             }
+
+        }
+
+        root.closeOnlyText.setOnClickListener {
+            root.onlyText_CV.visibility = View.GONE
         }
 
         return root
@@ -209,24 +199,6 @@ class HomeFragment : Fragment() {
         //loadUserImage(root)
         recyclerView!!.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
-            /*override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-                if(dy >=0 && appBar_HomeFragment.visibility == View.VISIBLE){
-                    //create_post_fab.startAnimation(toInvisibility)
-                    //root.create_post_fab.visibility = View.GONE
-                    appBar_HomeFragment.startAnimation(toInvisibility)
-                    appBar_HomeFragment.visibility = View.GONE
-
-                }else if(dy<=0  && appBar_HomeFragment.visibility == View.GONE){
-                    //create_post_fab.startAnimation(toVisibility)
-                    //root.create_post_fab.visibility = View.VISIBLE
-                    appBar_HomeFragment.startAnimation(toVisibility)
-                    appBar_HomeFragment.visibility = View.VISIBLE
-                }
-            }*/
-
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
@@ -238,6 +210,26 @@ class HomeFragment : Fragment() {
         })
 
     }
+
+    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val userId = FirebaseAuth.getInstance().currentUser!!.uid
+
+        val userInterestsRef = FirebaseDatabase.getInstance().getReference("UserInterest")
+            .child(userId)
+
+        userInterestsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val interestsList = snapshot.getValue(object : GenericTypeIndicator<List<String>>() {})
+                val userInterests = UserInterest(interestsList ?: emptyList())
+                homeViewModel.setUserInterests(userInterests)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle the error
+            }
+        })
+    }*/
 
     private suspend fun checkFirstVisit() {
         val dataRef = FirebaseDatabase

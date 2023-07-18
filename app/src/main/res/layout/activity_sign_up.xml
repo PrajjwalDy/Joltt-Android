@@ -16,18 +16,31 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:src="@drawable/signup_header"
+                android:layout_height="wrap_content">
 
-                />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/signup_header"
+
+                    />
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/campus_logo"
+                    android:layout_margin="10dp"/>
+
+            </RelativeLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="543dp"
                 android:layout_marginTop="-10dp"
                 android:background="@drawable/ocean_green_bg"
                 android:orientation="vertical">
@@ -92,17 +105,6 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="-20dp"
-                    android:fontFamily="@font/comfortaa"
-                    android:text="theCampus"
-                    android:textColor="@color/red"
-                    android:textSize="35dp"
-
-                    />
 
                 <TextView
                     android:id="@+id/logInAccount_text"
@@ -131,8 +133,6 @@
 
             </LinearLayout>
 
-
-
             <TextView
                 android:id="@+id/tnc_SignUP"
                 android:layout_width="wrap_content"
@@ -144,10 +144,6 @@
                 android:textColor="@color/teal_200"
                 android:visibility="gone"
                 android:textSize="15dp" />
-
-
-
-
 
 
         </LinearLayout>

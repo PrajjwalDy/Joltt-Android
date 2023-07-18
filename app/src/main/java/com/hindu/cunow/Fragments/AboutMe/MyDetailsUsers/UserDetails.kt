@@ -207,8 +207,8 @@ class UserDetails : Fragment() {
                         root.genderImage_user.setImageResource(R.drawable.female)
                         gender_txt_user.text = "Female"
                         if (users.single) {
-                            root.RS_Image_profile.setImageResource(R.drawable.single)
-                            root.relation_txt.text = "Single"
+                            root.RS_Image_user.setImageResource(R.drawable.single)
+                            root.relation_txt_user.text = "Single"
                         } else if (users.committed) {
                             root.RS_Image_user.setImageResource(R.drawable.com_female)
                             root.relation_txt_user.text = "Committed"

@@ -12,23 +12,36 @@ import com.bumptech.glide.Glide
 import com.hindu.cunow.Model.AbroadModel
 import com.hindu.cunow.R
 
-class AbroadAdapter(private val mContext: Context,
-                    private val mList:List<AbroadModel>):RecyclerView.Adapter<AbroadAdapter.ViewHolder>() {
+class AbroadAdapter(
+    private val mContext: Context,
+    private val mList: MutableList<AbroadModel>
+) : RecyclerView.Adapter<AbroadAdapter.ViewHolder>() {
 
-                        inner class ViewHolder(@NonNull itemView: View):RecyclerView.ViewHolder(itemView){
-                            val abrImage:ImageView = itemView.findViewById(R.id.abr_image)
-                            val title:TextView = itemView.findViewById(R.id.abroad_title) as TextView
-                            val description:TextView = itemView.findViewById(R.id.abroad_description) as TextView
+    inner class ViewHolder(@NonNull itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val programName: TextView = itemView.findViewById(R.id.abroad_title) as TextView
+        val description: TextView = itemView.findViewById(R.id.abroad_description) as TextView
+        val instituteName: TextView = itemView.findViewById(R.id.instituteName) as TextView
+        val country: TextView = itemView.findViewById(R.id.country) as TextView
+        val classMode: TextView = itemView.findViewById(R.id.classMode) as TextView
+        val degree: TextView = itemView.findViewById(R.id.programFor) as TextView
 
-                            fun bind(list:AbroadModel){
-                                title.text = list.abroadTitle
-                                description.text = list.abroadDetails
-                                Glide.with(mContext).load(list.abroadImage).into(abrImage)
-                            }
-                        }
+        fun bind(list: AbroadModel) {
+            programName.text = list.programName
+            description.text = list.prgramDes
+            instituteName.text = list.instituteName
+            country.text = list.country
+            classMode.text = list.classMode
+            degree.text = list.degree
+        }
+    }
+
+    fun setData(newData: List<AbroadModel>) {
+        mList.clear()
+        mList.addAll(newData)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(mContext).inflate(R.layout.abroad_item_layout,parent,false)
+        val view = LayoutInflater.from(mContext).inflate(R.layout.abroad_item_layout, parent, false)
         return ViewHolder(view)
     }
 

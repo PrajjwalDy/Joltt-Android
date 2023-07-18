@@ -14,17 +14,15 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel(), IPostCallback {
+class HomeViewModel() : ViewModel(), IPostCallback {
 
-    private var postLiveData:MutableLiveData<List<PostModel>>? = null
-
-    var followingList:MutableList<String>? = null
-    var pageList:MutableList<String>? = null
+    private var postLiveData: MutableLiveData<List<PostModel>>? = null
+    var followingList: MutableList<String>? = null
+    var pageList: MutableList<String>? = null
+    var userInterest: MutableList<String>? = mutableListOf()
+    var tagList = mutableListOf<String>()
     private val postLoadCallback: IPostCallback = this
     private var messageError: MutableLiveData<String>? = null
-    var lastLoadedKey: String? = null
-    var loading = false
-
 
     val postModel: MutableLiveData<List<PostModel>>?
         get() {
@@ -33,8 +31,9 @@ class HomeViewModel : ViewModel(), IPostCallback {
                 messageError = MutableLiveData()
 
                 viewModelScope.launch(Dispatchers.IO) {
-                    pageList()
-                    checkFollowing()
+                     loadUserInterestFromFirebase()
+                     pageList()
+                     checkFollowing()
                 }
             }
             return postLiveData
@@ -42,14 +41,13 @@ class HomeViewModel : ViewModel(), IPostCallback {
         }
 
 
-
     private suspend fun loadPost() {
-        val postList=ArrayList<PostModel>()
+        var postList = ArrayList<PostModel>()
         val dataReference = FirebaseDatabase.getInstance().reference.child("Post")
-        dataReference.addValueEventListener(object:ValueEventListener{
+        dataReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 postList.clear()
-                for (snapshot in snapshot.children){
+                for (snapshot in snapshot.children) {
                     val postModel = snapshot.getValue<PostModel>(PostModel::class.java) as PostModel
                     for (id in (followingList as ArrayList<String>)){
                         if (postModel.publisher == id){
@@ -62,32 +60,42 @@ class HomeViewModel : ViewModel(), IPostCallback {
                         }
                     }
 
+                    val userInterestsString = userInterest!!.joinToString("#")
+                    val caption = postModel.caption!!.trim{ it <= ' '}
+                    val feedTags = caption.split(" ")
+                    for (tag in feedTags) {
+                        if (tag.startsWith("#")){
+                            if (userInterestsString.contains(tag)) {
+                                postList.add(postModel)
+                                break
+                            }
+                        }
+                    }
                 }
+                postList = postList.distinct() as ArrayList<PostModel>
                 postLoadCallback.onPostPCallbackLoadSuccess(postList)
             }
 
             override fun onCancelled(error: DatabaseError) {
                 postLoadCallback.onPostCallbackLoadFailed(error.message)
             }
-
-
-
         })
         dataReference.keepSynced(true)
     }
 
-    private suspend fun checkFollowing(){
+    //CHECK FOLLOWING
+    private suspend fun checkFollowing() {
         followingList = ArrayList()
 
         val userDataRef = FirebaseDatabase.getInstance().reference.child("Follow")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
             .child("Following")
-        userDataRef.addValueEventListener(object :ValueEventListener{
+        userDataRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
                     (followingList as ArrayList<String>).clear()
 
-                    for (snapshot in snapshot.children){
+                    for (snapshot in snapshot.children) {
                         snapshot.key?.let { (followingList as ArrayList<String>).add(it) }
                     }
                     CoroutineScope(Dispatchers.IO).launch {
@@ -95,6 +103,7 @@ class HomeViewModel : ViewModel(), IPostCallback {
                     }
                 }
             }
+
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
@@ -103,41 +112,17 @@ class HomeViewModel : ViewModel(), IPostCallback {
         userDataRef.keepSynced(true)
     }
 
-    /*private fun loadPagePost(){
-        val postList=ArrayList<PostModel>()
-        val dataReference = FirebaseDatabase.getInstance().reference.child("Post")
-        dataReference.addValueEventListener(object:ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                postList.clear()
-                for (snapshot in snapshot.children){
-                    val postModel = snapshot.getValue<PostModel>(PostModel::class.java) as PostModel
-                    for (id in (pageList as ArrayList<String>)){
-                        if (postModel.publisher == id){
-                            postList.add(postModel)
-                        }
-                    }
-                }
-                postLoadCallback.onPostPCallbackLoadSuccess(postList)
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                postLoadCallback.onPostCallbackLoadFailed(error.message)
-            }
-
-        })
-    }*/
-
-    private suspend fun pageList(){
+    private suspend fun pageList() {
         pageList = ArrayList()
         val data = FirebaseDatabase.getInstance().reference.child("Users")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
             .child("FollowingPages")
 
-        data.addValueEventListener(object :ValueEventListener{
+        data.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
                     (pageList as ArrayList<String>).clear()
-                    for (snapshot in snapshot.children){
+                    for (snapshot in snapshot.children) {
                         snapshot.key?.let { (pageList as ArrayList<String>).add(it) }
                         //loadPagePost()
                     }
@@ -151,6 +136,33 @@ class HomeViewModel : ViewModel(), IPostCallback {
         })
     }
 
+    //New Filtration Function
+    private fun loadUserInterestFromFirebase() {
+        val userInterestRef = FirebaseDatabase
+            .getInstance()
+            .getReference("UserInterest")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+        userInterestRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                userInterest!!.clear()
+                for (interestSnapshot in dataSnapshot.children) {
+                    val interest = interestSnapshot.getValue(String::class.java)
+                    if (interest != null) {
+                        userInterest!!.add(interest)
+                    }
+                }
+                CoroutineScope(Dispatchers.IO).launch{
+                    loadPost()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // TODO: Handle error
+            }
+        })
+    }
+
+
 
 
     override fun onPostCallbackLoadFailed(str: String) {
@@ -162,6 +174,5 @@ class HomeViewModel : ViewModel(), IPostCallback {
         val mutableLiveData = postLiveData
         mutableLiveData!!.value = list
     }
-
 
 }

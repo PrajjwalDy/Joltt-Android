@@ -5,79 +5,86 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/red"
     tools:context=".Activity.VerifyActivity">
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:src="@drawable/campus_logo"
+        android:layout_margin="10dp"/>
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to CUNow"
+        android:text="Verify your Email"
         android:layout_gravity="center"
-        android:layout_marginTop="100dp"
-        android:textSize="25dp"
-        android:fontFamily="@font/amiko"
+        android:textSize="20dp"
+        android:fontFamily="@font/comfortaa"
         android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="@color/vivaMagenta"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/mail_message"
-        android:textColor="@color/white"
-        android:textAlignment="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="5dp"
-        android:fontFamily="@font/amiko"
-        android:layout_marginEnd="5dp"
-        />
-
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:src="@drawable/junk_folder"
-            android:layout_margin="5dp"
-            android:layout_gravity="center_horizontal"/>
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="15dp">
 
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="80dp"
-            android:src="@drawable/mail_image"
-            android:layout_marginStart="-20dp"
-            android:layout_gravity="center_horizontal|center_vertical"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                app:lottie_rawRes="@raw/animation_mail_sent"
+                app:lottie_autoPlay="true"
+                android:layout_gravity="center_horizontal"
+                app:lottie_loop="true"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/proceed_to_verification"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:text="Refresh"
-        android:textColor="@color/red"
-        android:textStyle="bold"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/usernamr_password_bg"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:text="H.I.N.D.U Production"
-        android:fontFamily="@font/amiko"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="100dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mail_message"
+                android:textAlignment="center"
+                android:textColor="@color/red"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/comfortaa"
+                android:layout_marginEnd="5dp"
+                />
 
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/proceed_to_verification"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:text="Refresh"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:fontFamily="@font/comfortaa"
+                android:layout_marginTop="150dp"
+                android:background="@drawable/rounded_corner_green"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="H.I.N.D.U"
+                android:fontFamily="@font/comfortaa"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"/>
+
+
+        </LinearLayout>
 
 
 
+    </androidx.cardview.widget.CardView>
 
 
 </LinearLayout>

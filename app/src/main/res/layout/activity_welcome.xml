@@ -18,6 +18,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
+            android:elevation="15dp"
             android:src="@drawable/welcome_image" />
 
     </RelativeLayout>
@@ -58,7 +59,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="70dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:orientation="horizontal">

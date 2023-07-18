@@ -14,4 +14,5 @@ class PostModel {
     val page:Boolean = false
     val pageAdmin:String? = null
     val pageName:String? = null
+    //val postTags: List<String>? = null
 }

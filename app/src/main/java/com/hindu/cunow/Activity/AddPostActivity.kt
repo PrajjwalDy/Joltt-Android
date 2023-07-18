@@ -132,6 +132,31 @@ class AddPostActivity : AppCompatActivity() {
                 ref.child(postId).updateChildren(postMap)
                 //saveTags(postId)
                 buildHasTag(postId)
+
+                //extracting and saving tags in post node
+
+                val sentence = caption_image.text.toString().trim{ it <= ' '}
+                val words = sentence.split(" ")
+
+                // Initialize an empty list of hashtags
+                val hashtags = mutableListOf<String>()
+
+                // Extract hashtags from the words
+                for (word in words) {
+                    if (word.startsWith("#")) {
+                        hashtags.add(word)
+                    }
+                }
+
+                for (hashtag in hashtags) {
+                    val key = hashtag.toString().removeRange(0,1)
+                    ref.child(postId).child("postTags").child(key).setValue(key)
+                }
+
+
+                ///end
+
+
                 Toast.makeText(this,"Image shared successfully",Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this@AddPostActivity,MainActivity::class.java))
                 finish()

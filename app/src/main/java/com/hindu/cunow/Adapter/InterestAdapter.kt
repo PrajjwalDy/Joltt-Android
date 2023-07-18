@@ -20,18 +20,22 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.jsoup.select.Evaluator.Id
 
-class InterestAdapter(private val mContext: Context,
-                      private val mInterest:List<InterestModel>):RecyclerView.Adapter<InterestAdapter.ViewHolder>() {
+class InterestAdapter(
+    private val mContext: Context,
+    private val mInterest: List<InterestModel>
+) : RecyclerView.Adapter<InterestAdapter.ViewHolder>() {
 
-                          inner class ViewHolder(@NonNull itemView:View):RecyclerView.ViewHolder(itemView){
-                               val interest: TextView = itemView.findViewById(R.id.interestName) as TextView
-                               val card:CardView = itemView.findViewById(R.id.interestCV) as CardView
-                              fun bind(list:InterestModel){
-                                  interest.text = list.interestTV
-                              }
-                          }
+    inner class ViewHolder(@NonNull itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val interest: TextView = itemView.findViewById(R.id.interestName) as TextView
+        val card: CardView = itemView.findViewById(R.id.interestCV) as CardView
+        fun bind(list: InterestModel) {
+            interest.text = list.interestTV
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(mContext).inflate(R.layout.interest_item_layout, parent,false)
+        val view =
+            LayoutInflater.from(mContext).inflate(R.layout.interest_item_layout, parent, false)
         return ViewHolder(view)
     }
 
@@ -40,36 +44,43 @@ class InterestAdapter(private val mContext: Context,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val selectedInterests: MutableList<String> = mutableListOf()
         var checker = false
         holder.bind(mInterest[position])
         holder.itemView.setOnClickListener {
 
-            if (!checker){
-                    holder.card.setCardBackgroundColor(Color.parseColor("#FF3A63"))
-                    holder.interest.setTextColor(Color.WHITE)
-                    checker = true
-                CoroutineScope(Dispatchers.IO).launch{
-                    addInterest(mInterest[position].inteID!!)
+            if (!checker) {
+                holder.card.setCardBackgroundColor(Color.parseColor("#FF3A63"))
+                holder.interest.setTextColor(Color.WHITE)
+                checker = true
+                CoroutineScope(Dispatchers.IO).launch {
+                    addInterest(mInterest[position].interestTV!!)
                 }
 
-                }else{
-                    holder.card.setCardBackgroundColor(Color.parseColor("#BAEBDF"))
-                    holder.interest.setTextColor(Color.parseColor("#226880"))
-                    checker = false
+            } else {
+                holder.card.setCardBackgroundColor(Color.parseColor("#BAEBDF"))
+                holder.interest.setTextColor(Color.parseColor("#226880"))
+                checker = false
                 CoroutineScope(Dispatchers.IO).launch {
-                    removeInterest(mInterest[position].inteID!!)
-                  }
+                    removeInterest(mInterest[position].interestTV!!)
                 }
+            }
         }
     }
 
-    private suspend fun addInterest(ID:String){
-        FirebaseDatabase.getInstance().reference.child("UserInterest")
+    private suspend fun addInterest(tag: String) {
+        FirebaseDatabase
+            .getInstance()
+            .reference
+            .child("UserInterest")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
-            .child(ID).setValue(true)
+            .child(tag)
+            .setValue(tag)
+
+
     }
 
-    private fun removeInterest(ID: String){
+    private fun removeInterest(ID: String) {
         FirebaseDatabase.getInstance().reference.child("UserInterest")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
             .child(ID).removeValue()

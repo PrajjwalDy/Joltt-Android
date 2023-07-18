@@ -4,33 +4,37 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="2dp"
-    app:cardBackgroundColor="@color/grey"
-    app:cardCornerRadius="7pt"
+    app:cardBackgroundColor="@color/white"
     app:cardElevation="7pt">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/schemeImage_CV"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_margin="5dp"
-            app:cardCornerRadius="7pt">
+            android:layout_alignParentEnd="true"
+            app:cardCornerRadius="10dp">
 
             <ImageView
                 android:id="@+id/scheme_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/test_img" />
 
         </androidx.cardview.widget.CardView>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toStartOf="@+id/schemeImage_CV"
             android:orientation="vertical">
 
             <TextView
@@ -38,9 +42,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:ellipsize="end"
                 android:fontFamily="@font/amiko"
+                android:maxLines="1"
                 android:text="@string/app_name"
-                android:textColor="@color/red"
+                android:textColor="@color/vivaMagenta"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -50,6 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:ellipsize="end"
+                android:textColor="@color/red"
                 android:maxLines="1"
                 android:text="Government of India" />
 
@@ -59,13 +66,13 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:justificationMode="inter_word"
-                android:maxLines="2"
+                android:maxLines="4"
                 android:text="@string/lorem_sample"
                 android:textColor="@color/black" />
 
 
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

@@ -1,8 +1,12 @@
 package com.hindu.cunow.Model
 
 class AbroadModel {
-    val abroadId:String? = null
-    val abroadTitle:String? = null
-    val abroadDetails:String? = null
-    val abroadImage:String? = null
+    val abId:String? = null
+    val programName:String? = null
+    val prgramDes:String? = null
+    val instituteName:String? = null
+    val country:String? = null
+    val degree:String? = null
+    val classMode:String? = null
+    val tag:String? = null
 }

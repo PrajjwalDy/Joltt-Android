@@ -61,4 +61,6 @@ class AbroadViewModel : ViewModel(), IAbroadCallback {
         mutableLiveData!!.value = list
     }
 
+
+
 }
