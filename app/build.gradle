@@ -103,6 +103,9 @@ dependencies {
     //API CALL OKHTTP
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
 
+    //WEB VIEW
+    //implementation 'androidx.webkit:webkit:1.7.0'
+
 
 
 

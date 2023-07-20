@@ -88,7 +88,7 @@ class PostAdapter (private val mContext: Context,
 
         holder.bind(mPost[position],mContext,holder.image,holder.playerView)
 
-        if (mPost[position].page!!){
+        if (mPost[position].page){
             CoroutineScope(Dispatchers.IO).launch {
                 pageInfo(holder.publisherImage,holder.publisherName,post.publisher!!)
             }

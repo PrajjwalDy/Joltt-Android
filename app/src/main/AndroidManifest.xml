@@ -19,6 +19,11 @@
         android:theme="@style/Theme.CUNow"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activity.WebView2"
+            android:exported="false"
+            android:label="@string/title_activity_web_view2"
+            android:theme="@style/Theme.CUNow" />
+        <activity
             android:name=".Activity.ChatGPT"
             android:exported="false" />
         <activity

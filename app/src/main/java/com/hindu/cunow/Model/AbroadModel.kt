@@ -9,4 +9,5 @@ class AbroadModel {
     val degree:String? = null
     val classMode:String? = null
     val tag:String? = null
+    val programLink:String? = null
 }

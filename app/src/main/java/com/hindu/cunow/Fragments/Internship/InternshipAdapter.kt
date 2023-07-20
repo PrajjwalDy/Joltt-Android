@@ -2,12 +2,14 @@ package com.hindu.cunow.Fragments.Internship
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hindu.cunow.Activity.WebViewActivity
@@ -60,10 +62,9 @@ class InternshipAdapter(private val mContext: Context,
     }
 
     private fun openLink(link:String,title:String){
-        val intent = Intent(mContext, WebViewActivity::class.java)
-        intent.putExtra("url", link)
-        intent.putExtra("title", title)
-        mContext.startActivity(intent)
+        val builder = CustomTabsIntent.Builder()
+        val customTabsIntent = builder.build()
+        customTabsIntent.launchUrl(mContext, Uri.parse(link))
 
 
 //        intent.data = Uri.parse(link)

@@ -59,7 +59,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private var clicked = false
-   // private var postList: MutableList<PostModel>? = null
+    // private var postList: MutableList<PostModel>? = null
 
     private val rotateOpen: Animation by lazy {
         AnimationUtils.loadAnimation(
@@ -95,20 +95,19 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        checkFirstVisit()
 
-        if (checker == "confirmed"){
-            homeViewModel.postModel!!.observe(viewLifecycleOwner, Observer {
-                initView(root)
-                postAdapter = context?.let { it1-> PostAdapter(it1,it) }
-                recyclerView!!.adapter = postAdapter
-                postAdapter!!.notifyDataSetChanged()
+        homeViewModel.postModel!!.observe(viewLifecycleOwner, Observer {
+            initView(root)
+            postAdapter = context?.let { it1 -> PostAdapter(it1, it) }
+            recyclerView!!.adapter = postAdapter
+            postAdapter!!.notifyDataSetChanged()
 
-            })
-        }
+        })
+
 
 
         CoroutineScope(Dispatchers.IO).launch() {
-            launch { checkFirstVisit() }
             launch { developerMessage() }
         }
 
@@ -183,8 +182,8 @@ class HomeFragment : Fragment() {
     }
 
     //BUILD HASHTAG
-    private fun buildHasTag(postId:String){
-        val sentence = addText_ET.text.toString().trim{ it <= ' '}
+    private fun buildHasTag(postId: String) {
+        val sentence = addText_ET.text.toString().trim { it <= ' ' }
         val words = sentence.split(" ")
 
         // Initialize an empty list of hashtags
@@ -199,8 +198,8 @@ class HomeFragment : Fragment() {
         val hashtagsRef = FirebaseDatabase.getInstance().getReference("hashtags")
 
         for (hashtag in hashtags) {
-            val key = hashtag.toString().removeRange(0,1)
-            val tagMap = HashMap<String,Any>()
+            val key = hashtag.toString().removeRange(0, 1)
+            val tagMap = HashMap<String, Any>()
             tagMap["tagName"] = hashtag
             hashtagsRef.child(key).updateChildren(tagMap)
             hashtagsRef.child(key).child("posts").child(postId).setValue(true)
@@ -209,20 +208,20 @@ class HomeFragment : Fragment() {
     }
 
     //POST COUNT
-    private fun getPostCount(tag:String){
+    private fun getPostCount(tag: String) {
         val key = tag.removePrefix("#")
         val dataRef = FirebaseDatabase.getInstance()
             .reference.child("hashtags")
             .child(key)
             .child("posts")
 
-        dataRef.addValueEventListener(object :ValueEventListener{
+        dataRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
                     val hashtagsRef = FirebaseDatabase.getInstance().reference
                         .child("hashtags")
                         .child(key)
-                    val tagMap = HashMap<String,Any>()
+                    val tagMap = HashMap<String, Any>()
                     tagMap["postCount"] = snapshot.childrenCount.toInt()
                     hashtagsRef.updateChildren(tagMap)
                 }
@@ -257,7 +256,7 @@ class HomeFragment : Fragment() {
 
     }
 
-    private suspend fun checkFirstVisit() {
+    private fun checkFirstVisit() {
         val dataRef = FirebaseDatabase
             .getInstance().reference.child("Users")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
@@ -267,7 +266,7 @@ class HomeFragment : Fragment() {
                     val data = snapshot.getValue(UserModel::class.java)
                     if (data!!.firstVisit) {
                         welcome_screen.visibility = View.VISIBLE
-                        postLayout_ll.visibility = View.GONE
+                        //postLayout_ll.visibility = View.GONE
                     } else {
                         checker = "confirmed"
                         postLayout_ll.visibility = View.VISIBLE

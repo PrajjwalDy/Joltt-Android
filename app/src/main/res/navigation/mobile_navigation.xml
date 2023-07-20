@@ -100,6 +100,9 @@
         <action
             android:id="@+id/action_navigation_dashboard_to_fullPostView2"
             app:destination="@id/fullPostView" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_flash"
+            app:destination="@id/flash" />
     </fragment>
 
     <fragment
@@ -367,6 +370,11 @@
         android:name="com.hindu.cunow.Fragments.AboutMe.MyDetails.MyDetailsFragment"
         android:label="my_details_fragment"
         tools:layout="@layout/my_details_fragment" />
+    <fragment
+        android:id="@+id/flash"
+        android:name="com.hindu.cunow.Fragments.Flash"
+        android:label="fragment_flash"
+        tools:layout="@layout/fragment_flash" />
 
 
 </navigation>

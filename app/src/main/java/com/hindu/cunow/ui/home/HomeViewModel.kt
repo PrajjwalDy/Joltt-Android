@@ -72,12 +72,7 @@ class HomeViewModel() : ViewModel(), IPostCallback {
                         }
                     }
                 }
-                if (postList.isEmpty()){
-                    println("New User")
-                }else{
-                    postList = postList.distinct() as ArrayList<PostModel>
-                }
-
+                postList = postList.distinct() as ArrayList<PostModel>
 
                 postLoadCallback.onPostPCallbackLoadSuccess(postList)
             }

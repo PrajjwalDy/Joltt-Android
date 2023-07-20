@@ -80,7 +80,7 @@ class HomeTab : Fragment() {
         }
         root.ll_events.setOnClickListener {
             Navigation.findNavController(root)
-                .navigate(R.id.action_navigation_dashboard_to_eventFragment)
+                .navigate(R.id.action_navigation_dashboard_to_communityFragment)
         }
         root.ll_study_abroad.setOnClickListener {
             Navigation.findNavController(root)
@@ -96,7 +96,7 @@ class HomeTab : Fragment() {
         }
         root.ll_community.setOnClickListener {
             Navigation.findNavController(root)
-                .navigate(R.id.action_navigation_dashboard_to_communityFragment)
+                .navigate(R.id.action_navigation_dashboard_to_flash)
         }
         root.ll_pages.setOnClickListener {
             startActivity(Intent(context, PagesTabActivity::class.java))

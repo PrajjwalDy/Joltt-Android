@@ -101,10 +101,6 @@ class UserProfile : Fragment() {
             openInBrowser(url)
         }
 
-
-
-
-
         root.userMenu.setOnClickListener{
             addButtonClicked()
         }
