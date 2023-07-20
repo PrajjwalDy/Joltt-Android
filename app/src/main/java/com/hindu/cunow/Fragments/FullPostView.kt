@@ -26,6 +26,7 @@ class FullPostView : Fragment() {
     private var mPost:MutableList<PostModel>? = null
 
     private lateinit var postId:String
+    private lateinit var hasTag:String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,8 +38,8 @@ class FullPostView : Fragment() {
         val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)
         if (pref != null){
             this.postId = pref.getString("postId","none")!!
+            this.hasTag = pref.getString("hashtag","none")!!
         }
-
         recyclerView = root.findViewById(R.id.fullPost_rv)
         recyclerView!!.setHasFixedSize(true)
         recyclerView!!.layoutManager = LinearLayoutManager(context)
@@ -47,7 +48,11 @@ class FullPostView : Fragment() {
         postAdapter = context?.let { PostAdapter(it,mPost as ArrayList<PostModel>) }
         recyclerView?.adapter = postAdapter
 
-        returnPost(postId)
+        if (postId == "none"){
+            returnPost(postId)
+        }else{
+            retrievePostFromTag()
+        }
         //retrievePost()
 
         return root
@@ -79,15 +84,22 @@ class FullPostView : Fragment() {
             })
     }
 
-    private fun retrievePost(){
+    private fun retrievePostFromTag(){
         val postRef = FirebaseDatabase.getInstance().reference.child("Post")
         postRef.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                     mPost!!.clear()
                     for(snapshot in snapshot.children){
                         val post = snapshot.getValue(PostModel::class.java)
-                        if (post != null){
-                            mPost?.add(post)
+                        val caption = post!!.caption!!.trim{ it <= ' '}
+                        val feedTags = caption.split(" ")
+                        for (tag in feedTags) {
+                            if (tag.startsWith("#")){
+                                if (feedTags.contains(hasTag)) {
+                                    mPost!!.add(post)
+                                    break
+                                }
+                            }
                         }
                         postAdapter!!.notifyDataSetChanged()
                 }

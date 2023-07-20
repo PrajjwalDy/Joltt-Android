@@ -52,10 +52,5 @@ class HackathonAdapter(private val mContext:Context,
         intent.putExtra("url", link)
         intent.putExtra("title", title)
         mContext.startActivity(intent)
-
-
-//        intent.data = Uri.parse(link)
-//        mContext.startActivity(intent)
-
     }
 }

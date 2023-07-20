@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.ChatGPT">
+
+
+    <ImageView
+        android:id="@+id/IV_voltChat"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/volt_chat_img"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"/>
+
+
+    <TextView
+        android:id="@+id/TV_voltChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to VoltChat"
+        android:layout_below="@id/IV_voltChat"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        android:layout_marginTop="-20dp"
+        android:textColor="@color/red"
+        android:fontFamily="@font/comfortaa"/>
+
+    <ScrollView
+        android:layout_below="@+id/TV_voltChat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:layout_above="@+id/promptText_CV">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardBackgroundColor="@color/light_grey"
+            app:cardElevation="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/chatResponse"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Your Reseponse will appear here"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/comfortaa"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/vivaMagenta"
+                    android:textStyle="bold"/>
+
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+    </ScrollView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/promptText_CV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:layout_margin="2dp"
+        android:layout_alignParentBottom="true"
+        android:elevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/red"
+                android:layout_toStartOf="@+id/send_prompt"
+                android:padding="5dp"
+                android:hint="Enter your prompt"
+                android:textColor="@color/red"
+                android:fontFamily="@font/comfortaa"
+                android:layout_centerVertical="true"
+                android:id="@+id/ET_Prompt"/>
+
+            <ImageView
+                android:id="@+id/send_prompt"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_margin="5dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/send_prompt"/>
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</RelativeLayout>

@@ -72,7 +72,13 @@ class HomeViewModel() : ViewModel(), IPostCallback {
                         }
                     }
                 }
-                postList = postList.distinct() as ArrayList<PostModel>
+                if (postList.isEmpty()){
+                    println("New User")
+                }else{
+                    postList = postList.distinct() as ArrayList<PostModel>
+                }
+
+
                 postLoadCallback.onPostPCallbackLoadSuccess(postList)
             }
 
@@ -161,8 +167,6 @@ class HomeViewModel() : ViewModel(), IPostCallback {
             }
         })
     }
-
-
 
 
     override fun onPostCallbackLoadFailed(str: String) {

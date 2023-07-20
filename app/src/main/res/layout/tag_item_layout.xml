@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="10dp"
+    android:layout_margin="2dp"
+    app:cardCornerRadius="10dp"
+    android:layout_height="60dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/hash_ico"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:src="@drawable/hashtag"/>
+
         <LinearLayout
             android:id="@+id/tag_LL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/hash_ico"
             android:orientation="vertical">
 
 
@@ -32,6 +46,8 @@
                 android:layout_height="wrap_content"
                 android:text="43K posts"
                 android:textColor="@color/red"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:layout_marginStart="10dp" />
 
 
@@ -39,22 +55,7 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tag_trend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:fontFamily="@font/comfortaa"
-            android:textColor="@color/red"
-            android:text="Chandigarh University"
-            android:textSize="12sp"
-            />
-
     </RelativeLayout>
-
-
 
 
 </androidx.cardview.widget.CardView>

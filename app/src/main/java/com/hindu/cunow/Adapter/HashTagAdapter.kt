@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.NonNull
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -43,6 +44,13 @@ class HashTagAdapter(private val mContext:Context,private val mHash:List<HashTag
         holder.bind(mHash[position])
         CoroutineScope(Dispatchers.IO).launch {
             getPostCount(mTag.tagName!!,holder.postCount)
+        }
+        holder.itemView.setOnClickListener {
+            val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+            pref.putString("hashtag",mHash[position].tagName)
+            pref.apply()
+
+            Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_dashboard_to_fullPostView2)
         }
     }
 

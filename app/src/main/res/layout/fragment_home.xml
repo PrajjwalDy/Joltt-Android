@@ -8,6 +8,8 @@
     tools:context=".ui.home.HomeFragment">
 
 
+    <!--Parent Linear Layout-->
+
     <LinearLayout
         android:id="@+id/postLayout_ll"
         android:layout_width="match_parent"
@@ -15,6 +17,7 @@
         android:orientation="vertical"
         android:visibility="gone">
 
+        <!--Appbar layout-->
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBar_HomeFragment"
             android:layout_width="match_parent"
@@ -44,6 +47,7 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+        <!--Developer message-->
         <androidx.cardview.widget.CardView
             android:id="@+id/developerMessage_CV"
             android:layout_width="match_parent"
@@ -83,12 +87,14 @@
 
         </androidx.cardview.widget.CardView>
 
+        <!--POST RECYCLERVIEW-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/postRecyclerView"
             android:layout_width="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_height="match_parent" />
 
+        <!--EMPTY POST LINEAR LAYOUT-->
         <LinearLayout
             android:id="@+id/ll_empty_posts"
             android:layout_width="match_parent"
@@ -116,150 +122,54 @@
 
         </LinearLayout>
 
-
     </LinearLayout>
 
+    <!--WELCOME SCREEN-->
+    <RelativeLayout
+    android:id="@+id/welcome_screen"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:visibility="gone"
+    android:layout_centerInParent="true">
+
+    <ImageView
+        android:id="@+id/welcome_img"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:src="@drawable/welcome" />
+
     <androidx.cardview.widget.CardView
-        android:id="@+id/welcome_screen"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:visibility="gone"
+        android:layout_height="200dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_below="@+id/welcome_img"
         app:cardBackgroundColor="@color/red"
         app:cardCornerRadius="5pt">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/red"
+            android:gravity="center"
             android:orientation="vertical">
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center_horizontal"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/welcome" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
                 android:layout_margin="5dp"
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/welcome_to_cunow"
                 android:textAlignment="center"
+
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="7dp">
-
-                    <LinearLayout
-                        android:id="@+id/people_welcome"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_margin="10dp"
-                            android:src="@drawable/people" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:text="People"
-                            android:textColor="@color/red"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/confession_welcome"
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="7dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_margin="10dp"
-                            android:src="@drawable/diary" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:text="Confession Room"
-                            android:textColor="@color/red"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/circle_welcome"
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="7dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_margin="10dp"
-                            android:src="@drawable/mycircle" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:text="Circle"
-                            android:textColor="@color/red"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/imin"
@@ -274,6 +184,9 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_text"
@@ -329,6 +242,7 @@
         app:srcCompat="@drawable/ic_add"
         app:tint="@android:color/white" />
 
+    <!--POST ONLY TEXT-->
     <androidx.cardview.widget.CardView
         android:id="@+id/onlyText_CV"
         android:layout_width="match_parent"
@@ -341,11 +255,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="550dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
-
-
-
 
             <LinearLayout
                 android:id="@+id/hedTxt_LL"
@@ -354,11 +265,9 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="26dp"
                 android:layout_margin="5dp"
-                android:layout_marginBottom="17dp"
-                >
+                android:layout_marginBottom="17dp">
 
                 <TextView
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Words on your mind ?"
@@ -366,7 +275,7 @@
                     android:textColor="@color/white"
                     android:layout_margin="10dp"
                     android:layout_gravity="center_vertical"
-                    android:textSize="22sp"
+                    android:textSize="18sp"
                     />
 
                 <ImageView
@@ -382,7 +291,7 @@
             <EditText
                 android:id="@+id/addText_ET"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/hedTxt_LL"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
@@ -390,7 +299,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/box_grey"
                 android:fontFamily="@font/comfortaa"
-                android:hint="@string/lorem_sample"
+                android:hint="your feeling here"
                 android:padding="25dp"
                 android:textColor="@color/black" />
 
@@ -425,8 +334,8 @@
                     android:layout_margin="10dp"/>
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
                     android:src="@drawable/joltt_button"
                     android:layout_marginStart="10dp"
                     android:id="@+id/uploadTextBtn"/>

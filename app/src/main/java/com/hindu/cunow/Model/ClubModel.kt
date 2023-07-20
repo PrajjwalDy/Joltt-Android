@@ -1,9 +1,12 @@
 package com.hindu.cunow.Model
 
 class ClubModel {
-    val clubName:String? = null
-    val clubId:String? = null
-    val clubDes:String? = null
-    val clubOwner:String? = null
-    val clubImage:String? = null
+    val jobTitle:String? = null
+    val jobImage:String? = null
+    val jobLocation:String? = null
+    val jobSalary:String? =null
+    val jobExperience:String?= null
+    val jobSkills:String? = null
+    val jobCompany:String? = null
+    val jobLink:String? = null
 }

@@ -22,7 +22,6 @@ class ClubsViewModel : ViewModel(), IClubsCallback {
         if (clubLiveData == null){
             clubLiveData = MutableLiveData()
             messageError = MutableLiveData()
-            messageError = MutableLiveData()
             CoroutineScope(Dispatchers.IO).launch {
                 loadData()
             }
@@ -33,7 +32,7 @@ class ClubsViewModel : ViewModel(), IClubsCallback {
 
     private fun loadData(){
         val clubList = ArrayList<ClubModel>()
-        val data = FirebaseDatabase.getInstance().reference.child("Clubs")
+        val data = FirebaseDatabase.getInstance().reference.child("Jobs")
         data.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 clubList.clear()

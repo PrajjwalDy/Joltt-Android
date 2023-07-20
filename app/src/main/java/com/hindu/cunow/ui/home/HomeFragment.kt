@@ -1,9 +1,5 @@
 package com.hindu.cunow.ui.home
 
-import android.animation.ValueAnimator
-import android.app.AlertDialog
-import android.app.Dialog
-import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,40 +7,46 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.GenericTypeIndicator
 import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Activity.AddPostActivity
-import com.hindu.cunow.Activity.AddVibesAcitvity
 import com.hindu.cunow.Activity.VideoUploadActivity
-import com.hindu.cunow.Adapter.PageAdapter
 import com.hindu.cunow.Adapter.PostAdapter
-import com.hindu.cunow.Fragments.Circle.CircleTabActivity
 import com.hindu.cunow.Model.DevMessageModel
-import com.hindu.cunow.Model.PostModel
-import com.hindu.cunow.Model.UserInterest
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.FragmentHomeBinding
-import kotlinx.android.synthetic.main.add_community_post_dialog.view.*
-import kotlinx.android.synthetic.main.add_only_text_dialog.*
-import kotlinx.android.synthetic.main.add_only_text_dialog.view.*
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
-import kotlinx.android.synthetic.main.image_or_video_dialogbox.view.*
-import kotlinx.android.synthetic.main.more_option_dialogbox.view.*
+import kotlinx.android.synthetic.main.activity_add_post.caption_image
+import kotlinx.android.synthetic.main.fragment_home.addText_ET
+import kotlinx.android.synthetic.main.fragment_home.add_image
+import kotlinx.android.synthetic.main.fragment_home.add_text
+import kotlinx.android.synthetic.main.fragment_home.add_video
+import kotlinx.android.synthetic.main.fragment_home.create_post_fab
+import kotlinx.android.synthetic.main.fragment_home.dev_message_tv
+import kotlinx.android.synthetic.main.fragment_home.developerMessage_CV
+import kotlinx.android.synthetic.main.fragment_home.ll_empty_posts
+import kotlinx.android.synthetic.main.fragment_home.postLayout_ll
+import kotlinx.android.synthetic.main.fragment_home.postRecyclerView
+import kotlinx.android.synthetic.main.fragment_home.view.add_image
+import kotlinx.android.synthetic.main.fragment_home.view.add_text
+import kotlinx.android.synthetic.main.fragment_home.view.add_video
+import kotlinx.android.synthetic.main.fragment_home.view.closeMessage_btn
+import kotlinx.android.synthetic.main.fragment_home.view.closeOnlyText
+import kotlinx.android.synthetic.main.fragment_home.view.create_post_fab
+import kotlinx.android.synthetic.main.fragment_home.view.developerMessage_CV
+import kotlinx.android.synthetic.main.fragment_home.view.imin
+import kotlinx.android.synthetic.main.fragment_home.view.onlyText_CV
+import kotlinx.android.synthetic.main.fragment_home.view.uploadTextBtn
+import kotlinx.android.synthetic.main.fragment_home.welcome_screen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -57,7 +59,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private var clicked = false
-    private var postList: MutableList<PostModel>? = null
+   // private var postList: MutableList<PostModel>? = null
 
     private val rotateOpen: Animation by lazy {
         AnimationUtils.loadAnimation(
@@ -94,14 +96,16 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        if (checker == "confirmed"){
+            homeViewModel.postModel!!.observe(viewLifecycleOwner, Observer {
+                initView(root)
+                postAdapter = context?.let { it1-> PostAdapter(it1,it) }
+                recyclerView!!.adapter = postAdapter
+                postAdapter!!.notifyDataSetChanged()
 
-        homeViewModel.postModel!!.observe(viewLifecycleOwner, Observer {
-            initView(root)
-            postAdapter = context?.let { it1-> PostAdapter(it1,it) }
-            recyclerView!!.adapter = postAdapter
-            postAdapter!!.notifyDataSetChanged()
+            })
+        }
 
-        })
 
         CoroutineScope(Dispatchers.IO).launch() {
             launch { checkFirstVisit() }
@@ -112,18 +116,6 @@ class HomeFragment : Fragment() {
         root.imin.setOnClickListener {
             updateVisit(root)
         }
-
-        //Welcome Menu
-        root.people_welcome.setOnClickListener {
-            Navigation.findNavController(root)
-                .navigate(R.id.action_navigation_home_to_peopleFragment)
-        }
-
-        root.confession_welcome.setOnClickListener {
-            Navigation.findNavController(root)
-                .navigate(R.id.action_navigation_home_to_confessionRoomFragment)
-        }
-
 
         //Close Developer Message
         root.closeMessage_btn.setOnClickListener {
@@ -163,8 +155,10 @@ class HomeFragment : Fragment() {
                 dataMap["page"] = false
                 dataMap["public"] = false
                 dataRef.child(postId).updateChildren(dataMap)
+                buildHasTag(postId)
                 Toast.makeText(context, "Post add successfully", Toast.LENGTH_SHORT).show()
                 root.onlyText_CV.visibility = View.GONE
+                addText_ET.text.clear()
             }
 
         }
@@ -186,6 +180,58 @@ class HomeFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             checkFirstVisit()
         }
+    }
+
+    //BUILD HASHTAG
+    private fun buildHasTag(postId:String){
+        val sentence = addText_ET.text.toString().trim{ it <= ' '}
+        val words = sentence.split(" ")
+
+        // Initialize an empty list of hashtags
+        val hashtags = mutableListOf<String>()
+
+        // Extract hashtags from the words
+        for (word in words) {
+            if (word.startsWith("#")) {
+                hashtags.add(word)
+            }
+        }
+        val hashtagsRef = FirebaseDatabase.getInstance().getReference("hashtags")
+
+        for (hashtag in hashtags) {
+            val key = hashtag.toString().removeRange(0,1)
+            val tagMap = HashMap<String,Any>()
+            tagMap["tagName"] = hashtag
+            hashtagsRef.child(key).updateChildren(tagMap)
+            hashtagsRef.child(key).child("posts").child(postId).setValue(true)
+            getPostCount(hashtag)
+        }
+    }
+
+    //POST COUNT
+    private fun getPostCount(tag:String){
+        val key = tag.removePrefix("#")
+        val dataRef = FirebaseDatabase.getInstance()
+            .reference.child("hashtags")
+            .child(key)
+            .child("posts")
+
+        dataRef.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val hashtagsRef = FirebaseDatabase.getInstance().reference
+                        .child("hashtags")
+                        .child(key)
+                    val tagMap = HashMap<String,Any>()
+                    tagMap["postCount"] = snapshot.childrenCount.toInt()
+                    hashtagsRef.updateChildren(tagMap)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
     }
 
     private fun initView(root: View) {
@@ -211,38 +257,19 @@ class HomeFragment : Fragment() {
 
     }
 
-    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val userId = FirebaseAuth.getInstance().currentUser!!.uid
-
-        val userInterestsRef = FirebaseDatabase.getInstance().getReference("UserInterest")
-            .child(userId)
-
-        userInterestsRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val interestsList = snapshot.getValue(object : GenericTypeIndicator<List<String>>() {})
-                val userInterests = UserInterest(interestsList ?: emptyList())
-                homeViewModel.setUserInterests(userInterests)
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Handle the error
-            }
-        })
-    }*/
-
     private suspend fun checkFirstVisit() {
         val dataRef = FirebaseDatabase
             .getInstance().reference.child("Users")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
-        dataRef.addListenerForSingleValueEvent(object : ValueEventListener {
+        dataRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     val data = snapshot.getValue(UserModel::class.java)
                     if (data!!.firstVisit) {
                         welcome_screen.visibility = View.VISIBLE
-                        //postLayout_ll.visibility = View.GONE
+                        postLayout_ll.visibility = View.GONE
                     } else {
+                        checker = "confirmed"
                         postLayout_ll.visibility = View.VISIBLE
                     }
                 }

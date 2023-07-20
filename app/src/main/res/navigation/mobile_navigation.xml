@@ -97,6 +97,9 @@
         <action
             android:id="@+id/action_navigation_dashboard_to_clubsFragment"
             app:destination="@id/clubsFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_fullPostView2"
+            app:destination="@id/fullPostView" />
     </fragment>
 
     <fragment
