@@ -38,6 +38,7 @@
                 android:layout_height="25dp"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="10dp"
+                android:visibility="gone"
                 android:layout_toLeftOf="@+id/createPost_page_img"
                 android:src="@drawable/notification"
                 app:tint="@color/red" />
@@ -89,10 +90,12 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/pagePostCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textSize="22sp"
+                    android:fontFamily="@font/comfortaa"
                     android:layout_gravity="center_horizontal"
                     android:textStyle="bold"
                     />
@@ -101,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Posts"
-                    android:fontFamily="@font/amiko"
+                    android:fontFamily="@font/comfortaa"
                     android:textStyle="bold"
                     android:textSize="16sp"/>
 
@@ -121,6 +124,7 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textSize="22sp"
+                    android:fontFamily="@font/comfortaa"
                     android:layout_gravity="center_horizontal"
                     android:textStyle="bold"
                     />
@@ -129,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Followers"
-                    android:fontFamily="@font/amiko"
+                    android:fontFamily="@font/comfortaa"
                     android:textStyle="bold"
                     android:textSize="16sp"/>
 
@@ -157,11 +161,11 @@
             android:layout_height="30dp"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/box_grey"
-            android:fontFamily="@font/amiko"
+            android:background="@drawable/viva_magenta_round_bg"
+            android:fontFamily="@font/comfortaa"
             android:text="Create Post"
             android:textAllCaps="false"
-            android:textColor="@color/red" />
+            android:textColor="@color/white" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/pageFollow_Btn_pd"
@@ -181,7 +185,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="This is page description"
-        android:fontFamily="@font/amiko"
+        android:fontFamily="@font/comfortaa"
         android:layout_margin="5dp"
         android:textColor="@color/black"
         android:textSize="16sp" />
@@ -190,7 +194,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:fontFamily="@font/amiko"
+        android:fontFamily="@font/comfortaa"
         android:text="Posts"
         android:textColor="@color/red"
         android:textSize="16sp"

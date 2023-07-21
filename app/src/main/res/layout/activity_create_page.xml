@@ -8,70 +8,38 @@
     android:orientation="vertical"
     tools:context=".Activity.CreatePageActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/commentAppbar"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/white">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/amiko"
-                android:text="Create Page"
-                android:textColor="@color/red"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="300dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/create_page"/>
+
+        <TextView
+            android:id="@+id/pageDetails_Head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Page's Details"
+            android:layout_gravity="center_vertical"
+            android:textSize="20sp"
+            android:fontFamily="@font/comfortaa"
+            android:textColor="@color/red"/>
+
+    </LinearLayout>
 
 
-            <ImageView
-                android:id="@+id/createPage_ImgBtn"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/right_arrow" />
 
-        </RelativeLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/LL_pageDetails_ETs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/pageIcon_Image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="20dp"
-                app:civ_border_width="2dp"
-                app:civ_border_color="@color/red"
-                android:src="@drawable/ic_baseline_add_a_photo_24"/>
-
-            <TextView
-                android:id="@+id/selectIcon_TV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/red"
-                android:text="Select Icon"
-                android:textStyle="bold"
-                android:fontFamily="@font/amiko"
-                android:textSize="16sp"
-                android:layout_gravity="center_horizontal"/>
 
 
             <EditText
@@ -79,7 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_margin="20dp"
-                android:background="@drawable/box_grey"
+                android:background="@drawable/ocean_green_button"
                 android:hint="Page Name"
                 android:padding="5dp"/>
 
@@ -87,26 +55,46 @@
                 android:id="@+id/pageDescription"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:background="@drawable/box_grey"
+                android:background="@drawable/ocean_green_button"
                 android:layout_marginStart="20dp"
                 android:hint="Page Description"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"/>
 
-            <Button
-                android:id="@+id/createPage_Btn"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="20dp"
-                android:text="Create Page"
-                android:fontFamily="@font/amiko"/>
-
 
         </LinearLayout>
 
+    <ImageView
+        android:id="@+id/pageIcon_Image"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/page_icon_ico"/>
 
-    </ScrollView>
+    <TextView
+        android:id="@+id/selectIcon_TV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        android:text="Select Icon"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:fontFamily="@font/comfortaa"
+        android:textSize="16sp"
+        android:layout_gravity="center_horizontal"/>
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/createPage_Btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
+        android:text="Next"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:background="@drawable/viva_magenta_round_bg"
+        android:fontFamily="@font/comfortaa"/>
 
 </LinearLayout>

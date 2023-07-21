@@ -39,10 +39,7 @@ class ShowUsersActivity : AppCompatActivity() {
 
         idList = ArrayList()
 
-        when(title){
-            "Followers"-> getFollowers()
-            "Followings"->getFollowings()
-        }
+       getPageFollowers()
 
     }
 
@@ -69,6 +66,26 @@ class ShowUsersActivity : AppCompatActivity() {
     private fun getFollowings(){
         val data = FirebaseDatabase.getInstance().reference.child("Follow")
             .child(id).child("Following")
+
+        data.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                (idList as ArrayList<String>).clear()
+                for (snapshot in snapshot.children){
+                    (idList as ArrayList<String>).add(snapshot.key!!)
+                }
+                showUser()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    private fun getPageFollowers(){
+        val data = FirebaseDatabase.getInstance().reference.child("Pages")
+            .child(id).child("pageFollowers")
 
         data.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {

@@ -48,6 +48,7 @@ class HashTagAdapter(private val mContext:Context,private val mHash:List<HashTag
         holder.itemView.setOnClickListener {
             val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
             pref.putString("hashtag",mHash[position].tagName)
+            pref.putString("postId","no")
             pref.apply()
 
             Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_dashboard_to_fullPostView2)

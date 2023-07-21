@@ -59,9 +59,9 @@
         android:layout_height="40dp"
         android:layout_margin="10dp"
         android:padding="5dp"
-        android:fontFamily="@font/amiko"
+        android:fontFamily="@font/comfortaa"
         android:textSize="12sp"
-        android:background="@drawable/box_grey"
+        android:background="@drawable/ocean_green_bg"
         android:hint="Describe something about this image"
         android:textColor="@color/red"/>
 

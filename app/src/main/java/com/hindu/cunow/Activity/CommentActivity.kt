@@ -280,7 +280,6 @@ class CommentActivity : AppCompatActivity() {
         }
     }
 
-
     private fun sendNotification(){
         val notificationRef = getInstance().reference.child("Tokens")
 

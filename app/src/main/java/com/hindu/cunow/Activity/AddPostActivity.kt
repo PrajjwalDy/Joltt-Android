@@ -195,7 +195,6 @@ class AddPostActivity : AppCompatActivity() {
             getPostCount(hashtag)
         }
     }
-
     //POST COUNT
     private fun getPostCount(tag:String){
         val key = tag.removeRange(0,1)

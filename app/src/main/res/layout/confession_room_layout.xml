@@ -3,126 +3,154 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/light_grey"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ll_main_confess"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/logo_image"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/camera"
-                android:layout_margin="10dp"/>
-
-            <TextView
-                android:id="@+id/captionConfession"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/logo_image"
-                android:fontFamily="@font/amiko"
-                android:text="Confessed with Love"
-                android:textColor="@color/red"
-                android:textSize="14sp" />
-
-            <ImageView
-                android:id="@+id/moreOptionConfession"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/more_option"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="10dp"/>
-
-        </RelativeLayout>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginStart="5dp"
+            app:cardCornerRadius="10dp"
+            android:layout_marginTop="2dp"
             android:layout_marginEnd="5dp"
-            android:layout_marginTop="-10dp"
-            android:src="@drawable/minus"
-            android:scaleType="fitXY"/>
+            android:layout_marginStart="5dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:text="I know this very late to answer. After did a lot of brainstorming, studying EXOPlayer source to achieve this feature, I have figured it out by myself, what I did is just add the below line and it worked like a charm:"
-                android:textColor="@color/black"
-                android:fontFamily="@font/amiko"
-                android:id="@+id/confessionText"/>
+                android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="250dp"
-                android:visibility="gone"
-                android:layout_height="250dp"
-                app:cardCornerRadius="7pt"
-                android:layout_margin="10dp"
-                android:id="@+id/imageCard"
-                android:layout_gravity="end">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
 
                     <ImageView
-                        android:id="@+id/confessionImage"
-                        android:layout_width="250dp"
-                        android:layout_height="250dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/profile_testimg"/>
+                        android:id="@+id/logo_image"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/confession_ico" />
 
+                    <TextView
+                        android:id="@+id/captionConfession"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/logo_image"
+                        android:fontFamily="@font/comfortaa"
+                        android:text="Confessed with Love"
+                        android:textColor="@color/red"
+                        android:textSize="14sp" />
+
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="-10dp"
+                    android:src="@drawable/minus"
+                    android:scaleType="fitXY"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginBottom="50dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:text="I know this very late to answer. After did a lot of brainstorming, studying EXOPlayer source to achieve this feature, I have figured it out by myself, what I did is just add the below line and it worked like a charm:"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/amiko"
+                        android:id="@+id/confessionText"/>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="250dp"
+                        android:visibility="gone"
+                        android:layout_height="250dp"
+                        app:cardCornerRadius="7pt"
+                        android:layout_margin="10dp"
+                        android:id="@+id/imageCard"
+                        android:layout_gravity="end">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/confessionImage"
+                                android:layout_width="250dp"
+                                android:layout_height="250dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/profile_testimg"/>
+
+
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="50dp">
+
+
+
+                    </RelativeLayout>
 
                 </LinearLayout>
 
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-            </androidx.cardview.widget.CardView>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
+        <androidx.cardview.widget.CardView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_main_confess"
+            android:layout_centerHorizontal="true"
+            app:cardElevation="10dp"
+            app:cardCornerRadius="25dp"
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@color/light_grey"
+            android:layout_marginTop="-25dp">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="50dp">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
                 <LinearLayout
-                    android:id="@+id/like_layout"
+                    android:id="@+id/moreOptionConfession"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_margin="7dp"
-                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:gravity="center_horizontal">
                     <ImageView
-                        android:id="@+id/confessionLike"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/blank_heart"/>
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/more_option_confess"/>
 
-                    <TextView
-                        android:id="@+id/totalLike_confession"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/amiko"
-                        android:text="Like"
-                        android:textSize="10sp"
-                        android:layout_marginTop="2dp"
-                        tools:ignore="SmallSp" />
 
                 </LinearLayout>
 
@@ -130,30 +158,62 @@
                     android:id="@+id/commentLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_margin="7dp"
-                    android:layout_toStartOf="@+id/like_layout"
-                    android:gravity="center_horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="40dp"
+                    android:gravity="center_vertical">
                     <ImageView
                         android:id="@+id/confessionComment"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/comment"/>
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/confession_comment"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/amiko"
-                        android:text="Comment"
+                        android:text="0"
                         android:textSize="10sp"
+                        android:layout_marginStart="2dp"
                         android:layout_marginTop="2dp"
                         tools:ignore="SmallSp" />
 
                 </LinearLayout>
 
-            </RelativeLayout>
+                <LinearLayout
+                    android:id="@+id/like_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="40dp"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:id="@+id/confessionLike"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/blank_heart"/>
 
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/totalLike_confession"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/amiko"
+                        android:text="0"
+                        android:textSize="10sp"
+                        android:layout_marginStart="2dp"
+                        tools:ignore="SmallSp" />
 
-    </LinearLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

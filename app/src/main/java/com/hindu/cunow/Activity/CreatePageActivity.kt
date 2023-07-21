@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.OnCompleteListener
@@ -41,15 +42,40 @@ class CreatePageActivity : AppCompatActivity() {
         }
 
         createPage_Btn.setOnClickListener {
-            if (pageDescription.text.isEmpty() && pageName.text.isEmpty() && imageUri == null){
-                Toast.makeText(
-                    this,
-                    "Please have the required credential to create the page",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }else{
-                createPage()
+
+            when{
+                createPage_Btn.text == "Next"->{
+
+                    if (pageDescription.text.isEmpty() && pageName.text.isEmpty()){
+                        Toast.makeText(
+                            this,
+                            "Please enter the required credential to create the page",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }else{
+                        LL_pageDetails_ETs.visibility = View.GONE
+                        selectIcon_TV.visibility = View.VISIBLE
+                        pageIcon_Image.visibility = View.VISIBLE
+                        createPage_Btn.text = "Create"
+                        pageDetails_Head.text = "Choose Your Page Icon"
+                    }
+
+                }
+                createPage_Btn.text == "Create"->{
+                    if (imageUri == null){
+                        Toast.makeText(
+                            this,
+                            "Please choose the icon to proceed",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }else{
+                        createPage()
+                    }
+                }
+
             }
+
+
 
         }
     }

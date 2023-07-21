@@ -48,10 +48,10 @@ class FullPostView : Fragment() {
         postAdapter = context?.let { PostAdapter(it,mPost as ArrayList<PostModel>) }
         recyclerView?.adapter = postAdapter
 
-        if (postId == "none"){
-            returnPost(postId)
-        }else{
+        if (postId == "no"){
             retrievePostFromTag()
+        }else{
+            returnPost(postId)
         }
         //retrievePost()
 

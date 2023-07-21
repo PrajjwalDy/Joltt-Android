@@ -113,7 +113,7 @@ class CommunityAdapter(private val mContext:Context,
                 }else{
                     button.tag = "upVote"
                     if (button.tag == "upVote"){
-                        button.setImageResource(R.drawable.thumbsp_blank)
+                        button.setImageResource(R.drawable.thumbsup_blank)
                     }
                 }
             }

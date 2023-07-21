@@ -2,144 +2,179 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    
-    <LinearLayout
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    android:layout_margin="2dp"
+    app:cardElevation="10dp">
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        
+        android:layout_height="wrap_content">
+
         <LinearLayout
+            android:id="@+id/LL_mainContent_comm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-            
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profileImage_comm"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/test_img"/>
-            
-            <TextView
-                android:id="@+id/userName_comm"
-                android:layout_width="wrap_content"
+            android:layout_toStartOf="@+id/ll_options_comm"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lorem Ipsum"
-                android:textStyle="bold"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profileImage_comm"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/test_img"/>
+
+                <TextView
+                    android:id="@+id/userName_comm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lorem Ipsum"
+                    android:textStyle="bold"
+                    android:textColor="@color/red"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/comfortaa"
+                    android:layout_gravity="center_vertical"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/query_article_TV1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:justificationMode="inter_word"
+                android:maxLines="4"
+                android:ellipsize="end"
+                android:fontFamily="@font/comfortaa"
+                android:textColor="@color/black"
+                android:layout_margin="10dp"
+                android:text="@string/lorem_sample"/>
+
+            <TextView
+                android:id="@+id/query_article_TV2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:justificationMode="inter_word"
                 android:textColor="@color/red"
-                android:textSize="16sp"
-                android:fontFamily="@font/amiko"
-                android:layout_gravity="center_vertical"/>
-            
+                android:layout_margin="12dp"
+                android:visibility="gone"
+                android:text="@string/lorem_sample"/>
+
+
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/query_article_TV1"
-            android:layout_width="match_parent"
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ll_options_comm"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:justificationMode="inter_word"
-            android:maxLines="4"
-            android:ellipsize="end"
-            android:textColor="@color/red"
-            android:layout_margin="10dp"
-            android:text="@string/lorem_sample"/>
-
-        <TextView
-            android:id="@+id/query_article_TV2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:justificationMode="inter_word"
-            android:textColor="@color/red"
-            android:layout_margin="12dp"
-            android:visibility="gone"
-            android:text="@string/lorem_sample"/>
-        
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="10dp">
             <LinearLayout
-                android:id="@+id/ll_up_vote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="10dp"
                 android:gravity="center_horizontal">
 
-                <ImageView
-                    android:id="@+id/upVote"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/thumbsp_blank"
-                    app:tint="@color/red" />
-
-                <TextView
-                    android:id="@+id/upVoteCount"
+                <LinearLayout
+                    android:id="@+id/ll_up_vote"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textColor="@color/red"
-                    android:textSize="12sp"/>
+                    android:orientation="vertical"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="5dp"
+                    android:gravity="center_horizontal">
+
+                    <ImageView
+                        android:id="@+id/upVote"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/thumbsup_blank"/>
+
+                    <TextView
+                        android:id="@+id/upVoteCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/red"
+                        android:textSize="12sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_down_vote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_toStartOf="@+id/ll_up_vote"
+                    android:layout_margin="5dp"
+                    android:gravity="center_horizontal">
+
+                    <ImageView
+                        android:id="@+id/downVote"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/dislike_blank" />
+
+                    <TextView
+                        android:id="@+id/downVote_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/red"
+                        android:textSize="12sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_reply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="5dp"
+                    android:gravity="center_horizontal">
+
+                    <ImageView
+                        android:id="@+id/reply_img"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/confession_comment"
+                        />
+
+                    <TextView
+                        android:id="@+id/reply_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/red"
+                        android:textSize="12sp"/>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/more_option_comm"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/moreOption"/>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_down_vote"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_toStartOf="@+id/ll_up_vote"
-                android:layout_margin="10dp"
-                android:gravity="center_horizontal">
 
-                <ImageView
-                    android:id="@+id/downVote"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/dislike_blank"
-                    app:tint="@color/red" />
+        </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:id="@+id/downVote_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textColor="@color/red"
-                    android:textSize="12sp"/>
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_reply"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_toStartOf="@+id/ll_down_vote"
-                android:layout_margin="10dp"
-                android:gravity="center_horizontal">
+    </RelativeLayout>
+    
 
-                <ImageView
-                    android:id="@+id/reply_img"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/reply"
-                    app:tint="@color/red" />
-
-                <TextView
-                    android:id="@+id/reply_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textColor="@color/red"
-                    android:textSize="12sp"/>
-
-            </LinearLayout>
-
-        </RelativeLayout>
-        
-    </LinearLayout>
 
 </androidx.cardview.widget.CardView>

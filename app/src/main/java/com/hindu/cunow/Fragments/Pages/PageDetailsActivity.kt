@@ -1,5 +1,6 @@
 package com.hindu.cunow.Fragments.Pages
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,6 +17,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Activity.CreatePagePostActivity
+import com.hindu.cunow.Activity.ShowUsersActivity
 import com.hindu.cunow.Adapter.PostAdapter
 import com.hindu.cunow.Model.PageModel
 import com.hindu.cunow.Model.PostModel
@@ -153,6 +155,12 @@ class PageDetailsActivity : AppCompatActivity() {
         loadPagePosts()
         totalFollowers()
 
+        pageFollowersCount.setOnClickListener {
+            val intent = Intent(this,ShowUsersActivity::class.java)
+            intent.putExtra("id", pageId)
+            startActivity(intent)
+        }
+
     }
 
     private fun loadPagesDetails(){
@@ -185,6 +193,7 @@ class PageDetailsActivity : AppCompatActivity() {
                         val postModel = snapshot.getValue(PostModel::class.java)
                         if (postModel!!.publisher == pageId){
                             postList!!.add(postModel)
+                            pagePostCount.text = (postList as ArrayList<PostModel>).size.toString()
                         }
                 }
                 postAdapter!!.notifyDataSetChanged()

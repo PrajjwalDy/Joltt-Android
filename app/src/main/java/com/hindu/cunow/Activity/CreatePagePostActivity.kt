@@ -11,7 +11,10 @@ import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.StorageTask
@@ -94,6 +97,7 @@ class CreatePagePostActivity : AppCompatActivity() {
                 postMap["public"] = privacy == "public"
 
                 ref.child(postId).updateChildren(postMap)
+                buildHasTag(postId)
 
                 Toast.makeText(this,"Image shared successfully", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this@CreatePagePostActivity, MainActivity::class.java))
@@ -105,6 +109,56 @@ class CreatePagePostActivity : AppCompatActivity() {
             }
         })
 
+    }
+
+    private fun buildHasTag(postId:String){
+        val sentence = caption_PageImage.text.toString().trim{ it <= ' '}
+        val words = sentence.split(" ")
+
+        // Initialize an empty list of hashtags
+        val hashtags = mutableListOf<String>()
+
+        // Extract hashtags from the words
+        for (word in words) {
+            if (word.startsWith("#")) {
+                hashtags.add(word)
+            }
+        }
+        val hashtagsRef = FirebaseDatabase.getInstance().getReference("hashtags")
+
+        for (hashtag in hashtags) {
+            val key = hashtag.toString().removeRange(0,1)
+            val tagMap = HashMap<String,Any>()
+            tagMap["tagName"] = hashtag
+            hashtagsRef.child(key).updateChildren(tagMap)
+            hashtagsRef.child(key).child("posts").child(postId).setValue(true)
+            getPostCount(hashtag)
+        }
+    }
+    //POST COUNT
+    private fun getPostCount(tag:String){
+        val key = tag.removeRange(0,1)
+        val dataRef = FirebaseDatabase.getInstance()
+            .reference.child("hashtags")
+            .child(key)
+            .child("posts")
+
+        dataRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val hashtagsRef = FirebaseDatabase.getInstance().reference
+                        .child("hashtags")
+                        .child(key)
+                    val tagMap = HashMap<String,Any>()
+                    tagMap["postCount"] = snapshot.childrenCount.toInt()
+                    hashtagsRef.updateChildren(tagMap)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

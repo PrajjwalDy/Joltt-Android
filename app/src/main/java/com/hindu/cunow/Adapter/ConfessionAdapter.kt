@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.cardview.widget.CardView
@@ -88,21 +89,21 @@ class ConfessionAdapter(private val mContext: Context,
         return mConfession.size
     }
 
-    inner class ViewHolder(@NonNull itemView: View):RecyclerView.ViewHolder(itemView){
-        val comment:ImageView = itemView.findViewById(R.id.confessionComment) as ImageView
-        val confessionImage:ImageView = itemView.findViewById(R.id.confessionImage) as ImageView
-        val like:ImageView = itemView.findViewById(R.id.confessionLike) as ImageView
-        val confessionText:TextView = itemView.findViewById(R.id.confessionText) as TextView
-        val totalLike:TextView = itemView.findViewById(R.id.totalLike_confession) as TextView
-        val moreOption:ImageView= itemView.findViewById(R.id.moreOptionConfession) as ImageView
-        val imageCard:CardView = itemView.findViewById(R.id.imageCard)as CardView
+    inner class ViewHolder(@NonNull itemView: View):RecyclerView.ViewHolder(itemView) {
+        val comment: ImageView = itemView.findViewById(R.id.confessionComment) as ImageView
+        val confessionImage: ImageView = itemView.findViewById(R.id.confessionImage) as ImageView
+        val like: ImageView = itemView.findViewById(R.id.confessionLike) as ImageView
+        val confessionText: TextView = itemView.findViewById(R.id.confessionText) as TextView
+        val totalLike: TextView = itemView.findViewById(R.id.totalLike_confession) as TextView
+        val moreOption: LinearLayout = itemView.findViewById(R.id.moreOptionConfession) as LinearLayout
+        val imageCard: CardView = itemView.findViewById(R.id.imageCard) as CardView
 
 
         //member function
-        fun bind(list:ConfessionModel){
+        fun bind(list: ConfessionModel) {
             confessionText.text = list.confessionText
             //confessionCaption.text = list.captionConfession
-            if (list.cImage != null){
+            if (list.cImage != null) {
                 imageCard.visibility = View.VISIBLE
                 confessionImage.visibility = View.VISIBLE
                 Glide.with(mContext).load(list.cImage).into(confessionImage)
@@ -169,9 +170,9 @@ class ConfessionAdapter(private val mContext: Context,
                 if (snapshot.exists()){
                     val count = snapshot.childrenCount.toInt()
                     if (count <= 1){
-                        totalLike.text = count.toString()+"Like"
+                        totalLike.text = count.toString()
                     }else{
-                        totalLike.text = count.toString()+"Likes"
+                        totalLike.text = count.toString()
                     }
                 }
             }
@@ -182,9 +183,7 @@ class ConfessionAdapter(private val mContext: Context,
 
         })
     }
-
-
-        private fun addNotification(confessorId:String,confessionText:String,confessionId: String){
+    private fun addNotification(confessorId:String,confessionText:String,confessionId: String){
             //sendNotification()
             if (confessorId != FirebaseAuth.getInstance().currentUser!!.uid){
                 val dataRef = FirebaseDatabase.getInstance()

@@ -161,7 +161,7 @@
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
                             android:padding="2dp"
-                            android:src="@drawable/event" />
+                            android:src="@drawable/community" />
                     </RelativeLayout>
 
 
@@ -169,7 +169,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="Events"
+                        android:text="Community"
                         android:fontFamily="@font/comfortaa"
                         android:textColor="@color/red"
                         android:textSize="12sp"
@@ -385,14 +385,14 @@
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
                             android:padding="2dp"
-                            android:src="@drawable/projects" />
+                            android:src="@drawable/event" />
                     </RelativeLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="Projects"
+                        android:text="Event"
                         android:textColor="@color/red"
                         android:textSize="12sp"
                         android:fontFamily="@font/comfortaa"
@@ -476,7 +476,8 @@
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
                             android:padding="2dp"
-                            android:src="@drawable/community" />
+                            android:src="@drawable/flash" />
+
                     </RelativeLayout>
 
 

@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="1dp"
-    app:cardBackgroundColor="@color/grey"
     app:cardCornerRadius="7pt">
 
     <LinearLayout
@@ -29,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:fontFamily="@font/amiko"
+                android:fontFamily="@font/comfortaa"
                 android:text="Lorem Ipsum"
                 android:textColor="@color/red"
                 android:textSize="14sp" />
@@ -44,9 +43,13 @@
                 android:id="@+id/replyText_community"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:justificationMode="inter_word"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/comfortaa"
                 android:layout_toStartOf="@+id/ll_down_vote_rp"
+                android:justificationMode="inter_word"
                 android:text="@string/lorem_sample"
                 android:textColor="@color/black" />
 
@@ -63,8 +66,7 @@
                     android:id="@+id/upVote_reply"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/thumbsp_blank"
-                    app:tint="@color/red" />
+                    android:src="@drawable/thumbsup_blank" />
 
                 <TextView
                     android:id="@+id/upVoteCount_reply"
@@ -80,7 +82,10 @@
                 android:id="@+id/ll_down_vote_rp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 android:layout_toStartOf="@+id/ll_up_vote_rp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
@@ -89,8 +94,7 @@
                     android:id="@+id/downVote_reply"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/dislike_blank"
-                    app:tint="@color/red" />
+                    android:src="@drawable/dislike_blank" />
 
                 <TextView
                     android:id="@+id/downVote_count_reply"
