@@ -26,8 +26,6 @@
         android:layout_height="wrap_content">
 
 
-
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/proceed_interest"
             android:layout_width="60dp"

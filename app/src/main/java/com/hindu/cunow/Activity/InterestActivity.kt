@@ -41,9 +41,6 @@ class InterestActivity : AppCompatActivity() {
         recyclerView.adapter = interestAdapter
         loadData()
 
-        skip_interest.setOnClickListener {
-            startActivity(Intent(this,MainActivity::class.java))
-        }
 
         proceed_interest.setOnClickListener { view->
             checkInterest(view)

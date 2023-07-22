@@ -5,46 +5,5 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="7pt">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Community Post"
-            android:fontFamily="@font/queensides"
-            android:textColor="@color/red"
-            android:layout_margin="10dp"
-            android:textSize="16sp"/>
-
-
-        <EditText
-            android:id="@+id/com_editText"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/box_grey"
-            android:hint="your text here"
-            android:textColor="@color/red"
-            android:padding="5dp"/>
-
-
-        <Button
-            android:id="@+id/com_post"
-            android:layout_width="200dp"
-            android:layout_height="45dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/green_button"
-            android:layout_margin="5dp"
-            android:text="Submit"
-            android:textAllCaps="false"
-            android:fontFamily="@font/amiko"
-            android:textSize="16sp"/>
-
-
-    </LinearLayout>
-
 
 </androidx.cardview.widget.CardView>

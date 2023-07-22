@@ -59,5 +59,74 @@
         android:textAlignment="center"
         android:textColor="@color/grey"
         android:textSize="24sp" />
+    
+    <androidx.cardview.widget.CardView
+        android:id="@+id/create_query_CV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="10dp"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        app:cardCornerRadius="12dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/people_community"
+                android:layout_margin="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Post your query for discussion"
+                android:fontFamily="@font/comfortaa"
+                android:layout_marginTop="-40sp"
+                android:layout_marginStart="10dp"/>
+
+            <EditText
+                android:id="@+id/com_editText"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:padding="5dp"
+                android:background="@drawable/ocean_green_button"
+                android:layout_margin="10dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/com_post"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/viva_magenta_round_bg"
+                    android:layout_alignParentEnd="true"
+                    android:text="Post"
+                    android:fontFamily="@font/comfortaa"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:layout_margin="10dp"/>
+
+                <ImageView
+                    android:id="@+id/close_ccp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/close"
+                    android:layout_toStartOf="@+id/com_post"
+                    android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    
 
 </RelativeLayout>

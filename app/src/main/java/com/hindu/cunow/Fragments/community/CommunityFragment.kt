@@ -24,6 +24,9 @@ import com.hindu.cunow.databinding.FragmentCommunityBinding
 import com.hindu.cunow.databinding.FragmentHackathonsBinding
 import kotlinx.android.synthetic.main.activity_comment.*
 import kotlinx.android.synthetic.main.add_community_post_dialog.view.*
+import kotlinx.android.synthetic.main.fragment_community.com_editText
+import kotlinx.android.synthetic.main.fragment_community.com_post
+import kotlinx.android.synthetic.main.fragment_community.create_query_CV
 import kotlinx.android.synthetic.main.fragment_community.view.*
 
 class CommunityFragment : Fragment() {
@@ -39,32 +42,29 @@ class CommunityFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewModel = ViewModelProvider(this).get(CommunityViewModel::class.java)
-        _binding = FragmentCommunityBinding.inflate(inflater,container,false)
-        val root:View = binding.root
+        _binding = FragmentCommunityBinding.inflate(inflater, container, false)
+        val root: View = binding.root
 
         viewModel.communityModel!!.observe(viewLifecycleOwner, Observer {
             initView(root)
-            communityAdapter = context?.let { it1-> CommunityAdapter(it1,it) }
+            communityAdapter = context?.let { it1 -> CommunityAdapter(it1, it) }
             recyclerView!!.adapter = communityAdapter
             communityAdapter!!.notifyDataSetChanged()
         })
 
+        root.com_post.setOnClickListener {
+            addCommunityPost(root)
+        }
 
         root.add_button_commnunity.setOnClickListener {
-            val dialogView =
-                LayoutInflater.from(context).inflate(R.layout.add_community_post_dialog, null)
+            root.create_query_CV.visibility = View.VISIBLE
+        }
 
-            val dialogBuilder = AlertDialog.Builder(context)
-                .setView(dialogView)
 
-            val alertDialog = dialogBuilder.show()
+        root.close_ccp.setOnClickListener {
+            root.create_query_CV.visibility = View.GONE
+        }
 
-            dialogView.com_post.setOnClickListener {
-                addCommunityPost(root, dialogView.com_editText)
-                alertDialog.dismiss()
-            }
-
-            }
         root.communityBack.setOnClickListener {
             Navigation.findNavController(root)
                 .navigate(R.id.action_communityFragment_to_navigation_dashboard3)
@@ -81,24 +81,24 @@ class CommunityFragment : Fragment() {
         linearLayoutManager.reverseLayout = true
         linearLayoutManager.stackFromEnd = true
         recyclerView!!.layoutManager = linearLayoutManager
-
     }
 
-    private fun addCommunityPost(root: View,text:EditText){
-        if (text.text.isEmpty()){
-            Snackbar.make(root,"please write something..", Snackbar.LENGTH_SHORT).show()
-        }else {
+    private fun addCommunityPost(root: View) {
+        if (com_editText.text.isEmpty()) {
+            Snackbar.make(root, "please write something..", Snackbar.LENGTH_SHORT).show()
+        } else {
             val dataRef = FirebaseDatabase.getInstance().reference
                 .child("Community")
 
             val commentId = dataRef.push().key
             val dataMap = HashMap<String, Any>()
             dataMap["communityId"] = commentId!!
-            dataMap["communityCaption"] = text.text.toString()
+            dataMap["communityCaption"] = com_editText.text.toString()
             dataMap["communityPublisher"] = FirebaseAuth.getInstance().currentUser!!.uid
 
             dataRef.child(commentId).updateChildren(dataMap)
-            text.text.clear()
+            com_editText.text.clear()
+            root.create_query_CV.visibility = View.GONE
         }
     }
 
