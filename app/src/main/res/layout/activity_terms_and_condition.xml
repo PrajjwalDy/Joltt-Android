@@ -24,7 +24,7 @@
                 android:layout_margin="5dp"
                 app:srcCompat= "@drawable/back"/>
 
-        <TextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -47,19 +47,19 @@
 
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center_vertical">
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/amiko"
-                android:text=""
-                android:layout_margin="5dp"
-                android:textColor="@color/red"/>
-        </LinearLayout>
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/amiko"
+                    android:text=""
+                    android:layout_margin="5dp"
+                    android:textColor="@color/red"/>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -71,7 +71,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="By using the CUNow service you are agreeing to be bound by the following terms and conditions."
+                    android:text="By using the JOLTT service you are agreeing to be bound by the following terms and conditions."
                     android:layout_margin="5dp"
                     android:fontFamily="@font/amiko"
                     android:textStyle="bold"/>
@@ -81,1097 +81,1077 @@
 
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center_vertical">
-
-            <TextView
-                android:layout_width="86dp"
-                android:layout_height="25dp"
-                android:text="Account"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/amiko"
-                android:textColor="@color/red"
-                android:textStyle="bold"
-                />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                >
-
-
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="10dp"
-                    app:tint="@color/red"
-                    />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="You are responsible for any activity that occurs under your screen name."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                >
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="10dp"
-                    app:tint="@color/red"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="You are responsible for keeping your password secure."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                >
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="10dp"
-                    app:tint="@color/red"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Be respectful – maintain a friendly environment."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                >
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="10dp"
-                    app:tint="@color/red"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Do not post material that is inappropriate or that could reasonably be deemed defamatory, offensive or obscene."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                >
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="10dp"
-                    app:tint="@color/red"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Do not use these online spaces for illegal purposes or to breach any laws."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                >
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="10dp"
-                    app:tint="@color/red"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="We reserve the right to remove comments and/or posts. We also reserve the right to restrict users who don’t follow these guidelines, have online pages containing offensive material and/content, or for any other reason."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                >
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="10dp"
-                    app:tint="@color/red"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="avoid quoting out of context and include a credit for the original author as the source of material"
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="10dp"
-                    app:tint="@color/red"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="You must not abuse, harass, threaten, impersonate or intimidate other CUNow users."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="10dp"
-                    app:tint="@color/red"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="You may not use the CUNow service for any illegal or unauthorized purpose. International users agree to comply with all local laws regarding online conduct and acceptable content."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"
-                   />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="10dp"
-                    app:tint="@color/red"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="You must not create or submit unwanted email or comments to any CUNow members (Spam)."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"
-                 />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical"
-                >
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="10dp"
-                    app:tint="@color/red" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="You must not transmit any worms or viruses or any code of a destructive nature."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
+
+                <TextView
+                    android:layout_width="86dp"
+                    android:layout_height="25dp"
+                    android:text="Account"
                     android:layout_margin="10dp"
-                    app:tint="@color/red" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="We reserve the right to modify or terminate the CUNow service for any reason, without notice at any time."
                     android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"
-                />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="We reserve the right to alter these Terms of Use at any time. If the alterations constitute a material change to the Terms of Use, we will notify you via internet mail according to the preference expressed on your account. What constitutes a (material change) will be determined at our sole discretion, in good faith and using common sense and reasonable judgement."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"
+                    android:textColor="@color/red"
+                    android:textStyle="bold"
                     />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="We reserve the right to refuse service to anyone for any reason at any time."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"
-                    />
-            </LinearLayout>
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="CUnow's terms state they will not rent or sell a user’s information without consent, but may share non-personal information with third-party organizations, service providers, affiliates, and advertising partners that help CUnow provide the service."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="10dp"
+                        app:tint="@color/red"
+                        />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="You are responsible for any activity that occurs under your screen name."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"
+                        />
                 </LinearLayout>
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_gravity="center_vertical" >
-    <ImageView
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:src="@drawable/star"
-        android:layout_margin="5dp"
-        app:tint="@color/red"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CUnow's terms state that they may combine a user’s information with other information and share de-identified and aggregated information with third-parties. CUnow may display advertisements and promotions on the service."
-        android:fontFamily="@font/amiko"
-        android:layout_margin="5dp" />
-</LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                 android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    >
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="10dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="You are responsible for keeping your password secure."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    >
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="10dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Be respectful – maintain a friendly environment."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    >
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="10dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Do not post material that is inappropriate or that could reasonably be deemed defamatory, offensive or obscene."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    >
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="10dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Do not use these online spaces for illegal purposes or to breach any laws."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    >
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="10dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="We reserve the right to remove comments and/or posts. We also reserve the right to restrict users who don’t follow these guidelines, have online pages containing offensive material and/content, or for any other reason."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    >
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="10dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Avoid quoting out of context and include a credit for the original author as the source of material."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="10dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="You must not abuse, harass, threaten, impersonate or intimidate other JOLTT users."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="10dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="You may not use the JOLTT service for any illegal or unauthorized purpose. International users agree to comply with all local laws regarding online conduct and acceptable content."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="10dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="You must not create or submit unwanted email or comments to any JOLTT members (Spam)."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical"
+                    >
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="10dp"
+                        app:tint="@color/red" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="You must not transmit any worms or viruses or any code of a destructive nature."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="10dp"
+                        app:tint="@color/red" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="We reserve the right to modify or terminate the JOLTT service for any reason, without notice at any time."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="We reserve the right to alter these Terms of Use at any time. If the alterations constitute a material change to the Terms of Use, we will notify you via internet mail according to the preference expressed on your account. What constitutes a (material change) will be determined at our sole discretion, in good faith and using common sense and reasonable judgement."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="We reserve the right to refuse service to anyone for any reason at any time."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="JOLTT's terms state they will not rent or sell a user’s information without consent, but may share non-personal information with third-party organizations, service providers, affiliates, and advertising partners that help JOLTT provide the service."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="In addition, CUnow's terms describe that a person's distinct mobile device identifier and other device-specific information may be collected and stored. This distinct identifier could be used by CUnow or third party affiliates to track and target content and advertising to users."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical" >
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="JOLTT's terms state that they may combine a user’s information with other information and share de-identified and aggregated information with third-parties. JOLTT may display advertisements and promotions on the service."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp" />
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="CUnow's terms state they use commercially reasonable safeguards to help secure a user's information collected through the service. The terms also state that CUnow takes reasonable steps to verify a user's identity before granting them access to an account. However, the policies do not clearly indicate whether or not a user's data is encrypted while in transit or at rest. CUnow's terms also do not disclose how they would notify users in the event of a data breach."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                >
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="In addition, JOLTT's terms describe that a person's distinct mobile device identifier and other device-specific information may be collected and stored. This distinct identifier could be used by JOLTT or third party affiliates to track and target content and advertising to users."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="You will not share your account or password with anyone, and you must protect the security of your account and your password. You’re responsible for notifying us of any unauthorized use. You’re responsible for any activity associated with your account."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp" />
-            </LinearLayout>
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="JOLTT's terms state they use commercially reasonable safeguards to help secure a user's information collected through the service. The terms also state that JOLTT takes reasonable steps to verify a user's identity before granting them access to an account. However, the policies do not clearly indicate whether or not a user's data is encrypted while in transit or at rest. JOLTT's terms also do not disclose how they would notify users in the event of a data breach."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_margin="7dp"
-                    android:src="@drawable/doble_arrow"
-                    app:tint="@color/red" />
-
-                <TextView
-                    android:layout_width="86dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="5dp"
-                    android:fontFamily="@font/amiko"
-                    android:text="POST"
-                    android:textColor="@color/red"
-                    android:textStyle="bold" />
-            </LinearLayout>
- <LinearLayout
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:orientation="horizontal"
-     android:layout_gravity="center_vertical">
-     <ImageView
-         android:layout_width="7dp"
-         android:layout_height="7dp"
-         android:src="@drawable/star"
-         android:layout_margin="5dp"
-         app:tint="@color/red"/>
-     <TextView
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="You may not post sexually suggestive photos."
-         android:fontFamily="@font/amiko"
-         android:layout_margin="5dp"/>
-
- </LinearLayout>
-
-          <LinearLayout
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:orientation="horizontal"
-              android:layout_gravity="center_vertical">
-              <ImageView
-                  android:layout_width="10dp"
-                  android:layout_height="10dp"
-                  android:src="@drawable/star"
-                  android:layout_margin="5dp"
-                  app:tint="@color/red"/>
-              <TextView
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="CUnow's terms state it is a platform for users to post content, including photos, comments and other materials to the service and to share user content publicly. This means that other users may search, see, use, or share any user content that is posted and made publicly available through the service. "
-                  android:fontFamily="@font/amiko"
-                  android:layout_margin="5dp"/>
-
-          </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-               <ImageView
-                   android:layout_width="15dp"
-                   android:layout_height="15dp"
-                   android:src="@drawable/doble_arrow"
-                   android:layout_margin="7dp"
-                   app:tint="@color/red"/>
-
-                <TextView
-                    android:layout_width="86dp"
-                    android:layout_height="25dp"
-                    android:text="COMMENT"
-                    android:layout_margin="5dp"
-                    android:fontFamily="@font/amiko"
-                    android:textColor="@color/red"
-                    android:textStyle="bold"
-                    />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-          <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-              android:src="@drawable/star"
-              android:layout_margin="5dp"
-              app:tint="@color/red"/>
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="CUnow's terms state they provide social interactions between users who can post comments, likes or other messages on a user's content. These interactions include direct messages between individual users, and disappearing messages."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    >
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="You will not share your account or password with anyone, and you must protect the security of your account and your password. You’re responsible for notifying us of any unauthorized use. You’re responsible for any activity associated with your account."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp" />
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" Any false, defamatory, libelous, abusive, threatening, racially offensive, sexually explicit, obscene, harmful, vulgar, hateful, illegal, or otherwise objectionable content;"
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                   <TextView
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:text="Any content that personally attacks an individual whose identity can be easily learned from what you post (An example of a personal attack is posting negative comments about an individual in a way meant to demean that person. Note that posting your opinion about someone’s ideas or actions is not a personal attack);"
-                       android:fontFamily="@font/amiko"
-                       android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:src="@drawable/doble_arrow"
-                    android:layout_margin="7dp"
-                    app:tint="@color/red"/>
-
-                <TextView
-                    android:layout_width="196dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="35dp"
-                    android:text="POLICY NOTICE"
-                    android:layout_margin="7dp"
-                    android:fontFamily="@font/amiko"
-                    android:textColor="@color/red"
-                    android:textStyle="bold"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Users are notified if there are any material changes to the policies."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="•	Privacy policies indicate the method used to notify a user when policies are updated."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:src="@drawable/doble_arrow"
-                    android:layout_margin="7dp"
-                    app:tint="@color/red"/>
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="196dp"
-                    android:layout_height="35dp"
-                    android:text="POLICY PRINCIPLES"
-                    android:layout_margin="7dp"
-                    android:fontFamily="@font/amiko"
-                    android:textColor="@color/red"
-                    android:textStyle="bold"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Privacy policies do not indicate any privacy principles, layered notices, or a table of contents."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Users can contact the vendor about any privacy policy questions, complaints, or material changes to the policies."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:src="@drawable/doble_arrow"
-                    android:layout_margin="7dp"
-                    app:tint="@color/red"/>
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_margin="7dp"
+                        android:src="@drawable/doble_arrow"
+                        app:tint="@color/red" />
 
-                <TextView
-                    android:layout_width="196dp"
-                    android:layout_height="35dp"
-                    android:text="DATA COLLECTION"
-                    android:layout_margin="7dp"
-                    android:fontFamily="@font/amiko"
-                    android:textColor="@color/red"
-                    android:textStyle="bold"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
+                    <TextView
+                        android:layout_width="86dp"
+                        android:layout_height="25dp"
+                        android:layout_margin="5dp"
+                        android:fontFamily="@font/amiko"
+                        android:text="POST"
+                        android:textColor="@color/red"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-android:text="Personally identifiable information (PII) is collected."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="7dp"
+                        android:layout_height="7dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="You may not post sexually suggestive photos."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-android:text="The categories of collected personally identifiable information are indicated."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:fontFamily="@font/amiko"
+                        android:text="JOLTT's terms state it is a platform for users to post content, including photos, comments and other materials to the service and to share user content publicly. This means that other users may search, see, use, or share any user content that is posted and made publicly available through the service. " />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:src="@drawable/doble_arrow"
+                        android:layout_margin="7dp"
+                        app:tint="@color/red"/>
+
+                    <TextView
+                        android:layout_width="86dp"
+                        android:layout_height="25dp"
+                        android:text="COMMENT"
+                        android:layout_margin="5dp"
+                        android:fontFamily="@font/amiko"
+                        android:textColor="@color/red"
+                        android:textStyle="bold"
+                        />
+                </LinearLayout>
+
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Geolocation data are collected."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="JOLTT's terms state they provide social interactions between users who can post comments, likes or other messages on a user's content. These interactions include direct messages between individual users, and disappearing messages."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Biometric or health data are collected."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" Any false, defamatory, libelous, abusive, threatening, racially offensive, sexually explicit, obscene, harmful, vulgar, hateful, illegal, or otherwise objectionable content;"
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Behavioural data are collected."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Any content that personally attacks an individual whose identity can be easily learned from what you post (An example of a personal attack is posting negative comments about an individual in a way meant to demean that person. Note that posting your opinion about someone’s ideas or actions is not a personal attack);"
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:src="@drawable/doble_arrow"
+                        android:layout_margin="7dp"
+                        app:tint="@color/red"/>
+
+                    <TextView
+                        android:layout_width="196dp"
+                        android:layout_height="35dp"
+                        android:text="POLICY NOTICE"
+                        android:layout_margin="7dp"
+                        android:fontFamily="@font/amiko"
+                        android:textColor="@color/red"
+                        android:textStyle="bold"
+                        />
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sensitive data are collected."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Users are notified if there are any material changes to the policies."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Non-personally identifiable information is collected."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="•	Privacy policies indicate the method used to notify a user when policies are updated."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:src="@drawable/doble_arrow"
+                        android:layout_margin="7dp"
+                        app:tint="@color/red"/>
+
+                    <TextView
+                        android:layout_width="196dp"
+                        android:layout_height="35dp"
+                        android:text="POLICY PRINCIPLES"
+                        android:layout_margin="7dp"
+                        android:fontFamily="@font/amiko"
+                        android:textColor="@color/red"
+                        android:textStyle="bold"
+                        />
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Unclear whether free or reduced lunch status is collected."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Privacy policies do not indicate any privacy principles, layered notices, or a table of contents."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Personal information or education records are collected from preK-12 students."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Users can contact the vendor about any privacy policy questions, complaints, or material changes to the policies."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:src="@drawable/doble_arrow"
+                        android:layout_margin="7dp"
+                        app:tint="@color/red"/>
+
+                    <TextView
+                        android:layout_width="196dp"
+                        android:layout_height="35dp"
+                        android:text="DATA COLLECTION"
+                        android:layout_margin="7dp"
+                        android:fontFamily="@font/amiko"
+                        android:textColor="@color/red"
+                        android:textStyle="bold"
+                        />
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Unclear whether specific types of collected information are excluded from the privacy policy."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Personally identifiable information (PII) is collected."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Unclear whether specific types of personal information are not collected."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="The categories of collected personally identifiable information are indicated."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Collection or use of data is not limited to product requirements."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:src="@drawable/doble_arrow"
-                    android:layout_margin="7dp"
-                    app:tint="@color/red"/>
-                <TextView
-                    android:layout_width="296dp"
-                    android:layout_height="35dp"
-                    android:text="CONFESSION ROOM and CIRCLE"
-                    android:layout_margin="7dp"
-                    android:fontFamily="@font/amiko"
-                    android:textColor="@color/red"
-                    android:textStyle="bold" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Geolocation data are collected."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="The CUNow Circle policies will apply to each Member."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Biometric or health data are collected."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Circle is only for connecting people, user can create both private and public circles."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Behavioural data are collected."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                  android:text="You can't point someone out with the wrong words in a circle."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sensitive data are collected."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="If someone reports that a user is using wrong words in the circle, we will investigate the whole matter. After all we will take action."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Non-personally identifiable information is collected."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Confession Room takes the privacy of its users very seriously"
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Unclear whether free or reduced lunch status is collected."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Personal information or education records are collected from preK-12 students."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Unclear whether specific types of collected information are excluded from the privacy policy."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Unclear whether specific types of personal information are not collected."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Collection or use of data is not limited to product requirements."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:src="@drawable/doble_arrow"
+                        android:layout_margin="7dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="296dp"
+                        android:layout_height="35dp"
+                        android:text="CONFESSION ROOM and CIRCLE"
+                        android:layout_margin="7dp"
+                        android:fontFamily="@font/amiko"
+                        android:textColor="@color/red"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="The JOLTT Circle policies will apply to each Member."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Circle is only for connecting people, user can create both private and public circles."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="You can't point someone out with the wrong words in a circle."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="If someone reports that a user is using wrong words in the circle, we will investigate the whole matter. After all we will take action."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Confession Room takes the privacy of its users very seriously"
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="
 We’re always trying to improve the Services, so they may change over time. We may suspend or discontinue any part of the Services, or we may introduce new features or impose limits on certain features or restrict access to parts or all of the Services."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center_vertical">
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:src="@drawable/star"
-                android:layout_margin="5dp"
-                app:tint="@color/red"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="
 User should not create any such circle which is Violence or related to dirty video....if we get such report then we will take action against it."
-                android:fontFamily="@font/amiko"
-                android:layout_margin="5dp"/>
-        </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Whenever you upload material to the Confession Room, or to make contact with other users of the Confession Room, you must comply with our Acceptable Use Standards. You warrant that any such contribution does comply with those standards, and you indemnify us for any breach of that warranty."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/star"
-                    android:layout_margin="5dp"
-                    app:tint="@color/red"/>
-                <TextView
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Whenever you upload material to the Confession Room, or to make contact with other users of the Confession Room, you must comply with our Acceptable Use Standards. You warrant that any such contribution does comply with those standards, and you indemnify us for any breach of that warranty."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="We also have the right to disclose your identity to any third party who is claiming that any material posted or uploaded by you to our platform is defamatory of them, a violation of their intellectual property rights, or of their right to privacy."
-                    android:fontFamily="@font/amiko"
-                    android:layout_margin="5dp"/>
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/star"
+                        android:layout_margin="5dp"
+                        app:tint="@color/red"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="We also have the right to disclose your identity to any third party who is claiming that any material posted or uploaded by you to our platform is defamatory of them, a violation of their intellectual property rights, or of their right to privacy."
+                        android:fontFamily="@font/amiko"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+
+
+
             </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        </LinearLayout>
 
         </LinearLayout>
 

@@ -19,7 +19,7 @@
         android:clickable="true"
         android:focusable="true"
         android:visibility="gone"
-        app:srcCompat="@drawable/ic_settings"
+        app:srcCompat="@drawable/ic_edit"
         app:tint="@color/white" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -32,7 +32,7 @@
         android:clickable="true"
         android:focusable="true"
         android:visibility="gone"
-        app:srcCompat="@drawable/ic_edit"
+        app:srcCompat="@drawable/ic_settings"
         app:tint="@color/white" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -56,25 +56,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="a. CUnow is a platform for users to post content, including photos, videos, comments, and other information. CUnow provides social interactions between users who can post comments, likes, or other messages on a user's content. These interactions include direct messages between individual users, and disappearing messages. CUnow's terms state they collect a broad range of personal information from people using the site, and about friends and contacts of people using CUnow. CUnow's terms state they use commercially reasonable safeguards to help secure a user's information collected through the service." />
+                android:text="@string/introduction_aboutUs" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="@string/introduction_b" />
+                android:text="@string/tnc_aboutUs" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="@string/introduction_c" />
+                android:text="@string/notice_about_us" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="@string/introduction_d" />
+                android:text="d. If you fail to comply with these Terms or any other applicable terms or policies, we may suspend or terminate your App or account, as described below.
+" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -87,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="@string/founder" />
+                android:text="@string/founder_about_us" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -101,13 +102,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="@string/co_founder" />
+                android:text="@string/cofounder_aboutUs" />
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
 
     </ScrollView>
+
 
 
 </LinearLayout>
