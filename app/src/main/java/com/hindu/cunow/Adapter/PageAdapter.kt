@@ -125,4 +125,5 @@ class PageAdapter(private var mContext: Context,
 
         })
     }
+
 }

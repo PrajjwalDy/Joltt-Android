@@ -6,5 +6,6 @@ class CourseModel {
     val coursePlatform:String? = null
     val courseLink:String? = null
     val courseDescription:String? = null
+    val courseDuration:String? = null
     val courseID:String? = null
 }

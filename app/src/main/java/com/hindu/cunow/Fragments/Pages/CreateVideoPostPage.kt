@@ -14,6 +14,15 @@ import android.widget.MediaController
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.android.exoplayer2.DefaultRenderersFactory
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.source.MediaSource
+import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
+import com.google.android.exoplayer2.upstream.DataSource
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
+import com.google.android.exoplayer2.util.Util
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -29,14 +38,18 @@ class CreateVideoPostPage : AppCompatActivity() {
     private var pageId =""
     private var pageAdmin = ""
     private var pageName = ""
+
     //constants to pick video
     private val VIDEO_PICK_GALLARY_CODE = 100
     private val VIDEO_PICK_CAMERA_CODE = 101
+
     //PERMISSION REQUEST CODE
     private val CAMERA_REQUEST_CODE = 102
+
     //APPLY FOR CAMERA REQUEST PERMISSION
-    private lateinit var cameraPermission:Array<String>
+    private lateinit var cameraPermission: Array<String>
     private var videoUri: Uri? = null
+    private lateinit var player: SimpleExoPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,19 +63,6 @@ class CreateVideoPostPage : AppCompatActivity() {
         //init camera permission
         cameraPermission = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
-        /*caption_privacy.setOnClickListener {
-            videoPreviewPage.visibility = View.GONE
-            captionVideo_page.visibility = View.VISIBLE
-            buttonPanel_video_page.visibility = View.VISIBLE
-        }
-
-
-*/
-        next_step_video_page.setOnClickListener {
-            println("Page Admin is: "+pageAdmin)
-            println("Page Name is: "+pageName)
-            println("Page ID is: "+pageId)
-        }
 
         if (videoUri == null){
             videoPickDialog()
@@ -70,28 +70,32 @@ class CreateVideoPostPage : AppCompatActivity() {
             Toast.makeText(this,"Video Picked", Toast.LENGTH_SHORT).show()
         }
 
+        uploadVideo_page.setOnClickListener {
+            uploadVideo()
+        }
+
+        changeVideo_page.setOnClickListener {
+            videoPickDialog()
+        }
+
     }
 
-    private fun setVideoToVideoView() {
-        val mediaController = MediaController(this)
-        mediaController.setAnchorView(videoPreviewPage)
+    private fun initializePlayer(videoUri: Uri) {
+        player = SimpleExoPlayer.Builder(this, DefaultRenderersFactory(this))
+            .setTrackSelector(DefaultTrackSelector(this))
+            .build()
+        videoPlayer_page.player = player
 
-        //media controller
-        videoPreviewPage.setMediaController(mediaController)
-        videoPreviewPage.setVideoURI(videoUri)
-        videoPreviewPage.requestFocus()
-        videoPreviewPage.setOnPreparedListener { mediaPlayer ->
-            val videoRatio = mediaPlayer.videoWidth / mediaPlayer.videoHeight.toFloat()
-            val screenRatio = videoPreviewPage.width / videoPreviewPage.height.toFloat()
-            val scaleX = videoRatio / screenRatio
-            if (scaleX >= 1f) {
-                videoPreviewPage.scaleX = scaleX
-            } else {
-                videoPreviewPage.scaleY = 1f / scaleX
-            }
-        }
-        videoPreviewPage.start()
-        //videoPreview.setOnPreparedListener{videoPreview.pause()}
+        val dataSourceFactory: DataSource.Factory = DefaultDataSourceFactory(
+            this,
+            Util.getUserAgent(this, "ExoPlayer")
+        )
+        val mediaSource: MediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
+            .createMediaSource(MediaItem.fromUri(videoUri))
+
+        player.setMediaSource(mediaSource)
+        player.prepare()
+        player.play()
     }
 
     private fun videoPickDialog() {
@@ -180,7 +184,6 @@ class CreateVideoPostPage : AppCompatActivity() {
         progressDialog.setContentView(R.layout.porgress_dialog)
         progressDialog.show()
 
-
         val timestamp = ""+System.currentTimeMillis()
         val filePathName = "Videos/video_$timestamp"
         //upload video using url of video to storage
@@ -201,18 +204,20 @@ class CreateVideoPostPage : AppCompatActivity() {
                 val postMap = HashMap<String,Any>()
                 postMap["postId"] = postId!!
                 postMap["publisher"] = pageId
-                postMap["caption"] = captionVideo.text.toString()
+                postMap["caption"] = captionVideo_page.text.toString()
                 postMap["videoId"] = "$downloadUri"
                 postMap["iImage"] = false
                 postMap["video"] = true
                 postMap["page"] = true
+                postMap["pageAdmin"] = pageAdmin
+                postMap["pageName"] = pageName
 
                 println("reached her3")
                 Toast.makeText(this,"Video shared successfully",Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
                 progressDialog.dismiss()
-                ref.child(postId).setValue(postMap).addOnCanceledListener{
+                ref.child(postId).setValue(postMap).addOnCompleteListener{
                     Toast.makeText(this,"Image shared successfully",Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
@@ -242,18 +247,15 @@ class CreateVideoPostPage : AppCompatActivity() {
         if (resultCode == RESULT_OK){
             if (resultCode == VIDEO_PICK_CAMERA_CODE){
                 videoUri = data!!.data
-                setVideoToVideoView()
+                initializePlayer(videoUri!!)
             }else if (requestCode == VIDEO_PICK_GALLARY_CODE){
                 videoUri = data!!.data
-                setVideoToVideoView()
+                initializePlayer(videoUri!!)
             }
 
         }else{
             Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show()
         }
     }
-
-
-
 
 }

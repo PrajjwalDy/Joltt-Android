@@ -143,6 +143,7 @@ class HomeViewModel() : ViewModel(), IPostCallback {
             .getInstance()
             .getReference("UserInterest")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child("interest")
         userInterestRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 userInterest!!.clear()

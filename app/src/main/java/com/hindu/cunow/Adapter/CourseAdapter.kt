@@ -1,12 +1,14 @@
 package com.hindu.cunow.Adapter
 
 import android.content.Context
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hindu.cunow.Model.CourseModel
@@ -20,11 +22,20 @@ class CourseAdapter(private val mContext:Context,
         private val courseImage: ImageView = itemView.findViewById(R.id.courseImage) as ImageView
         private val courseName: TextView = itemView.findViewById(R.id.courseName) as TextView
         private val coursePlatform: TextView = itemView.findViewById(R.id.coursePlatform) as TextView
+        private val courseDuration: TextView = itemView.findViewById(R.id.courseDuration) as TextView
+        private val courseDescription: TextView = itemView.findViewById(R.id.courseDescription) as TextView
 
         fun bind(list:CourseModel){
             Glide.with(mContext).load(list.courseImage).into(courseImage)
             courseName.text = list.courseName
             coursePlatform.text = list.coursePlatform
+            courseDescription.text = list.courseDescription
+            courseDuration.text = list.courseDuration
+
+            itemView.setOnClickListener {
+                openLink(list.courseLink!!)
+            }
+
         }
     }
 
@@ -39,5 +50,11 @@ class CourseAdapter(private val mContext:Context,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(mCourse[position])
+    }
+
+    private fun openLink(link:String){
+        val builder = CustomTabsIntent.Builder()
+        val customTabsIntent = builder.build()
+        customTabsIntent.launchUrl(mContext, Uri.parse(link))
     }
 }

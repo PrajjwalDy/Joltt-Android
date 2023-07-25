@@ -67,13 +67,13 @@ class AbroadFragment : Fragment() {
         val currentUserUid = currentUser?.uid
 
         // Assuming you have a "users" node in your database with "interests" field as a list
-        val userReference = FirebaseDatabase.getInstance().reference.child("Clubs").child(currentUserUid!!)
+        val userReference = FirebaseDatabase.getInstance().reference.child("UserInterest").child(currentUserUid!!)
         userReference.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val interestData = dataSnapshot.child("interest").getValue(object : GenericTypeIndicator<List<String>>(){})
+                val interestData = dataSnapshot.child("interest").getValue()
 
-                if (interestData != null){
-                    val userInterest: List<String> = interestData
+                if (interestData is Map<*, *>){
+                    val userInterest =interestData.values.toList().filterIsInstance<String>()
 
                     // Step 2: Fetch posts with matching interests
                     val postsReference = FirebaseDatabase.getInstance().getReference("AbroadSchemes")

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -21,7 +22,7 @@ import com.hindu.cunow.databinding.ExplorePagesFragmentBinding
 import com.hindu.cunow.databinding.MyPagesFragmentBinding
 import kotlinx.android.synthetic.main.my_pages_fragment.*
 
-class MyPagesFragment : Fragment() {
+class    MyPagesFragment : Fragment() {
 
     var recyclerView:RecyclerView? = null
     private var pageAdapter:PageAdapter? = null
@@ -51,9 +52,7 @@ class MyPagesFragment : Fragment() {
     private fun initView(root: View) {
         recyclerView = root.findViewById(R.id.myPages_RV) as RecyclerView
         recyclerView!!.setHasFixedSize(true)
-        val linearLayoutManager = LinearLayoutManager(context)
-        linearLayoutManager.reverseLayout = true
-        linearLayoutManager.stackFromEnd = true
+        val linearLayoutManager:LinearLayoutManager= GridLayoutManager(context,2)
         recyclerView!!.layoutManager = linearLayoutManager
     }
 
@@ -77,7 +76,6 @@ class MyPagesFragment : Fragment() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
 
         })

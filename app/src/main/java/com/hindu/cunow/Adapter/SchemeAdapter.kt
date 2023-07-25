@@ -1,12 +1,14 @@
 package com.hindu.cunow.Adapter
 
 import android.content.Context
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hindu.cunow.Model.SchemeModel
@@ -24,11 +26,14 @@ class SchemeAdapter(private val mContext:Context,
 
                             fun bind(list:SchemeModel){
                                 Glide.with(mContext).load(list.schemeImage).into(schemeImage)
-                                schemeBy.text = list.schemeBy
+                                schemeBy.text = list.schmeBy
                                 schemeName.text = list.schemeName
                                 schemeDes.text = list.schemeDesc
-                            }
 
+                                itemView.setOnClickListener {
+                                    openLink(list.schemeLink!!)
+                                }
+                            }
                         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -44,5 +49,10 @@ class SchemeAdapter(private val mContext:Context,
         holder.bind(mScheme[position])
     }
 
+    private fun openLink(link:String){
+        val builder = CustomTabsIntent.Builder()
+        val customTabsIntent = builder.build()
+        customTabsIntent.launchUrl(mContext, Uri.parse(link))
+    }
 
 }

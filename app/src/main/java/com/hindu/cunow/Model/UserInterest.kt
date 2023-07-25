@@ -1,6 +1,6 @@
 package com.hindu.cunow.Model
 
-data class UserInterest(
+data class  UserInterest(
     val userTags: List<String>
 )
 

@@ -134,9 +134,9 @@ class PageDetailsActivity : AppCompatActivity() {
             }
             dialogView.selectVideoPage.setOnClickListener {
                 val intent = Intent(this,CreateVideoPostPage::class.java)
-                intent.putExtra("Id",pageId)
-                intent.putExtra("admin",pageAdmin)
-                intent.putExtra("name",pageName_detailsPage_appbar.text.toString())
+                intent.putExtra("pageId",pageId)
+                intent.putExtra("pageAdmin",pageAdmin)
+                intent.putExtra("pageName",pageName_detailsPage_appbar.text.toString())
                 startActivity(intent)
                 alertdialog.dismiss()
             }

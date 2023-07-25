@@ -69,7 +69,6 @@ class VideoUploadActivity : AppCompatActivity() {
         }
 
 
-
         if (videoUri == null) {
             videoPickDialog()
         } else {

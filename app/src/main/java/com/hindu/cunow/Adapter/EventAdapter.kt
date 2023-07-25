@@ -3,6 +3,7 @@ package com.hindu.cunow.Adapter
 import android.content.Context
 import android.content.Intent
 import android.media.Image
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
@@ -29,16 +31,22 @@ class EventAdapter(private val mContext: Context,
                        inner class ViewHolder(@NonNull itemView: View):RecyclerView.ViewHolder(itemView){
                            private val eventImage: ImageView = itemView.findViewById(R.id.eventImage) as ImageView
                            private val eventName:TextView = itemView.findViewById(R.id.eventName) as TextView
-                           private val eventDes:TextView = itemView.findViewById(R.id.eventDesc) as TextView
-                           private val button:Button = itemView.findViewById(R.id.interested_button) as Button
+                           private val eventTime:TextView = itemView.findViewById(R.id.eventTime) as TextView
+                           private val eventDate:TextView = itemView.findViewById(R.id.eventDate) as TextView
+                           private val eventMode:Button = itemView.findViewById(R.id.eventMode) as Button
+
 
                            fun bind(list:EventModel){
                                Glide.with(mContext).load(list.eventImg).into(eventImage)
                                eventName.text = list.eventName
-                               eventDes.text = list.eventDescription
-                               getStatus(list.eventId!!,button)
-                               button.setOnClickListener {
-                                   addInterest(list.eventId,button)
+                               eventDate.text = list.eventDate
+                               eventMode.text = list.eventMode
+                               eventTime.text = list.eventTime
+
+                               itemView.setOnClickListener {
+                                   val builder = CustomTabsIntent.Builder()
+                                   val customTabsIntent = builder.build()
+                                   customTabsIntent.launchUrl(mContext, Uri.parse(list.eventLink))
                                }
                            }
                        }
@@ -60,50 +68,6 @@ class EventAdapter(private val mContext: Context,
             val intent = Intent(mContext, EventDetails::class.java)
             intent.putExtra("eventId",event.eventId)
         }
-    }
-
-    private fun addInterest(id:String, button: Button){
-
-        when(button.text){
-            "Interested"->{
-                FirebaseDatabase.getInstance().reference
-                    .child("Events")
-                    .child(id)
-                    .child("Interested")
-                    .child(FirebaseAuth.getInstance().currentUser!!.uid)
-                    .setValue(true)
-            }else->{
-            FirebaseDatabase.getInstance().reference
-                .child("Events")
-                .child(id)
-                .child("Interested")
-                .child(FirebaseAuth.getInstance().currentUser!!.uid)
-                .removeValue()
-            }
-        }
-
-
-    }
-
-    private fun getStatus(id:String,button: Button){
-        val ref = FirebaseDatabase.getInstance().reference
-            .child("Events")
-            .child(id)
-            .child("Interested")
-        ref.addValueEventListener(object :ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.hasChild(FirebaseAuth.getInstance().currentUser!!.uid)){
-                    button.text = "Undo"
-                }else{
-                    button.text = "Interested"
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
     }
 
 }

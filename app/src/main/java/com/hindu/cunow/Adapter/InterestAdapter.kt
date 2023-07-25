@@ -19,6 +19,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.jsoup.select.Evaluator.Id
+import kotlin.math.min
 
 class InterestAdapter(
     private val mContext: Context,
@@ -54,7 +55,7 @@ class InterestAdapter(
                 holder.interest.setTextColor(Color.WHITE)
                 checker = true
                 CoroutineScope(Dispatchers.IO).launch {
-                    addInterest(mInterest[position].interestTV!!)
+                    addInterest(mInterest[position].interestTV!!, mInterest[position].inteID!!)
                 }
 
             } else {
@@ -62,13 +63,13 @@ class InterestAdapter(
                 holder.interest.setTextColor(Color.parseColor("#226880"))
                 checker = false
                 CoroutineScope(Dispatchers.IO).launch {
-                    removeInterest(mInterest[position].interestTV!!)
+                    removeInterest(mInterest[position].interestTV!!,mInterest[position].inteID!!)
                 }
             }
         }
     }
 
-    private suspend fun addInterest(tag: String) {
+    private suspend fun addInterest(tag: String, interestId:String) {
         FirebaseDatabase
             .getInstance()
             .reference
@@ -77,12 +78,22 @@ class InterestAdapter(
             .child(tag)
             .setValue(tag)
 
+        FirebaseDatabase.getInstance().reference.child("InterestUser")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child(interestId)
+            .setValue(true)
+
 
     }
 
-    private fun removeInterest(ID: String) {
+    private fun removeInterest(ID: String,interestId:String) {
         FirebaseDatabase.getInstance().reference.child("UserInterest")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
             .child(ID).removeValue()
+
+        FirebaseDatabase.getInstance().reference.child("InterestUser")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child(interestId)
+            .removeValue()
     }
 }

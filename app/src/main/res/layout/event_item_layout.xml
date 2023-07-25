@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="2dp"
     app:cardCornerRadius="7pt">
 
     <RelativeLayout
@@ -11,18 +12,16 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/event_image_cv"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_centerVertical="true"
-            android:layout_margin="5dp"
-            app:cardCornerRadius="5pt">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="7pt">
 
             <ImageView
                 android:id="@+id/eventImage"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/test_img" />
+                android:src="@drawable/profile_testimg" />
 
         </androidx.cardview.widget.CardView>
 
@@ -30,46 +29,87 @@
             android:id="@+id/eventName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="10dp"
-            android:fontFamily="@font/amiko"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/comfortaa"
             android:text="Event Name"
-            android:textColor="@color/red"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@color/vivaMagenta"
+            android:layout_below="@+id/event_image_cv"
+            android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/eventDesc"
+        <LinearLayout
+            android:id="@+id/ll_eventDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/eventName"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
+            android:gravity="center_vertical"
             android:layout_marginBottom="5dp"
-            android:layout_toEndOf="@+id/event_image_cv"
-            android:ellipsize="end"
-            android:justificationMode="inter_word"
-            android:maxLines="6"
-            android:text="@string/lorem_sample"
-            android:textColor="@color/black" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/interested_button"
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/schedule"/>
+
+            <TextView
+                android:id="@+id/eventDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/eventName"
+                android:layout_marginStart="5dp"
+                android:ellipsize="end"
+                android:text="Date"
+                android:fontFamily="@font/comfortaa"
+                android:justificationMode="inter_word"
+                android:textColor="@color/red" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_eventTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_eventDate"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/stopwatch"/>
+
+            <TextView
+                android:id="@+id/eventTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/eventName"
+                android:layout_marginStart="5dp"
+                android:ellipsize="end"
+                android:text="Date"
+                android:fontFamily="@font/comfortaa"
+                android:justificationMode="inter_word"
+                android:textColor="@color/red" />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/eventMode"
             android:layout_width="150dp"
             android:layout_height="40dp"
-            android:layout_below="@id/eventDesc"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_toEndOf="@id/event_image_cv"
-            android:background="@drawable/ll_bg_red"
-            android:fontFamily="@font/amiko"
-            android:text="Intrested"
+            android:layout_below="@+id/ll_eventTime"
+            android:text="Online"
             android:textAllCaps="false"
-            android:textStyle="bold" />
+            android:fontFamily="@font/comfortaa"
+            android:textColor="@color/white"
+            android:layout_margin="10dp"
+            android:background="@drawable/viva_magenta_round_bg"/>
+
 
     </RelativeLayout>
 

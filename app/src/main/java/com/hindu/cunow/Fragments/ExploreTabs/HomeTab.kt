@@ -103,7 +103,7 @@ class HomeTab : Fragment() {
         }
         root.ll_projects.setOnClickListener {
             Navigation.findNavController(root)
-                .navigate(R.id.action_navigation_dashboard_to_projectsFragment)
+                .navigate(R.id.action_navigation_dashboard_to_eventFragment)
         }
         root.ll_courses.setOnClickListener {
             Navigation.findNavController(root)

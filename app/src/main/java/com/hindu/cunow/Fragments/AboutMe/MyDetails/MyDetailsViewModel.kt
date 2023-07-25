@@ -69,7 +69,7 @@ class MyDetailsViewModel : ViewModel(), IinterestCallback, ISkillCallback, IExpe
     private fun loadInterest() {
         val interestList = ArrayList<InterestModel>()
         myInterest = ArrayList()
-        val database = FirebaseDatabase.getInstance().reference.child("UserInterest")
+        val database = FirebaseDatabase.getInstance().reference.child("InterestUser")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
 
         database.addValueEventListener(object : ValueEventListener {
