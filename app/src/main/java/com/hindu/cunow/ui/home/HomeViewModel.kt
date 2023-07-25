@@ -67,12 +67,13 @@ class HomeViewModel() : ViewModel(), IPostCallback {
                         if (tag.startsWith("#")){
                             if (userInterestsString.contains(tag)) {
                                 postList.add(postModel)
+                                postList = postList.distinct() as ArrayList<PostModel>
                                 break
                             }
                         }
                     }
                 }
-                postList = postList.distinct() as ArrayList<PostModel>
+                //postList = postList.distinct() as ArrayList<PostModel>
 
                 postLoadCallback.onPostPCallbackLoadSuccess(postList)
             }

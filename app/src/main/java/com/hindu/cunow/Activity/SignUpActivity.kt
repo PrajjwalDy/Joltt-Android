@@ -106,6 +106,7 @@ class SignUpActivity : AppCompatActivity() {
         userRef.child(currentUserID).setValue(dataMap).addOnCompleteListener { task->
             if (task.isSuccessful){
                 progressDialog.dismiss()
+                addFirstVisit(currentUserID)
 
                 firebaseUser!!.sendEmailVerification()
                     .addOnCompleteListener { task ->
@@ -135,6 +136,13 @@ class SignUpActivity : AppCompatActivity() {
             }
 
         }
+
+    }
+
+    private fun addFirstVisit(userId:String){
+        FirebaseDatabase.getInstance().reference.child("FirstVisit")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .setValue(true)
 
     }
 

@@ -170,16 +170,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun updateVisit(view: View) {
-        val ref = FirebaseDatabase.getInstance().reference
-            .child("Users")
-        val postMap = HashMap<String, Any>()
-        postMap["firstVisit"] = false
-        ref.child(FirebaseAuth.getInstance().currentUser!!.uid)
-            .updateChildren(postMap)
-        CoroutineScope(Dispatchers.IO).launch {
-            checkFirstVisit()
-        }
+        FirebaseDatabase.getInstance().reference
+            .child("FirstVisit")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .removeValue()
     }
+
 
     //BUILD HASHTAG
     private fun buildHasTag(postId: String) {
@@ -258,19 +254,14 @@ class HomeFragment : Fragment() {
 
     private fun checkFirstVisit() {
         val dataRef = FirebaseDatabase
-            .getInstance().reference.child("Users")
-            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .getInstance().reference.child("FirstVisit")
         dataRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    val data = snapshot.getValue(UserModel::class.java)
-                    if (data!!.firstVisit) {
-                        welcome_screen.visibility = View.VISIBLE
-                        //postLayout_ll.visibility = View.GONE
-                    } else {
-                        checker = "confirmed"
-                        postLayout_ll.visibility = View.VISIBLE
-                    }
+                if (snapshot.hasChild(FirebaseAuth.getInstance().currentUser!!.uid)) {
+                    welcome_screen.visibility = View.VISIBLE
+                }else{
+                    welcome_screen.visibility = View.GONE
+                    postLayout_ll.visibility = View.VISIBLE
                 }
                 CoroutineScope(Dispatchers.IO).launch {
                     checkFollowingList()
@@ -314,11 +305,10 @@ class HomeFragment : Fragment() {
     private fun checkPost() {
         val database = FirebaseDatabase.getInstance().reference
             .child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
-            .child("MyPosts")
 
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
+                if (snapshot.hasChild("MyPosts") || snapshot.hasChild("FollowingPages")) {
                     checker = "yes"
                 } else {
                     checker = "no"

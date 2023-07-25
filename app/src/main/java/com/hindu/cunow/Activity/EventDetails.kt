@@ -31,10 +31,10 @@ class EventDetails : AppCompatActivity() {
                 if (snapshot.exists()){
                     val data = snapshot.getValue(EventModel::class.java)
                     Glide.with(this@EventDetails).load(data!!.eventImg).into(eventImage_details)
-                    eventName_details.text = data.eventName.toString()
+                   /* eventName_details.text = data.eventName.toString()
                     eventDescription_details.text = data.eventDescription.toString()
                     startDate.text = data.startDate.toString()
-                    endDate.text = data.endDate.toString()
+                    endDate.text = data.endDate.toString()*/
                 }
             }
             override fun onCancelled(error: DatabaseError) {
