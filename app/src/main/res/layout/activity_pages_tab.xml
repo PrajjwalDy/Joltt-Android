@@ -24,11 +24,10 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="5dp"
-                android:fontFamily="@font/amiko"
-                android:text="PagesNow"
+                android:fontFamily="@font/comfortaa"
+                android:text="Pages"
                 android:textColor="@color/red"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/CP_TV"
