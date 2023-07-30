@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -30,9 +31,11 @@ import kotlinx.android.synthetic.main.fragment_home.addText_ET
 import kotlinx.android.synthetic.main.fragment_home.add_image
 import kotlinx.android.synthetic.main.fragment_home.add_text
 import kotlinx.android.synthetic.main.fragment_home.add_video
+import kotlinx.android.synthetic.main.fragment_home.chatNotification_Count
 import kotlinx.android.synthetic.main.fragment_home.create_post_fab
 import kotlinx.android.synthetic.main.fragment_home.dev_message_tv
 import kotlinx.android.synthetic.main.fragment_home.developerMessage_CV
+import kotlinx.android.synthetic.main.fragment_home.ll_chatcount
 import kotlinx.android.synthetic.main.fragment_home.ll_empty_posts
 import kotlinx.android.synthetic.main.fragment_home.postLayout_ll
 import kotlinx.android.synthetic.main.fragment_home.postRecyclerView
@@ -45,6 +48,7 @@ import kotlinx.android.synthetic.main.fragment_home.view.create_post_fab
 import kotlinx.android.synthetic.main.fragment_home.view.developerMessage_CV
 import kotlinx.android.synthetic.main.fragment_home.view.imin
 import kotlinx.android.synthetic.main.fragment_home.view.onlyText_CV
+import kotlinx.android.synthetic.main.fragment_home.view.strike
 import kotlinx.android.synthetic.main.fragment_home.view.uploadTextBtn
 import kotlinx.android.synthetic.main.fragment_home.welcome_screen
 import kotlinx.coroutines.CoroutineScope
@@ -109,6 +113,7 @@ class HomeFragment : Fragment() {
 
         CoroutineScope(Dispatchers.IO).launch() {
             launch { developerMessage() }
+            launch { chatNotification() }
         }
 
         //first time visit
@@ -166,6 +171,10 @@ class HomeFragment : Fragment() {
             root.onlyText_CV.visibility = View.GONE
         }
 
+        root.strike.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_navigation_home_to_chatFragment)
+        }
         return root
     }
 
@@ -175,7 +184,6 @@ class HomeFragment : Fragment() {
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
             .removeValue()
     }
-
 
     //BUILD HASHTAG
     private fun buildHasTag(postId: String) {
@@ -287,10 +295,10 @@ class HomeFragment : Fragment() {
                 if (snapshot.exists()) {
                     val count = snapshot.childrenCount.toInt()
                     if (count <= 1 && checker == "no") {
-                        ll_empty_posts.visibility = View.VISIBLE
-                        postRecyclerView.visibility = View.GONE
+                        ll_empty_posts?.visibility = View.VISIBLE
+                        postRecyclerView?.visibility = View.GONE
                     } else {
-                        postRecyclerView.visibility = View.VISIBLE
+                        postRecyclerView?.visibility = View.VISIBLE
                     }
                 }
             }
@@ -347,17 +355,19 @@ class HomeFragment : Fragment() {
         })
     }
 
-    /*private suspend fun chatNotification(){
+    private suspend fun chatNotification(){
         val data = FirebaseDatabase.getInstance().reference.child("ChatMessageCount")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
 
-        data.addListenerForSingleValueEvent(object :ValueEventListener{
+        data.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
-                    chatNotification_Count.visibility = View.VISIBLE
-                    chatNotification_Count_text.text = snapshot.childrenCount.toString()
+                    ll_chatcount?.visibility =View.VISIBLE
+                    chatNotification_Count?.visibility = View.VISIBLE
+                    chatNotification_Count?.text = snapshot.childrenCount.toString()
                 }else{
-                    chatNotification_Count.visibility = View.GONE
+                    ll_chatcount?.visibility =View.GONE
+                    chatNotification_Count?.visibility = View.GONE
                 }
             }
 
@@ -366,7 +376,7 @@ class HomeFragment : Fragment() {
             }
 
         })
-    }*/
+    }
     private fun addButtonClicked() {
         setVisibility(clicked)
         setAnimation(clicked)
@@ -396,7 +406,16 @@ class HomeFragment : Fragment() {
             add_image.startAnimation(toBottom)
             add_video.startAnimation(toBottom)
             create_post_fab.startAnimation(rotateClose)
+            clearAnimation()
+
         }
+
+    }
+
+    private fun clearAnimation(){
+        add_image.clearAnimation()
+        add_text.clearAnimation()
+        add_video.clearAnimation()
     }
 
 

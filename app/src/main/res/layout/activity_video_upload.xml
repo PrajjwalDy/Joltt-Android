@@ -7,106 +7,125 @@
     android:orientation="vertical"
     tools:context=".Activity.VideoUploadActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/white">
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/addVideo_img"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/add_video_img"
+            android:layout_margin="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Nowadays Moving Media is the Trend"
+            android:layout_toEndOf="@+id/addVideo_img"
+            android:textSize="25sp"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/comfortaa"
+            android:textColor="@color/red"
+            android:layout_centerVertical="true"/>
+
+
+
+
+    </RelativeLayout>
+
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    android:layout_margin="5dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/captionVideo"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:maxHeight="200dp"
+            android:backgroundTint="@color/white"
+            android:hint="Say somethig aboot your post"
+            android:padding="10dp"
+            android:textSize="14sp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="10dp"
+            android:layout_margin="5dp">
+
+            <com.google.android.exoplayer2.ui.PlayerView
+                android:id="@+id/videoPlayer_upload"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_gravity="center"
+                app:controller_layout_id="@layout/exoplayer_custom"
+                app:played_color="@color/red"
+                app:resize_mode="zoom" />
+
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:id="@+id/buttonPanel_video"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="10dp"
+            android:layout_margin="5dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/postPrivacy_video"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/ocean_green_button"
+                android:elevation="5dp"
                 android:fontFamily="@font/amiko"
-                android:text="Video Preview"
-                android:textColor="@color/red"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
+                android:text="Post Privacy"
+                android:textAllCaps="false"
+                android:textColor="@color/red" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/changeVideo"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/ocean_green_button"
+                android:elevation="5dp"
+                android:fontFamily="@font/amiko"
+                android:text="Change Video"
+                android:textAllCaps="false"
+                android:textColor="@color/red" />
 
-    <EditText
-        android:id="@+id/captionVideo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:elevation="10dp"
-        android:maxHeight="200dp"
-        android:backgroundTint="@color/red"
-        android:hint="Say somethig aboot your post"
-        android:padding="10dp"
-        android:textSize="14sp" />
+        </LinearLayout>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="10dp"
-        android:layout_margin="5dp">
-
-        <com.google.android.exoplayer2.ui.PlayerView
-            android:id="@+id/videoPlayer_upload"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_gravity="center"
-            app:controller_layout_id="@layout/exoplayer_custom"
-            app:played_color="@color/red"
-            app:resize_mode="zoom" />
-
-
-    </androidx.cardview.widget.CardView>
-
-    <LinearLayout
-        android:id="@+id/buttonPanel_video"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="10dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/postPrivacy_video"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:elevation="5dp"
-            android:fontFamily="@font/amiko"
-            android:text="Post Privacy"
-            android:textAllCaps="false"
-            android:textColor="@color/red" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/changeVideo"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:elevation="5dp"
-            android:fontFamily="@font/amiko"
-            android:text="Change Video"
-            android:textAllCaps="false"
-            android:textColor="@color/red" />
 
     </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
+
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/uploadVideo"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@drawable/viva_magenta_round_bg"
-        android:layout_margin="10dp"
+        android:layout_margin="20dp"
         android:text="Joltt"
         android:textSize="16sp"
         android:fontFamily="@font/comfortaa"

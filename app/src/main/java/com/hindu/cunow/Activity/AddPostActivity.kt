@@ -4,7 +4,9 @@ import android.Manifest
 import android.app.Activity
 import android.app.Dialog
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -13,10 +15,20 @@ import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -34,9 +46,19 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.theartofdev.edmodo.cropper.CropImage
+import com.yalantis.ucrop.UCrop
 import kotlinx.android.synthetic.main.activity_add_post.*
+import kotlinx.android.synthetic.main.activity_web_scraping.previewImage
+import kotlinx.android.synthetic.main.fragment_home.addText_ET
+import kotlinx.android.synthetic.main.fragment_home.view.onlyText_CV
 import kotlinx.android.synthetic.main.post_privacy_dialog.view.*
 import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
+import java.io.IOException
+import java.lang.ref.WeakReference
+import java.util.UUID
 
 class AddPostActivity : AppCompatActivity() {
     private var privacy = "public"
@@ -44,21 +66,73 @@ class AddPostActivity : AppCompatActivity() {
     private var imageUri : Uri? = null
     private var storagePostImageRef: StorageReference? = null
 
+    private val GALLERY_REQUEST_CODE = 1234
+    private val WRITE_EXTERNAL_STORAGE_CODE=1
+
+    lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_post)
 
         storagePostImageRef = FirebaseStorage.getInstance().reference.child("Posted Images")
 
-        cropImage()
+        checkPermission()
+        requestPermission()
+
+
+        pickImage.setOnClickListener {
+            if (checkPermission()){
+                pickFromGallery()
+            }else{
+                Toast.makeText(this,"Please Allow the Required Permission",Toast.LENGTH_SHORT).show()
+                requestPermission()
+            }
+        }
+
+        pickVideo.setOnClickListener {
+            startActivity(Intent(this,VideoUploadActivity::class.java))
+            finish()
+        }
 
         shareImage_btn.setOnClickListener {
-            uploadImage()
+            if (imageUri == null){
+                uploadOnlyText()
+            }else{
+                uploadImage()
+            }
+
+        }
+
+        activityResultLauncher  = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+
+
+            if (result.resultCode== RESULT_OK) {
+
+                var extras: Bundle? = result.data?.extras
+
+                var imageUri: Uri
+
+                var imageBitmap = extras?.get("data") as Bitmap
+
+                var imageResult: WeakReference<Bitmap> = WeakReference(
+                    Bitmap.createScaledBitmap(
+                        imageBitmap, imageBitmap.width, imageBitmap.height, false
+                    ).copy(
+                        Bitmap.Config.RGB_565, true
+                    )
+                )
+
+                var bm = imageResult.get()
+
+                imageUri = saveImage(bm, this)
+
+                launchImageCrop(imageUri)
+            }
         }
 
         //PRIVACY BUTTON
 
-        changePrivacy_btn.setOnClickListener {
+        /*changePrivacy_btn.setOnClickListener {
             val dialogView = LayoutInflater.from(this).inflate(R.layout.post_privacy_dialog, null)
 
             val dialogBuilder = android.app.AlertDialog.Builder(this)
@@ -77,17 +151,46 @@ class AddPostActivity : AppCompatActivity() {
                 Toast.makeText(this,"Post privacy set to public",Toast.LENGTH_SHORT).show()
                 alertDialog.dismiss()
             }
-        }
+        }*/
     }
 
-    //CROP IMAGE
-    private fun cropImage(){
-        CropImage.activity()
-            .setAspectRatio(3, 4)
-            .start(this)
-
+    //CHECK PERMISSION
+    private fun checkPermission(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.CAMERA
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
+    //REQUEST PERMISSION
+    private fun requestPermission() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA
+            ),
+            100
+        )
+    }
+
+    //CHOOSE IMAGE FORM GALLERY
+    private fun pickFromGallery() {
+
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        intent.type = "image/*"
+        val mimeTypes = arrayOf("image/jpeg", "image/png", "image/jpg")
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+        intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+        startActivityForResult(intent, GALLERY_REQUEST_CODE)
+    }
 
     //UPLOAD IMAGE
     private fun uploadImage(){
@@ -161,13 +264,102 @@ class AddPostActivity : AppCompatActivity() {
             imageUri = result.uri
             postImage_preview.setImageURI(imageUri)
         }
+
+        when (requestCode) {
+
+            GALLERY_REQUEST_CODE -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    data?.data?.let { uri ->
+                        launchImageCrop(uri)
+                    }
+                }
+
+                else{
+
+                }
+            }
+
+        }
+
+        if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
+            val resultUri :Uri ?= UCrop.getOutput(data!!)
+
+            setImage(resultUri!!)
+
+            if (resultUri != null) {
+                imageUri=resultUri
+            }
+        }
+
     }
 
-    companion object {
-        private const val GALLERY = 1
-        private const val CAMERA = 2
-        // A constant variable for place picker
-        private const val PLACE_AUTOCOMPLETE_REQUEST_CODE = 3
+    //UPLOAD ONLY TEXT
+    private fun uploadOnlyText(){
+        if (addText_ET.text.isEmpty()) {
+            Toast.makeText(this, "Please Write something", Toast.LENGTH_SHORT).show()
+        } else {
+            val dataRef = FirebaseDatabase.getInstance().reference.child("Post")
+            val postId = dataRef.push().key
+            val dataMap = HashMap<String, Any>()
+
+            dataMap["postId"] = postId!!
+            dataMap["caption"] = caption_image.text.toString()
+            dataMap["publisher"] = FirebaseAuth.getInstance().currentUser!!.uid
+            dataMap["iImage"] = false
+            dataMap["video"] = false
+            dataMap["page"] = false
+            dataMap["public"] = privacy == "public"
+            dataRef.child(postId).updateChildren(dataMap)
+            buildHasTag(postId)
+            Toast.makeText(this, "Post added Successfully", Toast.LENGTH_SHORT).show()
+            caption_image.text.clear()
+        }
+    }
+
+    //IMAGE CROPPING FUNCTION
+    private fun launchImageCrop(uri: Uri) {
+        var destination:String=StringBuilder(UUID.randomUUID().toString()).toString()
+        var options:UCrop.Options=UCrop.Options()
+
+        UCrop.of(Uri.parse(uri.toString()), Uri.fromFile(File(cacheDir,destination)))
+            .withOptions(options)
+            .withAspectRatio(3F, 2F)
+            .useSourceImageAspectRatio()
+            .withMaxResultSize(2000, 2000)
+            .start(this)
+    }
+
+    //SET IMAGE TO IMAGE VIEW
+    private fun setImage(uri: Uri){
+        postImage_preview.visibility = View.VISIBLE
+        Glide.with(this)
+            .load(uri)
+            .into(postImage_preview)
+        imagePickOption_RL.visibility = View.GONE
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        when(requestCode) {
+
+            WRITE_EXTERNAL_STORAGE_CODE -> {
+
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+
+                } else {
+                    Toast.makeText(this, "Enable permissions", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
+        }
+
     }
 
     // HASHTAG FUNCTION
@@ -220,4 +412,28 @@ class AddPostActivity : AppCompatActivity() {
 
         })
     }
+    private fun saveImage(image: Bitmap?, context: Context): Uri {
+
+        var imageFolder=File(context.cacheDir,"Joltt")
+        var uri: Uri? = null
+
+        try {
+            imageFolder.mkdirs()
+            var file:File= File(imageFolder,"joltt_image.png")
+            var stream: FileOutputStream = FileOutputStream(file)
+            image?.compress(Bitmap.CompressFormat.JPEG,100,stream)
+            stream.flush()
+            stream.close()
+            uri= FileProvider.getUriForFile(context.applicationContext,"com.hindu.cunow"+".provider",file)
+
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        }catch (e: IOException){
+            e.printStackTrace()
+        }
+
+        return uri!!
+
+    }
+
 }

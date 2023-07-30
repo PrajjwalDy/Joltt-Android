@@ -18,8 +18,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:src="@drawable/report_option"
                 android:layout_margin="10dp"/>
 
@@ -27,10 +27,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/red"
-                android:text="Find support"
-                android:fontFamily="@font/amiko"
+                android:text="Report"
+                android:fontFamily="@font/comfortaa"
                 android:layout_margin="5dp"
-                android:textSize="12sp"/>
+                android:textSize="16sp"/>
 
 
         </LinearLayout>
@@ -43,8 +43,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:src="@drawable/delete_option"
                 android:layout_margin="10dp"/>
 
@@ -52,10 +52,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/red"
-                android:text="Delete this confession"
-                android:fontFamily="@font/amiko"
+                android:text="Delete"
+                android:fontFamily="@font/comfortaa"
                 android:layout_margin="5dp"
-                android:textSize="12sp"/>
+                android:textSize="16sp"/>
 
 
         </LinearLayout>

@@ -267,7 +267,7 @@
                                 android:layout_marginEnd="10dp"
                                 android:layout_marginBottom="10dp"
                                 android:fontFamily="@font/comfortaa"
-                                android:text="Chadigarh University"
+                                android:text="College Name"
                                 android:textColor="@color/white"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -291,7 +291,7 @@
                                 android:layout_marginTop="-5dp"
                                 android:layout_toStartOf="@+id/divider_img"
                                 android:fontFamily="@font/comfortaa"
-                                android:text="Bachelor of Engineering"
+                                android:text="Course/Subject"
                                 android:textColor="@color/white"
                                 android:textSize="14sp" />
 

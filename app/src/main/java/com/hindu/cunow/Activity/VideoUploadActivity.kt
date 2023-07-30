@@ -70,7 +70,7 @@ class VideoUploadActivity : AppCompatActivity() {
 
 
         if (videoUri == null) {
-            videoPickDialog()
+            videoPickGallery()
         } else {
             Toast.makeText(this, "Video Picked", Toast.LENGTH_SHORT).show()
         }
@@ -97,58 +97,11 @@ class VideoUploadActivity : AppCompatActivity() {
         }
 
         changeVideo.setOnClickListener {
-            videoPickDialog()
-        }
-
-    }
-
-    //VIDEO PICK DIALOG
-    private fun videoPickDialog() {
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.video_upload_dialogbox, null)
-        val dialogBuilder = android.app.AlertDialog.Builder(this)
-            .setView(dialogView)
-
-        val alertDialog = dialogBuilder.show()
-
-        dialogView.pickGallery.setOnClickListener {
             videoPickGallery()
-            alertDialog.dismiss()
         }
-        dialogView.recordVideo.setOnClickListener {
-            alertDialog.dismiss()
-            if (!checkCameraPermission()) {
-                requestCameraPermission()
-            } else {
-                recordVideo()
-            }
-        }
-
     }
 
     //REQUEST CAMERA PERMISSION
-    private fun requestCameraPermission() {
-        //RequestCameraPermission
-        ActivityCompat.requestPermissions(
-            this,
-            cameraPermission,
-            CAMERA_REQUEST_CODE
-        )
-    }
-
-    //PERMISSION CAMERA
-    private fun checkCameraPermission(): Boolean {
-        val result1 = ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.CAMERA
-        ) == PackageManager.PERMISSION_GRANTED
-
-        val result2 = ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-        ) == PackageManager.PERMISSION_GRANTED
-
-        return result1 && result2
-    }
 
     //DIALOG VIDEO PICKER
     private fun videoPickGallery() {
@@ -221,13 +174,13 @@ class VideoUploadActivity : AppCompatActivity() {
                 postMap["video"] = true
                 postMap["page"] = false
 
-                println("reached her3")
+                buildHasTag(postId)
                 Toast.makeText(this, "Video shared successfully", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, MainActivity::class.java))
+
                 finish()
                 progressDialog.dismiss()
                 ref.child(postId).setValue(postMap).addOnCompleteListener {
-                    buildHasTag(postId)
                     Toast.makeText(this, "Post shared successfully", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
@@ -307,7 +260,7 @@ class VideoUploadActivity : AppCompatActivity() {
         val hashtagsRef = FirebaseDatabase.getInstance().getReference("hashtags")
 
         for (hashtag in hashtags) {
-            val key = hashtag.toString().removeRange(0,1)
+            val key = hashtag.toString().removePrefix("#")
             val tagMap = HashMap<String,Any>()
             tagMap["tagName"] = hashtag
             hashtagsRef.child(key).updateChildren(tagMap)
@@ -318,7 +271,7 @@ class VideoUploadActivity : AppCompatActivity() {
 
     //POST COUNT
     private fun getPostCount(tag:String){
-        val key = tag.removeRange(0,1)
+        val key = tag.removePrefix("#")
         val dataRef = FirebaseDatabase.getInstance()
             .reference.child("hashtags")
             .child(key)

@@ -103,8 +103,11 @@ dependencies {
     //API CALL OKHTTP
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
 
-    //WEB VIEW
-    //implementation 'androidx.webkit:webkit:1.7.0'
+    //U-CROP
+    implementation("com.github.yalantis:ucrop:2.2.6-native")
+
+    //Toast
+    implementation 'com.github.usman18:TastyToasty:v1.2'
 
 
 

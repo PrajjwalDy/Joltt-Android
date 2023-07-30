@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="10dp"
     android:layout_margin="2dp"
+    app:cardCornerRadius="10dp"
     app:cardElevation="10dp">
 
     <RelativeLayout
@@ -29,18 +29,18 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_margin="10dp"
-                    android:src="@drawable/test_img"/>
+                    android:src="@drawable/test_img" />
 
                 <TextView
                     android:id="@+id/userName_comm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/comfortaa"
                     android:text="Lorem Ipsum"
-                    android:textStyle="bold"
                     android:textColor="@color/red"
                     android:textSize="16sp"
-                    android:fontFamily="@font/comfortaa"
-                    android:layout_gravity="center_vertical"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -48,23 +48,23 @@
                 android:id="@+id/query_article_TV1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:justificationMode="inter_word"
-                android:maxLines="4"
+                android:layout_margin="10dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/comfortaa"
-                android:textColor="@color/black"
-                android:layout_margin="10dp"
-                android:text="@string/lorem_sample"/>
+                android:justificationMode="inter_word"
+                android:maxLines="4"
+                android:text="@string/lorem_sample"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/query_article_TV2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:justificationMode="inter_word"
-                android:textColor="@color/red"
                 android:layout_margin="12dp"
-                android:visibility="gone"
-                android:text="@string/lorem_sample"/>
+                android:justificationMode="inter_word"
+                android:text="@string/lorem_sample"
+                android:textColor="@color/red"
+                android:visibility="gone" />
 
 
         </LinearLayout>
@@ -74,30 +74,31 @@
             android:id="@+id/ll_options_comm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="10dp"
             android:layout_alignParentEnd="true"
-            android:layout_margin="10dp">
+            android:layout_margin="10dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal">
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/ll_up_vote"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_alignParentEnd="true"
                     android:layout_margin="5dp"
-                    android:gravity="center_horizontal">
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
                     <ImageView
                         android:id="@+id/upVote"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/thumbsup_blank"/>
+                        android:src="@drawable/thumbsup_blank" />
 
                     <TextView
                         android:id="@+id/upVoteCount"
@@ -105,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:text="0"
                         android:textColor="@color/red"
-                        android:textSize="12sp"/>
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -113,10 +114,10 @@
                     android:id="@+id/ll_down_vote"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_toStartOf="@+id/ll_up_vote"
                     android:layout_margin="5dp"
-                    android:gravity="center_horizontal">
+                    android:layout_toStartOf="@+id/ll_up_vote"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
                     <ImageView
                         android:id="@+id/downVote"
@@ -130,7 +131,7 @@
                         android:layout_height="wrap_content"
                         android:text="0"
                         android:textColor="@color/red"
-                        android:textSize="12sp"/>
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -138,16 +139,15 @@
                     android:id="@+id/ll_reply"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_margin="5dp"
-                    android:gravity="center_horizontal">
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
                     <ImageView
                         android:id="@+id/reply_img"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/confession_comment"
-                        />
+                        android:src="@drawable/confession_comment" />
 
                     <TextView
                         android:id="@+id/reply_count"
@@ -155,16 +155,16 @@
                         android:layout_height="wrap_content"
                         android:text="0"
                         android:textColor="@color/red"
-                        android:textSize="12sp"/>
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/moreOption_community"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/more_option_comm"
                     android:layout_gravity="center_horizontal"
-                    android:id="@+id/moreOption"/>
+                    android:src="@drawable/more_option_comm" />
 
             </LinearLayout>
 
@@ -172,9 +172,7 @@
         </androidx.cardview.widget.CardView>
 
 
-
     </RelativeLayout>
-    
 
 
 </androidx.cardview.widget.CardView>

@@ -29,6 +29,8 @@ import kotlinx.android.synthetic.main.activity_edit_profile.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.net.HttpURLConnection
+import java.net.URL
 
 class EditProfileActivity : AppCompatActivity() {
 
@@ -36,8 +38,14 @@ class EditProfileActivity : AppCompatActivity() {
     var relation = ""
 
     private var myUrl = ""
-    private var imageUri:Uri? = null
-    private var storageProfileImageRef:StorageReference? = null
+    private var imageUri: Uri? = null
+    private var storageProfileImageRef: StorageReference? = null
+    private var gitHubLink =""
+    private var instagramLink = ""
+    private var linkedLink = ""
+    private var portfolioLink = ""
+    private var threadLink = ""
+    private var twitterLink = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +54,7 @@ class EditProfileActivity : AppCompatActivity() {
             finish()
         }
 
-        val view  = View(this)
+        val view = View(this)
 
         storageProfileImageRef = FirebaseStorage.getInstance()
             .reference
@@ -55,7 +63,7 @@ class EditProfileActivity : AppCompatActivity() {
 
         change_ProfileImage_text.setOnClickListener {
             CropImage.activity()
-                .setAspectRatio(1,1)
+                .setAspectRatio(1, 1)
                 .start(this@EditProfileActivity)
         }
 
@@ -105,21 +113,20 @@ class EditProfileActivity : AppCompatActivity() {
         }
 
         //DONE BUTTON
-        proceed_editProfile.setOnClickListener {view->
+        proceed_editProfile.setOnClickListener { view ->
             CoroutineScope(Dispatchers.IO).launch {
                 launch { updateInformation(view) }
                 launch { updateExperience() }
                 launch { updateSkills() }
             }
-
-
         }
     }
 
     //UPDATE INFORMATION
-    private fun updateInformation(view: View){
+    private fun updateInformation(view: View) {
+        links()
         val databaseRef = FirebaseDatabase.getInstance().reference.child("Users")
-        val dataMap = HashMap<String,Any>()
+        val dataMap = HashMap<String, Any>()
         dataMap["fullName"] = ProfileUserName_editText.text.toString()
         dataMap["bio"] = Bio_EditText.text.toString()
         dataMap["place"] = editTextAddress.text.toString()
@@ -134,23 +141,25 @@ class EditProfileActivity : AppCompatActivity() {
         dataMap["crush"] = relation == "crush"
         dataMap["college"] = ET_college.text.toString()
         dataMap["course"] = ET_course.text.toString()
-        dataMap["githubLink"] = ET_github.text.toString()
-        dataMap["linkedin"] = ET_linkedin.text.toString()
-        dataMap["portfolio"] = ET_portfolio.text.toString()
-        dataMap["instagram"] = ET_instagram.text.toString()
-        dataMap["twitter"] = ET_twitter.text.toString()
-        dataMap["threads"] = ET_threads.text.toString()
+        dataMap["githubLink"] = gitHubLink
+        dataMap["linkedin"] = linkedLink
+        dataMap["portfolio"] = portfolioLink
+        dataMap["instagram"] = instagramLink
+        dataMap["twitter"] = twitterLink
+        dataMap["threads"] = threadLink
+
+
 
         databaseRef.child(FirebaseAuth.getInstance().currentUser!!.uid)
             .updateChildren(dataMap)
-        Snackbar.make(view,"Update successful", Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(view, "Update successful", Snackbar.LENGTH_SHORT).show()
         finish()
     }
 
     //UPDATE PROFILE IMAGE
     private fun updateProfileImage() {
         if (imageUri == null) {
-            Toast.makeText(this,"You haven't selected any picture",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "You haven't selected any picture", Toast.LENGTH_SHORT).show()
             //Snackbar.make(this@EditPr,"Update successful", Snackbar.LENGTH_SHORT).show()
         } else {
             val progressDialog = Dialog(this)
@@ -191,7 +200,8 @@ class EditProfileActivity : AppCompatActivity() {
                     ).updateChildren(mapData)
                     progressDialog.dismiss()
                     retrieveUserData()
-                    Toast.makeText(this,"Profile picture updated successfully",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Profile picture updated successfully", Toast.LENGTH_SHORT)
+                        .show()
                 } else {
                     progressDialog.dismiss()
                 }
@@ -204,9 +214,11 @@ class EditProfileActivity : AppCompatActivity() {
         val dataRef = FirebaseDatabase
             .getInstance().reference
             .child("Users")
-            .child(FirebaseAuth
+            .child(
+                FirebaseAuth
                     .getInstance()
-                    .currentUser!!.uid)
+                    .currentUser!!.uid
+            )
 
         dataRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -232,15 +244,15 @@ class EditProfileActivity : AppCompatActivity() {
                     ET_threads.setText(users.threads)
 
                     if (users.male) {
-                        checker ="male"
+                        checker = "male"
                         edit_gender_male.setBackgroundColor(resources.getColor(R.color.red))
                         edit_gender_male.setTextColor(resources.getColor(R.color.white))
                     } else if (users.female) {
-                        checker ="female"
+                        checker = "female"
                         edit_gender_female.setBackgroundColor(resources.getColor(R.color.red))
                         edit_gender_female.setTextColor(resources.getColor(R.color.white))
                     }
-                    if (users.single){
+                    if (users.single) {
                         relation = "single"
                         edit_single.setBackgroundColor(resources.getColor(R.color.pink))
                         edit_single.setTextColor(resources.getColor(R.color.white))
@@ -248,7 +260,7 @@ class EditProfileActivity : AppCompatActivity() {
                         edit_mingle.setTextColor(resources.getColor(R.color.red))
                         edit_crush.setBackgroundColor(resources.getColor(R.color.white))
                         edit_crush.setTextColor(resources.getColor(R.color.red))
-                    }else if (users.committed){
+                    } else if (users.committed) {
                         relation = "mingle"
                         edit_mingle.setBackgroundColor(resources.getColor(R.color.pink))
                         edit_mingle.setTextColor(resources.getColor(R.color.white))
@@ -256,7 +268,7 @@ class EditProfileActivity : AppCompatActivity() {
                         edit_single.setTextColor(resources.getColor(R.color.red))
                         edit_crush.setBackgroundColor(resources.getColor(R.color.white))
                         edit_crush.setTextColor(resources.getColor(R.color.red))
-                    } else if (users.crush){
+                    } else if (users.crush) {
                         relation = "crush"
                         edit_crush.setBackgroundColor(resources.getColor(R.color.pink))
                         edit_crush.setTextColor(resources.getColor(R.color.white))
@@ -275,65 +287,169 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     //Update Skills
-    private fun updateSkills(){
-        val sentence  = editText_skills.text.toString().trim{it <=' '}
-        val words = sentence.split(",")
+    private fun updateSkills() {
+        if (editText_skills.text.isEmpty()) {
+            //DoNothing
+        } else {
+            val sentence = editText_skills.text.toString().trim { it <= ' ' }
+            val words = sentence.split(",")
 
-        //Initialize an empty list of skills
-        val skills = mutableListOf<String>()
+            //Initialize an empty list of skills
+            val skills = mutableListOf<String>()
 
-        //Extract skills from the words
-        for (word in words){
-            skills.add(word)
-        }
+            //Extract skills from the words
+            for (word in words) {
+                skills.add(word)
+            }
 
-        val databaseRef = FirebaseDatabase.getInstance()
-            .getReference("Skills")
-            .child(FirebaseAuth.getInstance().currentUser!!.uid)
-        for (skill in skills){
-            val key = skill.toString()
-            val map = HashMap<String,Any>()
-            map["skillName"] = skill
-            databaseRef.child(key).updateChildren(map)
+            val databaseRef = FirebaseDatabase.getInstance()
+                .getReference("Skills")
+                .child(FirebaseAuth.getInstance().currentUser!!.uid)
+            for (skill in skills) {
+                val key = skill.toString()
+                val map = HashMap<String, Any>()
+                map["skillName"] = skill
+                databaseRef.child(key).updateChildren(map)
+            }
         }
 
     }
 
     //Update Experience
-    private fun updateExperience(){
-        val sentence  = editText_experience.text.toString().trim{it <=' '}
-        val words = sentence.split(",")
+    private fun updateExperience() {
 
-        //Initialize an empty list of skills
-        val experience = mutableListOf<String>()
+        if (editText_experience.text.isEmpty()) {
+            //do nothing
+        } else {
+            val sentence = editText_experience.text.toString().trim { it <= ' ' }
+            val words = sentence.split(",")
 
-        //Extract skills from the words
-        for (word in words){
-            experience.add(word)
-        }
+            //Initialize an empty list of skills
+            val experience = mutableListOf<String>()
 
-        val databaseRef = FirebaseDatabase.getInstance()
-            .getReference("Experience")
-            .child(FirebaseAuth.getInstance().currentUser!!.uid)
-        for (experience in experience){
-            val key = experience.toString()
-            val map = HashMap<String,Any>()
-            map["expName"] = experience
-            databaseRef.child(key).updateChildren(map)
-        }
-    }
-
-        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-            super.onActivityResult(requestCode, resultCode, data)
-
-            if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null)
-            {
-                val result = CropImage.getActivityResult(data)
-                imageUri = result.uri
-                change_ProfileImage.setImageURI(imageUri)
-                updateProfileImage()
+            //Extract skills from the words
+            for (word in words) {
+                experience.add(word)
             }
 
+            val databaseRef = FirebaseDatabase.getInstance()
+                .getReference("Experience")
+                .child(FirebaseAuth.getInstance().currentUser!!.uid)
+            for (experience in experience) {
+                val key = experience.toString()
+                val map = HashMap<String, Any>()
+                map["expName"] = experience
+                databaseRef.child(key).updateChildren(map)
+            }
+        }
+
+
+    }
+
+    //CHECK VALID LINK
+    private fun links(){
+        gitHubLink = if (ET_github.text.toString().isEmpty()){
+            ""
+        }else{
+            if (isWebLinkValid(ET_github.text.toString().trim())){
+                ET_github.text.toString().trim()
+            } else {
+                gitHubLink = ""
+                return
+            }
+        }
+
+        linkedLink = if (ET_linkedin.text.toString().isEmpty()){
+            ""
+        }else{
+            if (isWebLinkValid(ET_linkedin.text.toString().toString())){
+                ET_linkedin.text.toString().toString()
+            } else {
+                linkedLink = ""
+                return
+            }
+        }
+
+        portfolioLink = if (ET_portfolio.text.toString().isEmpty()){
+            ""
+        }else{
+            if (isWebLinkValid(ET_portfolio.text.toString().trim())){
+                ET_portfolio.text.toString().trim()
+            } else {
+               portfolioLink = ""
+                return
+            }
+        }
+
+        instagramLink = if (ET_instagram.text.toString().isEmpty()){
+            ""
+        }else{
+            if (isWebLinkValid(ET_instagram.text.toString().trim())){
+                ET_instagram.text.toString().trim()
+            } else {
+                instagramLink = ""
+                return
+            }
+        }
+
+        twitterLink = if (ET_twitter.text.toString().isEmpty()){
+            ""
+        }else{
+            if (isWebLinkValid(ET_twitter.text.toString().trim())){
+                ET_twitter.text.toString().trim()
+            } else {
+                twitterLink = ""
+                return
+            }
+        }
+
+        threadLink = if (ET_threads.text.toString().isEmpty()){
+            ""
+        }else{
+            if (isWebLinkValid(ET_threads.text.toString().trim())){
+                ET_threads.text.toString().trim()
+            } else {
+                threadLink = ""
+                return
+            }
+        }
+    }
+
+    private fun isWebLinkValid(link: String): Boolean {
+        try {
+            // Step 1: Create a URL object from the given link
+            val url = URL(link)
+
+            // Step 2: Open a connection to the URL
+            val connection = url.openConnection() as HttpURLConnection
+
+            // Step 3: Set the request method (HEAD, which only fetches the header, not the whole content)
+            connection.requestMethod = "HEAD"
+
+            // Step 4: Get the HTTP response code
+            val responseCode = connection.responseCode
+
+            // Step 5: Check if the response code indicates a successful request (status code 200-299)
+            return responseCode in 200..299
+        } catch (e: Exception) {
+            // Any exception occurred while trying to validate the link indicates an invalid link
+            return false
+        }
+    }
+
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
+            val result = CropImage.getActivityResult(data)
+            imageUri = result.uri
+            change_ProfileImage.setImageURI(imageUri)
+            updateProfileImage()
         }
 
     }
+
+
+}

@@ -30,7 +30,7 @@ class EventDetails : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     val data = snapshot.getValue(EventModel::class.java)
-                    Glide.with(this@EventDetails).load(data!!.eventImg).into(eventImage_details)
+                    //Glide.with(this@EventDetails).load(data!!.eventImg).into(eventImage_details)
                    /* eventName_details.text = data.eventName.toString()
                     eventDescription_details.text = data.eventDescription.toString()
                     startDate.text = data.startDate.toString()

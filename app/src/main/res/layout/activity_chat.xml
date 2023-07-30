@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
-        android:background="@color/white">
+        android:background="@color/light_grey">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,8 +31,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/amiko"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/comfortaa"
                 android:text=""
                 android:textColor="@color/red"
                 android:textSize="18sp" />
@@ -44,53 +45,75 @@
         android:id="@+id/chatRV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/sendingLayout_chat"
+        android:layout_above="@+id/ll_chatContent"
         android:layout_below="@+id/appBar_chat" />
 
-    <RelativeLayout
-        android:id="@+id/sendingLayout_chat"
+    <LinearLayout
+        android:id="@+id/ll_chatContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/chat_message"
+        <ImageView
+            android:id="@+id/chatImage_preview"
+            android:layout_width="150dp"
+            android:visibility="gone"
+            android:layout_height="150dp"
+            android:src="@drawable/profile_testimg"
+            android:layout_gravity="center_horizontal"/>
+
+
+        <RelativeLayout
+            android:id="@+id/sendingLayout_chat"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_toStartOf="@+id/send_chat"
-            android:layout_toEndOf="@+id/selectMedia_chat"
-            android:backgroundTint="@color/white"
-            android:hint="Message"
-            android:textColor="@color/red" />
+            android:background="#f1fbf8"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/selectMedia_chat"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:src="@drawable/gallery" />
 
-        <ImageView
-            android:id="@+id/send_chat"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:src="@drawable/send" />
+            <EditText
+                android:id="@+id/chat_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:padding="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toStartOf="@+id/send_chat"
+                android:layout_toEndOf="@+id/selectMedia_chat"
+                android:background="@drawable/viva_grey_bg"
+                android:fontFamily="@font/comfortaa"
+                android:hint="Message"
+                android:textColor="@color/red" />
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/selectMedia_chat"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/gallery" />
+
+            <ImageView
+                android:id="@+id/send_chat"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/send" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
 
 
 </RelativeLayout>

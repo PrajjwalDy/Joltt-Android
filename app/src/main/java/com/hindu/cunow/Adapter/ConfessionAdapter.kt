@@ -27,6 +27,9 @@ import com.hindu.cunow.Model.ConfessionModel
 import com.hindu.cunow.R
 import kotlinx.android.synthetic.main.activity_comment.*
 import kotlinx.android.synthetic.main.more_option_confession.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ConfessionAdapter(private val mContext: Context,
                         private val mConfession:List<ConfessionModel>,
@@ -44,8 +47,14 @@ class ConfessionAdapter(private val mContext: Context,
         holder.bind(mConfession[position])
         val cList = mConfession[position]
 
-        isLike(cList.confessionId!!,holder.like)
-        totalLike(cList.confessionId!!,holder.totalLike)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            launch { isLike(cList.confessionId!!,holder.like) }
+            launch {  totalLike(cList.confessionId!!,holder.totalLike) }
+            launch { totalComment(cList.confessionId!!,holder.total_comment) }
+
+
+        }
 
         holder.comment.setOnClickListener {
             val intent = Intent(mContext,ConfessionCommentActivity::class.java)
@@ -97,6 +106,7 @@ class ConfessionAdapter(private val mContext: Context,
         val totalLike: TextView = itemView.findViewById(R.id.totalLike_confession) as TextView
         val moreOption: LinearLayout = itemView.findViewById(R.id.moreOptionConfession) as LinearLayout
         val imageCard: CardView = itemView.findViewById(R.id.imageCard) as CardView
+        val total_comment:TextView = itemView.findViewById(R.id.total_comment_confession) as TextView
 
 
         //member function
@@ -210,6 +220,25 @@ class ConfessionAdapter(private val mContext: Context,
 
             }
         }
+
+    private fun totalComment(confessionId: String,textView: TextView){
+        val dbRef = FirebaseDatabase.getInstance().reference.child("ConfessionComment")
+            .child(confessionId)
+
+        dbRef.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val count = snapshot.childrenCount.toInt()
+                    textView.text = count.toString()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
 
 
 }

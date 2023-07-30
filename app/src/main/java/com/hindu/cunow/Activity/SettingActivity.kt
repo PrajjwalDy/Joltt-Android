@@ -61,7 +61,7 @@ class SettingActivity : AppCompatActivity() {
         }
 
         webscraping.setOnClickListener {
-            startActivity(Intent(this,InterestActivity::class.java))
+            startActivity(Intent(this,UserDetailsActivity::class.java))
         }
     }
 }

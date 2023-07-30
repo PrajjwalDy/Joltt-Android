@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/commentProfileImage"
@@ -22,28 +21,28 @@
             android:src="@drawable/profileuser" />
 
         <TextView
+            android:id="@+id/commenterName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:layout_toEndOf="@+id/commentProfileImage"
             android:layout_centerVertical="true"
-            android:textSize="12sp"
-            android:textStyle="bold"
+            android:layout_toEndOf="@+id/commentProfileImage"
+            android:fontFamily="@font/comfortaa"
             android:text="myname"
-            android:fontFamily="@font/amiko"
-            android:id="@+id/commenterName"/>
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
 
         <TextView
             android:id="@+id/commentedText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:fontFamily="@font/amiko"
-            android:layout_toEndOf="@+id/commenterName"
             android:layout_centerVertical="true"
-            android:text="I have commented this"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@+id/commenterName"
             android:layout_toRightOf="@+id/moreOptionComment"
+            android:fontFamily="@font/amiko"
+            android:text="I have commented this"
             android:textColor="#37474F"
             android:textSize="12sp" />
 

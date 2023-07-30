@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.UserDetailsActivity">
+
+    <!--Linear Layout 0-->
+    <ScrollView
+        android:id="@+id/ll_0"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp">
+
+                <TextView
+                    android:id="@+id/head_welcome_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="@font/comfortaa"
+                    android:text="Welcome to"
+                    android:textColor="@color/red"
+                    android:textSize="25sp" />
+
+                <ImageView
+                    android:id="@+id/head_logo"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_toEndOf="@+id/head_welcome_tv"
+                    android:src="@drawable/campus_logo" />
+
+            </RelativeLayout>
+
+
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/girl_robot" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="-50dp"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/comfortaa"
+                android:text="We Are Curious to Know About You"
+                android:textColor="@color/red"
+                android:textSize="25dp" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/proceed_btn_0"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/viva_magenta_round_bg"
+                android:fontFamily="@font/comfortaa"
+                android:text="Proceed"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!--Linear Layout 1-->
+    <ScrollView
+        android:id="@+id/ll_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/head_ll1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/comfortaa"
+                android:text="Choose your Gender"
+                android:textColor="@color/red"
+                android:textSize="25sp" />
+
+            <LinearLayout
+                android:id="@+id/ll_selectGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/head_ll1"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/genderFemale"
+                        android:layout_width="150dp"
+                        android:layout_height="350dp"
+                        android:src="@drawable/gender_female" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/comfortaa"
+                        android:text="Female"
+                        android:textColor="@color/red"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/genderMale"
+                        android:layout_width="150dp"
+                        android:layout_height="350dp"
+                        android:src="@drawable/gender_male" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/comfortaa"
+                        android:text="Male"
+                        android:textColor="@color/red"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/ll_selectGender"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="150dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/campus_logo" />
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <!--Linear Layout 2-->
+    <ScrollView
+        android:id="@+id/ll_2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/headLogo_2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/campus_logo" />
+
+            <ImageView
+                android:id="@+id/bicycleImage"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_below="@id/headLogo_2"
+                android:layout_margin="10dp"
+                android:src="@drawable/bycycle" />
+
+            <TextView
+                android:id="@+id/locationTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bicycleImage"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="-50dp"
+                android:fontFamily="@font/comfortaa"
+                android:text="Your Location"
+                android:textColor="@color/red"
+                android:textSize="25sp" />
+
+
+            <EditText
+                android:id="@+id/location_et_welcome"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/locationTV"
+                android:layout_margin="20dp"
+                android:background="@drawable/viva_grey"
+                android:hint="Varanasi, Uttar Pradesh"
+                android:padding="10dp" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/nextBtn_2"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/location_et_welcome"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="20dp"
+                android:background="@drawable/viva_magenta_round_bg"
+                android:fontFamily="@font/comfortaa"
+                android:text="Next"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <!--Linear Layout 3-->
+
+    <ScrollView
+        android:id="@+id/ll_3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rl_head"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp">
+                <TextView
+                    android:id="@+id/tv_yourCollege"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your College"
+                    android:layout_marginStart="20dp"
+                    android:textSize="25sp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/comfortaa"
+                    android:textColor="@color/red"/>
+
+                <ImageView
+                    android:id="@+id/iv_girlWithBook"
+                    android:layout_width="200dp"
+                    android:layout_height="300dp"
+                    android:src="@drawable/girl_with_book"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_centerVertical="true"/>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@id/rl_head"
+                android:id="@+id/ll_collegeDetails">
+
+                <EditText
+                    android:id="@+id/collegeName_welcome"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/viva_grey"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:padding="10dp"
+                    android:fontFamily="@font/comfortaa"
+                    android:textColor="@color/white"
+                    android:hint="Collgeg Name"
+                    android:layout_marginEnd="20dp"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/et_course_welcome"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="50dp"
+                        android:background="@drawable/viva_grey"
+                        android:hint="Course"
+                        android:padding="10dp"
+                        android:fontFamily="@font/comfortaa"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"/>
+
+                    <EditText
+                        android:id="@+id/et_admission_year"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="50dp"
+                        android:background="@drawable/viva_grey"
+                        android:layout_marginStart="20dp"
+                        android:padding="10dp"
+                        android:hint="Admission year"
+                        android:fontFamily="@font/comfortaa"
+                        android:layout_marginEnd="20dp"/>
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/et_branch_welcome"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/viva_grey"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:padding="10dp"
+                    android:fontFamily="@font/comfortaa"
+                    android:textColor="@color/white"
+                    android:hint="Branch/Subject"
+                    android:layout_marginEnd="20dp"/>
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/nextBtn_3"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/ll_collegeDetails"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/viva_magenta_round_bg"
+                android:fontFamily="@font/comfortaa"
+                android:text="Next"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+            <ImageView
+                android:id="@+id/headLogo_3"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/campus_logo" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <!--Linear Layout 4-->
+
+    <ScrollView
+        android:id="@+id/ll_4"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/headLogo_4"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/campus_logo" />
+
+            <ImageView
+                android:id="@+id/iv_experience_welcome"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:src="@drawable/boy_with_guitar"
+                android:layout_margin="20dp"/>
+
+            <TextView
+                android:id="@+id/tv_exp_quote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="Things that makes you unique"
+                android:fontFamily="@font/comfortaa"
+                android:layout_below="@id/iv_experience_welcome"
+                android:textSize="25dp"
+                android:layout_marginStart="100dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="-50dp"
+                android:textColor="@color/red"/>
+
+            <LinearLayout
+                android:id="@+id/ll_skill_exp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/tv_exp_quote">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Experince"
+                    android:textSize="18sp"
+                    android:textColor="@color/red"
+                    android:fontFamily="@font/comfortaa"
+                    android:layout_marginStart="20dp"/>
+
+                <EditText
+                    android:id="@+id/et_exp_welcome"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@drawable/viva_grey"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:padding="10dp"
+                    android:fontFamily="@font/comfortaa"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:hint="WebDevelopement, ContentWrititng (use ',' to seperate)"
+                    android:layout_marginEnd="20dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Skills"
+                    android:textSize="18sp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/red"
+                    android:fontFamily="@font/comfortaa"
+                    android:layout_marginStart="20dp"/>
+
+                <EditText
+                    android:id="@+id/et_skills_welcome"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/viva_grey"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:padding="10dp"
+                    android:fontFamily="@font/comfortaa"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:hint="UIDesigning, Photoshop (use ',' to seperate)"
+                    android:layout_marginEnd="20dp"/>
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/nextBtn_4"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_below="@+id/ll_skill_exp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/viva_magenta_round_bg"
+                android:fontFamily="@font/comfortaa"
+                android:text="Finish"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

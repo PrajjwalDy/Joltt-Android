@@ -62,36 +62,6 @@ class NotificationsFragment : Fragment() {
             }
         })
 
-        /*database = FirebaseDatabase.getInstance().reference
-            .child("Notification")
-            .child("AllNotification")
-            .child(FirebaseAuth.getInstance().currentUser!!.uid)
-
-        data = mutableListOf()
-
-        adapter = NotificationAdapter(requireContext(),data)
-
-        recyclerView = root.findViewById(R.id.notificationRecycler) as RecyclerView
-        recyclerView!!.addOnScrollListener(object :RecyclerView.OnScrollListener(){
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
-                if (lastVisibleItemPosition == data.size-1){
-                    CoroutineScope(Dispatchers.IO).launch{
-                        loadMoreData()
-                    }
-                }
-            }
-        })
-        recyclerView!!.adapter =adapter
-        recyclerView!!.layoutManager = LinearLayoutManager(context)
-
-        CoroutineScope(Dispatchers.IO).launch{
-            launch { loadInitialData() }
-            launch { markAllAsRead() }
-        }*/
-
         root.followRequest.setOnClickListener {
             Navigation.findNavController(root).navigate(R.id.action_navigation_notifications_to_followRequest2)
         }

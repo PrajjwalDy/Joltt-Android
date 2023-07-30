@@ -12,7 +12,7 @@
         android:layout_height="50dp"
         android:background="@color/white">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal">
@@ -22,12 +22,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="10dp"
-                android:fontFamily="@font/amiko"
-                android:text="ChatNow"
+                android:fontFamily="@font/comfortaa"
+                android:text="Joltt Strike"
+                android:layout_centerInParent="true"
                 android:textColor="@color/red"
                 android:textSize="18dp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                />
+        </RelativeLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -21,18 +21,30 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_margin="5dp"
+                android:layout_centerVertical="true"
                 android:src="@drawable/test_img" />
 
             <TextView
                 android:id="@+id/userName_reply_community"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_centerVertical="true"
                 android:fontFamily="@font/comfortaa"
+                android:layout_toEndOf="@+id/profilePic_replies"
                 android:text="Lorem Ipsum"
                 android:textColor="@color/red"
                 android:textSize="14sp" />
-        </LinearLayout>
+
+            <ImageView
+                android:id="@+id/communityReplies_MO"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/more_option_comm"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"/>
+
+        </RelativeLayout>
 
 
         <RelativeLayout

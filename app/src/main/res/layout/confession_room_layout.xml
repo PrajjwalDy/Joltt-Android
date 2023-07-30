@@ -170,6 +170,7 @@
                         android:src="@drawable/confession_comment"/>
 
                     <TextView
+                        android:id="@+id/total_comment_confession"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/amiko"

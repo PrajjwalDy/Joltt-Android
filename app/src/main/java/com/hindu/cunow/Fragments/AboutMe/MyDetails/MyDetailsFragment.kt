@@ -186,7 +186,9 @@ class MyDetailsFragment : Fragment() {
                 if (snapshot.exists()) {
                     val users = snapshot.getValue(UserModel::class.java)
                     root.from_profile.text = users!!.place
-                    root.branch_profile.text = users!!.branch
+                    root.institutionName.text = users.college
+                    root.student_course.text= users.course
+                    root.branch_profile.text = users.branch
                     root.year_profile.text = "Year: " + users.year
 
                     if (users.male) {

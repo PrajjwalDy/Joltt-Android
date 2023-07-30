@@ -7,6 +7,6 @@
 
 
     <solid
-        android:color="@color/red"/>
+        android:color="@color/vivaMagenta"/>
 
 </shape>

@@ -82,7 +82,6 @@ class CommentAdapter(private val mContext: Context,
         val commentText:TextView = itemView.findViewById(R.id.commentedText) as TextView
         val moreOption: ImageView = itemView.findViewById(R.id.moreOptionComment) as ImageView
 
-
         fun bind(list: CommentModel){
             commentText.text = list.commentText
         }

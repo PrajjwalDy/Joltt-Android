@@ -40,8 +40,9 @@ class NotificationsViewModel : ViewModel(), INotificationCallback {
         val notificationList = ArrayList<NotificationModel>()
         val notificationData = FirebaseDatabase.getInstance().reference.child("Notification").child("AllNotification")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
-        notificationData.addListenerForSingleValueEvent(object :ValueEventListener{
+        notificationData.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                notificationList.clear()
                 for (snapshot in snapshot.children){
                     val nData = snapshot.getValue(NotificationModel::class.java)
                     notificationList.add(nData!!)

@@ -124,11 +124,14 @@ class MyDetailsViewModel : ViewModel(), IinterestCallback, ISkillCallback, IExpe
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
         skillData.addValueEventListener(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                for (snapshot in snapshot.children){
-                    val data = snapshot.getValue(ESModel::class.java)
-                    skillList.add(data!!)
+                if (snapshot.exists()){
+                    for (snapshot in snapshot.children){
+                        val data = snapshot.getValue(ESModel::class.java)
+                        skillList.add(data!!)
+                    }
+                    skillCallback.onSkillListLoadSuccess(skillList)
                 }
-                skillCallback.onSkillListLoadSuccess(skillList)
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -144,11 +147,13 @@ class MyDetailsViewModel : ViewModel(), IinterestCallback, ISkillCallback, IExpe
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
         expData.addValueEventListener(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                for (snapshot in snapshot.children){
-                    val data = snapshot.getValue(ESModel::class.java)
-                    expList.add(data!!)
+                if (snapshot.exists()){
+                    for (snapshot in snapshot.children){
+                        val data = snapshot.getValue(ESModel::class.java)
+                        expList.add(data!!)
+                    }
+                    expCallback.onExpListLoadSuccess(expList)
                 }
-                expCallback.onExpListLoadSuccess(expList)
             }
 
             override fun onCancelled(error: DatabaseError) {

@@ -73,6 +73,7 @@ class CommunityRepliesActivity : AppCompatActivity() {
             dataMap["replyId"] = commentId!!
             dataMap["replyText"] = addReplyEditText.text.toString()
             dataMap["replierId"] = firebaseUser!!.uid
+            dataMap["communityId"] = id
 
             dataRef.child(commentId).updateChildren(dataMap)
             addReplyEditText.text.clear()

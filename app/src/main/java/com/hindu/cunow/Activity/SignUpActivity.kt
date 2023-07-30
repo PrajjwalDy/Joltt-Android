@@ -95,7 +95,7 @@ class SignUpActivity : AppCompatActivity() {
         dataMap["ID"] = uid
         dataMap["password"] = password
         dataMap["phone"] = phone
-        dataMap["profileImage"] = "https://developers.google.cn/web/images/contributors/no-photo.jpg"
+        dataMap["profileImage"] = "https://firebasestorage.googleapis.com/v0/b/cunow-2fcfa.appspot.com/o/user.png?alt=media&token=af6c2872-edb2-4d9b-ac62-2b61cefc8ad1"
         dataMap["verification"] = false
         dataMap["firstVisit"] = true
         dataMap["searchName"] = fullName.toString().lowercase(Locale.getDefault())

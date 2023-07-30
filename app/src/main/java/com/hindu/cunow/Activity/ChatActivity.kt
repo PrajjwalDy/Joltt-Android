@@ -69,12 +69,12 @@ class ChatActivity : AppCompatActivity() {
             if (imageUri != null){
                 uploadImage()
             }else{
-                sendMessage(view)
+                sendMessage(view,recyclerView)
             }
         }
 
         loadUserData()
-        retrieveChat()
+        retrieveChat(recyclerView)
 
     }
 
@@ -83,7 +83,7 @@ class ChatActivity : AppCompatActivity() {
             .start(this)
     }
 
-    private fun sendMessage(view:View){
+    private fun sendMessage(view:View,recyclerView: RecyclerView){
         if (chat_message.text.isEmpty()) {
             Snackbar.make(view, "please write something..", Snackbar.LENGTH_SHORT).show()
         } else {
@@ -114,6 +114,8 @@ class ChatActivity : AppCompatActivity() {
                 .child(profileId)
                 .child(FirebaseAuth.getInstance().currentUser!!.uid)
                 .child(commentId).setValue(true)
+
+            scrollToBottom(recyclerView)
         }
     }
 
@@ -186,7 +188,7 @@ class ChatActivity : AppCompatActivity() {
         })
     }
 
-    private fun retrieveChat(){
+    private fun retrieveChat(recyclerView: RecyclerView){
         val chatData = FirebaseDatabase.getInstance().reference.child("ChatData")
 
         chatData.addValueEventListener(object :ValueEventListener{
@@ -199,6 +201,7 @@ class ChatActivity : AppCompatActivity() {
                         if (chat!!.receiver.equals(FirebaseAuth.getInstance().currentUser!!.uid) && chat.sender.equals(profileId)
                             ||chat.receiver.equals(profileId) && chat.sender.equals(FirebaseAuth.getInstance().currentUser!!.uid) ){
                             chatList!!.add(chat!!)
+                            scrollToBottom(recyclerView)
                         }
 
                     }
@@ -232,7 +235,6 @@ class ChatActivity : AppCompatActivity() {
                 override fun onCancelled(error: DatabaseError) {
                     TODO("Not yet implemented")
                 }
-
             }
         )
     }
@@ -243,7 +245,14 @@ class ChatActivity : AppCompatActivity() {
         {
             val result = CropImage.getActivityResult(data)
             imageUri = result.uri
+            chatImage_preview?.visibility = View.VISIBLE
+            chatImage_preview.setImageURI(imageUri)
+
+            chat_message.setHint("Click on send button to send the image")
         }
     }
 
+    private fun scrollToBottom(recyclerView: RecyclerView){
+        recyclerView.post { recyclerView.scrollToPosition(chatAdapter!!.itemCount-1) }
+    }
 }

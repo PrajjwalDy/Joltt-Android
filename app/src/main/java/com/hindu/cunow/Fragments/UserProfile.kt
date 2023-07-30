@@ -186,7 +186,6 @@ class UserProfile : Fragment() {
         intent.data = Uri.parse(url)
         startActivity(intent)
     }
-
     //Animating the FABs
     private fun addButtonClicked(){
         setVisibility(clicked)
@@ -212,11 +211,22 @@ class UserProfile : Fragment() {
             userMenu.startAnimation(rotateOpen)
         }else{
             blockUser.startAnimation(toBottom)
+            blockUser.visibility = View.GONE
             aboutUser.startAnimation(toBottom)
+            aboutUser.visibility = View.GONE
             chatUser.startAnimation(toBottom)
+            chatUser.visibility = View.GONE
             userMenu.startAnimation(rotateClose)
+            clearAnimation()
         }
     }
+
+    private fun clearAnimation(){
+        blockUser.clearAnimation()
+        aboutUser.clearAnimation()
+        chatUser.clearAnimation()
+    }
+
     //User Info Retrieve Function
     private suspend fun userInfo(){
 
@@ -234,6 +244,27 @@ class UserProfile : Fragment() {
                     instagramLink.text = userData.instagram
                     twitterLink.text = userData.twitter
                     threadsLink.text = userData.threads
+
+
+                    if (userData.githubLink.isNullOrEmpty()){
+                        github.visibility =View.GONE
+                    }
+                    if (userData.portfolio.isNullOrEmpty()){
+                        portfolio.visibility =View.GONE
+                    }
+                    if (userData.instagram.isNullOrEmpty()){
+                        instagram.visibility =View.GONE
+                    }
+                    if (userData.twitter.isNullOrEmpty()){
+                        twitter.visibility =View.GONE
+                    }
+                    if (userData.linkedin.isNullOrEmpty()){
+                        linkedin.visibility =View.GONE
+                    }
+                    if (userData.threads.isNullOrEmpty()){
+                        threads.visibility =View.GONE
+                    }
+
                     /*if (userData.verification){
                         verification_UserPage.visibility = View.VISIBLE
                     }*/
@@ -244,7 +275,6 @@ class UserProfile : Fragment() {
             }
         })
     }
-
     //Privacy Status Function Function
     private suspend fun checkPrivacy(root:View){
         val userRef = FirebaseDatabase.getInstance().reference.child("Users").child(profileId)
@@ -376,7 +406,6 @@ class UserProfile : Fragment() {
 
         })
     }
-
     //Infuse Request Check
     private suspend fun checkRequested(root:View){
         val database = FirebaseDatabase.getInstance().reference.child("Users")
@@ -399,8 +428,7 @@ class UserProfile : Fragment() {
 
         })
     }
-
-    //Check Following and Following Fuction
+    //Check Following and Following Function
     private suspend fun checkFollowAndFollowing(root: View){
         val databaseRef =
             FirebaseDatabase.getInstance().reference
@@ -446,7 +474,6 @@ class UserProfile : Fragment() {
 
         })
     }
-
     //Get Following
     private suspend fun getFollowings(root: View){
         val followingRef = FirebaseDatabase.getInstance().reference
@@ -466,7 +493,6 @@ class UserProfile : Fragment() {
 
         })
     }
-
     //Get Privacy
     private suspend fun privacy(root: View){
         val userRef = FirebaseDatabase.getInstance().reference.child("Users").child(profileId)
@@ -497,7 +523,6 @@ class UserProfile : Fragment() {
 
         })
     }
-
     //Is Blocked Function
     private suspend fun isBlocked(root: View){
         val database = FirebaseDatabase.getInstance().reference.child("Users")
@@ -522,7 +547,6 @@ class UserProfile : Fragment() {
 
         })
     }
-
     //Check Block Status Function
     private suspend fun haveBlocked(root: View){
         val database = FirebaseDatabase.getInstance().reference.child("Users")
@@ -542,7 +566,6 @@ class UserProfile : Fragment() {
             }
         })
     }
-
     //Add Notification
     private suspend fun addNotification(message:String){
         //sendNotification()
@@ -569,7 +592,6 @@ class UserProfile : Fragment() {
 
         }
     }
-
     //User Post function
     private fun retrievePost(){
         val postRef = FirebaseDatabase.getInstance().reference.child("Post")
@@ -613,7 +635,6 @@ class UserProfile : Fragment() {
 
         })
     }
-
     //Checking current user is in users following list
     fun isCurrentUserInList(callback: (Boolean) -> Unit) {
         val database = FirebaseDatabase.getInstance()

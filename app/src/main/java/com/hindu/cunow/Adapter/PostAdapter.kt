@@ -113,6 +113,7 @@ class PostAdapter (private val mContext: Context,
                 Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_home_to_userProfile)
             }
         }
+
         holder.like.setOnClickListener {
             like(holder.like,
                 post.postId!!,zoom,
@@ -179,6 +180,7 @@ class PostAdapter (private val mContext: Context,
                 alertDialog.dismiss()
             }
         }
+
         holder.postCardView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.context, R.anim.card_view_anim))
     }
 
@@ -392,7 +394,7 @@ class PostAdapter (private val mContext: Context,
     private suspend fun totalLikes(postId: String, totalLikes:TextView){
         val databaseRef = FirebaseDatabase.getInstance().reference
             .child("Likes").child(postId)
-        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener{
+        databaseRef.addValueEventListener(object : ValueEventListener{
             @SuppressLint("SetTextI18n")
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){

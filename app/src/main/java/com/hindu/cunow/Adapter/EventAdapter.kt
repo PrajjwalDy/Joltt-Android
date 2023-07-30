@@ -37,17 +37,12 @@ class EventAdapter(private val mContext: Context,
 
 
                            fun bind(list:EventModel){
-                               Glide.with(mContext).load(list.eventImg).into(eventImage)
+                               Glide.with(mContext).load(list.eventImage).into(eventImage)
                                eventName.text = list.eventName
                                eventDate.text = list.eventDate
                                eventMode.text = list.eventMode
                                eventTime.text = list.eventTime
 
-                               itemView.setOnClickListener {
-                                   val builder = CustomTabsIntent.Builder()
-                                   val customTabsIntent = builder.build()
-                                   customTabsIntent.launchUrl(mContext, Uri.parse(list.eventLink))
-                               }
                            }
                        }
 
@@ -65,9 +60,14 @@ class EventAdapter(private val mContext: Context,
 
         holder.bind(mEvent[position])
         holder.itemView.setOnClickListener {
-            val intent = Intent(mContext, EventDetails::class.java)
-            intent.putExtra("eventId",event.eventId)
+          openLink(mEvent[position].eventLink!!)
         }
+    }
+
+    private fun openLink(url:String){
+        val builder = CustomTabsIntent.Builder()
+        val customTabsIntent = builder.build()
+        customTabsIntent.launchUrl(mContext, Uri.parse(url))
     }
 
 }

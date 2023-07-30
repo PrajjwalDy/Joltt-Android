@@ -28,15 +28,12 @@ class VerifyActivity : AppCompatActivity() {
 
             FirebaseAuth.getInstance().currentUser?.reload()?.addOnCompleteListener { task->
                 if (firebaseUser!!.isEmailVerified){
-                    val intent = Intent(this@VerifyActivity, InterestActivity::class.java)
+                    val intent = Intent(this@VerifyActivity, UserDetailsActivity::class.java)
                     startActivity(intent)
                 }else{
                     Snackbar.make(this,view,"Email isn't verified yet!", Snackbar.LENGTH_LONG).show()
                 }
-
             }
-
         }
-
     }
 }

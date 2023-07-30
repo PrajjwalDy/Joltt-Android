@@ -33,6 +33,7 @@ class CourseAdapter(private val mContext:Context,
             courseDuration.text = list.courseDuration
 
             itemView.setOnClickListener {
+
                 openLink(list.courseLink!!)
             }
 
@@ -50,6 +51,7 @@ class CourseAdapter(private val mContext:Context,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(mCourse[position])
+
     }
 
     private fun openLink(link:String){

@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        app:cardBackgroundColor="#42A5F5"
+        app:cardBackgroundColor="@color/vivaMagenta"
         app:cardCornerRadius="5pt"
         app:cardElevation="5dp">
 
@@ -72,9 +72,11 @@
                     android:id="@+id/chatText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:minWidth="30dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="5dp"
-                    android:text="I have to say something"
+                    android:text="hi"
+                    android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 

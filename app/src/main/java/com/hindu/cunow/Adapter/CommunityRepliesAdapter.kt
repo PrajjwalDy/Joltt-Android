@@ -1,6 +1,8 @@
 package com.hindu.cunow.Adapter
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,10 +16,13 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.hindu.cunow.Activity.ReportPostActivity
 import com.hindu.cunow.Model.CommunityReplyModel
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.more_option_confession.view.deleteConfession
+import kotlinx.android.synthetic.main.more_option_confession.view.reportConfession
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,6 +39,7 @@ class CommunityRepliesAdapter(private val mContext:Context,
         private val downVoteCount: TextView = itemView.findViewById(R.id.downVote_count_reply) as TextView
         private val upVote:ImageView = itemView.findViewById(R.id.upVote_reply)
         private val upVoteCount: TextView = itemView.findViewById(R.id.upVoteCount_reply) as TextView
+        val moreOption:ImageView = itemView.findViewById(R.id.communityReplies_MO) as ImageView
 
         fun bind(list:CommunityReplyModel){
             replyText.text = list.replyText
@@ -66,6 +72,34 @@ class CommunityRepliesAdapter(private val mContext:Context,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(mReplies[position])
+        val cList = mReplies[position]
+
+        holder.moreOption.setOnClickListener {
+            val dialogView = LayoutInflater.from(mContext).inflate(R.layout.more_option_confession, null)
+
+            val dialogBuilder = AlertDialog.Builder(mContext)
+                .setView(dialogView)
+
+            val alertDialog = dialogBuilder.show()
+
+            dialogView.reportConfession.setOnClickListener {
+                val intent = Intent(mContext, ReportPostActivity::class.java)
+                intent.putExtra("postId",mReplies[position].replyId+"+communityRepliesId")
+                mContext.startActivity(intent)
+                alertDialog.dismiss()
+            }
+
+            if (cList.replierId != FirebaseAuth.getInstance().currentUser!!.uid){
+                dialogView.deleteConfession.visibility = View.GONE
+            }
+            dialogView.deleteConfession.setOnClickListener {
+                FirebaseDatabase.getInstance().reference.child("Community")
+                    .child(cList.communityId!!)
+                    .child(cList.replyId!!)
+                    .removeValue()
+                alertDialog.dismiss()
+            }
+        }
     }
 
     private fun isUpVote(id:String, button:ImageView){
