@@ -53,6 +53,8 @@ import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_comment.*
+import kotlinx.android.synthetic.main.delete_confirm_layout.cancel_delete
+import kotlinx.android.synthetic.main.delete_confirm_layout.confirmDelete
 import kotlinx.android.synthetic.main.more_option_dialogbox.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -77,8 +79,14 @@ class PostAdapter (private val mContext: Context,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
+        //ANIMATION DECLARATION
         val zoom = AnimationUtils.loadAnimation(mContext, R.anim.zoom)
+        val popUp = AnimationUtils.loadAnimation(mContext, R.anim.pop_up_animation)
+        val fromRight = AnimationUtils.loadAnimation(mContext, R.anim.from_right)
+
+        //DIALOG VIEW DECLARATION
+
+
         val post = mPost[position]
         CoroutineScope(Dispatchers.IO).launch {
             launch { islike(post.postId!!, holder.like) }
@@ -114,6 +122,7 @@ class PostAdapter (private val mContext: Context,
             }
         }
 
+        //LIKE BUTTON
         holder.like.setOnClickListener {
             like(holder.like,
                 post.postId!!,zoom,
@@ -124,6 +133,7 @@ class PostAdapter (private val mContext: Context,
             )
         }
 
+        //COMMENT BUTTON
         holder.comment.setOnClickListener {
             if (post.page){
                 val commentIntent = Intent(mContext,CommentActivity::class.java)
@@ -143,12 +153,17 @@ class PostAdapter (private val mContext: Context,
 
         }
 
+        //COMMENT BUTTON
+
         holder.moreOption.setOnClickListener {
             val dialogView = LayoutInflater.from(mContext).inflate(R.layout.more_option_dialogbox, null)
+
+            dialogView.startAnimation(popUp)
 
             val dialogBuilder = AlertDialog.Builder(mContext)
                 .setView(dialogView)
                 .setTitle("Options")
+
 
             val alertDialog = dialogBuilder.show()
 
@@ -167,18 +182,39 @@ class PostAdapter (private val mContext: Context,
             }
 
             dialogView.deletePost.setOnClickListener {
-                FirebaseDatabase.getInstance().reference.child("Post")
-                    .child(post.postId!!)
-                    .removeValue()
-                Snackbar.make(holder.itemView,"Post removed success",Snackbar.LENGTH_SHORT).show()
-                alertDialog.dismiss()
+                val confirmView = LayoutInflater.from(mContext).inflate(R.layout.delete_confirm_layout, null)
+                confirmView.startAnimation(popUp)
+                val buildDialog = AlertDialog.Builder(mContext)
+                    .setView(confirmView)
+                    .setTitle("Are you sure?")
+
+                val confDialog = buildDialog.show()
+
+                confDialog.confirmDelete.setOnClickListener {
+                    FirebaseDatabase.getInstance().reference.child("Post")
+                        .child(post.postId!!)
+                        .removeValue()
+                    Snackbar.make(holder.itemView,"Post removed success",Snackbar.LENGTH_SHORT).show()
+                    confDialog.dismiss()
+                    alertDialog.dismiss()
+                }
+
+                confDialog.cancel_delete.setOnClickListener {
+                    confDialog.dismiss()
+                    alertDialog.dismiss()
+                }
+
             }
+
             dialogView.reportPost.setOnClickListener {
                 val commentIntent = Intent(mContext,ReportPostActivity::class.java)
                 commentIntent.putExtra("postId",post.postId)
                 mContext.startActivity(commentIntent)
                 alertDialog.dismiss()
             }
+
+            alertDialog.setCanceledOnTouchOutside(true)
+
         }
 
         holder.postCardView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.context, R.anim.card_view_anim))

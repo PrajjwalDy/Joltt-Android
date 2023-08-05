@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -19,10 +18,10 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.FirebaseDatabase.getInstance
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.installations.FirebaseInstallations
 import com.google.firebase.messaging.FirebaseMessaging
 import com.hindu.cunow.Adapter.CommentAdapter
 import com.hindu.cunow.Model.CommentModel
+import com.hindu.cunow.Model.Token
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.PushNotification.*
 import com.hindu.cunow.R
@@ -108,12 +107,13 @@ class CommentActivity : AppCompatActivity() {
                 addPageNotification()
             }else{
                 addNotification()
+                sendNotification()
             }
         }
     }
 
     private fun userInfo(){
-        val usersRef = FirebaseDatabase.getInstance().reference
+        val usersRef = getInstance().reference
             .child("Users")
             .child(firebaseUser!!.uid)
 
@@ -136,7 +136,7 @@ class CommentActivity : AppCompatActivity() {
     }
 
     private fun loadComments(){
-        val databaseRef = FirebaseDatabase.getInstance().reference
+        val databaseRef = getInstance().reference
             .child("Comments")
             .child(postId)
         databaseRef.addValueEventListener(object : ValueEventListener{
@@ -190,13 +190,13 @@ class CommentActivity : AppCompatActivity() {
     }
 
     private fun publisherInfo(){
-        val userDataRef = FirebaseDatabase.getInstance().reference
+        val userDataRef = getInstance().reference
             .child("Users")
             .child(publisherId)
         userDataRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
-                    val data = snapshot.getValue<UserModel>(UserModel::class.java)
+                    val data = snapshot.getValue(UserModel::class.java)
                     Glide.with(this@CommentActivity).load(data!!.profileImage).into(publisherProfileComment)
                     publisherNameComment.text = data.fullName
 
@@ -213,7 +213,7 @@ class CommentActivity : AppCompatActivity() {
     private fun addNotification(){
         //sendNotification()
         if (publisherId != FirebaseAuth.getInstance().currentUser!!.uid){
-            val dataRef = FirebaseDatabase.getInstance()
+            val dataRef = getInstance()
                 .reference.child("Notification")
                 .child("AllNotification")
                 .child(publisherId)
@@ -228,7 +228,7 @@ class CommentActivity : AppCompatActivity() {
 
             dataRef.push().setValue(dataMap)
 
-            val databaseRef = FirebaseDatabase.getInstance().reference
+            val databaseRef = getInstance().reference
                 .child("Notification")
                 .child("UnReadNotification")
                 .child(publisherId).child(notificationId).setValue(true)
@@ -238,7 +238,7 @@ class CommentActivity : AppCompatActivity() {
 
     private fun addPageNotification(){
         if (publisherId != FirebaseAuth.getInstance().currentUser!!.uid){
-            val dataRef = FirebaseDatabase.getInstance()
+            val dataRef = getInstance()
                 .reference.child("Notification")
                 .child("AllNotifications")
                 .child(pageAdmin)
@@ -254,7 +254,7 @@ class CommentActivity : AppCompatActivity() {
 
             dataRef.push().setValue(dataMap)
 
-            val dataNRef = FirebaseDatabase.getInstance()
+            val dataNRef = getInstance()
                 .reference.child("PageNotification")
                 .child("AllNotification")
                 .child(pageAdmin)
@@ -272,7 +272,7 @@ class CommentActivity : AppCompatActivity() {
 
             dataNRef.child(nId).updateChildren(dataNMap)
 
-            FirebaseDatabase.getInstance().reference
+            getInstance().reference
                 .child("Notification")
                 .child("UnReadNotification")
                 .child(pageAdmin).child(notificationId).setValue(true)
@@ -281,38 +281,46 @@ class CommentActivity : AppCompatActivity() {
     }
 
     private fun sendNotification(){
-        val notificationRef = getInstance().reference.child("Tokens")
+        val notificationRef = getInstance().reference.child("Tokens").child(publisherId)
 
-        val query = notificationRef.orderByKey().equalTo(publisherId)
-        query.addListenerForSingleValueEvent(object :ValueEventListener{
+        notificationRef.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-               for (data in snapshot.children){
-                   val token: Token? = data.getValue(Token::class.java)
-                   val data2 = Data(firebaseUser!!.uid,
-                       R.mipmap.ic_launcher,
-                       "Commented on your post"+addCommentEditText.text.toString(),
-                       "Post",publisherId)
+                if (snapshot.exists()){
+                    val token = snapshot.getValue(Token::class.java)?.token
+                    if (token != null){
+                        val data2 = Data(firebaseUser!!.uid,
+                            R.mipmap.ic_launcher,
+                            "Commented on your post"+addCommentEditText.text.toString(),
+                            "Post",
+                            publisherId)
 
-                   val sender = Sender(data2,token!!.toString())
+                        addCommentEditText.setHint("$token")
 
-                   apiService!!.sendNotification(sender)
-                       .enqueue(object : Callback<MyResponse?>{
-                           override fun onResponse(
-                               call: Call<MyResponse?>,
-                               response: Response<MyResponse?>
-                           ) {
-                               if (response.code() == 200)
-                                   if (response.body()!!.success !==1){
-                                       Toast.makeText(this@CommentActivity,"Failed,Nothing Happened",Toast.LENGTH_SHORT).show()
-                                   }
-                           }
+                        val sender = Sender(data2,token.toString())
 
-                           override fun onFailure(call: Call<MyResponse?>, t: Throwable) {
-                               TODO("Not yet implemented")
-                           }
+                        apiService!!.sendNotification(sender)
+                            .enqueue(object : Callback<MyResponse?>{
+                                override fun onResponse(
+                                    call: Call<MyResponse?>,
+                                    response: Response<MyResponse?>
+                                ) {
+                                    if (response.code() == 200)
+                                        if (response.body()!!.success !==1){
 
-                       })
-               }
+                                            Toast.makeText(this@CommentActivity,"Failed,Nothing Happened $token",Toast.LENGTH_SHORT).show()
+                                        }
+                                }
+
+                                override fun onFailure(call: Call<MyResponse?>, t: Throwable) {
+                                    TODO("Not yet implemented")
+                                }
+
+                            })
+
+                    }else{
+                        Toast.makeText(this@CommentActivity,"No,Token Found $publisherId",Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -330,9 +338,10 @@ class CommentActivity : AppCompatActivity() {
                 return@OnCompleteListener
             }
             val token = task.result
-            val newToken = Token(token.toString())
+            val newToken = Token(token)
             getInstance().reference.child("Tokens")
-                .child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(newToken)
+                .child(FirebaseAuth.getInstance().currentUser!!.uid)
+                .setValue(newToken)
         })
 
     }

@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -22,11 +21,10 @@ import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Activity.AddPostActivity
 import com.hindu.cunow.Activity.VideoUploadActivity
 import com.hindu.cunow.Adapter.PostAdapter
+import com.hindu.cunow.Fragments.Chat.ChatFragment
 import com.hindu.cunow.Model.DevMessageModel
-import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.FragmentHomeBinding
-import kotlinx.android.synthetic.main.activity_add_post.caption_image
 import kotlinx.android.synthetic.main.fragment_home.addText_ET
 import kotlinx.android.synthetic.main.fragment_home.add_image
 import kotlinx.android.synthetic.main.fragment_home.add_text
@@ -54,6 +52,8 @@ import kotlinx.android.synthetic.main.fragment_home.welcome_screen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import androidx.fragment.app.FragmentManager
+import androidx.navigation.Navigation
 
 class HomeFragment : Fragment() {
     private var checker = ""
@@ -172,6 +172,7 @@ class HomeFragment : Fragment() {
         }
 
         root.strike.setOnClickListener {
+
             Navigation.findNavController(root)
                 .navigate(R.id.action_navigation_home_to_chatFragment)
         }
@@ -417,6 +418,7 @@ class HomeFragment : Fragment() {
         add_text.clearAnimation()
         add_video.clearAnimation()
     }
+
 
 
 }

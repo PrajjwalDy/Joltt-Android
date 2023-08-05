@@ -9,6 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.hindu.cunow.ui.home.HomeFragment"
         tools:layout="@layout/fragment_home" >
+
+        <action
+            android:id="@+id/action_global_to_home"
+            app:destination="@+id/navigation_home"/>
+
         <action
             android:id="@+id/action_navigation_home_to_navigation_profile"
             app:destination="@id/navigation_profile" />

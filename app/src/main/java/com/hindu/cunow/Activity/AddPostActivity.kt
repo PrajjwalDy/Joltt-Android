@@ -39,6 +39,7 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.StorageTask
 import com.hindu.cunow.MainActivity
 import com.hindu.cunow.Model.HashTagModel
+import com.hindu.cunow.Model.JoltScoreModel
 import com.hindu.cunow.R
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -52,6 +53,9 @@ import kotlinx.android.synthetic.main.activity_web_scraping.previewImage
 import kotlinx.android.synthetic.main.fragment_home.addText_ET
 import kotlinx.android.synthetic.main.fragment_home.view.onlyText_CV
 import kotlinx.android.synthetic.main.post_privacy_dialog.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileNotFoundException
@@ -63,11 +67,11 @@ import java.util.UUID
 class AddPostActivity : AppCompatActivity() {
     private var privacy = "public"
     var myUrl = 0
-    private var imageUri : Uri? = null
+    private var imageUri: Uri? = null
     private var storagePostImageRef: StorageReference? = null
 
     private val GALLERY_REQUEST_CODE = 1234
-    private val WRITE_EXTERNAL_STORAGE_CODE=1
+    private val WRITE_EXTERNAL_STORAGE_CODE = 1
 
     lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,54 +85,56 @@ class AddPostActivity : AppCompatActivity() {
 
 
         pickImage.setOnClickListener {
-            if (checkPermission()){
+            if (checkPermission()) {
                 pickFromGallery()
-            }else{
-                Toast.makeText(this,"Please Allow the Required Permission",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Please Allow the Required Permission", Toast.LENGTH_SHORT)
+                    .show()
                 requestPermission()
             }
         }
 
         pickVideo.setOnClickListener {
-            startActivity(Intent(this,VideoUploadActivity::class.java))
+            startActivity(Intent(this, VideoUploadActivity::class.java))
             finish()
         }
 
         shareImage_btn.setOnClickListener {
-            if (imageUri == null){
+            if (imageUri == null) {
                 uploadOnlyText()
-            }else{
+            } else {
                 uploadImage()
             }
 
         }
 
-        activityResultLauncher  = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+        activityResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
 
 
-            if (result.resultCode== RESULT_OK) {
+                if (result.resultCode == RESULT_OK) {
 
-                var extras: Bundle? = result.data?.extras
+                    var extras: Bundle? = result.data?.extras
 
-                var imageUri: Uri
+                    var imageUri: Uri
 
-                var imageBitmap = extras?.get("data") as Bitmap
+                    var imageBitmap = extras?.get("data") as Bitmap
 
-                var imageResult: WeakReference<Bitmap> = WeakReference(
-                    Bitmap.createScaledBitmap(
-                        imageBitmap, imageBitmap.width, imageBitmap.height, false
-                    ).copy(
-                        Bitmap.Config.RGB_565, true
+                    var imageResult: WeakReference<Bitmap> = WeakReference(
+                        Bitmap.createScaledBitmap(
+                            imageBitmap, imageBitmap.width, imageBitmap.height, false
+                        ).copy(
+                            Bitmap.Config.RGB_565, true
+                        )
                     )
-                )
 
-                var bm = imageResult.get()
+                    var bm = imageResult.get()
 
-                imageUri = saveImage(bm, this)
+                    imageUri = saveImage(bm, this)
 
-                launchImageCrop(imageUri)
+                    launchImageCrop(imageUri)
+                }
             }
-        }
 
         //PRIVACY BUTTON
 
@@ -193,7 +199,7 @@ class AddPostActivity : AppCompatActivity() {
     }
 
     //UPLOAD IMAGE
-    private fun uploadImage(){
+    private fun uploadImage() {
         val progressDialog = Dialog(this)
         progressDialog.setContentView(R.layout.porgress_dialog)
         progressDialog.show()
@@ -207,59 +213,61 @@ class AddPostActivity : AppCompatActivity() {
         val data = baos.toByteArray()
 
         val fileReference = storagePostImageRef!!
-            .child(System.currentTimeMillis().toString()+".jpg")
+            .child(System.currentTimeMillis().toString() + ".jpg")
 
-        val uploadTask:StorageTask<*>
+        val uploadTask: StorageTask<*>
         uploadTask = fileReference.putBytes(data)
 
         uploadTask
-        .addOnSuccessListener{
-            val downloadUrl = it.metadata!!.reference!!.downloadUrl
-            downloadUrl.addOnSuccessListener {
-                // Save the download URL to the database
-                val imageUrl = it.toString()
+            .addOnSuccessListener {
+                val downloadUrl = it.metadata!!.reference!!.downloadUrl
+                downloadUrl.addOnSuccessListener {
+                    // Save the download URL to the database
+                    val imageUrl = it.toString()
 
-                val ref = FirebaseDatabase.getInstance().reference.child("Post")
-                val postId = ref.push().key
+                    val ref = FirebaseDatabase.getInstance().reference.child("Post")
+                    val postId = ref.push().key
 
-                val postMap = HashMap<String,Any>()
-                postMap["postId"] = postId!!
-                postMap["publisher"] = FirebaseAuth.getInstance().currentUser!!.uid
-                postMap["caption"] = caption_image.text.toString()
-                postMap["image"] = imageUrl
-                postMap["iImage"] = true
-                postMap["video"] = false
-                postMap["page"] = false
-                postMap["public"] = privacy == "public"
+                    val postMap = HashMap<String, Any>()
+                    postMap["postId"] = postId!!
+                    postMap["publisher"] = FirebaseAuth.getInstance().currentUser!!.uid
+                    postMap["caption"] = caption_image.text.toString()
+                    postMap["image"] = imageUrl
+                    postMap["iImage"] = true
+                    postMap["video"] = false
+                    postMap["page"] = false
+                    postMap["public"] = privacy == "public"
 
-                ref.child(postId).updateChildren(postMap)
-                //saveTags(postId)
-                buildHasTag(postId)
+                    ref.child(postId).updateChildren(postMap)
+                    //saveTags(postId)
+                    buildHasTag(postId)
+                    CoroutineScope(Dispatchers.IO).launch {
+                        getJoltScore(2)
+                    }
 
-                ///end
+                    ///end
 
-                Toast.makeText(this,"Image shared successfully",Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this@AddPostActivity,MainActivity::class.java))
-                finish()
-                FirebaseAuth.getInstance().currentUser!!.uid.let { it1 ->
-                    FirebaseDatabase.getInstance().reference
-                        .child("Users").child(it1.toString())
-                        .child("MyPosts").child(postId)
-                        .setValue(true)
+                    Toast.makeText(this, "Image shared successfully", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@AddPostActivity, MainActivity::class.java))
+                    finish()
+                    FirebaseAuth.getInstance().currentUser!!.uid.let { it1 ->
+                        FirebaseDatabase.getInstance().reference
+                            .child("Users").child(it1.toString())
+                            .child("MyPosts").child(postId)
+                            .setValue(true)
+                    }
+
+                    progressDialog.dismiss()
                 }
 
-                progressDialog.dismiss()
             }
-
-        }
 
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null)
-        {
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
             val result = CropImage.getActivityResult(data)
             imageUri = result.uri
             postImage_preview.setImageURI(imageUri)
@@ -272,9 +280,7 @@ class AddPostActivity : AppCompatActivity() {
                     data?.data?.let { uri ->
                         launchImageCrop(uri)
                     }
-                }
-
-                else{
+                } else {
 
                 }
             }
@@ -282,19 +288,19 @@ class AddPostActivity : AppCompatActivity() {
         }
 
         if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
-            val resultUri :Uri ?= UCrop.getOutput(data!!)
+            val resultUri: Uri? = UCrop.getOutput(data!!)
 
             setImage(resultUri!!)
 
             if (resultUri != null) {
-                imageUri=resultUri
+                imageUri = resultUri
             }
         }
 
     }
 
     //UPLOAD ONLY TEXT
-    private fun uploadOnlyText(){
+    private fun uploadOnlyText() {
         if (addText_ET.text.isEmpty()) {
             Toast.makeText(this, "Please Write something", Toast.LENGTH_SHORT).show()
         } else {
@@ -311,6 +317,9 @@ class AddPostActivity : AppCompatActivity() {
             dataMap["public"] = privacy == "public"
             dataRef.child(postId).updateChildren(dataMap)
             buildHasTag(postId)
+
+            getJoltScore(2)
+
             Toast.makeText(this, "Post added Successfully", Toast.LENGTH_SHORT).show()
             caption_image.text.clear()
         }
@@ -318,10 +327,10 @@ class AddPostActivity : AppCompatActivity() {
 
     //IMAGE CROPPING FUNCTION
     private fun launchImageCrop(uri: Uri) {
-        var destination:String=StringBuilder(UUID.randomUUID().toString()).toString()
-        var options:UCrop.Options=UCrop.Options()
+        var destination: String = StringBuilder(UUID.randomUUID().toString()).toString()
+        var options: UCrop.Options = UCrop.Options()
 
-        UCrop.of(Uri.parse(uri.toString()), Uri.fromFile(File(cacheDir,destination)))
+        UCrop.of(Uri.parse(uri.toString()), Uri.fromFile(File(cacheDir, destination)))
             .withOptions(options)
             .withAspectRatio(3F, 2F)
             .useSourceImageAspectRatio()
@@ -330,7 +339,7 @@ class AddPostActivity : AppCompatActivity() {
     }
 
     //SET IMAGE TO IMAGE VIEW
-    private fun setImage(uri: Uri){
+    private fun setImage(uri: Uri) {
         postImage_preview.visibility = View.VISIBLE
         Glide.with(this)
             .load(uri)
@@ -345,7 +354,7 @@ class AddPostActivity : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        when(requestCode) {
+        when (requestCode) {
 
             WRITE_EXTERNAL_STORAGE_CODE -> {
 
@@ -363,8 +372,8 @@ class AddPostActivity : AppCompatActivity() {
     }
 
     // HASHTAG FUNCTION
-    private fun buildHasTag(postId:String){
-        val sentence = caption_image.text.toString().trim{ it <= ' '}
+    private fun buildHasTag(postId: String) {
+        val sentence = caption_image.text.toString().trim { it <= ' ' }
         val words = sentence.split(" ")
 
         // Initialize an empty list of hashtags
@@ -379,29 +388,30 @@ class AddPostActivity : AppCompatActivity() {
         val hashtagsRef = FirebaseDatabase.getInstance().getReference("hashtags")
 
         for (hashtag in hashtags) {
-            val key = hashtag.toString().removeRange(0,1)
-            val tagMap = HashMap<String,Any>()
+            val key = hashtag.toString().removeRange(0, 1)
+            val tagMap = HashMap<String, Any>()
             tagMap["tagName"] = hashtag
             hashtagsRef.child(key).updateChildren(tagMap)
             hashtagsRef.child(key).child("posts").child(postId).setValue(true)
             getPostCount(hashtag)
         }
     }
+
     //POST COUNT
-    private fun getPostCount(tag:String){
-        val key = tag.removeRange(0,1)
+    private fun getPostCount(tag: String) {
+        val key = tag.removeRange(0, 1)
         val dataRef = FirebaseDatabase.getInstance()
             .reference.child("hashtags")
             .child(key)
             .child("posts")
 
-        dataRef.addValueEventListener(object :ValueEventListener{
+        dataRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
                     val hashtagsRef = FirebaseDatabase.getInstance().reference
                         .child("hashtags")
                         .child(key)
-                    val tagMap = HashMap<String,Any>()
+                    val tagMap = HashMap<String, Any>()
                     tagMap["postCount"] = snapshot.childrenCount.toInt()
                     hashtagsRef.updateChildren(tagMap)
                 }
@@ -412,28 +422,64 @@ class AddPostActivity : AppCompatActivity() {
 
         })
     }
+
     private fun saveImage(image: Bitmap?, context: Context): Uri {
 
-        var imageFolder=File(context.cacheDir,"Joltt")
+        var imageFolder = File(context.cacheDir, "Joltt")
         var uri: Uri? = null
 
         try {
             imageFolder.mkdirs()
-            var file:File= File(imageFolder,"joltt_image.png")
+            var file: File = File(imageFolder, "joltt_image.png")
             var stream: FileOutputStream = FileOutputStream(file)
-            image?.compress(Bitmap.CompressFormat.JPEG,100,stream)
+            image?.compress(Bitmap.CompressFormat.JPEG, 100, stream)
             stream.flush()
             stream.close()
-            uri= FileProvider.getUriForFile(context.applicationContext,"com.hindu.cunow"+".provider",file)
+            uri = FileProvider.getUriForFile(
+                context.applicationContext,
+                "com.hindu.cunow" + ".provider",
+                file
+            )
 
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
-        }catch (e: IOException){
+        } catch (e: IOException) {
             e.printStackTrace()
         }
 
         return uri!!
 
+    }
+
+    //JOLT POINT
+    private fun getJoltScore(point: Int) {
+        val firebaseUser = FirebaseAuth.getInstance().currentUser!!.uid
+        val databaseRef = FirebaseDatabase.getInstance().reference.child("JoltPoint")
+            .child(firebaseUser)
+        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val data = snapshot.getValue(JoltScoreModel::class.java)
+                var joltScore = 0
+                if (data != null) {
+                    joltScore = data.joltScore
+                }
+                addJoltPoint(joltScore, point)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle onCancelled if needed
+            }
+        })
+    }
+    private fun addJoltPoint(joltPoint: Int, point: Int) {
+        val firebaseUser = FirebaseAuth.getInstance().currentUser!!.uid
+        val databaseRef = FirebaseDatabase.getInstance().reference.child("JoltPoint")
+
+        val newJoltScore = joltPoint + point
+        val pointMap = HashMap<String, Any>()
+        pointMap["joltScore"] = newJoltScore
+        databaseRef.child(firebaseUser).updateChildren(pointMap)
+        Toast.makeText(this, "Code reached here", Toast.LENGTH_SHORT).show()
     }
 
 }

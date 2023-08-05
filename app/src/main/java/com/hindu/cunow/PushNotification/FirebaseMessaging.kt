@@ -40,7 +40,7 @@ class FirebaseMessaging:FirebaseMessagingService()
         val body = mRemoteNotification.data["body"]
 
         val notification = mRemoteNotification.notification
-        val j = user!!.replace("[\\D]".toRegex(),"").toInt()
+        val j = user!!.toInt()
         val intent =Intent(this,MainActivity::class.java)
 
         val bundle = Bundle()
@@ -48,7 +48,12 @@ class FirebaseMessaging:FirebaseMessagingService()
         intent.putExtras(bundle)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
-        val pendingIntent = PendingIntent.getActivity(this,j,intent,PendingIntent.FLAG_ONE_SHOT)
+        val pendingIntent = PendingIntent.getActivity(
+            this,
+            j,
+            intent,
+            PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
+        )
 
         val defaultSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val builder: NotificationCompat.Builder = NotificationCompat.Builder(this)
@@ -66,8 +71,6 @@ class FirebaseMessaging:FirebaseMessagingService()
         if (i>0){
             noti.notify(i, builder.build())
         }
-
-
     }
 
     private fun sendOreoNotification(mRemoteNotification: RemoteMessage) {

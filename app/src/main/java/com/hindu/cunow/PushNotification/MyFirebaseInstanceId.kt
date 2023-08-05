@@ -3,11 +3,11 @@ package com.hindu.cunow.PushNotification
 import android.content.ContentValues.TAG
 import android.util.Log
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.FirebaseMessaging
+import com.hindu.cunow.Model.Token
 
 class MyFirebaseInstanceId:FirebaseMessagingService() {
   override fun onNewToken(p0:String){

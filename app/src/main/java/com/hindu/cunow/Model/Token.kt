@@ -1,8 +1,8 @@
-package com.hindu.cunow.PushNotification
+package com.hindu.cunow.Model
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.installations.InstallationTokenResult
 
-class Token(val token: String) {
+class Token(val token:String) {
     constructor():this("")
 }
