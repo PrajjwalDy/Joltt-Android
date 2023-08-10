@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -75,6 +76,11 @@ class ConfessionRoomFragment : Fragment() {
             val intent = Intent(context,TermsAndCondition::class.java)
             startActivity(intent)
         }
+        root.confessionBack.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_confessionRoomFragment_to_navigation_dashboard)
+        }
+
 
         return root
     }

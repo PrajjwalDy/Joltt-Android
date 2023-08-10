@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.hindu.cunow.MainActivity
 import com.hindu.cunow.R
 import kotlinx.android.synthetic.main.activity_feedback.*
 import kotlinx.android.synthetic.main.activity_help.*
@@ -16,10 +18,11 @@ class FeedbackActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feedback)
 
+
+
         sendFeedback.setOnClickListener {
             requestHelp()
         }
-
     }
     private fun requestHelp(){
         if(fName.text.isEmpty()||feedText.text.isEmpty()){
