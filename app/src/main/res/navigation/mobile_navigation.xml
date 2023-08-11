@@ -339,12 +339,20 @@
         android:id="@+id/schemesFragment"
         android:name="com.hindu.cunow.Fragments.Schemes.SchemesFragment"
         android:label="fragment_schemes"
-        tools:layout="@layout/fragment_schemes" />
+        tools:layout="@layout/fragment_schemes" >
+        <action
+            android:id="@+id/action_schemesFragment_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
     <fragment
         android:id="@+id/abroadFragment"
         android:name="com.hindu.cunow.Fragments.Abroad.AbroadFragment"
         android:label="fragment_abroad"
-        tools:layout="@layout/fragment_abroad" />
+        tools:layout="@layout/fragment_abroad" >
+        <action
+            android:id="@+id/action_abroadFragment_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
     <fragment
         android:id="@+id/communityFragment"
         android:name="com.hindu.cunow.Fragments.community.CommunityFragment"
@@ -379,7 +387,11 @@
         android:id="@+id/flash"
         android:name="com.hindu.cunow.Fragments.Flash"
         android:label="fragment_flash"
-        tools:layout="@layout/fragment_flash" />
+        tools:layout="@layout/fragment_flash" >
+        <action
+            android:id="@+id/action_flash_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
 
 
 </navigation>

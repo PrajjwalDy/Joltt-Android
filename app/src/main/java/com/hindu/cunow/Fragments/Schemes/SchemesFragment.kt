@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hindu.cunow.Adapter.HackathonAdapter
@@ -15,6 +16,7 @@ import com.hindu.cunow.Fragments.Hackathons.HackathonsViewModel
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.FragmentHackathonsBinding
 import com.hindu.cunow.databinding.FragmentSchemesBinding
+import kotlinx.android.synthetic.main.fragment_schemes.view.*
 
 class SchemesFragment : Fragment() {
 
@@ -38,6 +40,11 @@ class SchemesFragment : Fragment() {
             recyclerView!!.adapter = schemesAdapter
             schemesAdapter!!.notifyDataSetChanged()
         })
+
+        root.governmentschemeBack.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_schemesFragment_to_navigation_dashboard)
+        }
 
         return root
     }

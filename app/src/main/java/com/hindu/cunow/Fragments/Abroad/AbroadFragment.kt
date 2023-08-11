@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -21,6 +22,7 @@ import com.hindu.cunow.Model.AbroadModel
 import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.FragmentAbroadBinding
+import kotlinx.android.synthetic.main.abroad_item_layout.view.*
 
 class AbroadFragment : Fragment() {
     var recyclerView:RecyclerView? = null
@@ -46,6 +48,11 @@ class AbroadFragment : Fragment() {
         abroadAdapter!!.notifyDataSetChanged()
 
         getData()
+
+        root.AbroadBack.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_abroadFragment_to_navigation_dashboard)
+        }
 
         return root
     }

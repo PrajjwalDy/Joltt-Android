@@ -18,4 +18,5 @@ class Flash : Fragment() {
         return inflater.inflate(R.layout.fragment_flash, container, false)
     }
 
+
 }

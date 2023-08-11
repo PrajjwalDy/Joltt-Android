@@ -35,6 +35,7 @@ class AddProjectActivity : AppCompatActivity() {
         submit_project.setOnClickListener {
             addEvent()
         }
+        
 
     }
 
