@@ -8,21 +8,22 @@
 
     <ImageView
         android:id="@+id/exo_play"
-        android:layout_width="40dp"
+        android:layout_width="50dp"
         android:contentDescription="PlayButton"
-        android:layout_height="20dp"
+        android:layout_height="50dp"
         android:scaleType="fitCenter"
         android:layout_centerInParent="true"
         android:src="@drawable/play_button"
-        app:tint="@color/red" />
+        />
+
     <ImageView
         android:id="@+id/exo_pause"
-        android:layout_width="20dp"
-        android:contentDescription="PlayButton"
-        android:layout_height="40dp"
-        android:scaleType="fitCenter"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_centerInParent="true"
+        android:contentDescription="PlayButton"
+        android:scaleType="fitCenter"
         android:src="@drawable/pause_button"
-        app:tint="@color/red" />
+        />
 
 </RelativeLayout>

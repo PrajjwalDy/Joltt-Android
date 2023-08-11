@@ -2,7 +2,12 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="2dp"
+    android:id="@+id/chatCardView"
+    android:layout_marginTop="2dp"
+    android:layout_marginEnd="2dp"
+    app:cardCornerRadius="10dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,36 +28,50 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/chatProfileImage"
+            android:fontFamily="@font/comfortaa"
             android:text="Full Name"
             android:textColor="@color/red"
             android:textSize="16sp"
             android:textStyle="bold" />
 
-<RelativeLayout
-    android:visibility="gone"
-    android:id="@+id/RL_chat_count"
-    android:layout_width="20dp"
-    android:layout_height="20dp"
-    android:layout_alignParentEnd="true"
-    android:layout_centerVertical="true"
-    android:layout_marginEnd="20dp"
-    android:background="@drawable/ic_elipse_chat_count">
+        <TextView
+            android:id="@+id/chatLast_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/chatFullName"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/chatProfileImage"
+            android:ellipsize="end"
+            android:fontFamily="@font/comfortaa"
+            android:maxWidth="200dp"
+            android:maxLines="1"
+            android:text="lastMessage" />
 
-    <TextView
-        android:id="@+id/textCount_TV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_margin="10dp"
-        android:padding="5dp"
-        android:text="1"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
+        <RelativeLayout
+            android:id="@+id/RL_chat_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/chat_notification"
+            android:minWidth="25dp"
+            android:minHeight="25dp"
+            android:visibility="gone">
 
-</RelativeLayout>
+            <TextView
+                android:id="@+id/textCount_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="5dp"
+                android:textSize="11sp"
+                android:fontFamily="@font/comfortaa"
+                android:text="1"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
-
-
+        </RelativeLayout>
 
     </RelativeLayout>
 

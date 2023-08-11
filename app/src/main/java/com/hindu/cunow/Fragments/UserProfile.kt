@@ -247,22 +247,28 @@ class UserProfile : Fragment() {
 
 
                     if (userData.githubLink.isNullOrEmpty()){
-                        github.visibility =View.GONE
+                        github.setImageResource(R.drawable.git_blur)
+                        github.isClickable = false
                     }
                     if (userData.portfolio.isNullOrEmpty()){
-                        portfolio.visibility =View.GONE
+                        portfolio.setImageResource(R.drawable.portfolio_blur)
+                        portfolio.isClickable = false
                     }
                     if (userData.instagram.isNullOrEmpty()){
-                        instagram.visibility =View.GONE
+                        instagram.setImageResource(R.drawable.insta_blur)
+                        instagram.isClickable = false
                     }
                     if (userData.twitter.isNullOrEmpty()){
-                        twitter.visibility =View.GONE
+                        twitter.setImageResource(R.drawable.twitter_blur)
+                        twitter.isClickable = false
                     }
                     if (userData.linkedin.isNullOrEmpty()){
-                        linkedin.visibility =View.GONE
+                        linkedin.setImageResource(R.drawable.linkedin_blur)
+                        linkedin.isClickable = false
                     }
                     if (userData.threads.isNullOrEmpty()){
-                        threads.visibility =View.GONE
+                        threads.setImageResource(R.drawable.threads_blur)
+                        threads.isClickable = false
                     }
 
                     /*if (userData.verification){

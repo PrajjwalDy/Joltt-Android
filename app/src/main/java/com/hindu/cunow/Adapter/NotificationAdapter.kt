@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.navigation.Navigation
@@ -22,6 +23,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.w3c.dom.Text
 
 class NotificationAdapter(private val nContext:Context,
                           private  val nList:List<NotificationModel>):RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
@@ -91,6 +93,9 @@ class NotificationAdapter(private val nContext:Context,
         val profileImage:CircleImageView =itemView.findViewById(R.id.notification_profileImage) as CircleImageView
         val userName:TextView = itemView.findViewById(R.id.usernameNotification) as TextView
         val notificationText:TextView = itemView.findViewById(R.id.notificationText) as TextView
+        val des_layout:LinearLayout = itemView.findViewById(R.id.request_ll) as LinearLayout
+        val ingore:TextView = itemView.findViewById(R.id.ignoreRequest_infuse) as TextView
+        val accept:TextView = itemView.findViewById(R.id.acceptRequest_infuse) as TextView
 
         fun bind(list: NotificationModel){
 

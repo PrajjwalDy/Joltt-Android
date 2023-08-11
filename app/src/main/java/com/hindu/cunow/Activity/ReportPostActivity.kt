@@ -1,17 +1,28 @@
 package com.hindu.cunow.Activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.hindu.cunow.Adapter.ReportAdapter
+import com.hindu.cunow.MainActivity
+import com.hindu.cunow.Model.ReportModel
 import com.hindu.cunow.R
 import kotlinx.android.synthetic.main.activity_comment.*
 import kotlinx.android.synthetic.main.activity_report_post.*
 
 class ReportPostActivity : AppCompatActivity() {
     private var postId = ""
+    private var reportList:MutableList<ReportModel>? = null
+    private var reportAdapter: ReportAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,30 +31,46 @@ class ReportPostActivity : AppCompatActivity() {
         val intent = intent
         postId = intent.getStringExtra("postId").toString()
 
+
+        val recyclerView:RecyclerView = findViewById(R.id.reportRV)
+        val ll = LinearLayoutManager(this)
+        ll.reverseLayout = true
+        recyclerView.layoutManager = ll
+        ll.stackFromEnd =true
+
+        reportList = ArrayList()
+        reportAdapter = ReportAdapter(this,reportList as ArrayList<ReportModel>,postId)
+        recyclerView.adapter = reportAdapter
+
+        loadReport()
+
+
         reportPost_btn.setOnClickListener { view->
-            reportPost(view)
+            Snackbar.make(view,"Report Request successful",Snackbar.LENGTH_SHORT).show()
+            startActivity(Intent(this,MainActivity::class.java))
+            finish()
         }
-
     }
+    private fun loadReport() {
+        val databaseRef = FirebaseDatabase.getInstance().reference
+            .child("ReportList")
 
-    private fun reportPost(view:View){
-        if (postReportPoint_ET.text.isEmpty()){
-            Snackbar.make(view,"please mention the point no. stated above..", Snackbar.LENGTH_SHORT).show()
-        }else{
-            val dataRef = FirebaseDatabase.getInstance().reference
-                .child("PostReport")
+        databaseRef.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    reportList!!.clear()
+                    for (snap in snapshot.children){
+                        val data = snap.getValue(ReportModel::class.java)
+                        reportList!!.add(data!!)
+                    }
+                    reportAdapter!!.notifyDataSetChanged()
+                }
+            }
 
-            val commentId = dataRef.push().key
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
 
-            val dataMap = HashMap<String,Any>()
-            dataMap["reportId"] = commentId!!
-            dataMap["reportPoint"] = postReportPoint_ET.text.toString()
-            dataMap["reporter"] = FirebaseAuth.getInstance().currentUser!!.uid
-            dataMap["postId"] = postId
-
-            dataRef.child(commentId).updateChildren(dataMap)
-            Snackbar.make(view,"Post Reported successfully", Snackbar.LENGTH_SHORT).show()
-            postReportPoint_ET.text.clear()
-        }
+        })
     }
 }

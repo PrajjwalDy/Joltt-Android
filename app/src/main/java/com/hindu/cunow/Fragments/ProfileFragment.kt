@@ -27,6 +27,12 @@ import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_user_profiel.github
+import kotlinx.android.synthetic.main.fragment_user_profiel.instagram
+import kotlinx.android.synthetic.main.fragment_user_profiel.linkedin
+import kotlinx.android.synthetic.main.fragment_user_profiel.portfolio
+import kotlinx.android.synthetic.main.fragment_user_profiel.threads
+import kotlinx.android.synthetic.main.fragment_user_profiel.twitter
 import kotlinx.android.synthetic.main.fragment_user_profiel.view.*
 import kotlinx.android.synthetic.main.my_details_fragment.view.*
 import kotlinx.android.synthetic.main.profile_fragment.*
@@ -131,6 +137,31 @@ class ProfileFragment : Fragment() {
                     context?.let { Glide.with(it).load(userData!!.profileImage).into(profileImage) }
                     userFullName.text = userData!!.fullName
                     userBio.text = userData.bio
+
+                    if (userData.githubLink.isNullOrEmpty()){
+                        github_profile.setImageResource(R.drawable.git_blur)
+                        github_profile.isClickable = false
+                    }
+                    if (userData.portfolio.isNullOrEmpty()){
+                        portfolio_profile.setImageResource(R.drawable.portfolio_blur)
+                        portfolio_profile.isClickable = false
+                    }
+                    if (userData.instagram.isNullOrEmpty()){
+                        instagram_profile.setImageResource(R.drawable.insta_blur)
+                        instagram_profile.isClickable = false
+                    }
+                    if (userData.twitter.isNullOrEmpty()){
+                        twitter_profile.setImageResource(R.drawable.twitter_blur)
+                        twitter_profile.isClickable = false
+                    }
+                    if (userData.linkedin.isNullOrEmpty()){
+                        linkedin_profile.setImageResource(R.drawable.linkedin_blur)
+                        linkedin_profile.isClickable = false
+                    }
+                    if (userData.threads.isNullOrEmpty()){
+                        threads_profile.setImageResource(R.drawable.threads_blur)
+                        threads_profile.isClickable = false
+                    }
 
                 }
             }

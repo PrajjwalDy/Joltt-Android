@@ -6,6 +6,7 @@
     android:layout_alignParentEnd="true">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/chat_cv2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -20,7 +21,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -74,7 +75,6 @@
                 </RelativeLayout>
 
 
-
                 <TextView
                     android:id="@+id/chatText"
                     android:layout_width="wrap_content"
@@ -87,12 +87,27 @@
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
-            </LinearLayout>
+            </RelativeLayout>
+
 
         </LinearLayout>
 
 
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/timeStamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="time"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="-5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_alignParentEnd="true"
+        android:fontFamily="@font/comfortaa"
+        android:textSize="10sp"
+        android:layout_below="@+id/chat_cv2"
+        android:textColor="@color/grey"/>
 
 
 </RelativeLayout>

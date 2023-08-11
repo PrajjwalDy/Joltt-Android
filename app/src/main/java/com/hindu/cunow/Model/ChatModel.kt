@@ -7,4 +7,6 @@ class ChatModel {
     val receiver:String? = null
     val messageId:String? = null
     val containImage:Boolean = false
+    val timeStamp:String?= null
+    val seen:Boolean = false
 }

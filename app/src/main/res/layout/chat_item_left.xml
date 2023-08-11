@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/chat_cv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -12,7 +13,7 @@
         app:cardCornerRadius="5pt"
         app:cardElevation="5dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_margin="2dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,7 +65,7 @@
                         android:layout_marginEnd="5dp"
                         android:layout_marginBottom="5dp"
                         android:scaleType="centerCrop"
-                        android:visibility="gone" />
+                        android:visibility="gone"/>
 
                 </RelativeLayout>
 
@@ -74,15 +75,33 @@
                     android:layout_height="wrap_content"
                     android:minWidth="30dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_margin="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/comfortaa"
                     android:text="hi"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
-            </LinearLayout>
+
+            </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/timeStamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="time"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="-5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_below="@+id/chat_cv"
+        android:fontFamily="@font/comfortaa"
+        android:textSize="10sp"
+        android:textColor="@color/grey"/>
 
 
 </RelativeLayout>
