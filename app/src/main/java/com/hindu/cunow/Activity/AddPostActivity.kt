@@ -327,14 +327,13 @@ class AddPostActivity : AppCompatActivity() {
 
     //IMAGE CROPPING FUNCTION
     private fun launchImageCrop(uri: Uri) {
-        var destination: String = StringBuilder(UUID.randomUUID().toString()).toString()
-        var options: UCrop.Options = UCrop.Options()
+        val destination: String = StringBuilder(UUID.randomUUID().toString()).toString()
+        val options: UCrop.Options = UCrop.Options()
 
         UCrop.of(Uri.parse(uri.toString()), Uri.fromFile(File(cacheDir, destination)))
             .withOptions(options)
             .withAspectRatio(3F, 2F)
-            .useSourceImageAspectRatio()
-            .withMaxResultSize(2000, 2000)
+            .withMaxResultSize(1080, 1080)
             .start(this)
     }
 
