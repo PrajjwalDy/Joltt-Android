@@ -156,7 +156,6 @@ class EditProfileActivity : AppCompatActivity() {
         Snackbar.make(view, "Update successful", Snackbar.LENGTH_SHORT).show()
         finish()
     }
-
     //UPDATE PROFILE IMAGE
     private fun updateProfileImage() {
         if (imageUri == null) {
@@ -209,7 +208,6 @@ class EditProfileActivity : AppCompatActivity() {
             }
         }
     }
-
     //RETRIEVE INFORMATION
     private fun retrieveUserData() {
         val dataRef = FirebaseDatabase
@@ -286,7 +284,6 @@ class EditProfileActivity : AppCompatActivity() {
 
         })
     }
-
     //Update Skills
     private fun updateSkills() {
         if (editText_skills.text.isEmpty()) {
@@ -315,7 +312,6 @@ class EditProfileActivity : AppCompatActivity() {
         }
 
     }
-
     //Update Experience
     private fun updateExperience() {
 
@@ -415,8 +411,6 @@ class EditProfileActivity : AppCompatActivity() {
         val regex = Patterns.WEB_URL
         return regex.matcher(link).matches()
     }
-
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
