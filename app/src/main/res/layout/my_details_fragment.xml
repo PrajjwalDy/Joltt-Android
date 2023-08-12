@@ -60,90 +60,97 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <RelativeLayout
-                            android:id="@+id/skill_btn"
-                            android:layout_width="80dp"
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/skill_btn_cv"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            app:cardCornerRadius="16dp"
                             android:layout_margin="10dp"
-                            android:background="@drawable/rounded_corner_grey">
+                            app:cardBackgroundColor="@color/grey">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:layout_marginStart="5dp"
-                                android:layout_marginTop="5dp"
-                                android:layout_marginEnd="5dp"
-                                android:layout_marginBottom="5dp"
-                                android:fontFamily="@font/comfortaa"
-                                android:text="Skills"
-                                android:textColor="@color/black"
-                                android:textSize="15sp" />
+                            <RelativeLayout
+                                android:id="@+id/skill_btn"
+                                android:layout_width="80dp"
+                                android:layout_height="wrap_content">
 
-                        </RelativeLayout>
+                                <TextView
+                                    android:id="@+id/skill_btn_txt"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginEnd="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:fontFamily="@font/comfortaa"
+                                    android:text="Skills"
+                                    android:textColor="@color/black"
+                                    android:textSize="15sp" />
 
-                        <RelativeLayout
-                            android:id="@+id/photos_btn"
-                            android:layout_width="100dp"
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/interest_btn_cv"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            app:cardCornerRadius="16dp"
                             android:layout_margin="10dp"
-                            android:background="@drawable/rounded_corner_grey"
-                            android:visibility="gone">
+                            app:cardBackgroundColor="@color/grey">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:layout_marginStart="5dp"
-                                android:layout_marginTop="5dp"
-                                android:layout_marginEnd="5dp"
-                                android:layout_marginBottom="5dp"
-                                android:fontFamily="@font/comfortaa"
-                                android:text="Photos"
-                                android:textColor="@color/black"
-                                android:textSize="15sp" />
+                            <RelativeLayout
+                                android:id="@+id/interest_btn"
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content">
 
-                        </RelativeLayout>
+                                <TextView
+                                    android:id="@+id/interest_btn_tv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:layout_margin="5dp"
+                                    android:layout_marginStart="0dp"
+                                    android:fontFamily="@font/comfortaa"
+                                    android:text="Interests"
+                                    android:textColor="@color/black"
+                                    android:textSize="15sp" />
 
-                        <RelativeLayout
-                            android:id="@+id/interest_btn"
-                            android:layout_width="100dp"
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/experience_btn_cv"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            app:cardCornerRadius="16dp"
                             android:layout_margin="10dp"
-                            android:background="@drawable/rounded_corner_grey">
+                            app:cardBackgroundColor="@color/grey">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:layout_margin="5dp"
-                                android:layout_marginStart="0dp"
-                                android:fontFamily="@font/comfortaa"
-                                android:text="Interests"
-                                android:textColor="@color/black"
-                                android:textSize="15sp" />
+                            <RelativeLayout
+                                android:id="@+id/experience_btn"
+                                android:layout_width="120dp"
+                                android:layout_height="wrap_content">
 
-                        </RelativeLayout>
+                                <TextView
+                                    android:id="@+id/experience_btn_tv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:layout_margin="5dp"
+                                    android:layout_marginStart="0dp"
+                                    android:fontFamily="@font/comfortaa"
+                                    android:text="Experience"
+                                    android:textColor="@color/black"
+                                    android:textSize="15sp" />
 
-                        <RelativeLayout
-                            android:id="@+id/experience_btn"
-                            android:layout_width="120dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:background="@drawable/rounded_corner_grey">
+                            </RelativeLayout>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:layout_margin="5dp"
-                                android:layout_marginStart="0dp"
-                                android:fontFamily="@font/comfortaa"
-                                android:text="Experience"
-                                android:textColor="@color/black"
-                                android:textSize="15sp" />
+                        </androidx.cardview.widget.CardView>
 
-                        </RelativeLayout>
+
+
 
 
                     </LinearLayout>
@@ -152,6 +159,7 @@
                 </HorizontalScrollView>
 
                 <!--Linear Layout About-->
+
                 <LinearLayout
                     android:id="@+id/ll_about_profile"
                     android:layout_width="match_parent"

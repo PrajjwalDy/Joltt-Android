@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white">
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal">
@@ -26,19 +26,26 @@
                 android:textColor="@color/red"
                 android:textSize="20sp"
                 />
-        </LinearLayout>
+
+            <TextView
+                android:id="@+id/followRequest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/comfortaa"
+                android:text="Follow Requests"
+                android:textColor="@color/red" />
+
+        </RelativeLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Follow Requests"
-        android:layout_gravity="end"
-        android:layout_margin="10dp"
-        android:id="@+id/followRequest"
-        android:textColor="@color/red"
-        android:fontFamily="@font/amiko"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

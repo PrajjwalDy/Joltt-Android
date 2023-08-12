@@ -51,11 +51,13 @@
             android:src="@drawable/test_img" />
 
         <LinearLayout
+            android:id="@+id/request_ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_margin="10dp"
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <TextView
@@ -69,6 +71,7 @@
                 android:textSize="12sp"/>
 
             <TextView
+                android:id="@+id/acceptRequest_infuse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Accpet"

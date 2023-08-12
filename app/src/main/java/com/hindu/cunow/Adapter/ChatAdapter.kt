@@ -1,6 +1,7 @@
 package com.hindu.cunow.Adapter
 
 import android.content.Context
+import android.media.AudioTimestamp
 import android.media.Image
 import android.opengl.Visibility
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.hindu.cunow.Model.ChatModel
 import com.hindu.cunow.R
 import org.w3c.dom.Text
+import java.util.logging.Handler
 
 class ChatAdapter(private val mContext: Context,
                   private val mChat:List<ChatModel>):RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
@@ -27,6 +29,7 @@ class ChatAdapter(private val mContext: Context,
                           val chatImage_left:ImageView? = itemView.findViewById(R.id.chatImage_left) as? ImageView
                           val imageRL:RelativeLayout = itemView.findViewById(R.id.sendingImage_RL) as RelativeLayout
                           val imageLL:LinearLayout = itemView.findViewById(R.id.sendingImage_ll) as LinearLayout
+                          val timeStamp:TextView = itemView.findViewById(R.id.timeStamp) as TextView
 
                           fun bind(list:ChatModel){
                               if (list.containImage){
@@ -39,7 +42,7 @@ class ChatAdapter(private val mContext: Context,
                                       imageLL.visibility = View.GONE
                                       if (list.sender.equals(FirebaseAuth.getInstance().currentUser!!.uid)){
                                           chatImage_right!!.visibility = View.VISIBLE
-                                          Glide.with(mContext).load(list.chatImage).into(chatImage_right!!)
+                                          Glide.with(mContext).load(list.chatImage).into(chatImage_right)
 
                                       }else if (!list.sender.equals(FirebaseAuth.getInstance().currentUser!!.uid)){
                                           chatImage_left!!.visibility = View.VISIBLE
@@ -56,6 +59,8 @@ class ChatAdapter(private val mContext: Context,
                                       chatImage_left!!.visibility = View.GONE
                                   }
                               }
+
+                              timeStamp.text = formatTimeStamp(list.timeStamp!!.toLong())
                           }
 
                       }
@@ -86,6 +91,25 @@ class ChatAdapter(private val mContext: Context,
             1
         }
     }
+
+    private fun formatTimeStamp(timestamp: Long): String {
+        val currentTime = System.currentTimeMillis()
+        val timeDifference = currentTime - timestamp
+
+        val seconds = timeDifference / 1000
+        val minutes = seconds / 60
+        val hours = minutes / 60
+        val days = hours / 24
+
+        return when {
+            seconds < 60 -> "Just now"
+            minutes < 60 -> "$minutes minutes ago"
+            hours < 24 -> "$hours hours ago"
+            days == 1L -> "Yesterday"
+            else -> "$days days ago"
+        }
+    }
+
 
 
 }

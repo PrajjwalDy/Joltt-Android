@@ -17,8 +17,10 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Adapter.NotificationAdapter
 import com.hindu.cunow.Model.NotificationModel
+import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.FragmentNotificationsBinding
+import kotlinx.android.synthetic.main.fragment_notifications.followRequest
 import kotlinx.android.synthetic.main.fragment_notifications.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -58,12 +60,16 @@ class NotificationsFragment : Fragment() {
             recyclerView!!.adapter = notificationAdapter
             notificationAdapter!!.notifyDataSetChanged()
             CoroutineScope(Dispatchers.IO).launch {
-                markAllAsRead()
+                launch { markAllAsRead() }
             }
         })
 
         root.followRequest.setOnClickListener {
             Navigation.findNavController(root).navigate(R.id.action_navigation_notifications_to_followRequest2)
+        }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            checkPrivacy()
         }
 
         return root
@@ -79,43 +85,6 @@ class NotificationsFragment : Fragment() {
         recyclerView!!.layoutManager = linearLayoutManager
     }
 
-   /* private fun loadInitialData(){
-        database.orderByKey().limitToLast(10).get().addOnSuccessListener { snapshot->
-            val newData = mutableListOf<NotificationModel>()
-            snapshot.children.forEach { child->
-                val item = child.getValue(NotificationModel::class.java)
-                if (item != null){
-                    data.add(item)
-                    lastLoadedItemName = item.notificationId
-                }
-            }
-            data.addAll(0,newData.reversed())
-            adapter.notifyDataSetChanged()
-        }
-    }
-    private suspend fun loadMoreData(){
-        if (lastLoadedItemName == null) {
-            return
-        }
-
-        val lastItem = data.lastOrNull()
-        if (lastItem != null){
-            database.orderByKey().endBefore(lastLoadedItemName)
-                .limitToLast(10).get().addOnSuccessListener { snapshot->
-                val newData = mutableListOf<NotificationModel>()
-                snapshot.children.forEach{child->
-                    val item = child.getValue(NotificationModel::class.java)
-                    if (item != null){
-                        data.add(item)
-                        lastLoadedItemName = item.notificationId
-                    }
-                }
-                data.addAll(0,newData.reversed())
-                adapter.notifyDataSetChanged()
-            }
-        }
-    }*/
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -126,6 +95,24 @@ class NotificationsFragment : Fragment() {
             .child("UnReadNotification")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
             .removeValue()
+    }
+
+    private fun checkPrivacy(){
+        val db = FirebaseDatabase.getInstance().reference.child("Users")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+        db.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val data = snapshot.getValue(UserModel::class.java)
+                if (!data!!.private){
+                    followRequest.visibility = View.GONE
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
 }

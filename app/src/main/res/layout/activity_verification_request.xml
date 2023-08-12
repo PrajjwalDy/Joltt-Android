@@ -44,8 +44,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/pink_vierification"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -147,7 +150,7 @@ android:fontFamily="@font/amiko"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/red"
-                    android:hint="Chandigarh India"
+                    android:hint="Someone Example"
                     android:fontFamily="@font/amiko"
                     android:textSize="14dp"/>
 
@@ -169,7 +172,7 @@ android:fontFamily="@font/amiko"
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="User UID"
+                        android:text="Entity"
                         android:textColor="@color/red"
                         android:fontFamily="@font/amiko"
                         />
@@ -178,7 +181,7 @@ android:fontFamily="@font/amiko"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/red"
-                        android:hint="Chandigarh uid."
+                        android:hint="Personal Blog, News Agency"
                         android:fontFamily="@font/amiko"
                         android:textSize="14sp"/>
 
@@ -186,12 +189,14 @@ android:fontFamily="@font/amiko"
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="-10dp"
                 android:gravity="center_vertical">
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -201,17 +206,16 @@ android:fontFamily="@font/amiko"
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="AADHAAR No."
+                        android:text="Valid ID Proof No."
                         android:textColor="@color/red"
                         android:fontFamily="@font/amiko"
                         />
                     <EditText
                         android:id="@+id/editTextAdhaar"
                         android:layout_width="match_parent"
-                        android:inputType="number"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/red"
-                        android:hint="xxxx xxxx xxxx"
+                        android:hint="Adhaar/PAN/Any Valid ID"
                         android:fontFamily="@font/amiko"
                         android:textSize="14sp"/>
 
@@ -219,6 +223,30 @@ android:fontFamily="@font/amiko"
 
 
             </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+
+                <ImageView
+                    android:id="@+id/id_proofImage"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/image_on_txt"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:id="@+id/proof_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload the ID Proof"
+                    android:layout_toEndOf="@+id/id_proofImage"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/red"
+                    android:textSize="16sp"/>
+
+            </RelativeLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/requester_verification"

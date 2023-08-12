@@ -1,5 +1,6 @@
 package com.hindu.cunow.Fragments.AboutMe.MyDetails
 
+import android.graphics.Color
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -75,9 +76,14 @@ class MyDetailsFragment : Fragment() {
         root.skill_btn.setOnClickListener {
             val recyclerView: RecyclerView = root.findViewById(R.id.profile_skill_rv)
 
-            root.skill_btn.visibility = View.GONE
-            root.interest_btn.visibility = View.VISIBLE
-            root.experience_btn.visibility = View.VISIBLE
+            skill_btn_cv.setCardBackgroundColor(Color.parseColor("#FF3A63"))
+            skill_btn_txt.setTextColor(Color.WHITE)
+
+            experience_btn_cv.setCardBackgroundColor(Color.parseColor("#54CBAF"))
+            experience_btn_tv.setTextColor(Color.parseColor("#226880"))
+
+            interest_btn_cv.setCardBackgroundColor(Color.parseColor("#54CBAF"))
+            interest_btn_tv.setTextColor(Color.parseColor("#226880"))
 
             //visibility of the Layouts
 
@@ -103,12 +109,20 @@ class MyDetailsFragment : Fragment() {
         }
 
         //Interest Button
-        root.interest_btn.setOnClickListener {
-            val recyclerView1: RecyclerView = root.findViewById(R.id.profile_interest_rv)
+        root.interest_btn_cv.setOnClickListener {
 
-            root.interest_btn.visibility = View.GONE
-            root.experience_btn.visibility = View.VISIBLE
-            root.skill_btn.visibility = View.VISIBLE
+            //Changing the color theme of the Card View
+            interest_btn_cv.setCardBackgroundColor(Color.parseColor("#FF3A63"))
+            interest_btn_tv.setTextColor(Color.WHITE)
+
+            experience_btn_cv.setCardBackgroundColor(Color.parseColor("#54CBAF"))
+            experience_btn_tv.setTextColor(Color.parseColor("#226880"))
+
+            skill_btn_cv.setCardBackgroundColor(Color.parseColor("#54CBAF"))
+            skill_btn_txt.setTextColor(Color.parseColor("#226880"))
+
+
+            val recyclerView1: RecyclerView = root.findViewById(R.id.profile_interest_rv)
 
 
             //visibility of the Layouts
@@ -139,9 +153,14 @@ class MyDetailsFragment : Fragment() {
 
             val recyclerView: RecyclerView = root.findViewById(R.id.profile_experience_rv)
 
-            root.experience_btn.visibility = View.GONE
-            root.interest_btn.visibility = View.VISIBLE
-            root.skill_btn.visibility = View.VISIBLE
+            experience_btn_cv.setCardBackgroundColor(Color.parseColor("#FF3A63"))
+            experience_btn_tv.setTextColor(Color.WHITE)
+
+            interest_btn_cv.setCardBackgroundColor(Color.parseColor("#54CBAF"))
+            interest_btn_tv.setTextColor(Color.parseColor("#226880"))
+
+            skill_btn_cv.setCardBackgroundColor(Color.parseColor("#54CBAF"))
+            skill_btn_txt.setTextColor(Color.parseColor("#226880"))
 
             //visibility and animation of the layouts
 

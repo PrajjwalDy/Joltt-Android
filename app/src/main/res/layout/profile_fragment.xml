@@ -56,7 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--<RelativeLayout
+        <RelativeLayout
             android:id="@+id/SRL_1"
             android:layout_width="50dp"
             android:layout_height="200dp"
@@ -75,6 +75,7 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/github_profile"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/github" />
@@ -91,6 +92,7 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/portfolio_profile"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/briefcase" />
@@ -98,16 +100,6 @@
 
             </LinearLayout>
 
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_toStartOf="@+id/profileImage"
-            android:layout_width="50dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_toEndOf="@+id/SRL_1">
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -117,41 +109,16 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/linkedin_profile"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/linkedin" />
 
             </LinearLayout>
 
-
-
-        </RelativeLayout>-->
-
-        <!--<RelativeLayout
-            android:id="@+id/SRL_2"
-            android:layout_width="50dp"
-            android:layout_height="200dp"
-            android:layout_toEndOf="@+id/profileImage"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_margin="5dp"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/instagram" />
-
-            </LinearLayout>
-
         </RelativeLayout>
+
+
 
         <RelativeLayout
             android:layout_width="50dp"
@@ -159,7 +126,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_toEndOf="@+id/SRL_2">
+            android:layout_alignParentEnd="true">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -170,9 +137,26 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/twitter_profile"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/twitter" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="5dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/instagram_profile"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/instagram" />
 
             </LinearLayout>
 
@@ -186,19 +170,22 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/threads_profile"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/threads" />
 
             </LinearLayout>
 
-        </RelativeLayout>-->
+        </RelativeLayout>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profileImage"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_centerHorizontal="true"
+            app:civ_border_color="@color/vivaMagenta"
+            app:civ_border_width="0.5dp"
             android:layout_marginTop="40dp"
             android:src="@drawable/test_img" />
 
@@ -345,6 +332,43 @@
             android:layout_marginTop="11dp" />
 
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gitlink_profile"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linkednLink_profile"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/portfolioLink_profile"
+        android:visibility="gone"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/twitterLink_profile"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/instagramLink_profile"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/threadsLink_profile"
+        android:visibility="gone"/>
 
 
 </RelativeLayout>

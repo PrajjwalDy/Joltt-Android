@@ -2,12 +2,15 @@ package com.hindu.cunow.Adapter
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.annotation.NonNull
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
@@ -16,9 +19,11 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.Activity.ChatActivity
+import com.hindu.cunow.Model.ChatModel
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.activity_edit_profile.edit_crush
 
 class ChatListAdapter(private val mContext:Context,
                       private val mUser:List<UserModel>): RecyclerView.Adapter<ChatListAdapter.ViewHolder>() {
@@ -28,10 +33,13 @@ class ChatListAdapter(private val mContext:Context,
         val name:TextView = itemView.findViewById(R.id.chatFullName) as TextView
         val textCount:TextView = itemView.findViewById(R.id.textCount_TV) as TextView
         val layout:RelativeLayout = itemView.findViewById(R.id.RL_chat_count) as RelativeLayout
+        val lastMessage:TextView = itemView.findViewById(R.id.chatLast_message) as TextView
+        val card:CardView =itemView.findViewById(R.id.chatCardView) as CardView
 
         fun bind(list:UserModel){
             Glide.with(mContext).load(list.profileImage).into(profileImage)
             name.text = list.fullName
+            getLastMessage(lastMessage,list.uid!!)
 
         }
     }
@@ -52,7 +60,7 @@ class ChatListAdapter(private val mContext:Context,
                 .child(mUser[position].uid!!).removeValue()
         }
 
-        countUnreadMessage(holder.textCount, mUser[position].uid!!,holder.layout)
+        countUnreadMessage(holder.textCount, mUser[position].uid!!,holder.layout,holder.card)
 
     }
 
@@ -60,7 +68,7 @@ class ChatListAdapter(private val mContext:Context,
         return mUser.size
     }
 
-    private fun countUnreadMessage(count:TextView,profileId:String,layout:RelativeLayout){
+    private fun countUnreadMessage(count:TextView,profileId:String,layout:RelativeLayout,card:CardView){
         val data = FirebaseDatabase.getInstance().reference.child("ChatMessageCount")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
             .child(profileId)
@@ -70,9 +78,45 @@ class ChatListAdapter(private val mContext:Context,
                     layout.visibility = View.VISIBLE
                     count.visibility = View.VISIBLE
                     count.text = snapshot.childrenCount.toString()
+                    card.setCardBackgroundColor(Color.parseColor("#ffc2cf"))
                 }else{
                     count.visibility = View.GONE
                     layout.visibility = View.GONE
+                    card.setCardBackgroundColor(Color.parseColor("#ffffff"))
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    private fun getLastMessage(textView:TextView, receiver:String){
+        val chatData = FirebaseDatabase.getInstance().reference.child("ChatData")
+
+        chatData.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val chatList = mutableListOf<ChatModel>()
+                    for (snapshot in snapshot.children){
+                        val chat = snapshot.getValue(ChatModel::class.java)
+
+                        if (chat!!.receiver.equals(FirebaseAuth.getInstance().currentUser!!.uid) && chat.sender.equals(receiver)
+                            ||chat.receiver.equals(receiver) && chat.sender.equals(FirebaseAuth.getInstance().currentUser!!.uid) ){
+                            chatList.add(chat)
+                        }
+                        if (chatList.isNotEmpty()) {
+                            val lastItem = chatList.last()
+
+                            if (lastItem.containImage){
+                                textView.text ="Photo"
+                            }else{
+                                textView.text = lastItem.chatText
+                            }
+                        }
+                    }
                 }
             }
 

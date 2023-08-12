@@ -5,8 +5,10 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.Toast
+import androidx.core.os.postDelayed
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -39,8 +41,14 @@ class ChatActivity : AppCompatActivity() {
     private var storageChatImageRef: StorageReference? =null
     private var media = ""
 
+
     private var chatList:MutableList<ChatModel>? = null
     private var chatAdapter:ChatAdapter? = null
+
+    //UPDATING THE TIME STAMP
+    private val handler = Handler()
+    private val updateDelayMillis = 1000*60
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +68,8 @@ class ChatActivity : AppCompatActivity() {
         chatAdapter = ChatAdapter(this, chatList as ArrayList<ChatModel>)
         recyclerView.adapter = chatAdapter
 
+        startPeriodicTimestampUpdate()
+
         selectMedia_chat.setOnClickListener {
             cropImage()
             media = "yes"
@@ -78,11 +88,24 @@ class ChatActivity : AppCompatActivity() {
 
     }
 
+    private fun startPeriodicTimestampUpdate() {
+        handler.postDelayed(timestampUpdaterRunnable, updateDelayMillis.toLong())
+    }
+
+    private val timestampUpdaterRunnable = object :Runnable{
+        override fun run() {
+            chatAdapter!!.notifyDataSetChanged()
+            handler.postDelayed(this, updateDelayMillis.toLong())
+        }
+    }
+
+
     private fun cropImage(){
         CropImage.activity()
             .start(this)
     }
 
+    //SEND MESSAGE
     private fun sendMessage(view:View,recyclerView: RecyclerView){
         if (chat_message.text.isEmpty()) {
             Snackbar.make(view, "please write something..", Snackbar.LENGTH_SHORT).show()
@@ -107,6 +130,7 @@ class ChatActivity : AppCompatActivity() {
             dataMap["sender"] = FirebaseAuth.getInstance().currentUser!!.uid
             dataMap["receiver"] = profileId
             dataMap["containImage"] = false
+            dataMap["timeStamp"] = System.currentTimeMillis().toString()
 
             dataRef.push().setValue(dataMap)
             chat_message.text.clear()
@@ -119,6 +143,7 @@ class ChatActivity : AppCompatActivity() {
         }
     }
 
+    //UPLOAD IMAGE
     private fun uploadImage(){
         val fileReference = storageChatImageRef!!
             .child(System.currentTimeMillis().toString()+".jpg")
@@ -146,6 +171,7 @@ class ChatActivity : AppCompatActivity() {
         dataMap["containImage"] = true
         dataMap["receiver"] = profileId
         dataMap["chatImage"] = ""
+        dataMap["timeStamp"] = System.currentTimeMillis().toString()
 
         ref.child(chatId).updateChildren(dataMap)
 
@@ -171,6 +197,7 @@ class ChatActivity : AppCompatActivity() {
                 dataMap["receiver"] = profileId
                 dataMap["containImage"] = true
                 dataMap["chatImage"] = myUrl
+                dataMap["timeStamp"] = System.currentTimeMillis().toString()
 
                 ref.child(chatId).updateChildren(dataMap)
                 Toast.makeText(this,"Image Sent", Toast.LENGTH_SHORT).show()
@@ -188,6 +215,7 @@ class ChatActivity : AppCompatActivity() {
         })
     }
 
+    //RETRIEVE CHAT
     private fun retrieveChat(recyclerView: RecyclerView){
         val chatData = FirebaseDatabase.getInstance().reference.child("ChatData")
 
@@ -216,6 +244,7 @@ class ChatActivity : AppCompatActivity() {
         })
     }
 
+    //LOAD USER DATA
     private fun loadUserData(){
         val usersRef = FirebaseDatabase.getInstance().reference
             .child("Users")
@@ -239,6 +268,7 @@ class ChatActivity : AppCompatActivity() {
         )
     }
 
+    //ON ACTIVITY RESULT
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null)
@@ -252,7 +282,18 @@ class ChatActivity : AppCompatActivity() {
         }
     }
 
+    //SCROLL TO BOTTOM
     private fun scrollToBottom(recyclerView: RecyclerView){
+
+        /*chatAdapter!!.notifyItemInserted(chatAdapter!!.itemCount-1)
+        recyclerView.smoothScrollToPosition(chatAdapter!!.itemCount-1)*/
         recyclerView.post { recyclerView.scrollToPosition(chatAdapter!!.itemCount-1) }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Stop the periodic timestamp update when the activity is destroyed
+        handler.removeCallbacks(timestampUpdaterRunnable)
+    }
+
 }

@@ -6,6 +6,7 @@
     android:layout_alignParentEnd="true">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/chat_cv2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -15,12 +16,11 @@
         app:cardElevation="5dp">
 
         <LinearLayout
-            android:layout_margin="2dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -63,16 +63,12 @@
                         android:id="@+id/chatImage_right"
                         android:layout_width="300dp"
                         android:layout_height="300dp"
-                        android:layout_marginStart="5dp"
                         android:layout_below="@+id/sendingImage_ll"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="5dp"
                         android:visibility="gone"
+                        android:src="@drawable/profile_testimg"
                         android:scaleType="centerCrop" />
 
                 </RelativeLayout>
-
 
 
                 <TextView
@@ -87,12 +83,27 @@
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
-            </LinearLayout>
+            </RelativeLayout>
+
 
         </LinearLayout>
 
 
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/timeStamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="time"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="-5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_alignParentEnd="true"
+        android:fontFamily="@font/comfortaa"
+        android:textSize="10sp"
+        android:layout_below="@+id/chat_cv2"
+        android:textColor="@color/grey"/>
 
 
 </RelativeLayout>

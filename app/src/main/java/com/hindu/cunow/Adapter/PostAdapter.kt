@@ -12,21 +12,25 @@ import android.content.Intent
 import android.media.Image
 import android.net.Uri
 import android.os.Build
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.cardview.widget.CardView
+import androidx.core.os.postDelayed
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.util.Util
+import com.google.android.exoplayer2.Format
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.PlaybackException
 import com.google.android.exoplayer2.Player
@@ -36,6 +40,7 @@ import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
+import com.google.android.exoplayer2.util.MediaFormatUtil
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -47,6 +52,7 @@ import com.hindu.cunow.Activity.CommentActivity
 import com.hindu.cunow.Activity.HelpActivity
 import com.hindu.cunow.Activity.ReportPostActivity
 import com.hindu.cunow.Fragments.Pages.PageDetailsActivity
+import com.hindu.cunow.Model.NotificationModel
 import com.hindu.cunow.Model.PageModel
 import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.Model.UserModel
@@ -60,6 +66,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import java.util.concurrent.TimeUnit
 
 class PostAdapter (private val mContext: Context,
                    private val mPost:List<PostModel>,
@@ -194,6 +201,7 @@ class PostAdapter (private val mContext: Context,
                     FirebaseDatabase.getInstance().reference.child("Post")
                         .child(post.postId!!)
                         .removeValue()
+                    removeNotification(post.postId)
                     Snackbar.make(holder.itemView,"Post removed success",Snackbar.LENGTH_SHORT).show()
                     confDialog.dismiss()
                     alertDialog.dismiss()
@@ -224,7 +232,7 @@ class PostAdapter (private val mContext: Context,
         return mPost.size
     }
 
-
+    //INNER CLASS
     inner class ViewHolder(@NonNull itemView: View):RecyclerView.ViewHolder(itemView){
         val image: ImageView = itemView.findViewById(R.id.postImage) as ImageView
         val caption: TextView = itemView.findViewById(R.id.caption) as TextView
@@ -240,6 +248,8 @@ class PostAdapter (private val mContext: Context,
         val totalComments:TextView = itemView.findViewById(R.id.totalComments)
         val postCardView:CardView = itemView.findViewById(R.id.postCV)
         val mediaCV: CardView = itemView.findViewById(R.id.media_cv) as CardView
+        val duration:TextView = itemView.findViewById(R.id.videoDuration) as TextView
+        val rl_duration:RelativeLayout = itemView.findViewById(R.id.videoDuration_RL) as RelativeLayout
 
 
         fun bind(list:PostModel,context: Context,imageView: ImageView,playerView: PlayerView){
@@ -262,7 +272,8 @@ class PostAdapter (private val mContext: Context,
             }else if(list.video){
                 imageView.visibility = View.GONE
                 playerView.visibility = View.VISIBLE
-                playVideo(playerView,list.videoId!!)
+                rl_duration.visibility = View.VISIBLE
+                playVideo(playerView,list.videoId!!,duration)
                 mediaCV.visibility = View.VISIBLE
             }else{
                 playerView.visibility = View.GONE
@@ -274,6 +285,7 @@ class PostAdapter (private val mContext: Context,
         }
     }
 
+    //PUBLISHER
     private suspend fun publisher(profileImage:CircleImageView, name:TextView,publisherId:String,verifImage:CircleImageView){
 
         val userDataRef = FirebaseDatabase.getInstance().reference.child("Users").child(publisherId)
@@ -299,6 +311,7 @@ class PostAdapter (private val mContext: Context,
         })
         userDataRef.keepSynced(true)
     }
+
     //Like Mechanism
     private fun like(likeButton: ImageView,
                      postId: String,
@@ -349,6 +362,7 @@ class PostAdapter (private val mContext: Context,
         }
     }
 
+    //IS LIKE FUNCTION
     private suspend fun islike(postId:String, likeButton:ImageView){
         val firebaseUser = FirebaseAuth.getInstance().currentUser
 
@@ -376,9 +390,36 @@ class PostAdapter (private val mContext: Context,
         likeRef.keepSynced(true)
 
     }
-    private fun playVideo(videoView:PlayerView,videoUrl: String){
+
+    //PLAY VIDEO
+    private fun playVideo(videoView:PlayerView,videoUrl: String,duration:TextView){
         initPlayer(videoView,videoUrl)
+
+
+        val player = videoView.player
+        player!!.addListener(object : Player.Listener {
+            private val handler = Handler()
+            private val updateProgressAction = object : Runnable {
+                override fun run() {
+                    updateProgress(videoView,duration)
+                    handler.postDelayed(this, 1000) // Update every 1 second
+                }
+            }
+
+            @Deprecated("Deprecated in Java")
+            override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
+                when(playbackState){
+                    Player.STATE_READY->{
+                        handler.postDelayed(updateProgressAction,1000)
+                    }else->{
+                        handler.removeCallbacks(updateProgressAction)
+                    }
+                }
+            }
+        })
     }
+
+    //INIT PLAYER
     private fun initPlayer(videoView:PlayerView,videoUrl: String) {
         lateinit var simpleExoPlayer:SimpleExoPlayer
         lateinit var mediaSource: MediaSource
@@ -424,9 +465,13 @@ class PostAdapter (private val mContext: Context,
         simpleExoPlayer.addListener(playerListener)
 
     }
+
+    //URL OF THE VIDEO
     enum class URLType(var url:String){
         MP4(""), HLS("")
     }
+
+    //TOTAL LIKES
     private suspend fun totalLikes(postId: String, totalLikes:TextView){
         val databaseRef = FirebaseDatabase.getInstance().reference
             .child("Likes").child(postId)
@@ -444,6 +489,8 @@ class PostAdapter (private val mContext: Context,
         })
         databaseRef.keepSynced(true)
     }
+
+    //ADD NOTIFICATIONS
     private fun addNotification(publisherId: String,postId: String,caption:TextView){
         if (publisherId != FirebaseAuth.getInstance().currentUser!!.uid){
             val dataRef = FirebaseDatabase.getInstance()
@@ -460,9 +507,9 @@ class PostAdapter (private val mContext: Context,
             dataMap["postN"] = true
             dataMap["notifierId"] = FirebaseAuth.getInstance().currentUser!!.uid
 
-            dataRef.push().setValue(dataMap)
+            dataRef.child(notificationId).setValue(dataMap)
 
-            val databaseRef = FirebaseDatabase.getInstance().reference
+            FirebaseDatabase.getInstance().reference
                 .child("Notification")
                 .child("UnReadNotification")
                 .child(publisherId).child(notificationId).setValue(true)
@@ -470,6 +517,8 @@ class PostAdapter (private val mContext: Context,
 
         }
     }
+
+    //TOTAL COMMENTS
     private suspend fun totalComments(totalComments:TextView, postId: String){
         val postData = FirebaseDatabase.getInstance().reference.child("Comments")
             .child(postId)
@@ -489,6 +538,8 @@ class PostAdapter (private val mContext: Context,
         postData.keepSynced(true)
 
     }
+
+    //ADD PAGE NOTIFICATION
     private fun addPageNotification(pageAdmin: String,postId: String,pageName:String,pageId:String){
         if (pageAdmin != FirebaseAuth.getInstance().currentUser!!.uid){
             val dataRef = FirebaseDatabase.getInstance()
@@ -507,7 +558,7 @@ class PostAdapter (private val mContext: Context,
             dataMap["pageId"] = pageId
             dataMap["notifierId"] = FirebaseAuth.getInstance().currentUser!!.uid
 
-            dataRef.push().setValue(dataMap)
+            dataRef.child(notificationId).setValue(dataMap)
             addPageN(pageAdmin,postId,pageName,pageId)
 
             FirebaseDatabase.getInstance().reference
@@ -516,6 +567,8 @@ class PostAdapter (private val mContext: Context,
                 .child(pageAdmin).child(notificationId).setValue(true)
         }
     }
+
+    //ADD PAGE DETAILS
     private fun addPageN(pageAdmin: String,postId: String,pageName:String,pageId:String){
         val dataNRef = FirebaseDatabase.getInstance()
             .reference.child("PageNotification")
@@ -535,6 +588,8 @@ class PostAdapter (private val mContext: Context,
 
         dataNRef.child(nId).updateChildren(dataNMap)
     }
+
+    //FETCH PAGE DETAILS
     private suspend fun pageInfo(profileImage:CircleImageView, name:TextView,publisherId:String) {
         val userDataRef = FirebaseDatabase.getInstance().reference.child("Pages").child(publisherId)
 
@@ -544,6 +599,46 @@ class PostAdapter (private val mContext: Context,
                     val data = snapshot.getValue(PageModel::class.java)
                     Glide.with(mContext).load(data!!.pageIcon).into(profileImage)
                     name.text = data.pageName
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    //OBJECT FOR DURATION OF THE VIDEO
+    object FormatUtils {
+        fun formatDuration(duration: Long): String {
+            val hours = TimeUnit.MILLISECONDS.toHours(duration)
+            val minutes = TimeUnit.MILLISECONDS.toMinutes(duration) % 60
+            val seconds = TimeUnit.MILLISECONDS.toSeconds(duration) % 60
+            return String.format("%02d:%02d", minutes, seconds)
+        }
+    }
+
+    //UPDATE THE PROGRESS OF THE VIDEO WHILE PLAYING
+    private fun updateProgress(videoView: PlayerView,duration: TextView) {
+        val player = videoView.player
+        val currentPosition = player!!.currentPosition
+        val formattedPosition = FormatUtils.formatDuration(currentPosition)
+        duration.text = formattedPosition
+    }
+
+    //REMOVE NOTIFICATION
+    private fun removeNotification(postId: String){
+        val dbRef = FirebaseDatabase.getInstance().reference.child("Notification")
+            .child("AllNotification")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+        dbRef.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (snapshot in snapshot.children){
+                    val nData = snapshot.getValue(NotificationModel::class.java)
+                    if (nData!!.postID == postId){
+                        snapshot.ref.removeValue()
+                    }
                 }
             }
 

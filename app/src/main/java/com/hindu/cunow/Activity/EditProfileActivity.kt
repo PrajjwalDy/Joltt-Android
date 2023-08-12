@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import com.bumptech.glide.Glide
@@ -155,7 +156,6 @@ class EditProfileActivity : AppCompatActivity() {
         Snackbar.make(view, "Update successful", Snackbar.LENGTH_SHORT).show()
         finish()
     }
-
     //UPDATE PROFILE IMAGE
     private fun updateProfileImage() {
         if (imageUri == null) {
@@ -208,7 +208,6 @@ class EditProfileActivity : AppCompatActivity() {
             }
         }
     }
-
     //RETRIEVE INFORMATION
     private fun retrieveUserData() {
         val dataRef = FirebaseDatabase
@@ -285,7 +284,6 @@ class EditProfileActivity : AppCompatActivity() {
 
         })
     }
-
     //Update Skills
     private fun updateSkills() {
         if (editText_skills.text.isEmpty()) {
@@ -314,7 +312,6 @@ class EditProfileActivity : AppCompatActivity() {
         }
 
     }
-
     //Update Experience
     private fun updateExperience() {
 
@@ -347,14 +344,14 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     //CHECK VALID LINK
-    private fun links(){
+    private fun links() {
+
         gitHubLink = if (ET_github.text.toString().isEmpty()){
             ""
         }else{
             if (isWebLinkValid(ET_github.text.toString().trim())){
                 ET_github.text.toString().trim()
             } else {
-                gitHubLink = ""
                 return
             }
         }
@@ -365,10 +362,9 @@ class EditProfileActivity : AppCompatActivity() {
             if (isWebLinkValid(ET_linkedin.text.toString().toString())){
                 ET_linkedin.text.toString().toString()
             } else {
-                linkedLink = ""
                 return
             }
-        }
+        }.toString()
 
         portfolioLink = if (ET_portfolio.text.toString().isEmpty()){
             ""
@@ -376,7 +372,6 @@ class EditProfileActivity : AppCompatActivity() {
             if (isWebLinkValid(ET_portfolio.text.toString().trim())){
                 ET_portfolio.text.toString().trim()
             } else {
-               portfolioLink = ""
                 return
             }
         }
@@ -387,7 +382,6 @@ class EditProfileActivity : AppCompatActivity() {
             if (isWebLinkValid(ET_instagram.text.toString().trim())){
                 ET_instagram.text.toString().trim()
             } else {
-                instagramLink = ""
                 return
             }
         }
@@ -398,7 +392,6 @@ class EditProfileActivity : AppCompatActivity() {
             if (isWebLinkValid(ET_twitter.text.toString().trim())){
                 ET_twitter.text.toString().trim()
             } else {
-                twitterLink = ""
                 return
             }
         }
@@ -409,36 +402,15 @@ class EditProfileActivity : AppCompatActivity() {
             if (isWebLinkValid(ET_threads.text.toString().trim())){
                 ET_threads.text.toString().trim()
             } else {
-                threadLink = ""
                 return
             }
         }
-    }
 
+    }
     private fun isWebLinkValid(link: String): Boolean {
-        try {
-            // Step 1: Create a URL object from the given link
-            val url = URL(link)
-
-            // Step 2: Open a connection to the URL
-            val connection = url.openConnection() as HttpURLConnection
-
-            // Step 3: Set the request method (HEAD, which only fetches the header, not the whole content)
-            connection.requestMethod = "HEAD"
-
-            // Step 4: Get the HTTP response code
-            val responseCode = connection.responseCode
-
-            // Step 5: Check if the response code indicates a successful request (status code 200-299)
-            return responseCode in 200..299
-        } catch (e: Exception) {
-            // Any exception occurred while trying to validate the link indicates an invalid link
-            return false
-        }
+        val regex = Patterns.WEB_URL
+        return regex.matcher(link).matches()
     }
-
-
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 

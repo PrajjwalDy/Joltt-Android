@@ -31,8 +31,8 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 class ConfessionRoomFragment : Fragment() {
 
-    var recyclerView:RecyclerView? = null
-    private var confessionAdapter:ConfessionAdapter? = null
+    var recyclerView: RecyclerView? = null
+    private var confessionAdapter: ConfessionAdapter? = null
 
     private lateinit var viewModel: ConfessionRoomViewModel
 
@@ -46,18 +46,18 @@ class ConfessionRoomFragment : Fragment() {
     ): View? {
         viewModel =
             ViewModelProvider(this).get(ConfessionRoomViewModel::class.java)
-        _binding = ConfessionRoomFragmentBinding.inflate(inflater,container,false)
+        _binding = ConfessionRoomFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
         initView(root)
         checkFirstVisit()
 
         viewModel.confessionViewModel!!.observe(viewLifecycleOwner, Observer {
 
-            confessionAdapter = context?.let { it1-> ConfessionAdapter(it1,it) }
+            confessionAdapter = context?.let { it1 -> ConfessionAdapter(it1, it) }
             recyclerView!!.adapter = confessionAdapter
             confessionAdapter!!.notifyDataSetChanged()
         })
-        root.send_confession.setOnClickListener { view->
+        root.send_confession.setOnClickListener { view ->
             postText(view)
         }
         root.confessionMedia.setOnClickListener {
@@ -66,14 +66,14 @@ class ConfessionRoomFragment : Fragment() {
 
         root.button_confession.setOnClickListener {
             root.button_confession.visibility = View.GONE
-            root.CV_upload_confession.visibility =View.VISIBLE
+            root.CV_upload_confession.visibility = View.VISIBLE
         }
         root.accept_confession_tnc.setOnClickListener {
             updateVisit(root)
         }
 
         root.terms_condition_confession.setOnClickListener {
-            val intent = Intent(context,TermsAndCondition::class.java)
+            val intent = Intent(context, TermsAndCondition::class.java)
             startActivity(intent)
         }
         root.confessionBack.setOnClickListener {
@@ -89,7 +89,7 @@ class ConfessionRoomFragment : Fragment() {
         return root
     }
 
-    private fun initView(root:View){
+    private fun initView(root: View) {
         recyclerView = root.findViewById(R.id.confessionRV) as RecyclerView
         recyclerView!!.setHasFixedSize(true)
         recyclerView!!.isNestedScrollingEnabled = false
@@ -105,13 +105,13 @@ class ConfessionRoomFragment : Fragment() {
         _binding = null
     }
 
-    private fun postText(view: View){
-        Snackbar.make(view,"adding confession....", Snackbar.LENGTH_SHORT).show()
+    private fun postText(view: View) {
+        Snackbar.make(view, "adding confession....", Snackbar.LENGTH_SHORT).show()
 
         val ref = FirebaseDatabase.getInstance().reference.child("Confession")
         val postId = ref.push().key
 
-        val postMap = HashMap<String,Any>()
+        val postMap = HashMap<String, Any>()
         postMap["confessionId"] = postId!!
         postMap["confesserId"] = FirebaseAuth.getInstance().currentUser!!.uid
         postMap["confessionText"] = confess_editText.text.toString()
@@ -119,15 +119,15 @@ class ConfessionRoomFragment : Fragment() {
 
         ref.child(postId).updateChildren(postMap)
 
-        Snackbar.make(view,"confession added successfully", Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(view, "confession added successfully", Snackbar.LENGTH_SHORT).show()
 
         confess_editText.text.clear()
-        CV_upload_confession.visibility =View.GONE
+        CV_upload_confession.visibility = View.GONE
         button_confession.visibility = View.VISIBLE
 
     }
 
-    private fun checkFirstVisit(){
+    private fun checkFirstVisit() {
         val progressDialog = context?.let { Dialog(it) }
         progressDialog!!.setContentView(R.layout.profile_dropdown_menu)
         progressDialog.show()
@@ -136,11 +136,11 @@ class ConfessionRoomFragment : Fragment() {
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
         dataRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
                     val data = snapshot.getValue(UserModel::class.java)
-                    if (data!!.confessionVisited){
+                    if (data!!.confessionVisited) {
                         tnc_confessionView.visibility = View.VISIBLE
-                    }else{
+                    } else {
                         confession_main_ll.visibility = View.VISIBLE
                     }
                 }
@@ -154,12 +154,12 @@ class ConfessionRoomFragment : Fragment() {
         })
     }
 
-    private fun updateVisit(view: View){
+    private fun updateVisit(view: View) {
 
         val ref = FirebaseDatabase.getInstance().reference
             .child("Users")
 
-        val postMap = HashMap<String,Any>()
+        val postMap = HashMap<String, Any>()
         postMap["confessionVisited"] = false
         ref.child(FirebaseAuth.getInstance().currentUser!!.uid)
             .updateChildren(postMap)

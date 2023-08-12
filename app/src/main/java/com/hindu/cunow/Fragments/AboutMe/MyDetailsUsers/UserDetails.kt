@@ -1,6 +1,7 @@
 package com.hindu.cunow.Fragments.AboutMe.MyDetailsUsers
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,22 +25,31 @@ import com.hindu.cunow.Model.ESModel
 import com.hindu.cunow.Model.InterestModel
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
+import kotlinx.android.synthetic.main.fragment_user_details.experience_btn_user
 import kotlinx.android.synthetic.main.fragment_user_details.gender_txt_user
+import kotlinx.android.synthetic.main.fragment_user_details.skill_btn_user
 import kotlinx.android.synthetic.main.fragment_user_details.view.*
+import kotlinx.android.synthetic.main.my_details_fragment.experience_btn_cv
+import kotlinx.android.synthetic.main.my_details_fragment.experience_btn_tv
 import kotlinx.android.synthetic.main.my_details_fragment.gender_txt
+import kotlinx.android.synthetic.main.my_details_fragment.interest_btn_cv
+import kotlinx.android.synthetic.main.my_details_fragment.interest_btn_tv
+import kotlinx.android.synthetic.main.my_details_fragment.skill_btn_cv
+import kotlinx.android.synthetic.main.my_details_fragment.skill_btn_txt
 import kotlinx.android.synthetic.main.my_details_fragment.view.*
 
 class UserDetails : Fragment() {
     private lateinit var profileId: String
     private lateinit var firebaseUser: FirebaseUser
+    var myInterest: List<String>? = null
 
     var recyclerView: RecyclerView? = null
     private var interestAdapter: InterestAdapter_Prof? = null
 
     private var expAdapter_Prof: ExpAdapter? = null
     private var skillAdapter: SkillAdapter? = null
-    private var interestList: List<InterestModel>? = null
-    private var ESList: List<ESModel>? = null
+    private var interestList: MutableList<InterestModel>? = null
+    private var ESList: MutableList<ESModel>? = null
 
 
     //Animations
@@ -74,9 +84,14 @@ class UserDetails : Fragment() {
         root.skill_btn_user.setOnClickListener {
             val recyclerView: RecyclerView = root.findViewById(R.id.user_skill_rv)
 
-            root.skill_btn_user.visibility = View.GONE
-            root.interest_btn_user.visibility = View.VISIBLE
-            root.experience_btn_user.visibility = View.VISIBLE
+            root.skill_btn_user.setCardBackgroundColor(Color.parseColor("#FF3A63"))
+            root.skill_txt_user.setTextColor(Color.WHITE)
+
+            root.experience_btn_user.setCardBackgroundColor(Color.parseColor("#54CBAF"))
+            root.experience_txt_user.setTextColor(Color.parseColor("#226880"))
+
+            root.interest_btn_user.setCardBackgroundColor(Color.parseColor("#54CBAF"))
+            root.interest_txt_user.setTextColor(Color.parseColor("#226880"))
 
             //visibility of the Layouts
 
@@ -97,17 +112,20 @@ class UserDetails : Fragment() {
             ESList = ArrayList()
             skillAdapter = context?.let { it1 -> SkillAdapter(it1, ESList as ArrayList<ESModel>) }
             recyclerView.adapter = skillAdapter
-            skillAdapter!!.notifyDataSetChanged()
-
+            loadSkills()
         }
-
         //Interest Button
         root.interest_btn_user.setOnClickListener {
             val recyclerView1: RecyclerView = root.findViewById(R.id.user_interest_rv)
 
-            root.interest_btn_user.visibility = View.GONE
-            root.experience_btn_user.visibility = View.VISIBLE
-            root.skill_btn_user.visibility = View.VISIBLE
+            root.interest_btn_user.setCardBackgroundColor(Color.parseColor("#FF3A63"))
+            root.interest_txt_user.setTextColor(Color.WHITE)
+
+            root.experience_btn_user.setCardBackgroundColor(Color.parseColor("#54CBAF"))
+            root.experience_txt_user.setTextColor(Color.parseColor("#226880"))
+
+            root.skill_btn_user.setCardBackgroundColor(Color.parseColor("#54CBAF"))
+            root.skill_txt_user.setTextColor(Color.parseColor("#226880"))
 
 
             //visibility of the Layouts
@@ -125,7 +143,6 @@ class UserDetails : Fragment() {
 
 
             //loadData
-
             initView(recyclerView1, 3)
             interestList = ArrayList()
             interestAdapter = context?.let { it1 ->
@@ -135,18 +152,21 @@ class UserDetails : Fragment() {
                 )
             }
             recyclerView1.adapter = interestAdapter
-            interestAdapter!!.notifyDataSetChanged()
-
+            loadInterest()
         }
-
         //Experience button
         root.experience_btn_user.setOnClickListener {
 
             val recyclerView: RecyclerView = root.findViewById(R.id.user_experience_rv)
 
-            root.experience_btn_user.visibility = View.GONE
-            root.interest_btn_user.visibility = View.VISIBLE
-            root.skill_btn_user.visibility = View.VISIBLE
+            root.experience_btn_user.setCardBackgroundColor(Color.parseColor("#FF3A63"))
+            root.experience_txt_user.setTextColor(Color.WHITE)
+
+            root.skill_btn_user.setCardBackgroundColor(Color.parseColor("#54CBAF"))
+            root.skill_txt_user.setTextColor(Color.parseColor("#226880"))
+
+            root.interest_btn_user.setCardBackgroundColor(Color.parseColor("#54CBAF"))
+            root.interest_txt_user.setTextColor(Color.parseColor("#226880"))
 
             //visibility and animation of the layouts
 
@@ -163,13 +183,13 @@ class UserDetails : Fragment() {
             root.ll_about_user.startAnimation(toBottom)
 
 
+
             initView(recyclerView, 2)
             ESList = ArrayList()
             expAdapter_Prof = context?.let { it1 -> ExpAdapter(it1, ESList as ArrayList<ESModel>) }
             recyclerView.adapter = expAdapter_Prof
-            expAdapter_Prof!!.notifyDataSetChanged()
+            loadExperience()
         }
-
 
         return root
     }
@@ -189,6 +209,8 @@ class UserDetails : Fragment() {
                     root.from_users.text = users!!.place
                     root.branch_user.text = users.branch
                     root.year_user.text = "Year: " + users.year
+                    root.institutionName_user.text = users.college
+                    root.student_course_user.text = users.course
 
                     if (users.male) {
                         root.genderImage_user.setImageResource(R.drawable.male)
@@ -236,6 +258,97 @@ class UserDetails : Fragment() {
         linearLayoutManager.reverseLayout = true
         linearLayoutManager.stackFromEnd = true
         recyclerView.layoutManager = linearLayoutManager
+    }
+
+    private fun readInterest() {
+        val intRef = FirebaseDatabase.getInstance().reference.child("interests")
+        intRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    interestList!!.clear()
+                    for (snapshot in snapshot.children) {
+                        val interest = snapshot.getValue(InterestModel::class.java)
+                        for (key in myInterest!!) {
+                            if (interest!!.inteID == key) {
+                                interestList!!.add(interest)
+                            }
+                            interestList!!.reverse()
+                        }
+                        interestAdapter!!.notifyDataSetChanged()
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
+    }
+
+    private fun loadInterest() {
+        val interestList = ArrayList<InterestModel>()
+        myInterest = ArrayList()
+        val database = FirebaseDatabase.getInstance().reference.child("InterestUser")
+            .child(profileId)
+
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (snapshot in snapshot.children) {
+                        (myInterest as ArrayList<String>).add(snapshot.key!!)
+                    }
+                    readInterest()
+                    interestAdapter!!.notifyDataSetChanged()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
+    }
+
+    private fun loadSkills() {
+        val skillData = FirebaseDatabase.getInstance().getReference("Skills")
+            .child(profileId)
+        skillData.addValueEventListener(object:ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    for (snapshot in snapshot.children){
+                        val data = snapshot.getValue(ESModel::class.java)
+                        ESList?.add(data!!)
+                    }
+                    skillAdapter!!.notifyDataSetChanged()
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
+    }
+
+    private fun loadExperience() {
+        val expData = FirebaseDatabase.getInstance().getReference("Experience")
+            .child(profileId)
+        expData.addValueEventListener(object:ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    for (snapshot in snapshot.children){
+                        val data = snapshot.getValue(ESModel::class.java)
+                        ESList?.add(data!!)
+                    }
+                    expAdapter_Prof!!.notifyDataSetChanged()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
     }
 
 }
