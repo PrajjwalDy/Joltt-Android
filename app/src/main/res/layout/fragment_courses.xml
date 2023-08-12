@@ -15,7 +15,16 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <ImageView
+                android:id="@+id/courseBack"
+                android:layout_width="32dp"
+                android:layout_height="23dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:src="@drawable/back"/>
+
             <TextView
+                android:id="@+id/courseTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"

@@ -80,6 +80,10 @@ class ConfessionRoomFragment : Fragment() {
             Navigation.findNavController(root)
                 .navigate(R.id.action_confessionRoomFragment_to_navigation_dashboard)
         }
+        root.confessionTxt.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_confessionRoomFragment_to_navigation_dashboard)
+        }
 
 
         return root

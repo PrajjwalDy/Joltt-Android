@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hindu.cunow.Adapter.ExploreUserAdapter
@@ -16,6 +17,7 @@ import com.hindu.cunow.R
 import com.hindu.cunow.databinding.ExplorePeopleLayoutBinding
 import com.hindu.cunow.databinding.FragmentHomeBinding
 import com.hindu.cunow.databinding.PeopleFragmentBinding
+import kotlinx.android.synthetic.main.people_fragment.view.*
 
 class PeopleFragment : Fragment() {
 
@@ -43,6 +45,15 @@ class PeopleFragment : Fragment() {
             exploreUserAdapter!!.notifyDataSetChanged()
 
         })
+
+        root.exploreBack.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_peopleFragment_to_navigation_dashboard)
+        }
+        root.exploreTxt.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_peopleFragment_to_navigation_dashboard)
+        }
 
         return root
     }

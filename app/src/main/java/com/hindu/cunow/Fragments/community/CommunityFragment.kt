@@ -70,6 +70,10 @@ class CommunityFragment : Fragment() {
             Navigation.findNavController(root)
                 .navigate(R.id.action_communityFragment_to_navigation_dashboard3)
         }
+        root.communityTxt.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_communityFragment_to_navigation_dashboard3)
+        }
 
         return root
     }

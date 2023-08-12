@@ -48,6 +48,10 @@ class EventFragment : Fragment() {
             Navigation.findNavController(root)
                 .navigate(R.id.action_eventFragment_to_navigation_dashboard)
         }
+        root.eventTxt.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_eventFragment_to_navigation_dashboard)
+        }
         return root
     }
     private fun initView(root: View) {

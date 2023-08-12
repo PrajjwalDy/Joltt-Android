@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,7 @@ import com.hindu.cunow.Fragments.AboutMe.Posts.MyPostsFragemtViewModel
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.MyPostsFragemtFragmentBinding
 import com.hindu.cunow.databinding.PublicPostFragementFragmentBinding
+import kotlinx.android.synthetic.main.public_post_fragement_fragment.view.*
 
 class PublicPostFragement : Fragment() {
 
@@ -44,6 +46,14 @@ class PublicPostFragement : Fragment() {
             recyclerViewGrid!!.adapter = publicPostAdapter
             publicPostAdapter!!.notifyDataSetChanged()
         })
+        root.postBack.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_publicPostFragement_to_navigation_dashboard)
+        }
+        root.explorerTxt.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_publicPostFragement_to_navigation_dashboard)
+        }
 
         return root
     }

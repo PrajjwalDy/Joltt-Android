@@ -23,6 +23,7 @@ import com.hindu.cunow.Model.PostModel
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.FragmentAbroadBinding
 import kotlinx.android.synthetic.main.abroad_item_layout.view.*
+import kotlinx.android.synthetic.main.fragment_abroad.view.*
 
 class AbroadFragment : Fragment() {
     var recyclerView:RecyclerView? = null
@@ -49,11 +50,15 @@ class AbroadFragment : Fragment() {
 
         getData()
 
-        root.AbroadBack.setOnClickListener {
+        root.abroadBack.setOnClickListener {
             Navigation.findNavController(root)
                 .navigate(R.id.action_abroadFragment_to_navigation_dashboard)
         }
 
+        root.abroadTxt.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_abroadFragment_to_navigation_dashboard)
+        }
         return root
     }
 

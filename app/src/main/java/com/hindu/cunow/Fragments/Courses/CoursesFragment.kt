@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hindu.cunow.Adapter.CourseAdapter
@@ -15,6 +16,7 @@ import com.hindu.cunow.Fragments.Event.EventViewModel
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.FragmentCoursesBinding
 import com.hindu.cunow.databinding.FragmentEventBinding
+import kotlinx.android.synthetic.main.fragment_courses.view.*
 
 class CoursesFragment : Fragment() {
     var recyclerView: RecyclerView? = null
@@ -37,6 +39,15 @@ class CoursesFragment : Fragment() {
             recyclerView!!.adapter = courseAdapter
             courseAdapter!!.notifyDataSetChanged()
         })
+
+        root.courseBack.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_coursesFragment_to_navigation_dashboard)
+        }
+        root.courseTxt.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_coursesFragment_to_navigation_dashboard)
+        }
 
         return root
     }

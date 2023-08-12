@@ -18,7 +18,12 @@ class FeedbackActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feedback)
 
-
+        feedbackBack.setOnClickListener {
+            finish()
+        }
+        feedbackTxt.setOnClickListener {
+            finish()
+        }
 
         sendFeedback.setOnClickListener {
             requestHelp()
@@ -44,6 +49,9 @@ class FeedbackActivity : AppCompatActivity() {
             Toast.makeText(this,"Feedback sent success", Toast.LENGTH_LONG).show()
             ll_feedLayout.visibility  = View.GONE
             done.visibility = View.VISIBLE
+
+            finish()
+
         }
 
     }

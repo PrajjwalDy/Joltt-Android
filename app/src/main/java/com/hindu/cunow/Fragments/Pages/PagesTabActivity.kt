@@ -33,6 +33,13 @@ class PagesTabActivity : AppCompatActivity() {
                 }
             }
 
+            pagesBack.setOnClickListener {
+                finish()
+            }
+            pageTxt.setOnClickListener {
+                finish()
+            }
+
         }.attach()
 
         CP_img.setOnClickListener {
@@ -43,6 +50,9 @@ class PagesTabActivity : AppCompatActivity() {
         CP_TV.setOnClickListener {
             val intent = Intent(this, CreatePageActivity::class.java)
             startActivity(intent)
+
+            finish()
+
         }
 
 

@@ -253,6 +253,9 @@
         <action
             android:id="@+id/action_publicPostFragement_to_fullPostView"
             app:destination="@id/fullPostView" />
+        <action
+            android:id="@+id/action_publicPostFragement_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
     </fragment>
     <fragment
         android:id="@+id/peopleFragment"
@@ -262,6 +265,9 @@
         <action
             android:id="@+id/action_peopleFragment_to_userProfile"
             app:destination="@id/userProfile" />
+        <action
+            android:id="@+id/action_peopleFragment_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
     </fragment>
     <fragment
         android:id="@+id/fullPostView"
@@ -372,12 +378,20 @@
         android:id="@+id/coursesFragment"
         android:name="com.hindu.cunow.Fragments.Courses.CoursesFragment"
         android:label="fragment_courses"
-        tools:layout="@layout/fragment_courses" />
+        tools:layout="@layout/fragment_courses" >
+        <action
+            android:id="@+id/action_coursesFragment_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
     <fragment
         android:id="@+id/clubsFragment"
         android:name="com.hindu.cunow.Fragments.Clubs.ClubsFragment"
         android:label="fragment_clubs2"
-        tools:layout="@layout/fragment_clubs2" />
+        tools:layout="@layout/fragment_clubs2" >
+        <action
+            android:id="@+id/action_clubsFragment_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
     <fragment
         android:id="@+id/myDetailsFragment"
         android:name="com.hindu.cunow.Fragments.AboutMe.MyDetails.MyDetailsFragment"

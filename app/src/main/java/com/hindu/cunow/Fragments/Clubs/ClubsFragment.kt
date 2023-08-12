@@ -8,12 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.get
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hindu.cunow.Adapter.ClubsAdapter
 import com.hindu.cunow.Adapter.CourseAdapter
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.FragmentClubs2Binding
+import kotlinx.android.synthetic.main.fragment_clubs2.view.*
 
 class ClubsFragment : Fragment() {
     var recyclerView:RecyclerView? = null
@@ -36,6 +38,15 @@ class ClubsFragment : Fragment() {
             recyclerView!!.adapter = clubsAdapter
             clubsAdapter!!.notifyDataSetChanged()
         })
+
+        root.jobsBack.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_clubsFragment_to_navigation_dashboard)
+        }
+        root.jobsTxt.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_clubsFragment_to_navigation_dashboard)
+        }
 
         return root
     }

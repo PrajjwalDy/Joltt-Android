@@ -11,21 +11,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/AbroadBack"
-            android:layout_width="30dp"
-            android:layout_height="23dp"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="5dp"
-            app:srcCompat="@drawable/back" />
-
-
         <TextView
             android:id="@+id/abroad_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Program Name"
-            android:layout_gravity="center"
             android:layout_margin="10dp"
             android:fontFamily="@font/comfortaa"
             android:textSize="18sp"
