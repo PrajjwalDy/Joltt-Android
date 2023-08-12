@@ -130,6 +130,10 @@ class ChatActivity : AppCompatActivity() {
         loadUserData()
         retrieveChat(recyclerView)
 
+        chat1Back.setOnClickListener {
+            finish()
+        }
+
     }
 
     private fun startPeriodicTimestampUpdate() {
@@ -338,6 +342,10 @@ class ChatActivity : AppCompatActivity() {
         super.onDestroy()
         // Stop the periodic timestamp update when the activity is destroyed
         handler.removeCallbacks(timestampUpdaterRunnable)
+
+        finish()
+
     }
+
 
 }

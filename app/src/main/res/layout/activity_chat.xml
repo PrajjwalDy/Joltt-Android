@@ -19,26 +19,49 @@
             android:layout_height="50dp"
             android:orientation="horizontal">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/chatUser_Image"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+            <ImageView
+                android:id="@+id/chat1Back"
+                android:layout_width="32dp"
+                android:layout_height="28dp"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="10dp"
-                android:src="@drawable/profile_testimg" />
+                android:src="@drawable/back" />
 
-            <TextView
-                android:id="@+id/userName_chat"
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/comfortaa"
-                android:text="Someone Example"
-                android:layout_toEndOf="@+id/chatUser_Image"
-                android:textColor="@color/red"
-                android:textSize="18sp" />
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/chatUser_Image"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/profile_testimg" />
+
+                <TextView
+                    android:id="@+id/userName_chat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginEnd="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/comfortaa"
+                    android:text="Someone Example"
+                    android:layout_toEndOf="@+id/chatUser_Image"
+                    android:textColor="@color/red"
+                    android:textSize="18sp" />
+
+
+            </LinearLayout>
+
+
+
 
             <ImageView
                 android:id="@+id/moreOption_chat"
