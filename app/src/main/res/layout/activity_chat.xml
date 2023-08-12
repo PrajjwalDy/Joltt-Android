@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
-        android:background="@color/light_grey">
+        android:elevation="10dp"
+        android:background="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,7 +68,8 @@
         <RelativeLayout
             android:id="@+id/sendingLayout_chat"
             android:layout_width="match_parent"
-            android:background="#f1fbf8"
+            android:layout_margin="3dp"
+            android:background="@drawable/ocean_green_button"
             android:layout_height="wrap_content">
 
 
@@ -82,8 +84,8 @@
                 android:layout_marginBottom="5dp"
                 android:layout_toStartOf="@+id/send_chat"
                 android:layout_toEndOf="@+id/selectMedia_chat"
-                android:background="@drawable/viva_grey_bg"
                 android:fontFamily="@font/comfortaa"
+                android:background="@drawable/white_round_corner_bg"
                 android:hint="Message"
                 android:textColor="@color/red" />
 
@@ -96,7 +98,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
-                android:src="@drawable/gallery" />
+                android:src="@drawable/image_on_txt" />
 
             <ImageView
                 android:id="@+id/send_chat"

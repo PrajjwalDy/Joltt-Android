@@ -16,7 +16,6 @@
         app:cardElevation="5dp">
 
         <LinearLayout
-            android:layout_margin="2dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -64,12 +63,9 @@
                         android:id="@+id/chatImage_right"
                         android:layout_width="300dp"
                         android:layout_height="300dp"
-                        android:layout_marginStart="5dp"
                         android:layout_below="@+id/sendingImage_ll"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="5dp"
                         android:visibility="gone"
+                        android:src="@drawable/profile_testimg"
                         android:scaleType="centerCrop" />
 
                 </RelativeLayout>

@@ -100,7 +100,6 @@ class UserProfile : Fragment() {
             val url = twitterLink.text.toString()
             openInBrowser(url)
         }
-
         root.userMenu.setOnClickListener{
             addButtonClicked()
         }

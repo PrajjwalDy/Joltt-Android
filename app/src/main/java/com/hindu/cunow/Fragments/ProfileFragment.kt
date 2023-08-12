@@ -2,6 +2,7 @@ package com.hindu.cunow.Fragments
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -28,11 +29,17 @@ import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_user_profiel.github
+import kotlinx.android.synthetic.main.fragment_user_profiel.gitlink
 import kotlinx.android.synthetic.main.fragment_user_profiel.instagram
+import kotlinx.android.synthetic.main.fragment_user_profiel.instagramLink
 import kotlinx.android.synthetic.main.fragment_user_profiel.linkedin
+import kotlinx.android.synthetic.main.fragment_user_profiel.linkednLink
 import kotlinx.android.synthetic.main.fragment_user_profiel.portfolio
+import kotlinx.android.synthetic.main.fragment_user_profiel.portfolioLink
 import kotlinx.android.synthetic.main.fragment_user_profiel.threads
+import kotlinx.android.synthetic.main.fragment_user_profiel.threadsLink
 import kotlinx.android.synthetic.main.fragment_user_profiel.twitter
+import kotlinx.android.synthetic.main.fragment_user_profiel.twitterLink
 import kotlinx.android.synthetic.main.fragment_user_profiel.view.*
 import kotlinx.android.synthetic.main.my_details_fragment.view.*
 import kotlinx.android.synthetic.main.profile_fragment.*
@@ -76,6 +83,33 @@ class ProfileFragment : Fragment() {
             launch { getFollowings(root) }
             launch { getPostCount() }
         }
+
+        root.github_profile.setOnClickListener {
+            val url = gitlink_profile.text.toString()
+            openInBrowser(url)
+        }
+        root.linkedin_profile.setOnClickListener {
+            val url = linkednLink_profile.text.toString()
+            openInBrowser(url)
+        }
+        root.portfolio_profile.setOnClickListener {
+            val url = portfolioLink_profile.text.toString()
+            openInBrowser(url)
+        }
+        root.instagram_profile.setOnClickListener {
+            val url = instagramLink_profile.text.toString()
+            openInBrowser(url)
+        }
+        root.threads_profile.setOnClickListener {
+            val url = threadsLink_profile.text.toString()
+            openInBrowser(url)
+        }
+        root.twitter_profile.setOnClickListener {
+            val url = twitterLink_profile.text.toString()
+            openInBrowser(url)
+        }
+
+
 
         root.totalFollowers_user.setOnClickListener {
             val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
@@ -137,6 +171,13 @@ class ProfileFragment : Fragment() {
                     context?.let { Glide.with(it).load(userData!!.profileImage).into(profileImage) }
                     userFullName.text = userData!!.fullName
                     userBio.text = userData.bio
+                    gitlink_profile.text = userData.githubLink
+                    linkednLink_profile.text = userData.linkedin
+                    portfolioLink_profile.text = userData.portfolio
+                    instagramLink_profile.text = userData.instagram
+                    twitterLink_profile.text = userData.twitter
+                    threadsLink_profile.text = userData.threads
+
 
                     if (userData.githubLink.isNullOrEmpty()){
                         github_profile.setImageResource(R.drawable.git_blur)
@@ -275,6 +316,12 @@ class ProfileFragment : Fragment() {
             }
 
         })
+    }
+
+    private fun openInBrowser(url:String){
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
     }
 
     //User Post init function
