@@ -40,7 +40,6 @@ class VerificationRequest : AppCompatActivity() {
 
         id_proofImage.setOnClickListener {
             CropImage.activity()
-                .setAspectRatio(1, 1)
                 .start(this@VerificationRequest)
         }
 
@@ -137,12 +136,10 @@ class VerificationRequest : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
             val result = CropImage.getActivityResult(data)
             imageUri = result.uri
             id_proofImage.setImageURI(imageUri)
-            updateProfileImage()
         }
     }
 

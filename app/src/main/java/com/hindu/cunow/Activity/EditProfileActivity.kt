@@ -342,7 +342,6 @@ class EditProfileActivity : AppCompatActivity() {
 
 
     }
-
     //CHECK VALID LINK
     private fun links() {
 
