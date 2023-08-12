@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.core.os.postDelayed
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,10 +47,37 @@ class ChatActivity : AppCompatActivity() {
     private var chatList:MutableList<ChatModel>? = null
     private var chatAdapter:ChatAdapter? = null
 
+    var check = false
+
     //UPDATING THE TIME STAMP
     private val handler = Handler()
     private val updateDelayMillis = 1000*60
 
+    private val fromBottom: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            this,
+            R.anim.from_bottom3
+        )
+    }
+    private val toBottom: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            this,
+            R.anim.to_bottom_anim3
+        )
+    }
+
+    private val rotateOpen: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            this,
+            R.anim.rotate_open_anim
+        )
+    }
+    private val rotateClose: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            this,
+            R.anim.rotate_close_anim
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,6 +110,21 @@ class ChatActivity : AppCompatActivity() {
             }else{
                 sendMessage(view,recyclerView)
             }
+        }
+        moreOption_chat.setOnClickListener {
+            if (!check){
+                moreOption_chat.startAnimation(rotateOpen)
+                viewMore_chat.visibility = View.VISIBLE
+                viewMore_chat.startAnimation(toBottom)
+                check = true
+            }else{
+                moreOption_chat.startAnimation(rotateClose)
+                viewMore_chat.visibility = View.GONE
+                viewMore_chat.startAnimation(fromBottom)
+                check = false
+            }
+
+
         }
 
         loadUserData()
@@ -132,7 +176,7 @@ class ChatActivity : AppCompatActivity() {
             dataMap["containImage"] = false
             dataMap["timeStamp"] = System.currentTimeMillis().toString()
 
-            dataRef.push().setValue(dataMap)
+            dataRef.child(commentId).setValue(dataMap)
             chat_message.text.clear()
             FirebaseDatabase.getInstance().reference.child("ChatMessageCount")
                 .child(profileId)

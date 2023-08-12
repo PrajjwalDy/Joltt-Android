@@ -1,6 +1,8 @@
 package com.hindu.cunow.Adapter
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.media.AudioTimestamp
 import android.media.Image
 import android.opengl.Visibility
@@ -15,6 +17,7 @@ import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.hindu.cunow.Model.ChatModel
 import com.hindu.cunow.R
 import org.w3c.dom.Text
@@ -59,8 +62,24 @@ class ChatAdapter(private val mContext: Context,
                                       chatImage_left!!.visibility = View.GONE
                                   }
                               }
-
                               timeStamp.text = formatTimeStamp(list.timeStamp!!.toLong())
+
+                              if (list.sender == FirebaseAuth.getInstance().currentUser!!.uid){
+                                  itemView.setOnClickListener {
+                                      val options = arrayOf<CharSequence>(
+                                          "Delete Message"
+                                      )
+
+                                      val builder:AlertDialog.Builder = AlertDialog.Builder(itemView.context)
+
+                                      builder.setItems(options,DialogInterface.OnClickListener{
+                                          dialog, which ->  if (which == 0){
+                                              deleteChat(list.messageId!!)
+                                      }
+                                      })
+                                      builder.show()
+                                  }
+                              }
                           }
 
                       }
@@ -108,6 +127,11 @@ class ChatAdapter(private val mContext: Context,
             days == 1L -> "Yesterday"
             else -> "$days days ago"
         }
+    }
+
+    private fun deleteChat(chatId:String){
+        FirebaseDatabase.getInstance().reference.child("ChatData")
+        .child(chatId).removeValue()
     }
 
 

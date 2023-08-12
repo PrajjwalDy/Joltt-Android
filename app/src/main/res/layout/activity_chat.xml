@@ -14,7 +14,7 @@
         android:elevation="10dp"
         android:background="@color/white">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal">
@@ -35,12 +35,119 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/comfortaa"
-                android:text=""
+                android:text="Someone Example"
+                android:layout_toEndOf="@+id/chatUser_Image"
                 android:textColor="@color/red"
                 android:textSize="18sp" />
-        </LinearLayout>
+
+            <ImageView
+                android:id="@+id/moreOption_chat"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:visibility="gone"
+                android:src="@drawable/more_option"
+                android:layout_marginEnd="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:tint="@color/red" />
+
+
+
+        </RelativeLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/viewMore_chat"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/light_grey"
+        android:visibility="gone"
+        android:layout_below="@+id/appBar_chat"
+        android:layout_alignParentEnd="true"
+        app:cardCornerRadius="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/viewProfile_chat"
+                android:layout_width="match_parent"
+                android:layout_margin="2dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:background="@drawable/white_round_corner_bg"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/man_user"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red"
+                    android:text="View Profile"
+                    android:fontFamily="@font/comfortaa"
+                    android:layout_margin="5dp"
+                    android:textSize="12sp"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/clearChat"
+                android:layout_width="match_parent"
+                android:layout_margin="2dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:background="@drawable/white_round_corner_bg"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/thinking"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red"
+                    android:text="Clear Chat"
+                    android:fontFamily="@font/comfortaa"
+                    android:layout_margin="5dp"
+                    android:textSize="12sp"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        android:visibility="gone"
+        android:layout_margin="20dp"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatRV"
