@@ -159,7 +159,7 @@
     android:id="@+id/welcome_screen"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:visibility="gone"
+    android:visibility=""
     android:layout_centerInParent="true">
 
     <ImageView
@@ -196,7 +196,6 @@
                 android:fontFamily="@font/comfortaa"
                 android:text="@string/welcome_to_cunow"
                 android:textAlignment="center"
-
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 

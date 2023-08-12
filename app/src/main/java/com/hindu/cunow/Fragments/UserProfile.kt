@@ -54,8 +54,6 @@ class UserProfile : Fragment() {
     private var postAdapter: MyPostAdapter? = null
     private var mPost:MutableList<PostModel>? = null
 
-
-
     //Animations
     private val rotateOpen: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_open_anim) }
     private val rotateClose: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_close_anim) }
@@ -449,8 +447,6 @@ class UserProfile : Fragment() {
                         launch {checkRequested(root)  }
                         launch { haveBlocked(root) }
                     }
-
-
                 }
             }
 
@@ -466,7 +462,7 @@ class UserProfile : Fragment() {
             .child("Follow").child(profileId)
             .child("Followers")
 
-        followingRef.addListenerForSingleValueEvent(object :ValueEventListener{
+        followingRef.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                if (snapshot.exists()){
                    root.totalFollowers.text = snapshot.childrenCount.toString()
@@ -655,7 +651,6 @@ class UserProfile : Fragment() {
                     callback.invoke(false)
                 }
             }
-
             override fun onCancelled(databaseError: DatabaseError) {
                 // Handle the error
                 println("Error: ${databaseError.message}")
@@ -663,8 +658,4 @@ class UserProfile : Fragment() {
             }
         })
     }
-
-
-
-
 }
