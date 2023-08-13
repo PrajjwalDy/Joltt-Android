@@ -40,6 +40,8 @@
                android:layout_height="wrap_content"
                android:text="Page Name"
                android:fontFamily="@font/comfortaa"
+               android:maxLines="2"
+               android:textAlignment="center"
                android:textSize="16sp"
                android:textColor="@color/red" />
 

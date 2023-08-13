@@ -222,7 +222,7 @@ class ConfessionAdapter(private val mContext: Context,
         }
 
     private fun totalComment(confessionId: String,textView: TextView){
-        val dbRef = FirebaseDatabase.getInstance().reference.child("ConfessionComment")
+        val dbRef = FirebaseDatabase.getInstance().reference.child("ConfessionComments")
             .child(confessionId)
 
         dbRef.addValueEventListener(object :ValueEventListener{

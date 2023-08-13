@@ -49,13 +49,14 @@ class ShowUserFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         userList = ArrayList()
-         showUserAdapter = context?.let { ShowUserAdapter(it,userList as ArrayList<UserModel>) }
+         showUserAdapter = context?.let { ShowUserAdapter(it,userList as ArrayList<UserModel>, title) }
         recyclerView.adapter = showUserAdapter
         showUserList = ArrayList()
 
         when(title){
             "Followers"->getFollowers()
             "Following"->getFollowing()
+            "Chat"->getFollowers()
         }
 
         root.title_showUsers.text = title

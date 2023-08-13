@@ -282,9 +282,9 @@ class HomeFragment : Fragment() {
                     welcome_screen.visibility = View.GONE
                     postLayout_ll.visibility = View.VISIBLE
                 }
-                CoroutineScope(Dispatchers.IO).launch {
+                /*CoroutineScope(Dispatchers.IO).launch {
                     checkFollowingList()
-                }
+                }*/
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -294,7 +294,7 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private suspend fun checkFollowingList() {
+    /*private suspend fun checkFollowingList() {
         checkPost()
         val database = FirebaseDatabase.getInstance().reference
             .child("Follow")
@@ -320,7 +320,6 @@ class HomeFragment : Fragment() {
 
         })
     }
-
     private fun checkPost() {
         val database = FirebaseDatabase.getInstance().reference
             .child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
@@ -339,7 +338,7 @@ class HomeFragment : Fragment() {
             }
 
         })
-    }
+    }*/
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -287,7 +287,11 @@
         android:id="@+id/chatFragment"
         android:name="com.hindu.cunow.Fragments.Chat.ChatFragment"
         android:label="chat_fragment"
-        tools:layout="@layout/chat_fragment" />
+        tools:layout="@layout/chat_fragment" >
+        <action
+            android:id="@+id/action_chatFragment_to_showUserFragment"
+            app:destination="@id/showUserFragment" />
+    </fragment>
     <fragment
         android:id="@+id/viewConfessionFragment"
         android:name="com.hindu.cunow.Fragments.ViewConfessionFragment"

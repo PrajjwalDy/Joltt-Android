@@ -31,15 +31,44 @@ class HomeViewModel() : ViewModel(), IPostCallback {
                 messageError = MutableLiveData()
 
                 viewModelScope.launch(Dispatchers.IO) {
-                     loadUserInterestFromFirebase()
-                     pageList()
-                     checkFollowing()
+                    loadUserInterestFromFirebase()
+                    pageList()
+                    checkFollowing()
                 }
             }
             return postLiveData
 
         }
 
+
+    private suspend fun checkFollowingList() {
+        val database = FirebaseDatabase.getInstance().reference
+            .child("Follow")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child("Following")
+
+        database.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val count = snapshot.childrenCount.toInt()
+                    if (count <= 1) {
+                        CoroutineScope(Dispatchers.IO).launch {
+                            loadPost2()
+                        }
+                    } else {
+                        CoroutineScope(Dispatchers.IO).launch {
+                            loadPost()
+                        }
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
 
     private suspend fun loadPost() {
         var postList = ArrayList<PostModel>()
@@ -49,8 +78,8 @@ class HomeViewModel() : ViewModel(), IPostCallback {
                 postList.clear()
                 for (snapshot in snapshot.children) {
                     val postModel = snapshot.getValue<PostModel>(PostModel::class.java) as PostModel
-                    for (id in (followingList as ArrayList<String>)){
-                        if (postModel.publisher == id){
+                    for (id in (followingList as ArrayList<String>)) {
+                        if (postModel.publisher == id) {
                             postList.add(postModel)
                         }
                     }
@@ -61,13 +90,56 @@ class HomeViewModel() : ViewModel(), IPostCallback {
                     }
 
                     val userInterestsString = userInterest!!.joinToString("#")
-                    val caption = postModel.caption!!.trim{ it <= ' '}
+                    val caption = postModel.caption!!.trim { it <= ' ' }
                     val feedTags = caption.split(" ")
                     for (tag in feedTags) {
-                        if (tag.startsWith("#")){
+                        if (tag.startsWith("#")) {
                             if (userInterestsString.contains(tag)) {
                                 postList.add(postModel)
-                                postList = postList.distinct() as ArrayList<PostModel>
+                                //postList = postList.distinct() as ArrayList<PostModel>
+                                break
+                            }
+                        }
+                    }
+                }
+                postList = postList.distinct() as ArrayList<PostModel>
+
+                postLoadCallback.onPostPCallbackLoadSuccess(postList)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                postLoadCallback.onPostCallbackLoadFailed(error.message)
+            }
+        })
+        dataReference.keepSynced(true)
+    }
+    private suspend fun loadPost2() {
+        val postList = ArrayList<PostModel>()
+        val dataReference = FirebaseDatabase.getInstance().reference.child("Post")
+        dataReference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                postList.clear()
+                for (snapshot in snapshot.children) {
+                    val postModel = snapshot.getValue<PostModel>(PostModel::class.java) as PostModel
+                    for (id in (followingList as ArrayList<String>)) {
+                        if (postModel.publisher == id) {
+                            postList.add(postModel)
+                        }
+                    }
+                    for (id in (pageList as ArrayList<String>)) {
+                        if (postModel.publisher == id) {
+                            postList.add(postModel)
+                        }
+                    }
+
+                    val userInterestsString = userInterest!!.joinToString("#")
+                    val caption = postModel.caption!!.trim { it <= ' ' }
+                    val feedTags = caption.split(" ")
+                    for (tag in feedTags) {
+                        if (tag.startsWith("#")) {
+                            if (userInterestsString.contains(tag)) {
+                                postList.add(postModel)
+                                // postList = postList.distinct() as ArrayList<PostModel>
                                 break
                             }
                         }
@@ -101,7 +173,8 @@ class HomeViewModel() : ViewModel(), IPostCallback {
                         snapshot.key?.let { (followingList as ArrayList<String>).add(it) }
                     }
                     CoroutineScope(Dispatchers.IO).launch {
-                        loadPost()
+                        //loadPost()
+                        checkFollowingList()
                     }
                 }
             }
@@ -154,8 +227,9 @@ class HomeViewModel() : ViewModel(), IPostCallback {
                         userInterest!!.add(interest)
                     }
                 }
-                CoroutineScope(Dispatchers.IO).launch{
-                    loadPost()
+                CoroutineScope(Dispatchers.IO).launch {
+                    //loadPost()
+                    checkFollowingList()
                 }
             }
 

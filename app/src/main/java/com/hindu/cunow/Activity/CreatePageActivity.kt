@@ -131,6 +131,7 @@ class CreatePageActivity : AppCompatActivity() {
                     .setValue(true)
 
                 Toast.makeText(this,"Page Created Successfully", Toast.LENGTH_SHORT).show()
+                finish()
                 progressDialog.dismiss()
             }else{
                 Toast.makeText(this,"Something went wrong",Toast.LENGTH_SHORT).show()

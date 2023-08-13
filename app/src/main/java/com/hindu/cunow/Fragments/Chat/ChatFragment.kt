@@ -1,5 +1,6 @@
 package com.hindu.cunow.Fragments.Chat
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,12 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.get
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import com.hindu.cunow.Adapter.ChatListAdapter
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.ChatFragmentBinding
 import com.hindu.cunow.databinding.PeopleFragmentBinding
+import kotlinx.android.synthetic.main.chat_fragment.view.addChat
 
 class ChatFragment : Fragment() {
     var recyclerView:RecyclerView? = null
@@ -42,6 +46,13 @@ class ChatFragment : Fragment() {
             chatListAdapter!!.notifyDataSetChanged()
         })
 
+        root.addChat.setOnClickListener{
+            val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
+            pref!!.putString("uid",FirebaseAuth.getInstance().currentUser!!.uid)
+            pref.putString("title","Chat")
+            pref.apply()
+            Navigation.findNavController(root).navigate(R.id.action_chatFragment_to_showUserFragment)
+        }
 
 
         return root

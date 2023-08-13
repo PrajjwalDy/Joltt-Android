@@ -111,7 +111,7 @@ class ProfileFragment : Fragment() {
 
 
 
-        root.totalFollowers_user.setOnClickListener {
+        root.ll_followers.setOnClickListener {
             val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
             pref!!.putString("uid",FirebaseAuth.getInstance().currentUser!!.uid)
             pref.putString("title","Followers")
@@ -119,7 +119,7 @@ class ProfileFragment : Fragment() {
             Navigation.findNavController(root).navigate(R.id.action_navigation_profile_to_showUserFragment)
         }
 
-        root.totalFollowing_user.setOnClickListener {
+        root.ll_following.setOnClickListener {
             val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
             pref!!.putString("uid",FirebaseAuth.getInstance().currentUser!!.uid)
             pref.putString("title","Following")

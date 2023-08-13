@@ -250,6 +250,7 @@ class PostAdapter (private val mContext: Context,
         val mediaCV: CardView = itemView.findViewById(R.id.media_cv) as CardView
         val duration:TextView = itemView.findViewById(R.id.videoDuration) as TextView
         val rl_duration:RelativeLayout = itemView.findViewById(R.id.videoDuration_RL) as RelativeLayout
+        val caption2: TextView = itemView.findViewById(R.id.caption2) as TextView
 
 
         fun bind(list:PostModel,context: Context,imageView: ImageView,playerView: PlayerView){
@@ -262,6 +263,14 @@ class PostAdapter (private val mContext: Context,
             }else{
                 caption.visibility = View.VISIBLE
                 caption.text = list.caption
+            }
+            caption.setOnClickListener {
+                caption.visibility = View.GONE
+                caption2.visibility = View.VISIBLE
+            }
+            caption2.setOnClickListener {
+                caption.visibility = View.VISIBLE
+                caption2.visibility = View.GONE
             }
 
             if (list.iImage){
@@ -479,7 +488,13 @@ class PostAdapter (private val mContext: Context,
             @SuppressLint("SetTextI18n")
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
-                    totalLikes.text = snapshot.childrenCount.toString()
+                    val count = snapshot.childrenCount.toDouble()
+                    if (count >= 1000) {
+                        val result = count / 1000
+                        totalLikes.text = String.format("%.1f K", result)
+                    } else {
+                        totalLikes.text = count.toString()
+                    }
                 }
             }
             override fun onCancelled(error: DatabaseError) {

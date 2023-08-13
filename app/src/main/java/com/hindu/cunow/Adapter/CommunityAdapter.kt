@@ -120,6 +120,11 @@ class CommunityAdapter(
                 replyIntent.putExtra("communityId", list.communityId)
                 mContext.startActivity(replyIntent)
             }
+            itemView.setOnClickListener {
+                val replyIntent = Intent(mContext, CommunityRepliesActivity::class.java)
+                replyIntent.putExtra("communityId", list.communityId)
+                mContext.startActivity(replyIntent)
+            }
             communityCaption1.setOnClickListener {
                 communityCaption1.visibility = View.GONE
                 communityCaption2.visibility = View.VISIBLE

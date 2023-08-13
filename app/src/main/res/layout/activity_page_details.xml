@@ -39,9 +39,9 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="10dp"
                 android:visibility="gone"
-                android:layout_toLeftOf="@+id/createPost_page_img"
-                android:src="@drawable/notification"
-                app:tint="@color/red" />
+                android:layout_toStartOf="@+id/createPost_page_img"
+                android:src="@drawable/delete_option"
+                />
 
             <ImageView
                 android:id="@+id/createPost_page_img"

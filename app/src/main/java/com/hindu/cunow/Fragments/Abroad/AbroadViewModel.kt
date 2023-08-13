@@ -13,30 +13,31 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class AbroadViewModel : ViewModel(), IAbroadCallback {
-    private var abroadLiveData:MutableLiveData<List<AbroadModel>>? = null
-    private val abroadCallback:IAbroadCallback = this
-    private var messageError:MutableLiveData<String>? = null
+    private var abroadLiveData: MutableLiveData<List<AbroadModel>>? = null
+    private val abroadCallback: IAbroadCallback = this
+    private var messageError: MutableLiveData<String>? = null
 
-    val abroadView:MutableLiveData<List<AbroadModel>>
-    get() {
-        if (abroadLiveData  == null){
-            abroadLiveData = MutableLiveData()
-            messageError = MutableLiveData()
-            CoroutineScope(Dispatchers.IO).launch {
-                loadData()
+    val abroadView: MutableLiveData<List<AbroadModel>>
+        get() {
+            if (abroadLiveData == null) {
+                abroadLiveData = MutableLiveData()
+                messageError = MutableLiveData()
+                CoroutineScope(Dispatchers.IO).launch {
+                    loadData()
+                }
             }
+            val mutableLiveData = abroadLiveData
+            return mutableLiveData!!
         }
-        val mutableLiveData = abroadLiveData
-        return mutableLiveData!!
-    }
 
-    private fun loadData(){
+    private fun loadData() {
         val list = ArrayList<AbroadModel>()
         val dbRef = FirebaseDatabase.getInstance().reference.child("AbroadSchemes")
 
-        dbRef.addValueEventListener(object :ValueEventListener{
+        dbRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                for (snapshot in snapshot.children){
+                list.clear()
+                for (snapshot in snapshot.children) {
                     val data = snapshot.getValue(AbroadModel::class.java)
                     list.add(data!!)
                 }
@@ -53,14 +54,13 @@ class AbroadViewModel : ViewModel(), IAbroadCallback {
 
     override fun onAbroadListLoadFailed(str: String) {
         val mutableLiveData = messageError
-        mutableLiveData!!.value =str
+        mutableLiveData!!.value = str
     }
 
     override fun onAbroadListLoadSuccess(list: List<AbroadModel>) {
         val mutableLiveData = abroadLiveData
         mutableLiveData!!.value = list
     }
-
 
 
 }

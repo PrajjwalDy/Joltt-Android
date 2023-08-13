@@ -158,7 +158,7 @@ class UserProfile : Fragment() {
         }
 
         //Total following and followers on click
-        root.totalFollowers.setOnClickListener {
+        root.ll_followers_user.setOnClickListener {
             val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
             pref!!.putString("uid",profileId)
             pref.putString("title","Followers")
@@ -166,7 +166,7 @@ class UserProfile : Fragment() {
             Navigation.findNavController(root).navigate(R.id.action_userProfile_to_showUserFragment)
         }
 
-        root.totalFollowing.setOnClickListener {
+        root.ll_following_user.setOnClickListener {
             val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
             pref!!.putString("uid",profileId)
             pref.putString("title","Following")

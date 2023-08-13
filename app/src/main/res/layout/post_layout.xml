@@ -70,9 +70,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="65dp"
-            android:fontFamily="@font/amiko"
+            android:fontFamily="@font/comfortaa"
             android:text="@string/lorem_sample"
             android:visibility="gone"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="-10dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/caption2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="65dp"
+            android:fontFamily="@font/comfortaa"
+            android:text="@string/lorem_sample"
+            android:visibility="gone"
+            android:layout_marginEnd="10dp"
             android:layout_marginTop="-10dp"
             android:textColor="@color/black"
             android:textSize="14sp" />

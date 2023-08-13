@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -160,6 +161,9 @@ class PageDetailsActivity : AppCompatActivity() {
             intent.putExtra("id", pageId)
             startActivity(intent)
         }
+        pageNotification.setOnClickListener {
+            deletePage()
+        }
 
     }
 
@@ -238,6 +242,13 @@ class PageDetailsActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun deletePage(){
+        FirebaseDatabase.getInstance().reference.child("Pages")
+            .child(pageId).removeValue()
+        Toast.makeText(this,"Page Deleted",Toast.LENGTH_SHORT).show()
+        finish()
     }
 
 }

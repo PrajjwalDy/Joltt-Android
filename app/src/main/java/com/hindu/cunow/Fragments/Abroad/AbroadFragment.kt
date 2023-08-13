@@ -33,6 +33,8 @@ class AbroadFragment : Fragment() {
     private var _binding:FragmentAbroadBinding? = null
     private var abroadModel:MutableList<AbroadModel>? = null
     private val binding get() = _binding!!
+    val filteredPosts = mutableListOf<AbroadModel>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,13 +44,27 @@ class AbroadFragment : Fragment() {
         _binding = FragmentAbroadBinding.inflate(inflater,container,false)
         val root:View = binding.root
 
+       /* getData()
+
+        if (filteredPosts.isEmpty()){
+            viewModel.abroadView.observe(viewLifecycleOwner, Observer {
+                initView(root)
+                abroadAdapter = context?.let { it1->AbroadAdapter(it1, it as MutableList<AbroadModel>) }
+                recyclerView!!.adapter = abroadAdapter
+                abroadAdapter!!.notifyDataSetChanged()
+            })
+        }else{
+
+        }*/
+
         initView(root)
         abroadModel = ArrayList()
         abroadAdapter = AbroadAdapter(requireContext(),abroadModel!!)
         recyclerView!!.adapter = abroadAdapter
         abroadAdapter!!.notifyDataSetChanged()
-
         getData()
+
+
 
         root.abroadBack.setOnClickListener {
             Navigation.findNavController(root)
@@ -79,10 +95,10 @@ class AbroadFragment : Fragment() {
         val currentUserUid = currentUser?.uid
 
         // Assuming you have a "users" node in your database with "interests" field as a list
-        val userReference = FirebaseDatabase.getInstance().reference.child("UserInterest").child(currentUserUid!!)
+        val userReference = FirebaseDatabase.getInstance().reference.child("UserInterest")
         userReference.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val interestData = dataSnapshot.child("interest").getValue()
+                val interestData = dataSnapshot.child(currentUserUid!!).value
 
                 if (interestData is Map<*, *>){
                     val userInterest =interestData.values.toList().filterIsInstance<String>()
@@ -92,23 +108,27 @@ class AbroadFragment : Fragment() {
 
                     postsReference.addValueEventListener(object : ValueEventListener {
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
-                            val filteredPosts = mutableListOf<AbroadModel>()
+
+                            val filtered = mutableListOf<AbroadModel>()
 
                             for (postSnapshot in dataSnapshot.children) {
                                 val post = postSnapshot.getValue(AbroadModel::class.java)
                                 post?.let {
                                     val postTags: String? = it.tag
-
+                                    //filteredPosts.clear()
                                     for (interest in userInterest) {
                                         if (postTags != null && userInterest.any { interest -> postTags.contains(interest, ignoreCase = true) }) {
-                                            filteredPosts.add(it)
+                                            //filteredPosts.add(it)
+                                            filtered.add(it)
+                                            break
                                         }
                                     }
                                 }
                             }
 
                             // Step 3: Update the RecyclerView adapter with filtered posts
-                            abroadAdapter!!.setData(filteredPosts)
+
+                            abroadAdapter!!.setData(filtered)
                             abroadAdapter!!.notifyDataSetChanged()
                         }
 
@@ -117,7 +137,6 @@ class AbroadFragment : Fragment() {
                         }
                     })
                 }
-
 
             }
 

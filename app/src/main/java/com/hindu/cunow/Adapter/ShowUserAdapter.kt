@@ -1,6 +1,7 @@
 package com.hindu.cunow.Adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +11,15 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.hindu.cunow.Activity.ChatActivity
 import com.hindu.cunow.Model.UserModel
 import com.hindu.cunow.R
 import de.hdodenhof.circleimageview.CircleImageView
+import java.lang.StringBuilder
 
 class ShowUserAdapter(private val mContext:Context,
-                      private val mUser: List<UserModel>):RecyclerView.Adapter<ShowUserAdapter.ViewHolder>(){
+                      private val mUser: List<UserModel>,
+                      private val title:String):RecyclerView.Adapter<ShowUserAdapter.ViewHolder>(){
 
     inner class ViewHolder(@NonNull itemView: View):RecyclerView.ViewHolder(itemView){
         val profileImage: CircleImageView = itemView.findViewById(R.id.profileImage_showUser) as CircleImageView
@@ -33,6 +37,21 @@ class ShowUserAdapter(private val mContext:Context,
                 verification.visibility = View.GONE
             }
 
+            itemView.setOnClickListener {
+                if (title == "Chat"){
+                    val intent = Intent(mContext, ChatActivity::class.java)
+                    intent.putExtra("uid",list.uid)
+                    mContext.startActivity(intent)
+                }else{
+                    val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+                    pref.putString("uid",mUser[position].uid)
+                    pref.apply()
+                    Navigation.findNavController(itemView).navigate(R.id.action_showUserFragment_to_userProfile)
+                }
+            }
+
+
+
         }
     }
 
@@ -43,14 +62,6 @@ class ShowUserAdapter(private val mContext:Context,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(mUser[position])
-
-        holder.itemView.setOnClickListener {
-
-            val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
-            pref.putString("uid",mUser[position].uid)
-            pref.apply()
-            Navigation.findNavController(holder.itemView).navigate(R.id.action_showUserFragment_to_userProfile)
-        }
 
         if (mUser[position].uid == FirebaseAuth.getInstance().currentUser!!.uid){
             holder.itemView.visibility = View.GONE
