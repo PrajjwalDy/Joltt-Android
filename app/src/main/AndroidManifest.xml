@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -11,7 +15,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
-        android:name=".Network"
+        android:name="com.hindu.joltt.Network"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -20,10 +24,10 @@
         android:theme="@style/Theme.CUNow"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Activity.UserDetailsActivity"
+            android:name="com.hindu.joltt.Activity.UserDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.WebView2"
+            android:name="com.hindu.joltt.Activity.WebView2"
             android:exported="false"
             android:label="@string/title_activity_web_view2"
             android:theme="@style/Theme.CUNow" />
@@ -32,152 +36,111 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".Activity.ChatGPT"
+            android:name="com.hindu.joltt.Activity.ChatGPT"
             android:exported="false" />
         <activity
-            android:name=".Activity.WebViewActivity"
+            android:name="com.hindu.joltt.Activity.WebViewActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="com.hindu.joltt.Activity.AddClubActivity"
             android:exported="false" />
         <activity
-            android:name=".TestProfile"
+            android:name="com.hindu.joltt.Activity.WebScraping"
             android:exported="false" />
         <activity
-            android:name=".internshipsDetails"
+            android:name="com.hindu.joltt.Activity.InterestActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="com.hindu.joltt.Activity.CommunityRepliesActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.hindu.joltt.Activity.AddEventActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.hindu.joltt.Activity.AddSubjectsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".EventDetails"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Activity.AddClubActivity"
+            android:name="com.hindu.joltt.Activity.FacultyVerificationActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.WebScraping"
+            android:name="com.hindu.joltt.Activity.FacultyLogin"
             android:exported="false" />
         <activity
-            android:name=".Activity.InterestActivity"
+            android:name="com.hindu.joltt.Activity.LandingPageActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.AddProjectActivity"
+            android:name="com.hindu.joltt.Activity.FacultySignup"
+            android:exported="false" />
+        
+
+        <activity
+            android:name="com.hindu.joltt.Fragments.Pages.MyPages.PageNotificationsActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.ProjectDetailsActivity"
+            android:name="com.hindu.joltt.Fragments.ConfessionRoom.ConfessionCommentActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.CommunityRepliesActivity"
+            android:name="com.hindu.joltt.Fragments.Pages.CreateVideoPostPage"
             android:exported="false" />
         <activity
-            android:name=".Activity.AddEventActivity"
+            android:name="com.hindu.joltt.Activity.CreatePagePostActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.AddSubjectsActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Activity.FacultyVerificationActivity"
+            android:name="com.hindu.joltt.Fragments.Pages.PageDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.FacultyLogin"
+            android:name="com.hindu.joltt.Fragments.Pages.PagesTabActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.LandingPageActivity"
+            android:name="com.hindu.joltt.Activity.CreatePageActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.FacultySignup"
+            android:name="com.hindu.joltt.Activity.ChatActivity"
             android:exported="false" />
         <activity
-            android:name=".Fragments.Circle.ThreadActivity"
+            android:name="com.hindu.joltt.Activity.ReportPostActivity"
             android:exported="false" />
         <activity
-            android:name=".PageNotificationActivity"
+            android:name="com.hindu.joltt.Activity.ForgetPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".AcademicsActivity"
+            android:name="com.hindu.joltt.Activity.ShowUsersActivity"
             android:exported="false" />
         <activity
-            android:name=".Fragments.Pages.MyPages.PageNotificationsActivity"
+            android:name="com.hindu.joltt.Activity.CirclePermissionActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="com.hindu.joltt.Activity.UserSupportActivity"
             android:exported="false" />
         <activity
-            android:name=".Fragments.ConfessionRoom.ConfessionCommentActivity"
+            android:name="com.hindu.joltt.Activity.ViewFullActivity"
             android:exported="false" />
         <activity
-            android:name=".Fragments.Pages.CreateVideoPostPage"
+            android:name="com.hindu.joltt.Activity.UserDetailsTabsAcitvity"
+            android:exported="false" />
+
+        <activity
+            android:name="com.hindu.joltt.Activity.PrivacySettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.CreatePagePostActivity"
+            android:name="com.hindu.joltt.Activity.AboutMeTabsActivity"
             android:exported="false" />
         <activity
-            android:name=".Fragments.Pages.PageDetailsActivity"
+            android:name="com.hindu.joltt.Activity.CircleFlowActivity"
             android:exported="false" />
         <activity
-            android:name=".Fragments.Pages.PagesTabActivity"
+            android:name="com.hindu.joltt.Activity.VerificationRequest"
             android:exported="false" />
+
         <activity
-            android:name=".Activity.CreatePageActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.ChatActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.ReportPostActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.ForgetPasswordActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.ShowUsersActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.CirclePermissionActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.AddMembersActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.CircleDetailsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.UserSupportActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.ViewFullActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.UserDetailsTabsAcitvity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.AddVibesAcitvity"
-            android:exported="false"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".Activity.PrivacySettingsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.AboutMeTabsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.CircleFlowActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.VerificationRequest"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.VibesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Fragments.Circle.CircleTabActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.WelcomeActivity"
+            android:name="com.hindu.joltt.Activity.WelcomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -186,28 +149,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.FindSupportOnPostAcitvity"
+            android:name="com.hindu.joltt.Activity.FindSupportOnPostAcitvity"
             android:exported="false" />
         <activity
-            android:name=".Activity.TermsAndCondition"
+            android:name="com.hindu.joltt.Activity.TermsAndCondition"
             android:exported="false" />
         <activity
-            android:name=".Activity.HelpActivity"
+            android:name="com.hindu.joltt.Activity.HelpActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.FeedbackActivity"
+            android:name="com.hindu.joltt.Activity.FeedbackActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.AboutUs"
+            android:name="com.hindu.joltt.Activity.AboutUs"
             android:exported="false" />
         <activity
-            android:name=".Activity.SettingActivity"
+            android:name="com.hindu.joltt.Activity.SettingActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.CreateCircle"
+            android:name="com.hindu.joltt.Activity.CreateCircle"
             android:exported="false" />
         <activity
-            android:name=".Activity.AddConfessionActivity"
+            android:name="com.hindu.joltt.Activity.AddConfessionActivity"
             android:exported="false" />
 
         <meta-data
@@ -222,32 +185,32 @@
             android:resource="@color/red" />
 
         <activity
-            android:name=".Activity.VideoUploadActivity"
+            android:name="com.hindu.joltt.Activity.VideoUploadActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.CommentActivity"
+            android:name="com.hindu.joltt.Activity.CommentActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.EditProfileActivity"
+            android:name="com.hindu.joltt.Activity.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.AddPostActivity"
+            android:name="com.hindu.joltt.Activity.AddPostActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.Verify"
+            android:name="com.hindu.joltt.Activity.Verify"
             android:exported="false" />
         <activity
-            android:name=".Activity.VerifyActivity"
+            android:name="com.hindu.joltt.Activity.VerifyActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".Activity.SignUpActivity"
+            android:name="com.hindu.joltt.Activity.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.LogInActivity"
+            android:name="com.hindu.joltt.Activity.LogInActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.hindu.joltt.MainActivity"
             android:exported="true" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
@@ -268,7 +231,7 @@
         </provider>
 
         <service
-            android:name=".PushNotification.FirebaseMessaging"
+            android:name="com.hindu.joltt.PushNotification.FirebaseMessaging"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

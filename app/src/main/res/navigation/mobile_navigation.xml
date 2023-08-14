@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.hindu.cunow.ui.home.HomeFragment"
+        android:name="com.hindu.joltt.ui.home.HomeFragment"
         tools:layout="@layout/fragment_home" >
 
         <action
@@ -33,7 +33,7 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.hindu.cunow.Fragments.Explore.ExploreFragment"
+        android:name="com.hindu.joltt.Fragments.Explore.ExploreFragment"
         tools:layout="@layout/explore_fragment" >
         <action
             android:id="@+id/action_navigation_dashboard_to_confessionRoomFragment"
@@ -52,9 +52,6 @@
             android:id="@+id/action_navigation_dashboard_to_peopleFragment"
             app:destination="@id/peopleFragment" />
         <action
-            android:id="@+id/action_navigation_dashboard_to_academicsFragment"
-            app:destination="@id/academicsFragment" />
-        <action
             android:id="@+id/action_navigation_dashboard_to_hasTagFragment"
             app:destination="@id/hasTagFragment" />
         <action
@@ -69,9 +66,6 @@
         <action
             android:id="@+id/action_navigation_dashboard_to_fullPostView"
             app:destination="@id/fullPostView" />
-        <action
-            android:id="@+id/action_navigation_dashboard_to_projectsFragment"
-            app:destination="@id/projectsFragment" />
         <action
             android:id="@+id/action_navigation_dashboard_to_schemesFragment"
             app:destination="@id/schemesFragment" />
@@ -99,25 +93,23 @@
         <action
             android:id="@+id/action_navigation_dashboard_to_communityFragment6"
             app:destination="@id/communityFragment" />
-        <action
-            android:id="@+id/action_navigation_dashboard_to_clubsFragment"
-            app:destination="@id/clubsFragment" />
+
         <action
             android:id="@+id/action_navigation_dashboard_to_fullPostView2"
             app:destination="@id/fullPostView" />
         <action
             android:id="@+id/action_navigation_dashboard_to_flash"
             app:destination="@id/flash" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_jobsFragment"
+            app:destination="@id/jobsFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/navigation_addPost"
-        android:name="com.hindu.cunow.Fragments.Academics.AcademicsFragment"
-        tools:layout="@layout/fragment_academics" />
+
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.hindu.cunow.ui.notifications.NotificationsFragment"
+        android:name="com.hindu.joltt.ui.notifications.NotificationsFragment"
         tools:layout="@layout/fragment_notifications" >
         <action
             android:id="@+id/action_navigation_notifications_to_followRequest2"
@@ -144,14 +136,11 @@
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.hindu.cunow.Fragments.ProfileFragment"
+        android:name="com.hindu.joltt.Fragments.ProfileFragment"
         tools:layout="@layout/profile_fragment" >
         <action
             android:id="@+id/action_navigation_profile_to_navigation_dashboard"
             app:destination="@id/navigation_dashboard" />
-        <action
-            android:id="@+id/action_navigation_profile_to_myCirclesFragment"
-            app:destination="@id/myCirclesFragment" />
         <action
             android:id="@+id/action_navigation_profile_to_myPostsFragemt"
             app:destination="@id/myPostsFragemt" />
@@ -164,7 +153,7 @@
     </fragment>
     <fragment
         android:id="@+id/confessionRoomFragment"
-        android:name="com.hindu.cunow.Fragments.ConfessionRoom.ConfessionRoomFragment"
+        android:name="com.hindu.joltt.Fragments.ConfessionRoom.ConfessionRoomFragment"
         android:label="confession_room_fragment"
         tools:layout="@layout/confession_room_fragment" >
         <action
@@ -172,19 +161,10 @@
             app:destination="@id/navigation_dashboard" />
     </fragment>
 
-    <fragment
-        android:id="@+id/circleDetails"
-        android:name="com.hindu.cunow.Fragments.CircleDetails.CircleDetails"
-        android:label="circle_details_fragment"
-        tools:layout="@layout/circle_details_fragment" >
 
-        <action
-            android:id="@+id/action_circleDetails_to_exploreCirclesFragments2"
-            app:destination="@id/exploreCirclesFragments2" />
-    </fragment>
     <fragment
         android:id="@+id/userProfile"
-        android:name="com.hindu.cunow.Fragments.UserProfile"
+        android:name="com.hindu.joltt.Fragments.UserProfile"
         android:label="fragment_user_profiel"
         tools:layout="@layout/fragment_user_profiel" >
         <action
@@ -197,9 +177,10 @@
             android:id="@+id/action_userProfile_to_showUserFragment"
             app:destination="@id/showUserFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/followRequest2"
-        android:name="com.hindu.cunow.Fragments.FollowRequest.FollowRequest"
+        android:name="com.hindu.joltt.Fragments.FollowRequest.FollowRequest"
         android:label="follow_request_fragment"
         tools:layout="@layout/follow_request_fragment" >
         <action
@@ -207,47 +188,36 @@
             app:destination="@id/navigation_notifications" />
     </fragment>
 
-    <fragment
-        android:id="@+id/myCirclesFragment"
-        android:name="com.hindu.cunow.Fragments.Circle.MyCircles.MyCirclesFragment"
-        android:label="my_circles_fragment"
-        tools:layout="@layout/my_circles_fragment" />
 
     <fragment
         android:id="@+id/myPostsFragemt"
-        android:name="com.hindu.cunow.Fragments.AboutMe.Posts.MyPostsFragemt"
+        android:name="com.hindu.joltt.Fragments.AboutMe.Posts.MyPostsFragemt"
         android:label="my_posts_fragemt_fragment"
         tools:layout="@layout/my_posts_fragemt_fragment" >
         <action
             android:id="@+id/action_myPostsFragemt_to_showUserFragment"
             app:destination="@id/showUserFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/exploreCirclesFragments2"
-        android:name="com.hindu.cunow.Fragments.Circle.ExploreCircles.ExploreCirclesFragments"
-        android:label="explore_circles_fragments_fragment"
-        tools:layout="@layout/explore_circles_fragments_fragment" >
-        <action
-            android:id="@+id/action_exploreCirclesFragments2_to_circleDetails"
-            app:destination="@id/circleDetails" />
-    </fragment>
+
     <fragment
         android:id="@+id/userPostsFragment"
-        android:name="com.hindu.cunow.Fragments.AboutMe.UserPosts.UserPostsFragment"
+        android:name="com.hindu.joltt.Fragments.AboutMe.UserPosts.UserPostsFragment"
         android:label="user_posts_fragment"
         tools:layout="@layout/user_posts_fragment" >
         <action
             android:id="@+id/action_userPostsFragment_to_fullPostView"
             app:destination="@id/fullPostView" />
     </fragment>
+
     <fragment
         android:id="@+id/userDetails"
-        android:name="com.hindu.cunow.Fragments.AboutMe.MyDetailsUsers.UserDetails"
+        android:name="com.hindu.joltt.Fragments.AboutMe.MyDetailsUsers.UserDetails"
         android:label="fragment_user_details"
         tools:layout="@layout/fragment_user_details" />
+
     <fragment
         android:id="@+id/publicPostFragement"
-        android:name="com.hindu.cunow.Fragments.PublicPost.PublicPostFragement"
+        android:name="com.hindu.joltt.Fragments.PublicPost.PublicPostFragement"
         android:label="public_post_fragement_fragment"
         tools:layout="@layout/public_post_fragement_fragment" >
         <action
@@ -257,9 +227,10 @@
             android:id="@+id/action_publicPostFragement_to_navigation_dashboard"
             app:destination="@id/navigation_dashboard" />
     </fragment>
+
     <fragment
         android:id="@+id/peopleFragment"
-        android:name="com.hindu.cunow.Fragments.People.PeopleFragment"
+        android:name="com.hindu.joltt.Fragments.People.PeopleFragment"
         android:label="people_fragment"
         tools:layout="@layout/people_fragment" >
         <action
@@ -269,103 +240,106 @@
             android:id="@+id/action_peopleFragment_to_navigation_dashboard"
             app:destination="@id/navigation_dashboard" />
     </fragment>
+
     <fragment
         android:id="@+id/fullPostView"
-        android:name="com.hindu.cunow.Fragments.FullPostView"
+        android:name="com.hindu.joltt.Fragments.FullPostView"
         android:label="fragment_full_post_view"
         tools:layout="@layout/fragment_full_post_view" />
+
     <fragment
         android:id="@+id/showUserFragment"
-        android:name="com.hindu.cunow.Fragments.ShowUserFragment"
+        android:name="com.hindu.joltt.Fragments.ShowUserFragment"
         android:label="show_user_fragment"
         tools:layout="@layout/show_user_fragment" >
         <action
             android:id="@+id/action_showUserFragment_to_userProfile"
             app:destination="@id/userProfile" />
     </fragment>
+
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.hindu.cunow.Fragments.Chat.ChatFragment"
+        android:name="com.hindu.joltt.Fragments.Chat.ChatFragment"
         android:label="chat_fragment"
         tools:layout="@layout/chat_fragment" >
         <action
             android:id="@+id/action_chatFragment_to_showUserFragment"
             app:destination="@id/showUserFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/viewConfessionFragment"
-        android:name="com.hindu.cunow.Fragments.ViewConfessionFragment"
+        android:name="com.hindu.joltt.Fragments.ViewConfessionFragment"
         android:label="fragment_view_confession"
         tools:layout="@layout/fragment_view_confession" />
+
     <fragment
         android:id="@+id/pageNotificationFragment"
-        android:name="com.hindu.cunow.Fragments.Pages.PageNotification.PageNotificationFragment"
+        android:name="com.hindu.joltt.Fragments.Pages.PageNotification.PageNotificationFragment"
         android:label="fragment_page_notification"
         tools:layout="@layout/fragment_page_notification" >
         <action
             android:id="@+id/action_pageNotificationFragment_to_fullPostView"
             app:destination="@id/fullPostView" />
     </fragment>
-    <fragment
-        android:id="@+id/academicsFragment"
-        android:name="com.hindu.cunow.Fragments.Academics.AcademicsFragment"
-        android:label="fragment_academics"
-        tools:layout="@layout/fragment_academics" />
+
     <fragment
         android:id="@+id/hasTagFragment"
-        android:name="com.hindu.cunow.Fragments.HashTag.HasTagFragment"
+        android:name="com.hindu.joltt.Fragments.HashTag.HasTagFragment"
         android:label="fragment_has_tag"
         tools:layout="@layout/fragment_has_tag" />
+
     <fragment
         android:id="@+id/homeTab"
-        android:name="com.hindu.cunow.Fragments.ExploreTabs.HomeTab"
+        android:name="com.hindu.joltt.Fragments.ExploreTabs.HomeTab"
         android:label="fragment_home_tab"
         tools:layout="@layout/fragment_home_tab" />
+
     <fragment
         android:id="@+id/eventFragment"
-        android:name="com.hindu.cunow.Fragments.Event.EventFragment"
+        android:name="com.hindu.joltt.Fragments.Event.EventFragment"
         android:label="fragment_event"
         tools:layout="@layout/fragment_event" >
         <action
             android:id="@+id/action_eventFragment_to_navigation_dashboard"
             app:destination="@id/navigation_dashboard" />
     </fragment>
+
     <fragment
         android:id="@+id/internshipsFragment"
-        android:name="com.hindu.cunow.Fragments.Internship.InternshipsFragment"
+        android:name="com.hindu.joltt.Fragments.Internship.InternshipsFragment"
         android:label="fragment_internships"
         tools:layout="@layout/fragment_internships" />
+
     <fragment
         android:id="@+id/hackathonsFragment"
-        android:name="com.hindu.cunow.Fragments.Hackathons.HackathonsFragment"
+        android:name="com.hindu.joltt.Fragments.Hackathons.HackathonsFragment"
         android:label="fragment_hackathons"
         tools:layout="@layout/fragment_hackathons" />
-    <fragment
-        android:id="@+id/projectsFragment"
-        android:name="com.hindu.cunow.Fragments.Projects.ProjectsFragment"
-        android:label="fragment_projects"
-        tools:layout="@layout/fragment_projects" />
+
     <fragment
         android:id="@+id/schemesFragment"
-        android:name="com.hindu.cunow.Fragments.Schemes.SchemesFragment"
+        android:name="com.hindu.joltt.Fragments.Schemes.SchemesFragment"
         android:label="fragment_schemes"
         tools:layout="@layout/fragment_schemes" >
         <action
             android:id="@+id/action_schemesFragment_to_navigation_dashboard"
             app:destination="@id/navigation_dashboard" />
     </fragment>
+
     <fragment
         android:id="@+id/abroadFragment"
-        android:name="com.hindu.cunow.Fragments.Abroad.AbroadFragment"
+        android:name="com.hindu.joltt.Fragments.Abroad.AbroadFragment"
         android:label="fragment_abroad"
         tools:layout="@layout/fragment_abroad" >
         <action
             android:id="@+id/action_abroadFragment_to_navigation_dashboard"
             app:destination="@id/navigation_dashboard" />
     </fragment>
+
     <fragment
         android:id="@+id/communityFragment"
-        android:name="com.hindu.cunow.Fragments.community.CommunityFragment"
+        android:name="com.hindu.joltt.Fragments.community.CommunityFragment"
         android:label="fragment_community"
         tools:layout="@layout/fragment_community" >
         <action
@@ -378,36 +352,39 @@
             android:id="@+id/action_communityFragment_to_navigation_dashboard3"
             app:destination="@id/navigation_dashboard" />
     </fragment>
+
     <fragment
         android:id="@+id/coursesFragment"
-        android:name="com.hindu.cunow.Fragments.Courses.CoursesFragment"
+        android:name="com.hindu.joltt.Fragments.Courses.CoursesFragment"
         android:label="fragment_courses"
         tools:layout="@layout/fragment_courses" >
         <action
             android:id="@+id/action_coursesFragment_to_navigation_dashboard"
             app:destination="@id/navigation_dashboard" />
     </fragment>
-    <fragment
-        android:id="@+id/clubsFragment"
-        android:name="com.hindu.cunow.Fragments.Clubs.ClubsFragment"
-        android:label="fragment_clubs2"
-        tools:layout="@layout/fragment_clubs2" >
-        <action
-            android:id="@+id/action_clubsFragment_to_navigation_dashboard"
-            app:destination="@id/navigation_dashboard" />
-    </fragment>
+
     <fragment
         android:id="@+id/myDetailsFragment"
-        android:name="com.hindu.cunow.Fragments.AboutMe.MyDetails.MyDetailsFragment"
+        android:name="com.hindu.joltt.Fragments.AboutMe.MyDetails.MyDetailsFragment"
         android:label="my_details_fragment"
         tools:layout="@layout/my_details_fragment" />
+
     <fragment
         android:id="@+id/flash"
-        android:name="com.hindu.cunow.Fragments.Flash"
+        android:name="com.hindu.joltt.Fragments.Flash"
         android:label="fragment_flash"
         tools:layout="@layout/fragment_flash" >
         <action
             android:id="@+id/action_flash_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
+    <fragment
+        android:id="@+id/jobsFragment"
+        android:name="com.hindu.joltt.Fragments.Jobs.JobsFragment"
+        android:label="fragment_jobs"
+        tools:layout="@layout/fragment_jobs" >
+        <action
+            android:id="@+id/action_jobsFragment_to_navigation_dashboard"
             app:destination="@id/navigation_dashboard" />
     </fragment>
 
