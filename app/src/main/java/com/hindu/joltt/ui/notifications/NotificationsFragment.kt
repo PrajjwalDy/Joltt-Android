@@ -18,8 +18,11 @@ import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.FragmentNotificationsBinding
 import com.hindu.joltt.Model.NotificationModel
+import com.hindu.joltt.Model.PostModel
 import com.hindu.joltt.Model.UserModel
 import kotlinx.android.synthetic.main.fragment_notifications.followRequest
+import kotlinx.android.synthetic.main.fragment_notifications.noNotificationLayout
+import kotlinx.android.synthetic.main.fragment_notifications.notificationRecycler
 import kotlinx.android.synthetic.main.fragment_notifications.view.followRequest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,8 +34,9 @@ class NotificationsFragment : Fragment() {
     private lateinit var notificationsViewModel: NotificationsViewModel
     private var _binding: FragmentNotificationsBinding? = null
 
-    private var notificationList: List<NotificationModel>? = null
+    private var notificationList: MutableList<NotificationModel>? = null
     private var notificationAdapter: com.hindu.joltt.Adapter.NotificationAdapter? = null
+
 
     private val binding get() = _binding!!
 
@@ -69,6 +73,7 @@ class NotificationsFragment : Fragment() {
 
         CoroutineScope(Dispatchers.IO).launch {
             checkPrivacy()
+            launch { loadNotification() }
         }
 
         return root
@@ -109,6 +114,33 @@ class NotificationsFragment : Fragment() {
 
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    private suspend fun loadNotification(){
+        val notificationData = FirebaseDatabase.getInstance().reference.child("Notification").child("AllNotification")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+        notificationData.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                notificationList?.clear()
+                for (snapshot in snapshot.children){
+                    val nData = snapshot.getValue(NotificationModel::class.java)
+                    notificationList?.add(nData!!)
+                }
+                if (notificationList.isNullOrEmpty()){
+                    noNotificationLayout.visibility = View.VISIBLE
+                    notificationRecycler.visibility= View.GONE
+                }else{
+                    noNotificationLayout.visibility = View.VISIBLE
+                    notificationRecycler.visibility= View.GONE
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
             }
 
         })

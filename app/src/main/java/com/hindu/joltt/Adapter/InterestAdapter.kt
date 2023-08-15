@@ -71,6 +71,7 @@ class InterestAdapter(
             .reference
             .child("UserInterest")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child("interest")
             .child(tag)
             .setValue(tag)
 

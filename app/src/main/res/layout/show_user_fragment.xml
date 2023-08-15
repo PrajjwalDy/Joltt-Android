@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".Fragments.ShowUserFragment">
+    tools:context="com.hindu.joltt.Fragments.ShowUserFragment">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar_showUser"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white">
@@ -21,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="10dp"
-                android:fontFamily="@font/amiko"
+                android:fontFamily="@font/comfortaa"
                 android:text=""
                 android:textColor="@color/red"
                 android:textSize="18dp"
@@ -31,7 +33,39 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/appBar_showUser"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/showUserFrag_RV"/>
-</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/noFriendsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:lottie_rawRes="@raw/animation_friend"
+            android:layout_gravity="center_horizontal"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Expand your conversations – add friends to start chatting!"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center"
+            android:fontFamily="@font/comfortaa"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/vivaMagenta"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+</RelativeLayout>

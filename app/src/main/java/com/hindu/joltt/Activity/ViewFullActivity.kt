@@ -64,8 +64,6 @@ class ViewFullActivity : AppCompatActivity() {
             }
         })
     }
-
-
     private fun playVideo(videoUrl: String){
         initPlayer(videoUrl)
     }
@@ -115,12 +113,8 @@ class ViewFullActivity : AppCompatActivity() {
         simpleExoPlayer.addListener(playerListener)
 
     }
-
-
     enum class URLType(var url:String){
         MP4(""), HLS("")
     }
-
-
 
 }

@@ -38,10 +38,7 @@ class MyPostAdapter(
         fun bind(list: PostModel) {
             if (list.caption == "") {
                 caption.visibility = View.GONE
-                caption2.visibility = View.GONE
             } else {
-                caption.visibility = View.VISIBLE
-                caption.text = list.caption
                 caption2.visibility = View.VISIBLE
                 caption2.text = list.caption
             }

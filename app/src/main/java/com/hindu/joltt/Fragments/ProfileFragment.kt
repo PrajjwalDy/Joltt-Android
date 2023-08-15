@@ -34,6 +34,8 @@ import kotlinx.android.synthetic.main.profile_fragment.instagramLink_profile
 import kotlinx.android.synthetic.main.profile_fragment.instagram_profile
 import kotlinx.android.synthetic.main.profile_fragment.linkedin_profile
 import kotlinx.android.synthetic.main.profile_fragment.linkednLink_profile
+import kotlinx.android.synthetic.main.profile_fragment.myPostLayout
+import kotlinx.android.synthetic.main.profile_fragment.noPostLayout
 import kotlinx.android.synthetic.main.profile_fragment.portfolioLink_profile
 import kotlinx.android.synthetic.main.profile_fragment.portfolio_profile
 import kotlinx.android.synthetic.main.profile_fragment.postCount_profile
@@ -97,7 +99,6 @@ class ProfileFragment : Fragment() {
             launch { userInfo() }
             launch { getFollowers(root) }
             launch { getFollowings(root) }
-            launch { getPostCount() }
         }
 
         root.github_profile.setOnClickListener {
@@ -277,6 +278,14 @@ class ProfileFragment : Fragment() {
                         }
                     }
                     postAdapter!!.notifyDataSetChanged()
+                    postCount_profile.text = mPost?.size.toString()
+                    if (mPost.isNullOrEmpty()){
+                        noPostLayout?.visibility = View.VISIBLE
+                        myPostLayout?.visibility = View.GONE
+                    }else{
+                        noPostLayout?.visibility = View.GONE
+                        myPostLayout?.visibility = View.VISIBLE
+                    }
                 }
             }
 
@@ -314,25 +323,6 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun getPostCount(){
-        val database = FirebaseDatabase.getInstance().reference.child("Users")
-            .child(FirebaseAuth.getInstance().currentUser!!.uid)
-            .child("MyPosts")
-
-        database.addValueEventListener(object :ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
-                    val count = snapshot.childrenCount.toInt()
-                    postCount_profile.text = count.toString()
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
-    }
 
     private fun openInBrowser(url:String){
         val intent = Intent(Intent.ACTION_VIEW)

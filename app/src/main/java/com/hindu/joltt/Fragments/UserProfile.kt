@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
@@ -139,8 +140,7 @@ class UserProfile : Fragment() {
             launch { getFollowings(root) }
             launch { isBlocked(root)
                 haveBlocked(root) }
-            launch { retrievePost() }
-            launch { getPostCount() }
+            /*launch { retrievePost() }*/
         }
 
         //Follow button status
@@ -381,6 +381,8 @@ class UserProfile : Fragment() {
                                     .child("BlockedUsers")
                                     .child(profileId)
                                     .removeValue()
+                                Toast.makeText(context,"User unblocked",Toast.LENGTH_SHORT).show()
+                                root.infuseTxt.text="Infuse"
                             }
                             "Requested" ->{
                                 FirebaseDatabase.getInstance().reference.child("Users")
@@ -500,6 +502,7 @@ class UserProfile : Fragment() {
                                 usersPostRecyclerView.visibility = View.VISIBLE
                                 user_socialLinks_RL.visibility = View.VISIBLE
                                 userMenu.visibility = View.VISIBLE
+                                retrievePost()
                             }else{
                                 privateAC_LL.visibility = View.VISIBLE
                                 usersPostRecyclerView.visibility = View.GONE
@@ -507,6 +510,8 @@ class UserProfile : Fragment() {
                                 userMenu.visibility = View.GONE
                             }
                         }
+                    }else{
+                        retrievePost()
                     }
                 }
             }
@@ -600,26 +605,15 @@ class UserProfile : Fragment() {
                         }
                     }
                     postAdapter!!.notifyDataSetChanged()
-                }
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
-    }
-    //Post count
-    private fun getPostCount(){
-        val database = FirebaseDatabase.getInstance().reference.child("Users")
-            .child(profileId)
-            .child("MyPosts")
-
-        database.addValueEventListener(object :ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
-                    val count = snapshot.childrenCount.toInt()
-                    postcount_user.text = count.toString()
+                    postcount_user.text = mPost?.size.toString()
+                    if (mPost.isNullOrEmpty()){
+                        noPostLayout_user.visibility = View.VISIBLE
+                        othersPostLayout.visibility = View.GONE
+                    }else{
+                        noPostLayout_user.visibility = View.GONE
+                        othersPostLayout.visibility = View.VISIBLE
+                    }
                 }
             }
 

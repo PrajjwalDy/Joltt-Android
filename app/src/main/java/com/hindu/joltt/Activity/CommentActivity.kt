@@ -191,6 +191,7 @@ class CommentActivity : AppCompatActivity() {
                     postCaptionComment.text = caption
                 }else if (caption.text ==null){
                     postCaptionComment.text = "No Caption Added"
+                    postCaptionComment.maxLines = 2
                 }
             }
 

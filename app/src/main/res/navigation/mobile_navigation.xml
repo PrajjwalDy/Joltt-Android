@@ -29,6 +29,21 @@
         <action
             android:id="@+id/action_navigation_home_to_chatFragment"
             app:destination="@id/chatFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_schemesFragment"
+            app:destination="@id/schemesFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_publicPostFragement"
+            app:destination="@id/publicPostFragement" />
+        <action
+            android:id="@+id/action_navigation_home_to_communityFragment"
+            app:destination="@id/communityFragment" />
+        <action
+            android:id="@+id/action_navigation_home_self"
+            app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_navigation_home_to_jobsFragment"
+            app:destination="@id/jobsFragment" />
     </fragment>
 
     <fragment

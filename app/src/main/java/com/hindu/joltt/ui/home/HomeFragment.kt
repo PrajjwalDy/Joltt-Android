@@ -26,7 +26,9 @@ import com.hindu.cunow.databinding.FragmentHomeBinding
 import com.hindu.joltt.Activity.AddPostActivity
 import com.hindu.joltt.Activity.VideoUploadActivity
 import com.hindu.joltt.Adapter.PostAdapter
+import com.hindu.joltt.Fragments.Pages.PagesTabActivity
 import com.hindu.joltt.Model.DevMessageModel
+import com.hindu.joltt.Model.PostModel
 import kotlinx.android.synthetic.main.fragment_home.addText_ET
 import kotlinx.android.synthetic.main.fragment_home.add_image
 import kotlinx.android.synthetic.main.fragment_home.add_text
@@ -36,7 +38,9 @@ import kotlinx.android.synthetic.main.fragment_home.create_post_fab
 import kotlinx.android.synthetic.main.fragment_home.dev_message_tv
 import kotlinx.android.synthetic.main.fragment_home.developerMessage_CV
 import kotlinx.android.synthetic.main.fragment_home.ll_chatcount
+import kotlinx.android.synthetic.main.fragment_home.ll_empty_posts
 import kotlinx.android.synthetic.main.fragment_home.postLayout_ll
+import kotlinx.android.synthetic.main.fragment_home.postRecyclerView
 import kotlinx.android.synthetic.main.fragment_home.view.add_image
 import kotlinx.android.synthetic.main.fragment_home.view.add_text
 import kotlinx.android.synthetic.main.fragment_home.view.add_video
@@ -45,10 +49,18 @@ import kotlinx.android.synthetic.main.fragment_home.view.closeOnlyText
 import kotlinx.android.synthetic.main.fragment_home.view.create_post_fab
 import kotlinx.android.synthetic.main.fragment_home.view.developerMessage_CV
 import kotlinx.android.synthetic.main.fragment_home.view.imin
+import kotlinx.android.synthetic.main.fragment_home.view.ll_clubs_home
+import kotlinx.android.synthetic.main.fragment_home.view.ll_confessionRoom_home
+import kotlinx.android.synthetic.main.fragment_home.view.ll_events_home
+import kotlinx.android.synthetic.main.fragment_home.view.ll_govt_schemes_home
+import kotlinx.android.synthetic.main.fragment_home.view.ll_pages_home
 import kotlinx.android.synthetic.main.fragment_home.view.onlyText_CV
+import kotlinx.android.synthetic.main.fragment_home.view.postLayout_ll
+import kotlinx.android.synthetic.main.fragment_home.view.postRecyclerView
 import kotlinx.android.synthetic.main.fragment_home.view.strike
 import kotlinx.android.synthetic.main.fragment_home.view.uploadTextBtn
 import kotlinx.android.synthetic.main.fragment_home.welcome_screen
+import kotlinx.android.synthetic.main.fragment_home_tab.view.ll_community
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -61,7 +73,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private var clicked = false
-    // private var postList: MutableList<PostModel>? = null
+
 
     private val rotateOpen: Animation by lazy {
         AnimationUtils.loadAnimation(
@@ -97,13 +109,25 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        checkFirstVisit()
+        CoroutineScope(Dispatchers.IO).launch {
+            checkFirstVisit()
+        }
 
-        homeViewModel.postModel!!.observe(viewLifecycleOwner, Observer {
-            initView(root)
-            postAdapter = context?.let { it1 -> PostAdapter(it1, it) }
-            recyclerView!!.adapter = postAdapter
-            postAdapter!!.notifyDataSetChanged()
+        homeViewModel.postModel!!.observe(viewLifecycleOwner, Observer {postList->
+
+            if (postList.isEmpty()){
+                root.postLayout_ll?.visibility = View.VISIBLE
+                ll_empty_posts?.visibility = View.VISIBLE
+                root.postRecyclerView.visibility = View.GONE
+            }else{
+                root.postLayout_ll?.visibility = View.VISIBLE
+                ll_empty_posts?.visibility = View.GONE
+                root.postRecyclerView.visibility = View.VISIBLE
+                initView(root)
+                postAdapter = context?.let { it1 -> PostAdapter(it1, postList) }
+                recyclerView!!.adapter = postAdapter
+                postAdapter!!.notifyDataSetChanged()
+            }
 
         })
 
@@ -143,6 +167,32 @@ class HomeFragment : Fragment() {
             addButtonClicked()
         }
 
+
+        //FEATURES BUTTON ON CLICK
+        root.ll_confessionRoom_home.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_navigation_home_to_confessionRoomFragment)
+        }
+
+        root.ll_clubs_home.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_navigation_home_to_jobsFragment)
+        }
+
+        root.ll_pages_home.setOnClickListener {
+            startActivity(Intent(context, PagesTabActivity::class.java))
+        }
+
+        root.ll_govt_schemes_home.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_navigation_home_to_schemesFragment)
+        }
+
+        root.ll_events_home.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_navigation_home_to_communityFragment)
+        }
+        
         root.uploadTextBtn.setOnClickListener {
             if (addText_ET.text.isEmpty()) {
                 Toast.makeText(context, "Please Write something", Toast.LENGTH_SHORT).show()
@@ -163,7 +213,8 @@ class HomeFragment : Fragment() {
                 Toast.makeText(context, "Post add successfully", Toast.LENGTH_SHORT).show()
                 root.onlyText_CV.visibility = View.GONE
                 addText_ET.text.clear()
-                val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                val inputMethodManager =
+                    requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
                 // Hide the soft input method
                 inputMethodManager.hideSoftInputFromWindow(root.windowToken, 0)
@@ -265,14 +316,14 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun checkFirstVisit() {
+    private suspend fun checkFirstVisit() {
         val dataRef = FirebaseDatabase
             .getInstance().reference.child("FirstVisit")
         dataRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.hasChild(FirebaseAuth.getInstance().currentUser!!.uid)) {
                     welcome_screen.visibility = View.VISIBLE
-                }else{
+                } else {
                     welcome_screen.visibility = View.GONE
                     postLayout_ll.visibility = View.VISIBLE
                 }
@@ -288,56 +339,11 @@ class HomeFragment : Fragment() {
         })
     }
 
-    /*private suspend fun checkFollowingList() {
-        checkPost()
-        val database = FirebaseDatabase.getInstance().reference
-            .child("Follow")
-            .child(FirebaseAuth.getInstance().currentUser!!.uid)
-            .child("Following")
-
-        database.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    val count = snapshot.childrenCount.toInt()
-                    if (count <= 1 && checker == "no") {
-                        ll_empty_posts?.visibility = View.VISIBLE
-                        postRecyclerView?.visibility = View.GONE
-                    } else {
-                        postRecyclerView?.visibility = View.VISIBLE
-                    }
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
-    }
-    private fun checkPost() {
-        val database = FirebaseDatabase.getInstance().reference
-            .child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
-
-        database.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.hasChild("MyPosts") || snapshot.hasChild("FollowingPages")) {
-                    checker = "yes"
-                } else {
-                    checker = "no"
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
-    }*/
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
 
     private suspend fun developerMessage() {
         val database = FirebaseDatabase.getInstance().reference.child("DevMessage")
@@ -359,18 +365,18 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private suspend fun chatNotification(){
+    private suspend fun chatNotification() {
         val data = FirebaseDatabase.getInstance().reference.child("ChatMessageCount")
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
 
-        data.addValueEventListener(object :ValueEventListener{
+        data.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
-                    ll_chatcount?.visibility =View.VISIBLE
+                if (snapshot.exists()) {
+                    ll_chatcount?.visibility = View.VISIBLE
                     chatNotification_Count?.visibility = View.VISIBLE
                     chatNotification_Count?.text = snapshot.childrenCount.toString()
-                }else{
-                    ll_chatcount?.visibility =View.GONE
+                } else {
+                    ll_chatcount?.visibility = View.GONE
                     chatNotification_Count?.visibility = View.GONE
                 }
             }
@@ -381,6 +387,7 @@ class HomeFragment : Fragment() {
 
         })
     }
+
     private fun addButtonClicked() {
         setVisibility(clicked)
         setAnimation(clicked)
@@ -414,9 +421,12 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun clearAnimation(){
+    private fun clearAnimation() {
         add_image.clearAnimation()
         add_text.clearAnimation()
         add_video.clearAnimation()
     }
+
+    //Check Post Functions Post Functions
+
 }
