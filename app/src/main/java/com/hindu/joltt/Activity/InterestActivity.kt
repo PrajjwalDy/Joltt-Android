@@ -72,6 +72,7 @@ class InterestActivity : AppCompatActivity() {
                 if (snapshot.hasChild(firebaseUser!!.uid)) {
                     val intent = Intent(this@InterestActivity, MainActivity::class.java)
                     startActivity(intent)
+                    finish()
                 } else {
                     Snackbar.make(view, "Please choose your interest to proceed", 1000).show()
                 }

@@ -92,9 +92,6 @@ class NotificationAdapter(private val nContext:Context,
         val profileImage:CircleImageView =itemView.findViewById(R.id.notification_profileImage) as CircleImageView
         val userName:TextView = itemView.findViewById(R.id.usernameNotification) as TextView
         val notificationText:TextView = itemView.findViewById(R.id.notificationText) as TextView
-        val des_layout:LinearLayout = itemView.findViewById(R.id.request_ll) as LinearLayout
-        val ingore:TextView = itemView.findViewById(R.id.ignoreRequest_infuse) as TextView
-        val accept:TextView = itemView.findViewById(R.id.acceptRequest_infuse) as TextView
 
         fun bind(list: NotificationModel){
 

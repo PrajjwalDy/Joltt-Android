@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.UserDetailsActivity">
+    tools:context="com.hindu.joltt.Activity.UserDetailsActivity">
 
     <!--Linear Layout 0-->
     <ScrollView
@@ -336,7 +336,7 @@
                     android:textColorHint="@color/hint_colour"
                     android:fontFamily="@font/comfortaa"
                     android:textColor="@color/white"
-                    android:hint="Collgeg Name"
+                    android:hint="College Name"
                     android:layout_marginEnd="20dp"/>
 
 
@@ -355,6 +355,7 @@
                         android:textColorHint="@color/hint_colour"
                         android:padding="10dp"
                         android:textSize="14sp"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/comfortaa"
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"/>
@@ -370,6 +371,8 @@
                         android:textColorHint="@color/hint_colour"
                         android:textSize="14sp"
                         android:hint="Admission year"
+                        android:inputType="number"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/comfortaa"
                         android:layout_marginEnd="20dp"/>
 

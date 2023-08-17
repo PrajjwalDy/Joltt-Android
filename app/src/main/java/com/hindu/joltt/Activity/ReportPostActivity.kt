@@ -14,6 +14,7 @@ import com.hindu.cunow.R
 import com.hindu.joltt.Adapter.ReportAdapter
 import com.hindu.joltt.MainActivity
 import com.hindu.joltt.Model.ReportModel
+import com.uk.tastytoasty.TastyToasty
 import kotlinx.android.synthetic.main.activity_report_post.reportPost_btn
 
 class ReportPostActivity : AppCompatActivity() {
@@ -43,7 +44,8 @@ class ReportPostActivity : AppCompatActivity() {
 
 
         reportPost_btn.setOnClickListener { view->
-            Snackbar.make(view,"Report Request successful",Snackbar.LENGTH_SHORT).show()
+            TastyToasty.makeText(this,"Post Reported",
+                TastyToasty.SHORT,R.drawable.ic_report,R.color.vivaMagenta,R.color.white,false).show()
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }

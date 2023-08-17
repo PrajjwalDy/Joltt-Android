@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.AboutMe.MyDetails.MyDetailsFragment">
+    tools:context="com.hindu.joltt.Fragments.AboutMe.MyDetails.MyDetailsFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -59,6 +59,35 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/postBtn_btn_cv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="16dp"
+                            android:layout_margin="10dp"
+                            app:cardBackgroundColor="@color/grey">
+
+                            <RelativeLayout
+                                android:layout_width="80dp"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginEnd="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:fontFamily="@font/comfortaa"
+                                    android:text="Posts"
+                                    android:textColor="@color/black"
+                                    android:textSize="15sp" />
+
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/skill_btn_cv"
@@ -241,7 +270,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/comfortaa"
-                                    android:text="Gender"
+                                    android:text="Relationship"
                                     android:textColor="@color/white" />
 
 
@@ -312,7 +341,7 @@
                                 android:layout_marginTop="5dp"
                                 android:layout_toStartOf="@+id/divider_img"
                                 android:fontFamily="@font/comfortaa"
-                                android:text="Computer Science Engineering"
+                                android:text="Branch"
                                 android:textColor="@color/white" />
 
                             <TextView

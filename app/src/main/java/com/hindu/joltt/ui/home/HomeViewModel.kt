@@ -10,6 +10,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.hindu.joltt.Callback.IPostCallback
 import com.hindu.joltt.Model.PostModel
+import com.hindu.joltt.Model.UserModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,6 +25,14 @@ class HomeViewModel() : ViewModel(), IPostCallback {
     private val postLoadCallback: IPostCallback = this
     private var messageError: MutableLiveData<String>? = null
 
+    var skillList : MutableList<String>? = mutableListOf()
+    var experienceList: MutableList<String>? = mutableListOf()
+    var college =""
+    var course = ""
+    var branch = ""
+    var location = ""
+
+
     val postModel: MutableLiveData<List<PostModel>>?
         get() {
             if (postLiveData == null) {
@@ -31,6 +40,7 @@ class HomeViewModel() : ViewModel(), IPostCallback {
                 messageError = MutableLiveData()
 
                 viewModelScope.launch(Dispatchers.IO) {
+                    loadSkillsExp()
                     loadUserInterestFromFirebase()
                     pageList()
                     checkFollowing()
@@ -40,16 +50,22 @@ class HomeViewModel() : ViewModel(), IPostCallback {
 
         }
 
-    private fun loadPost2(){
+    private fun loadPost2() {
         val postSet = HashSet<PostModel>()
         val databaseReference = FirebaseDatabase.getInstance().reference.child("Post")
-        databaseReference.addValueEventListener(object :ValueEventListener{
+        databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
                 postSet.clear()
-                for (snapshot in snapshot.children){
+                for (snapshot in snapshot.children) {
                     val postModel = snapshot.getValue(PostModel::class.java) as PostModel
-                    if ((followingList as ArrayList<String>).contains(postModel.publisher)||(pageList as ArrayList<String>).contains(postModel.publisher)|| postModelUserInterest(postModel)){
+
+                    if ((followingList as ArrayList<String>).contains(postModel.publisher) || (pageList as ArrayList<String>).contains(
+                            postModel.publisher
+                        ) || postModelUserInterest(postModel)||checkSkills(postModel)||checkExperience(postModel)
+                        || location == postModel.pubLocation || course == postModel.pubCourse|| college == postModel.pubCollege
+                        || branch == postModel.pubBranch
+                    ) {
                         postSet.add(postModel)
                     }
                 }
@@ -63,18 +79,93 @@ class HomeViewModel() : ViewModel(), IPostCallback {
 
         })
     }
-    private fun postModelUserInterest(postModel: PostModel):Boolean{
+
+    private fun postModelUserInterest(postModel: PostModel): Boolean {
         val userInterestString = userInterest!!.joinToString("#")
-        val caption = postModel.caption!!.trim(){it <=' '}
+        val caption = postModel.caption!!.trim() { it <= ' ' }
         val feedTags = caption.split(" ")
 
-        for (tag in feedTags){
-            if (tag.startsWith("#") && userInterestString.contains(tag)){
+        for (tag in feedTags) {
+            if (tag.startsWith("#") && userInterestString.contains(tag)) {
                 return true
             }
         }
         return false
     }
+
+    private fun checkSkills(postModel: PostModel): Boolean {
+        val skills = postModel.pubSkills?.trim() { it <= ' ' }
+        val skillTags = skills?.split(",")
+
+        if (skillTags != null) {
+            for (skill in skillTags){
+                if (skillList!!.contains(skill)){
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
+    private fun checkExperience(postModel: PostModel):Boolean{
+        val experience = postModel.pubExperience?.trim() { it <= ' ' }
+        val experienceTags = experience?.split(",")
+
+        if (experienceTags != null) {
+            for (exp in experienceTags){
+                if (experienceList!!.contains(exp)){
+                    return true
+                }
+            }
+        }
+
+        return false
+    }
+
+    //LOAD SKILLS
+    private fun loadSkillsExp(){
+        val dbRef = FirebaseDatabase.getInstance().reference.child("Users")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+        dbRef.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val data = snapshot.getValue(UserModel::class.java)
+                    val skills  = data!!.skills?.split(",")
+                    val experience = data.experience?.split(",")
+
+
+                    college = data.college?:""
+
+                    course = data.course ?: ""
+
+                    branch = data.branch ?: ""
+
+                    location = data.place?: ""
+
+
+
+                    if (skills!!.isNotEmpty()){
+                        for(skill in skills){
+                            skillList!!.add(skill)
+                        }
+                    }
+
+                    if (experience!!.isNotEmpty()){
+                        for (exp in experience){
+                            experienceList!!.add(exp)
+                        }
+                    }
+
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
     //CHECK FOLLOWING
     private suspend fun checkFollowing() {
         followingList = ArrayList()
@@ -104,6 +195,7 @@ class HomeViewModel() : ViewModel(), IPostCallback {
         })
         userDataRef.keepSynced(true)
     }
+
     private suspend fun pageList() {
         pageList = ArrayList()
         val data = FirebaseDatabase.getInstance().reference.child("Users")
@@ -127,6 +219,7 @@ class HomeViewModel() : ViewModel(), IPostCallback {
 
         })
     }
+
     //New Filtration Function
     private fun loadUserInterestFromFirebase() {
         val userInterestRef = FirebaseDatabase
@@ -154,7 +247,6 @@ class HomeViewModel() : ViewModel(), IPostCallback {
             }
         })
     }
-
 
     override fun onPostCallbackLoadFailed(str: String) {
         val mutableLiveData = messageError

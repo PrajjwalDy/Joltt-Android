@@ -24,6 +24,7 @@ import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.hindu.cunow.R
+import com.uk.tastytoasty.TastyToasty
 import kotlinx.android.synthetic.main.activity_user_details.collegeName_welcome
 import kotlinx.android.synthetic.main.activity_user_details.et_admission_year
 import kotlinx.android.synthetic.main.activity_user_details.et_branch_welcome
@@ -118,19 +119,31 @@ class UserDetailsActivity : AppCompatActivity() {
         }
 
         nextBtn_3.setOnClickListener {
-            ll_0.visibility = View.GONE
-            ll_3.startAnimation(toLeft)
-            ll_3.visibility = View.GONE
+
+            if (collegeName_welcome.text.isEmpty() || et_course_welcome.text.isEmpty()
+                ||et_admission_year.text.isEmpty()||et_branch_welcome.text.isEmpty()){
+                Toast.makeText(this, "Kindly Complete the Required Fields",Toast.LENGTH_SHORT).show()
+            }else{
+                ll_0.visibility = View.GONE
+                ll_3.startAnimation(toLeft)
+                ll_3.visibility = View.GONE
 
 
-            ll_4.startAnimation(fromRight)
-            ll_4.visibility = View.VISIBLE
-            val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputMethodManager.hideSoftInputFromWindow(nextBtn_3.windowToken, 0)
+                ll_4.startAnimation(fromRight)
+                ll_4.visibility = View.VISIBLE
+                val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(nextBtn_3.windowToken, 0)
+            }
+
         }
 
         nextBtn_4.setOnClickListener {
-            updateInformation()
+            if (et_exp_welcome.text.isEmpty()||et_skills_welcome.text.isEmpty()){
+                Toast.makeText(this, "Looks like some fields need your attention – please fill in the required information.",Toast.LENGTH_SHORT).show()
+            }else{
+                updateInformation()
+            }
+
         }
 
         getLocation.setOnClickListener {
@@ -140,6 +153,7 @@ class UserDetailsActivity : AppCompatActivity() {
 
     //UPDATE INFORMATION
     private fun updateInformation() {
+        TastyToasty.makeText(this,"Please Wait while we create your profile",TastyToasty.LONG,R.drawable.ic_person,R.color.grey,R.color.white,false).show()
         val databaseRef = FirebaseDatabase.getInstance().reference.child("Users")
         val dataMap = HashMap<String, Any>()
         dataMap["place"] = location_et_welcome.text.toString()
@@ -172,7 +186,8 @@ class UserDetailsActivity : AppCompatActivity() {
         if (et_skills_welcome.text.isEmpty()) {
             //DoNothing
         } else {
-            val sentence = et_skills_welcome.text.toString().replace(" ", "")
+            val texData = et_skills_welcome.text.toString().trim { it <= ' ' }
+            val sentence = texData.replace(" ", "")
             val words = sentence.split(",")
 
             //Initialize an empty list of skills
@@ -198,11 +213,11 @@ class UserDetailsActivity : AppCompatActivity() {
 
     //Update Experience
     private fun updateExperience() {
-
         if (et_exp_welcome.text.isEmpty()) {
             //do nothing
         } else {
-            val sentence = et_exp_welcome.text.toString().replace(" ", "")
+            val textData = et_exp_welcome.text.toString().trim { it <= ' ' }
+            val sentence = textData.replace(" ", "")
             val words = sentence.split(",")
 
             //Initialize an empty list of skills

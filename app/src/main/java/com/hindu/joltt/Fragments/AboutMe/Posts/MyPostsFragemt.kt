@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +15,7 @@ import com.hindu.cunow.R
 import com.hindu.cunow.databinding.MyPostsFragemtFragmentBinding
 import com.hindu.joltt.Adapter.PostAdapter
 import com.hindu.joltt.Adapter.PostGridAdapter
+import kotlinx.android.synthetic.main.my_posts_fragemt_fragment.view.fab_savedPost
 import kotlinx.android.synthetic.main.my_posts_fragemt_fragment.view.myPostsRV
 import kotlinx.android.synthetic.main.my_posts_fragemt_fragment.view.myPostsRV_grid
 import kotlinx.android.synthetic.main.my_posts_fragemt_fragment.view.postGrid_profile
@@ -43,7 +45,7 @@ class MyPostsFragemt : Fragment() {
 
         viewModel.postModel!!.observe(viewLifecycleOwner, Observer {
             initView(root)
-            postAdapter = context?.let { it1-> PostAdapter(it1,it) }
+            postAdapter = context?.let { it1-> PostAdapter(it1,it,"Profile") }
             recyclerView!!.adapter = postAdapter
             postAdapter!!.notifyDataSetChanged()
 
@@ -62,6 +64,9 @@ class MyPostsFragemt : Fragment() {
         root.postVertical_profile.setOnClickListener {
             root.myPostsRV_grid.visibility = View.GONE
             root.myPostsRV.visibility = View.VISIBLE
+        }
+        root.fab_savedPost.setOnClickListener {
+            Navigation.findNavController(root).navigate(R.id.action_myPostsFragemt_to_mySavedFragment2)
         }
 
         return root

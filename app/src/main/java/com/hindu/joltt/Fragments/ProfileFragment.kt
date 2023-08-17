@@ -314,7 +314,7 @@ class ProfileFragment : Fragment() {
             editProfile_fab.startAnimation(fromBottom)
             settingFab.startAnimation(fromBottom)
             profileMenu.startAnimation(rotateOpen)
-            profileMenu.setImageResource(R.drawable.close_angle)
+            profileMenu.setImageResource(R.drawable.clos_angle)
         }else{
             editProfile_fab.startAnimation(toBottom)
             settingFab.startAnimation(toBottom)

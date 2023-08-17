@@ -16,6 +16,8 @@ import com.hindu.cunow.R
 import com.hindu.cunow.databinding.ChatFragmentBinding
 import com.hindu.joltt.Adapter.ChatListAdapter
 import kotlinx.android.synthetic.main.chat_fragment.view.addChat
+import kotlinx.android.synthetic.main.chat_fragment.view.chatList_RV
+import kotlinx.android.synthetic.main.chat_fragment.view.noChatsLayout
 
 class ChatFragment : Fragment() {
     var recyclerView:RecyclerView? = null
@@ -37,11 +39,20 @@ class ChatFragment : Fragment() {
         _binding = ChatFragmentBinding.inflate(inflater,container,false)
         val root:View = binding.root
 
-        viewModel.chatListModel!!.observe(viewLifecycleOwner, Observer {
-            initView(root)
-            chatListAdapter = context?.let { it1-> ChatListAdapter(it1,it) }
-            recyclerView!!.adapter = chatListAdapter
-            chatListAdapter!!.notifyDataSetChanged()
+        viewModel.chatListModel!!.observe(viewLifecycleOwner, Observer {chatList->
+            if (chatList.isNullOrEmpty()){
+                root.noChatsLayout?.visibility = View.VISIBLE
+                root.chatList_RV?.visibility = View.GONE
+            }else{
+                root.noChatsLayout?.visibility = View.GONE
+                root.chatList_RV?.visibility = View.VISIBLE
+                root.noChatsLayout.visibility = View.VISIBLE
+                initView(root)
+                chatListAdapter = context?.let { it1-> ChatListAdapter(it1,chatList) }
+                recyclerView!!.adapter = chatListAdapter
+                chatListAdapter!!.notifyDataSetChanged()
+            }
+
         })
 
         root.addChat.setOnClickListener{

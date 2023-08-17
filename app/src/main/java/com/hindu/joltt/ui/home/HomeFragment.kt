@@ -2,6 +2,7 @@ package com.hindu.joltt.ui.home
 
 import android.content.Context
 import android.content.Intent
+import android.nfc.tech.MifareUltralight.PAGE_SIZE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,8 +26,8 @@ import com.hindu.cunow.R
 import com.hindu.cunow.databinding.FragmentHomeBinding
 import com.hindu.joltt.Activity.AddPostActivity
 import com.hindu.joltt.Activity.VideoUploadActivity
+import com.hindu.joltt.Adapter.MyPostAdapter
 import com.hindu.joltt.Adapter.PostAdapter
-import com.hindu.joltt.Fragments.Pages.PagesTabActivity
 import com.hindu.joltt.Model.DevMessageModel
 import com.hindu.joltt.Model.PostModel
 import kotlinx.android.synthetic.main.fragment_home.addText_ET
@@ -38,9 +39,7 @@ import kotlinx.android.synthetic.main.fragment_home.create_post_fab
 import kotlinx.android.synthetic.main.fragment_home.dev_message_tv
 import kotlinx.android.synthetic.main.fragment_home.developerMessage_CV
 import kotlinx.android.synthetic.main.fragment_home.ll_chatcount
-import kotlinx.android.synthetic.main.fragment_home.ll_empty_posts
 import kotlinx.android.synthetic.main.fragment_home.postLayout_ll
-import kotlinx.android.synthetic.main.fragment_home.postRecyclerView
 import kotlinx.android.synthetic.main.fragment_home.view.add_image
 import kotlinx.android.synthetic.main.fragment_home.view.add_text
 import kotlinx.android.synthetic.main.fragment_home.view.add_video
@@ -48,19 +47,14 @@ import kotlinx.android.synthetic.main.fragment_home.view.closeMessage_btn
 import kotlinx.android.synthetic.main.fragment_home.view.closeOnlyText
 import kotlinx.android.synthetic.main.fragment_home.view.create_post_fab
 import kotlinx.android.synthetic.main.fragment_home.view.developerMessage_CV
+import kotlinx.android.synthetic.main.fragment_home.view.emptyListPost
 import kotlinx.android.synthetic.main.fragment_home.view.imin
-import kotlinx.android.synthetic.main.fragment_home.view.ll_clubs_home
-import kotlinx.android.synthetic.main.fragment_home.view.ll_confessionRoom_home
-import kotlinx.android.synthetic.main.fragment_home.view.ll_events_home
-import kotlinx.android.synthetic.main.fragment_home.view.ll_govt_schemes_home
-import kotlinx.android.synthetic.main.fragment_home.view.ll_pages_home
 import kotlinx.android.synthetic.main.fragment_home.view.onlyText_CV
 import kotlinx.android.synthetic.main.fragment_home.view.postLayout_ll
 import kotlinx.android.synthetic.main.fragment_home.view.postRecyclerView
 import kotlinx.android.synthetic.main.fragment_home.view.strike
 import kotlinx.android.synthetic.main.fragment_home.view.uploadTextBtn
 import kotlinx.android.synthetic.main.fragment_home.welcome_screen
-import kotlinx.android.synthetic.main.fragment_home_tab.view.ll_community
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -73,6 +67,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private var clicked = false
+
 
 
     private val rotateOpen: Animation by lazy {
@@ -113,22 +108,19 @@ class HomeFragment : Fragment() {
             checkFirstVisit()
         }
 
-        homeViewModel.postModel!!.observe(viewLifecycleOwner, Observer {postList->
+        homeViewModel.postModel!!.observe(viewLifecycleOwner, Observer { postList ->
 
-            if (postList.isEmpty()){
-                root.postLayout_ll?.visibility = View.VISIBLE
-                ll_empty_posts?.visibility = View.VISIBLE
-                root.postRecyclerView.visibility = View.GONE
+            if (postList.isNullOrEmpty()){
+                root.postLayout_ll?.visibility = View.GONE
+                root.emptyListPost.visibility = View.VISIBLE
             }else{
                 root.postLayout_ll?.visibility = View.VISIBLE
-                ll_empty_posts?.visibility = View.GONE
                 root.postRecyclerView.visibility = View.VISIBLE
                 initView(root)
-                postAdapter = context?.let { it1 -> PostAdapter(it1, postList) }
+                postAdapter = context?.let { it1 -> PostAdapter(it1, postList,"Home") }
                 recyclerView!!.adapter = postAdapter
                 postAdapter!!.notifyDataSetChanged()
             }
-
         })
 
 
@@ -167,32 +159,6 @@ class HomeFragment : Fragment() {
             addButtonClicked()
         }
 
-
-        //FEATURES BUTTON ON CLICK
-        root.ll_confessionRoom_home.setOnClickListener {
-            Navigation.findNavController(root)
-                .navigate(R.id.action_navigation_home_to_confessionRoomFragment)
-        }
-
-        root.ll_clubs_home.setOnClickListener {
-            Navigation.findNavController(root)
-                .navigate(R.id.action_navigation_home_to_jobsFragment)
-        }
-
-        root.ll_pages_home.setOnClickListener {
-            startActivity(Intent(context, PagesTabActivity::class.java))
-        }
-
-        root.ll_govt_schemes_home.setOnClickListener {
-            Navigation.findNavController(root)
-                .navigate(R.id.action_navigation_home_to_schemesFragment)
-        }
-
-        root.ll_events_home.setOnClickListener {
-            Navigation.findNavController(root)
-                .navigate(R.id.action_navigation_home_to_communityFragment)
-        }
-        
         root.uploadTextBtn.setOnClickListener {
             if (addText_ET.text.isEmpty()) {
                 Toast.makeText(context, "Please Write something", Toast.LENGTH_SHORT).show()
@@ -293,7 +259,7 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun initView(root: View) {
+    private fun initView(root: View){
         recyclerView = root.findViewById(R.id.postRecyclerView) as RecyclerView
         recyclerView!!.setHasFixedSize(true)
         recyclerView!!.isNestedScrollingEnabled = false
@@ -302,7 +268,7 @@ class HomeFragment : Fragment() {
         linearLayoutManager.stackFromEnd = true
         recyclerView!!.layoutManager = linearLayoutManager
         //loadUserImage(root)
-        recyclerView!!.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        /*recyclerView!!.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -312,7 +278,8 @@ class HomeFragment : Fragment() {
                     create_post_fab.hide()
                 }
             }
-        })
+        })*/
+
 
     }
 
@@ -322,10 +289,10 @@ class HomeFragment : Fragment() {
         dataRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.hasChild(FirebaseAuth.getInstance().currentUser!!.uid)) {
-                    welcome_screen.visibility = View.VISIBLE
+                    welcome_screen?.visibility = View.VISIBLE
                 } else {
-                    welcome_screen.visibility = View.GONE
-                    postLayout_ll.visibility = View.VISIBLE
+                    welcome_screen?.visibility = View.GONE
+                    postLayout_ll?.visibility = View.VISIBLE
                 }
                 /*CoroutineScope(Dispatchers.IO).launch {
                     checkFollowingList()
@@ -428,5 +395,6 @@ class HomeFragment : Fragment() {
     }
 
     //Check Post Functions Post Functions
+
 
 }

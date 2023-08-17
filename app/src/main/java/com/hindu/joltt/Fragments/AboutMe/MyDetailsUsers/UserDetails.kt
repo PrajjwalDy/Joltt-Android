@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -39,6 +40,7 @@ import kotlinx.android.synthetic.main.fragment_user_details.view.ll_about_user
 import kotlinx.android.synthetic.main.fragment_user_details.view.ll_experience_user
 import kotlinx.android.synthetic.main.fragment_user_details.view.ll_interests_user
 import kotlinx.android.synthetic.main.fragment_user_details.view.ll_skills_user
+import kotlinx.android.synthetic.main.fragment_user_details.view.post_btn_user
 import kotlinx.android.synthetic.main.fragment_user_details.view.relation_txt_user
 import kotlinx.android.synthetic.main.fragment_user_details.view.skill_btn_user
 import kotlinx.android.synthetic.main.fragment_user_details.view.skill_txt_user
@@ -113,6 +115,8 @@ class UserDetails : Fragment() {
 
             root.ll_experience_user.visibility = View.GONE
             root.ll_experience_user.startAnimation(toBottom)
+
+
 
 
             initView2(recyclerView)
@@ -196,6 +200,16 @@ class UserDetails : Fragment() {
             expAdapter_Prof = context?.let { it1 -> ExpAdapter(it1, ESList as ArrayList<ESModel>) }
             recyclerView.adapter = expAdapter_Prof
             loadExperience()
+        }
+
+        root.post_btn_user.setOnClickListener {
+            val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
+            pref?.putString("profile", profileId)
+            pref?.apply()
+
+            Navigation.findNavController(root)
+                .navigate(R.id.action_userDetails_to_userPostsFragment)
+
         }
 
         return root

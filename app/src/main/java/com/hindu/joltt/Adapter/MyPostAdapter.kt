@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.exoplayer2.MediaItem
@@ -59,6 +60,19 @@ class MyPostAdapter(
                 caption2.visibility = View.VISIBLE
                 caption.visibility = View.GONE
             }
+
+                itemView.setOnClickListener {
+
+                    val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+                    pref.putString("postId",list.postId)
+                    pref.putString("from","ProfileFrag")
+                    pref.apply()
+
+                    Navigation.findNavController(itemView)
+                        .navigate(R.id.action_navigation_profile_to_fullPostView)
+
+                }
+
         }
     }
 

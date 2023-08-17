@@ -83,6 +83,7 @@ class CommentActivity : AppCompatActivity() {
         commentList = ArrayList()
         commentsAdapter = CommentAdapter(this, commentList as ArrayList<CommentModel>,publisherId,postId)
         recyclerView.adapter = commentsAdapter
+
         displayCaption()
         loadComments()
         userInfo()

@@ -24,23 +24,25 @@ import com.google.android.exoplayer2.util.Util
 import com.hindu.cunow.R
 import com.hindu.joltt.Model.PostModel
 
-class PublicPostAdapter(private val mContext: Context,
-                        private val mPost:List<PostModel>): RecyclerView.Adapter<PublicPostAdapter.ViewHolder>() {
+class PublicPostAdapter(
+    private val mContext: Context,
+    private val mPost: List<PostModel>
+) : RecyclerView.Adapter<PublicPostAdapter.ViewHolder>() {
 
-    inner class ViewHolder(@NonNull itemView: View):RecyclerView.ViewHolder(itemView){
+    inner class ViewHolder(@NonNull itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.postImage_public) as ImageView
         val playerView: PlayerView = itemView.findViewById(R.id.videoPlayer_public) as PlayerView
 
-        fun bind(list:PostModel){
-            if (list.iImage){
+        fun bind(list: PostModel) {
+            if (list.iImage) {
                 imageView.visibility = View.VISIBLE
                 playerView.visibility = View.GONE
                 Glide.with(mContext).load(list.image).into(imageView)
-            }else if(list.video){
+            } else if (list.video) {
                 imageView.visibility = View.GONE
                 playerView.visibility = View.VISIBLE
-                playVideo(playerView,list.videoId!!)
-            }else{
+                playVideo(playerView, list.videoId!!)
+            } else {
                 playerView.visibility = View.GONE
                 imageView.visibility = View.GONE
             }
@@ -48,7 +50,7 @@ class PublicPostAdapter(private val mContext: Context,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(mContext).inflate(R.layout.public_post_item,parent,false)
+        val view = LayoutInflater.from(mContext).inflate(R.layout.public_post_item, parent, false)
         return ViewHolder(view)
     }
 
@@ -57,19 +59,22 @@ class PublicPostAdapter(private val mContext: Context,
         holder.bind(mPost[position])
         holder.itemView.setOnClickListener {
 
-                    val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
-                    pref.putString("postId",mPost[position].postId)
-                    pref.apply()
-
-                    Navigation.findNavController(holder.itemView).navigate(R.id.action_publicPostFragement_to_fullPostView)
-
-        }
-        holder.playerView.setOnClickListener{
             val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
-            pref.putString("postId",mPost[position].postId)
+            pref.putString("postId", mPost[position].postId)
+            pref.putString("from","PublicPost")
             pref.apply()
 
-            Navigation.findNavController(holder.itemView).navigate(R.id.action_publicPostFragement_to_fullPostView)
+            Navigation.findNavController(holder.itemView)
+                .navigate(R.id.action_publicPostFragement_to_fullPostView)
+
+        }
+        holder.playerView.setOnClickListener {
+            val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+            pref.putString("postId", mPost[position].postId)
+            pref.apply()
+
+            Navigation.findNavController(holder.itemView)
+                .navigate(R.id.action_publicPostFragement_to_fullPostView)
         }
     }
 
@@ -77,11 +82,11 @@ class PublicPostAdapter(private val mContext: Context,
         return mPost.size
     }
 
-    private fun playVideo(videoView:PlayerView,videoUrl: String){
-        initPlayer(videoView,videoUrl)
+    private fun playVideo(videoView: PlayerView, videoUrl: String) {
+        initPlayer(videoView, videoUrl)
     }
 
-    private fun initPlayer(videoView:PlayerView,videoUrl: String) {
+    private fun initPlayer(videoView: PlayerView, videoUrl: String) {
         lateinit var simpleExoPlayer: SimpleExoPlayer
         lateinit var mediaSource: MediaSource
 
@@ -93,21 +98,23 @@ class PublicPostAdapter(private val mContext: Context,
         urlType.url = videoUrl
 
         simpleExoPlayer.seekTo(0)
-        when (urlType){
-            URLType.MP4 ->{
+        when (urlType) {
+            URLType.MP4 -> {
                 val datasourceFactory: DataSource.Factory = DefaultDataSourceFactory(
                     mContext,
-                    Util.getUserAgent(mContext,"")
+                    Util.getUserAgent(mContext, "")
                 )
                 mediaSource = ProgressiveMediaSource.Factory(datasourceFactory).createMediaSource(
                     MediaItem.fromUri(Uri.parse(urlType.url))
                 )
-            }else->{}
+            }
+
+            else -> {}
         }
 
         simpleExoPlayer.setMediaSource(mediaSource)
         simpleExoPlayer.prepare()
-        val playerListener = object : Player.Listener{
+        val playerListener = object : Player.Listener {
 
             override fun onRenderedFirstFrame() {
                 super.onRenderedFirstFrame()
@@ -119,7 +126,7 @@ class PublicPostAdapter(private val mContext: Context,
 
             override fun onPlayerError(error: PlaybackException) {
                 super.onPlayerError(error)
-                Toast.makeText(mContext,"Some Error Occurred", Toast.LENGTH_SHORT).show()
+                Toast.makeText(mContext, "Some Error Occurred", Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -127,7 +134,7 @@ class PublicPostAdapter(private val mContext: Context,
 
     }
 
-    enum class URLType(var url:String){
+    enum class URLType(var url: String) {
         MP4(""), HLS("")
     }
 

@@ -156,7 +156,7 @@ class PageDetailsActivity : AppCompatActivity() {
         linearLayoutManager.stackFromEnd = true
 
         postList = ArrayList()
-        postAdapter = PostAdapter(this,postList as ArrayList<PostModel>)
+        postAdapter = PostAdapter(this,postList as ArrayList<PostModel>,"Page")
         recyclerView.adapter = postAdapter
         loadPagePosts()
         totalFollowers()

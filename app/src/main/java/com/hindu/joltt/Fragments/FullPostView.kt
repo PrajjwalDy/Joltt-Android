@@ -26,6 +26,7 @@ class FullPostView : Fragment() {
 
     private lateinit var postId:String
     private lateinit var hasTag:String
+    private lateinit var from:String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,13 +39,14 @@ class FullPostView : Fragment() {
         if (pref != null){
             this.postId = pref.getString("postId","none")!!
             this.hasTag = pref.getString("hashtag","none")!!
+            this.from = pref.getString("from","none")!!
         }
         recyclerView = root.findViewById(R.id.fullPost_rv)
         recyclerView!!.setHasFixedSize(true)
         recyclerView!!.layoutManager = LinearLayoutManager(context)
 
         mPost = ArrayList()
-        postAdapter = context?.let { PostAdapter(it,mPost as ArrayList<PostModel>) }
+        postAdapter = context?.let { PostAdapter(it,mPost as ArrayList<PostModel>,from) }
         recyclerView?.adapter = postAdapter
 
         if (postId == "no"){

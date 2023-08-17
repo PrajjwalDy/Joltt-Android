@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -42,6 +43,7 @@ import kotlinx.android.synthetic.main.my_details_fragment.view.ll_about_profile
 import kotlinx.android.synthetic.main.my_details_fragment.view.ll_experience
 import kotlinx.android.synthetic.main.my_details_fragment.view.ll_interests
 import kotlinx.android.synthetic.main.my_details_fragment.view.ll_skills
+import kotlinx.android.synthetic.main.my_details_fragment.view.postBtn_btn_cv
 import kotlinx.android.synthetic.main.my_details_fragment.view.relation_txt
 import kotlinx.android.synthetic.main.my_details_fragment.view.skill_btn
 import kotlinx.android.synthetic.main.my_details_fragment.view.student_course
@@ -202,6 +204,13 @@ class MyDetailsFragment : Fragment() {
 
         }
 
+        root.postBtn_btn_cv.setOnClickListener {
+
+            Navigation.findNavController(root)
+                .navigate(R.id.action_myDetailsFragment_to_myPostsFragemt)
+
+        }
+
         return root
 
     }
@@ -221,13 +230,13 @@ class MyDetailsFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     val users = snapshot.getValue(UserModel::class.java)
-                    root.from_profile.text = users!!.place
-                    root.institutionName.text = users.college
-                    root.student_course.text= users.course
-                    root.branch_profile.text = users.branch
-                    root.year_profile.text = "Year: " + users.year
+                    root.from_profile.text = users?.place
+                    root.institutionName.text = users?.college
+                    root.student_course.text= users?.course
+                    root.branch_profile.text = users?.branch
+                    root.year_profile.text = "Year: " + users?.year
 
-                    if (users.male) {
+                    if (users?.male == true) {
                         root.genderImage_profile.setImageResource(R.drawable.male)
                         gender_txt.text = "Male"
                         if (users.single) {
@@ -240,7 +249,7 @@ class MyDetailsFragment : Fragment() {
                             root.RS_Image_profile.setImageResource(R.drawable.crush_male)
                             root.relation_txt.text = "Have a Crush"
                         }
-                    } else if (users.female) {
+                    } else if (users?.female == true) {
                         root.genderImage_profile.setImageResource(R.drawable.female)
                         gender_txt.text = "Female"
                         if (users.single) {

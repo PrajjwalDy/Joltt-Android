@@ -14,5 +14,11 @@ class PostModel {
     val page:Boolean = false
     val pageAdmin:String? = null
     val pageName:String? = null
+    val pubSkills:String? = null
+    val pubLocation:String? =null
+    val pubCollege:String? = null
+    val pubExperience:String? = null
+    val pubBranch:String? = null
+    val pubCourse:String? = null
     //val postTags: List<String>? = null
 }

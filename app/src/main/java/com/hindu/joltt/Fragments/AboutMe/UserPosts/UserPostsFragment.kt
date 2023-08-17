@@ -19,7 +19,6 @@ import com.hindu.joltt.Adapter.PostAdapter
 import com.hindu.joltt.Adapter.PostGridAdapter
 import com.hindu.joltt.Model.PostModel
 import kotlinx.android.synthetic.main.user_posts_fragment.view.postVertical_user
-import kotlinx.android.synthetic.main.user_posts_fragment.view.userPostRV_grid
 
 class UserPostsFragment : Fragment() {
 
@@ -43,60 +42,39 @@ class UserPostsFragment : Fragment() {
 
         val recyclerView: RecyclerView = root.findViewById(R.id.userPostsRV) as RecyclerView
         recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        val linearLayoutManager = LinearLayoutManager(context)
+        linearLayoutManager.reverseLayout = true
+        recyclerView.layoutManager = linearLayoutManager
+        linearLayoutManager.stackFromEnd = true
 
         postList = ArrayList()
-        postAdapter = context?.let { PostAdapter(it,postList as ArrayList<PostModel>) }
+        postAdapter = context?.let { PostAdapter(it,postList as ArrayList<PostModel>,"UsersPost") }
         recyclerView.adapter = postAdapter
 
-        //Posts in Grid View
-        val recyclerViewGrid: RecyclerView = root.findViewById(R.id.userPostRV_grid) as RecyclerView
-        recyclerViewGrid.setHasFixedSize(true)
-        val linearLayoutManagerGrid: LinearLayoutManager = GridLayoutManager(context,3)
-        recyclerViewGrid.layoutManager = linearLayoutManagerGrid
-
-        postList = ArrayList()
-        postGridAdapter = context?.let { PostGridAdapter(it,postList as ArrayList<PostModel>) }
-        recyclerViewGrid.adapter = postGridAdapter
         retrievePosts()
-
-        root.postVertical_user.setOnClickListener {
-            root.userPostRV_grid.visibility = View.GONE
-        }
 
         return root
     }
 
     private fun retrievePosts() {
-        val progressDialog = context?.let { Dialog(it) }
-        progressDialog!!.setContentView(R.layout.profile_dropdown_menu)
-        progressDialog.show()
         val dataRef = FirebaseDatabase.getInstance().reference.child("Post")
 
         dataRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
                     for (snapshot in snapshot.children){
-
                         val data = snapshot.getValue(PostModel::class.java)
-
                         if (data!!.publisher == profileId){
                             (postList as ArrayList<PostModel>).add(data)
-
-                            postAdapter!!.notifyDataSetChanged()
-                            postGridAdapter!!.notifyDataSetChanged()
                         }
-
                     }
-
+                postAdapter!!.notifyDataSetChanged()
             }
-
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
 
         })
-        progressDialog.dismiss()
     }
 
 

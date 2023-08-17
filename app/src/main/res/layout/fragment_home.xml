@@ -125,6 +125,8 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_height="match_parent" />
 
+        <!--EMPTY POST LINEAR LAYOUT-->
+
     </LinearLayout>
 
     <!--WELCOME SCREEN-->
@@ -189,353 +191,32 @@
 
 </RelativeLayout>
 
-    <!--EMPTY POST LINEAR LAYOUT-->
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/ll_empty_posts"
+    <LinearLayout
+        android:id="@+id/emptyListPost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="15dp"
-        android:layout_margin="10dp"
         android:layout_centerInParent="true"
-        app:cardBackgroundColor="@color/light_grey"
-        app:cardCornerRadius="12dp">
+        android:visibility="gone"
+        android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:lottie_rawRes="@raw/animation_search"
+            android:layout_gravity="center_horizontal"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"/>
+        
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/userName_emptyPost"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_toStartOf="@id/emptyAnimation"
-                android:fontFamily="@font/comfortaa"
-                android:text="Hello!, Someone Example"
-                android:textColor="@color/vivaMagenta"
-                android:textSize="16sp" />
-
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/emptyAnimation"
-                android:layout_alignParentEnd="true"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_margin="10dp"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/animation_planet" />
-
-            <TextView
-                android:id="@+id/welcomeTxt"
-                android:layout_below="@+id/userName_emptyPost"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/comfortaa"
-                android:layout_toStartOf="@id/emptyAnimation"
-                android:textSize="18sp"
-                android:textColor="@color/red"
-                android:layout_marginStart="10dp"
-                android:text="Welcome to Joltt"
-                />
-
-            <TextView
-                android:id="@+id/emptyPostText"
-                android:layout_below="@+id/welcomeTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/comfortaa"
-                android:layout_toStartOf="@id/emptyAnimation"
-                android:textSize="14sp"
-                android:textColor="@color/red"
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="10dp"
-                android:text="@string/empty_feed"
-                />
-
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/emptyPostText"
-                android:layout_margin="10dp"
-                app:cardCornerRadius="10dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:id="@+id/ll_confessionRoom_home"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_margin="10dp"
-                            android:orientation="vertical">
-
-                            <RelativeLayout
-                                android:layout_width="65dp"
-                                android:layout_height="65dp"
-                                android:layout_gravity="center_horizontal"
-                                android:background="@drawable/circular_items">
-
-                                <ImageView
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:layout_centerInParent="true"
-                                    android:layout_marginStart="10dp"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_marginEnd="10dp"
-                                    android:layout_marginBottom="10dp"
-                                    android:padding="2dp"
-                                    android:src="@drawable/diary" />
-                            </RelativeLayout>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:text="Confession"
-                                android:textColor="@color/red"
-                                android:fontFamily="@font/comfortaa"
-                                android:textSize="12sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/ll_post_home"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_margin="10dp"
-                            android:orientation="vertical">
-
-                            <RelativeLayout
-                                android:layout_width="65dp"
-                                android:layout_height="65dp"
-                                android:layout_gravity="center_horizontal"
-                                android:background="@drawable/circular_items">
-
-                                <ImageView
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:layout_centerInParent="true"
-                                    android:layout_marginStart="10dp"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_marginEnd="10dp"
-                                    android:layout_marginBottom="10dp"
-                                    android:padding="2dp"
-                                    android:src="@drawable/posts" />
-                            </RelativeLayout>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:text="Posts"
-                                android:textColor="@color/red"
-                                android:textSize="12sp"
-                                android:fontFamily="@font/comfortaa"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/ll_events_home"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_margin="10dp"
-                            android:orientation="vertical">
-
-                            <RelativeLayout
-                                android:layout_width="65dp"
-                                android:layout_height="65dp"
-                                android:layout_gravity="center_horizontal"
-                                android:background="@drawable/circular_items">
-
-                                <ImageView
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:layout_centerInParent="true"
-                                    android:layout_marginStart="10dp"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_marginEnd="10dp"
-                                    android:layout_marginBottom="10dp"
-                                    android:padding="2dp"
-                                    android:src="@drawable/community" />
-                            </RelativeLayout>
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:text="Community"
-                                android:fontFamily="@font/comfortaa"
-                                android:textColor="@color/red"
-                                android:textSize="12sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:id="@+id/ll_govt_schemes_home"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_margin="10dp"
-                            android:orientation="vertical">
-
-                            <RelativeLayout
-                                android:layout_width="65dp"
-                                android:layout_height="65dp"
-                                android:layout_gravity="center_horizontal"
-                                android:background="@drawable/circular_items">
-
-                                <ImageView
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:layout_centerInParent="true"
-                                    android:layout_marginStart="10dp"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_marginEnd="10dp"
-                                    android:layout_marginBottom="10dp"
-                                    android:padding="3dp"
-                                    android:src="@drawable/bank" />
-                            </RelativeLayout>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:text="Schemes"
-                                android:textColor="@color/red"
-                                android:textAlignment="center"
-                                android:fontFamily="@font/comfortaa"
-                                android:textSize="12sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/ll_pages_home"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_margin="10dp"
-                            android:orientation="vertical">
-
-                            <RelativeLayout
-                                android:layout_width="65dp"
-                                android:layout_height="65dp"
-                                android:layout_gravity="center_horizontal"
-                                android:background="@drawable/circular_items">
-
-                                <ImageView
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:layout_centerInParent="true"
-                                    android:layout_marginStart="10dp"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_marginEnd="10dp"
-                                    android:layout_marginBottom="10dp"
-                                    android:padding="3dp"
-                                    android:src="@drawable/pages" />
-                            </RelativeLayout>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:text="Pages"
-                                android:fontFamily="@font/comfortaa"
-                                android:textColor="@color/red"
-                                android:textAlignment="center"
-                                android:textSize="12sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/ll_clubs_home"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_margin="10dp"
-                            android:orientation="vertical">
-
-                            <RelativeLayout
-                                android:layout_width="65dp"
-                                android:layout_height="65dp"
-                                android:layout_gravity="center_horizontal"
-                                android:background="@drawable/circular_items">
-
-                                <ImageView
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:layout_centerInParent="true"
-                                    android:layout_marginStart="10dp"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_marginEnd="10dp"
-                                    android:layout_marginBottom="10dp"
-                                    android:padding="3dp"
-                                    android:src="@drawable/job_ico" />
-
-                            </RelativeLayout>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:text="Jobs"
-                                android:fontFamily="@font/comfortaa"
-                                android:textColor="@color/red"
-                                android:textSize="12sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-
-
-
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
+            android:text="Nothing quite matches up? Consider updating your profile, making friends, or dive into the Explore for more exciting features!"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:textAlignment="center"
+            android:fontFamily="@font/comfortaa"
+            android:textColor="@color/vivaMagenta"/>
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_text"
@@ -587,7 +268,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="18dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="18dp"
         android:backgroundTint="@color/red"
         android:clickable="true"
         android:focusable="true"
@@ -636,8 +320,8 @@
                         />
 
                     <ImageView
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:layout_marginStart="10dp"
                         android:src="@drawable/braininage" />
 

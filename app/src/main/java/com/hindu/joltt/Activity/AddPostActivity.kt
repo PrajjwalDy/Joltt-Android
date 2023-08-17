@@ -32,6 +32,7 @@ import com.google.firebase.storage.StorageTask
 import com.hindu.cunow.R
 import com.hindu.joltt.MainActivity
 import com.hindu.joltt.Model.JoltScoreModel
+import com.hindu.joltt.Model.UserModel
 import com.theartofdev.edmodo.cropper.CropImage
 import com.yalantis.ucrop.UCrop
 import kotlinx.android.synthetic.main.activity_add_post.caption_image
@@ -51,6 +52,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.lang.ref.WeakReference
 import java.util.UUID
+import kotlin.math.exp
 
 class AddPostActivity : AppCompatActivity() {
     private var privacy = "public"
@@ -89,9 +91,9 @@ class AddPostActivity : AppCompatActivity() {
 
         shareImage_btn.setOnClickListener {
             if (imageUri == null) {
-                uploadOnlyText()
+                userInfoUploadText()
             } else {
-                uploadImage()
+                userInfoUploadImage()
             }
 
         }
@@ -187,7 +189,7 @@ class AddPostActivity : AppCompatActivity() {
     }
 
     //UPLOAD IMAGE
-    private fun uploadImage() {
+    private fun uploadImage(skills:String, location:String,college:String,experience:String,branch:String,course:String) {
         val progressDialog = Dialog(this)
         progressDialog.setContentView(R.layout.porgress_dialog)
         progressDialog.show()
@@ -224,6 +226,12 @@ class AddPostActivity : AppCompatActivity() {
                     postMap["iImage"] = true
                     postMap["video"] = false
                     postMap["page"] = false
+                    postMap["pubSkill"] = skills
+                    postMap["pubExperience"] = experience
+                    postMap["pubLocation"] = location
+                    postMap["pubCollege"] = college
+                    postMap["pubCourse"] = course
+                    postMap["pubBranch"] = branch
                     postMap["public"] = privacy == "public"
 
                     ref.child(postId).updateChildren(postMap)
@@ -238,18 +246,100 @@ class AddPostActivity : AppCompatActivity() {
                     Toast.makeText(this, "Image shared successfully", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this@AddPostActivity, MainActivity::class.java))
                     finish()
-                    FirebaseAuth.getInstance().currentUser!!.uid.let { it1 ->
-                        FirebaseDatabase.getInstance().reference
-                            .child("Users").child(it1.toString())
-                            .child("MyPosts").child(postId)
-                            .setValue(true)
-                    }
 
                     progressDialog.dismiss()
                 }
 
             }
 
+    }
+
+    private fun userInfoUploadImage(){
+        val firebaseDatabase = FirebaseDatabase.getInstance().reference.child("Users")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+        firebaseDatabase.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                if (snapshot.exists()){
+                    val data = snapshot.getValue(UserModel::class.java)
+
+                    val college = data?.college
+                    val location = data?.place
+                    val course = data?.course
+                    val branch = data?.branch
+                    val skills = data?.skills
+                    val experience = data?.experience
+
+                    uploadImage(skills!!,location!!,college!!,experience!!,course!!,branch!!)
+
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+
+    //UPLOAD ONLY TEXT
+    private fun uploadOnlyText(skills:String, location:String,college:String,experience:String,branch:String,course:String) {
+        if (caption_image.text.isEmpty()) {
+            Toast.makeText(this, "Please Write something", Toast.LENGTH_SHORT).show()
+        } else {
+            val dataRef = FirebaseDatabase.getInstance().reference.child("Post")
+            val postId = dataRef.push().key
+            val dataMap = HashMap<String, Any>()
+
+            dataMap["postId"] = postId!!
+            dataMap["caption"] = caption_image.text.toString()
+            dataMap["publisher"] = FirebaseAuth.getInstance().currentUser!!.uid
+            dataMap["iImage"] = false
+            dataMap["video"] = false
+            dataMap["page"] = false
+            dataMap["pubSkill"] = skills
+            dataMap["pubExperience"] = experience
+            dataMap["pubLocation"] = location
+            dataMap["pubCollege"] = college
+            dataMap["pubCourse"] = course
+            dataMap["pubBranch"] = branch
+            dataMap["public"] = privacy == "public"
+            dataRef.child(postId).updateChildren(dataMap)
+            buildHasTag(postId)
+
+            getJoltScore(2)
+
+            Toast.makeText(this, "Post added Successfully", Toast.LENGTH_SHORT).show()
+            caption_image.text.clear()
+        }
+    }
+    private fun userInfoUploadText(){
+        val firebaseDatabase = FirebaseDatabase.getInstance().reference.child("Users")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+        firebaseDatabase.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                if (snapshot.exists()){
+                    val data = snapshot.getValue(UserModel::class.java)
+
+                    val college = data?.college
+                    val location = data?.place
+                    val course = data?.course
+                    val branch = data?.branch
+                    val skills = data?.skills
+                    val experience = data?.experience
+
+                    uploadOnlyText(skills!!,location!!,college!!, experience!!,branch!!,course!!)
+
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -287,31 +377,6 @@ class AddPostActivity : AppCompatActivity() {
 
     }
 
-    //UPLOAD ONLY TEXT
-    private fun uploadOnlyText() {
-        if (addText_ET.text.isEmpty()) {
-            Toast.makeText(this, "Please Write something", Toast.LENGTH_SHORT).show()
-        } else {
-            val dataRef = FirebaseDatabase.getInstance().reference.child("Post")
-            val postId = dataRef.push().key
-            val dataMap = HashMap<String, Any>()
-
-            dataMap["postId"] = postId!!
-            dataMap["caption"] = caption_image.text.toString()
-            dataMap["publisher"] = FirebaseAuth.getInstance().currentUser!!.uid
-            dataMap["iImage"] = false
-            dataMap["video"] = false
-            dataMap["page"] = false
-            dataMap["public"] = privacy == "public"
-            dataRef.child(postId).updateChildren(dataMap)
-            buildHasTag(postId)
-
-            getJoltScore(2)
-
-            Toast.makeText(this, "Post added Successfully", Toast.LENGTH_SHORT).show()
-            caption_image.text.clear()
-        }
-    }
 
     //IMAGE CROPPING FUNCTION
     private fun launchImageCrop(uri: Uri) {
@@ -466,7 +531,6 @@ class AddPostActivity : AppCompatActivity() {
         val pointMap = HashMap<String, Any>()
         pointMap["joltScore"] = newJoltScore
         databaseRef.child(firebaseUser).updateChildren(pointMap)
-        Toast.makeText(this, "Code reached here", Toast.LENGTH_SHORT).show()
     }
 
 }

@@ -499,13 +499,13 @@ class UserProfile : Fragment() {
                     if (data!!.private) {
                         isCurrentUserInList { isInList->
                             if (isInList){
-                                usersPostRecyclerView.visibility = View.VISIBLE
+                                othersPostLayout.visibility = View.VISIBLE
                                 user_socialLinks_RL.visibility = View.VISIBLE
                                 userMenu.visibility = View.VISIBLE
                                 retrievePost()
                             }else{
                                 privateAC_LL.visibility = View.VISIBLE
-                                usersPostRecyclerView.visibility = View.GONE
+                                othersPostLayout.visibility = View.GONE
                                 user_socialLinks_RL.visibility = View.GONE
                                 userMenu.visibility = View.GONE
                             }

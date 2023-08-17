@@ -77,7 +77,8 @@ class SignUpActivity : AppCompatActivity() {
                             saveData(fullName,uid, phone, password, progressDialog)
                         }else{
                             val message = task.exception.toString()
-                            Toast.makeText(this, "Some Error Occurred: $message", Toast.LENGTH_LONG).show()
+                            val textMessage = message.removePrefix("com.google.firebase.auth.Firebase")
+                            Toast.makeText(this, textMessage, Toast.LENGTH_LONG).show()
                             mAuth.signOut()
                             progressDialog.dismiss()
                         }
@@ -134,7 +135,8 @@ class SignUpActivity : AppCompatActivity() {
 
             }else{
                 val message = task.exception.toString()
-                Toast.makeText(this, "Some Error Occurred: $message", Toast.LENGTH_LONG).show()
+                val textMessage = message.removePrefix("com.google.firebase.auth.Firebase")
+                Toast.makeText(this, textMessage, Toast.LENGTH_LONG).show()
                 FirebaseAuth.getInstance().signOut()
                 progressDialog.dismiss()
             }

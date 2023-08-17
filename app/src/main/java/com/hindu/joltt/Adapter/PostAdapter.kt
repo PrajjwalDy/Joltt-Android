@@ -15,6 +15,7 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.cardview.widget.CardView
 import androidx.navigation.Navigation
@@ -44,6 +45,7 @@ import com.hindu.joltt.Model.NotificationModel
 import com.hindu.joltt.Model.PageModel
 import com.hindu.joltt.Model.PostModel
 import com.hindu.joltt.Model.UserModel
+import com.uk.tastytoasty.TastyToasty
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_comment.*
 import kotlinx.android.synthetic.main.delete_confirm_layout.cancel_delete
@@ -56,7 +58,7 @@ import java.util.concurrent.TimeUnit
 
 class PostAdapter (private val mContext: Context,
                    private val mPost:List<PostModel>,
-                   ):RecyclerView.Adapter<PostAdapter.ViewHolder>()
+                   private val from:String):RecyclerView.Adapter<PostAdapter.ViewHolder>()
 {
 
     private var posts: List<PostModel> = emptyList()
@@ -107,11 +109,20 @@ class PostAdapter (private val mContext: Context,
                 intent.putExtra("pageAdmin",mPost[position].pageAdmin)
                 mContext.startActivity(intent)
             }else{
-                val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
-                pref.putString("uid",post.publisher)
-                pref.apply()
+                if (from =="PublicPost"){
+                    val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+                    pref.putString("uid",post.publisher)
+                    pref.apply()
 
-                Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_home_to_userProfile)
+                    Navigation.findNavController(holder.itemView).navigate(R.id.action_fullPostView_to_userProfile)
+                }else{
+                    val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+                    pref.putString("uid",post.publisher)
+                    pref.apply()
+
+                    Navigation.findNavController(holder.itemView).navigate(R.id.action_navigation_home_to_userProfile)
+                }
+
             }
         }
 
@@ -167,6 +178,7 @@ class PostAdapter (private val mContext: Context,
                     .child("SavedPosts")
                     .child(post.postId!!)
                     .setValue(true)
+                TastyToasty.makeText(mContext,"Post Saved",TastyToasty.SHORT,R.drawable.ic_saved,R.color.vivaMagenta,R.color.white,false).show()
                 alertDialog.dismiss()
             }
 

@@ -1,15 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.AboutMe.Posts.MyPostsFragemt">
+    tools:context="com.hindu.joltt.Fragments.AboutMe.Posts.MyPostsFragemt">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar_myPosts"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/amiko"
+                android:text="My Posts"
+                android:textColor="@color/red"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
+        android:id="@+id/option_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/appBar_myPosts"
         android:orientation="horizontal">
 
         <ImageView
@@ -27,7 +53,8 @@
             android:layout_height="20dp"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:src="@drawable/grid" />
+            android:src="@drawable/grid"
+            app:tint="@color/red" />
 
     </LinearLayout>
 
@@ -35,13 +62,31 @@
         android:id="@+id/myPostsRV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/option_ll"
         android:layout_marginTop="5dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myPostsRV_grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/option_ll"
         android:layout_marginTop="5dp"
         android:visibility="gone" />
 
-</LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_savedPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="18dp"
+        android:backgroundTint="@color/red"
+        android:clickable="true"
+        android:focusable="true"
+        app:srcCompat="@drawable/ic_saved"
+        app:tint="@android:color/white" />
+
+</RelativeLayout>

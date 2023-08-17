@@ -57,14 +57,23 @@ class NotificationsFragment : Fragment() {
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        notificationsViewModel.notificationViewModel.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            initView(root)
-            notificationAdapter = context?.let { it1-> com.hindu.joltt.Adapter.NotificationAdapter(it1,it) }
-            recyclerView!!.adapter = notificationAdapter
-            notificationAdapter!!.notifyDataSetChanged()
-            CoroutineScope(Dispatchers.IO).launch {
-                launch { markAllAsRead() }
+        notificationsViewModel.notificationViewModel.observe(viewLifecycleOwner, androidx.lifecycle.Observer {notificationList->
+
+            if (notificationList.isNullOrEmpty()){
+                noNotificationLayout.visibility = View.VISIBLE
+                notificationRecycler.visibility= View.GONE
+            }else{
+                noNotificationLayout.visibility = View.GONE
+                notificationRecycler.visibility= View.VISIBLE
+                initView(root)
+                notificationAdapter = context?.let { it1-> com.hindu.joltt.Adapter.NotificationAdapter(it1,notificationList) }
+                recyclerView!!.adapter = notificationAdapter
+                notificationAdapter!!.notifyDataSetChanged()
+                CoroutineScope(Dispatchers.IO).launch {
+                    launch { markAllAsRead() }
+                }
             }
+
         })
 
         root.followRequest.setOnClickListener {
@@ -129,13 +138,7 @@ class NotificationsFragment : Fragment() {
                     val nData = snapshot.getValue(NotificationModel::class.java)
                     notificationList?.add(nData!!)
                 }
-                if (notificationList.isNullOrEmpty()){
-                    noNotificationLayout.visibility = View.VISIBLE
-                    notificationRecycler.visibility= View.GONE
-                }else{
-                    noNotificationLayout.visibility = View.VISIBLE
-                    notificationRecycler.visibility= View.GONE
-                }
+
 
             }
 

@@ -42,7 +42,7 @@ class MySavedFragment : Fragment() {
 
         viewModel.postModel!!.observe(viewLifecycleOwner, Observer {
             initView(root)
-            postAdapter = context?.let { it1-> PostAdapter(it1,it) }
+            postAdapter = context?.let { it1-> PostAdapter(it1,it,"MySaved") }
             recyclerView!!.adapter = postAdapter
             postAdapter!!.notifyDataSetChanged()
 
