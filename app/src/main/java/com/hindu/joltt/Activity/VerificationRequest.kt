@@ -43,6 +43,11 @@ class VerificationRequest : AppCompatActivity() {
                 .start(this@VerificationRequest)
         }
 
+        proof_txt.setOnClickListener {
+            CropImage.activity()
+                .start(this@VerificationRequest)
+        }
+
         requester_verification.setOnClickListener {
             updateProfileImage()
         }
@@ -73,7 +78,7 @@ class VerificationRequest : AppCompatActivity() {
 
     private fun updateProfileImage() {
         if (imageUri == null) {
-            Toast.makeText(this, "You haven't selected any picture", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "You haven't selected any proof", Toast.LENGTH_SHORT).show()
             //Snackbar.make(this@EditPr,"Update successful", Snackbar.LENGTH_SHORT).show()
         } else {
             val progressDialog = Dialog(this)

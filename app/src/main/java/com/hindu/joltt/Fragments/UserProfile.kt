@@ -125,7 +125,7 @@ class UserProfile : Fragment() {
         recyclerView!!.layoutManager = layoutManager
 
         mPost = ArrayList()
-        postAdapter = context?.let { MyPostAdapter(it,mPost as ArrayList<PostModel>) }
+        postAdapter = context?.let { MyPostAdapter(it,mPost as ArrayList<PostModel>,"UserProfile") }
         recyclerView?.adapter = postAdapter
         postAdapter!!.notifyDataSetChanged()
 

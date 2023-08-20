@@ -290,6 +290,7 @@ class HomeFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.hasChild(FirebaseAuth.getInstance().currentUser!!.uid)) {
                     welcome_screen?.visibility = View.VISIBLE
+                    postLayout_ll?.visibility = View.GONE
                 } else {
                     welcome_screen?.visibility = View.GONE
                     postLayout_ll?.visibility = View.VISIBLE
@@ -317,11 +318,11 @@ class HomeFragment : Fragment() {
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    developerMessage_CV.visibility = View.VISIBLE
+                    developerMessage_CV?.visibility = View.VISIBLE
                     val data = snapshot.getValue(DevMessageModel::class.java)
-                    dev_message_tv.text = data!!.message
+                    dev_message_tv?.text = data!!.message
                 } else {
-                    developerMessage_CV.visibility = View.GONE
+                    developerMessage_CV?.visibility = View.GONE
                 }
             }
 

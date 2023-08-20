@@ -14,7 +14,7 @@ import com.hindu.joltt.Model.AbroadModel
 
 class AbroadAdapter(
     private val mContext: Context,
-    private val mList: MutableList<AbroadModel>
+    private val mList: List<AbroadModel>
 ) : RecyclerView.Adapter<AbroadAdapter.ViewHolder>() {
 
     inner class ViewHolder(@NonNull itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -39,10 +39,6 @@ class AbroadAdapter(
         }
     }
 
-    fun setData(newData: List<AbroadModel>) {
-        mList.clear()
-        mList.addAll(newData)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(mContext).inflate(R.layout.abroad_item_layout, parent, false)

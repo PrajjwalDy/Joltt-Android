@@ -26,7 +26,8 @@ import com.hindu.joltt.Model.PostModel
 
 class MyPostAdapter(
     private val mContext: Context,
-    private val mPost: List<PostModel>
+    private val mPost: List<PostModel>,
+    private val from:String
 ) : RecyclerView.Adapter<MyPostAdapter.ViewHolder>() {
 
 
@@ -63,13 +64,23 @@ class MyPostAdapter(
 
                 itemView.setOnClickListener {
 
-                    val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
-                    pref.putString("postId",list.postId)
-                    pref.putString("from","ProfileFrag")
-                    pref.apply()
+                    if (from == "UserProfile"){
+                        val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+                        pref.putString("postId",list.postId)
+                        pref.putString("from","ProfileFrag")
+                        pref.apply()
 
-                    Navigation.findNavController(itemView)
-                        .navigate(R.id.action_navigation_profile_to_fullPostView)
+                        Navigation.findNavController(itemView)
+                            .navigate(R.id.action_userProfile_to_fullPostView)
+                    }else{
+                        val pref = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit()
+                        pref.putString("postId",list.postId)
+                        pref.putString("from","ProfileFrag")
+                        pref.apply()
+
+                        Navigation.findNavController(itemView)
+                            .navigate(R.id.action_navigation_profile_to_fullPostView)
+                    }
 
                 }
 

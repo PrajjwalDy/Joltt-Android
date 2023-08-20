@@ -95,6 +95,7 @@ class CommunityRepliesAdapter(private val mContext:Context,
             dialogView.deleteConfession.setOnClickListener {
                 FirebaseDatabase.getInstance().reference.child("Community")
                     .child(cList.communityId!!)
+                    .child("replies")
                     .child(cList.replyId!!)
                     .removeValue()
                 alertDialog.dismiss()

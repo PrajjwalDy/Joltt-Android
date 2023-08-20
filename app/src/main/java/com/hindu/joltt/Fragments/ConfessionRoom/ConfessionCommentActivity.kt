@@ -91,6 +91,7 @@ class ConfessionCommentActivity : AppCompatActivity() {
             val dataMap = HashMap<String,Any>()
             dataMap["cCommentId"] = commentId!!
             dataMap["cComment"] = addcCommentEditText.text.toString()
+            dataMap["confessionId"] = confessionId
             dataMap["cPublisher"] = firebaseUser!!.uid
 
             dataRef.child(commentId).updateChildren(dataMap)

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,25 +42,13 @@ class AbroadFragment : Fragment() {
         _binding = FragmentAbroadBinding.inflate(inflater,container,false)
         val root:View = binding.root
 
-       /* getData()
+        viewModel.abroadView.observe(viewLifecycleOwner, Observer {
+            initView(root)
+            abroadAdapter = context?.let { it1-> AbroadAdapter(it1,it) }
+            recyclerView!!.adapter = abroadAdapter
+            abroadAdapter!!.notifyDataSetChanged()
+        })
 
-        if (filteredPosts.isEmpty()){
-            viewModel.abroadView.observe(viewLifecycleOwner, Observer {
-                initView(root)
-                abroadAdapter = context?.let { it1->AbroadAdapter(it1, it as MutableList<AbroadModel>) }
-                recyclerView!!.adapter = abroadAdapter
-                abroadAdapter!!.notifyDataSetChanged()
-            })
-        }else{
-
-        }*/
-
-        initView(root)
-        abroadModel = ArrayList()
-        abroadAdapter = AbroadAdapter(requireContext(),abroadModel!!)
-        recyclerView!!.adapter = abroadAdapter
-        abroadAdapter!!.notifyDataSetChanged()
-        getData()
 
 
 
@@ -85,7 +74,7 @@ class AbroadFragment : Fragment() {
 
     }
 
-    private fun getData()
+   /* private fun getData()
     {
         // Step 1: Retrieve the user's interests from Firebase
         val currentUser = FirebaseAuth.getInstance().currentUser
@@ -141,7 +130,7 @@ class AbroadFragment : Fragment() {
                 Toast.makeText(context,"Code Reached here"+error.message, Toast.LENGTH_LONG).show()
             }
         })
-    }
+    }*/
 
 
 }

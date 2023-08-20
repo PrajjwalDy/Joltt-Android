@@ -59,7 +59,7 @@ class ConfessionCommentAdapter(private val mContext:Context,
                 dialogView.deleteConfession.visibility = View.GONE
             }
             dialogView.deleteConfession.setOnClickListener {
-                FirebaseDatabase.getInstance().reference.child("ConfessionComment")
+                FirebaseDatabase.getInstance().reference.child("ConfessionComments")
                     .child(cList.confessionId!!)
                     .child(cList.cCommentId!!)
                     .removeValue()

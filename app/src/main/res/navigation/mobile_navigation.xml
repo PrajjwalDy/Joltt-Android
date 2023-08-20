@@ -194,6 +194,9 @@
         <action
             android:id="@+id/action_userProfile_to_showUserFragment"
             app:destination="@id/showUserFragment" />
+        <action
+            android:id="@+id/action_userProfile_to_fullPostView"
+            app:destination="@id/fullPostView" />
     </fragment>
 
     <fragment
