@@ -4,9 +4,13 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
@@ -17,18 +21,41 @@ import com.google.firebase.storage.StorageTask
 import com.google.firebase.storage.UploadTask
 import com.hindu.cunow.R
 import com.theartofdev.edmodo.cropper.CropImage
-import kotlinx.android.synthetic.main.activity_edit_profile.change_ProfileImage
-import kotlinx.android.synthetic.main.activity_help.*
-import kotlinx.android.synthetic.main.activity_verification_request.*
 
 class VerificationRequest : AppCompatActivity() {
 
     private var myUrl = ""
     private var imageUri: Uri? = null
     private var storageProfileImageRef: StorageReference? = null
+
+    private lateinit var Verification_Back:ImageView
+    private lateinit var id_proofImage:ImageView
+    private lateinit var proof_txt:TextView
+
+    private lateinit var requester_verification:AppCompatButton
+
+    private lateinit var edit_TextAddress:EditText
+    private lateinit var editTextAdhaar:EditText
+    private lateinit var editTextUID:EditText
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_verification_request)
+
+        Verification_Back = findViewById(R.id.Verification_Back)
+        id_proofImage = findViewById(R.id.id_proofImage)
+        proof_txt = findViewById(R.id.proof_txt)
+
+        requester_verification = findViewById(R.id.requester_verification)
+
+        edit_TextAddress = findViewById(R.id.edit_TextAddress)
+        editTextAdhaar = findViewById(R.id.editTextAdhaar)
+        editTextUID = findViewById(R.id.editTextUID)
+
+
+
+
 
         storageProfileImageRef = FirebaseStorage.getInstance()
             .reference
@@ -141,11 +168,11 @@ class VerificationRequest : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
-            val result = CropImage.getActivityResult(data)
-            imageUri = result.uri
-            id_proofImage.setImageURI(imageUri)
-        }
+            if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
+                val result = CropImage.getActivityResult(data)
+                imageUri = result.uri
+                id_proofImage.setImageURI(imageUri)
+            }
     }
 
 

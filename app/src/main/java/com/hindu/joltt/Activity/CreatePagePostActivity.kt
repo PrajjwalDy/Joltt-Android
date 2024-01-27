@@ -5,8 +5,11 @@ import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
@@ -21,8 +24,6 @@ import com.google.firebase.storage.UploadTask
 import com.hindu.cunow.R
 import com.hindu.joltt.MainActivity
 import com.theartofdev.edmodo.cropper.CropImage
-import kotlinx.android.synthetic.main.activity_add_post.*
-import kotlinx.android.synthetic.main.activity_create_page_post.*
 
 class CreatePagePostActivity : AppCompatActivity() {
 
@@ -33,9 +34,19 @@ class CreatePagePostActivity : AppCompatActivity() {
     private var pageName = ""
     private var imageUri : Uri? = null
     private var storagePostImageRef: StorageReference? = null
+
+    private lateinit var sharePageImage_btn:AppCompatButton
+    private lateinit var caption_PageImage:EditText
+    private lateinit var pageImage_preview:ImageView
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_page_post)
+
+        sharePageImage_btn = findViewById(R.id.sharePageImage_btn)
+        caption_PageImage = findViewById(R.id.caption_PageImage)
+        pageImage_preview = findViewById(R.id.pageImage_preview)
 
         val intent = intent
         pageId = intent.getStringExtra("Id").toString()

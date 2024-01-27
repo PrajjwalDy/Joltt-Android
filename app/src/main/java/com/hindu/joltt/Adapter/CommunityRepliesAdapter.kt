@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
@@ -21,8 +22,6 @@ import com.hindu.joltt.Activity.ReportPostActivity
 import com.hindu.joltt.Model.CommunityReplyModel
 import com.hindu.joltt.Model.UserModel
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.more_option_confession.view.deleteConfession
-import kotlinx.android.synthetic.main.more_option_confession.view.reportConfession
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -82,7 +81,10 @@ class CommunityRepliesAdapter(private val mContext:Context,
 
             val alertDialog = dialogBuilder.show()
 
-            dialogView.reportConfession.setOnClickListener {
+            val reportConfession = dialogView.findViewById<LinearLayout>(R.id.reportConfession)
+            val deleteConfession = dialogView.findViewById<LinearLayout>(R.id.deleteConfession)
+
+            reportConfession.setOnClickListener {
                 val intent = Intent(mContext, ReportPostActivity::class.java)
                 intent.putExtra("postId",mReplies[position].replyId+"+communityRepliesId")
                 mContext.startActivity(intent)
@@ -90,9 +92,9 @@ class CommunityRepliesAdapter(private val mContext:Context,
             }
 
             if (cList.replierId != FirebaseAuth.getInstance().currentUser!!.uid){
-                dialogView.deleteConfession.visibility = View.GONE
+                deleteConfession.visibility = View.GONE
             }
-            dialogView.deleteConfession.setOnClickListener {
+            deleteConfession.setOnClickListener {
                 FirebaseDatabase.getInstance().reference.child("Community")
                     .child(cList.communityId!!)
                     .child("replies")

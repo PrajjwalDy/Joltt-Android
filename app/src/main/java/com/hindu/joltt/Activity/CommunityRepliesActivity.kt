@@ -2,9 +2,13 @@ package com.hindu.joltt.Activity
 
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -17,12 +21,7 @@ import com.hindu.cunow.R
 import com.hindu.joltt.Adapter.CommunityRepliesAdapter
 import com.hindu.joltt.Model.CommunityReplyModel
 import com.hindu.joltt.Model.UserModel
-import kotlinx.android.synthetic.main.activity_community_replies.addReplyButton
-import kotlinx.android.synthetic.main.activity_community_replies.addReplyEditText
-import kotlinx.android.synthetic.main.activity_community_replies.currentUserProfileReply
-import kotlinx.android.synthetic.main.activity_community_replies.noReplyText
-import kotlinx.android.synthetic.main.activity_community_replies.replies_RV
-import kotlinx.android.synthetic.main.activity_community_replies.reply_empty_animation
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,9 +31,33 @@ class CommunityRepliesActivity : AppCompatActivity() {
     private var firebaseUser: FirebaseUser? = null
     private var communityRepliesList:MutableList<CommunityReplyModel>? = null
     private var communityRepliesAdapterAdapter: CommunityRepliesAdapter? = null
+
+
+
+    //OBJECTS
+
+    private lateinit var reply_empty_animation:LottieAnimationView
+    private lateinit var addReplyButton:ImageView
+    private lateinit var addReplyEditText:EditText
+    private lateinit var noReplyText:TextView
+    private lateinit var currentUserProfileReply:CircleImageView
+    private lateinit var replies_RV:RecyclerView
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_community_replies)
+
+
+        //OBJECTS DECLARATIONS
+        replies_RV = findViewById(R.id.replies_RV)
+        currentUserProfileReply = findViewById(R.id.currentUserProfileReply)
+        noReplyText = findViewById(R.id.noReplyText)
+        addReplyEditText = findViewById(R.id.addReplyEditText)
+        reply_empty_animation = findViewById(R.id.reply_empty_animation)
+        addReplyButton = findViewById(R.id.addReplyButton)
+
 
         val intent = intent
         id = intent.getStringExtra("communityId").toString()

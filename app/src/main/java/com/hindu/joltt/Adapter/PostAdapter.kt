@@ -13,9 +13,9 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.cardview.widget.CardView
 import androidx.navigation.Navigation
@@ -47,10 +47,6 @@ import com.hindu.joltt.Model.PostModel
 import com.hindu.joltt.Model.UserModel
 import com.uk.tastytoasty.TastyToasty
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.activity_comment.*
-import kotlinx.android.synthetic.main.delete_confirm_layout.cancel_delete
-import kotlinx.android.synthetic.main.delete_confirm_layout.confirmDelete
-import kotlinx.android.synthetic.main.more_option_dialogbox.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -63,10 +59,6 @@ class PostAdapter (private val mContext: Context,
 
     private var posts: List<PostModel> = emptyList()
 
-    fun setPosts(filteredPosts: List<PostModel>) {
-        posts = filteredPosts
-        notifyDataSetChanged()
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(mContext).inflate(R.layout.post_layout,parent,false)
@@ -168,10 +160,14 @@ class PostAdapter (private val mContext: Context,
                 .setView(dialogView)
                 .setTitle("Options")
 
+            val savePost = dialogView.findViewById<LinearLayout>(R.id.savePost)
+            val deletePost = dialogView.findViewById<LinearLayout>(R.id.deletePost)
+            val reportPost = dialogView.findViewById<LinearLayout>(R.id.reportPost)
+
 
             val alertDialog = dialogBuilder.show()
 
-            dialogView.savePost.setOnClickListener {
+            savePost.setOnClickListener {
                 FirebaseDatabase.getInstance().reference
                     .child("Users")
                     .child(FirebaseAuth.getInstance().currentUser!!.uid)
@@ -183,10 +179,10 @@ class PostAdapter (private val mContext: Context,
             }
 
             if (post.publisher != FirebaseAuth.getInstance().currentUser!!.uid){
-                dialogView.deletePost.visibility = View.GONE
+                deletePost.visibility = View.GONE
             }
 
-            dialogView.deletePost.setOnClickListener {
+            deletePost.setOnClickListener {
                 val confirmView = LayoutInflater.from(mContext).inflate(R.layout.delete_confirm_layout, null)
                 confirmView.startAnimation(popUp)
                 val buildDialog = AlertDialog.Builder(mContext)
@@ -195,7 +191,10 @@ class PostAdapter (private val mContext: Context,
 
                 val confDialog = buildDialog.show()
 
-                confDialog.confirmDelete.setOnClickListener {
+                val confirmDelete = confDialog.findViewById<TextView>(R.id.confirmDelete)
+                val cancleDelete = confDialog.findViewById<TextView>(R.id.cancel_delete)
+
+                confirmDelete.setOnClickListener {
                     FirebaseDatabase.getInstance().reference.child("Post")
                         .child(post.postId!!)
                         .removeValue()
@@ -205,14 +204,14 @@ class PostAdapter (private val mContext: Context,
                     alertDialog.dismiss()
                 }
 
-                confDialog.cancel_delete.setOnClickListener {
+                cancleDelete.setOnClickListener {
                     confDialog.dismiss()
                     alertDialog.dismiss()
                 }
 
             }
 
-            dialogView.reportPost.setOnClickListener {
+            reportPost.setOnClickListener {
                 val commentIntent = Intent(mContext, ReportPostActivity::class.java)
                 commentIntent.putExtra("postId",post.postId)
                 mContext.startActivity(commentIntent)

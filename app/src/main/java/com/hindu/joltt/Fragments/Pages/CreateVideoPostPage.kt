@@ -8,8 +8,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.exoplayer2.DefaultRenderersFactory
@@ -18,6 +21,7 @@ import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
+import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
@@ -26,12 +30,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.hindu.cunow.R
 import com.hindu.joltt.MainActivity
-import kotlinx.android.synthetic.main.activity_create_video_post_page.captionVideo_page
-import kotlinx.android.synthetic.main.activity_create_video_post_page.changeVideo_page
-import kotlinx.android.synthetic.main.activity_create_video_post_page.uploadVideo_page
-import kotlinx.android.synthetic.main.activity_create_video_post_page.videoPlayer_page
-import kotlinx.android.synthetic.main.video_upload_dialogbox.view.pickGallery
-import kotlinx.android.synthetic.main.video_upload_dialogbox.view.recordVideo
 
 class CreateVideoPostPage : AppCompatActivity() {
 
@@ -52,9 +50,21 @@ class CreateVideoPostPage : AppCompatActivity() {
     private var videoUri: Uri? = null
     private lateinit var player: SimpleExoPlayer
 
+    private lateinit var uploadVideo_page:AppCompatButton
+    private lateinit var changeVideo_page:AppCompatButton
+    private lateinit var videoPlayer_page:PlayerView
+
+    private lateinit var captionVideo_page:EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_video_post_page)
+
+        uploadVideo_page = findViewById(R.id.uploadVideo_page)
+        changeVideo_page = findViewById(R.id.changeVideo_page)
+        videoPlayer_page = findViewById(R.id.videoPlayer_page)
+        captionVideo_page = findViewById(R.id.captionVideo_page)
+
 
         val intent = intent
         pageId = intent.getStringExtra("pageId").toString()
@@ -106,11 +116,14 @@ class CreateVideoPostPage : AppCompatActivity() {
 
         val alertDialog = dialogBuilder.show()
 
-        dialogView.pickGallery.setOnClickListener {
+        val pickGallery = dialogView.findViewById<LinearLayout>(R.id.pickGallery)
+        val recordVideo = dialogView.findViewById<LinearLayout>(R.id.recordVideo)
+
+        pickGallery.setOnClickListener {
             videoPickGallery()
             alertDialog.dismiss()
         }
-        dialogView.recordVideo.setOnClickListener {
+        recordVideo.setOnClickListener {
             alertDialog.dismiss()
             if (!checkCameraPermission()){
                 requestCameraPermission()

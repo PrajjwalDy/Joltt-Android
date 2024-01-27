@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -13,8 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.FragmentCoursesBinding
 import com.hindu.joltt.Adapter.CourseAdapter
-import kotlinx.android.synthetic.main.fragment_courses.view.courseBack
-import kotlinx.android.synthetic.main.fragment_courses.view.courseTxt
 
 class CoursesFragment : Fragment() {
     var recyclerView: RecyclerView? = null
@@ -22,6 +22,9 @@ class CoursesFragment : Fragment() {
     private lateinit var viewModel: CoursesViewModel
     private var _binding:FragmentCoursesBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var courseBack:ImageView
+    private lateinit var courseTxt:TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +34,10 @@ class CoursesFragment : Fragment() {
         _binding = FragmentCoursesBinding.inflate(inflater,container,false)
         val root:View = binding.root
 
+        courseBack = root.findViewById(R.id.courseBack)
+        courseTxt = root.findViewById(R.id.courseTxt)
+
+
         viewModel.courseModel!!.observe(viewLifecycleOwner, Observer {
             initView(root)
             courseAdapter = context?.let { it1-> CourseAdapter(it1,it) }
@@ -38,11 +45,11 @@ class CoursesFragment : Fragment() {
             courseAdapter!!.notifyDataSetChanged()
         })
 
-        root.courseBack.setOnClickListener {
+        courseBack.setOnClickListener {
             Navigation.findNavController(root)
                 .navigate(R.id.action_coursesFragment_to_navigation_dashboard)
         }
-        root.courseTxt.setOnClickListener {
+        courseTxt.setOnClickListener {
             Navigation.findNavController(root)
                 .navigate(R.id.action_coursesFragment_to_navigation_dashboard)
         }

@@ -17,8 +17,6 @@ import com.google.firebase.storage.StorageTask
 import com.hindu.cunow.R
 import com.hindu.joltt.MainActivity
 import com.theartofdev.edmodo.cropper.CropImage
-import kotlinx.android.synthetic.main.activity_add_event.*
-import kotlinx.android.synthetic.main.activity_add_post.*
 import java.io.ByteArrayOutputStream
 
 class AddEventActivity : AppCompatActivity() {
@@ -29,13 +27,6 @@ class AddEventActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_event)
         storageEventImageRef = FirebaseStorage.getInstance().reference.child("Event Images")
 
-        addEvent_img_tv.setOnClickListener {
-            cropImage()
-        }
-
-        submit_event.setOnClickListener {
-            addEvent()
-        }
     }
 
     private fun addEvent() {
@@ -70,10 +61,10 @@ class AddEventActivity : AppCompatActivity() {
                     val postMap = HashMap<String, Any>()
                     postMap["eventId"] = postId!!
                     postMap["adder"] = FirebaseAuth.getInstance().currentUser!!.uid
-                    postMap["eventName"] = eventName_ET.text.toString()
+                    //["eventName"] = eventName_ET.text.toString()
                     postMap["eventImg"] = imageUrl
-                    postMap["eventHost"] = eventHost_ET.text.toString()
-                    postMap["eventDescription"] = eventDes_ET.text.toString()
+                    //postMap["eventHost"] = eventHost_ET.text.toString()
+                    //postMap["eventDescription"] = eventDes_ET.text.toString()
 
 
                     ref.child(postId).updateChildren(postMap)
@@ -99,7 +90,7 @@ class AddEventActivity : AppCompatActivity() {
         {
             val result = CropImage.getActivityResult(data)
             imageUri = result.uri
-            add_eventImg.setImageURI(imageUri)
+            //add_eventImg.setImageURI(imageUri)
         }
     }
 

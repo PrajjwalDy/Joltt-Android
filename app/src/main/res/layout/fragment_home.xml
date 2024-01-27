@@ -39,27 +39,26 @@
                     android:id="@+id/ll_chatcount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/chat_notification"
                     android:layout_marginEnd="5dp"
-                    android:minHeight="25dp"
+                    android:layout_toStartOf="@+id/strike"
+                    android:background="@drawable/chat_notification"
                     android:minWidth="25dp"
-                    android:visibility="gone"
-                    android:layout_toStartOf="@+id/strike">
+                    android:minHeight="25dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
                     <TextView
                         android:id="@+id/chatNotification_Count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1222"
-                        android:layout_margin="5dp"
                         android:layout_gravity="center"
-                        android:textSize="11sp"
-                        android:textColor="@color/white" />
+                        android:layout_margin="5dp"
+                        android:text="1222"
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
 
                 </LinearLayout>
-
-
 
 
                 <ImageView
@@ -70,7 +69,6 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="10dp"
                     android:src="@drawable/strike" />
-
 
 
             </RelativeLayout>
@@ -121,9 +119,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/postRecyclerView"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:visibility="gone"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:layout_height="match_parent" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         <!--EMPTY POST LINEAR LAYOUT-->
 
@@ -131,91 +129,91 @@
 
     <!--WELCOME SCREEN-->
     <RelativeLayout
-    android:id="@+id/welcome_screen"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:visibility="gone"
-    android:layout_centerInParent="true">
-
-    <ImageView
-        android:id="@+id/welcome_img"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:src="@drawable/welcome" />
-
-    <androidx.cardview.widget.CardView
+        android:id="@+id/welcome_screen"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_below="@+id/welcome_img"
-        app:cardBackgroundColor="@color/red"
-        app:cardCornerRadius="5pt">
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/welcome_img"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/welcome" />
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/red"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="200dp"
+            android:layout_below="@+id/welcome_img"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:cardBackgroundColor="@color/red"
+            app:cardCornerRadius="5pt">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:fontFamily="@font/comfortaa"
-                android:text="@string/welcome_to_cunow"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/red"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:fontFamily="@font/comfortaa"
+                    android:text="@string/welcome_to_cunow"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/imin"
-                android:layout_width="200dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="20dp"
-                android:background="@drawable/usernamr_password_bg"
-                android:text="I'm In"
-                android:textColor="@color/red" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/imin"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/usernamr_password_bg"
+                    android:text="I'm In"
+                    android:textColor="@color/red" />
 
-        </LinearLayout>
+            </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-</RelativeLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/emptyListPost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:visibility="gone"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <com.airbnb.lottie.LottieAnimationView
             android:layout_width="200dp"
             android:layout_height="200dp"
-            app:lottie_rawRes="@raw/animation_search"
             android:layout_gravity="center_horizontal"
             app:lottie_autoPlay="true"
-            app:lottie_loop="true"/>
-        
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/animation_search" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nothing quite matches up? Consider updating your profile, making friends, or dive into the Explore for more exciting features!"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:textAlignment="center"
             android:fontFamily="@font/comfortaa"
-            android:textColor="@color/vivaMagenta"/>
+            android:text="Nothing quite matches up? Consider updating your profile, making friends, or dive into the Explore for more exciting features!"
+            android:textAlignment="center"
+            android:textColor="@color/vivaMagenta" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -241,10 +239,10 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/light_yellow"
         android:clickable="true"
         android:focusable="true"
         android:visibility="gone"
-        android:backgroundTint="@color/light_yellow"
         app:srcCompat="@drawable/ic_image"
         app:tint="@color/white" />
 
@@ -255,10 +253,10 @@
         android:layout_above="@+id/create_post_fab"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/light_yellow"
         android:clickable="true"
         android:focusable="true"
         android:visibility="gone"
-        android:backgroundTint="@color/light_yellow"
         app:srcCompat="@drawable/ic_video"
         app:tint="@color/white" />
 
@@ -282,17 +280,17 @@
         android:id="@+id/onlyText_CV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        android:background="@drawable/blur_bg_ocean">
+        android:background="@drawable/blur_bg_ocean"
+        android:visibility="gone">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardElevation="10dp"
-            app:cardCornerRadius="12dp"
             android:layout_centerInParent="true"
             android:layout_margin="5dp"
-            app:cardBackgroundColor="@color/red">
+            app:cardBackgroundColor="@color/red"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="10dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -303,21 +301,20 @@
                     android:id="@+id/hedTxt_LL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="26dp"
                     android:layout_margin="5dp"
-                    android:layout_marginBottom="17dp">
+                    android:layout_marginTop="26dp"
+                    android:layout_marginBottom="17dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="What's on your mind ?"
-                        android:fontFamily="@font/comfortaa"
-                        android:textColor="@color/white"
-                        android:layout_margin="10dp"
                         android:layout_gravity="center_vertical"
-                        android:textSize="18sp"
-                        />
+                        android:layout_margin="10dp"
+                        android:fontFamily="@font/comfortaa"
+                        android:text="What's on your mind ?"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
 
                     <ImageView
                         android:layout_width="60dp"
@@ -336,21 +333,21 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:maxHeight="300dp"
                     android:background="@drawable/white_round_corner_bg"
                     android:fontFamily="@font/comfortaa"
                     android:hint="your feeling here"
+                    android:maxHeight="300dp"
                     android:padding="25dp"
                     android:textColor="@color/black" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_below="@id/addText_ET"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="10dp"
                     android:gravity="center_vertical"
-                    android:layout_below="@id/addText_ET">
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/closeOnlyText"
@@ -360,26 +357,27 @@
                         android:src="@drawable/close" />
 
                     <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/add_to_page"
                         android:id="@+id/postToPage"
-                        android:visibility="gone"
-                        android:layout_margin="10dp"/>
-                    <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/image_on_txt"
-                        android:id="@+id/addImageToText"
-                        android:visibility="gone"
-                        android:layout_margin="10dp"/>
+                        android:layout_margin="10dp"
+                        android:src="@drawable/add_to_page"
+                        android:visibility="gone" />
 
                     <ImageView
+                        android:id="@+id/addImageToText"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/image_on_txt"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/uploadTextBtn"
                         android:layout_width="100dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/joltt_button"
                         android:layout_margin="10dp"
-                        android:id="@+id/uploadTextBtn"/>
+                        android:src="@drawable/joltt_button" />
 
 
                 </LinearLayout>

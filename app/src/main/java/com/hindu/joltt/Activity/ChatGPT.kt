@@ -1,13 +1,9 @@
 package com.hindu.joltt.Activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.hindu.cunow.R
-import kotlinx.android.synthetic.main.activity_chat_gpt.ET_Prompt
-import kotlinx.android.synthetic.main.activity_chat_gpt.chatResponse
-import kotlinx.android.synthetic.main.activity_chat_gpt.send_prompt
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -25,16 +21,6 @@ class ChatGPT : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_gpt)
-
-        val prompt = ET_Prompt.text.toString()
-
-        send_prompt.setOnClickListener {
-            getResponse(prompt) { response ->
-                runOnUiThread {
-                    chatResponse.text = response
-                }
-            }
-        }
 
     }
 

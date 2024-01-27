@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -13,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.FragmentSchemesBinding
 import com.hindu.joltt.Adapter.SchemeAdapter
-import kotlinx.android.synthetic.main.fragment_schemes.view.governmentschemeBack
 
 class SchemesFragment : Fragment() {
 
@@ -23,6 +23,8 @@ class SchemesFragment : Fragment() {
     private val binding get() = _binding!!
     private var schemesAdapter: SchemeAdapter? = null
 
+    private lateinit var governmentschemeBack: ImageView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,6 +33,9 @@ class SchemesFragment : Fragment() {
         _binding = FragmentSchemesBinding.inflate(inflater,container,false)
         val root:View = binding.root
 
+        governmentschemeBack = root.findViewById(R.id.governmentschemeBack)
+
+
         viewModel.schemeViewModel!!.observe(viewLifecycleOwner, Observer {
             initView(root)
             schemesAdapter = context?.let { it1-> SchemeAdapter(it1,it) }
@@ -38,7 +43,7 @@ class SchemesFragment : Fragment() {
             schemesAdapter!!.notifyDataSetChanged()
         })
 
-        root.governmentschemeBack.setOnClickListener {
+        governmentschemeBack.setOnClickListener {
             Navigation.findNavController(root)
                 .navigate(R.id.action_schemesFragment_to_navigation_dashboard)
         }

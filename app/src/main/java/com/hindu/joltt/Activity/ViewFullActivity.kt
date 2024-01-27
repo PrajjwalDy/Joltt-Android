@@ -3,6 +3,7 @@ package com.hindu.joltt.Activity
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -12,6 +13,7 @@ import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
@@ -21,12 +23,13 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.R
 import com.hindu.joltt.Model.PostModel
-import kotlinx.android.synthetic.main.activity_view_full.postImage_full
-import kotlinx.android.synthetic.main.activity_view_full.videoPlayer_full
 
 class ViewFullActivity : AppCompatActivity() {
     private var postId = ""
     private var publisher = ""
+
+    private lateinit var postImage_full:ImageView
+    private lateinit var videoPlayer_full:PlayerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +37,10 @@ class ViewFullActivity : AppCompatActivity() {
 
         postId = intent.getStringExtra("postId").toString()
         publisher = intent.getStringExtra("publisher").toString()
+
+        postImage_full = findViewById(R.id.postImage_full)
+        videoPlayer_full = findViewById(R.id.videoPlayer_full)
+
 
         /*val videoView = R.id.videoPlayer_full
         val videoUrl = */

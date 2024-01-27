@@ -1,16 +1,26 @@
 package com.hindu.joltt.Activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import com.google.firebase.auth.FirebaseAuth
 import com.hindu.cunow.R
-import kotlinx.android.synthetic.main.activity_forget_password.*
 
 class ForgetPasswordActivity : AppCompatActivity() {
+
+    private lateinit var passwordReset_Btn:AppCompatButton
+    private lateinit var uid_forgetPassword:EditText
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forget_password)
+
+
+        passwordReset_Btn = findViewById(R.id.passwordReset_Btn)
+        uid_forgetPassword = findViewById(R.id.uid_forgetPassword)
+
+
 
         passwordReset_Btn.setOnClickListener {
             val uid: String = uid_forgetPassword.text.toString()+"@cuchd.in"

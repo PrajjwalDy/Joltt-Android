@@ -4,8 +4,11 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -14,16 +17,28 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.R
 import com.hindu.joltt.MainActivity
-import kotlinx.android.synthetic.main.activity_log_in.createAccount_text
-import kotlinx.android.synthetic.main.activity_log_in.forget_password_txt
-import kotlinx.android.synthetic.main.activity_log_in.login_btn
-import kotlinx.android.synthetic.main.activity_log_in.password_edit_text
-import kotlinx.android.synthetic.main.activity_log_in.uid_edit_text
 
 class LogInActivity : AppCompatActivity() {
+
+    private lateinit var login_btn:AppCompatButton
+    private lateinit var createAccount_text:TextView
+    private lateinit var forget_password_txt:TextView
+    private lateinit var uid_edit_text:EditText
+    private lateinit var password_edit_text:EditText
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_log_in)
+
+
+        login_btn = findViewById(R.id.login_btn)
+        createAccount_text = findViewById(R.id.createAccount_text)
+        forget_password_txt = findViewById(R.id.forget_password_txt)
+        uid_edit_text = findViewById(R.id.uid_edit_text)
+        password_edit_text = findViewById(R.id.password_edit_text)
+
+
 
         login_btn.setOnClickListener {
             login()

@@ -2,14 +2,19 @@ package com.hindu.joltt.Activity
 
 import android.app.Activity
 import android.content.Intent
+import android.media.Image
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -31,22 +36,30 @@ import com.hindu.joltt.Adapter.ChatAdapter
 import com.hindu.joltt.Model.ChatModel
 import com.hindu.joltt.Model.UserModel
 import com.theartofdev.edmodo.cropper.CropImage
-import kotlinx.android.synthetic.main.activity_chat.chat1Back
-import kotlinx.android.synthetic.main.activity_chat.chatImage_preview
-import kotlinx.android.synthetic.main.activity_chat.chatUser_Image
-import kotlinx.android.synthetic.main.activity_chat.chat_message
-import kotlinx.android.synthetic.main.activity_chat.moreOption_chat
-import kotlinx.android.synthetic.main.activity_chat.selectMedia_chat
-import kotlinx.android.synthetic.main.activity_chat.send_chat
-import kotlinx.android.synthetic.main.activity_chat.userName_chat
-import kotlinx.android.synthetic.main.activity_chat.viewMore_chat
+import de.hdodenhof.circleimageview.CircleImageView
+
 
 class ChatActivity : AppCompatActivity() {
+
+
     private var profileId = ""
     private var myUrl = ""
     private var imageUri: Uri? = null
     private var storageChatImageRef: StorageReference? =null
     private var media = ""
+
+    //objects
+    private lateinit var selectMedia:ImageView
+    private lateinit var send:ImageView
+    private lateinit var chatMessage:EditText
+    private lateinit var moreOption:ImageView
+    private lateinit var viewMore:CardView
+    private lateinit var back:ImageView
+    private lateinit var userName:TextView
+    private lateinit var userProfile:CircleImageView
+    private lateinit var chatImagePreview:ImageView
+
+
 
 
     private var chatList:MutableList<ChatModel>? = null
@@ -104,28 +117,45 @@ class ChatActivity : AppCompatActivity() {
 
         startPeriodicTimestampUpdate()
 
-        selectMedia_chat.setOnClickListener {
+        //object Decleration
+
+        selectMedia = findViewById(R.id.selectMedia_chat)
+        send = findViewById(R.id.send_chat)
+        back = findViewById(R.id.chat1Back)
+        viewMore = findViewById(R.id.viewMore_chat)
+        moreOption = findViewById(R.id.moreOption_chat)
+        chatImagePreview = findViewById(R.id.chatImage_preview)
+        userName = findViewById(R.id.userName_chat)
+        userProfile = findViewById(R.id.chatUser_Image)
+        chatMessage = findViewById(R.id.chat_message)
+
+
+
+
+
+
+        selectMedia.setOnClickListener {
             cropImage()
             media = "yes"
         }
 
-        send_chat.setOnClickListener { view->
+        send.setOnClickListener { view->
             if (imageUri != null){
                 uploadImage()
             }else{
                 sendMessage(view,recyclerView)
             }
         }
-        moreOption_chat.setOnClickListener {
+        moreOption.setOnClickListener {
             if (!check){
-                moreOption_chat.startAnimation(rotateOpen)
-                viewMore_chat.visibility = View.VISIBLE
-                viewMore_chat.startAnimation(toBottom)
+                moreOption.startAnimation(rotateOpen)
+                viewMore.visibility = View.VISIBLE
+                viewMore.startAnimation(toBottom)
                 check = true
             }else{
-                moreOption_chat.startAnimation(rotateClose)
-                viewMore_chat.visibility = View.GONE
-                viewMore_chat.startAnimation(fromBottom)
+                moreOption.startAnimation(rotateClose)
+                viewMore.visibility = View.GONE
+                viewMore.startAnimation(fromBottom)
                 check = false
             }
 
@@ -135,7 +165,7 @@ class ChatActivity : AppCompatActivity() {
         loadUserData()
         retrieveChat(recyclerView)
 
-        chat1Back.setOnClickListener {
+        back.setOnClickListener {
             finish()
         }
 
@@ -160,7 +190,7 @@ class ChatActivity : AppCompatActivity() {
 
     //SEND MESSAGE
     private fun sendMessage(view:View,recyclerView: RecyclerView){
-        if (chat_message.text.isEmpty()) {
+        if (chatMessage.text.isEmpty()) {
             Snackbar.make(view, "please write something..", Snackbar.LENGTH_SHORT).show()
         } else {
             FirebaseDatabase.getInstance().reference.child("ChatList")
@@ -179,14 +209,14 @@ class ChatActivity : AppCompatActivity() {
 
             val dataMap = HashMap<String, Any>()
             dataMap["messageId"] = commentId!!
-            dataMap["chatText"] = chat_message.text.toString()
+            dataMap["chatText"] = chatMessage.text.toString()
             dataMap["sender"] = FirebaseAuth.getInstance().currentUser!!.uid
             dataMap["receiver"] = profileId
             dataMap["containImage"] = false
             dataMap["timeStamp"] = System.currentTimeMillis().toString()
 
             dataRef.child(commentId).setValue(dataMap)
-            chat_message.text.clear()
+            chatMessage.text.clear()
             FirebaseDatabase.getInstance().reference.child("ChatMessageCount")
                 .child(profileId)
                 .child(FirebaseAuth.getInstance().currentUser!!.uid)
@@ -219,7 +249,7 @@ class ChatActivity : AppCompatActivity() {
 
         val dataMap = HashMap<String, Any>()
         dataMap["messageId"] = chatId!!
-        dataMap["chatText"] = chat_message.text.toString()
+        dataMap["chatText"] = chatMessage.text.toString()
         dataMap["sender"] = FirebaseAuth.getInstance().currentUser!!.uid
         dataMap["containImage"] = true
         dataMap["receiver"] = profileId
@@ -309,8 +339,8 @@ class ChatActivity : AppCompatActivity() {
 
                     if (snapshot.exists()){
                         val user = snapshot.getValue(UserModel::class.java)
-                        Glide.with(this@ChatActivity).load(user!!.profileImage).into(chatUser_Image)
-                        userName_chat.text = user.fullName
+                        Glide.with(this@ChatActivity).load(user!!.profileImage).into(userProfile)
+                        userName.text = user.fullName
                     }
                 }
 
@@ -328,10 +358,10 @@ class ChatActivity : AppCompatActivity() {
         {
             val result = CropImage.getActivityResult(data)
             imageUri = result.uri
-            chatImage_preview?.visibility = View.VISIBLE
-            chatImage_preview.setImageURI(imageUri)
+            chatImagePreview?.visibility = View.VISIBLE
+            chatImagePreview.setImageURI(imageUri)
 
-            chat_message.setHint("Click on send button to send the image")
+            chatMessage.setHint("Click on send button to send the image")
         }
     }
 

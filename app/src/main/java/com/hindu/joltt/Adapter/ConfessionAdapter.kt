@@ -25,8 +25,6 @@ import com.hindu.cunow.R
 import com.hindu.joltt.Activity.ReportPostActivity
 import com.hindu.joltt.Fragments.ConfessionRoom.ConfessionCommentActivity
 import com.hindu.joltt.Model.ConfessionModel
-import kotlinx.android.synthetic.main.activity_comment.*
-import kotlinx.android.synthetic.main.more_option_confession.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -74,7 +72,11 @@ class ConfessionAdapter(private val mContext: Context,
 
             val alertDialog = dialogBuilder.show()
 
-            dialogView.reportConfession.setOnClickListener {
+            val reportConfession = dialogView.findViewById<LinearLayout>(R.id.reportConfession)
+            val deleteConfession = dialogView.findViewById<LinearLayout>(R.id.deleteConfession)
+
+
+            reportConfession.setOnClickListener {
                 val intent = Intent(mContext, ReportPostActivity::class.java)
                 intent.putExtra("postId",mConfession[position].confessionId)
                 mContext.startActivity(intent)
@@ -82,9 +84,9 @@ class ConfessionAdapter(private val mContext: Context,
             }
 
             if (cList.confesserId != FirebaseAuth.getInstance().currentUser!!.uid){
-                dialogView.deleteConfession.visibility = View.GONE
+                deleteConfession.visibility = View.GONE
             }
-            dialogView.deleteConfession.setOnClickListener {
+            deleteConfession.setOnClickListener {
                 FirebaseDatabase.getInstance().reference.child("Confession")
                     .child(cList.confessionId!!)
                     .removeValue()

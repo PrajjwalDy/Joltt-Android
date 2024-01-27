@@ -11,8 +11,12 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
@@ -25,25 +29,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.hindu.cunow.R
 import com.uk.tastytoasty.TastyToasty
-import kotlinx.android.synthetic.main.activity_user_details.collegeName_welcome
-import kotlinx.android.synthetic.main.activity_user_details.et_admission_year
-import kotlinx.android.synthetic.main.activity_user_details.et_branch_welcome
-import kotlinx.android.synthetic.main.activity_user_details.et_course_welcome
-import kotlinx.android.synthetic.main.activity_user_details.et_exp_welcome
-import kotlinx.android.synthetic.main.activity_user_details.et_skills_welcome
-import kotlinx.android.synthetic.main.activity_user_details.genderFemale
-import kotlinx.android.synthetic.main.activity_user_details.genderMale
-import kotlinx.android.synthetic.main.activity_user_details.getLocation
-import kotlinx.android.synthetic.main.activity_user_details.ll_0
-import kotlinx.android.synthetic.main.activity_user_details.ll_1
-import kotlinx.android.synthetic.main.activity_user_details.ll_2
-import kotlinx.android.synthetic.main.activity_user_details.ll_3
-import kotlinx.android.synthetic.main.activity_user_details.ll_4
-import kotlinx.android.synthetic.main.activity_user_details.location_et_welcome
-import kotlinx.android.synthetic.main.activity_user_details.nextBtn_2
-import kotlinx.android.synthetic.main.activity_user_details.nextBtn_3
-import kotlinx.android.synthetic.main.activity_user_details.nextBtn_4
-import kotlinx.android.synthetic.main.activity_user_details.proceed_btn_0
 import java.io.IOException
 import java.util.Locale
 
@@ -60,9 +45,58 @@ class UserDetailsActivity : AppCompatActivity() {
 
     lateinit var locationRequest: com.google.android.gms.location.LocationRequest
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
+    private lateinit var proceed_btn_0:AppCompatButton
+    private lateinit var ll_0:LinearLayout
+    private lateinit var ll_1:LinearLayout
+    private lateinit var ll_2:LinearLayout
+    private lateinit var ll_3:LinearLayout
+    private lateinit var ll_4:LinearLayout
+
+    private lateinit var genderFemale:ImageView
+    private lateinit var genderMale:ImageView
+
+    private lateinit var nextBtn_2:AppCompatButton
+    private lateinit var nextBtn_3:AppCompatButton
+    private lateinit var nextBtn_4:AppCompatButton
+
+    private lateinit var et_branch_welcome:EditText
+    private lateinit var et_admission_year:EditText
+    private lateinit var et_course_welcome:EditText
+    private lateinit var collegeName_welcome:EditText
+
+    private lateinit var et_skills_welcome:EditText
+    private lateinit var et_exp_welcome:EditText
+
+    private lateinit var getLocation:AppCompatButton
+    private lateinit var location_et_welcome:EditText
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_details)
+
+        proceed_btn_0 = findViewById(R.id.proceed_btn_0)
+        ll_0 = findViewById(R.id.ll_0)
+        ll_1 = findViewById(R.id.ll_1)
+        ll_2 = findViewById(R.id.ll_2)
+        ll_3 = findViewById(R.id.ll_3)
+        ll_4 = findViewById(R.id.ll_4)
+        genderFemale = findViewById(R.id.genderFemale)
+        genderMale = findViewById(R.id.genderMale)
+        nextBtn_2 = findViewById(R.id.nextBtn_2)
+        nextBtn_3 = findViewById(R.id.nextBtn_3)
+        nextBtn_4 = findViewById(R.id.nextBtn_4)
+        et_branch_welcome = findViewById(R.id.et_branch_welcome)
+        et_admission_year = findViewById(R.id.et_admission_year)
+        et_course_welcome = findViewById(R.id.et_course_welcome)
+        collegeName_welcome = findViewById(R.id.collegeName_welcome)
+        et_skills_welcome = findViewById(R.id.et_skills_welcome)
+        et_exp_welcome = findViewById(R.id.et_exp_welcome)
+        getLocation = findViewById(R.id.getLocation)
+        location_et_welcome = findViewById(R.id.location_et_welcome)
+
+
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
@@ -329,10 +363,10 @@ class UserDetailsActivity : AppCompatActivity() {
                     val geocoder = Geocoder(this, Locale.getDefault())
                     val addressList = geocoder.getFromLocation(location.latitude,location.longitude,1)
 
-                    val address = addressList[0]
-                    val city = address.locality
-                    val state = address.adminArea
-                    val country = address.countryName
+                    val address = addressList?.get(0)
+                    val city = address?.locality
+                    val state = address?.adminArea
+                    val country = address?.countryName
 
 
                     val addressLine = "$city, $state, $country"

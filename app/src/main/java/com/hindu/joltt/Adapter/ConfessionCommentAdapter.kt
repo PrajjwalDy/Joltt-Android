@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
@@ -15,8 +16,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.hindu.cunow.R
 import com.hindu.joltt.Activity.ReportPostActivity
 import com.hindu.joltt.Model.ConfessionCommentModel
-import kotlinx.android.synthetic.main.more_option_confession.view.deleteConfession
-import kotlinx.android.synthetic.main.more_option_confession.view.reportConfession
 
 class ConfessionCommentAdapter(private val mContext:Context,
                                private val mComment:List<ConfessionCommentModel>,
@@ -47,8 +46,10 @@ class ConfessionCommentAdapter(private val mContext:Context,
                 .setView(dialogView)
 
             val alertDialog = dialogBuilder.show()
+            val reportConfession = dialogView.findViewById<LinearLayout>(R.id.reportConfession)
+            val deleteConfession = dialogView.findViewById<LinearLayout>(R.id.deleteConfession)
 
-            dialogView.reportConfession.setOnClickListener {
+            reportConfession.setOnClickListener {
                 val intent = Intent(mContext, ReportPostActivity::class.java)
                 intent.putExtra("postId",mComment[position].cCommentId+"+Confessioncomment")
                 mContext.startActivity(intent)
@@ -56,9 +57,9 @@ class ConfessionCommentAdapter(private val mContext:Context,
             }
 
             if (cList.cPublisher != FirebaseAuth.getInstance().currentUser!!.uid){
-                dialogView.deleteConfession.visibility = View.GONE
+                deleteConfession.visibility = View.GONE
             }
-            dialogView.deleteConfession.setOnClickListener {
+            deleteConfession.setOnClickListener {
                 FirebaseDatabase.getInstance().reference.child("ConfessionComments")
                     .child(cList.confessionId!!)
                     .child(cList.cCommentId!!)

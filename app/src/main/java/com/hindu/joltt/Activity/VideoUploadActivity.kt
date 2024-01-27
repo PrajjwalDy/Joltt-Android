@@ -8,14 +8,18 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import com.google.android.exoplayer2.DefaultRenderersFactory
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
+import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
@@ -28,13 +32,6 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.hindu.cunow.R
 import com.hindu.joltt.MainActivity
-import kotlinx.android.synthetic.main.activity_video_upload.captionVideo
-import kotlinx.android.synthetic.main.activity_video_upload.changeVideo
-import kotlinx.android.synthetic.main.activity_video_upload.postPrivacy_video
-import kotlinx.android.synthetic.main.activity_video_upload.uploadVideo
-import kotlinx.android.synthetic.main.activity_video_upload.videoPlayer_upload
-import kotlinx.android.synthetic.main.post_privacy_dialog.view.post_private
-import kotlinx.android.synthetic.main.post_privacy_dialog.view.post_public
 
 class VideoUploadActivity : AppCompatActivity() {
     private var privacy = "public"
@@ -51,9 +48,27 @@ class VideoUploadActivity : AppCompatActivity() {
     private var videoUri: Uri? = null
     private lateinit var player: SimpleExoPlayer
 
+    private lateinit var uploadVideo:AppCompatButton
+    private lateinit var postPrivacy_video:AppCompatButton
+    private lateinit var changeVideo:AppCompatButton
+    private lateinit var captionVideo:EditText
+    private lateinit var videoPlayer_upload:PlayerView
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_upload)
+
+        uploadVideo = findViewById(R.id.uploadVideo)
+        postPrivacy_video = findViewById(R.id.postPrivacy_video)
+        changeVideo = findViewById(R.id.changeVideo)
+        captionVideo = findViewById(R.id.captionVideo)
+        videoPlayer_upload = findViewById(R.id.videoPlayer_upload)
+
+
+
+
+
 
         //init camera permission
         cameraPermission =
@@ -78,13 +93,16 @@ class VideoUploadActivity : AppCompatActivity() {
 
             val alertDialog = dialogBuilder.show()
 
-            dialogView.post_public.setOnClickListener { view ->
+            val post_public = dialogView.findViewById<LinearLayout>(R.id.post_public)
+            val post_private = dialogView.findViewById<LinearLayout>(R.id.post_private)
+
+            post_public.setOnClickListener { view ->
                 privacy = "public"
                 Snackbar.make(view, "Post privacy set to public", Snackbar.LENGTH_SHORT).show()
                 alertDialog.dismiss()
             }
 
-            dialogView.post_private.setOnClickListener { view ->
+            post_private.setOnClickListener { view ->
                 privacy = "private"
                 Snackbar.make(view, "Post privacy set to private", Snackbar.LENGTH_SHORT).show()
                 alertDialog.dismiss()

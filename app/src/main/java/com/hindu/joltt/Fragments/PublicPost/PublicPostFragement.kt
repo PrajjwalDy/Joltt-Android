@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,8 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.PublicPostFragementFragmentBinding
 import com.hindu.joltt.Adapter.PublicPostAdapter
-import kotlinx.android.synthetic.main.public_post_fragement_fragment.view.explorerTxt
-import kotlinx.android.synthetic.main.public_post_fragement_fragment.view.postBack
 
 class PublicPostFragement : Fragment() {
 
@@ -26,6 +26,10 @@ class PublicPostFragement : Fragment() {
     private var _binding:PublicPostFragementFragmentBinding? = null
 
     private val binding get() = _binding!!
+
+    private lateinit var postBack: ImageView
+    private lateinit var explorerTxt: TextView
+
 
 
     override fun onCreateView(
@@ -38,17 +42,22 @@ class PublicPostFragement : Fragment() {
         _binding = PublicPostFragementFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
+        postBack = root.findViewById(R.id.postBack)
+        explorerTxt = root.findViewById(R.id.explorerTxt)
+
+
         viewModel.postModel!!.observe(viewLifecycleOwner, Observer {
             initView2(root)
             publicPostAdapter = context?.let { it1-> PublicPostAdapter(it1,it) }
             recyclerViewGrid!!.adapter = publicPostAdapter
             publicPostAdapter!!.notifyDataSetChanged()
         })
-        root.postBack.setOnClickListener {
+        postBack.setOnClickListener {
             Navigation.findNavController(root)
                 .navigate(R.id.action_publicPostFragement_to_navigation_dashboard)
         }
-        root.explorerTxt.setOnClickListener {
+        explorerTxt.setOnClickListener {
             Navigation.findNavController(root)
                 .navigate(R.id.action_publicPostFragement_to_navigation_dashboard)
         }

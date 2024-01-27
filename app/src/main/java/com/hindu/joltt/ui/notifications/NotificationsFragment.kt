@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -18,12 +20,7 @@ import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.FragmentNotificationsBinding
 import com.hindu.joltt.Model.NotificationModel
-import com.hindu.joltt.Model.PostModel
 import com.hindu.joltt.Model.UserModel
-import kotlinx.android.synthetic.main.fragment_notifications.followRequest
-import kotlinx.android.synthetic.main.fragment_notifications.noNotificationLayout
-import kotlinx.android.synthetic.main.fragment_notifications.notificationRecycler
-import kotlinx.android.synthetic.main.fragment_notifications.view.followRequest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -46,6 +43,10 @@ class NotificationsFragment : Fragment() {
     private lateinit var data: MutableList<NotificationModel>
     private var lastLoadedItemName: String? = null
 
+    private lateinit var noNotificationLayout:LinearLayout
+    private lateinit var notificationRecycler:RecyclerView
+    private lateinit var followRequest:TextView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -56,6 +57,14 @@ class NotificationsFragment : Fragment() {
 
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        noNotificationLayout = root.findViewById(R.id.noNotificationLayout)
+        notificationRecycler = root.findViewById(R.id.notificationRecycler)
+        followRequest = root.findViewById(R.id.followRequest)
+
+
+
+
 
         notificationsViewModel.notificationViewModel.observe(viewLifecycleOwner, androidx.lifecycle.Observer {notificationList->
 
@@ -76,7 +85,7 @@ class NotificationsFragment : Fragment() {
 
         })
 
-        root.followRequest.setOnClickListener {
+        followRequest.setOnClickListener {
             Navigation.findNavController(root).navigate(R.id.action_navigation_notifications_to_followRequest2)
         }
 

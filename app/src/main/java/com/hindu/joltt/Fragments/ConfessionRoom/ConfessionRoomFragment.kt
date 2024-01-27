@@ -6,12 +6,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -20,23 +28,9 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.ConfessionRoomFragmentBinding
-import com.hindu.joltt.Activity.AddConfessionActivity
 import com.hindu.joltt.Activity.TermsAndCondition
 import com.hindu.joltt.Adapter.ConfessionAdapter
 import com.hindu.joltt.Model.UserModel
-import kotlinx.android.synthetic.main.confession_room_fragment.CV_upload_confession
-import kotlinx.android.synthetic.main.confession_room_fragment.button_confession
-import kotlinx.android.synthetic.main.confession_room_fragment.confess_editText
-import kotlinx.android.synthetic.main.confession_room_fragment.confession_main_ll
-import kotlinx.android.synthetic.main.confession_room_fragment.tnc_confessionView
-import kotlinx.android.synthetic.main.confession_room_fragment.view.CV_upload_confession
-import kotlinx.android.synthetic.main.confession_room_fragment.view.accept_confession_tnc
-import kotlinx.android.synthetic.main.confession_room_fragment.view.button_confession
-import kotlinx.android.synthetic.main.confession_room_fragment.view.confessionBack
-import kotlinx.android.synthetic.main.confession_room_fragment.view.confessionMedia
-import kotlinx.android.synthetic.main.confession_room_fragment.view.confessionTxt
-import kotlinx.android.synthetic.main.confession_room_fragment.view.send_confession
-import kotlinx.android.synthetic.main.confession_room_fragment.view.terms_condition_confession
 
 class ConfessionRoomFragment : Fragment() {
 
@@ -49,6 +43,19 @@ class ConfessionRoomFragment : Fragment() {
 
     private val binding get() = _binding!!
 
+    private lateinit var send_confession:ImageView
+    private lateinit var button_confession:FloatingActionButton
+    private lateinit var CV_upload_confession:CardView
+
+    private lateinit var accept_confession_tnc:AppCompatButton
+    private lateinit var terms_condition_confession:TextView
+    private lateinit var confess_editText:EditText
+    private lateinit var confessionBack:ImageView
+    private lateinit var confessionTxt:TextView
+    private lateinit var tnc_confessionView:LinearLayout
+    private lateinit var confession_main_ll:RelativeLayout
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,8 +64,26 @@ class ConfessionRoomFragment : Fragment() {
             ViewModelProvider(this).get(ConfessionRoomViewModel::class.java)
         _binding = ConfessionRoomFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+
+
+        send_confession = root.findViewById(R.id.send_confession)
+        button_confession = root.findViewById(R.id.button_confession)
+        CV_upload_confession = root.findViewById(R.id.CV_upload_confession)
+        accept_confession_tnc = root.findViewById(R.id.accept_confession_tnc)
+        terms_condition_confession = root.findViewById(R.id.terms_condition_confession)
+        confess_editText = root.findViewById(R.id.confess_editText)
+        confessionTxt = root.findViewById(R.id.confessionTxt)
+        tnc_confessionView = root.findViewById(R.id.tnc_confessionView)
+        confession_main_ll = root.findViewById(R.id.confession_main_ll)
+        confessionBack = root.findViewById(R.id.confessionBack)
+
+
         initView(root)
         checkFirstVisit()
+
+
+
 
         viewModel.confessionViewModel!!.observe(viewLifecycleOwner, Observer {
 
@@ -66,30 +91,28 @@ class ConfessionRoomFragment : Fragment() {
             recyclerView!!.adapter = confessionAdapter
             confessionAdapter!!.notifyDataSetChanged()
         })
-        root.send_confession.setOnClickListener { view ->
+        send_confession.setOnClickListener { view ->
             postText(view)
         }
-        root.confessionMedia.setOnClickListener {
-            startActivity(Intent(context, AddConfessionActivity::class.java))
-        }
 
-        root.button_confession.setOnClickListener {
-            root.button_confession.visibility = View.GONE
-            root.CV_upload_confession.visibility = View.VISIBLE
+
+        button_confession.setOnClickListener {
+            button_confession.visibility = View.GONE
+            CV_upload_confession.visibility = View.VISIBLE
         }
-        root.accept_confession_tnc.setOnClickListener {
+        accept_confession_tnc.setOnClickListener {
             updateVisit(root)
         }
 
-        root.terms_condition_confession.setOnClickListener {
+        terms_condition_confession.setOnClickListener {
             val intent = Intent(context, TermsAndCondition::class.java)
             startActivity(intent)
         }
-        root.confessionBack.setOnClickListener {
+        confessionBack.setOnClickListener {
             Navigation.findNavController(root)
                 .navigate(R.id.action_confessionRoomFragment_to_navigation_dashboard)
         }
-        root.confessionTxt.setOnClickListener {
+        confessionTxt.setOnClickListener {
             Navigation.findNavController(root)
                 .navigate(R.id.action_confessionRoomFragment_to_navigation_dashboard)
         }

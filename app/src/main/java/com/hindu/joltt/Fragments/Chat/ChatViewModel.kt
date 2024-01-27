@@ -52,6 +52,7 @@ class ChatViewModel : ViewModel(), IChatListCallback {
             }
 
         })
+        dataReference.keepSynced(true)
     }
 
     private fun loadUser() {
@@ -79,6 +80,7 @@ class ChatViewModel : ViewModel(), IChatListCallback {
             }
 
         })
+        userData.keepSynced(true)
     }
 
     override fun onChatListLoadFailed(str: String) {

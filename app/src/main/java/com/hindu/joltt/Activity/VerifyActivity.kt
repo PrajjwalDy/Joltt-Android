@@ -3,16 +3,20 @@ package com.hindu.joltt.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.hindu.cunow.R
-import kotlinx.android.synthetic.main.activity_verify.proceed_to_verification
 
 class VerifyActivity : AppCompatActivity() {
+
+    private lateinit var proceed_to_verification:AppCompatButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_verify)
+
+        proceed_to_verification = findViewById(R.id.proceed_to_verification)
 
         startActivity()
     }

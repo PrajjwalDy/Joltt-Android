@@ -4,24 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.FragmentAbroadBinding
 import com.hindu.joltt.Adapter.AbroadAdapter
 import com.hindu.joltt.Model.AbroadModel
-import kotlinx.android.synthetic.main.fragment_abroad.view.abroadBack
-import kotlinx.android.synthetic.main.fragment_abroad.view.abroadTxt
 
 class AbroadFragment : Fragment() {
     var recyclerView:RecyclerView? = null
@@ -50,14 +44,16 @@ class AbroadFragment : Fragment() {
         })
 
 
+        val abroadBack = root.findViewById<ImageView>(R.id.abroadBack)
+        val abroadTxt = root.findViewById<TextView>(R.id.abroadTxt)
 
 
-        root.abroadBack.setOnClickListener {
+        abroadBack.setOnClickListener {
             Navigation.findNavController(root)
                 .navigate(R.id.action_abroadFragment_to_navigation_dashboard)
         }
 
-        root.abroadTxt.setOnClickListener {
+        abroadTxt.setOnClickListener {
             Navigation.findNavController(root)
                 .navigate(R.id.action_abroadFragment_to_navigation_dashboard)
         }

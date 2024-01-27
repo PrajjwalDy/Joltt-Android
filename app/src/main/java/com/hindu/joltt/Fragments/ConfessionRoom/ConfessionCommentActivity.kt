@@ -2,9 +2,13 @@ package com.hindu.joltt.Fragments.ConfessionRoom
 
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -16,12 +20,6 @@ import com.hindu.cunow.R
 import com.hindu.joltt.Adapter.ConfessionCommentAdapter
 import com.hindu.joltt.Model.ConfessionCommentModel
 import com.hindu.joltt.Model.ConfessionModel
-import kotlinx.android.synthetic.main.activity_confession_comment.Ccomment_empty_animation_c
-import kotlinx.android.synthetic.main.activity_confession_comment.RecyclerViewComment_c
-import kotlinx.android.synthetic.main.activity_confession_comment.addcCommentButton
-import kotlinx.android.synthetic.main.activity_confession_comment.addcCommentEditText
-import kotlinx.android.synthetic.main.activity_confession_comment.confessionTextComment
-import kotlinx.android.synthetic.main.activity_confession_comment.nocCommentsText
 
 class ConfessionCommentActivity : AppCompatActivity() {
     private var confessionId = ""
@@ -29,6 +27,16 @@ class ConfessionCommentActivity : AppCompatActivity() {
     private var firebaseUser:FirebaseUser? = null
     private var commentList:MutableList<ConfessionCommentModel>? = null
     private var confessionCommentAdapter: ConfessionCommentAdapter? = null
+
+    private lateinit var addcCommentButton:AppCompatButton
+    private lateinit var confessionTextComment:TextView
+    private lateinit var addcCommentEditText:EditText
+    private lateinit var Ccomment_empty_animation_c: LottieAnimationView
+    private lateinit var nocCommentsText:TextView
+    private lateinit var RecyclerViewComment_c:RecyclerView
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confession_comment)

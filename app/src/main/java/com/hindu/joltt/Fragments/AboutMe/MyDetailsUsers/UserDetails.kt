@@ -8,6 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
@@ -26,26 +31,6 @@ import com.hindu.joltt.Adapter.SkillAdapter
 import com.hindu.joltt.Model.ESModel
 import com.hindu.joltt.Model.InterestModel
 import com.hindu.joltt.Model.UserModel
-import kotlinx.android.synthetic.main.fragment_user_details.gender_txt_user
-import kotlinx.android.synthetic.main.fragment_user_details.view.RS_Image_user
-import kotlinx.android.synthetic.main.fragment_user_details.view.branch_user
-import kotlinx.android.synthetic.main.fragment_user_details.view.experience_btn_user
-import kotlinx.android.synthetic.main.fragment_user_details.view.experience_txt_user
-import kotlinx.android.synthetic.main.fragment_user_details.view.from_users
-import kotlinx.android.synthetic.main.fragment_user_details.view.genderImage_user
-import kotlinx.android.synthetic.main.fragment_user_details.view.institutionName_user
-import kotlinx.android.synthetic.main.fragment_user_details.view.interest_btn_user
-import kotlinx.android.synthetic.main.fragment_user_details.view.interest_txt_user
-import kotlinx.android.synthetic.main.fragment_user_details.view.ll_about_user
-import kotlinx.android.synthetic.main.fragment_user_details.view.ll_experience_user
-import kotlinx.android.synthetic.main.fragment_user_details.view.ll_interests_user
-import kotlinx.android.synthetic.main.fragment_user_details.view.ll_skills_user
-import kotlinx.android.synthetic.main.fragment_user_details.view.post_btn_user
-import kotlinx.android.synthetic.main.fragment_user_details.view.relation_txt_user
-import kotlinx.android.synthetic.main.fragment_user_details.view.skill_btn_user
-import kotlinx.android.synthetic.main.fragment_user_details.view.skill_txt_user
-import kotlinx.android.synthetic.main.fragment_user_details.view.student_course_user
-import kotlinx.android.synthetic.main.fragment_user_details.view.year_user
 
 class UserDetails : Fragment() {
     private lateinit var profileId: String
@@ -75,6 +60,43 @@ class UserDetails : Fragment() {
         )
     }
 
+
+
+    private lateinit var skill_txt_user: TextView
+    private lateinit var skill_btn_user: CardView
+
+    private lateinit var experience_btn_user: CardView
+    private lateinit var experience_txt_user: TextView
+
+    private lateinit var interest_btn_user: CardView
+    private lateinit var interest_txt_user: TextView
+
+    private lateinit var ll_skills_user: LinearLayout
+    private lateinit var ll_interests_user: LinearLayout
+
+    private lateinit var ll_about_user: LinearLayout
+
+    private lateinit var ll_experience_user: LinearLayout
+
+    private lateinit var post_btn_user: CardView
+
+
+    private lateinit var from_users: TextView
+    private lateinit var institutionName_user: TextView
+    private lateinit var student_course_user: TextView
+    private lateinit var branch_user: TextView
+    private lateinit var year_user: TextView
+
+    private lateinit var genderImage_user: ImageView
+    private lateinit var gender_txt_user: TextView
+    private lateinit var RS_Image_user: ImageView
+    private lateinit var relation_txt_user: TextView
+
+
+
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -87,37 +109,67 @@ class UserDetails : Fragment() {
             this.profileId = pref.getString("uid", "none")!!
         }
 
+
+
+        skill_btn_user = root.findViewById(R.id.skill_btn_user)
+        skill_txt_user = root.findViewById(R.id.skill_txt_user)
+
+        experience_btn_user = root.findViewById(R.id.experience_btn_user)
+        experience_txt_user = root.findViewById(R.id.experience_txt_user)
+        interest_btn_user = root.findViewById(R.id.interest_btn_user)
+
+        interest_txt_user = root.findViewById(R.id.interest_txt_user)
+        ll_skills_user = root.findViewById(R.id.ll_skills_user)
+        ll_interests_user = root.findViewById(R.id.ll_interests_user)
+
+        ll_about_user = root.findViewById(R.id.ll_about_user)
+        ll_experience_user = root.findViewById(R.id.ll_experience_user)
+
+        post_btn_user = root.findViewById(R.id.post_btn_user)
+
+        relation_txt_user = root.findViewById(R.id.relation_txt_user)
+
+        from_users = root.findViewById(R.id.from_users)
+        institutionName_user = root.findViewById(R.id.institutionName_user)
+        student_course_user = root.findViewById(R.id.student_course_user)
+        branch_user = root.findViewById(R.id.branch_user)
+        year_user = root.findViewById(R.id.year_user)
+        genderImage_user = root.findViewById(R.id.genderImage_user)
+
+        gender_txt_user = root.findViewById(R.id.gender_txt_user)
+        RS_Image_user = root.findViewById(R.id.RS_Image_user)
+
+
+
+
         retrieveUserData(root)
 
         //Skill Button
-        root.skill_btn_user.setOnClickListener {
+        skill_btn_user.setOnClickListener {
             val recyclerView: RecyclerView = root.findViewById(R.id.user_skill_rv)
 
-            root.skill_btn_user.setCardBackgroundColor(Color.parseColor("#FF3A63"))
-            root.skill_txt_user.setTextColor(Color.WHITE)
+            skill_btn_user.setCardBackgroundColor(Color.parseColor("#FF3A63"))
+            skill_txt_user.setTextColor(Color.WHITE)
 
-            root.experience_btn_user.setCardBackgroundColor(Color.parseColor("#54CBAF"))
-            root.experience_txt_user.setTextColor(Color.parseColor("#226880"))
+            experience_btn_user.setCardBackgroundColor(Color.parseColor("#54CBAF"))
+            experience_txt_user.setTextColor(Color.parseColor("#226880"))
 
-            root.interest_btn_user.setCardBackgroundColor(Color.parseColor("#54CBAF"))
-            root.interest_txt_user.setTextColor(Color.parseColor("#226880"))
+            interest_btn_user.setCardBackgroundColor(Color.parseColor("#54CBAF"))
+            interest_txt_user.setTextColor(Color.parseColor("#226880"))
 
             //visibility of the Layouts
 
-            root.ll_skills_user.visibility = View.VISIBLE
-            root.ll_skills_user.startAnimation(layout)
+            ll_skills_user.visibility = View.VISIBLE
+            ll_skills_user.startAnimation(layout)
 
-            root.ll_interests_user.visibility = View.GONE
-            root.ll_interests_user.startAnimation(toBottom)
+            ll_interests_user.visibility = View.GONE
+            ll_interests_user.startAnimation(toBottom)
 
-            root.ll_about_user.visibility = View.GONE
-            root.ll_about_user.startAnimation(toBottom)
+            ll_about_user.visibility = View.GONE
+            ll_about_user.startAnimation(toBottom)
 
-            root.ll_experience_user.visibility = View.GONE
-            root.ll_experience_user.startAnimation(toBottom)
-
-
-
+            ll_experience_user.visibility = View.GONE
+            ll_experience_user.startAnimation(toBottom)
 
             initView2(recyclerView)
             ESList = ArrayList()
@@ -126,31 +178,31 @@ class UserDetails : Fragment() {
             loadSkills()
         }
         //Interest Button
-        root.interest_btn_user.setOnClickListener {
+        interest_btn_user.setOnClickListener {
             val recyclerView1: RecyclerView = root.findViewById(R.id.user_interest_rv)
 
-            root.interest_btn_user.setCardBackgroundColor(Color.parseColor("#FF3A63"))
-            root.interest_txt_user.setTextColor(Color.WHITE)
+            interest_btn_user.setCardBackgroundColor(Color.parseColor("#FF3A63"))
+            interest_txt_user.setTextColor(Color.WHITE)
 
-            root.experience_btn_user.setCardBackgroundColor(Color.parseColor("#54CBAF"))
-            root.experience_txt_user.setTextColor(Color.parseColor("#226880"))
+            experience_btn_user.setCardBackgroundColor(Color.parseColor("#54CBAF"))
+            experience_txt_user.setTextColor(Color.parseColor("#226880"))
 
-            root.skill_btn_user.setCardBackgroundColor(Color.parseColor("#54CBAF"))
-            root.skill_txt_user.setTextColor(Color.parseColor("#226880"))
+            skill_btn_user.setCardBackgroundColor(Color.parseColor("#54CBAF"))
+            skill_txt_user.setTextColor(Color.parseColor("#226880"))
 
 
             //visibility of the Layouts
-            root.ll_interests_user.visibility = View.VISIBLE
-            root.ll_interests_user.startAnimation(layout)
+            ll_interests_user.visibility = View.VISIBLE
+            ll_interests_user.startAnimation(layout)
 
-            root.ll_about_user.visibility = View.GONE
-            root.ll_about_user.startAnimation(toBottom)
+            ll_about_user.visibility = View.GONE
+            ll_about_user.startAnimation(toBottom)
 
-            root.ll_experience_user.visibility = View.GONE
-            root.ll_experience_user.startAnimation(toBottom)
+            ll_experience_user.visibility = View.GONE
+            ll_experience_user.startAnimation(toBottom)
 
-            root.ll_skills_user.visibility = View.GONE
-            root.ll_skills_user.startAnimation(toBottom)
+            ll_skills_user.visibility = View.GONE
+            ll_skills_user.startAnimation(toBottom)
 
 
             //loadData
@@ -166,32 +218,32 @@ class UserDetails : Fragment() {
             loadInterest()
         }
         //Experience button
-        root.experience_btn_user.setOnClickListener {
+        experience_btn_user.setOnClickListener {
 
             val recyclerView: RecyclerView = root.findViewById(R.id.user_experience_rv)
 
-            root.experience_btn_user.setCardBackgroundColor(Color.parseColor("#FF3A63"))
-            root.experience_txt_user.setTextColor(Color.WHITE)
+            experience_btn_user.setCardBackgroundColor(Color.parseColor("#FF3A63"))
+            experience_txt_user.setTextColor(Color.WHITE)
 
-            root.skill_btn_user.setCardBackgroundColor(Color.parseColor("#54CBAF"))
-            root.skill_txt_user.setTextColor(Color.parseColor("#226880"))
+            skill_btn_user.setCardBackgroundColor(Color.parseColor("#54CBAF"))
+            skill_txt_user.setTextColor(Color.parseColor("#226880"))
 
-            root.interest_btn_user.setCardBackgroundColor(Color.parseColor("#54CBAF"))
-            root.interest_txt_user.setTextColor(Color.parseColor("#226880"))
+            interest_btn_user.setCardBackgroundColor(Color.parseColor("#54CBAF"))
+            interest_txt_user.setTextColor(Color.parseColor("#226880"))
 
             //visibility and animation of the layouts
 
-            root.ll_experience_user.visibility = View.VISIBLE
-            root.ll_experience_user.startAnimation(layout)
+            ll_experience_user.visibility = View.VISIBLE
+            ll_experience_user.startAnimation(layout)
 
-            root.ll_skills_user.visibility = View.GONE
-            root.ll_skills_user.startAnimation(toBottom)
+            ll_skills_user.visibility = View.GONE
+            ll_skills_user.startAnimation(toBottom)
 
-            root.ll_interests_user.visibility = View.GONE
-            root.ll_interests_user.startAnimation(toBottom)
+            ll_interests_user.visibility = View.GONE
+            ll_interests_user.startAnimation(toBottom)
 
-            root.ll_about_user.visibility = View.GONE
-            root.ll_about_user.startAnimation(toBottom)
+            ll_about_user.visibility = View.GONE
+            ll_about_user.startAnimation(toBottom)
 
 
 
@@ -202,7 +254,7 @@ class UserDetails : Fragment() {
             loadExperience()
         }
 
-        root.post_btn_user.setOnClickListener {
+        post_btn_user.setOnClickListener {
             val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
             pref?.putString("profile", profileId)
             pref?.apply()
@@ -227,37 +279,37 @@ class UserDetails : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     val users = snapshot.getValue(UserModel::class.java)
-                    root.from_users.text = users!!.place
-                    root.branch_user.text = users.branch
-                    root.year_user.text = "Year: " + users.year
-                    root.institutionName_user.text = users.college
-                    root.student_course_user.text = users.course
+                    from_users.text = users!!.place
+                    branch_user.text = users.branch
+                    year_user.text = "Year: " + users.year
+                    institutionName_user.text = users.college
+                    student_course_user.text = users.course
 
                     if (users.male) {
-                        root.genderImage_user.setImageResource(R.drawable.male)
+                        genderImage_user.setImageResource(R.drawable.male)
                         gender_txt_user.text = "Male"
                         if (users.single) {
-                            root.RS_Image_user.setImageResource(R.drawable.single_male)
-                            root.relation_txt_user.text = "Single"
+                            RS_Image_user.setImageResource(R.drawable.single_male)
+                            relation_txt_user.text = "Single"
                         } else if (users.committed) {
-                            root.RS_Image_user.setImageResource(R.drawable.com_male)
-                            root.relation_txt_user.text = "Committed"
+                            RS_Image_user.setImageResource(R.drawable.com_male)
+                            relation_txt_user.text = "Committed"
                         } else if (users.crush) {
-                            root.RS_Image_user.setImageResource(R.drawable.crush_male)
-                            root.relation_txt_user.text = "Have a Crush"
+                            RS_Image_user.setImageResource(R.drawable.crush_male)
+                            relation_txt_user.text = "Have a Crush"
                         }
                     } else if (users.female) {
-                        root.genderImage_user.setImageResource(R.drawable.female)
+                        genderImage_user.setImageResource(R.drawable.female)
                         gender_txt_user.text = "Female"
                         if (users.single) {
-                            root.RS_Image_user.setImageResource(R.drawable.single)
-                            root.relation_txt_user.text = "Single"
+                            RS_Image_user.setImageResource(R.drawable.single)
+                            relation_txt_user.text = "Single"
                         } else if (users.committed) {
-                            root.RS_Image_user.setImageResource(R.drawable.com_female)
-                            root.relation_txt_user.text = "Committed"
+                            RS_Image_user.setImageResource(R.drawable.com_female)
+                            relation_txt_user.text = "Committed"
                         } else if (users.crush) {
-                            root.RS_Image_user.setImageResource(R.drawable.crush_female)
-                            root.relation_txt_user.text = "Have a Crush"
+                            RS_Image_user.setImageResource(R.drawable.crush_female)
+                            relation_txt_user.text = "Have a Crush"
                         }
                     }
                 }

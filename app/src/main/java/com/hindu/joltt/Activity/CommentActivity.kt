@@ -4,10 +4,14 @@ import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.snackbar.Snackbar
@@ -28,17 +32,7 @@ import com.hindu.joltt.PushNotification.Client
 import com.hindu.joltt.PushNotification.Data
 import com.hindu.joltt.PushNotification.MyResponse
 import com.hindu.joltt.PushNotification.Sender
-import kotlinx.android.synthetic.main.activity_comment.RecyclerViewComment
-import kotlinx.android.synthetic.main.activity_comment.addCommentButton
-import kotlinx.android.synthetic.main.activity_comment.addCommentEditText
-import kotlinx.android.synthetic.main.activity_comment.commentBack
-import kotlinx.android.synthetic.main.activity_comment.comment_empty_animation
-import kotlinx.android.synthetic.main.activity_comment.currentUserProfileComment
-import kotlinx.android.synthetic.main.activity_comment.noCommentsText
-import kotlinx.android.synthetic.main.activity_comment.postCaptionComment
-import kotlinx.android.synthetic.main.activity_comment.publisherNameComment
-import kotlinx.android.synthetic.main.activity_comment.publisherProfileComment
-import kotlinx.android.synthetic.main.post_layout.caption
+import de.hdodenhof.circleimageview.CircleImageView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -57,12 +51,44 @@ class CommentActivity : AppCompatActivity() {
     var notify = false
     var apiService: APIService? = null
 
+    //objects
+    private lateinit var back:ImageView
+    private lateinit var addCommentButton:ImageView
+    private lateinit var commentText:EditText
+
+    private lateinit var emptyAnimation:LottieAnimationView
+    private lateinit var emptyCommentText:TextView
+
+    private lateinit var postPublisherName:TextView
+    private lateinit var postCaption:TextView
+    private lateinit var postPublisherProfile:CircleImageView
+
+    private lateinit var commentPublisherProfile:CircleImageView
+    private lateinit var commentRecyclerView:RecyclerView
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comment)
 
         apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService::class.java)
+
+        //OBJECT DECLARATION
+
+        back = findViewById(R.id.commentBack)
+        addCommentButton = findViewById(R.id.addCommentButton)
+        commentText = findViewById(R.id.addCommentEditText)
+        emptyAnimation = findViewById(R.id.comment_empty_animation)
+        emptyCommentText = findViewById(R.id.noCommentsText)
+        postPublisherName = findViewById(R.id.publisherNameComment)
+        postCaption = findViewById(R.id.postCaptionComment)
+        postPublisherProfile = findViewById(R.id.publisherProfileComment)
+        commentPublisherProfile = findViewById(R.id.currentUserProfileComment)
+        commentRecyclerView = findViewById(R.id.RecyclerViewComment)
+
+
+
 
         val intent = intent
         postId = intent.getStringExtra("postId").toString()
@@ -93,14 +119,14 @@ class CommentActivity : AppCompatActivity() {
         addCommentButton.setOnClickListener { view->
             addComment(view)
         }
-        commentBack.setOnClickListener {
+        back.setOnClickListener {
             finish()
         }
 
     }
 
     private fun addComment(view:View){
-        if (addCommentEditText.text.isEmpty()){
+        if (commentText.text.isEmpty()){
             Snackbar.make(view,"please write something...", Snackbar.LENGTH_SHORT).show()
         }else{
             val dataRef = getInstance().reference
@@ -111,11 +137,11 @@ class CommentActivity : AppCompatActivity() {
 
             val dataMap = HashMap<String,Any>()
             dataMap["commentId"] = commentId!!
-            dataMap["commentText"] = addCommentEditText.text.toString()
+            dataMap["commentText"] = commentText.text.toString()
             dataMap["commenter"] = firebaseUser!!.uid
 
             dataRef.child(commentId).updateChildren(dataMap)
-            addCommentEditText.text.clear()
+            commentText.text.clear()
             if (page){
                 addPageNotification()
             }else{
@@ -136,7 +162,7 @@ class CommentActivity : AppCompatActivity() {
 
                     if (snapshot.exists()){
                         val user = snapshot.getValue(UserModel::class.java)
-                        Glide.with(this@CommentActivity).load(user!!.profileImage).into(currentUserProfileComment)
+                        Glide.with(this@CommentActivity).load(user!!.profileImage).into(commentPublisherProfile)
                     }
                 }
 
@@ -156,9 +182,9 @@ class CommentActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     commentList!!.clear()
-                    noCommentsText.visibility = View.GONE
-                    comment_empty_animation.visibility = View.GONE
-                    RecyclerViewComment.visibility = View.VISIBLE
+                    emptyCommentText.visibility = View.GONE
+                    emptyAnimation.visibility = View.GONE
+                    commentRecyclerView.visibility = View.VISIBLE
                     for (snapshot in snapshot.children){
                         val comment = snapshot.getValue(CommentModel::class.java)
                         commentList!!.add(comment!!)
@@ -166,15 +192,15 @@ class CommentActivity : AppCompatActivity() {
                     commentsAdapter!!.notifyDataSetChanged()
 
                 }else{
-                    noCommentsText.visibility = View.VISIBLE
-                    RecyclerViewComment.visibility = View.GONE
+                    emptyCommentText.visibility = View.VISIBLE
+                    commentRecyclerView.visibility = View.GONE
                 }
 
             }
 
             override fun onCancelled(error: DatabaseError) {
-                noCommentsText.visibility = View.VISIBLE
-                RecyclerViewComment.visibility = View.GONE
+                emptyCommentText.visibility = View.VISIBLE
+                commentRecyclerView.visibility = View.GONE
             }
 
         })
@@ -189,10 +215,10 @@ class CommentActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     val caption = snapshot.value.toString()
-                    postCaptionComment.text = caption
-                }else if (caption.text ==null){
-                    postCaptionComment.text = "No Caption Added"
-                    postCaptionComment.maxLines = 2
+                    postCaption.text = caption
+                }else if (postCaption.text ==null){
+                    postCaption.text = "No Caption Added"
+                    postCaption.maxLines = 2
                 }
             }
 
@@ -211,8 +237,8 @@ class CommentActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     val data = snapshot.getValue(UserModel::class.java)
-                    Glide.with(this@CommentActivity).load(data!!.profileImage).into(publisherProfileComment)
-                    publisherNameComment.text = data.fullName
+                    Glide.with(this@CommentActivity).load(data!!.profileImage).into(postPublisherProfile)
+                    postPublisherName.text = data.fullName
 
                 }
             }
@@ -235,7 +261,7 @@ class CommentActivity : AppCompatActivity() {
 
             val dataMap = HashMap<String,Any>()
             dataMap["notificationId"] = notificationId
-            dataMap["notificationText"] = "Commented on your post"+addCommentEditText.text.toString()
+            dataMap["notificationText"] = "Commented on your post"+commentText.text.toString()
             dataMap["postID"] = postId
             dataMap["postN"] = true
             dataMap["notifierId"] = FirebaseAuth.getInstance().currentUser!!.uid
@@ -304,11 +330,10 @@ class CommentActivity : AppCompatActivity() {
                     if (token != null){
                         val data2 = Data(firebaseUser!!.uid,
                             R.mipmap.ic_launcher,
-                            "Commented on your post"+addCommentEditText.text.toString(),
+                            "Commented on your post"+commentText.text.toString(),
                             "Post",
                             publisherId)
 
-                        addCommentEditText.setHint("$token")
 
                         val sender = Sender(data2,token.toString())
 

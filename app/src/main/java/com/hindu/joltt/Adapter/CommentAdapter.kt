@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.NonNull
@@ -20,7 +21,6 @@ import com.hindu.cunow.R
 import com.hindu.joltt.Model.CommentModel
 import com.hindu.joltt.Model.UserModel
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.comments_more_option.view.deleteComment
 
 class CommentAdapter(private val mContext: Context,
                      private val mComment:List<CommentModel>,
@@ -48,13 +48,15 @@ class CommentAdapter(private val mContext: Context,
 
             val alertDialog = dialogBuilder.show()
 
+            val deleteComment = dialogView.findViewById<LinearLayout>(R.id.deleteComment)
+
             if (mComment[position].commenter == FirebaseAuth.getInstance().currentUser!!.uid || mComment[position].commenter == publisher){
-                dialogView.deleteComment.visibility = View.VISIBLE
+                deleteComment.visibility = View.VISIBLE
             }else{
-                dialogView.deleteComment.visibility = View.GONE
+               deleteComment.visibility = View.GONE
             }
 
-            dialogView.deleteComment.setOnClickListener {
+           deleteComment.setOnClickListener {
                 FirebaseDatabase.getInstance().reference
                     .child("Comments")
                     .child(postId)

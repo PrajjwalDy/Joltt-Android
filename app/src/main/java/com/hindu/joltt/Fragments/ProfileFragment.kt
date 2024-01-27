@@ -9,12 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -27,41 +32,6 @@ import com.hindu.joltt.Activity.SettingActivity
 import com.hindu.joltt.Adapter.MyPostAdapter
 import com.hindu.joltt.Model.PostModel
 import com.hindu.joltt.Model.UserModel
-import kotlinx.android.synthetic.main.profile_fragment.editProfile_fab
-import kotlinx.android.synthetic.main.profile_fragment.github_profile
-import kotlinx.android.synthetic.main.profile_fragment.gitlink_profile
-import kotlinx.android.synthetic.main.profile_fragment.instagramLink_profile
-import kotlinx.android.synthetic.main.profile_fragment.instagram_profile
-import kotlinx.android.synthetic.main.profile_fragment.linkedin_profile
-import kotlinx.android.synthetic.main.profile_fragment.linkednLink_profile
-import kotlinx.android.synthetic.main.profile_fragment.myPostLayout
-import kotlinx.android.synthetic.main.profile_fragment.noPostLayout
-import kotlinx.android.synthetic.main.profile_fragment.portfolioLink_profile
-import kotlinx.android.synthetic.main.profile_fragment.portfolio_profile
-import kotlinx.android.synthetic.main.profile_fragment.postCount_profile
-import kotlinx.android.synthetic.main.profile_fragment.profileImage
-import kotlinx.android.synthetic.main.profile_fragment.profileMenu
-import kotlinx.android.synthetic.main.profile_fragment.settingFab
-import kotlinx.android.synthetic.main.profile_fragment.threadsLink_profile
-import kotlinx.android.synthetic.main.profile_fragment.threads_profile
-import kotlinx.android.synthetic.main.profile_fragment.twitterLink_profile
-import kotlinx.android.synthetic.main.profile_fragment.twitter_profile
-import kotlinx.android.synthetic.main.profile_fragment.userBio
-import kotlinx.android.synthetic.main.profile_fragment.userFullName
-import kotlinx.android.synthetic.main.profile_fragment.view.editProfile_fab
-import kotlinx.android.synthetic.main.profile_fragment.view.github_profile
-import kotlinx.android.synthetic.main.profile_fragment.view.instagram_profile
-import kotlinx.android.synthetic.main.profile_fragment.view.linkedin_profile
-import kotlinx.android.synthetic.main.profile_fragment.view.ll_followers
-import kotlinx.android.synthetic.main.profile_fragment.view.ll_following
-import kotlinx.android.synthetic.main.profile_fragment.view.portfolio_profile
-import kotlinx.android.synthetic.main.profile_fragment.view.profileImage
-import kotlinx.android.synthetic.main.profile_fragment.view.profileMenu
-import kotlinx.android.synthetic.main.profile_fragment.view.settingFab
-import kotlinx.android.synthetic.main.profile_fragment.view.threads_profile
-import kotlinx.android.synthetic.main.profile_fragment.view.totalFollowers_user
-import kotlinx.android.synthetic.main.profile_fragment.view.totalFollowing_user
-import kotlinx.android.synthetic.main.profile_fragment.view.twitter_profile
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -82,11 +52,75 @@ class ProfileFragment : Fragment() {
     private val toInvisibility: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.to_invisibility) }
     private val toVisibility: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.to_visibility) }
 
+    private lateinit var github_profile:ImageView
+    private lateinit var linkedin_profile:ImageView
+    private lateinit var portfolio_profile:ImageView
+    private lateinit var instagram_profile:ImageView
+    private lateinit var threads_profile:ImageView
+    private lateinit var twitter_profile:ImageView
+    private lateinit var ll_followers:LinearLayout
+    private lateinit var ll_following:LinearLayout
+    private lateinit var profileMenu:FloatingActionButton
+    private lateinit var settingFab:FloatingActionButton
+    private lateinit var editProfile_fab:FloatingActionButton
+
+    private lateinit var profileImage:ImageView
+
+    private lateinit var userBio:TextView
+    private lateinit var userFullName:TextView
+    private lateinit var gitlink_profile:TextView
+    private lateinit var linkednLink_profile:TextView
+    private lateinit var instagramLink_profile:TextView
+    private lateinit var twitterLink_profile:TextView
+    private lateinit var threadsLink_profile:TextView
+    private lateinit var portfolioLink_profile:TextView
+
+    private lateinit var totalFollowers_user:TextView
+    private lateinit var totalFollowing_user:TextView
+
+    private lateinit var postCount_profile:TextView
+
+    private lateinit var noPostLayout:LinearLayout
+    private lateinit var myPostLayout:RelativeLayout
+
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val root:View = inflater.inflate(R.layout.profile_fragment, container, false)
+
+
+        github_profile = root.findViewById(R.id.github_profile)
+        linkedin_profile = root.findViewById(R.id.linkedin_profile)
+        portfolio_profile = root.findViewById(R.id.portfolio_profile)
+        instagram_profile = root.findViewById(R.id.instagram_profile)
+        threads_profile = root.findViewById(R.id.threads_profile)
+        twitter_profile = root.findViewById(R.id.twitter_profile)
+        ll_followers = root.findViewById(R.id.ll_followers)
+        ll_following = root.findViewById(R.id.ll_following)
+        profileMenu = root.findViewById(R.id.profileMenu)
+        settingFab = root.findViewById(R.id.settingFab)
+        editProfile_fab = root.findViewById(R.id.editProfile_fab)
+        profileImage = root.findViewById(R.id.profileImage)
+        userBio = root.findViewById(R.id.userBio)
+
+        userFullName = root.findViewById(R.id.userFullName)
+        gitlink_profile = root.findViewById(R.id.gitlink_profile)
+        linkednLink_profile = root.findViewById(R.id.linkednLink_profile)
+        instagramLink_profile = root.findViewById(R.id.instagramLink_profile)
+        twitterLink_profile = root.findViewById(R.id.twitterLink_profile)
+        threadsLink_profile = root.findViewById(R.id.threadsLink_profile)
+        portfolioLink_profile = root.findViewById(R.id.portfolioLink_profile)
+        totalFollowers_user = root.findViewById(R.id.totalFollowers_user)
+        totalFollowing_user = root.findViewById(R.id.totalFollowing_user)
+        postCount_profile = root.findViewById(R.id.postCount_profile)
+        noPostLayout = root.findViewById(R.id.noPostLayout)
+        myPostLayout = root.findViewById(R.id.myPostLayout)
+
+
 
         firebaseUser = FirebaseAuth.getInstance().currentUser!!
 
@@ -98,37 +132,39 @@ class ProfileFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             launch { userInfo() }
             launch { getFollowers(root) }
-            launch { getFollowings(root) }
+            launch {
+                getFollowings(root)
+            }
         }
 
-        root.github_profile.setOnClickListener {
+        github_profile.setOnClickListener {
             val url = gitlink_profile.text.toString()
             openInBrowser(url)
         }
-        root.linkedin_profile.setOnClickListener {
+        linkedin_profile.setOnClickListener {
             val url = linkednLink_profile.text.toString()
             openInBrowser(url)
         }
-        root.portfolio_profile.setOnClickListener {
+        portfolio_profile.setOnClickListener {
             val url = portfolioLink_profile.text.toString()
             openInBrowser(url)
         }
-        root.instagram_profile.setOnClickListener {
+        instagram_profile.setOnClickListener {
             val url = instagramLink_profile.text.toString()
             openInBrowser(url)
         }
-        root.threads_profile.setOnClickListener {
+        threads_profile.setOnClickListener {
             val url = threadsLink_profile.text.toString()
             openInBrowser(url)
         }
-        root.twitter_profile.setOnClickListener {
+        twitter_profile.setOnClickListener {
             val url = twitterLink_profile.text.toString()
             openInBrowser(url)
         }
 
 
 
-        root.ll_followers.setOnClickListener {
+        ll_followers.setOnClickListener {
             val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
             pref!!.putString("uid",FirebaseAuth.getInstance().currentUser!!.uid)
             pref.putString("title","Followers")
@@ -136,7 +172,7 @@ class ProfileFragment : Fragment() {
             Navigation.findNavController(root).navigate(R.id.action_navigation_profile_to_showUserFragment)
         }
 
-        root.ll_following.setOnClickListener {
+        ll_following.setOnClickListener {
             val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
             pref!!.putString("uid",FirebaseAuth.getInstance().currentUser!!.uid)
             pref.putString("title","Following")
@@ -158,21 +194,21 @@ class ProfileFragment : Fragment() {
             launch { retrievePost() }
         }
 
-        root.profileMenu.setOnClickListener {
+        profileMenu.setOnClickListener {
             addButtonClicked()
         }
 
-        root.settingFab.setOnClickListener {
+        settingFab.setOnClickListener {
             val intent = Intent(context, SettingActivity::class.java)
             startActivity(intent)
         }
 
-        root.editProfile_fab.setOnClickListener {
+        editProfile_fab.setOnClickListener {
             val intent = Intent(context, EditProfileActivity::class.java)
             startActivity(intent)
         }
 
-        root.profileImage.setOnClickListener {
+        profileImage.setOnClickListener {
             Navigation.findNavController(root).navigate(R.id.action_navigation_profile_to_myDetailsFragment)
         }
 
@@ -237,7 +273,7 @@ class ProfileFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     val count = snapshot.childrenCount.toInt()
-                    root.totalFollowers_user.text = count.toString()
+                    totalFollowers_user.text = count.toString()
                 }
             }
 
@@ -255,7 +291,7 @@ class ProfileFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     val count = snapshot.childrenCount.toInt()-1
-                    root.totalFollowing_user.text = count.toString()
+                    totalFollowing_user.text = count.toString()
                 }
             }
 

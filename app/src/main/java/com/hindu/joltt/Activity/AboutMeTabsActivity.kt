@@ -9,7 +9,6 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.hindu.cunow.R
 import com.hindu.joltt.Adapter.AboutMeTabsAdapter
-import kotlinx.android.synthetic.main.activity_about_me_tabs.*
 
 class AboutMeTabsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +43,7 @@ class AboutMeTabsActivity : AppCompatActivity() {
 
         }
  fun setupActionBar(){
-         setSupportActionBar(userNameAboutMe)
+         //setSupportActionBar(userNameAboutMe)
 
          val actionBar = supportActionBar
          if(actionBar != null){

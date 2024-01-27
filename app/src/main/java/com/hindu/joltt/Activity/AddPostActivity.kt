@@ -9,14 +9,21 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.view.View
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -35,13 +42,6 @@ import com.hindu.joltt.Model.JoltScoreModel
 import com.hindu.joltt.Model.UserModel
 import com.theartofdev.edmodo.cropper.CropImage
 import com.yalantis.ucrop.UCrop
-import kotlinx.android.synthetic.main.activity_add_post.caption_image
-import kotlinx.android.synthetic.main.activity_add_post.imagePickOption_RL
-import kotlinx.android.synthetic.main.activity_add_post.pickImage
-import kotlinx.android.synthetic.main.activity_add_post.pickVideo
-import kotlinx.android.synthetic.main.activity_add_post.postImage_preview
-import kotlinx.android.synthetic.main.activity_add_post.shareImage_btn
-import kotlinx.android.synthetic.main.fragment_home.addText_ET
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -64,6 +64,13 @@ class AddPostActivity : AppCompatActivity() {
     private val WRITE_EXTERNAL_STORAGE_CODE = 1
 
     lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
+    private lateinit var pickImage:ImageView
+    private lateinit var pickVideo:ImageView
+    private lateinit var shareImage_btn:AppCompatButton
+    private lateinit var postImage_preview:ImageView
+    private lateinit var imagePickOption_RL:RelativeLayout
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_post)
@@ -73,15 +80,27 @@ class AddPostActivity : AppCompatActivity() {
         checkPermission()
         requestPermission()
 
+        //Object Declarations
+        pickImage = findViewById(R.id.pickImage)
+        pickVideo = findViewById(R.id.pickVideo)
+        shareImage_btn = findViewById(R.id.shareImage_btn)
+        postImage_preview = findViewById(R.id.postImage_preview)
+        imagePickOption_RL = findViewById(R.id.imagePickOption_RL)
+
 
         pickImage.setOnClickListener {
-            if (checkPermission()) {
-                pickFromGallery()
-            } else {
-                Toast.makeText(this, "Please Allow the Required Permission", Toast.LENGTH_SHORT)
-                    .show()
-                requestPermission()
-            }
+
+
+            pickFromGallery()
+
+//            if (checkPermission()) {
+//                pickFromGallery()
+//            } else {
+//                Toast.makeText(this, "Please Allow the Required Permission", Toast.LENGTH_SHORT)
+//                    .show()
+//                requestPermission()
+//                //pickFromGallery()
+//            }
         }
 
         pickVideo.setOnClickListener {
@@ -151,26 +170,91 @@ class AddPostActivity : AppCompatActivity() {
     }
 
     //CHECK PERMISSION
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun checkPermission(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.READ_EXTERNAL_STORAGE
-        ) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-        ) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.CAMERA
-        ) == PackageManager.PERMISSION_GRANTED
+
+
+        return when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> {
+                // Android 10 and higher
+                ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED &&
+                        ContextCompat.checkSelfPermission(
+                            this,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        ) == PackageManager.PERMISSION_GRANTED &&
+                        ContextCompat.checkSelfPermission(
+                            this,
+                            Manifest.permission.CAMERA
+                        ) == PackageManager.PERMISSION_GRANTED &&
+                        ContextCompat.checkSelfPermission(
+                            this,
+                            Manifest.permission.READ_MEDIA_IMAGES
+                        ) == PackageManager.PERMISSION_GRANTED &&
+                        ContextCompat.checkSelfPermission(
+                            this,
+                            Manifest.permission.READ_MEDIA_VIDEO
+                        ) == PackageManager.PERMISSION_GRANTED
+            }
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.M -> {
+                // Android 6 and higher
+                ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED &&
+                        ContextCompat.checkSelfPermission(
+                            this,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        ) == PackageManager.PERMISSION_GRANTED &&
+                        ContextCompat.checkSelfPermission(
+                            this,
+                            Manifest.permission.CAMERA
+                        ) == PackageManager.PERMISSION_GRANTED
+            }
+            else -> {
+                // Versions below Android 6
+                ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED &&
+                        ContextCompat.checkSelfPermission(
+                            this,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        ) == PackageManager.PERMISSION_GRANTED
+            }
+        }
+
+//        return (ContextCompat.checkSelfPermission(
+//            this,
+//            Manifest.permission.READ_EXTERNAL_STORAGE
+//        ) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
+//            this,
+//            Manifest.permission.WRITE_EXTERNAL_STORAGE
+//        ) == PackageManager.PERMISSION_GRANTED && (Build.VERSION.SDK_INT < Build.VERSION_CODES.R ||
+//                Environment.isExternalStorageManager()) && ContextCompat.checkSelfPermission(
+//            this,
+//            Manifest.permission.CAMERA
+//        ) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
+//            this,
+//            Manifest.permission.READ_MEDIA_IMAGES
+//        ) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
+//            this,
+//            Manifest.permission.READ_MEDIA_VIDEO
+//        ) == PackageManager.PERMISSION_GRANTED)
     }
 
     //REQUEST PERMISSION
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun requestPermission() {
         ActivityCompat.requestPermissions(
             this,
             arrayOf(
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_MEDIA_IMAGES,
+                Manifest.permission.READ_MEDIA_VIDEO,
                 Manifest.permission.CAMERA
             ),
             100
@@ -190,6 +274,7 @@ class AddPostActivity : AppCompatActivity() {
 
     //UPLOAD IMAGE
     private fun uploadImage(skills:String, location:String,college:String,experience:String,branch:String,course:String) {
+        val caption_image = findViewById<EditText>(R.id.caption_image)
         val progressDialog = Dialog(this)
         progressDialog.setContentView(R.layout.porgress_dialog)
         progressDialog.show()
@@ -285,6 +370,7 @@ class AddPostActivity : AppCompatActivity() {
 
     //UPLOAD ONLY TEXT
     private fun uploadOnlyText(skills:String, location:String,college:String,experience:String,branch:String,course:String) {
+        val caption_image = findViewById<EditText>(R.id.caption_image)
         if (caption_image.text.isEmpty()) {
             Toast.makeText(this, "Please Write something", Toast.LENGTH_SHORT).show()
         } else {
@@ -345,6 +431,8 @@ class AddPostActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        val postImage_preview = findViewById<ImageView>(R.id.postImage_preview)
+
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
             val result = CropImage.getActivityResult(data)
             imageUri = result.uri
@@ -399,6 +487,7 @@ class AddPostActivity : AppCompatActivity() {
         imagePickOption_RL.visibility = View.GONE
     }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -408,15 +497,14 @@ class AddPostActivity : AppCompatActivity() {
 
         when (requestCode) {
 
-            WRITE_EXTERNAL_STORAGE_CODE -> {
-
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-
+            100 -> {
+                if (grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
+                    //pickFromGallery()
                 } else {
-                    Toast.makeText(this, "Enable permissions", Toast.LENGTH_SHORT).show()
+                    // Permission denied, show a message or handle accordingly
+                    //Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
+                    //requestPermission()
                 }
-
             }
 
         }
@@ -425,6 +513,7 @@ class AddPostActivity : AppCompatActivity() {
 
     // HASHTAG FUNCTION
     private fun buildHasTag(postId: String) {
+        val caption_image = findViewById<EditText>(R.id.caption_image)
         val sentence = caption_image.text.toString().trim { it <= ' ' }
         val words = sentence.split(" ")
 

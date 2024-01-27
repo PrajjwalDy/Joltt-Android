@@ -3,6 +3,7 @@ package com.hindu.joltt.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -11,13 +12,20 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.R
 import com.hindu.joltt.MainActivity
-import kotlinx.android.synthetic.main.activity_welcome.register_welcome
-import kotlinx.android.synthetic.main.activity_welcome.welcome_signin
 
 class WelcomeActivity : AppCompatActivity() {
+
+    private lateinit var welcome_signin:AppCompatButton
+    private lateinit var register_welcome:AppCompatButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome)
+
+
+        welcome_signin = findViewById(R.id.welcome_signin)
+        register_welcome = findViewById(R.id.register_welcome)
+
 
         welcome_signin.setOnClickListener {
             val intent = Intent(this, LogInActivity::class.java)

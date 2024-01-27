@@ -7,6 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -25,29 +30,6 @@ import com.hindu.joltt.Adapter.ExpAdapter
 import com.hindu.joltt.Adapter.InterestAdapter_Prof
 import com.hindu.joltt.Adapter.SkillAdapter
 import com.hindu.joltt.Model.UserModel
-import kotlinx.android.synthetic.main.my_details_fragment.experience_btn_cv
-import kotlinx.android.synthetic.main.my_details_fragment.experience_btn_tv
-import kotlinx.android.synthetic.main.my_details_fragment.gender_txt
-import kotlinx.android.synthetic.main.my_details_fragment.interest_btn_cv
-import kotlinx.android.synthetic.main.my_details_fragment.interest_btn_tv
-import kotlinx.android.synthetic.main.my_details_fragment.skill_btn_cv
-import kotlinx.android.synthetic.main.my_details_fragment.skill_btn_txt
-import kotlinx.android.synthetic.main.my_details_fragment.view.RS_Image_profile
-import kotlinx.android.synthetic.main.my_details_fragment.view.branch_profile
-import kotlinx.android.synthetic.main.my_details_fragment.view.experience_btn
-import kotlinx.android.synthetic.main.my_details_fragment.view.from_profile
-import kotlinx.android.synthetic.main.my_details_fragment.view.genderImage_profile
-import kotlinx.android.synthetic.main.my_details_fragment.view.institutionName
-import kotlinx.android.synthetic.main.my_details_fragment.view.interest_btn_cv
-import kotlinx.android.synthetic.main.my_details_fragment.view.ll_about_profile
-import kotlinx.android.synthetic.main.my_details_fragment.view.ll_experience
-import kotlinx.android.synthetic.main.my_details_fragment.view.ll_interests
-import kotlinx.android.synthetic.main.my_details_fragment.view.ll_skills
-import kotlinx.android.synthetic.main.my_details_fragment.view.postBtn_btn_cv
-import kotlinx.android.synthetic.main.my_details_fragment.view.relation_txt
-import kotlinx.android.synthetic.main.my_details_fragment.view.skill_btn
-import kotlinx.android.synthetic.main.my_details_fragment.view.student_course
-import kotlinx.android.synthetic.main.my_details_fragment.view.year_profile
 
 class MyDetailsFragment : Fragment() {
     var recyclerView: RecyclerView? = null
@@ -79,6 +61,41 @@ class MyDetailsFragment : Fragment() {
         )
     }
 
+    private lateinit var skill_btn_cv:CardView
+    private lateinit var skill_btn_txt:TextView
+    private lateinit var skill_btn:RelativeLayout
+
+    private lateinit var experience_btn_cv:CardView
+    private lateinit var experience_btn_tv:TextView
+
+    private lateinit var interest_btn_cv:CardView
+    private lateinit var interest_btn_tv:TextView
+
+    private lateinit var ll_skills:LinearLayout
+    private lateinit var ll_interests:LinearLayout
+
+    private lateinit var ll_about_profile:LinearLayout
+
+    private lateinit var ll_experience:LinearLayout
+
+    private lateinit var experience_btn:RelativeLayout
+
+    private lateinit var postBtn_btn_cv:CardView
+
+
+    private lateinit var from_profile:TextView
+    private lateinit var institutionName:TextView
+    private lateinit var student_course:TextView
+    private lateinit var branch_profile:TextView
+    private lateinit var year_profile:TextView
+
+    private lateinit var gender_txt:TextView
+    private lateinit var genderImage_profile:ImageView
+    private lateinit var RS_Image_profile:ImageView
+    private lateinit var relation_txt:TextView
+
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -88,11 +105,46 @@ class MyDetailsFragment : Fragment() {
         _binding = MyDetailsFragmentBinding.inflate(inflater, container, false)
         val root: View = binidng.root
 
+
+        skill_btn = root.findViewById(R.id.skill_btn)
+        skill_btn_cv = root.findViewById(R.id.skill_btn_cv)
+        skill_btn_txt = root.findViewById(R.id.skill_btn_txt)
+
+        experience_btn_cv = root.findViewById(R.id.experience_btn_cv)
+        experience_btn_tv = root.findViewById(R.id.experience_btn_tv)
+        interest_btn_cv = root.findViewById(R.id.interest_btn_cv)
+
+        interest_btn_tv = root.findViewById(R.id.interest_btn_tv)
+        ll_skills = root.findViewById(R.id.ll_skills)
+        ll_interests = root.findViewById(R.id.ll_interests)
+
+        ll_about_profile = root.findViewById(R.id.ll_about_profile)
+        ll_experience = root.findViewById(R.id.ll_experience)
+
+        experience_btn = root.findViewById(R.id.experience_btn)
+
+        postBtn_btn_cv = root.findViewById(R.id.postBtn_btn_cv)
+
+        from_profile = root.findViewById(R.id.from_profile)
+        institutionName = root.findViewById(R.id.institutionName)
+        student_course = root.findViewById(R.id.student_course)
+        branch_profile = root.findViewById(R.id.branch_profile)
+        year_profile = root.findViewById(R.id.year_profile)
+        gender_txt = root.findViewById(R.id.gender_txt)
+
+        genderImage_profile = root.findViewById(R.id.genderImage_profile)
+        RS_Image_profile = root.findViewById(R.id.RS_Image_profile)
+
+        relation_txt = root.findViewById(R.id.relation_txt)
+
+        
+
+
         //Top Function Call
         retrieveUserData(root)
 
         //Skill Button
-        root.skill_btn.setOnClickListener {
+        skill_btn.setOnClickListener {
             val recyclerView: RecyclerView = root.findViewById(R.id.profile_skill_rv)
 
             skill_btn_cv.setCardBackgroundColor(Color.parseColor("#FF3A63"))
@@ -106,17 +158,17 @@ class MyDetailsFragment : Fragment() {
 
             //visibility of the Layouts
 
-            root.ll_skills.visibility = View.VISIBLE
-            root.ll_skills.startAnimation(layout)
+            ll_skills.visibility = View.VISIBLE
+            ll_skills.startAnimation(layout)
 
-            root.ll_interests.visibility = View.GONE
-            root.ll_interests.startAnimation(toBottom)
+            ll_interests.visibility = View.GONE
+            ll_interests.startAnimation(toBottom)
 
-            root.ll_about_profile.visibility = View.GONE
-            root.ll_about_profile.startAnimation(toBottom)
+            ll_about_profile.visibility = View.GONE
+            ll_about_profile.startAnimation(toBottom)
 
-            root.ll_experience.visibility = View.GONE
-            root.ll_experience.startAnimation(toBottom)
+            ll_experience.visibility = View.GONE
+            ll_experience.startAnimation(toBottom)
 
             viewModel.mySkillModel!!.observe(viewLifecycleOwner, Observer {
                 initView2(recyclerView)
@@ -128,7 +180,7 @@ class MyDetailsFragment : Fragment() {
         }
 
         //Interest Button
-        root.interest_btn_cv.setOnClickListener {
+        interest_btn_cv.setOnClickListener {
 
             //Changing the color theme of the Card View
             interest_btn_cv.setCardBackgroundColor(Color.parseColor("#FF3A63"))
@@ -145,17 +197,17 @@ class MyDetailsFragment : Fragment() {
 
 
             //visibility of the Layouts
-            root.ll_interests.visibility = View.VISIBLE
-            root.ll_interests.startAnimation(layout)
+            ll_interests.visibility = View.VISIBLE
+            ll_interests.startAnimation(layout)
 
-            root.ll_about_profile.visibility = View.GONE
-            root.ll_about_profile.startAnimation(toBottom)
+            ll_about_profile.visibility = View.GONE
+            ll_about_profile.startAnimation(toBottom)
 
-            root.ll_experience.visibility = View.GONE
-            root.ll_experience.startAnimation(toBottom)
+            ll_experience.visibility = View.GONE
+            ll_experience.startAnimation(toBottom)
 
-            root.ll_skills.visibility = View.GONE
-            root.ll_skills.startAnimation(toBottom)
+            ll_skills.visibility = View.GONE
+            ll_skills.startAnimation(toBottom)
 
 
             //loadData
@@ -168,7 +220,7 @@ class MyDetailsFragment : Fragment() {
         }
 
         //Experience button
-        root.experience_btn.setOnClickListener {
+        experience_btn.setOnClickListener {
 
             val recyclerView: RecyclerView = root.findViewById(R.id.profile_experience_rv)
 
@@ -183,17 +235,17 @@ class MyDetailsFragment : Fragment() {
 
             //visibility and animation of the layouts
 
-            root.ll_experience.visibility = View.VISIBLE
-            root.ll_experience.startAnimation(layout)
+            ll_experience.visibility = View.VISIBLE
+            ll_experience.startAnimation(layout)
 
-            root.ll_skills.visibility = View.GONE
-            root.ll_skills.startAnimation(toBottom)
+            ll_skills.visibility = View.GONE
+            ll_skills.startAnimation(toBottom)
 
-            root.ll_interests.visibility = View.GONE
-            root.ll_interests.startAnimation(toBottom)
+            ll_interests.visibility = View.GONE
+            ll_interests.startAnimation(toBottom)
 
-            root.ll_about_profile.visibility = View.GONE
-            root.ll_about_profile.startAnimation(toBottom)
+            ll_about_profile.visibility = View.GONE
+            ll_about_profile.startAnimation(toBottom)
 
             viewModel.myExpModel!!.observe(viewLifecycleOwner, Observer {
                 initView(recyclerView, 2)
@@ -204,7 +256,7 @@ class MyDetailsFragment : Fragment() {
 
         }
 
-        root.postBtn_btn_cv.setOnClickListener {
+        postBtn_btn_cv.setOnClickListener {
 
             Navigation.findNavController(root)
                 .navigate(R.id.action_myDetailsFragment_to_myPostsFragemt)
@@ -230,37 +282,36 @@ class MyDetailsFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     val users = snapshot.getValue(UserModel::class.java)
-                    root.from_profile.text = users?.place
-                    root.institutionName.text = users?.college
-                    root.student_course.text= users?.course
-                    root.branch_profile.text = users?.branch
-                    root.year_profile.text = "Year: " + users?.year
+                    from_profile.text = users?.place
+                    institutionName.text = users?.college
+                    student_course.text= users?.course
+                    branch_profile.text = users?.branch
+                    year_profile.text = "Year: " + users?.year
 
                     if (users?.male == true) {
-                        root.genderImage_profile.setImageResource(R.drawable.male)
+                        genderImage_profile.setImageResource(R.drawable.male)
                         gender_txt.text = "Male"
-                        if (users.single) {
-                            root.RS_Image_profile.setImageResource(R.drawable.single_male)
-                            root.relation_txt.text = "Single"
+                        if (users.single) { RS_Image_profile.setImageResource(R.drawable.single_male)
+                            relation_txt.text = "Single"
                         } else if (users.committed) {
-                            root.RS_Image_profile.setImageResource(R.drawable.com_male)
-                            root.relation_txt.text = "Committed"
+                            RS_Image_profile.setImageResource(R.drawable.com_male)
+                            relation_txt.text = "Committed"
                         } else if (users.crush) {
-                            root.RS_Image_profile.setImageResource(R.drawable.crush_male)
-                            root.relation_txt.text = "Have a Crush"
+                            RS_Image_profile.setImageResource(R.drawable.crush_male)
+                            relation_txt.text = "Have a Crush"
                         }
                     } else if (users?.female == true) {
-                        root.genderImage_profile.setImageResource(R.drawable.female)
+                        genderImage_profile.setImageResource(R.drawable.female)
                         gender_txt.text = "Female"
                         if (users.single) {
-                            root.RS_Image_profile.setImageResource(R.drawable.single)
-                            root.relation_txt.text = "Single"
+                            RS_Image_profile.setImageResource(R.drawable.single)
+                            relation_txt.text = "Single"
                         } else if (users.committed) {
-                            root.RS_Image_profile.setImageResource(R.drawable.com_female)
-                            root.relation_txt.text = "Committed"
+                            RS_Image_profile.setImageResource(R.drawable.com_female)
+                            relation_txt.text = "Committed"
                         } else if (users.crush) {
-                            root.RS_Image_profile.setImageResource(R.drawable.crush_female)
-                            root.relation_txt.text = "Have a Crush"
+                            RS_Image_profile.setImageResource(R.drawable.crush_female)
+                            relation_txt.text = "Have a Crush"
                         }
                     }
                 }

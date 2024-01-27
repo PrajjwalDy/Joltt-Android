@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,11 +17,6 @@ import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.R
 import com.hindu.joltt.Adapter.ShowUserAdapter
 import com.hindu.joltt.Model.UserModel
-import kotlinx.android.synthetic.main.show_user_fragment.noFriendsLayout
-import kotlinx.android.synthetic.main.show_user_fragment.showUserFrag_RV
-import kotlinx.android.synthetic.main.show_user_fragment.view.noFriendsLayout
-import kotlinx.android.synthetic.main.show_user_fragment.view.showUserFrag_RV
-import kotlinx.android.synthetic.main.show_user_fragment.view.title_showUsers
 
 class ShowUserFragment : Fragment() {
 
@@ -31,12 +28,25 @@ class ShowUserFragment : Fragment() {
     private var uid = ""
     private var title = ""
 
+    private lateinit var title_showUsers:TextView
+    private lateinit var noFriendsLayout:LinearLayout
+    private lateinit var showUserFrag_RV:RecyclerView
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val root: View = inflater.inflate(R.layout.show_user_fragment, container, false)
+
+
+        title_showUsers = root.findViewById(R.id.title_showUsers)
+        noFriendsLayout = root.findViewById(R.id.noFriendsLayout)
+        showUserFrag_RV = root.findViewById(R.id.showUserFrag_RV)
+
+
+
+
 
         val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)
         if (pref != null) {
@@ -60,13 +70,13 @@ class ShowUserFragment : Fragment() {
             "Chat" -> getFollowers()
         }
 
-        root.title_showUsers.text = title
+        title_showUsers.text = title
         if (recyclerView.adapter?.itemCount == 0) {
-            root.noFriendsLayout.visibility = View.VISIBLE
-            root.showUserFrag_RV.visibility = View.GONE
+            noFriendsLayout.visibility = View.VISIBLE
+            showUserFrag_RV.visibility = View.GONE
         } else {
-            root.noFriendsLayout.visibility = View.GONE
-            root.showUserFrag_RV.visibility = View.VISIBLE
+            noFriendsLayout.visibility = View.GONE
+            showUserFrag_RV.visibility = View.VISIBLE
         }
 
         return root

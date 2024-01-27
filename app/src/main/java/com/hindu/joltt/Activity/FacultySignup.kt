@@ -2,83 +2,25 @@ package com.hindu.joltt.Activity
 
 import android.app.ProgressDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.hindu.cunow.R
-import kotlinx.android.synthetic.main.activity_faculty_signup.*
-import java.util.*
-import kotlin.collections.HashMap
+import java.util.Locale
 
 class FacultySignup : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_faculty_signup)
 
-        faculty_signup_button.setOnClickListener {
-            faculty_signup()
-        }
-
-        faculty_cna_login_button.setOnClickListener {
-            val intent = Intent(this, FacultyLogin::class.java)
-            startActivity(intent)
-        }
     }
 
-    private fun faculty_signup(){
-        val facultyName = faculty_name.text.toString().trim{it <=' '}
-        val facultyEmail = faculty_email.text.toString().trim{it <=' '}
-        val facultyPhone = faculty_phone.text.toString().trim{it <=' '}
-        val EID = faculty_eid.text.toString().trim(){it <=' '}
-        val password = faculty_password.text.toString().trim{it <=' '}
 
-        when{
-            TextUtils.isEmpty(faculty_name.text.toString().trim{it <=' '})->{
-                Toast.makeText(this@FacultySignup, "Please enter your Full Name", Toast.LENGTH_SHORT).show()
-            }
-
-            TextUtils.isEmpty(faculty_email.text.toString().trim{it <=' '})->{
-                Toast.makeText(this@FacultySignup, "Please enter your email", Toast.LENGTH_SHORT).show()
-            }
-            TextUtils.isEmpty(faculty_phone.text.toString().trim{it <=' '})->{
-                Toast.makeText(this@FacultySignup, "Please enter your phone", Toast.LENGTH_SHORT).show()
-            }
-
-            TextUtils.isEmpty(faculty_eid.text.toString().trim(){it <=' '})->{
-                Toast.makeText(this@FacultySignup, "Please enter your EID", Toast.LENGTH_SHORT).show()
-            }
-
-            TextUtils.isEmpty(faculty_password.text.trim{it <=' '})->{
-                Toast.makeText(this@FacultySignup, "Please enter your password", Toast.LENGTH_SHORT).show()
-            }
-            else->{
-                val progressDialog = ProgressDialog(this@FacultySignup)
-                progressDialog.setTitle("SigningUp")
-                progressDialog.setCanceledOnTouchOutside(false)
-                progressDialog.show()
-
-                val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
-
-                mAuth.createUserWithEmailAndPassword(facultyEmail,password)
-                    .addOnCompleteListener{task->
-                        if(task.isSuccessful){
-                            saveData(facultyName,facultyEmail,facultyPhone,EID,password,progressDialog)
-                        }else{
-                            val message = task.exception.toString()
-                            Toast.makeText(this, "Some Error occurred:$message", Toast.LENGTH_LONG).show()
-                            mAuth.signOut()
-                            progressDialog.dismiss()
-                        }
-                    }
-            }
-        }
-    }
 
     private fun saveData(facultyName: String, facultyEmail: String,
                          facultyPhone: String, EID:String, password: String,

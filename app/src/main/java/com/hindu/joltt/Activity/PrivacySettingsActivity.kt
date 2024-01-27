@@ -2,7 +2,9 @@ package com.hindu.joltt.Activity
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -11,14 +13,26 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.R
 import com.hindu.joltt.Model.UserModel
-import kotlinx.android.synthetic.main.activity_privacy_settings.Privacy_Back
-import kotlinx.android.synthetic.main.activity_privacy_settings.accountPrivacy_private
-import kotlinx.android.synthetic.main.activity_privacy_settings.accountPrivacy_public
 
 class PrivacySettingsActivity : AppCompatActivity() {
+
+    private lateinit var Privacy_Back:ImageView
+    private lateinit var accountPrivacy_private:AppCompatButton
+    private lateinit var accountPrivacy_public:AppCompatButton
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_privacy_settings)
+
+
+        Privacy_Back = findViewById(R.id.Privacy_Back)
+        accountPrivacy_private = findViewById(R.id.accountPrivacy_private)
+        accountPrivacy_public = findViewById(R.id.accountPrivacy_public)
+
+
+
+
         Privacy_Back.setOnClickListener {
             finish()
         }

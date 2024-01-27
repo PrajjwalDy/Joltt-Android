@@ -15,16 +15,12 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.StorageTask
 import com.hindu.cunow.R
 import com.yalantis.ucrop.UCrop
-import kotlinx.android.synthetic.main.activity_web_scraping.previewImage
-import kotlinx.android.synthetic.main.activity_web_scraping.selectImage_test
-import kotlinx.android.synthetic.main.activity_web_scraping.upload
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.util.UUID
@@ -47,13 +43,13 @@ class WebScraping : AppCompatActivity() {
         checkPermission()
         requestPermission()
 
-        selectImage_test.setOnClickListener {
-            pickFromGallery()
-        }
-
-        upload.setOnClickListener {
-            uploadImage()
-        }
+//        selectImage_test.setOnClickListener {
+//            pickFromGallery()
+//        }
+//
+//        upload.setOnClickListener {
+//            uploadImage()
+//        }
     }
 
     private fun checkPermission(): Boolean {
@@ -118,7 +114,7 @@ class WebScraping : AppCompatActivity() {
         if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
             val resultUri :Uri ?= UCrop.getOutput(data!!)
 
-            setImage(resultUri!!)
+           // setImage(resultUri!!)
 
             if (resultUri != null) {
                 finalUri=resultUri
@@ -138,11 +134,11 @@ class WebScraping : AppCompatActivity() {
             .start(this)
     }
 
-    private fun setImage(uri: Uri){
-        Glide.with(this)
-            .load(uri)
-            .into(previewImage)
-    }
+//    private fun setImage(uri: Uri){
+//        Glide.with(this)
+//            .load(uri)
+//            .into(previewImage)
+//    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,

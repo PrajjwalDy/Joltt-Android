@@ -4,10 +4,15 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
@@ -19,7 +24,6 @@ import com.google.firebase.storage.StorageTask
 import com.google.firebase.storage.UploadTask
 import com.hindu.cunow.R
 import com.theartofdev.edmodo.cropper.CropImage
-import kotlinx.android.synthetic.main.activity_create_page.*
 
 class CreatePageActivity : AppCompatActivity() {
 
@@ -28,10 +32,30 @@ class CreatePageActivity : AppCompatActivity() {
 
     private var storagePageReference:StorageReference? = null
 
+    //OBJECTS CREATE PAGE
+    private lateinit var selectIcon_TV:TextView
+    private lateinit var createPage_Btn:AppCompatButton
+    private lateinit var pageDescription:EditText
+    private lateinit var pageName:EditText
+    private lateinit var LL_pageDetails_ETs:LinearLayout
+    private lateinit var pageIcon_Image:ImageView
+    private lateinit var pageDetails_Head:TextView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_page)
+
+        //OBJECTS DECLARATION
+        selectIcon_TV = findViewById(R.id.selectIcon_TV)
+        createPage_Btn = findViewById(R.id.createPage_Btn)
+        pageDescription = findViewById(R.id.pageDescription)
+        pageName = findViewById(R.id.pageName)
+        LL_pageDetails_ETs = findViewById(R.id.LL_pageDetails_ETs)
+        pageIcon_Image = findViewById(R.id.pageIcon_Image)
+        pageDetails_Head = findViewById(R.id.pageDetails_Head)
+
+
 
         storagePageReference = FirebaseStorage.getInstance().reference.child("PageData")
 

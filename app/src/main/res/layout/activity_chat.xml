@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.ChatActivity">
+    tools:context="com.hindu.joltt.Activity.ChatActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar_chat"
@@ -24,7 +24,10 @@
                 android:layout_width="32dp"
                 android:layout_height="28dp"
                 android:layout_gravity="center_vertical"
-                android:layout_margin="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 android:src="@drawable/back" />
 
 

@@ -3,9 +3,9 @@ package com.hindu.joltt.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -15,16 +15,21 @@ import com.hindu.joltt.Adapter.ReportAdapter
 import com.hindu.joltt.MainActivity
 import com.hindu.joltt.Model.ReportModel
 import com.uk.tastytoasty.TastyToasty
-import kotlinx.android.synthetic.main.activity_report_post.reportPost_btn
 
 class ReportPostActivity : AppCompatActivity() {
     private var postId = ""
     private var reportList:MutableList<ReportModel>? = null
     private var reportAdapter: ReportAdapter? = null
 
+
+    private lateinit var reportPost_btn:AppCompatButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_report_post)
+
+
+        reportPost_btn = findViewById(R.id.reportPost_btn)
 
         val intent = intent
         postId = intent.getStringExtra("postId").toString()

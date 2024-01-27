@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".Fragments.community.CommunityFragment">
+    tools:context="com.hindu.joltt.Fragments.community.CommunityFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/communityAppbar"
@@ -41,10 +41,10 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/community_RV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/communityAppbar"
-        android:id="@+id/community_RV"/>
+        android:layout_below="@+id/communityAppbar" />
 
     <Button
         android:id="@+id/add_button_commnunity"
@@ -61,16 +61,17 @@
         android:textAlignment="center"
         android:textColor="@color/grey"
         android:textSize="24sp" />
-    
+
     <androidx.cardview.widget.CardView
         android:id="@+id/create_query_CV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="10dp"
+        android:layout_centerInParent="true"
         android:layout_margin="10dp"
         android:visibility="gone"
-        android:layout_centerInParent="true"
-        app:cardCornerRadius="12dp">
+        app:cardCornerRadius="12dp"
+        app:cardElevation="10dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -79,25 +80,25 @@
             <ImageView
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:src="@drawable/people_community"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp"
+                android:src="@drawable/people_community" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="Post your query for discussion"
-                android:fontFamily="@font/comfortaa"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="-40sp"
-                android:layout_marginStart="10dp"/>
+                android:fontFamily="@font/comfortaa"
+                android:text="Post your query for discussion"
+                android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/com_editText"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:padding="5dp"
+                android:layout_margin="10dp"
                 android:background="@drawable/ocean_green_button"
-                android:layout_margin="10dp"/>
+                android:padding="5dp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -107,21 +108,21 @@
                     android:id="@+id/com_post"
                     android:layout_width="100dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/viva_magenta_round_bg"
                     android:layout_alignParentEnd="true"
-                    android:text="Post"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/viva_magenta_round_bg"
                     android:fontFamily="@font/comfortaa"
+                    android:text="Post"
                     android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:layout_margin="10dp"/>
+                    android:textColor="@color/white" />
 
                 <ImageView
                     android:id="@+id/close_ccp"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:src="@drawable/close"
+                    android:layout_centerVertical="true"
                     android:layout_toStartOf="@+id/com_post"
-                    android:layout_centerVertical="true"/>
+                    android:src="@drawable/close" />
 
             </RelativeLayout>
 
@@ -129,6 +130,5 @@
 
     </androidx.cardview.widget.CardView>
 
-    
 
 </RelativeLayout>

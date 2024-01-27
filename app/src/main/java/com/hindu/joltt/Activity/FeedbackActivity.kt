@@ -2,23 +2,48 @@ package com.hindu.joltt.Activity
 
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
+import com.airbnb.lottie.LottieAnimationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.hindu.cunow.R
-import kotlinx.android.synthetic.main.activity_feedback.done
-import kotlinx.android.synthetic.main.activity_feedback.fName
-import kotlinx.android.synthetic.main.activity_feedback.feedText
-import kotlinx.android.synthetic.main.activity_feedback.feedbackBack
-import kotlinx.android.synthetic.main.activity_feedback.feedbackTxt
-import kotlinx.android.synthetic.main.activity_feedback.ll_feedLayout
-import kotlinx.android.synthetic.main.activity_feedback.sendFeedback
 
 class FeedbackActivity : AppCompatActivity() {
+
+
+    private lateinit var feedbackBack:ImageView
+    private lateinit var feedbackTxt:TextView
+    private lateinit var sendFeedback:AppCompatButton
+
+    private lateinit var fName:EditText
+    private lateinit var feedText:EditText
+    private lateinit var ll_feedLayout:LinearLayout
+    private lateinit var done:LottieAnimationView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feedback)
+
+
+        feedbackBack = findViewById(R.id.feedbackBack)
+        feedbackTxt = findViewById(R.id.feedbackTxt)
+        sendFeedback = findViewById(R.id.sendFeedback)
+        fName = findViewById(R.id.fName)
+        feedText = findViewById(R.id.feedText)
+        ll_feedLayout = findViewById(R.id.ll_feedLayout)
+        done = findViewById(R.id.done)
+
+
+
+
+
+
 
         feedbackBack.setOnClickListener {
             finish()

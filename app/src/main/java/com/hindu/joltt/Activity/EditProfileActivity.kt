@@ -7,8 +7,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import com.bumptech.glide.Glide
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
@@ -25,30 +29,7 @@ import com.google.firebase.storage.UploadTask
 import com.hindu.cunow.R
 import com.hindu.joltt.Model.UserModel
 import com.theartofdev.edmodo.cropper.CropImage
-import kotlinx.android.synthetic.main.activity_edit_profile.Bio_EditText
-import kotlinx.android.synthetic.main.activity_edit_profile.ET_college
-import kotlinx.android.synthetic.main.activity_edit_profile.ET_course
-import kotlinx.android.synthetic.main.activity_edit_profile.ET_github
-import kotlinx.android.synthetic.main.activity_edit_profile.ET_instagram
-import kotlinx.android.synthetic.main.activity_edit_profile.ET_linkedin
-import kotlinx.android.synthetic.main.activity_edit_profile.ET_portfolio
-import kotlinx.android.synthetic.main.activity_edit_profile.ET_threads
-import kotlinx.android.synthetic.main.activity_edit_profile.ET_twitter
-import kotlinx.android.synthetic.main.activity_edit_profile.Edit_Back
-import kotlinx.android.synthetic.main.activity_edit_profile.ProfileUserName_editText
-import kotlinx.android.synthetic.main.activity_edit_profile.change_ProfileImage
-import kotlinx.android.synthetic.main.activity_edit_profile.change_ProfileImage_text
-import kotlinx.android.synthetic.main.activity_edit_profile.editTextAddress
-import kotlinx.android.synthetic.main.activity_edit_profile.editTextBatch
-import kotlinx.android.synthetic.main.activity_edit_profile.editTextYear
-import kotlinx.android.synthetic.main.activity_edit_profile.editText_experience
-import kotlinx.android.synthetic.main.activity_edit_profile.editText_skills
-import kotlinx.android.synthetic.main.activity_edit_profile.edit_crush
-import kotlinx.android.synthetic.main.activity_edit_profile.edit_gender_female
-import kotlinx.android.synthetic.main.activity_edit_profile.edit_gender_male
-import kotlinx.android.synthetic.main.activity_edit_profile.edit_mingle
-import kotlinx.android.synthetic.main.activity_edit_profile.edit_single
-import kotlinx.android.synthetic.main.activity_edit_profile.proceed_editProfile
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -68,9 +49,72 @@ class EditProfileActivity : AppCompatActivity() {
     private var threadLink = ""
     private var twitterLink = ""
 
+
+    private lateinit var Edit_Back:ImageView
+    private lateinit var change_ProfileImage_text:TextView
+    private lateinit var edit_gender_female:AppCompatButton
+    private lateinit var edit_gender_male:AppCompatButton
+    private lateinit var edit_single:AppCompatButton
+    private lateinit var edit_mingle:AppCompatButton
+    private lateinit var edit_crush:AppCompatButton
+    private lateinit var proceed_editProfile:TextView
+    private lateinit var ProfileUserName_editText:EditText
+    private lateinit var Bio_EditText:EditText
+    private lateinit var editTextAddress:EditText
+    private lateinit var editTextBatch:EditText
+    private lateinit var editTextYear:EditText
+    private lateinit var editText_skills:EditText
+    private lateinit var editText_experience:EditText
+    private lateinit var ET_github:EditText
+    private lateinit var ET_college:EditText
+    private lateinit var ET_course:EditText
+    private lateinit var ET_linkedin:EditText
+    private lateinit var ET_portfolio:EditText
+    private lateinit var ET_instagram:EditText
+    private lateinit var ET_twitter:EditText
+    private lateinit var ET_threads:EditText
+
+    private lateinit var change_ProfileImage:CircleImageView
+
+
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
+
+
+        //OBJECTS DECLARATION
+        Edit_Back = findViewById(R.id.Edit_Back)
+        change_ProfileImage_text = findViewById(R.id.change_ProfileImage_text)
+        edit_gender_female = findViewById(R.id.edit_gender_female)
+        edit_gender_male = findViewById(R.id.edit_gender_male)
+        edit_single = findViewById(R.id.edit_single)
+        edit_mingle = findViewById(R.id.edit_mingle)
+        edit_crush = findViewById(R.id.edit_crush)
+        proceed_editProfile = findViewById(R.id.proceed_editProfile)
+        ProfileUserName_editText = findViewById(R.id.ProfileUserName_editText)
+        Bio_EditText = findViewById(R.id.Bio_EditText)
+        editTextAddress = findViewById(R.id.editTextAddress)
+        editTextBatch = findViewById(R.id.editTextBatch)
+        editTextYear = findViewById(R.id.editTextYear)
+        editText_skills = findViewById(R.id.editText_skills)
+        editText_experience = findViewById(R.id.editText_experience)
+
+        ET_github = findViewById(R.id.ET_github)
+        ET_college = findViewById(R.id.ET_college)
+        ET_course = findViewById(R.id.ET_course)
+        ET_linkedin = findViewById(R.id.ET_linkedin)
+        ET_portfolio = findViewById(R.id.ET_portfolio)
+        ET_instagram = findViewById(R.id.ET_instagram)
+        ET_twitter = findViewById(R.id.ET_twitter)
+        ET_threads = findViewById(R.id.ET_threads)
+
+        change_ProfileImage = findViewById(R.id.change_ProfileImage)
+
+
         Edit_Back.setOnClickListener {
             finish()
         }

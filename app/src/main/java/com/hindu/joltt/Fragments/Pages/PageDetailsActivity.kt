@@ -4,9 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -21,17 +25,7 @@ import com.hindu.joltt.Activity.ShowUsersActivity
 import com.hindu.joltt.Adapter.PostAdapter
 import com.hindu.joltt.Model.PageModel
 import com.hindu.joltt.Model.PostModel
-import kotlinx.android.synthetic.main.activity_page_details.createPost_page
-import kotlinx.android.synthetic.main.activity_page_details.createPost_page_img
-import kotlinx.android.synthetic.main.activity_page_details.pageDescription_pd
-import kotlinx.android.synthetic.main.activity_page_details.pageFollow_Btn_pd
-import kotlinx.android.synthetic.main.activity_page_details.pageFollowersCount
-import kotlinx.android.synthetic.main.activity_page_details.pageIcon_pd
-import kotlinx.android.synthetic.main.activity_page_details.pageName_detailsPage_appbar
-import kotlinx.android.synthetic.main.activity_page_details.pageNotification
-import kotlinx.android.synthetic.main.activity_page_details.pagePostCount
-import kotlinx.android.synthetic.main.page_post_dialog.view.selectImagePage
-import kotlinx.android.synthetic.main.page_post_dialog.view.selectVideoPage
+import de.hdodenhof.circleimageview.CircleImageView
 
 class PageDetailsActivity : AppCompatActivity() {
     private var pageId = ""
@@ -40,9 +34,32 @@ class PageDetailsActivity : AppCompatActivity() {
     var postList:MutableList<PostModel>? = null
     private var postAdapter: PostAdapter? = null
 
+    private lateinit var pageFollow_Btn_pd:AppCompatButton
+    private lateinit var createPost_page:AppCompatButton
+    private lateinit var createPost_page_img:ImageView
+    private lateinit var pageNotification:ImageView
+    private lateinit var pageName_detailsPage_appbar:TextView
+    private lateinit var pageFollowersCount:TextView
+    private lateinit var pagePostCount:TextView
+    private lateinit var pageIcon_pd:CircleImageView
+    private lateinit var pageDescription_pd:TextView
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_page_details)
+
+
+        pageDescription_pd = findViewById(R.id.pageDescription_pd)
+        createPost_page = findViewById(R.id.createPost_page)
+        pageFollow_Btn_pd = findViewById(R.id.pageFollow_Btn_pd)
+        createPost_page_img = findViewById(R.id.createPost_page_img)
+        pageNotification = findViewById(R.id.pageNotification)
+        pageName_detailsPage_appbar = findViewById(R.id.pageName_detailsPage_appbar)
+        pageFollowersCount = findViewById(R.id.pageFollowersCount)
+        pagePostCount = findViewById(R.id.pagePostCount)
+        pageIcon_pd = findViewById(R.id.pageIcon_pd)
+
 
         val intent = intent
         pageAdmin = intent.getStringExtra("pageAdmin").toString()
@@ -104,7 +121,10 @@ class PageDetailsActivity : AppCompatActivity() {
 
             val alertdialog = dialogBuilder.show()
 
-            dialogView.selectImagePage.setOnClickListener {
+            val selectVideoPage = dialogView.findViewById<LinearLayout>(R.id.selectVideoPage)
+            val selectImagePage = dialogView.findViewById<LinearLayout>(R.id.selectImagePage)
+
+            selectImagePage.setOnClickListener {
                 val intent = Intent(this, CreatePagePostActivity::class.java)
                 intent.putExtra("Id",pageId)
                 intent.putExtra("admin",pageAdmin)
@@ -112,7 +132,7 @@ class PageDetailsActivity : AppCompatActivity() {
                 startActivity(intent)
                 alertdialog.dismiss()
             }
-            dialogView.selectVideoPage.setOnClickListener {
+            selectVideoPage.setOnClickListener {
                 val intent = Intent(this,CreateVideoPostPage::class.java)
                 intent.putExtra("Id",pageId)
                 intent.putExtra("admin",pageAdmin)
@@ -130,7 +150,10 @@ class PageDetailsActivity : AppCompatActivity() {
 
             val alertdialog = dialogBuilder.show()
 
-            dialogView.selectImagePage.setOnClickListener {
+            val selectVideoPage = dialogView.findViewById<LinearLayout>(R.id.selectVideoPage)
+            val selectImagePage = dialogView.findViewById<LinearLayout>(R.id.selectImagePage)
+
+            selectImagePage.setOnClickListener {
                 val intent = Intent(this,CreatePagePostActivity::class.java)
                 intent.putExtra("Id",pageId)
                 intent.putExtra("admin",pageAdmin)
@@ -138,7 +161,7 @@ class PageDetailsActivity : AppCompatActivity() {
                 startActivity(intent)
                 alertdialog.dismiss()
             }
-            dialogView.selectVideoPage.setOnClickListener {
+            selectVideoPage.setOnClickListener {
                 val intent = Intent(this,CreateVideoPostPage::class.java)
                 intent.putExtra("pageId",pageId)
                 intent.putExtra("pageAdmin",pageAdmin)

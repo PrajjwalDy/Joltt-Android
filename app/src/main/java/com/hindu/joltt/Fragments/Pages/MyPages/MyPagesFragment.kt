@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,8 +20,6 @@ import com.hindu.cunow.R
 import com.hindu.cunow.databinding.MyPagesFragmentBinding
 import com.hindu.joltt.Adapter.PageAdapter
 import com.hindu.joltt.Model.PageModel
-import kotlinx.android.synthetic.main.my_pages_fragment.myPages_RV
-import kotlinx.android.synthetic.main.my_pages_fragment.no_page_txt
 
 class    MyPagesFragment : Fragment() {
 
@@ -31,6 +30,11 @@ class    MyPagesFragment : Fragment() {
     private var _binding:MyPagesFragmentBinding? = null
     private val binding get() = _binding
 
+
+    private lateinit var no_page_txt:TextView
+    private lateinit var myPages_RV:RecyclerView
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +42,13 @@ class    MyPagesFragment : Fragment() {
         viewModel =ViewModelProvider(this).get(MyPagesViewModel::class.java)
         _binding = MyPagesFragmentBinding.inflate(inflater,container,false)
         val root:View = binding!!.root
+
+        no_page_txt = root.findViewById(R.id.no_page_txt)
+        myPages_RV = root.findViewById(R.id.myPages_RV)
+
+
+
+
         check()
         viewModel.myPageViewModel!!.observe(viewLifecycleOwner, Observer {
             initView(root)

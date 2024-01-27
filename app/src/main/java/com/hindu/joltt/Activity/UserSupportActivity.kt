@@ -1,15 +1,16 @@
 package com.hindu.joltt.Activity
 
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
+import androidx.cardview.widget.CardView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
 import com.hindu.cunow.R
-import kotlinx.android.synthetic.main.activity_comment.*
-import kotlinx.android.synthetic.main.activity_user_support.*
 
 class UserSupportActivity : AppCompatActivity() {
     private var profileId = ""
@@ -17,9 +18,34 @@ class UserSupportActivity : AppCompatActivity() {
 
     var quote = ""
 
+    private lateinit var supportQ1:CardView
+    private lateinit var supportQ2:CardView
+    private lateinit var supportQ3:CardView
+
+    private lateinit var q1_text:TextView
+    private lateinit var q2_text:TextView
+    private lateinit var q3_text:TextView
+
+    private lateinit var reportBlockUser:AppCompatButton
+    private lateinit var reportUser:AppCompatButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_support)
+
+
+        supportQ1 = findViewById(R.id.supportQ1)
+        supportQ2 = findViewById(R.id.supportQ2)
+        supportQ3 = findViewById(R.id.supportQ3)
+
+        q1_text = findViewById(R.id.q1_text)
+        q2_text = findViewById(R.id.q2_text)
+        q3_text = findViewById(R.id.q3_text)
+
+        reportBlockUser = findViewById(R.id.reportBlockUser)
+        reportUser = findViewById(R.id.reportUser)
+
+
 
         firebaseUser = FirebaseAuth.getInstance().currentUser!!
 

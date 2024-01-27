@@ -50,39 +50,39 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/notificationRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/appBar_notification"
-        android:id="@+id/notificationRecycler"/>
+        android:layout_below="@+id/appBar_notification" />
 
     <LinearLayout
         android:id="@+id/noNotificationLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"
         android:layout_centerInParent="true"
-        android:orientation="vertical">
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <com.airbnb.lottie.LottieAnimationView
             android:layout_width="200dp"
             android:layout_height="200dp"
-            app:lottie_rawRes="@raw/no_notification"
             android:layout_gravity="center_horizontal"
             app:lottie_autoPlay="true"
-            app:lottie_loop="true"/>
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/no_notification" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Notifications awaiting? Find them all right here."
             android:layout_gravity="center_horizontal"
-            android:textAlignment="center"
-            android:fontFamily="@font/comfortaa"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:fontFamily="@font/comfortaa"
+            android:text="Notifications awaiting? Find them all right here."
+            android:textAlignment="center"
             android:textColor="@color/vivaMagenta"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
     </LinearLayout>
 
 

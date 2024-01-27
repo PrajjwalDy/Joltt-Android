@@ -16,8 +16,6 @@ import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.R
 import com.hindu.joltt.Adapter.PostAdapter
 import com.hindu.joltt.Model.PostModel
-import kotlinx.android.synthetic.main.fragment_full_post_view.*
-import kotlinx.android.synthetic.main.fragment_user_profiel.*
 
 class FullPostView : Fragment() {
     private var recyclerView:RecyclerView? = null

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,10 +15,6 @@ import com.hindu.cunow.R
 import com.hindu.cunow.databinding.MySavedFragmentBinding
 import com.hindu.joltt.Adapter.PostAdapter
 import com.hindu.joltt.Adapter.PostGridAdapter
-import kotlinx.android.synthetic.main.my_saved_fragment.view.myPostsRV_grid_saved
-import kotlinx.android.synthetic.main.my_saved_fragment.view.myPostsRV_saved
-import kotlinx.android.synthetic.main.my_saved_fragment.view.postGrid_saved
-import kotlinx.android.synthetic.main.my_saved_fragment.view.postVertical_saved
 
 class MySavedFragment : Fragment() {
     var recyclerView: RecyclerView? = null
@@ -30,6 +27,11 @@ class MySavedFragment : Fragment() {
 
     private val binding get() = _binding!!
 
+    private lateinit var postGrid_saved:ImageView
+    private lateinit var myPostsRV_grid_saved:RecyclerView
+    private lateinit var myPostsRV_saved:RecyclerView
+    private lateinit var postVertical_saved:ImageView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,6 +41,11 @@ class MySavedFragment : Fragment() {
 
         _binding = MySavedFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        postGrid_saved = root.findViewById(R.id.postGrid_saved)
+        myPostsRV_saved = root.findViewById(R.id.myPostsRV_saved)
+        myPostsRV_grid_saved = root.findViewById(R.id.myPostsRV_grid_saved)
+        postVertical_saved = root.findViewById(R.id.postVertical_saved)
 
         viewModel.postModel!!.observe(viewLifecycleOwner, Observer {
             initView(root)
@@ -54,13 +61,13 @@ class MySavedFragment : Fragment() {
 
         })
 
-        root.postGrid_saved.setOnClickListener {
-            root.myPostsRV_saved.visibility = View.GONE
-            root.myPostsRV_grid_saved.visibility = View.VISIBLE
+        postGrid_saved.setOnClickListener {
+            myPostsRV_saved.visibility = View.GONE
+            myPostsRV_grid_saved.visibility = View.VISIBLE
         }
-        root.postVertical_saved.setOnClickListener {
-            root.myPostsRV_grid_saved.visibility = View.GONE
-            root.myPostsRV_saved.visibility = View.VISIBLE
+        postVertical_saved.setOnClickListener {
+            myPostsRV_grid_saved.visibility = View.GONE
+            myPostsRV_saved.visibility = View.VISIBLE
         }
 
         return root

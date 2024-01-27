@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -11,15 +12,11 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.MyPostsFragemtFragmentBinding
 import com.hindu.joltt.Adapter.PostAdapter
 import com.hindu.joltt.Adapter.PostGridAdapter
-import kotlinx.android.synthetic.main.my_posts_fragemt_fragment.view.fab_savedPost
-import kotlinx.android.synthetic.main.my_posts_fragemt_fragment.view.myPostsRV
-import kotlinx.android.synthetic.main.my_posts_fragemt_fragment.view.myPostsRV_grid
-import kotlinx.android.synthetic.main.my_posts_fragemt_fragment.view.postGrid_profile
-import kotlinx.android.synthetic.main.my_posts_fragemt_fragment.view.postVertical_profile
 
 class MyPostsFragemt : Fragment() {
 
@@ -33,6 +30,13 @@ class MyPostsFragemt : Fragment() {
 
     private val binding get() = _binding!!
 
+    private lateinit var postGrid_profile:ImageView
+    private lateinit var myPostsRV:RecyclerView
+    private lateinit var myPostsRV_grid:RecyclerView
+
+    private lateinit var postVertical_profile:ImageView
+    private lateinit var fab_savedPost:FloatingActionButton
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,6 +46,14 @@ class MyPostsFragemt : Fragment() {
 
         _binding = MyPostsFragemtFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+
+        postGrid_profile = root.findViewById(R.id.postGrid_profile)
+        myPostsRV = root.findViewById(R.id.myPostsRV)
+        myPostsRV_grid = root.findViewById(R.id.myPostsRV_grid)
+        postVertical_profile = root.findViewById(R.id.postVertical_profile)
+        fab_savedPost = root.findViewById(R.id.fab_savedPost)
+
 
         viewModel.postModel!!.observe(viewLifecycleOwner, Observer {
             initView(root)
@@ -57,15 +69,15 @@ class MyPostsFragemt : Fragment() {
 
         })
 
-        root.postGrid_profile.setOnClickListener {
-            root.myPostsRV.visibility = View.GONE
-            root.myPostsRV_grid.visibility = View.VISIBLE
+        postGrid_profile.setOnClickListener {
+            myPostsRV.visibility = View.GONE
+            myPostsRV_grid.visibility = View.VISIBLE
         }
-        root.postVertical_profile.setOnClickListener {
-            root.myPostsRV_grid.visibility = View.GONE
-            root.myPostsRV.visibility = View.VISIBLE
+        postVertical_profile.setOnClickListener {
+            myPostsRV_grid.visibility = View.GONE
+            myPostsRV.visibility = View.VISIBLE
         }
-        root.fab_savedPost.setOnClickListener {
+        fab_savedPost.setOnClickListener {
             Navigation.findNavController(root).navigate(R.id.action_myPostsFragemt_to_mySavedFragment2)
         }
 

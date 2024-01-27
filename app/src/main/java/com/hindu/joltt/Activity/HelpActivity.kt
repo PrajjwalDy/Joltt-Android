@@ -1,20 +1,32 @@
 package com.hindu.joltt.Activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
-import com.google.android.material.snackbar.Snackbar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.hindu.cunow.R
-import kotlinx.android.synthetic.main.activity_help.*
-import kotlinx.android.synthetic.main.fragment_home.*
 
 class HelpActivity : AppCompatActivity() {
+
+    private lateinit var Help_Back:ImageView
+    private lateinit var send_btn:AppCompatButton
+    private lateinit var help_editText:EditText
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_help)
+
+        Help_Back = findViewById(R.id.Help_Back)
+        send_btn = findViewById(R.id.send_btn)
+        help_editText = findViewById(R.id.help_editText)
+
+
         Help_Back.setOnClickListener {
             finish()
         }

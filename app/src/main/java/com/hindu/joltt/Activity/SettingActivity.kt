@@ -1,16 +1,43 @@
 package com.hindu.joltt.Activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.hindu.cunow.R
-import kotlinx.android.synthetic.main.activity_setting.*
 
 class SettingActivity : AppCompatActivity() {
+
+    private lateinit var Setting_Back:ImageView
+    private lateinit var logout:LinearLayout
+    private lateinit var edit_profile:LinearLayout
+    private lateinit var help:LinearLayout
+    private lateinit var about_us:LinearLayout
+    private lateinit var terms_condition:LinearLayout
+    private lateinit var verify:LinearLayout
+    private lateinit var privacy_settings:LinearLayout
+    private lateinit var webscraping:LinearLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
+
+
+        Setting_Back = findViewById(R.id.Setting_Back)
+        logout = findViewById(R.id.logout)
+        edit_profile = findViewById(R.id.edit_profile)
+        help = findViewById(R.id.help)
+        about_us = findViewById(R.id.about_us)
+        terms_condition = findViewById(R.id.terms_condition)
+        verify = findViewById(R.id.verify)
+        privacy_settings = findViewById(R.id.privacy_settings)
+        webscraping = findViewById(R.id.webscraping)
+
+
+
+
         Setting_Back.setOnClickListener {
             finish()
         }

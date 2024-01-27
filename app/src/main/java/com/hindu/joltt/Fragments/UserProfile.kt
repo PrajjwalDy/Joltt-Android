@@ -10,6 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
@@ -17,6 +21,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -30,11 +35,6 @@ import com.hindu.joltt.Adapter.MyPostAdapter
 import com.hindu.joltt.Model.PostModel
 import com.hindu.joltt.Model.RequestModel
 import com.hindu.joltt.Model.UserModel
-import kotlinx.android.synthetic.main.activity_comment.*
-import kotlinx.android.synthetic.main.fragment_user_profiel.*
-import kotlinx.android.synthetic.main.fragment_user_profiel.view.*
-import kotlinx.android.synthetic.main.profile_fragment.*
-import kotlinx.android.synthetic.main.profile_fragment.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -54,11 +54,96 @@ class UserProfile : Fragment() {
     private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.from_bottom_anim) }
     private val toBottom: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.to_bottom_anim) }
 
+    private lateinit var github:ImageView
+    private lateinit var portfolio:ImageView
+    private lateinit var linkedin:ImageView
+    private lateinit var instagram:ImageView
+    private lateinit var threads:ImageView
+    private lateinit var twitter:ImageView
+    private lateinit var userMenu:FloatingActionButton
+    private lateinit var aboutUser:FloatingActionButton
+
+    private lateinit var gitlink: TextView
+    private lateinit var linkednLink:TextView
+    private lateinit var portfolioLink:TextView
+    private lateinit var instagramLink:TextView
+    private lateinit var threadsLink:TextView
+    private lateinit var twitterLink:TextView
+
+    private lateinit var blockUser:FloatingActionButton
+    private lateinit var chatUser:FloatingActionButton
+
+    private lateinit var infuseButton:RelativeLayout
+
+    private lateinit var userName_profile:TextView
+    private lateinit var user_bio_profile:TextView
+
+    private lateinit var ll_followers_user:LinearLayout
+    private lateinit var ll_following_user:LinearLayout
+
+    private lateinit var userProfileImage:ImageView
+
+    private lateinit var infuseTxt:TextView
+
+    private lateinit var othersPostLayout:LinearLayout
+    private lateinit var user_socialLinks_RL:RelativeLayout
+    private lateinit var privateAC_LL:RelativeLayout
+    private lateinit var noPostLayout_user:LinearLayout
+    private lateinit var rl_countDetails_user:RelativeLayout
+
+
+    private lateinit var totalFollowers:TextView
+    private lateinit var totalFollowing:TextView
+    private lateinit var postcount_user:TextView
+
+
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val root:View = inflater.inflate(R.layout.fragment_user_profiel, container, false)
+
+
+
+        github = root.findViewById(R.id.github)
+        portfolio = root.findViewById(R.id.portfolio)
+        linkedin = root.findViewById(R.id.linkedin)
+        instagram = root.findViewById(R.id.instagram)
+        threads = root.findViewById(R.id.threads)
+        twitter = root.findViewById(R.id.twitter)
+        userMenu = root.findViewById(R.id.userMenu)
+        aboutUser = root.findViewById(R.id.aboutUser)
+        gitlink = root.findViewById(R.id.gitlink)
+        linkednLink = root.findViewById(R.id.linkednLink)
+        portfolioLink = root.findViewById(R.id.portfolioLink)
+        instagramLink = root.findViewById(R.id.instagramLink)
+        threadsLink = root.findViewById(R.id.threadsLink)
+        twitterLink = root.findViewById(R.id.twitterLink)
+        blockUser = root.findViewById(R.id.blockUser)
+        chatUser = root.findViewById(R.id.chatUser)
+        infuseButton = root.findViewById(R.id.infuseButton)
+        userName_profile = root.findViewById(R.id.userName_profile)
+        user_bio_profile = root.findViewById(R.id.user_bio_profile)
+        ll_followers_user = root.findViewById(R.id.ll_followers_user)
+        ll_following_user = root.findViewById(R.id.ll_following_user)
+        userProfileImage = root.findViewById(R.id.userProfileImage)
+        infuseTxt = root.findViewById(R.id.infuseTxt)
+        othersPostLayout = root.findViewById(R.id.othersPostLayout)
+        user_socialLinks_RL = root.findViewById(R.id.user_socialLinks_RL)
+        privateAC_LL = root.findViewById(R.id.privateAC_LL)
+        noPostLayout_user = root.findViewById(R.id.noPostLayout_user)
+        rl_countDetails_user = root.findViewById(R.id.rl_countDetails_user)
+        totalFollowers = root.findViewById(R.id.totalFollowers)
+        totalFollowing = root.findViewById(R.id.totalFollowing)
+        postcount_user = root.findViewById(R.id.postcount_user)
+
+
+
+
+
 
 
         firebaseUser = FirebaseAuth.getInstance().currentUser!!
@@ -68,51 +153,51 @@ class UserProfile : Fragment() {
         }
 
         //Social Link implementation
-        root.github.setOnClickListener {
+        github.setOnClickListener {
             val url = gitlink.text.toString()
             openInBrowser(url)
         }
-        root.linkedin.setOnClickListener {
+        linkedin.setOnClickListener {
             val url = linkednLink.text.toString()
             openInBrowser(url)
         }
-        root.portfolio.setOnClickListener {
+        portfolio.setOnClickListener {
             val url = portfolioLink.text.toString()
             openInBrowser(url)
         }
-        root.instagram.setOnClickListener {
+        instagram.setOnClickListener {
             val url = instagramLink.text.toString()
             openInBrowser(url)
         }
-        root.threads.setOnClickListener {
+        threads.setOnClickListener {
             val url = threadsLink.text.toString()
             openInBrowser(url)
         }
-        root.twitter.setOnClickListener {
+        twitter.setOnClickListener {
             val url = twitterLink.text.toString()
             openInBrowser(url)
         }
-        root.userMenu.setOnClickListener{
+        userMenu.setOnClickListener{
             addButtonClicked()
         }
 
         //About User FAB
 
-        root.aboutUser.setOnClickListener {
+        aboutUser.setOnClickListener {
             val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
             pref!!.putString("uid",profileId)
             pref.apply()
             Navigation.findNavController(root).navigate(R.id.action_userProfile_to_userDetails)
         }
         //Block User FAB
-        root.blockUser.setOnClickListener {
+        blockUser.setOnClickListener {
             val intent = Intent(context, UserSupportActivity::class.java)
             intent.putExtra("uid",profileId)
             startActivity(intent)
         }
 
         //Chat User FAB
-        root.chatUser.setOnClickListener {
+        chatUser.setOnClickListener {
             val intent = Intent(context, ChatActivity::class.java)
             intent.putExtra("uid",profileId)
             startActivity(intent)
@@ -144,14 +229,14 @@ class UserProfile : Fragment() {
         }
 
         //Follow button status
-        root.infuseButton.setOnClickListener {
+        infuseButton.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch{
                 checkPrivacy(root)
             }
         }
 
         //Total following and followers on click
-        root.ll_followers_user.setOnClickListener {
+        ll_followers_user.setOnClickListener {
             val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
             pref!!.putString("uid",profileId)
             pref.putString("title","Followers")
@@ -159,7 +244,7 @@ class UserProfile : Fragment() {
             Navigation.findNavController(root).navigate(R.id.action_userProfile_to_showUserFragment)
         }
 
-        root.ll_following_user.setOnClickListener {
+        ll_following_user.setOnClickListener {
             val pref = context?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)?.edit()
             pref!!.putString("uid",profileId)
             pref.putString("title","Following")
@@ -281,14 +366,14 @@ class UserProfile : Fragment() {
                 if (snapshot.exists()){
                     val data = snapshot.getValue(UserModel::class.java)
                     if (data!!.private){
-                        when (root.infuseTxt.text.toString()){
+                        when (infuseTxt.text.toString()){
                             "Infuse"->{
                                 firebaseUser.uid.let { it1 ->
                                     FirebaseDatabase.getInstance().reference
                                         .child("Users").child(profileId)
                                         .child("FollowRequest").child(it1.toString())
                                         .setValue(true)
-                                    root.infuseTxt.text = "Requested"
+                                    infuseTxt.text = "Requested"
 
                                     val ref = FirebaseDatabase.getInstance().reference
                                         .child("Users")
@@ -337,7 +422,7 @@ class UserProfile : Fragment() {
 
                     }else{
 
-                        when (root.infuseTxt.text.toString()) {
+                        when (infuseTxt.text.toString()) {
                             "Infuse" -> {
                                 firebaseUser.uid.let { it1 ->
                                     FirebaseDatabase.getInstance().reference
@@ -382,7 +467,7 @@ class UserProfile : Fragment() {
                                     .child(profileId)
                                     .removeValue()
                                 Toast.makeText(context,"User unblocked",Toast.LENGTH_SHORT).show()
-                                root.infuseTxt.text="Infuse"
+                                infuseTxt.text="Infuse"
                             }
                             "Requested" ->{
                                 FirebaseDatabase.getInstance().reference.child("Users")
@@ -414,9 +499,9 @@ class UserProfile : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val dataRef = snapshot.getValue(RequestModel::class.java)
                 if (snapshot.child(FirebaseAuth.getInstance().currentUser!!.uid).exists()){
-                    root.infuseTxt.text = "Requested"
+                    infuseTxt.text = "Requested"
                 }else{
-                    root.infuseTxt.text = "Infuse"
+                    infuseTxt.text = "Infuse"
                 }
             }
 
@@ -436,7 +521,7 @@ class UserProfile : Fragment() {
         databaseRef.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.child(firebaseUser.uid).exists()){
-                    root.infuseTxt.text= "Defuse"
+                    infuseTxt.text= "Defuse"
                 }else{
                     CoroutineScope(Dispatchers.IO).launch {
                         launch {checkRequested(root)  }
@@ -460,7 +545,7 @@ class UserProfile : Fragment() {
         followingRef.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                if (snapshot.exists()){
-                   root.totalFollowers.text = snapshot.childrenCount.toString()
+                   totalFollowers.text = snapshot.childrenCount.toString()
                }
             }
 
@@ -479,7 +564,7 @@ class UserProfile : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     val count = snapshot.childrenCount.toInt()-1
-                    root.totalFollowing.text = count.toString()
+                    totalFollowing.text = count.toString()
                 }
             }
 
@@ -532,11 +617,14 @@ class UserProfile : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val dataRef = snapshot.getValue(RequestModel::class.java)
                 if (snapshot.child(FirebaseAuth.getInstance().currentUser!!.uid).exists()){
-                    root.infuseButton.visibility = View.GONE
+                    infuseButton.visibility = View.GONE
                     user_socialLinks_RL.visibility = View.GONE
                     userName_profile.text = "Username"
                     user_bio_profile.text = " "
                     rl_countDetails_user.visibility = View.VISIBLE
+                    userMenu.visibility = View.GONE
+                    noPostLayout_user.visibility = View.VISIBLE
+                    othersPostLayout.visibility = View.GONE
                 }
             }
 
@@ -545,6 +633,7 @@ class UserProfile : Fragment() {
             }
 
         })
+        database.keepSynced(true)
     }
     //Check Block Status Function
     private suspend fun haveBlocked(root: View){
@@ -556,7 +645,7 @@ class UserProfile : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val dataRef = snapshot.getValue(RequestModel::class.java)
                 if (snapshot.child(profileId).exists()){
-                    root.infuseTxt.text = "Unblock"
+                    infuseTxt.text = "Unblock"
                 }
             }
 
@@ -564,6 +653,7 @@ class UserProfile : Fragment() {
                 TODO("Not yet implemented")
             }
         })
+        database.keepSynced(true)
     }
     //Add Notification
     private suspend fun addNotification(message:String){
@@ -622,6 +712,7 @@ class UserProfile : Fragment() {
             }
 
         })
+        postRef.keepSynced(true)
     }
     //Checking current user is in users following list
     fun isCurrentUserInList(callback: (Boolean) -> Unit) {
@@ -644,5 +735,6 @@ class UserProfile : Fragment() {
                 callback(false) // Assuming false when an error occurs
             }
         })
+        usersRef.keepSynced(true)
     }
 }

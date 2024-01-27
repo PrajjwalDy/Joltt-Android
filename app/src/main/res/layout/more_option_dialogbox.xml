@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView android:layout_margin="5dp"
-    app:cardCornerRadius="3dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_margin="5dp"
+    app:cardCornerRadius="3dp">
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -12,26 +13,26 @@
 
 
         <LinearLayout
+            android:id="@+id/savePost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:id="@+id/savePost"
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/save_post"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp"
+                android:src="@drawable/save_post" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/red"
-                android:text="Save this post"
                 android:layout_margin="5dp"
                 android:fontFamily="@font/amiko"
-                android:textSize="12sp"/>
+                android:text="Save this post"
+                android:textColor="@color/red"
+                android:textSize="12sp" />
 
 
         </LinearLayout>
@@ -47,17 +48,17 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/delete_option"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp"
+                android:src="@drawable/delete_option" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/red"
-                android:text="Delete this post"
-                android:fontFamily="@font/amiko"
                 android:layout_margin="5dp"
-                android:textSize="12sp"/>
+                android:fontFamily="@font/amiko"
+                android:text="Delete this post"
+                android:textColor="@color/red"
+                android:textSize="12sp" />
 
 
         </LinearLayout>
@@ -72,17 +73,17 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/report_option"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp"
+                android:src="@drawable/report_option" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/red"
-                android:text="Report"
-                android:fontFamily="@font/amiko"
                 android:layout_margin="5dp"
-                android:textSize="12sp"/>
+                android:fontFamily="@font/amiko"
+                android:text="Report"
+                android:textColor="@color/red"
+                android:textSize="12sp" />
 
 
         </LinearLayout>

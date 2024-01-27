@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.tasks.OnCompleteListener
@@ -23,7 +24,6 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.ActivityMainBinding
 import com.hindu.joltt.Model.Token
-import kotlinx.android.synthetic.main.activity_main.newNotification_cv
 
 class MainActivity : AppCompatActivity() {
     //private lateinit var uiModeManager:UiModeManager
@@ -34,9 +34,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private lateinit var newNotification_cv:CardView
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
+
+
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -47,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-
+        newNotification_cv = findViewById(R.id.newNotification_cv)
 
 
         navView.setupWithNavController(navController)

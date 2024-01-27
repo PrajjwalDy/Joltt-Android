@@ -4,27 +4,44 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.hindu.cunow.R
-import kotlinx.android.synthetic.main.activity_sign_up.fullName_edit_text
-import kotlinx.android.synthetic.main.activity_sign_up.logInAccount_text
-import kotlinx.android.synthetic.main.activity_sign_up.password_Create_AC
-import kotlinx.android.synthetic.main.activity_sign_up.phone_edit_text
-import kotlinx.android.synthetic.main.activity_sign_up.signUp_button
-import kotlinx.android.synthetic.main.activity_sign_up.tnc_SignUP
-import kotlinx.android.synthetic.main.activity_sign_up.uid_edit_text
 import java.util.Locale
 
 class SignUpActivity : AppCompatActivity() {
+
+    private lateinit var logInAccount_text:TextView
+    private lateinit var signUp_button:AppCompatButton
+    private lateinit var tnc_SignUP:TextView
+
+    private lateinit var fullName_edit_text:EditText
+    private lateinit var uid_edit_text:EditText
+    private lateinit var phone_edit_text:EditText
+    private lateinit var password_Create_AC:EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
+
+        logInAccount_text = findViewById(R.id.logInAccount_text)
+        signUp_button = findViewById(R.id.signUp_button)
+        tnc_SignUP = findViewById(R.id.tnc_SignUP)
+        uid_edit_text = findViewById(R.id.uid_edit_text)
+        fullName_edit_text = findViewById(R.id.fullName_edit_text)
+        phone_edit_text = findViewById(R.id.phone_edit_text)
+        password_Create_AC = findViewById(R.id.password_Create_AC)
+
+
+
 
         logInAccount_text.setOnClickListener {
             startActivity(Intent(this, LogInActivity::class.java))

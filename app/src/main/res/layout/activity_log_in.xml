@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
 
-    tools:context=".Activity.LogInActivity">
+    tools:context="com.hindu.joltt.Activity.LogInActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
