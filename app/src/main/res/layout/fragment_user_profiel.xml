@@ -346,8 +346,8 @@
             android:id="@+id/usersPostRecyclerView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_below="@id/userPost_txt"
-            android:layout_centerHorizontal="true" />
+            android:layout_gravity="center_horizontal"
+            />
 
     </LinearLayout>
 

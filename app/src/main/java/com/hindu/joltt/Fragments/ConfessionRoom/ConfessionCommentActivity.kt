@@ -3,6 +3,7 @@ package com.hindu.joltt.Fragments.ConfessionRoom
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
@@ -28,7 +29,7 @@ class ConfessionCommentActivity : AppCompatActivity() {
     private var commentList:MutableList<ConfessionCommentModel>? = null
     private var confessionCommentAdapter: ConfessionCommentAdapter? = null
 
-    private lateinit var addcCommentButton:AppCompatButton
+    private lateinit var addcCommentButton:ImageView
     private lateinit var confessionTextComment:TextView
     private lateinit var addcCommentEditText:EditText
     private lateinit var Ccomment_empty_animation_c: LottieAnimationView
@@ -40,6 +41,16 @@ class ConfessionCommentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confession_comment)
+
+
+        addcCommentButton = findViewById(R.id.addcCommentButton)
+        confessionTextComment = findViewById(R.id.confessionTextComment)
+        addcCommentEditText = findViewById(R.id.addcCommentEditText)
+        Ccomment_empty_animation_c = findViewById(R.id.Ccomment_empty_animation_c)
+        nocCommentsText = findViewById(R.id.nocCommentsText)
+        RecyclerViewComment_c = findViewById(R.id.RecyclerViewComment_c)
+
+
 
         val intent = intent
         confessionId = intent.getStringExtra("confessionId").toString()

@@ -82,6 +82,7 @@ class ProfileFragment : Fragment() {
 
     private lateinit var noPostLayout:LinearLayout
     private lateinit var myPostLayout:RelativeLayout
+    private lateinit var verified:ImageView
 
 
 
@@ -119,6 +120,8 @@ class ProfileFragment : Fragment() {
         postCount_profile = root.findViewById(R.id.postCount_profile)
         noPostLayout = root.findViewById(R.id.noPostLayout)
         myPostLayout = root.findViewById(R.id.myPostLayout)
+
+        verified = root.findViewById(R.id.verified)
 
 
 
@@ -230,6 +233,12 @@ class ProfileFragment : Fragment() {
                     instagramLink_profile.text = userData.instagram
                     twitterLink_profile.text = userData.twitter
                     threadsLink_profile.text = userData.threads
+
+                    if (userData.verification){
+                        verified.visibility = View.VISIBLE
+                    }else{
+                        verified.visibility = View.GONE
+                    }
 
 
                     if (userData.githubLink.isNullOrEmpty()){

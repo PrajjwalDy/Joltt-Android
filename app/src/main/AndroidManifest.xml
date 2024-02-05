@@ -12,10 +12,10 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
-    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name="com.hindu.joltt.Network"
@@ -26,6 +26,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CUNow"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name="com.hindu.joltt.Activity.DisclaimerActivity"
+            android:exported="false" />
         <activity
             android:name="com.hindu.joltt.Activity.UserDetailsActivity"
             android:exported="false" />
@@ -44,7 +47,6 @@
         <activity
             android:name="com.hindu.joltt.Activity.WebViewActivity"
             android:exported="false" />
-
         <activity
             android:name="com.hindu.joltt.Activity.AddClubActivity"
             android:exported="false" />
@@ -54,7 +56,6 @@
         <activity
             android:name="com.hindu.joltt.Activity.InterestActivity"
             android:exported="false" />
-
         <activity
             android:name="com.hindu.joltt.Activity.CommunityRepliesActivity"
             android:exported="false" />
@@ -80,8 +81,6 @@
         <activity
             android:name="com.hindu.joltt.Activity.FacultySignup"
             android:exported="false" />
-        
-
         <activity
             android:name="com.hindu.joltt.Fragments.Pages.MyPages.PageNotificationsActivity"
             android:exported="false" />
@@ -118,7 +117,6 @@
         <activity
             android:name="com.hindu.joltt.Activity.CirclePermissionActivity"
             android:exported="false" />
-
         <activity
             android:name="com.hindu.joltt.Activity.UserSupportActivity"
             android:exported="false" />
@@ -128,7 +126,6 @@
         <activity
             android:name="com.hindu.joltt.Activity.UserDetailsTabsAcitvity"
             android:exported="false" />
-
         <activity
             android:name="com.hindu.joltt.Activity.PrivacySettingsActivity"
             android:exported="false" />
@@ -141,7 +138,6 @@
         <activity
             android:name="com.hindu.joltt.Activity.VerificationRequest"
             android:exported="false" />
-
         <activity
             android:name="com.hindu.joltt.Activity.WelcomeActivity"
             android:exported="true">
@@ -230,7 +226,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/fileporviderpaths"></meta-data>
+                android:resource="@xml/fileporviderpaths" />
         </provider>
 
         <service

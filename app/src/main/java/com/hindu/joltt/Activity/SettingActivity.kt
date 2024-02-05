@@ -19,6 +19,7 @@ class SettingActivity : AppCompatActivity() {
     private lateinit var verify:LinearLayout
     private lateinit var privacy_settings:LinearLayout
     private lateinit var webscraping:LinearLayout
+    private lateinit var disclaimer:LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +35,7 @@ class SettingActivity : AppCompatActivity() {
         verify = findViewById(R.id.verify)
         privacy_settings = findViewById(R.id.privacy_settings)
         webscraping = findViewById(R.id.webscraping)
+        disclaimer = findViewById(R.id.disclaimer)
 
 
 
@@ -89,6 +91,10 @@ class SettingActivity : AppCompatActivity() {
 
         webscraping.setOnClickListener {
             startActivity(Intent(this,UserDetailsActivity::class.java))
+        }
+
+        disclaimer.setOnClickListener {
+            startActivity(Intent(this,DisclaimerActivity::class.java))
         }
     }
 }

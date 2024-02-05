@@ -69,4 +69,7 @@
     <string name="tnc_aboutUs">b. To use Platform (including to Process any Platform Data), you agree to these Platform Terms (“Terms”), as well as all other applicable terms and policies. This may include the H.I.N.D.U Terms of Service, the JOLTT Terms of Use, the H.I.N.D.U Commercial Terms, the Business Tools Terms, and any H.I.N.D.U Product terms that are applicable.</string>
     <string name="notice_about_us">c. You must also comply with the applicable requirements in our Developer Policies and those made available on our Developer Site, including in our Documentation collectively, the “Developer Docs”)</string>
     <string name="empty_feed">Your feed\'s looking light, but Exciting Features Awaits you!</string>
+    <string name="source">The information displayed on our platform is sourced from various public domains, including but not limited to  <br>
+
+    </br>education.gov.in, MYGOV, Department of Higher Education, National Informatics Center and other publicly accessible databases.</string>
 </resources>

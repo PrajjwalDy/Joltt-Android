@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ScrollView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
@@ -47,11 +48,11 @@ class UserDetailsActivity : AppCompatActivity() {
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     private lateinit var proceed_btn_0:AppCompatButton
-    private lateinit var ll_0:LinearLayout
-    private lateinit var ll_1:LinearLayout
-    private lateinit var ll_2:LinearLayout
-    private lateinit var ll_3:LinearLayout
-    private lateinit var ll_4:LinearLayout
+    private lateinit var ll_0:ScrollView
+    private lateinit var ll_1:ScrollView
+    private lateinit var ll_2:ScrollView
+    private lateinit var ll_3:ScrollView
+    private lateinit var ll_4:ScrollView
 
     private lateinit var genderFemale:ImageView
     private lateinit var genderMale:ImageView

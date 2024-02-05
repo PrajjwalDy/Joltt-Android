@@ -116,12 +116,14 @@ class UserProfile : Fragment() {
         twitter = root.findViewById(R.id.twitter)
         userMenu = root.findViewById(R.id.userMenu)
         aboutUser = root.findViewById(R.id.aboutUser)
+
         gitlink = root.findViewById(R.id.gitlink)
         linkednLink = root.findViewById(R.id.linkednLink)
         portfolioLink = root.findViewById(R.id.portfolioLink)
         instagramLink = root.findViewById(R.id.instagramLink)
         threadsLink = root.findViewById(R.id.threadsLink)
         twitterLink = root.findViewById(R.id.twitterLink)
+
         blockUser = root.findViewById(R.id.blockUser)
         chatUser = root.findViewById(R.id.chatUser)
         infuseButton = root.findViewById(R.id.infuseButton)

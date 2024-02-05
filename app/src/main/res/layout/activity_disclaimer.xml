@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.hindu.joltt.Activity.DisclaimerActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/commentAppbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/backBtnDis"
+                android:layout_width="32dp"
+                android:layout_height="23dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/comfortaa"
+                android:text="Disclaimer"
+                android:textColor="@color/red"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--    1-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="10dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="JOLTT is not government certified and does not claim any official endorsement or certification by government authorities."
+                    android:fontFamily="@font/comfortaa"
+                    android:textColor="@color/black"
+                    android:layout_margin="5dp" />
+            </LinearLayout>
+
+            <!--    2-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="10dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/source"
+                    android:fontFamily="@font/comfortaa"
+                    android:textColor="@color/reddish"
+                    android:layout_margin="5dp" />
+            </LinearLayout>
+
+
+            <!--    3-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="10dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="While we strive to provide accurate and up-to-date information, we cannot guarantee the completeness, accuracy, or reliability of the data obtained from external sources."
+                    android:fontFamily="@font/comfortaa"
+                    android:textColor="@color/black"
+                    android:layout_margin="5dp" />
+            </LinearLayout>
+
+
+            <!--    4-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="10dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Users are advised to cross-verify information from official government websites or authorized channels before making any decisions based on the data presented on our platform."
+                    android:fontFamily="@font/comfortaa"
+                    android:textColor="@color/black"
+                    android:layout_margin="5dp" />
+            </LinearLayout>
+
+            <!--    5-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="10dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="JOLTT is an independent entity and not affiliated with any government agency, and therefore, any reliance on the information provided here is at the user's discretion."
+                    android:fontFamily="@font/comfortaa"
+                    android:textColor="@color/black"
+                    android:layout_margin="5dp" />
+            </LinearLayout>
+
+            <!--    7-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="10dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="We do not assume responsibility for any inaccuracies, errors, or omissions in the data obtained from external sources or for any consequences arising from the use of such information."
+                    android:fontFamily="@font/comfortaa"
+                    android:textColor="@color/black"
+                    android:layout_margin="5dp" />
+            </LinearLayout>
+
+            <!--    8-->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="10dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="The inclusion of any specific data or information on our platform does not imply endorsement or authentication by the government or any of its affiliated agencies."
+                    android:fontFamily="@font/comfortaa"
+                    android:textColor="@color/black"
+                    android:layout_margin="5dp" />
+            </LinearLayout>
+
+
+            <!--    9-->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="10dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="JOLTT disclaims any liability for direct, indirect, or consequential damages resulting from the use or reliance on the information provided on our platform."
+                    android:fontFamily="@font/comfortaa"
+                    android:textColor="@color/black"
+                    android:layout_margin="5dp" />
+            </LinearLayout>
+
+
+            <!--    10-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/star"
+                    android:layout_margin="10dp"
+                    app:tint="@color/red"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="JOLTT is not government certified and does not claim any official endorsement or certification by government authorities."
+                    android:fontFamily="@font/comfortaa"
+                    android:textColor="@color/black"
+                    android:layout_margin="5dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+
+
+</LinearLayout>

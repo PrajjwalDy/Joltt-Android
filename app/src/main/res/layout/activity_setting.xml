@@ -98,6 +98,31 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/disclaimer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/information"
+                app:tint="@color/red" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/comfortaa"
+                android:text="Disclaimer"
+                android:textColor="@color/red" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/about_us"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -192,7 +217,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/comfortaa"
-                android:text="Terms and Conditions"
+                android:text="TnC &amp; Privacy Policy"
                 android:textColor="@color/red" />
 
 

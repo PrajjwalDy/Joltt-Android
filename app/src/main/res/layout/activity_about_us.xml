@@ -74,35 +74,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="d. If you fail to comply with these Terms or any other applicable terms or policies, we may suspend or terminate your App or account, as described below.
+                android:text="d. If you fail to comply with these Terms or any other applicable terms or policies, we may suspend or terminate your account, as described below.
 " />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2.FOUNDER"
-                android:textColor="@color/red"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/founder_about_us" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="3.Co-Founder"
-                android:textColor="@color/red"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/cofounder_aboutUs" />
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
