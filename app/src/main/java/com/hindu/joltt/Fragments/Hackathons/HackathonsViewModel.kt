@@ -1,5 +1,6 @@
 package com.hindu.joltt.Fragments.Hackathons
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
@@ -12,52 +13,75 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class HackathonsViewModel : ViewModel(), IHackathonCallback {
-    private var hackathonLiveData: MutableLiveData<List<HackathonModel>>? = null
-    private val hackCallback: IHackathonCallback = this
-    private var messageError:MutableLiveData<String>? = null
+class HackathonsViewModel : ViewModel() {
+//    private var hackathonLiveData: MutableLiveData<List<HackathonModel>>? = null
+//    private val hackCallback: IHackathonCallback = this
+//    private var messageError:MutableLiveData<String>? = null
 
-    val hackathonModel:MutableLiveData<List<HackathonModel>>?
-    get() {
-        if (hackathonLiveData == null){
-            hackathonLiveData = MutableLiveData()
-            messageError = MutableLiveData()
-            CoroutineScope(Dispatchers.IO).launch {
-                loadData()
-            }
-        }
-        return hackathonLiveData
+    private val allHackathonsLiveData = MutableLiveData<List<HackathonModel>>()
+    private val filteredHackathonsLiveData = MutableLiveData<List<HackathonModel>>()
+
+    fun getAllHackathonsLiveData(): LiveData<List<HackathonModel>> = allHackathonsLiveData
+    fun getFilteredHackathonsLiveData(): LiveData<List<HackathonModel>> = filteredHackathonsLiveData
+
+
+    init {
+        loadData()
     }
 
-    private fun loadData(){
+    //val hackathonModel:MutableLiveData<List<HackathonModel>>?
+//    get() {
+//        if (hackathonLiveData == null){
+//            hackathonLiveData = MutableLiveData()
+//            messageError = MutableLiveData()
+//            CoroutineScope(Dispatchers.IO).launch {
+//                loadData()
+//            }
+//        }
+//        return hackathonLiveData
+//    }
+
+    fun loadData() {
         val hackList = ArrayList<HackathonModel>()
         val data = FirebaseDatabase.getInstance().reference.child("Hackathons")
-        data.addValueEventListener(object :ValueEventListener{
+        data.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 hackList.clear()
-                for (snapshot in snapshot.children){
+                for (snapshot in snapshot.children) {
                     val d1 = snapshot.getValue(HackathonModel::class.java)
                     hackList.add(d1!!)
                 }
-                hackCallback.onHackathonLoadSuccess(hackList)
+                allHackathonsLiveData.value = hackList
             }
 
             override fun onCancelled(error: DatabaseError) {
-                hackCallback.onHackathonLoadFailed(error.message)
+                // Handle error
             }
-
         })
     }
 
-    override fun onHackathonLoadFailed(str: String) {
-        val mutableLiveData = messageError
-        mutableLiveData!!.value = str
+
+
+    fun filterHackathons(selectedTheme: String) {
+        val allHackathons = allHackathonsLiveData.value ?: return
+        val filteredHackathons = if (selectedTheme.isNotEmpty()) {
+            allHackathons.filter { it.hTheme == selectedTheme }
+        } else {
+            allHackathons
+        }
+        filteredHackathonsLiveData.value = filteredHackathons
     }
 
-    override fun onHackathonLoadSuccess(list: List<HackathonModel>) {
-        val mutableLiveData = hackathonLiveData
-        mutableLiveData!!.value = list
-    }
+
+//    override fun onHackathonLoadFailed(str: String) {
+//        val mutableLiveData = messageError
+//        mutableLiveData!!.value = str
+//    }
+//
+//    override fun onHackathonLoadSuccess(list: List<HackathonModel>) {
+//        val mutableLiveData = hackathonLiveData
+//        mutableLiveData!!.value = list
+//    }
 
 
 }

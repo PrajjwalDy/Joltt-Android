@@ -12,8 +12,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hindu.cunow.R
 import com.hindu.joltt.Model.HackathonModel
 
-class HackathonAdapter(private val mContext:Context,
-                       private val mHack:List<HackathonModel>): RecyclerView.Adapter<HackathonAdapter.ViewHolder>(){
+class HackathonAdapter(private val mContext:Context): RecyclerView.Adapter<HackathonAdapter.ViewHolder>(){
+
+
+    private var hackathons: List<HackathonModel> = mutableListOf()
+
+    fun setItems(items: List<HackathonModel>) {
+        hackathons = items
+        notifyDataSetChanged()
+    }
 
                            inner class ViewHolder(@NonNull itemView: View):RecyclerView.ViewHolder(itemView){
                                private val hackName: TextView = itemView.findViewById(R.id.hackathon_name) as TextView
@@ -38,10 +45,10 @@ class HackathonAdapter(private val mContext:Context,
         return ViewHolder(view)
     }
     override fun getItemCount(): Int {
-        return mHack.size
+        return hackathons.size
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(mHack[position])
+        holder.bind(hackathons[position])
     }
     private fun openLink(link:String,title:String){
         val builder = CustomTabsIntent.Builder()

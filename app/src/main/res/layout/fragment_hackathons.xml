@@ -4,11 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.Hackathons.HackathonsFragment">
+    tools:context="com.hindu.joltt.Fragments.Hackathons.HackathonsFragment">
+
+
+    <Spinner
+        android:id="@+id/filterSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/spinner_bg" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/hackRV"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/hackRV"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

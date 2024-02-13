@@ -194,20 +194,20 @@
                 app:civ_border_color="@color/vivaMagenta"
                 app:civ_border_width="0.5dp" />
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/verified"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:src="@drawable/verify"
                 android:layout_below="@+id/profileImage"
                 android:layout_alignParentEnd="true"
+                android:layout_marginTop="-45dp"
+                android:src="@drawable/verify"
                 android:visibility="gone"
-                android:layout_marginTop="-45dp"/>
+                app:civ_border_color="@color/white"
+                app:civ_border_width="5dp" />
 
 
         </RelativeLayout>
-
-
 
 
         <TextView
