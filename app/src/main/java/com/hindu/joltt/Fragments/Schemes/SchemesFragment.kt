@@ -11,11 +11,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.FragmentSchemesBinding
 import com.hindu.joltt.Adapter.SchemeAdapter
 
 class SchemesFragment : Fragment() {
+
+
+    private lateinit var tabLayout: TabLayout
+    private lateinit var viewPager: ViewPager2
 
     var recyclerView: RecyclerView? = null
     private lateinit var viewModel: SchemesViewModel
@@ -33,30 +40,53 @@ class SchemesFragment : Fragment() {
         _binding = FragmentSchemesBinding.inflate(inflater,container,false)
         val root:View = binding.root
 
-        governmentschemeBack = root.findViewById(R.id.governmentschemeBack)
 
 
-        viewModel.schemeViewModel!!.observe(viewLifecycleOwner, Observer {
-            initView(root)
-            schemesAdapter = context?.let { it1-> SchemeAdapter(it1,it) }
-            recyclerView!!.adapter = schemesAdapter
-            schemesAdapter!!.notifyDataSetChanged()
-        })
 
-        governmentschemeBack.setOnClickListener {
-            Navigation.findNavController(root)
-                .navigate(R.id.action_schemesFragment_to_navigation_dashboard)
-        }
+//        viewModel.schemeViewModel!!.observe(viewLifecycleOwner, Observer {
+//            initView(root)
+//            schemesAdapter = context?.let { it1-> SchemeAdapter(it1,it) }
+//            recyclerView!!.adapter = schemesAdapter
+//            schemesAdapter!!.notifyDataSetChanged()
+//        })
+
+//        governmentschemeBack.setOnClickListener {
+//            Navigation.findNavController(root)
+//                .navigate(R.id.action_schemesFragment_to_navigation_dashboard)
+//        }
 
         return root
     }
-    private fun initView(root: View) {
-        recyclerView = root.findViewById(R.id.schemes_RV) as RecyclerView
-        recyclerView!!.setHasFixedSize(true)
-        val linearLayoutManager = LinearLayoutManager(context)
-        linearLayoutManager.reverseLayout = true
-        linearLayoutManager.stackFromEnd = true
-        recyclerView!!.layoutManager = linearLayoutManager
+//    private fun initView(root: View) {
+//        recyclerView = root.findViewById(R.id.schemes_RV) as RecyclerView
+//        recyclerView!!.setHasFixedSize(true)
+//        val linearLayoutManager = LinearLayoutManager(context)
+//        linearLayoutManager.reverseLayout = true
+//        linearLayoutManager.stackFromEnd = true
+//        recyclerView!!.layoutManager = linearLayoutManager
+//    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        tabLayout = view.findViewById(R.id.scheme_tabs_layout)
+        viewPager = view.findViewById(R.id.scheme_viewPager)
+        val adapter = Schemetabs(childFragmentManager,lifecycle)
+
+        viewPager.adapter = adapter
+        TabLayoutMediator(tabLayout,viewPager){tab,position->
+            when(position){
+                0->{
+                    tab.text = "Govt Jobs"
+                }
+                1->{
+                    tab.text = "Results"
+                }
+                2->{
+                    tab.text = "Admission"
+                }
+            }
+        }.attach()
     }
 
 }

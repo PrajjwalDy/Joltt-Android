@@ -114,4 +114,6 @@ dependencies {
 
     //LOCATION
     implementation 'com.google.android.gms:play-services-location:21.0.1'
+
+    implementation 'com.synnapps:carouselview:0.1.5'
 }

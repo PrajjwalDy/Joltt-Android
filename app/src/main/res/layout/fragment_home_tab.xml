@@ -9,6 +9,7 @@
 
 
     <RelativeLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -25,8 +26,6 @@
             android:hint="Search(lowercase)"
             android:padding="5dp"
             android:textColor="@color/red" />
-
-
         <ImageView
             android:id="@+id/filter"
             android:layout_width="30dp"
@@ -53,6 +52,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="7pt">
+
+                <com.synnapps.carouselview.CarouselView
+                    android:id="@+id/carouselview"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    app:radius="6dp"
+                    app:slideInterval="3000"
+                    app:strokeWidth="1dp"/>
+
+            </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -138,56 +154,6 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/ll_events"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="10dp"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/circular_items">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_centerInParent="true"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:padding="2dp"
-                            android:src="@drawable/community" />
-                    </RelativeLayout>
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="Community"
-                        android:fontFamily="@font/comfortaa"
-                        android:textColor="@color/red"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <LinearLayout
                     android:id="@+id/ll_govt_schemes"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -226,45 +192,17 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/ll_study_abroad"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="10dp"
-                    android:orientation="vertical">
 
-                    <RelativeLayout
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/circular_items">
+            </LinearLayout>
 
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_centerInParent="true"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:padding="0dp"
-                            android:src="@drawable/travelling"
-                            />
-                    </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="Abroad"
-                        android:textColor="@color/red"
-                        android:fontFamily="@font/comfortaa"
-                        android:textAlignment="center"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
+
 
                 <LinearLayout
                     android:id="@+id/ll_clubs"
@@ -306,18 +244,6 @@
                 </LinearLayout>
 
 
-
-
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
                 <LinearLayout
                     android:id="@+id/ll_pages"
                     android:layout_width="0dp"
@@ -354,48 +280,6 @@
                         android:textColor="@color/red"
                         android:textAlignment="center"
                         android:textSize="12sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-
-
-
-
-                <LinearLayout
-                    android:id="@+id/ll_projects"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="10dp"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/circular_items">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_centerInParent="true"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:padding="2dp"
-                            android:src="@drawable/event" />
-                    </RelativeLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="Event"
-                        android:textColor="@color/red"
-                        android:textSize="12sp"
-                        android:fontFamily="@font/comfortaa"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -439,11 +323,7 @@
                 </LinearLayout>
 
 
-
-
-
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -493,45 +373,6 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/ll_feedback"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="10dp"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/circular_items">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_centerInParent="true"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:padding="3dp"
-                            android:src="@drawable/star" />
-                    </RelativeLayout>
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="Feedback"
-                        android:fontFamily="@font/comfortaa"
-                        android:textColor="@color/red"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/ll_people"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -568,6 +409,45 @@
                         android:textColor="@color/red"
                         android:textSize="12sp"
                         android:fontFamily="@font/comfortaa"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_feedback"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/circular_items">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:padding="3dp"
+                            android:src="@drawable/star" />
+                    </RelativeLayout>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Feedback"
+                        android:fontFamily="@font/comfortaa"
+                        android:textColor="@color/red"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 

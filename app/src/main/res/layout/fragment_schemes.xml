@@ -40,10 +40,14 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/scheme_tabs_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabGravity="fill"/>
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/schemes_RV"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/scheme_viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
