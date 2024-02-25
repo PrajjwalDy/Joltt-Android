@@ -46,5 +46,15 @@ class InternshipsFragment : Fragment() {
         recyclerView!!.layoutManager = linearLayoutManger
     }
 
+    //try to apply the filter selected simultaneously
+
+    /*filter are : stipend
+                 company
+                 location
+                 Domain
+
+    */
+
+
 
 }
