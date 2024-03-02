@@ -50,6 +50,7 @@ class HomeFragment : Fragment() {
 
 
 
+
     private val rotateOpen: Animation by lazy {
         AnimationUtils.loadAnimation(
             context,
@@ -76,32 +77,32 @@ class HomeFragment : Fragment() {
     }
 
 
-    private lateinit var postLayout_ll:LinearLayout
-    private lateinit var emptyListPost:LinearLayout
-    private lateinit var postRecyclerView:RecyclerView
+    private lateinit var postLayout_ll: LinearLayout
+    private lateinit var emptyListPost: LinearLayout
+    private lateinit var postRecyclerView: RecyclerView
 
-    private lateinit var imin:AppCompatButton
-    private lateinit var closeMessage_btn:AppCompatButton
-    private lateinit var developerMessage_CV:CardView
-    private lateinit var create_post_fab:FloatingActionButton
+    private lateinit var imin: AppCompatButton
+    private lateinit var closeMessage_btn: AppCompatButton
+    private lateinit var developerMessage_CV: CardView
+    private lateinit var create_post_fab: FloatingActionButton
 
-    private lateinit var add_image:FloatingActionButton
-    private lateinit var add_video:FloatingActionButton
-    private lateinit var add_text:FloatingActionButton
+    private lateinit var add_image: FloatingActionButton
+    private lateinit var add_video: FloatingActionButton
+    private lateinit var add_text: FloatingActionButton
 
-    private lateinit var onlyText_CV:RelativeLayout
+    private lateinit var onlyText_CV: RelativeLayout
 
-    private lateinit var uploadTextBtn:ImageView
+    private lateinit var uploadTextBtn: ImageView
 
-    private lateinit var addText_ET:EditText
-    private lateinit var closeOnlyText:ImageView
-    private lateinit var strike:ImageView
+    private lateinit var addText_ET: EditText
+    private lateinit var closeOnlyText: ImageView
+    private lateinit var strike: ImageView
 
-    private lateinit var welcome_screen:RelativeLayout
-    private lateinit var dev_message_tv:TextView
+    private lateinit var welcome_screen: RelativeLayout
+    private lateinit var dev_message_tv: TextView
 
-    private lateinit var ll_chatcount:LinearLayout
-    private lateinit var chatNotification_Count:TextView
+    private lateinit var ll_chatcount: LinearLayout
+    private lateinit var chatNotification_Count: TextView
 
 
     override fun onCreateView(
@@ -109,7 +110,8 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel = ViewModelProvider(this,ViewModelFactory(requireContext()))[HomeViewModel::class.java]
+        homeViewModel =
+            ViewModelProvider(this, ViewModelFactory(requireContext()))[HomeViewModel::class.java]
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -144,14 +146,14 @@ class HomeFragment : Fragment() {
 
         homeViewModel.postModel!!.observe(viewLifecycleOwner, Observer { postList ->
 
-            if (postList.isNullOrEmpty()){
+            if (postList.isNullOrEmpty()) {
                 postLayout_ll?.visibility = View.GONE
                 emptyListPost.visibility = View.VISIBLE
-            }else{
+            } else {
                 postLayout_ll?.visibility = View.VISIBLE
                 postRecyclerView.visibility = View.VISIBLE
                 initView(root)
-                postAdapter = context?.let { it1 -> PostAdapter(it1, postList,"Home") }
+                postAdapter = context?.let { it1 -> PostAdapter(it1, postList, "Home") }
                 recyclerView!!.adapter = postAdapter
                 postAdapter!!.notifyDataSetChanged()
             }
@@ -293,7 +295,7 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun initView(root: View){
+    private fun initView(root: View) {
         recyclerView = root.findViewById(R.id.postRecyclerView) as RecyclerView
         recyclerView!!.setHasFixedSize(true)
         recyclerView!!.isNestedScrollingEnabled = false

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.People.PeopleFragment">
+    tools:context="com.hindu.joltt.Fragments.People.PeopleFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -25,16 +25,41 @@
                android:src="@drawable/back" />
 
 
-            <TextView
-                android:id="@+id/exploreTxt"
-                android:layout_width="wrap_content"
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/amiko"
-                android:text="Explore People"
-                android:textColor="@color/red"
-                android:textSize="18sp" />
+                android:layout_margin="5dp"
+                android:background="@drawable/box_grey"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/search_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_toStartOf="@+id/filter"
+                    android:hint="Search(lowercase)"
+                    android:padding="5dp"
+                    android:textColor="@color/red" />
+
+                <ImageView
+                    android:id="@+id/filter"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="5dp"
+                    android:padding="3dp"
+                    android:src="@drawable/search" />
+
+            </RelativeLayout>
+
+
+
+
+
         </LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -43,5 +68,12 @@
         android:id="@+id/explorePeople_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchUserR"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
 </LinearLayout>

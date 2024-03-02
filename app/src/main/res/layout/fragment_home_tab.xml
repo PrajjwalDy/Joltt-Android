@@ -8,41 +8,6 @@
     tools:context="com.hindu.joltt.Fragments.ExploreTabs.HomeTab">
 
 
-    <RelativeLayout
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:background="@drawable/box_grey"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/search_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_toStartOf="@+id/filter"
-            android:hint="Search(lowercase)"
-            android:padding="5dp"
-            android:textColor="@color/red" />
-        <ImageView
-            android:id="@+id/filter"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:padding="3dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="5dp"
-            android:src="@drawable/search" />
-
-    </RelativeLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searchUserR"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -60,13 +25,14 @@
                 android:layout_margin="10dp"
                 app:cardCornerRadius="7pt">
 
+
                 <com.synnapps.carouselview.CarouselView
                     android:id="@+id/carouselview"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     app:radius="6dp"
                     app:slideInterval="3000"
-                    app:strokeWidth="1dp"/>
+                    app:strokeWidth="1dp" />
 
             </androidx.cardview.widget.CardView>
 
@@ -80,10 +46,10 @@
                 <LinearLayout
                     android:id="@+id/ll_confessionRoom"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="10dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -108,9 +74,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/comfortaa"
                         android:text="Confession"
                         android:textColor="@color/red"
-                        android:fontFamily="@font/comfortaa"
                         android:textSize="12sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -118,10 +84,10 @@
                 <LinearLayout
                     android:id="@+id/ll_post"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="10dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -146,20 +112,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/comfortaa"
                         android:text="Posts"
                         android:textColor="@color/red"
                         android:textSize="12sp"
-                        android:fontFamily="@font/comfortaa"
                         android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/ll_govt_schemes"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="10dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -184,10 +150,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="Schemes"
-                        android:textColor="@color/red"
-                        android:textAlignment="center"
                         android:fontFamily="@font/comfortaa"
+                        android:text="Schemes"
+                        android:textAlignment="center"
+                        android:textColor="@color/red"
                         android:textSize="12sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -203,14 +169,13 @@
                 android:orientation="horizontal">
 
 
-
                 <LinearLayout
                     android:id="@+id/ll_clubs"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="10dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -236,8 +201,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="Jobs"
                         android:fontFamily="@font/comfortaa"
+                        android:text="Jobs"
                         android:textColor="@color/red"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -247,10 +212,10 @@
                 <LinearLayout
                     android:id="@+id/ll_pages"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="10dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -275,10 +240,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="Pages"
                         android:fontFamily="@font/comfortaa"
-                        android:textColor="@color/red"
+                        android:text="Pages"
                         android:textAlignment="center"
+                        android:textColor="@color/red"
                         android:textSize="12sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -286,10 +251,10 @@
                 <LinearLayout
                     android:id="@+id/ll_courses"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="10dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -315,10 +280,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/comfortaa"
                         android:text="Courses"
                         android:textColor="@color/red"
                         android:textSize="12sp"
-                        android:fontFamily="@font/comfortaa"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -335,10 +300,10 @@
                 <LinearLayout
                     android:id="@+id/ll_community"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="10dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -365,20 +330,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/comfortaa"
                         android:text="Flash"
                         android:textColor="@color/red"
                         android:textSize="12sp"
-                        android:fontFamily="@font/comfortaa"
                         android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/ll_people"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="10dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -396,8 +361,7 @@
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="10dp"
                             android:padding="3dp"
-                            android:src="@drawable/people"
-                            />
+                            android:src="@drawable/people" />
                     </RelativeLayout>
 
 
@@ -405,20 +369,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/comfortaa"
                         android:text="People"
                         android:textColor="@color/red"
                         android:textSize="12sp"
-                        android:fontFamily="@font/comfortaa"
                         android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/ll_feedback"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="10dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -444,8 +408,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="Feedback"
                         android:fontFamily="@font/comfortaa"
+                        android:text="Feedback"
                         android:textColor="@color/red"
                         android:textSize="12sp"
                         android:textStyle="bold" />

@@ -81,7 +81,7 @@ class InternshipsFragment : Fragment() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (snapshot in dataSnapshot.children) {
                     val item = snapshot.getValue(InternshipModel::class.java)
-                    item?.let { it.iDuration?.let { it1 -> filterSet.add(it1) } }
+                    item?.let { it.iTheme?.let { it1 -> filterSet.add(it1) } }
                 }
 
                 // Now, filterSet contains unique themes

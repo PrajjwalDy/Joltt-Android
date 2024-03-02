@@ -23,7 +23,7 @@ class admissionAdapter (private val mContext: Context,
 
             fun bind(list:AdmissionModel){
                 Glide.with(mContext).load(list.admissionImage).into(admissionImage)
-            admissionName.text = list.admissionName
+                    admissionName.text = list.admissionName
 
                 itemView.setOnClickListener {
                     openLink(list.admissionLink!!)

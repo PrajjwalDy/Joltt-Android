@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.LinearLayout
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,21 +36,21 @@ class HomeTab : Fragment() {
     private var mUser: MutableList<UserModel>? = null
     private var checker = "Name"
 
-    private lateinit var ll_confessionRoom:LinearLayout
-    private lateinit var ll_post:LinearLayout
-    private lateinit var ll_govt_schemes:LinearLayout
-    private lateinit var ll_clubs:LinearLayout
-    private lateinit var ll_community:LinearLayout
-    private lateinit var ll_pages:LinearLayout
-    private lateinit var ll_courses:LinearLayout
-    private lateinit var ll_people:LinearLayout
-    private lateinit var ll_feedback:LinearLayout
-    private lateinit var search_edit_text:EditText
+    private lateinit var ll_confessionRoom: LinearLayout
+    private lateinit var ll_post: LinearLayout
+    private lateinit var ll_govt_schemes: LinearLayout
+    private lateinit var ll_clubs: LinearLayout
+    private lateinit var ll_community: LinearLayout
+    private lateinit var ll_pages: LinearLayout
+    private lateinit var ll_courses: LinearLayout
+    private lateinit var ll_people: LinearLayout
+    private lateinit var ll_feedback: LinearLayout
+
 
     //Image Carousel
 
-    var imageArray :ArrayList<String> = ArrayList()
-    var carouselView:CarouselView? = null
+    var imageArray: ArrayList<String> = ArrayList()
+    var carouselView: CarouselView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,7 +69,7 @@ class HomeTab : Fragment() {
         ll_people = root.findViewById(R.id.ll_people)
         ll_feedback = root.findViewById(R.id.ll_feedback)
 
-        search_edit_text = root.findViewById(R.id.search_edit_text)
+
 
 
         ll_confessionRoom.setOnClickListener {
@@ -79,34 +78,10 @@ class HomeTab : Fragment() {
         }
 
 
-        recyclerView = root.findViewById(R.id.searchUserR)
-        recyclerView!!.setHasFixedSize(true)
-        recyclerView!!.layoutManager = LinearLayoutManager(context)
-
-        mUser = ArrayList()
-        userAdapter = context?.let { UserAdapter(it, mUser as ArrayList<UserModel>) }
-        recyclerView?.adapter = userAdapter
+//
 
 
-        search_edit_text.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                recyclerView?.visibility = View.GONE
-            }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (search_edit_text.text.toString() == "") {
-
-                } else {
-                    recyclerView?.visibility = View.VISIBLE
-                    retrieveUsers()
-                    searchUsers(p0!!.toString())
-                }
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-            }
-
-        })
 
         //Image Carousel loading image
 
@@ -163,65 +138,27 @@ class HomeTab : Fragment() {
             startActivity(Intent(context, FeedbackActivity::class.java))
         }
 
+        ll_community.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_navigation_dashboard_to_flash)
+        }
+
         return root
     }
-    private fun searchUsers(input: String) {
-        val array = FirebaseDatabase.getInstance().reference
-            .child("Users")
-            .orderByChild("searchName")
-            .startAt(input)
-            .endAt(input + "\uf88f")
-        array.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                mUser?.clear()
-
-                for (snapshot in snapshot.children) {
-                    val user = snapshot.getValue(UserModel::class.java)
-                    if (user != null) {
-                        mUser?.add(user)
-                    }
-                }
-                userAdapter?.notifyDataSetChanged()
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
-    }
-    private fun retrieveUsers() {
-        val userRef = FirebaseDatabase.getInstance().reference.child("Users")
-        userRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (search_edit_text?.text.toString() == "") {
-                    mUser?.clear()
-                    for (snapshot in snapshot.children) {
-                        val user = snapshot.getValue(UserModel::class.java)
-                        if (user != null) {
-                            mUser?.add(user)
-                        }
-                    }
-                    userAdapter!!.notifyDataSetChanged()
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
-    }
 
 
-    private fun loadCarouselImage(imageListener: ImageListener){
+
+
+
+
+    private fun loadCarouselImage(imageListener: ImageListener) {
         val dbRef = FirebaseDatabase.getInstance().reference.child("featureImage")
 
-        dbRef.addListenerForSingleValueEvent(object: ValueEventListener{
+        dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                for (snapshot in snapshot.children){
+                for (snapshot in snapshot.children) {
                     val imageData = snapshot.getValue(FeatureModel::class.java)
-                    if (imageData != null){
+                    if (imageData != null) {
                         imageArray.add(imageData.cImageLink!!)
                     }
                 }

@@ -46,7 +46,7 @@ class InternshipsViewModel : ViewModel(){
     fun filterInternships(selectedTheme:String){
         val allInternship = allInternshipLiveData.value ?: return
         val filterInternship = if (selectedTheme.isNotEmpty()) {
-            allInternship.filter { it.iDuration == selectedTheme }
+            allInternship.filter { it.iTheme == selectedTheme }
         } else {
             allInternship
         }

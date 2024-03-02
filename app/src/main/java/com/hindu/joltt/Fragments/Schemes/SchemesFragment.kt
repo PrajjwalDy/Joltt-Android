@@ -41,7 +41,7 @@ class SchemesFragment : Fragment() {
         val root:View = binding.root
 
 
-
+governmentschemeBack = root.findViewById(R.id.governmentschemeBack)
 
 //        viewModel.schemeViewModel!!.observe(viewLifecycleOwner, Observer {
 //            initView(root)
@@ -50,10 +50,10 @@ class SchemesFragment : Fragment() {
 //            schemesAdapter!!.notifyDataSetChanged()
 //        })
 
-//        governmentschemeBack.setOnClickListener {
-//            Navigation.findNavController(root)
-//                .navigate(R.id.action_schemesFragment_to_navigation_dashboard)
-//        }
+        governmentschemeBack.setOnClickListener {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_schemesFragment_to_navigation_dashboard)
+        }
 
         return root
     }
