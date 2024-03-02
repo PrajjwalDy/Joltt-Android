@@ -29,17 +29,6 @@ class HackathonsViewModel : ViewModel() {
         loadData()
     }
 
-    //val hackathonModel:MutableLiveData<List<HackathonModel>>?
-//    get() {
-//        if (hackathonLiveData == null){
-//            hackathonLiveData = MutableLiveData()
-//            messageError = MutableLiveData()
-//            CoroutineScope(Dispatchers.IO).launch {
-//                loadData()
-//            }
-//        }
-//        return hackathonLiveData
-//    }
 
     fun loadData() {
         val hackList = ArrayList<HackathonModel>()
@@ -61,7 +50,6 @@ class HackathonsViewModel : ViewModel() {
     }
 
 
-
     fun filterHackathons(selectedTheme: String) {
         val allHackathons = allHackathonsLiveData.value ?: return
         val filteredHackathons = if (selectedTheme.isNotEmpty()) {
@@ -71,17 +59,5 @@ class HackathonsViewModel : ViewModel() {
         }
         filteredHackathonsLiveData.value = filteredHackathons
     }
-
-
-//    override fun onHackathonLoadFailed(str: String) {
-//        val mutableLiveData = messageError
-//        mutableLiveData!!.value = str
-//    }
-//
-//    override fun onHackathonLoadSuccess(list: List<HackathonModel>) {
-//        val mutableLiveData = hackathonLiveData
-//        mutableLiveData!!.value = list
-//    }
-
 
 }

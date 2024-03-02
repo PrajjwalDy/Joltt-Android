@@ -28,13 +28,13 @@ class gJobAdapter (private val mContext: Context,
 
                 itemView.setOnClickListener {
                     openLink(list.gJobLink!!)
-                }
-                }
+                     }
+                    }
                 }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-   val view = LayoutInflater.from(mContext).inflate(R.layout.gjob_layout,parent,false)
+        val view = LayoutInflater.from(mContext).inflate(R.layout.gjob_layout,parent,false)
         return ViewHolder(view)
     }
 

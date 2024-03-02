@@ -1,5 +1,7 @@
 package com.hindu.joltt.ui.home
 
+import android.content.Context
+import android.preference.PreferenceManager
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,9 +15,10 @@ import com.hindu.joltt.Model.PostModel
 import com.hindu.joltt.Model.UserModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class HomeViewModel() : ViewModel(), IPostCallback {
+class HomeViewModel(private val context: Context) : ViewModel(), IPostCallback {
 
     private var postLiveData: MutableLiveData<List<PostModel>>? = null
     var followingList: MutableList<String>? = null
@@ -33,8 +36,21 @@ class HomeViewModel() : ViewModel(), IPostCallback {
     var location = ""
 
 
+    private var cachedPosts:List<PostModel>? = null
+    private var cacheExpiryTimeMillis:Long = 3*60*60*1000
+
+
+    fun fetchPosts(){
+        if (cachedPosts != null && !isCachedExpired(context)){
+            postLiveData!!.value = cachedPosts!!
+        }else{
+            loadPost2()
+        }
+    }
+
     val postModel: MutableLiveData<List<PostModel>>?
         get() {
+
             if (postLiveData == null) {
                 postLiveData = MutableLiveData()
                 messageError = MutableLiveData()
@@ -44,8 +60,10 @@ class HomeViewModel() : ViewModel(), IPostCallback {
                     loadUserInterestFromFirebase()
                     pageList()
                     checkFollowing()
+                    fetchPosts()
                 }
             }
+            
             return postLiveData
 
         }
@@ -53,32 +71,59 @@ class HomeViewModel() : ViewModel(), IPostCallback {
     private fun loadPost2() {
         val postSet = HashSet<PostModel>()
         val databaseReference = FirebaseDatabase.getInstance().reference.child("Post")
-        databaseReference.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
-                postSet.clear()
-                for (snapshot in snapshot.children) {
-                    val postModel = snapshot.getValue(PostModel::class.java) as PostModel
 
-                    if ((followingList as ArrayList<String>).contains(postModel.publisher) || (pageList as ArrayList<String>).contains(
-                            postModel.publisher
-                        ) || postModelUserInterest(postModel)||checkSkills(postModel)||checkExperience(postModel)
-                        || location == postModel.pubLocation || course == postModel.pubCourse|| college == postModel.pubCollege
-                        || branch == postModel.pubBranch
-                    ) {
-                        postSet.add(postModel)
+        GlobalScope.launch(Dispatchers.IO){
+            kotlinx.coroutines.delay(1000)
+            databaseReference.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
+                    postSet.clear()
+                    for (snapshot in snapshot.children) {
+                        val postModel = snapshot.getValue(PostModel::class.java) as PostModel
+
+                        if ((followingList as ArrayList<String>).contains(postModel.publisher) || (pageList as ArrayList<String>).contains(
+                                postModel.publisher
+                            ) || postModelUserInterest(postModel)||checkSkills(postModel)||checkExperience(postModel)
+                            || location == postModel.pubLocation || course == postModel.pubCourse|| college == postModel.pubCollege
+                            || branch == postModel.pubBranch
+                        ) {
+                            postSet.add(postModel)
+                        }
                     }
+                    val postList = postSet.toList()
+                    postLoadCallback.onPostPCallbackLoadSuccess(postList)
                 }
-                val postList = postSet.toList()
-                postLoadCallback.onPostPCallbackLoadSuccess(postList)
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                postLoadCallback.onPostCallbackLoadFailed(error.message)
-            }
+                override fun onCancelled(error: DatabaseError) {
+                    postLoadCallback.onPostCallbackLoadFailed(error.message)
+                }
 
-        })
+            })
+        }
     }
+
+    private fun isCachedExpired(context: Context):Boolean{
+        if (cachedPosts == null){
+            return true
+        }
+        val currentTimeMillis = System.currentTimeMillis()
+        return (currentTimeMillis - getLastCacheTimeMillis(context))>cacheExpiryTimeMillis
+    }
+
+
+    private fun getLastCacheTimeMillis(context: Context):Long{
+        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+        return preferences.getLong(Companion.LAST_CACHE_TIME_KEY,0)
+    }
+
+    private fun updateLastCacheTime(){
+        val sharedPreferences = context.getSharedPreferences("cache", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putLong("lastCacheTimeMillis", System.currentTimeMillis())
+        editor.apply()
+    }
+
+
 
     private fun postModelUserInterest(postModel: PostModel): Boolean {
         val userInterestString = userInterest!!.joinToString("#")
@@ -92,7 +137,6 @@ class HomeViewModel() : ViewModel(), IPostCallback {
         }
         return false
     }
-
     private fun checkSkills(postModel: PostModel): Boolean {
         val skills = postModel.pubSkills?.trim() { it <= ' ' }
         val skillTags = skills?.split(",")
@@ -255,7 +299,13 @@ class HomeViewModel() : ViewModel(), IPostCallback {
 
     override fun onPostPCallbackLoadSuccess(list: List<PostModel>) {
         val mutableLiveData = postLiveData
-        mutableLiveData!!.value = list
+        cachedPosts = list
+        postLiveData!!.value = list
+        updateLastCacheTime()
+    }
+
+    companion object {
+        private const val LAST_CACHE_TIME_KEY = "last_cache_time"
     }
 
 }

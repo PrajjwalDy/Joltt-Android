@@ -9,13 +9,18 @@ import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.PagerAdapter
 import com.hindu.cunow.R
 import com.hindu.joltt.Model.InternshipModel
 
-class InternshipAdapter(
-    private val mContext: Context,
-    private val mInternship: List<InternshipModel>
-) : RecyclerView.Adapter<InternshipAdapter.ViewHolder>() {
+class InternshipAdapter(private val mContext: Context) : RecyclerView.Adapter<InternshipAdapter.ViewHolder>() {
+
+    private var internship: List<InternshipModel> = mutableListOf()
+
+    fun setItems(items:List<InternshipModel>){
+        internship = items
+        notifyDataSetChanged()
+    }
 
     inner class ViewHolder(@NonNull itemView: View) : RecyclerView.ViewHolder(itemView) {
         val intern_name: TextView = itemView.findViewById(R.id.intern_title) as TextView
@@ -36,7 +41,7 @@ class InternshipAdapter(
             duration.text = list.iDuration
             stipend.text = list.iStipend
             type.text = list.iType
-            posted.text = "posted " + list.iPosted
+            /*posted.text = "posted " + list.iPosted*/
 
             itemView.setOnClickListener {
                 openLink(list.iLink!!, list.internTitle!!)
@@ -51,21 +56,16 @@ class InternshipAdapter(
     }
 
     override fun getItemCount(): Int {
-        return mInternship.size
+        return internship.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(mInternship[position])
+        holder.bind(internship[position])
     }
 
     private fun openLink(link: String, title: String) {
         val builder = CustomTabsIntent.Builder()
         val customTabsIntent = builder.build()
         customTabsIntent.launchUrl(mContext, Uri.parse(link))
-
-
-//        intent.data = Uri.parse(link)
-//        mContext.startActivity(intent)
-
     }
 }

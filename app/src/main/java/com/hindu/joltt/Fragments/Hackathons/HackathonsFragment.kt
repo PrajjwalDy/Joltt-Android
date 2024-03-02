@@ -1,6 +1,7 @@
 package com.hindu.joltt.Fragments.Hackathons
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -100,7 +101,7 @@ class HackathonsFragment : Fragment() {
                 filterList.addAll(filterSet)
 
                 // Update the UI with the filter list
-            updateFilterUI(filterList)
+                updateFilterUI(filterList)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -135,6 +136,7 @@ class HackathonsFragment : Fragment() {
                 if (selectedTheme == "View All"){
                     viewModel.getAllHackathonsLiveData()
                 }else{
+                    Log.d("Filter", "Filtered internships: $selectedTheme")
                     viewModel.filterHackathons(selectedTheme)
                 }
 

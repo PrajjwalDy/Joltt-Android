@@ -3,7 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.Internship.InternshipsFragment">
+    android:orientation="vertical"
+    tools:context="com.hindu.joltt.Fragments.Internship.InternshipsFragment">
+
+    <Spinner
+        android:id="@+id/filterSpinnerIntern"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/spinner_bg" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/intershipRV"

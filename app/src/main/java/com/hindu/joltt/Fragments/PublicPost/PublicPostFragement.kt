@@ -11,8 +11,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.hindu.cunow.R
 import com.hindu.cunow.databinding.PublicPostFragementFragmentBinding
 import com.hindu.joltt.Adapter.PublicPostAdapter
@@ -68,8 +70,8 @@ class PublicPostFragement : Fragment() {
     private fun initView2(root: View){
         recyclerViewGrid = root.findViewById(R.id.explorePost_rv) as RecyclerView
         recyclerViewGrid!!.setHasFixedSize(true)
-        val linearLayoutManager: LinearLayoutManager = GridLayoutManager(context,3)
-        recyclerViewGrid!!.layoutManager = linearLayoutManager
+        val staggeredGridLayoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+        recyclerViewGrid!!.layoutManager = staggeredGridLayoutManager
     }
 
 }

@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Handler
 import android.view.LayoutInflater
@@ -22,6 +23,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.PlaybackException
 import com.google.android.exoplayer2.Player
@@ -40,6 +43,7 @@ import com.google.firebase.database.ValueEventListener
 import com.hindu.cunow.R
 import com.hindu.joltt.Activity.CommentActivity
 import com.hindu.joltt.Activity.ReportPostActivity
+import com.hindu.joltt.Caching.CacheManager
 import com.hindu.joltt.Fragments.Pages.PageDetailsActivity
 import com.hindu.joltt.Model.NotificationModel
 import com.hindu.joltt.Model.PageModel
@@ -50,6 +54,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.File
 import java.util.concurrent.TimeUnit
 
 class PostAdapter (private val mContext: Context,
@@ -57,7 +62,11 @@ class PostAdapter (private val mContext: Context,
                    private val from:String):RecyclerView.Adapter<PostAdapter.ViewHolder>()
 {
 
-    private var posts: List<PostModel> = emptyList()
+    private val imageCache = HashMap<String, Bitmap>()
+
+    private val videoCacheDir:File by lazy {
+        mContext.cacheDir
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -222,7 +231,7 @@ class PostAdapter (private val mContext: Context,
 
         }
 
-        holder.postCardView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.context, R.anim.card_view_anim))
+       // holder.postCardView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.context, R.anim.card_view_anim))
     }
 
     override fun getItemCount(): Int {
@@ -275,7 +284,29 @@ class PostAdapter (private val mContext: Context,
                 imageView.visibility = View.VISIBLE
                 playerView.visibility = View.GONE
                 mediaCV.visibility = View.VISIBLE
-                Glide.with(context).load(list.image).into(image)
+//                Glide.with(context).load(list.image).into(image)
+
+                if (imageCache.containsKey(list.image)){
+                    imageView.setImageBitmap(imageCache[list.image])
+                }else{
+                    Glide.with(context)
+                        .asBitmap()
+                        .load(list.image)
+                        .into(object :SimpleTarget<Bitmap>(){
+                            override fun onResourceReady(
+                                resource: Bitmap,
+                                transition: Transition<in Bitmap>?
+                            ) {
+                                // Set the image in the ImageView
+                                imageView.setImageBitmap(resource)
+                                // Cache the loaded image
+                                imageCache[list.image!!] = resource
+                            }
+
+                        })
+                }
+
+
             }else if(list.video){
                 imageView.visibility = View.GONE
                 playerView.visibility = View.VISIBLE
@@ -289,11 +320,30 @@ class PostAdapter (private val mContext: Context,
             }
             progressDialog.dismiss()
 
+
+            val likeCount = CacheManager.getLikeCount(itemView.context, list.postId!!)
+            totalLikes.text = likeCount.toString()
+
+            // Example: Cache and retrieve comment count
+            val commentCount = CacheManager.getCommentCount(itemView.context, list.postId!!)
+            totalComments.text = commentCount.toString()
+
+            // Example: Cache and retrieve publisher details
+            val publisherDetails = CacheManager.getPublisherDetails(itemView.context, list.publisher!!)
+            if (publisherDetails != null) {
+                // Update views with cached publisher details
+                publisherName.text = publisherDetails.name
+                Glide.with(itemView.context).load(publisherDetails.imageUrl).into(publisherImage)
+            } else {
+                // Fetch publisher details from server if not cached
+                publisher(publisherImage,publisherName,list.publisher!!,verification)
+            }
+
         }
     }
 
     //PUBLISHER
-    private suspend fun publisher(profileImage:CircleImageView, name:TextView,publisherId:String,verifImage:CircleImageView){
+    private fun publisher(profileImage:CircleImageView, name:TextView,publisherId:String,verifImage:CircleImageView){
 
         val userDataRef = FirebaseDatabase.getInstance().reference.child("Users").child(publisherId)
 
@@ -301,8 +351,12 @@ class PostAdapter (private val mContext: Context,
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     val data = snapshot.getValue(UserModel::class.java)
-                    Glide.with(mContext).load(data!!.profileImage).into(profileImage)
-                    name.text = data.fullName
+
+                    val details = CacheManager.PublisherDetails(data!!.fullName!!, data.profileImage!!)
+                    CacheManager.savePublisherDetails(mContext, publisherId, details)
+
+                    Glide.with(mContext).load(details.imageUrl).into(profileImage)
+                    name.text = details.name
                     if (data.verification){
                         verifImage.visibility =View.VISIBLE
                     }else{
@@ -479,7 +533,7 @@ class PostAdapter (private val mContext: Context,
     }
 
     //TOTAL LIKES
-    private suspend fun totalLikes(postId: String, totalLikes:TextView){
+    private  fun totalLikes(postId: String, totalLikes:TextView){
         val databaseRef = FirebaseDatabase.getInstance().reference
             .child("Likes").child(postId)
         databaseRef.addValueEventListener(object : ValueEventListener{
@@ -500,7 +554,6 @@ class PostAdapter (private val mContext: Context,
             }
 
         })
-        databaseRef.keepSynced(true)
     }
 
     //ADD NOTIFICATIONS
@@ -532,7 +585,7 @@ class PostAdapter (private val mContext: Context,
     }
 
     //TOTAL COMMENTS
-    private suspend fun totalComments(totalComments:TextView, postId: String){
+    private  fun totalComments(totalComments:TextView, postId: String){
         val postData = FirebaseDatabase.getInstance().reference.child("Comments")
             .child(postId)
 
@@ -548,8 +601,6 @@ class PostAdapter (private val mContext: Context,
             }
 
         })
-        postData.keepSynced(true)
-
     }
 
     //ADD PAGE NOTIFICATION

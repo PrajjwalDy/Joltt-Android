@@ -2,217 +2,266 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/red_grey"
+    android:layout_margin="3dp"
+    android:elevation="7pt"
     app:cardBackgroundColor="@color/white"
-    android:layout_marginBottom="1dp"
-    android:elevation="3dp"
-    android:layout_height="wrap_content">
+    app:cardCornerRadius="7pt">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/intern_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:fontFamily="@font/comfortaa"
-            android:text="Title of the Internship"
-            android:textColor="@color/red"
-            android:maxLines="1"
-            android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/tv_offeredBy"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:ellipsize="end"
-            android:justificationMode="inter_word"
-            android:fontFamily="@font/comfortaa"
-            android:text="offered by"
-            android:textColor="@color/red"
-            android:textSize="14sp" />
+            android:layout_margin="5dp"
+            app:cardBackgroundColor="#C3E9E2"
+            app:cardCornerRadius="7pt">
 
 
-        <TextView
-            android:id="@+id/tv_iLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Location"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/red"
-            android:textSize="12sp"
-            android:fontFamily="@font/comfortaa"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
 
-        <TextView
-            android:id="@+id/tv_iType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Internship Type"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/red"
-            android:textSize="12sp"
-            android:fontFamily="@font/comfortaa"/>
+                <TextView
+                    android:id="@+id/intern_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/comfortaa"
+                    android:maxLines="2"
+                    android:textAlignment="center"
+                    android:layout_gravity="center"
+                    android:text="Title of the Internship"
+                    android:textColor="@color/red"
+                    android:textSize="20sp" />
 
+
+
+                <TextView
+                    android:id="@+id/tv_iLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/comfortaa"
+                    android:text="Location"
+                    android:textColor="@color/red"
+                    android:textSize="12sp" />
+
+
+                <TextView
+                    android:id="@+id/tv_iType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:visibility="gone"
+                    android:fontFamily="@font/comfortaa"
+                    android:text="Internship Type"
+                    android:textColor="@color/red"
+                    android:textSize="12sp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/viva_magenta_round_bg">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/comfortaa"
+                                android:text="Start Date"
+                                android:textColor="@color/white"
+                                android:textSize="14sp" />
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/tv_startDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/comfortaa"
+                            android:text="date"
+                            android:textColor="@color/red"
+                            android:textSize="14sp" />
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+
+                            android:background="@drawable/viva_magenta_round_bg">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/comfortaa"
+                                android:text="Duration"
+                                android:textColor="@color/white"
+                                android:textSize="14sp" />
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/tv_duration"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/comfortaa"
+                            android:text="Duration"
+                            android:textColor="@color/red"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/viva_magenta_round_bg">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/comfortaa"
+                                android:text="Stipend"
+                                android:textColor="@color/white"
+                                android:textSize="14sp" />
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/tv_startStipend"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/comfortaa"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="date"
+                            android:textColor="@color/red"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:visibility="gone"
+                    android:background="@drawable/grey_round_corner">
+
+                    <TextView
+                        android:id="@+id/tv_iPosted"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/comfortaa"
+                        android:text="Online"
+                        android:textColor="@color/red"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-            <LinearLayout
-                android:layout_width="0dp"
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/internship_ico"
+                android:layout_margin="20dp"/>
+
+
+            <TextView
+                android:id="@+id/tv_offeredBy"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-
-                    android:background="@drawable/viva_magenta_round_bg">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:fontFamily="@font/comfortaa"
-                        android:text="Start Date"
-                        android:layout_margin="5dp"
-                        android:textColor="@color/white"
-                        android:textSize="12sp" />
-
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/tv_startDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="date"
-                    android:textColor="@color/red"
-                    android:textSize="12sp"
-                    android:layout_gravity="center_horizontal"
-                    android:fontFamily="@font/comfortaa"/>
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-
-                    android:background="@drawable/viva_magenta_round_bg">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:fontFamily="@font/comfortaa"
-                        android:text="Duration"
-                        android:textColor="@color/white"
-                        android:textSize="12sp" />
-
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/tv_duration"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Duration"
-                    android:textColor="@color/red"
-                    android:textSize="12sp"
-                    android:layout_gravity="center_horizontal"
-                    android:fontFamily="@font/comfortaa"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/viva_magenta_round_bg">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_margin="5dp"
-                        android:fontFamily="@font/comfortaa"
-                        android:text="Stipend"
-                        android:textColor="@color/white"
-                        android:textSize="12sp" />
-
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/tv_startStipend"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="date"
-                    android:textColor="@color/red"
-                    android:textSize="12sp"
-                    android:layout_gravity="center_horizontal"
-                    android:fontFamily="@font/comfortaa"/>
-            </LinearLayout>
-
-
+                android:layout_marginEnd="10dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/comfortaa"
+                android:justificationMode="inter_word"
+                android:text="offered by"
+                android:textColor="@color/red"
+                android:textSize="18sp" />
 
 
 
 
         </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/grey_round_corner">
-
-            <TextView
-                android:id="@+id/tv_iPosted"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="@font/comfortaa"
-                android:text="Online"
-                android:textColor="@color/red"
-                android:textSize="11sp"
-                android:textStyle="bold" />
-
-
-        </RelativeLayout>
-
 
     </LinearLayout>
+
+
+
+
 
 </androidx.cardview.widget.CardView>

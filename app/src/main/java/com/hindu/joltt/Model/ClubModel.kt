@@ -9,4 +9,5 @@ class ClubModel {
     val jobSkills:String? = null
     val jobCompany:String? = null
     val jobLink:String? = null
+    val jobsTrade:String? = null
 }

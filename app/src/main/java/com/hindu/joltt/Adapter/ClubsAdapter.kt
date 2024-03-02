@@ -14,9 +14,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hindu.cunow.R
 import com.hindu.joltt.Model.ClubModel
+import com.hindu.joltt.Model.InternshipModel
 
-class ClubsAdapter(private val mContext: Context,
-                   private val mList:List<ClubModel>):RecyclerView.Adapter<ClubsAdapter.ViewHolder>() {
+class ClubsAdapter(private val mContext: Context):RecyclerView.Adapter<ClubsAdapter.ViewHolder>() {
+
+
+    private var jobs: List<ClubModel> = mutableListOf()
+
+    fun setItems(items:List<ClubModel>){
+        jobs = items
+        notifyDataSetChanged()
+    }
 
                        inner class ViewHolder(@NonNull itemView: View):RecyclerView.ViewHolder(itemView){
                            private val jobTitle:TextView = itemView.findViewById(R.id.TV_jobTitle) as TextView
@@ -58,11 +66,11 @@ class ClubsAdapter(private val mContext: Context,
     }
 
     override fun getItemCount(): Int {
-        return mList.size
+        return jobs.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(mList[position])
+        holder.bind(jobs[position])
     }
 
     private fun openLink(link:String,title:String){

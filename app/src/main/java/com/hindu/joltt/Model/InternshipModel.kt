@@ -11,6 +11,7 @@ class InternshipModel{
     val iPosted:String? = null
     val iLink:String? = null
     val iType:String? =null
+    val iTheme:String? = null
 
 
 }

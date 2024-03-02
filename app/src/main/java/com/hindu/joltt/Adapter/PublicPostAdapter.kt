@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.PlaybackException
@@ -46,6 +47,14 @@ class PublicPostAdapter(
                 playerView.visibility = View.GONE
                 imageView.visibility = View.GONE
             }
+
+
+            val layoutParams = itemView.layoutParams as StaggeredGridLayoutManager.LayoutParams
+            val displayMetrics = mContext.resources.displayMetrics
+            val screenWidth = displayMetrics.widthPixels
+            val itemWidth = screenWidth / 3
+            layoutParams.width = itemWidth
+            itemView.layoutParams = layoutParams
         }
     }
 
