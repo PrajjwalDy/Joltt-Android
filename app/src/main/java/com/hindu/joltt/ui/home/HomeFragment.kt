@@ -150,10 +150,11 @@ class HomeFragment : Fragment() {
                 postLayout_ll?.visibility = View.GONE
                 emptyListPost.visibility = View.VISIBLE
             } else {
+                val mutablePostList = postList.toMutableList()
                 postLayout_ll?.visibility = View.VISIBLE
                 postRecyclerView.visibility = View.VISIBLE
                 initView(root)
-                postAdapter = context?.let { it1 -> PostAdapter(it1, postList, "Home") }
+                postAdapter = context?.let { it1 -> PostAdapter(it1, mutablePostList, "Home") }
                 recyclerView!!.adapter = postAdapter
                 postAdapter!!.notifyDataSetChanged()
             }

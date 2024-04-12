@@ -1,6 +1,7 @@
 package com.hindu.joltt.Fragments.Internship
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -10,16 +11,28 @@ import androidx.annotation.NonNull
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.hindu.cunow.R
 import com.hindu.joltt.Model.InternshipModel
 
 class InternshipAdapter(private val mContext: Context) : RecyclerView.Adapter<InternshipAdapter.ViewHolder>() {
 
     private var internship: List<InternshipModel> = mutableListOf()
+    private val PREF_NAME = "InternshipCache"
+    private val KEY_INTERNSHIPS = "internships"
+    private val sharedPreferences: SharedPreferences = mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+
+
+    init {
+        internship = getCachedInternships()
+    }
 
     fun setItems(items:List<InternshipModel>){
         internship = items
         notifyDataSetChanged()
+
+        cacheInternships(items)
     }
 
     inner class ViewHolder(@NonNull itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -68,4 +81,18 @@ class InternshipAdapter(private val mContext: Context) : RecyclerView.Adapter<In
         val customTabsIntent = builder.build()
         customTabsIntent.launchUrl(mContext, Uri.parse(link))
     }
+
+    private fun cacheInternships(internships: List<InternshipModel>) {
+        val gson = Gson()
+        val json = gson.toJson(internships)
+        sharedPreferences.edit().putString(KEY_INTERNSHIPS, json).apply()
+    }
+
+    private fun getCachedInternships(): List<InternshipModel> {
+        val gson = Gson()
+        val json = sharedPreferences.getString(KEY_INTERNSHIPS, "")
+        val type = object : TypeToken<List<InternshipModel>>() {}.type
+        return gson.fromJson(json, type) ?: mutableListOf()
+    }
+
 }

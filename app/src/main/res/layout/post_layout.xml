@@ -109,7 +109,7 @@
                     android:layout_height="250dp"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/profile_testimg"
+                    android:src="@drawable/shimmer_image"
                     android:visibility="gone" />
 
                 <com.google.android.exoplayer2.ui.PlayerView

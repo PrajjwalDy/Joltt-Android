@@ -25,6 +25,7 @@ import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.PlaybackException
 import com.google.android.exoplayer2.Player
@@ -68,6 +69,8 @@ class PostAdapter (private val mContext: Context,
         mContext.cacheDir
     }
 
+    private var isLoading = true
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(mContext).inflate(R.layout.post_layout,parent,false)
@@ -81,6 +84,7 @@ class PostAdapter (private val mContext: Context,
         val fromRight = AnimationUtils.loadAnimation(mContext, R.anim.from_right)
 
         //DIALOG VIEW DECLARATION
+        
 
 
         val post = mPost[position]
@@ -234,6 +238,7 @@ class PostAdapter (private val mContext: Context,
        // holder.postCardView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.context, R.anim.card_view_anim))
     }
 
+
     override fun getItemCount(): Int {
         return mPost.size
     }
@@ -257,6 +262,15 @@ class PostAdapter (private val mContext: Context,
         val duration:TextView = itemView.findViewById(R.id.videoDuration) as TextView
         val rl_duration:RelativeLayout = itemView.findViewById(R.id.videoDuration_RL) as RelativeLayout
         val caption2: TextView = itemView.findViewById(R.id.caption2) as TextView
+
+
+        fun showShimmer() {
+            // Show shimmer effect
+            // You can use a library like Facebook Shimmer for this
+            // For example:
+            val shimmerLayout = itemView.findViewById<ShimmerFrameLayout>(R.id.shimmer_container)
+            shimmerLayout.startShimmer() // Start shimmer animation
+        }
 
 
         fun bind(list:PostModel,context: Context,imageView: ImageView,playerView: PlayerView){
@@ -338,6 +352,7 @@ class PostAdapter (private val mContext: Context,
                 // Fetch publisher details from server if not cached
                 publisher(publisherImage,publisherName,list.publisher!!,verification)
             }
+
 
         }
     }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?><!-- shimmer_layout.xml -->
+
+<com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/shimmer_container"
+    android:layout_width="match_parent"
+    android:layout_margin="5dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <!-- Your views here -->
+        <ImageView
+            android:id="@+id/shimmer_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/shimmer_background" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/shimmer_background" />
+
+
+        <TextView
+            android:id="@+id/shimmer_text"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/shimmer_background" />
+
+
+    </LinearLayout>
+
+
+    <!-- Add more views as needed -->
+
+</com.facebook.shimmer.ShimmerFrameLayout>

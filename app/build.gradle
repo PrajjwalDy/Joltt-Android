@@ -16,8 +16,8 @@ android {
         applicationId "com.hindu.joltt"
         minSdk 21
         targetSdk 34
-        versionCode 10
-        versionName "2.0"
+        versionCode 11
+        versionName "2.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -116,4 +116,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:21.0.1'
 
     implementation 'com.synnapps:carouselview:0.1.5'
+
+    //SHIMMER EFFECT
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 }
